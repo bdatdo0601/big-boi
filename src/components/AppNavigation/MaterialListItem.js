@@ -4,7 +4,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Collapse, List, useTheme, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
-const MaterialListItem = ({ item, level }) => {
+const MaterialListItem = ({ item, level, onClick, isSelected }) => {
   const [open, setOpen] = useState(item.defaultOpen);
   const theme = useTheme();
   if (item.children) {
@@ -13,11 +13,10 @@ const MaterialListItem = ({ item, level }) => {
         <ListItem
           button
           onClick={async () => {
-            await item.onClick();
             setOpen(!open);
           }}
           style={{
-            paddingLeft: theme.spacing(level * 4),
+            paddingLeft: theme.spacing(level * 2),
           }}
         >
           {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
@@ -27,7 +26,13 @@ const MaterialListItem = ({ item, level }) => {
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {item.children.map(childItem => (
-              <MaterialListItem key={childItem.name} item={childItem} level={level + 1} />
+              <MaterialListItem
+                key={childItem.name}
+                item={childItem}
+                onClick={onClick}
+                level={level + 1}
+                isSelected={isSelected}
+              />
             ))}
           </List>
         </Collapse>
@@ -38,15 +43,15 @@ const MaterialListItem = ({ item, level }) => {
     <ListItem
       button
       key={item.name}
+      selected={isSelected(item)}
       onClick={async () => {
-        await item.onClick();
-        setOpen(!open);
+        await onClick(item);
       }}
       style={{
         paddingLeft: theme.spacing(level * 2),
       }}
     >
-      {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+      {item.icon && <ListItemIcon style={{ paddingRight: 0 }}>{item.icon}</ListItemIcon>}
       <ListItemText primary={item.name} />
     </ListItem>
   );

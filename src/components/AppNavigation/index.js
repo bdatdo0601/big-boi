@@ -18,7 +18,17 @@ import useStyles from "./styleHooks";
 import { useMediaQuery, Switch, FormControlLabel } from "@material-ui/core";
 import MaterialListItem from "./MaterialListItem";
 
-export default function AppNavigation({ children, name, groupedDrawerContent, setOpen, open, isDark, setIsDark }) {
+export default function AppNavigation({
+  children,
+  name,
+  groupedDrawerContent,
+  setOpen,
+  open,
+  isDark,
+  setIsDark,
+  onItemClick,
+  isSelected,
+}) {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery("(min-width:600px)");
@@ -73,21 +83,27 @@ export default function AppNavigation({ children, name, groupedDrawerContent, se
             {theme.direction === "ltr" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
-        <List>
-          {Object.keys(groupedDrawerContent).map(groupedContents => (
-            <React.Fragment key={uuid()}>
-              <Divider />
-              {groupedDrawerContent[groupedContents].map(item => (
-                <MaterialListItem item={item} key={item.name} />
-              ))}
-            </React.Fragment>
-          ))}
-        </List>
         <FormControlLabel
           className={classes.darkModeSwitch}
           control={<Switch checked={isDark} onChange={e => setIsDark(e.target.checked)} />}
           label="Dark Mode"
         />
+        <List>
+          {Object.keys(groupedDrawerContent).map((groupedContents, index) => (
+            <React.Fragment key={uuid()}>
+              {index === 0 && <Divider />}
+              {groupedDrawerContent[groupedContents].map(item => (
+                <MaterialListItem
+                  item={item}
+                  key={item.name}
+                  onClick={item => onItemClick(item)}
+                  isSelected={isSelected}
+                />
+              ))}
+              <Divider />
+            </React.Fragment>
+          ))}
+        </List>
       </Drawer>
       {children}
     </div>
@@ -99,6 +115,7 @@ AppNavigation.propTypes = {
   name: PropTypes.string,
   isDark: PropTypes.bool.isRequired,
   setIsDark: PropTypes.func.isRequired,
+  isSelected: PropTypes.func.isRequired,
 };
 
 AppNavigation.defaultProps = {

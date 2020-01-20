@@ -48,6 +48,7 @@ const useStyles = makeStyles(theme => ({
   },
   darkModeSwitch: {
     paddingLeft: theme.spacing(2),
+    marginBottom: "5%",
   },
   content: {
     padding: theme.spacing(3),

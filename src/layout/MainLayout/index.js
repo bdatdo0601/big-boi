@@ -1,13 +1,17 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import { groupBy } from "lodash";
 import clsx from "clsx";
 import useStyles from "./styleHooks";
 import AppNavigation from "../../components/AppNavigation";
 import LayoutContext from "../../context/layout";
+import routes from "../../routes";
 import { useTheme } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 export default function MainLayout({ children, name }) {
   const classes = useStyles();
+  const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const { setIsDark, isDark, defaultPadding } = useContext(LayoutContext);
@@ -16,9 +20,17 @@ export default function MainLayout({ children, name }) {
       setOpen={setOpen}
       name={name}
       open={open}
-      groupedDrawerContent={{}}
+      groupedDrawerContent={groupBy(
+        routes.filter(route => !route.hidden),
+        "type"
+      )}
+      onItemClick={item => {
+        history.push(item.path);
+        setOpen(false);
+      }}
       setIsDark={setIsDark}
       isDark={isDark}
+      isSelected={item => history.location.pathname === item.path}
     >
       <main
         className={clsx(classes.content, {
