@@ -11,7 +11,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-between",
   },
   content: {
-    padding: theme.spacing(3),
     [theme.breakpoints.up("sm")]: {
       flexGrow: 1,
       transition: theme.transitions.create("margin", {

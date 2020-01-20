@@ -4,11 +4,13 @@ import clsx from "clsx";
 import useStyles from "./styleHooks";
 import AppNavigation from "../../components/AppNavigation";
 import LayoutContext from "../../context/layout";
+import { useTheme } from "@material-ui/core";
 
 export default function MainLayout({ children, name }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const { setIsDark, isDark } = useContext(LayoutContext);
+  const theme = useTheme();
+  const { setIsDark, isDark, defaultPadding } = useContext(LayoutContext);
   return (
     <AppNavigation
       setOpen={setOpen}
@@ -22,6 +24,7 @@ export default function MainLayout({ children, name }) {
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
+        style={{ padding: defaultPadding ? theme.spacing(3) : 0 }}
       >
         <div className={classes.drawerHeader} />
         {children}
