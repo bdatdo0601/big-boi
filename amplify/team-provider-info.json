@@ -1,0 +1,15 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-big-boi-dev-142545-authRole",
+            "UnauthRoleArn": "arn:aws:iam::142037127835:role/amplify-big-boi-dev-142545-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::142037127835:role/amplify-big-boi-dev-142545-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+            "UnauthRoleName": "amplify-big-boi-dev-142545-unauthRole",
+            "StackName": "amplify-big-boi-dev-142545",
+            "StackId": "arn:aws:cloudformation:us-east-1:142037127835:stack/amplify-big-boi-dev-142545/53d60820-3a28-11ea-b0fe-12e727a79a85",
+            "AmplifyAppId": "d2vxpb6a8hxx0o"
+        }
+    }
+}
