@@ -43,7 +43,7 @@ const MaterialListItem = ({ item, level }) => {
         setOpen(!open);
       }}
       style={{
-        paddingLeft: theme.spacing(level * 4),
+        paddingLeft: theme.spacing(level * 2),
       }}
     >
       {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}

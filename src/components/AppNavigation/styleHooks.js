@@ -46,6 +46,9 @@ const useStyles = makeStyles(theme => ({
     ...theme.mixins.toolbar,
     justifyContent: "space-between",
   },
+  darkModeSwitch: {
+    paddingLeft: theme.spacing(2),
+  },
   content: {
     padding: theme.spacing(3),
     [theme.breakpoints.up("sm")]: {

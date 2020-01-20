@@ -15,10 +15,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import useStyles from "./styleHooks";
-import { useMediaQuery } from "@material-ui/core";
+import { useMediaQuery, Switch, FormControlLabel } from "@material-ui/core";
 import MaterialListItem from "./MaterialListItem";
 
-export default function AppNavigation({ children, name, groupedDrawerContent, setOpen, open }) {
+export default function AppNavigation({ children, name, groupedDrawerContent, setOpen, open, isDark, setIsDark }) {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery("(min-width:600px)");
@@ -83,6 +83,11 @@ export default function AppNavigation({ children, name, groupedDrawerContent, se
             </React.Fragment>
           ))}
         </List>
+        <FormControlLabel
+          className={classes.darkModeSwitch}
+          control={<Switch checked={isDark} onChange={e => setIsDark(e.target.checked)} />}
+          label="Dark Mode"
+        />
       </Drawer>
       {children}
     </div>
@@ -92,6 +97,8 @@ export default function AppNavigation({ children, name, groupedDrawerContent, se
 AppNavigation.propTypes = {
   children: PropTypes.node.isRequired,
   name: PropTypes.string,
+  isDark: PropTypes.bool.isRequired,
+  setIsDark: PropTypes.func.isRequired,
 };
 
 AppNavigation.defaultProps = {
