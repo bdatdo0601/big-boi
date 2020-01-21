@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden;
+}
 .DataStack {
   display: flex;
   width: 100%;
@@ -5,6 +8,9 @@
   align-items: center;
   margin-top: 10%;
   padding-top: 10%;
+  user-select: none;
+  overscroll-behavior-y: contain;
+  overflow: hidden;
   div {
     position: absolute;
     width: 100%;
