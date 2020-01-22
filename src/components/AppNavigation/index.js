@@ -14,8 +14,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import useStyles from "./styleHooks";
 import { useMediaQuery, Switch, FormControlLabel } from "@material-ui/core";
+import useStyles from "./styleHooks";
 import MaterialListItem from "./MaterialListItem";
 
 export default function AppNavigation({
@@ -96,7 +96,7 @@ export default function AppNavigation({
                 <MaterialListItem
                   item={item}
                   key={item.name}
-                  onClick={item => onItemClick(item)}
+                  onClick={listItem => onItemClick(listItem)}
                   isSelected={isSelected}
                 />
               ))}
@@ -112,10 +112,14 @@ export default function AppNavigation({
 
 AppNavigation.propTypes = {
   children: PropTypes.node.isRequired,
-  name: PropTypes.string,
+  groupedDrawerContent: PropTypes.object.isRequired,
   isDark: PropTypes.bool.isRequired,
-  setIsDark: PropTypes.func.isRequired,
   isSelected: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  onItemClick: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  setIsDark: PropTypes.func.isRequired,
+  setOpen: PropTypes.func.isRequired,
 };
 
 AppNavigation.defaultProps = {

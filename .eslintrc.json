@@ -25,7 +25,7 @@
     "no-unused-expressions": ["error", { "allowTernary": true }],
     "no-plusplus": "off",
     "no-undef": "off",
-    "no-console": ["error", { "allow": ["error"]}],
+    "no-console": ["error", { "allow": ["error"] }],
     "no-confusing-arrow": "off",
     "function-paren-newline": "off",
     "no-param-reassign": ["error", { "props": false }],

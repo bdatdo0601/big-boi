@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 
 const LayoutContext = React.createContext();
@@ -48,6 +49,10 @@ export const LayoutContextProvider = ({ children }) => {
       </LayoutContext.Provider>
     </ThemeProvider>
   );
+};
+
+LayoutContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default LayoutContext;

@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { groupBy } from "lodash";
 import clsx from "clsx";
+import { useTheme } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import useStyles from "./styleHooks";
 import AppNavigation from "../../components/AppNavigation";
 import LayoutContext from "../../context/layout";
 import routes from "../../routes";
-import { useTheme } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 
 export default function MainLayout({ children, name }) {
   const classes = useStyles();

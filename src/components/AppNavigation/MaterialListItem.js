@@ -58,17 +58,26 @@ const MaterialListItem = ({ item, level, onClick, isSelected }) => {
 };
 
 MaterialListItem.propTypes = {
+  icon: PropTypes.node,
+  isSelected: PropTypes.func,
   item: PropTypes.shape({
     name: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     icon: PropTypes.node,
     children: PropTypes.array,
+    defaultOpen: PropTypes.bool,
   }),
   level: PropTypes.number,
+  name: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
 };
 
 MaterialListItem.defaultProps = {
+  icon: null,
+  isSelected: () => false,
+  item: null,
   level: 1,
+  onClick: () => {},
 };
 
 export default MaterialListItem;
