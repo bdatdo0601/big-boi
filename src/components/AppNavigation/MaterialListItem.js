@@ -68,7 +68,6 @@ MaterialListItem.propTypes = {
     defaultOpen: PropTypes.bool,
   }),
   level: PropTypes.number,
-  name: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };
 

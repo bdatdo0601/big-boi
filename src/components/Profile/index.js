@@ -2,18 +2,16 @@ import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
 import { Typography } from "@material-ui/core";
-import MAIN_PICTURE from "../../../assets/main_picture.jpg";
-import LayoutContext from "../../../context/layout";
+import MAIN_PICTURE from "../../assets/main_picture.jpg";
+import LayoutContext from "../../context/layout";
 
-export default function LandingProfile({ image, name, wrapperStyle, imageStyle }) {
+export default function Profile({ image, name, wrapperStyle, imageStyle }) {
   const { isDark, setDefaultPadding } = useContext(LayoutContext);
   const imageProps = useSpring({
     from: { opacity: 0, transform: "translateY(-100)" },
     transform: "translateY(0)",
     opacity: 1,
     marginBottom: 32,
-    width: 200,
-    height: 200,
     borderRadius: "50%",
     border: `${isDark ? "#fff" : "#000"} solid 5px`,
     ...imageStyle,
@@ -34,13 +32,13 @@ export default function LandingProfile({ image, name, wrapperStyle, imageStyle }
         ...wrapperStyle,
       }}
     >
-      <animated.img src={image} alt="main_picture" style={imageProps} />
+      <animated.img className="w-56 h-56" src={image} alt="main_picture" style={imageProps} />
       <Typography variant="h3">{name}</Typography>
     </div>
   );
 }
 
-LandingProfile.propTypes = {
+Profile.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string,
   title: PropTypes.string,
@@ -48,7 +46,7 @@ LandingProfile.propTypes = {
   imageStyle: PropTypes.object,
 };
 
-LandingProfile.defaultProps = {
+Profile.defaultProps = {
   image: MAIN_PICTURE,
   name: "Dat Do",
   title: "Software Engineer @ STW",
