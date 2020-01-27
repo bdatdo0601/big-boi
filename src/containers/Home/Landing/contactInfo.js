@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Paper, Typography, Grid } from "@material-ui/core";
+import { animated, useSpring } from "react-spring";
+import { useDrag } from "react-use-gesture";
 import ContactButton from "../../../components/ContactButton";
 
 const CONTACT_INFO = [
@@ -28,7 +30,7 @@ const CONTACT_INFO = [
       type: "Icon",
       value: "GitHub",
     },
-    value: "github.com/bdatdo0601",
+    value: "bdatdo0601",
     link: "http://www.github.com/bdatdo0601",
   },
   {
@@ -37,14 +39,30 @@ const CONTACT_INFO = [
       type: "Icon",
       value: "LinkedIn",
     },
-    value: "linkedin.com/in/datdo",
+    value: "Dat Do",
     link: "http://linkedin.com/in/datdo/",
   },
 ];
 
+const AnimatedPaper = animated(Paper);
+
 export default function ContactInfo({ className, contacts }) {
+  const [animateProps, setAnimateProps] = useSpring(() => ({
+    display: "flex",
+    flexDirection: "column",
+    transform: "translate(0, 0)",
+    from: { transform: "translate(0, -200px)" },
+    config: {
+      mass: 10,
+    },
+  }));
+
+  // Set the drag hook and define component movement based on gesture data
+  const bind = useDrag(({ down, movement: [mx, my] }) => {
+    setAnimateProps({ transform: down ? `translate(${mx}, ${my})` : "translate(0,0)" });
+  });
   return (
-    <Paper className={className} elevation={3} style={{ display: "flex", flexDirection: "column" }}>
+    <AnimatedPaper className={className} elevation={3} {...bind()} style={animateProps}>
       <Typography variant="h4" style={{ marginBottom: 24 }}>
         Contact
       </Typography>
@@ -55,7 +73,7 @@ export default function ContactInfo({ className, contacts }) {
           </Grid>
         ))}
       </Grid>
-    </Paper>
+    </AnimatedPaper>
   );
 }
 
