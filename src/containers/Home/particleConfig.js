@@ -1,69 +1,69 @@
 export default isDark => ({
   particles: {
     number: {
-      value: 20,
+      value: 50,
       density: {
-        enable: true,
-        value_area: 500,
+        enable: false,
+        value_area: 1140,
       },
     },
     color: {
-      value: !isDark ? "#000000" : "#fff",
+      value: isDark ? "#ffffff" : "#000",
     },
     shape: {
       type: "circle",
       stroke: {
-        width: 5,
-        color: !isDark ? "#000000" : "#fff",
+        width: 10,
+        color: isDark ? "#ffffff" : "#000",
       },
       polygon: {
-        nb_sides: 1,
+        nb_sides: 7,
       },
       image: {
         src: "img/github.svg",
-        width: 100,
-        height: 100,
+        width: 200,
+        height: 1910,
       },
     },
     opacity: {
-      value: 0.5,
+      value: 0.15232414578222467,
       random: false,
       anim: {
         enable: false,
-        speed: 0.2,
+        speed: 1,
         opacity_min: 0.1,
         sync: false,
       },
     },
     size: {
       value: 3,
-      random: true,
+      random: false,
       anim: {
         enable: false,
-        speed: 1,
+        speed: 4.872463273808071,
         size_min: 0.1,
         sync: false,
       },
     },
     line_linked: {
       enable: true,
-      distance: 150,
-      color: !isDark ? "#000000" : "#fff",
-      opacity: 0.4,
+      distance: 200,
+      color: isDark ? "#ffffff" : "#000",
+      opacity: 0.1736124811591,
       width: 1,
     },
     move: {
       enable: true,
-      speed: 2,
+      speed: 1.6,
       direction: "none",
-      random: false,
+      random: true,
       straight: false,
-      out_mode: "out",
-      bounce: false,
+      out_mode: "bounce",
+      bounce: true,
       attract: {
         enable: false,
-        rotateX: 600,
-        rotateY: 1200,
+        rotateX: 868.0624057955,
+        rotateY: 641.3648243462092,
       },
     },
   },
@@ -82,16 +82,16 @@ export default isDark => ({
     },
     modes: {
       grab: {
-        distance: 131.86813186813188,
+        distance: 231.44200550588337,
         line_linked: {
-          opacity: 1,
+          opacity: 0.33190049461268845,
         },
       },
       bubble: {
         distance: 400,
         size: 40,
         duration: 2,
-        opacity: 8,
+        opacity: 0.6252994534720357,
         speed: 3,
       },
       repulse: {

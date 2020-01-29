@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Particles
-        style={{ width: "100%", height: "100%", position: "fixed", zIndex: 0, top: 0, left: 0 }}
+        style={{ width: "100vw", height: "100vh", position: "fixed", zIndex: 0, top: 0, left: 0 }}
         params={particleConfig(isDark)}
       />
       <Landing />
