@@ -7,6 +7,7 @@ const LayoutContext = React.createContext();
 export const LayoutContextProvider = ({ children }) => {
   const [layout, setLayout] = useState();
   const [isDark, setIsDark] = useState(true);
+  const [animation, setAnimation] = useState(true);
   const [defaultPadding, setDefaultPadding] = useState(true);
   const theme = createMuiTheme({
     palette: {
@@ -43,6 +44,8 @@ export const LayoutContextProvider = ({ children }) => {
           setIsDark,
           defaultPadding,
           setDefaultPadding,
+          animation,
+          setAnimation,
         }}
       >
         {children}

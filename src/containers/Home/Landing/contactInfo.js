@@ -46,7 +46,7 @@ const CONTACT_INFO = [
 
 const AnimatedPaper = animated(Paper);
 
-export default function ContactInfo({ className, contacts }) {
+export default function ContactInfo({ className, contacts, animation }) {
   const [animateProps, setAnimateProps] = useSpring(() => ({
     display: "flex",
     flexDirection: "column",
@@ -85,9 +85,11 @@ export default function ContactInfo({ className, contacts }) {
 ContactInfo.propTypes = {
   className: PropTypes.string,
   contacts: PropTypes.array,
+  animation: PropTypes.bool,
 };
 
 ContactInfo.defaultProps = {
   className: "px-8 py-8",
   contacts: CONTACT_INFO,
+  animation: false,
 };
