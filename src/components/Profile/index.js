@@ -4,21 +4,33 @@ import { useSpring, animated } from "react-spring";
 import { Typography } from "@material-ui/core";
 import MAIN_PICTURE from "../../assets/main_picture.jpg";
 import LayoutContext from "../../context/layout";
+import { useDrag } from "react-use-gesture";
+
+import "./index.less";
 
 export default function Profile({ image, name, wrapperStyle, imageStyle }) {
   const { isDark, setDefaultPadding } = useContext(LayoutContext);
-  const imageProps = useSpring({
-    from: { opacity: 0, transform: "translateY(-100)" },
-    transform: "translateY(0)",
+  const [imageProps, setImageProps] = useSpring(() => ({
+    from: { opacity: 0, transform: [0, -100] },
+    transform: [0, 0],
     opacity: 1,
     marginBottom: 32,
     borderRadius: "50%",
     border: `${isDark ? "#fff" : "#000"} solid 5px`,
     ...imageStyle,
-  });
+    config: {
+      mass: 2,
+    },
+  }));
   useEffect(() => {
     setDefaultPadding(false);
   }, [setDefaultPadding]);
+  // Set the drag hook and define component movement based on gesture data
+  const bind = useDrag(({ down, movement: [mx, my] }) => {
+    setImageProps({
+      transform: down ? [mx, my] : [0, 0],
+    });
+  });
   return (
     <div
       style={{
@@ -32,7 +44,13 @@ export default function Profile({ image, name, wrapperStyle, imageStyle }) {
         ...wrapperStyle,
       }}
     >
-      <animated.img className="w-56 h-56" src={image} alt="main_picture" style={imageProps} />
+      <animated.img
+        className="w-56 h-56 profile-image"
+        src={image}
+        alt="main_picture"
+        style={{ ...imageProps, transform: imageProps.transform.interpolate((x, y) => `translate(${x}px, ${y}px)`) }}
+        {...bind()}
+      />
       <Typography variant="h3">{name}</Typography>
     </div>
   );

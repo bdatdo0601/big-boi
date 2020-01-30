@@ -50,8 +50,8 @@ export default function ContactInfo({ className, contacts }) {
   const [animateProps, setAnimateProps] = useSpring(() => ({
     display: "flex",
     flexDirection: "column",
-    transform: "translate(0, 0)",
-    from: { transform: "translate(0, -200px)" },
+    transform: [0, 0],
+    from: { transform: [0, -200] },
     config: {
       mass: 10,
     },
@@ -59,10 +59,15 @@ export default function ContactInfo({ className, contacts }) {
 
   // Set the drag hook and define component movement based on gesture data
   const bind = useDrag(({ down, movement: [mx, my] }) => {
-    setAnimateProps({ transform: down ? `translate(${mx}, ${my})` : "translate(0,0)" });
+    setAnimateProps({ transform: down ? [mx, my] : [0, 0], config: { mass: 3 } });
   });
   return (
-    <AnimatedPaper className={className} elevation={3} {...bind()} style={animateProps}>
+    <AnimatedPaper
+      className={className}
+      elevation={3}
+      {...bind()}
+      style={{ ...animateProps, transform: animateProps.transform.interpolate((x, y) => `translate(${x}px, ${y}px)`) }}
+    >
       <Typography variant="h4" style={{ marginBottom: 24 }}>
         Contact
       </Typography>

@@ -13,7 +13,15 @@ export default function Landing({ keywords }) {
     setDefaultPadding(false);
   }, [setDefaultPadding]);
   return (
-    <Grid className="px-2" container justify="center" alignItems="center" alignContent="center" spacing={10}>
+    <Grid
+      className="px-2"
+      container
+      justify="center"
+      alignItems="center"
+      alignContent="flex-start"
+      spacing={10}
+      style={{ maxHeight: 1200, minHeight: "95vh" }}
+    >
       <Grid style={{ height: 0, padding: 0 }} item xs={12} md={12} lg={4} />
       <Grid item xs={12} md={12} lg={4}>
         <MainInfo className="px-8 py-12" keywords={keywords} />
