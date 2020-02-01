@@ -8,10 +8,10 @@ import { useDrag } from "react-use-gesture";
 
 import "./index.less";
 
-export default function Profile({ image, name, wrapperStyle, imageStyle }) {
+export default function Profile({ image, name, wrapperStyle, imageStyle, animation }) {
   const { isDark, setDefaultPadding } = useContext(LayoutContext);
   const [imageProps, setImageProps] = useSpring(() => ({
-    from: { opacity: 0, transform: [0, -100] },
+    from: animation ? { opacity: 0, transform: [0, -100] } : {},
     transform: [0, 0],
     opacity: 1,
     marginBottom: 32,
@@ -28,7 +28,7 @@ export default function Profile({ image, name, wrapperStyle, imageStyle }) {
   // Set the drag hook and define component movement based on gesture data
   const bind = useDrag(({ down, movement: [mx, my] }) => {
     setImageProps({
-      transform: down ? [mx, my] : [0, 0],
+      transform: down && animation ? [mx, my] : [0, 0],
     });
   });
   return (
@@ -62,6 +62,7 @@ Profile.propTypes = {
   title: PropTypes.string,
   wrapperStyle: PropTypes.object,
   imageStyle: PropTypes.object,
+  animation: PropTypes.bool,
 };
 
 Profile.defaultProps = {
@@ -70,4 +71,5 @@ Profile.defaultProps = {
   title: "Software Engineer @ STW",
   wrapperStyle: {},
   imageStyle: {},
+  animation: false,
 };

@@ -51,7 +51,7 @@ export default function ContactInfo({ className, contacts, animation }) {
     display: "flex",
     flexDirection: "column",
     transform: [0, 0],
-    from: { transform: [0, -200] },
+    from: animation ? { transform: [0, -200] } : {},
     config: {
       mass: 10,
     },
@@ -59,7 +59,7 @@ export default function ContactInfo({ className, contacts, animation }) {
 
   // Set the drag hook and define component movement based on gesture data
   const bind = useDrag(({ down, movement: [mx, my] }) => {
-    setAnimateProps({ transform: down ? [mx, my] : [0, 0], config: { mass: 3 } });
+    setAnimateProps({ transform: down && animation ? [mx, my] : [0, 0], config: { mass: 3 } });
   });
   return (
     <AnimatedPaper

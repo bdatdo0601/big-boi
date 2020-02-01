@@ -14,7 +14,7 @@ export default function MainLayout({ children, name }) {
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
-  const { setIsDark, isDark, defaultPadding } = useContext(LayoutContext);
+  const { setIsDark, isDark, defaultPadding, globalAnimation, setGlobalAnimation } = useContext(LayoutContext);
   return (
     <AppNavigation
       setOpen={setOpen}
@@ -30,6 +30,8 @@ export default function MainLayout({ children, name }) {
       }}
       setIsDark={setIsDark}
       isDark={isDark}
+      globalAnimation={globalAnimation}
+      setGlobalAnimation={setGlobalAnimation}
       isSelected={item => history.location.pathname === item.path}
     >
       <main

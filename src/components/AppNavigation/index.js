@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import uuid from "uuid";
 import clsx from "clsx";
@@ -28,10 +28,16 @@ export default function AppNavigation({
   setIsDark,
   onItemClick,
   isSelected,
+  globalAnimation,
+  setGlobalAnimation,
 }) {
   const classes = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery("(min-width:600px)");
+  const isWeb = useMediaQuery("(min-width:600px)");
+
+  useEffect(() => {
+    setGlobalAnimation(isWeb);
+  }, [setGlobalAnimation, isWeb]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -68,7 +74,7 @@ export default function AppNavigation({
       </AppBar>
       <Drawer
         className={classes.drawer}
-        variant={isMobile ? "persistent" : "temporary"}
+        variant={isWeb ? "persistent" : "temporary"}
         anchor="left"
         open={open}
         classes={{
@@ -83,6 +89,11 @@ export default function AppNavigation({
             {theme.direction === "ltr" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
+        <FormControlLabel
+          className={classes.darkModeSwitch}
+          control={<Switch checked={globalAnimation} onChange={e => setGlobalAnimation(e.target.checked)} />}
+          label="Animation"
+        />
         <FormControlLabel
           className={classes.darkModeSwitch}
           control={<Switch checked={isDark} onChange={e => setIsDark(e.target.checked)} />}
@@ -120,6 +131,8 @@ AppNavigation.propTypes = {
   open: PropTypes.bool.isRequired,
   setIsDark: PropTypes.func.isRequired,
   setOpen: PropTypes.func.isRequired,
+  globalAnimation: PropTypes.bool.isRequired,
+  setGlobalAnimation: PropTypes.func.isRequired,
 };
 
 AppNavigation.defaultProps = {

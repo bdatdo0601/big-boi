@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import ProfileCard from "../../../components/ProfileCard";
 import { Typography } from "@material-ui/core";
+import LayoutContext from "../../../context/layout";
 
 const descriptions = [
   "I wrote my first line of code 9 years ago and it's been my passion ever since. I finished Bachelor's Degree in Computer Science at Wentworth Institute of Technology in 2018. Now, I build cool projects as a Software Engineer at Shell TechWorks",
@@ -8,13 +9,14 @@ const descriptions = [
 ];
 
 export default function About() {
+  const { globalAnimation } = useContext(LayoutContext);
   return (
     <div className="mx-12 py-8" style={{ zIndex: 2, textAlign: "center", display: "flex", justifyContent: "center" }}>
       <ProfileCard
         cardStyle={{ maxWidth: 400 }}
         header={<Typography variant="h5">Welcome</Typography>}
         contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
-        animation
+        animation={globalAnimation}
       >
         <Typography variant="h5">This is my website</Typography>
         <Typography variant="caption" style={{ color: "grey" }}>

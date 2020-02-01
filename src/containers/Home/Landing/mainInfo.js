@@ -7,7 +7,7 @@ import LandingProfile from "../../../components/Profile";
 
 const keywordListMap = ["Puns Admirer", "Tech Enthusiast", "Programmer", "Software Engineer @ STW"];
 
-const MainInfo = ({ keywords, containerStyle, className }) => (
+const MainInfo = ({ keywords, containerStyle, className, animation }) => (
   <div
     className={`px-4 ${className}`}
     style={{
@@ -20,7 +20,7 @@ const MainInfo = ({ keywords, containerStyle, className }) => (
       ...containerStyle,
     }}
   >
-    <LandingProfile containerStyle={{ zIndex: 1 }} imageStyle={{ zIndex: 1 }} />
+    <LandingProfile containerStyle={{ zIndex: 1 }} imageStyle={{ zIndex: 1 }} animation={animation} />
     <div style={{ flex: 1, width: "100%" }}>
       <DataStack
         dataList={keywords.map(keyword => (
@@ -54,12 +54,14 @@ MainInfo.propTypes = {
   className: PropTypes.string,
   keywords: PropTypes.arrayOf(PropTypes.string),
   containerStyle: PropTypes.object,
+  animation: PropTypes.bool,
 };
 
 MainInfo.defaultProps = {
   className: "",
   keywords: keywordListMap,
   containerStyle: {},
+  animation: false,
 };
 
 export default MainInfo;

@@ -21,7 +21,7 @@ function ProfileCard({
   const [animateProps, setAnimateProps] = useSpring(() => ({
     transform: [0, 0],
     ...cardStyle,
-    from: { transform: animation ? [0, -200] : "translate(0, 0)" },
+    from: { transform: animation ? [0, -200] : [0, 0] },
     config: {
       mass: 10,
     },
