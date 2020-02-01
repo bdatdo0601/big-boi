@@ -8,6 +8,8 @@ import useStyles from "./styleHooks";
 import AppNavigation from "../../components/AppNavigation";
 import LayoutContext from "../../context/layout";
 import routes from "../../routes";
+import Particles from "react-particles-js";
+import particleConfig from "./particleConfig";
 
 export default function MainLayout({ children, name }) {
   const classes = useStyles();
@@ -34,6 +36,10 @@ export default function MainLayout({ children, name }) {
       setGlobalAnimation={setGlobalAnimation}
       isSelected={item => history.location.pathname === item.path}
     >
+      <Particles
+        style={{ width: "100vw", height: "100vh", position: "fixed", zIndex: -1, top: 0, left: 0 }}
+        params={particleConfig(isDark)}
+      />
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
