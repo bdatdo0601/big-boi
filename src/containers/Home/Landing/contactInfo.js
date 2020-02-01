@@ -66,7 +66,7 @@ export default function ContactInfo({ className, contacts, animation }) {
       className={className}
       elevation={3}
       {...bind()}
-      style={{ ...animateProps, transform: animateProps.transform.interpolate((x, y) => `translate(${x}px, ${y}px)`) }}
+      style={{ ...animateProps, transform: animateProps.transform.to((x, y) => `translate(${x}px, ${y}px)`) }}
     >
       <Typography variant="h4" style={{ marginBottom: 24 }}>
         Contact

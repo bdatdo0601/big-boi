@@ -48,7 +48,7 @@ export default function Profile({ image, name, wrapperStyle, imageStyle, animati
         className="w-56 h-56 profile-image"
         src={image}
         alt="main_picture"
-        style={{ ...imageProps, transform: imageProps.transform.interpolate((x, y) => `translate(${x}px, ${y}px)`) }}
+        style={{ ...imageProps, transform: imageProps.transform.to((x, y) => `translate(${x}px, ${y}px)`) }}
         {...bind()}
       />
       <Typography variant="h3">{name}</Typography>

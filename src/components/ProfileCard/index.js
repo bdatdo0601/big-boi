@@ -40,7 +40,7 @@ function ProfileCard({
       className={classes.card}
       style={{
         ...animateProps,
-        transform: animateProps.transform.interpolate((x, y) => `translate(${x}px, ${y}px)`),
+        transform: animateProps.transform.to((x, y) => `translate(${x}px, ${y}px)`),
       }}
       {...bind()}
     >
