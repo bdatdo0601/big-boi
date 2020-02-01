@@ -91,13 +91,13 @@ export default function AppNavigation({
         </div>
         <FormControlLabel
           className={classes.darkModeSwitch}
-          control={<Switch checked={globalAnimation} onChange={e => setGlobalAnimation(e.target.checked)} />}
-          label="Animation"
+          control={<Switch checked={isDark} onChange={e => setIsDark(e.target.checked)} />}
+          label="Dark Mode"
         />
         <FormControlLabel
           className={classes.darkModeSwitch}
-          control={<Switch checked={isDark} onChange={e => setIsDark(e.target.checked)} />}
-          label="Dark Mode"
+          control={<Switch checked={globalAnimation} onChange={e => setGlobalAnimation(e.target.checked)} />}
+          label="Animation"
         />
         <List>
           {Object.keys(groupedDrawerContent).map((groupedContents, index) => (
