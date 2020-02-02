@@ -10,6 +10,14 @@
             "StackName": "amplify-big-boi-dev-142545",
             "StackId": "arn:aws:cloudformation:us-east-1:142037127835:stack/amplify-big-boi-dev-142545/53d60820-3a28-11ea-b0fe-12e727a79a85",
             "AmplifyAppId": "d2vxpb6a8hxx0o"
+        },
+        "categories": {
+            "auth": {
+                "bigboiauth": {
+                    "hostedUIProviderCreds": "[]"
+                },
+                "bigboi327b1f0d": {}
+            }
         }
     }
 }

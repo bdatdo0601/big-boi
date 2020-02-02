@@ -21,7 +21,7 @@ export default function MainLayout({ children, name }) {
   const { setIsDark, isDark, defaultPadding, globalAnimation, setGlobalAnimation } = useContext(LayoutContext);
   useEffect(() => {
     Promise.all(
-      routes.map(async item => ({ ...item, hidden: isFunction(item.hidden) ? await item.hidden : item.hidden }))
+      routes.map(async item => ({ ...item, hidden: isFunction(item.hidden) ? await item.hidden() : item.hidden }))
     ).then(resolvedRoutes => {
       setRouteList(resolvedRoutes);
     });
@@ -33,7 +33,7 @@ export default function MainLayout({ children, name }) {
       open={open}
       groupedDrawerContent={groupBy(
         routeList.filter(route => !route.hidden),
-        "type"
+        "type.name"
       )}
       onItemClick={item => {
         history.push(item.path);

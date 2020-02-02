@@ -1,6 +1,10 @@
 import React from "react";
+import { Auth } from "aws-amplify";
+import { Redirect } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import CommentIcon from "@material-ui/icons/Comment";
 import AssignmentIndSharpIcon from "@material-ui/icons/AssignmentIndSharp";
 import CreateIcon from "@material-ui/icons/Create";
@@ -8,10 +12,51 @@ import AccountTree from "@material-ui/icons/AccountTree";
 import Home from "./containers/Home";
 import { Typography, Button } from "@material-ui/core";
 
-const ROUTE_TYPE = {
-  PUBLIC: "",
-  PRIVATE: "Management",
+export const ROUTE_TYPE = {
+  PUBLIC: {
+    name: "",
+    withAuth: false,
+  },
+  PRIVATE: {
+    name: "Management",
+    withAuth: true,
+  },
 };
+
+const isAuthExsist = async () => {
+  try {
+    const user = await Auth.currentAuthenticatedUser();
+    return user !== null;
+  } catch (err) {
+    return false;
+  }
+};
+
+export const errorRoutes = [
+  {
+    name: "Error",
+    component: ({ history }) => (
+      <>
+        <Typography variant="h1" style={{ color: "red" }}>
+          404 - Error not found
+        </Typography>
+
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            history.replace("/");
+          }}
+        >
+          Go Home
+        </Button>
+      </>
+    ),
+    path: "*",
+    hidden: true,
+    type: "Error",
+  },
+];
 
 export default [
   {
@@ -49,10 +94,20 @@ export default [
   {
     name: "Login",
     icon: <ExitToAppIcon />,
-    component: () => <div>Login</div>,
+    component: () => <Redirect to="/admin" />,
     path: "/login",
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
+    hidden: async () => await isAuthExsist(),
+  },
+  {
+    name: "Admin Dashboard",
+    icon: <DashboardIcon />,
+    component: () => <div>Admin</div>,
+    path: "/admin",
+    exact: true,
+    type: ROUTE_TYPE.PRIVATE,
+    hidden: async () => !(await isAuthExsist()),
   },
   {
     name: "Blogs Manager",
@@ -61,27 +116,20 @@ export default [
     path: "/blogmanager",
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
+    hidden: async () => !(await isAuthExsist()),
   },
   {
-    name: "Error",
-    component: ({ history }) => (
-      <>
-        <Typography variant="h1" style={{ color: "red" }}>
-          404 - Error not found
-        </Typography>
-
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            history.replace("/");
-          }}
-        >
-          Go Home
-        </Button>
-      </>
-    ),
-    path: "*",
-    hidden: true,
+    name: "Logout",
+    icon: <MeetingRoomIcon />,
+    component: ({ history }) => {
+      Auth.signOut().then(() => {
+        history.replace("/");
+      });
+      return null;
+    },
+    path: "/logout",
+    exact: true,
+    type: ROUTE_TYPE.PRIVATE,
+    hidden: async () => !(await isAuthExsist()),
   },
 ];
