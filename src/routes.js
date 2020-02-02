@@ -11,6 +11,11 @@ import CreateIcon from "@material-ui/icons/Create";
 import AccountTree from "@material-ui/icons/AccountTree";
 import Home from "./containers/Home";
 import { Typography, Button } from "@material-ui/core";
+import Blogs from "./containers/Blogs";
+import Background from "./containers/Background";
+import Projects from "./containers/Projects";
+import AdminDashboard from "./containers/AdminDashboard";
+import BlogManager from "./containers/BlogManager";
 
 export const ROUTE_TYPE = {
   PUBLIC: {
@@ -70,7 +75,7 @@ export default [
   {
     name: "Background",
     icon: <AssignmentIndSharpIcon />,
-    component: () => <div>Background</div>,
+    component: Background,
     path: "/background",
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
@@ -78,7 +83,7 @@ export default [
   {
     name: "Blogs",
     icon: <CommentIcon />,
-    component: () => <div>Blogs</div>,
+    component: Blogs,
     path: "/blogs",
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
@@ -86,7 +91,7 @@ export default [
   {
     name: "Projects",
     icon: <AccountTree />,
-    component: () => <div>Projects</div>,
+    component: Projects,
     path: "/projects",
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
@@ -103,7 +108,7 @@ export default [
   {
     name: "Admin Dashboard",
     icon: <DashboardIcon />,
-    component: () => <div>Admin</div>,
+    component: AdminDashboard,
     path: "/admin",
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
@@ -112,7 +117,7 @@ export default [
   {
     name: "Blogs Manager",
     icon: <CreateIcon />,
-    component: () => <div>Blog Manager</div>,
+    component: BlogManager,
     path: "/blogmanager",
     exact: true,
     type: ROUTE_TYPE.PRIVATE,

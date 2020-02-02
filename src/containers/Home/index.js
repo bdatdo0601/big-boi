@@ -4,9 +4,9 @@ import About from "./About";
 
 export default function Home() {
   return (
-    <>
+    <div className="container-div">
       <Landing />
       <About />
-    </>
+    </div>
   );
 }

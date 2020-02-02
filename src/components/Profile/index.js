@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
 import { Typography } from "@material-ui/core";
@@ -9,7 +9,7 @@ import { useDrag } from "react-use-gesture";
 import "./index.less";
 
 export default function Profile({ image, name, wrapperStyle, imageStyle, animation }) {
-  const { isDark, setDefaultPadding } = useContext(LayoutContext);
+  const { isDark } = useContext(LayoutContext);
   const [imageProps, setImageProps] = useSpring(() => ({
     from: animation ? { opacity: 0, transform: [0, -100] } : {},
     transform: [0, 0],
@@ -22,9 +22,6 @@ export default function Profile({ image, name, wrapperStyle, imageStyle, animati
       mass: 2,
     },
   }));
-  useEffect(() => {
-    setDefaultPadding(false);
-  }, [setDefaultPadding]);
   // Set the drag hook and define component movement based on gesture data
   const bind = useDrag(({ down, movement: [mx, my] }) => {
     setImageProps({

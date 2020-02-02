@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
 import LayoutContext from "../../../context/layout";
@@ -8,10 +8,7 @@ import ContactInfo from "./contactInfo";
 const keywordListMap = ["Puns Admirer", "Tech Enthusiast", "Programmer", "Software Engineer @ STW"];
 
 export default function Landing({ keywords }) {
-  const { setDefaultPadding, globalAnimation } = useContext(LayoutContext);
-  useEffect(() => {
-    setDefaultPadding(false);
-  }, [setDefaultPadding]);
+  const { globalAnimation } = useContext(LayoutContext);
   return (
     <Grid
       className="px-2"

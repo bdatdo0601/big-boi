@@ -8,7 +8,6 @@ export const LayoutContextProvider = ({ children }) => {
   const [layout, setLayout] = useState();
   const [isDark, setIsDark] = useState(true);
   const [animation, setAnimation] = useState(true);
-  const [defaultPadding, setDefaultPadding] = useState(true);
   const [globalAnimation, setGlobalAnimation] = useState(true);
   const theme = createMuiTheme({
     palette: {
@@ -43,8 +42,6 @@ export const LayoutContextProvider = ({ children }) => {
           setLayout,
           isDark,
           setIsDark,
-          defaultPadding,
-          setDefaultPadding,
           animation,
           setAnimation,
           globalAnimation,

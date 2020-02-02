@@ -1,6 +1,12 @@
 button {
     outline: none;
 }
+
+.container-div {
+    width: "100%";
+    text-align: center;
+}
+
 .MuiGrid-spacing-xs-10 {
     width: 100% !important;
     margin: 0 !important;

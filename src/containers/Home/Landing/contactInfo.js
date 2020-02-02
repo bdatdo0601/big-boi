@@ -50,6 +50,7 @@ export default function ContactInfo({ className, contacts, animation }) {
   const [animateProps, setAnimateProps] = useSpring(() => ({
     display: "flex",
     flexDirection: "column",
+    textAlign: "left",
     transform: [0, 0],
     from: animation ? { transform: [0, -200] } : {},
     config: {

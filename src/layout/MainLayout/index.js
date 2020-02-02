@@ -3,7 +3,6 @@ import { isFunction } from "lodash";
 import PropTypes from "prop-types";
 import { groupBy } from "lodash";
 import clsx from "clsx";
-import { useTheme } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import useStyles from "./styleHooks";
 import AppNavigation from "../../components/AppNavigation";
@@ -17,8 +16,7 @@ export default function MainLayout({ children, name }) {
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const [routeList, setRouteList] = React.useState([]);
-  const theme = useTheme();
-  const { setIsDark, isDark, defaultPadding, globalAnimation, setGlobalAnimation } = useContext(LayoutContext);
+  const { setIsDark, isDark, globalAnimation, setGlobalAnimation } = useContext(LayoutContext);
   useEffect(() => {
     Promise.all(
       routes.map(async item => ({ ...item, hidden: isFunction(item.hidden) ? await item.hidden() : item.hidden }))
@@ -53,7 +51,6 @@ export default function MainLayout({ children, name }) {
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
-        style={{ padding: defaultPadding ? theme.spacing(3) : 0 }}
       >
         <div className={classes.drawerHeader} />
         {children}
