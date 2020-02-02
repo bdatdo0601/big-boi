@@ -3,13 +3,14 @@ import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import CommentIcon from "@material-ui/icons/Comment";
 import AssignmentIndSharpIcon from "@material-ui/icons/AssignmentIndSharp";
+import CreateIcon from "@material-ui/icons/Create";
 import AccountTree from "@material-ui/icons/AccountTree";
 import Home from "./containers/Home";
 import { Typography, Button } from "@material-ui/core";
 
 const ROUTE_TYPE = {
-  PUBLIC: "PUBLIC",
-  PRIVATE: "PRIVATE",
+  PUBLIC: "",
+  PRIVATE: "Management",
 };
 
 export default [
@@ -50,6 +51,14 @@ export default [
     icon: <ExitToAppIcon />,
     component: () => <div>Login</div>,
     path: "/login",
+    exact: true,
+    type: ROUTE_TYPE.PRIVATE,
+  },
+  {
+    name: "Blogs Manager",
+    icon: <CreateIcon />,
+    component: () => <div>Blog Manager</div>,
+    path: "/blogmanager",
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
   },

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { isEmpty } from "lodash";
 import PropTypes from "prop-types";
 import uuid from "uuid";
 import clsx from "clsx";
@@ -14,7 +15,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { useMediaQuery, Switch, FormControlLabel } from "@material-ui/core";
+import { useMediaQuery, Switch, FormControlLabel, CircularProgress } from "@material-ui/core";
 import useStyles from "./styleHooks";
 import MaterialListItem from "./MaterialListItem";
 
@@ -100,20 +101,34 @@ export default function AppNavigation({
           label="Animation"
         />
         <List>
-          {Object.keys(groupedDrawerContent).map((groupedContents, index) => (
-            <React.Fragment key={uuid()}>
-              {index === 0 && <Divider />}
-              {groupedDrawerContent[groupedContents].map(item => (
-                <MaterialListItem
-                  item={item}
-                  key={item.name}
-                  onClick={listItem => onItemClick(listItem)}
-                  isSelected={isSelected}
-                />
-              ))}
-              <Divider />
-            </React.Fragment>
-          ))}
+          {!isEmpty(groupedDrawerContent) ? (
+            Object.keys(groupedDrawerContent).map((groupedContents, index) => (
+              <React.Fragment key={uuid()}>
+                {index === 0 && <Divider />}
+                {groupedContents && (
+                  <Typography
+                    variant="caption"
+                    color="textSecondary"
+                    display="block"
+                    style={{ marginLeft: "6%", marginTop: 6 }}
+                  >
+                    {groupedContents}
+                  </Typography>
+                )}
+                {groupedDrawerContent[groupedContents].map(item => (
+                  <MaterialListItem
+                    item={item}
+                    key={item.name}
+                    onClick={listItem => onItemClick(listItem)}
+                    isSelected={isSelected}
+                  />
+                ))}
+                <Divider />
+              </React.Fragment>
+            ))
+          ) : (
+            <CircularProgress style={{ marginLeft: "6%" }} />
+          )}
         </List>
       </Drawer>
       {children}

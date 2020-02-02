@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { isFunction } from "lodash";
 import PropTypes from "prop-types";
 import { groupBy } from "lodash";
 import clsx from "clsx";
@@ -15,15 +16,23 @@ export default function MainLayout({ children, name }) {
   const classes = useStyles();
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
+  const [routeList, setRouteList] = React.useState([]);
   const theme = useTheme();
   const { setIsDark, isDark, defaultPadding, globalAnimation, setGlobalAnimation } = useContext(LayoutContext);
+  useEffect(() => {
+    Promise.all(
+      routes.map(async item => ({ ...item, hidden: isFunction(item.hidden) ? await item.hidden : item.hidden }))
+    ).then(resolvedRoutes => {
+      setRouteList(resolvedRoutes);
+    });
+  }, [setRouteList, history.location.pathname]);
   return (
     <AppNavigation
       setOpen={setOpen}
       name={name}
       open={open}
       groupedDrawerContent={groupBy(
-        routes.filter(route => !route.hidden),
+        routeList.filter(route => !route.hidden),
         "type"
       )}
       onItemClick={item => {
