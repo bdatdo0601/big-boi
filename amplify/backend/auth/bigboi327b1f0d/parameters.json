@@ -1,6 +1,6 @@
 {
     "identityPoolName": "bigboi327b1f0d_identitypool_327b1f0d",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "bigboi327b1f0d",
     "userPoolName": "bigboi327b1f0d_userpool_327b1f0d",
     "autoVerifiedAttributes": [

@@ -12,5 +12,11 @@
 			"dependsOn": [],
 			"customAuth": false
 		}
+	},
+	"storage": {
+		"bigboicontent": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
 	}
 }
