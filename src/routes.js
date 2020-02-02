@@ -23,7 +23,7 @@ export const ROUTE_TYPE = {
   },
 };
 
-const isAuthExsist = async () => {
+const isAuthExist = async () => {
   try {
     const user = await Auth.currentAuthenticatedUser();
     return user !== null;
@@ -98,7 +98,7 @@ export default [
     path: "/login",
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
-    hidden: async () => await isAuthExsist(),
+    hidden: async () => await isAuthExist(),
   },
   {
     name: "Admin Dashboard",
@@ -107,7 +107,7 @@ export default [
     path: "/admin",
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
-    hidden: async () => !(await isAuthExsist()),
+    hidden: async () => !(await isAuthExist()),
   },
   {
     name: "Blogs Manager",
@@ -116,7 +116,7 @@ export default [
     path: "/blogmanager",
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
-    hidden: async () => !(await isAuthExsist()),
+    hidden: async () => !(await isAuthExist()),
   },
   {
     name: "Logout",
@@ -130,6 +130,6 @@ export default [
     path: "/logout",
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
-    hidden: async () => !(await isAuthExsist()),
+    hidden: async () => !(await isAuthExist()),
   },
 ];
