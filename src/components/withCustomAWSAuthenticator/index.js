@@ -35,7 +35,7 @@ AuthenticatorWrapper.defaultProps = {
 
 const withCustomAWSAuthenticator = Component => props => {
   return (
-    <Authenticator hide={[SignUp, Greetings]} includeGreetings={false}>
+    <Authenticator hide={[SignUp, Greetings]} includeGreetings={false} theme={{ formContainer: { width: "100vw" } }}>
       <AuthenticatorWrapper {...props}>
         <Component {...props} />
       </AuthenticatorWrapper>
