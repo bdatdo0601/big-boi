@@ -4,6 +4,7 @@ import { fetchPhotos } from "../../../utils/awsStorage";
 import { GridList, GridListTile, CircularProgress, useMediaQuery } from "@material-ui/core";
 import useGetDataList from "../../../utils/hooks/useGetDataList";
 import ImageGridDisplay from "../../../components/ImageGridDisplay";
+import { formatGridList } from "../../../utils";
 
 export default function ImagesDisplay({ imageCols, cellHeight }) {
   const { data, loading } = useGetDataList(fetchPhotos);
@@ -18,17 +19,8 @@ export default function ImagesDisplay({ imageCols, cellHeight }) {
         spacing={4}
         cellHeight={cellHeight}
       >
-        {data.map(image => (
-          <GridListTile
-            key={image.key}
-            cols={Math.max(
-              image.metaData.aspectWidth >= image.metaData.aspectHeight
-                ? Math.min(image.metaData.aspectWidth, isWeb ? 4 : 1)
-                : Math.min(image.metaData.aspectWidth, isWeb ? 2 : 1),
-              isWeb ? 2 : 1
-            )}
-            rows={1}
-          >
+        {formatGridList(data, imageCols, isWeb).map(image => (
+          <GridListTile key={image.key} cols={image.metaData.cols} rows={1}>
             <ImageGridDisplay url={image.url} name={image.key} animation />
           </GridListTile>
         ))}
