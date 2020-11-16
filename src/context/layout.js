@@ -14,16 +14,16 @@ export const LayoutContextProvider = ({ children }) => {
       type: isDark ? "dark" : "light",
       primary: {
         // light: will be calculated from palette.primary.main,
-        main: "#00695c",
-        light: "#439889",
-        dark: "#003d33",
+        main: "#388e3c",
+        light: "#66bb6a",
+        dark: "#2e7d32",
         // dark: will be calculated from palette.primary.main,
         // contrastText: will be calculated to contrast with palette.primary.main
       },
       secondary: {
-        light: "#e6ffff",
-        main: "#b3e5fc",
-        dark: "#82b3c9",
+        light: "#42a5f5",
+        main: "#1976d2",
+        dark: "#1e88e5",
       },
       // Used by `getContrastText()` to maximize the contrast between
       // the background and the text.
