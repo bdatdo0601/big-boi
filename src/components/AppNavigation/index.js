@@ -15,9 +15,19 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { useMediaQuery, Switch, FormControlLabel, CircularProgress } from "@material-ui/core";
+import { useMediaQuery, Switch, FormControlLabel, CircularProgress, Grid, Tabs, Tab } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import useStyles from "./styleHooks";
 import MaterialListItem from "./MaterialListItem";
+import "./index.less";
+
+const a11yProps = index => ({
+  id: `simple-tab-${index}`,
+  "aria-controls": `simple-tabpanel-${index}`,
+  style: {
+    outline: "none",
+  },
+});
 
 export default function AppNavigation({
   children,
@@ -34,7 +44,10 @@ export default function AppNavigation({
 }) {
   const classes = useStyles();
   const theme = useTheme();
+  const isBigScreen = useMediaQuery("(min-width:1070px)");
   const isWeb = useMediaQuery("(min-width:600px)");
+
+  const history = useHistory();
 
   useEffect(() => {
     setGlobalAnimation(isWeb);
@@ -47,7 +60,6 @@ export default function AppNavigation({
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -57,21 +69,40 @@ export default function AppNavigation({
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-            style={{ outline: "none" }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap className={open ? classes.hide : ""}>
-            {name}
-          </Typography>
-        </Toolbar>
+        <Grid className="appbar-grid" container justify="space-between" alignItems="center" alignContent="center">
+          <Grid item xs={12} md={3} lg={3}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={clsx(classes.menuButton, open && classes.hide)}
+                style={{ outline: "none" }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap className={open ? classes.hide : ""}>
+                {name}
+              </Typography>
+            </Toolbar>
+          </Grid>
+          {isBigScreen && (
+            <Grid item xs={9} md={9} lg={9}>
+              <Tabs
+                value={history.location.pathname}
+                aria-label="simple tabs example"
+                onChange={(_, value) => {
+                  history.push(value);
+                }}
+              >
+                {(groupedDrawerContent[""] || []).map((item, index) => (
+                  <Tab label={item.name} key={item.name} value={item.path} {...a11yProps(index)} />
+                ))}
+              </Tabs>
+            </Grid>
+          )}
+        </Grid>
       </AppBar>
       <Drawer
         className={classes.drawer}
