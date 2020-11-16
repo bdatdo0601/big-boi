@@ -1,31 +1,49 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
+import { useMediaQuery } from "@material-ui/core";
 import LayoutContext from "../../../context/layout";
 import MainInfo from "./mainInfo";
 import ContactInfo from "./contactInfo";
+import WelcomeInfo from "./welcomeInfo";
 
 const keywordListMap = ["Puns Admirer", "Tech Enthusiast", "Programmer", "Software Engineer @ STW"];
 
 export default function Landing({ keywords }) {
   const { globalAnimation } = useContext(LayoutContext);
+  const isFullSize = useMediaQuery("(min-width:1280px)");
+  const contactInfo = useMemo(
+    () => ({ key: "contact-info", Component: ContactInfo, props: { animation: globalAnimation } }),
+    [globalAnimation]
+  );
+  const mainInfo = useMemo(
+    () => ({
+      key: "main-info",
+      Component: MainInfo,
+      props: { animation: globalAnimation, keywords, containerStyle: { marginBottom: "5rem" } },
+    }),
+    [globalAnimation, keywords]
+  );
+  const welcomeInfo = useMemo(() => ({ key: "welcome-info", Component: WelcomeInfo, props: {} }), []);
+  const items = useMemo(
+    () => (isFullSize ? [welcomeInfo, mainInfo, contactInfo] : [mainInfo, welcomeInfo, contactInfo]),
+    [welcomeInfo, mainInfo, contactInfo, isFullSize]
+  );
   return (
     <Grid
       className="px-2"
       container
-      justify="center"
+      justify={isFullSize ? "center" : "flex-start"}
       alignItems="center"
-      alignContent="flex-start"
+      alignContent="center"
       spacing={10}
-      style={{ maxHeight: 1200, minHeight: "95vh" }}
+      style={{ minHeight: "80vh", marginBottom: "2rem" }}
     >
-      <Grid style={{ height: 0, padding: 0 }} item xs={12} md={12} lg={4} />
-      <Grid item xs={12} md={12} lg={4}>
-        <MainInfo className="px-8 py-12" keywords={keywords} animation={globalAnimation} />
-      </Grid>
-      <Grid item style={{ zIndex: 1, marginTop: 72 }} xs={12} md={12} lg={4}>
-        <ContactInfo animation={globalAnimation} />
-      </Grid>
+      {items.map(({ Component, props, key }) => (
+        <Grid item xs={12} md={12} lg={4} key={key}>
+          <Component {...props} />
+        </Grid>
+      ))}
     </Grid>
   );
 }
