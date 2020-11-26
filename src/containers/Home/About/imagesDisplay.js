@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { fetchPhotos } from "../../../utils/awsStorage";
 import { GridList, GridListTile, CircularProgress, useMediaQuery } from "@material-ui/core";
+import { fetchPhotos } from "../../../utils/awsStorage";
 import useGetDataList from "../../../utils/hooks/useGetDataList";
 import ImageGridDisplay from "../../../components/ImageGridDisplay";
 import { formatGridList } from "../../../utils";
@@ -9,7 +9,6 @@ import { formatGridList } from "../../../utils";
 export default function ImagesDisplay({ imageCols, cellHeight }) {
   const { data, loading } = useGetDataList(fetchPhotos);
   const isWeb = useMediaQuery("(min-width:600px)");
-  console.log(data);
   if (loading) return <CircularProgress style={{ marginTop: 16 }} />;
   return (
     <>

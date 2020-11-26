@@ -23,9 +23,9 @@ export default function ImageGridDisplay({ url, name, animation, style }) {
     setAnimateProps({
       transform:
         down && animation
-          ? [mx > 0 ? Math.min(mx, 40) : Math.max(mx, -40), my > 0 ? Math.min(my, 40) : Math.max(my, -40)]
+          ? [mx > 0 ? Math.min(mx, 500) : Math.max(mx, -500), my > 0 ? Math.min(my, 500) : Math.max(my, -500)]
           : [0, 0],
-      config: { mass: 3 },
+      config: { mass: 0.5 },
     });
   });
   return (

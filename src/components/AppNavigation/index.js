@@ -16,7 +16,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { useMediaQuery, Switch, FormControlLabel, CircularProgress, Grid, Tabs, Tab } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import useStyles from "./styleHooks";
 import MaterialListItem from "./MaterialListItem";
 import "./index.less";
@@ -48,6 +48,7 @@ export default function AppNavigation({
   const isWeb = useMediaQuery("(min-width:600px)");
 
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     setGlobalAnimation(isWeb);
@@ -90,8 +91,9 @@ export default function AppNavigation({
           {isBigScreen && (
             <Grid item xs={9} md={9} lg={9}>
               <Tabs
-                value={history.location.pathname}
-                aria-label="simple tabs example"
+                style={{ width: "100%", right: 0, minWidth: 500 }}
+                value={location.pathname}
+                aria-label="header tabs"
                 onChange={(_, value) => {
                   history.push(value);
                 }}

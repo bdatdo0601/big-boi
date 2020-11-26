@@ -27,7 +27,6 @@ export const formatGridList = (data, colAmount, isWeb) => {
     }
     return { ...item, metaData: { ...item.metaData, cols } };
   });
-  console.log(result);
   return result;
 };
 
