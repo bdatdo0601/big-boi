@@ -1,6 +1,7 @@
 import React from "react";
 import { Auth } from "aws-amplify";
 import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import DashboardIcon from "@material-ui/icons/Dashboard";
@@ -9,13 +10,14 @@ import CommentIcon from "@material-ui/icons/Comment";
 import AssignmentIndSharpIcon from "@material-ui/icons/AssignmentIndSharp";
 import CreateIcon from "@material-ui/icons/Create";
 import AccountTree from "@material-ui/icons/AccountTree";
-import Home from "./containers/Home";
 import { Typography, Button } from "@material-ui/core";
+import Home from "./containers/Home";
 import Blogs from "./containers/Blogs";
 import Background from "./containers/Background";
 import Projects from "./containers/Projects";
 import AdminDashboard from "./containers/AdminDashboard";
 import BlogManager from "./containers/BlogManager";
+import BlogCreation from "./containers/BlogManager/Creation";
 
 export const ROUTE_TYPE = {
   PUBLIC: {
@@ -37,26 +39,32 @@ const isAuthExist = async () => {
   }
 };
 
+const ErrorPage = ({ history }) => (
+  <>
+    <Typography variant="h1" style={{ color: "red" }}>
+      404 - Error not found
+    </Typography>
+
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={() => {
+        history.replace("/");
+      }}
+    >
+      Go Home
+    </Button>
+  </>
+);
+
+ErrorPage.propTypes = {
+  history: PropTypes.object.isRequired,
+};
+
 export const errorRoutes = [
   {
     name: "Error",
-    component: ({ history }) => (
-      <>
-        <Typography variant="h1" style={{ color: "red" }}>
-          404 - Error not found
-        </Typography>
-
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            history.replace("/");
-          }}
-        >
-          Go Home
-        </Button>
-      </>
-    ),
+    component: ErrorPage,
     path: "*",
     hidden: true,
     type: "Error",
@@ -103,7 +111,7 @@ export default [
     path: "/login",
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
-    hidden: async () => await isAuthExist(),
+    hidden: async () => isAuthExist(),
   },
   {
     name: "Admin Dashboard",
@@ -122,6 +130,15 @@ export default [
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
     hidden: async () => !(await isAuthExist()),
+  },
+  {
+    name: "Blogs Creation",
+    icon: <CreateIcon />,
+    component: BlogCreation,
+    path: "/blogmanager/update/:postID",
+    exact: true,
+    type: ROUTE_TYPE.PRIVATE,
+    hidden: async () => true,
   },
   {
     name: "Logout",

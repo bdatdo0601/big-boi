@@ -1,0 +1,32 @@
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+type Post @model @auth(
+    rules: [
+      { allow: owner }, # owner can update, delete, and read
+      { allow: private, operations: [read] }, # signed in users who are not the owner can read
+      { allow: public, operations: [read] } # unauthenticated users can read
+    ]
+  ) {
+  id: ID!
+  title: String!
+  status: PostStatus!
+  data: AWSJSON!
+  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+}
+
+type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(
+    rules: [
+      { allow: owner }, # owner can update, delete, and read
+      { allow: private, operations: [read] }, # signed in users who are not the owner can read
+      { allow: public, operations: [read] } # unauthenticated users can read
+    ]
+  ) {
+  id: ID!
+  postID: ID!
+  post: Post @connection(fields: ["postID"])
+  content: String!
+}

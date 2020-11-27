@@ -1,3 +1,5 @@
 {
-  "standard.enable": false
+  "standard.enable": false,
+  "FSharp.suggestGitignore": false,
+  "FSharp.suggestSdkScripts": false
 }

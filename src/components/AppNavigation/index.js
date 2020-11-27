@@ -90,18 +90,20 @@ export default function AppNavigation({
           </Grid>
           {isBigScreen && (
             <Grid item xs={9} md={9} lg={9}>
-              <Tabs
-                style={{ width: "100%", right: 0, minWidth: 500 }}
-                value={location.pathname}
-                aria-label="header tabs"
-                onChange={(_, value) => {
-                  history.push(value);
-                }}
-              >
-                {(groupedDrawerContent[""] || []).map((item, index) => (
-                  <Tab label={item.name} key={item.name} value={item.path} {...a11yProps(index)} />
-                ))}
-              </Tabs>
+              {(groupedDrawerContent[""] || []).some(item => item.path === location.pathname) && (
+                <Tabs
+                  style={{ width: "100%", right: 0, minWidth: 500 }}
+                  value={location.pathname}
+                  aria-label="header tabs"
+                  onChange={(_, value) => {
+                    history.push(value);
+                  }}
+                >
+                  {(groupedDrawerContent[""] || []).map((item, index) => (
+                    <Tab label={item.name} key={item.name} value={item.path} {...a11yProps(index)} />
+                  ))}
+                </Tabs>
+              )}
             </Grid>
           )}
         </Grid>

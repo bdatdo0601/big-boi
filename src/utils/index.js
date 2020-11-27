@@ -34,7 +34,7 @@ export const getImageMeta = async url =>
   new Promise((res, rej) => {
     const img = new Image();
     img.src = url;
-    img.onload = function() {
+    img.onload = function onLoad() {
       const divisor = gcd(this.width, this.height);
       res({
         width: this.width,
@@ -43,8 +43,8 @@ export const getImageMeta = async url =>
         aspectHeight: this.height / divisor,
       });
     };
-    img.onerror = () => {
-      rej("Unable to get image meta data");
+    img.onerror = function onError() {
+      rej(new Error("Unable to get image meta data"));
     };
   });
 
