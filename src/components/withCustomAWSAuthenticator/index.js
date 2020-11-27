@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import { Hub } from "aws-amplify";
 import { Authenticator, SignUp, Greetings } from "aws-amplify-react";
 import { useSnackbar } from "notistack";
+import { get } from "lodash";
 
-const AuthenticatorWrapper = ({ children, authState, ...props }) => {
+const AuthenticatorWrapper = ({ children, authState }) => {
   const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
     Hub.listen("auth", res => {
-      const errorMsg = res.payload.data.message ? res.payload.data.message : "";
+      const errorMsg = get(res, "payload.data.message", "");
       if (errorMsg) {
+        console.error(res);
         enqueueSnackbar(errorMsg, {
           variant: "error",
           anchorOrigin: { vertical: "top", horizontal: "center" },
@@ -33,14 +35,12 @@ AuthenticatorWrapper.defaultProps = {
   authState: "",
 };
 
-const withCustomAWSAuthenticator = Component => props => {
-  return (
-    <Authenticator hide={[SignUp, Greetings]} includeGreetings={false} theme={{ formContainer: { width: "100vw" } }}>
-      <AuthenticatorWrapper {...props}>
-        <Component {...props} />
-      </AuthenticatorWrapper>
-    </Authenticator>
-  );
-};
+const withCustomAWSAuthenticator = Component => props => (
+  <Authenticator hide={[SignUp, Greetings]} includeGreetings={false} theme={{ formContainer: { width: "100vw" } }}>
+    <AuthenticatorWrapper {...props}>
+      <Component {...props} />
+    </AuthenticatorWrapper>
+  </Authenticator>
+);
 
 export default withCustomAWSAuthenticator;

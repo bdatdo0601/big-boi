@@ -6,10 +6,12 @@ export const onCreatePost = /* GraphQL */ `
     onCreatePost {
       id
       title
+      description
       status
+      tags
       data
-      createdAt
       updatedAt
+      createdAt
       comments {
         items {
           id
@@ -28,10 +30,12 @@ export const onUpdatePost = /* GraphQL */ `
     onUpdatePost {
       id
       title
+      description
       status
+      tags
       data
-      createdAt
       updatedAt
+      createdAt
       comments {
         items {
           id
@@ -50,10 +54,12 @@ export const onDeletePost = /* GraphQL */ `
     onDeletePost {
       id
       title
+      description
       status
+      tags
       data
-      createdAt
       updatedAt
+      createdAt
       comments {
         items {
           id
@@ -78,10 +84,12 @@ export const onCreateComment = /* GraphQL */ `
       post {
         id
         title
+        description
         status
+        tags
         data
-        createdAt
         updatedAt
+        createdAt
         comments {
           nextToken
         }
@@ -100,10 +108,12 @@ export const onUpdateComment = /* GraphQL */ `
       post {
         id
         title
+        description
         status
+        tags
         data
-        createdAt
         updatedAt
+        createdAt
         comments {
           nextToken
         }
@@ -122,10 +132,12 @@ export const onDeleteComment = /* GraphQL */ `
       post {
         id
         title
+        description
         status
+        tags
         data
-        createdAt
         updatedAt
+        createdAt
         comments {
           nextToken
         }

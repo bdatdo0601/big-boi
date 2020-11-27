@@ -11,10 +11,12 @@ export const listPosts = /* GraphQL */ `
       items {
         id
         title
+        description
         status
+        tags
         data
-        createdAt
         updatedAt
+        createdAt
         comments {
           nextToken
         }
@@ -28,10 +30,12 @@ export const getPost = /* GraphQL */ `
     getPost(id: $id) {
       id
       title
+      description
       status
+      tags
       data
-      createdAt
       updatedAt
+      createdAt
       comments {
         items {
           id
@@ -42,6 +46,38 @@ export const getPost = /* GraphQL */ `
         }
         nextToken
       }
+    }
+  }
+`;
+export const postByUpdatedAt = /* GraphQL */ `
+  query PostByUpdatedAt(
+    $updatedAt: AWSDateTime
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    PostByUpdatedAt(
+      updatedAt: $updatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        description
+        status
+        tags
+        data
+        updatedAt
+        createdAt
+        comments {
+          nextToken
+        }
+      }
+      nextToken
     }
   }
 `;
@@ -56,10 +92,12 @@ export const getComment = /* GraphQL */ `
       post {
         id
         title
+        description
         status
+        tags
         data
-        createdAt
         updatedAt
+        createdAt
         comments {
           nextToken
         }
@@ -83,10 +121,12 @@ export const listComments = /* GraphQL */ `
         post {
           id
           title
+          description
           status
+          tags
           data
-          createdAt
           updatedAt
+          createdAt
         }
       }
       nextToken

@@ -4,7 +4,7 @@ enum PostStatus {
   ARCHIVED
 }
 
-type Post @model @auth(
+type Post @model @key(name: "byUpdatedAt", fields: ["updatedAt"], queryField: "PostByUpdatedAt")  @auth(
     rules: [
       { allow: owner }, # owner can update, delete, and read
       { allow: private, operations: [read] }, # signed in users who are not the owner can read
@@ -13,8 +13,11 @@ type Post @model @auth(
   ) {
   id: ID!
   title: String!
+  description: String
   status: PostStatus!
+  tags: [String]
   data: AWSJSON!
+  updatedAt: AWSDateTime!
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
 }
 
