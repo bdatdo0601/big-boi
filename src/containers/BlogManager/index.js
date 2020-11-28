@@ -14,7 +14,8 @@ import BlogPostCard from "../../components/BlosPostCard";
 
 export default function BlogManager() {
   const history = useHistory();
-  const { data: rawData, loading, execute: refetch } = useAWSAPI(listPosts);
+  const query = useMemo(() => ({ limit: 10000 }), []);
+  const { data: rawData, loading, execute: refetch } = useAWSAPI(listPosts, query);
   const { execute: mutatePost, loading: updatingPost } = useLazyAWSAPI(updatePost);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -60,7 +61,7 @@ export default function BlogManager() {
         >
           Add New Blog
         </Button>
-        <Grid container justify="space-around">
+        <Grid container justify="flex-start">
           {posts.map(post => (
             <Grid item key={post.id}>
               <BlogPostCard

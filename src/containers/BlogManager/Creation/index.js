@@ -124,7 +124,7 @@ export default function BlogCreation() {
         />
         <div style={{ marginTop: 6, textAlign: "left" }}>
           {get(data, "tags", []).map((item, index) => (
-            <span style={{ margin: 4 }} key={`${item} ${index}`}>
+            <span style={{ marginRight: 8 }} key={`${item} ${index}`}>
               <Chip color="primary" label={item} />
             </span>
           ))}

@@ -51,13 +51,15 @@ export const getPost = /* GraphQL */ `
 `;
 export const postByUpdatedAt = /* GraphQL */ `
   query PostByUpdatedAt(
-    $updatedAt: AWSDateTime
+    $status: PostStatus
+    $updatedAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelPostFilterInput
     $limit: Int
     $nextToken: String
   ) {
     PostByUpdatedAt(
+      status: $status
       updatedAt: $updatedAt
       sortDirection: $sortDirection
       filter: $filter

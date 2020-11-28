@@ -1,4 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
+import { merge } from "lodash";
 import { useCallback, useEffect, useState } from "react";
 
 export const useAWSAPI = (operation, input, authMode = "AMAZON_COGNITO_USER_POOLS") => {
@@ -23,6 +24,26 @@ export const useAWSAPI = (operation, input, authMode = "AMAZON_COGNITO_USER_POOL
     [input, operation, authMode]
   );
 
+  const fetchMore = useCallback(
+    async token => {
+      try {
+        setLoading(true);
+        if (token) {
+          const formattedOperation = graphqlOperation(operation, { nextToken: token }, ...args);
+          const retrievedData = await API.graphql({ ...formattedOperation, authMode });
+          setData(currentData => merge(currentData, retrievedData));
+        }
+        setLoading(false);
+        return retrievedData;
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+        return {};
+      }
+    },
+    [authMode, operation]
+  );
+
   useEffect(() => {
     execute().then();
   }, [execute]);
@@ -32,10 +53,11 @@ export const useAWSAPI = (operation, input, authMode = "AMAZON_COGNITO_USER_POOL
     loading,
     error,
     execute,
+    fetchMore,
   };
 };
 
-export const useLazyAWSAPI = (operation, input) => {
+export const useLazyAWSAPI = (operation, input, authMode = "AMAZON_COGNITO_USER_POOLS") => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -57,10 +79,31 @@ export const useLazyAWSAPI = (operation, input) => {
     [input, operation]
   );
 
+  const fetchMore = useCallback(
+    async token => {
+      try {
+        setLoading(true);
+        if (token) {
+          const formattedOperation = graphqlOperation(operation, { nextToken: token }, ...args);
+          const retrievedData = await API.graphql({ ...formattedOperation, authMode });
+          setData(currentData => merge(currentData, retrievedData));
+        }
+        setLoading(false);
+        return retrievedData;
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+        return {};
+      }
+    },
+    [authMode, operation]
+  );
+
   return {
     data,
     loading,
     error,
     execute,
+    fetchMore,
   };
 };

@@ -4,7 +4,7 @@ enum PostStatus {
   ARCHIVED
 }
 
-type Post @model @key(name: "byUpdatedAt", fields: ["updatedAt"], queryField: "PostByUpdatedAt")  @auth(
+type Post @model @key(name: "byUpdatedAt", fields: ["status", "updatedAt"], queryField: "PostByUpdatedAt")  @auth(
     rules: [
       { allow: owner }, # owner can update, delete, and read
       { allow: private, operations: [read] }, # signed in users who are not the owner can read

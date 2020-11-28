@@ -1,8 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import hljs from "highlight.js/lib/core";
 import "./styles.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import "highlight.js/styles/atom-one-dark.css";
+
+hljs.initHighlightingOnLoad();
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

@@ -18,6 +18,7 @@ import Projects from "./containers/Projects";
 import AdminDashboard from "./containers/AdminDashboard";
 import BlogManager from "./containers/BlogManager";
 import BlogCreation from "./containers/BlogManager/Creation";
+import PostDisplay from "./containers/Blogs/PostDisplay";
 
 export const ROUTE_TYPE = {
   PUBLIC: {
@@ -95,6 +96,15 @@ export default [
     path: "/blogs",
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
+  },
+  {
+    name: "Post Display",
+    icon: <CommentIcon />,
+    component: PostDisplay,
+    path: "/blogs/post/:postID",
+    exact: true,
+    type: ROUTE_TYPE.PUBLIC,
+    hidden: async () => true,
   },
   {
     name: "Projects",
