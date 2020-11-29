@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, CardHeader, CardContent, CardActions } from "@material-ui/core";
 import PropTypes from "prop-types";
-import useStyles from "./styleHooks";
 import { useSpring, animated } from "react-spring";
 import { useDrag } from "react-use-gesture";
+import useStyles from "./styleHooks";
 
 const AnimatedCard = animated(Card);
 

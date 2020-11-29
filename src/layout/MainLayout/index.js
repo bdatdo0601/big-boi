@@ -1,14 +1,13 @@
 import React, { useContext, useEffect } from "react";
-import { isFunction } from "lodash";
+import { isFunction, groupBy } from "lodash";
 import PropTypes from "prop-types";
-import { groupBy } from "lodash";
+import Particles from "react-particles-js";
 import clsx from "clsx";
 import { useHistory } from "react-router-dom";
 import useStyles from "./styleHooks";
 import AppNavigation from "../../components/AppNavigation";
 import LayoutContext from "../../context/layout";
 import routes from "../../routes";
-import Particles from "react-particles-js";
 import particleConfig from "./particleConfig";
 
 export default function MainLayout({ children, name }) {
