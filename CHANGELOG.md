@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/bdatdo0601/big-boi/compare/v1.0.2...v1.0.3) (2020-11-29)
+
+
+### Bug Fixes
+
+* update styling chip ([47650f8](https://github.com/bdatdo0601/big-boi/commit/47650f84a266aea8a65862ecdf49c9af6af4914d))
+
 ### [1.0.2](https://github.com/bdatdo0601/big-boi/compare/v1.0.1...v1.0.2) (2020-11-29)
 
 
