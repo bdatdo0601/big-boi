@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/bdatdo0601/big-boi/compare/v1.0.1...v1.0.2) (2020-11-29)
+
+
+### Bug Fixes
+
+* update serviceWorker ([8bad362](https://github.com/bdatdo0601/big-boi/commit/8bad3629d8370ef447122879641aa0a40d74405f))
+* update styling ([da0f0b2](https://github.com/bdatdo0601/big-boi/commit/da0f0b242ea1c2aad5eeebb32f9e0b30a23b4dbd))
+
 ### [1.0.1](https://github.com/bdatdo0601/big-boi/compare/v1.0.0...v1.0.1) (2020-11-29)
 
 
