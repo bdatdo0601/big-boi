@@ -1,0 +1,290 @@
+{
+  "basic": {
+    "name": "Dat Do",
+    "label": "Software Engineer",
+    "picture": "https://scontent-bos3-1.xx.fbcdn.net/v/t1.0-9/51535839_2847062465305722_6300427194543898624_o.jpg?_nc_cat=102&ccb=2&_nc_sid=09cbfe&_nc_ohc=50g8TcNGrjwAX90LhTt&_nc_ht=scontent-bos3-1.xx&oh=511fbd3f0aa52a0250a135bbc824e686&oe=5FE8008C",
+    "email": "dat.b.do@gmail.com",
+    "phone": "(347) 389-2684",
+    "website": "https://dat.do/",
+    "summary": "Software Engineer with a demonstrated history of working in the oil & energy industry. Skilled in Computer Science, Amazon Web Services (AWS), iOS Development, Agile Methodologies. Strong engineering professional with a Bachelor of Science (B.S.) focused in Computer Science from Wentworth Institute of Technology.",
+    "location": {
+      "address": "28 Greenleaf ST",
+      "postalCode": "MA 02148",
+      "city": "Malden",
+      "countryCode": "US",
+      "region": "Massachusetts"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "bdatdo0601",
+        "url": "https://github.com/bdatdo0601"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "linkedin.com/in/datdo",
+        "url": "https://www.linkedin.com/in/datdo/"
+      },
+      {
+        "network": "Twitter",
+        "username": "@datbacdo",
+        "url": "https://twitter.com/datbacdo"
+      },
+      {
+        "network": "Facebook",
+        "username": "Dat Bac Do",
+        "url": "https://www.facebook.com/legenmately"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "Shell TechWorks",
+      "position": "Software Engineer",
+      "website": "http://shell.com",
+      "startDate": "December 2018",
+      "endDate": "Present",
+      "summary": "Boston, Massachusetts, United States",
+      "highlights": [
+        "Developing and designing software solutions to improve safety and efficiency for the energy industry",
+        "Integrating cutting-edge technologies (Artificial Intelligence, IoT) into software applications, delivering highly specialized system to assets and end clients",
+        "Utilizing cloud infrastructure to enable globally available software products, with intensive computing capability",
+        "Taking initiative on unifying React UI components across multiple projects and solutions via Storybook",
+        "Making contribution toward Software team developer standards and guidelines through documentation, conventional/atomic commits, CI/CD automation, and versioning"
+      ]
+    },
+    {
+      "company": "Shell TechWorks",
+      "position": "Software Engineer Intern",
+      "website": "http://shell.com",
+      "startDate": "April 2017",
+      "endDate": "April 2018",
+      "summary": "Boston, Massachusetts, United States",
+      "highlights": [
+        "Prototyped a highly scalable software product to semi-automate digital hydrostatic test instruments",
+        "Developed and designed intuitive interfaces with fast response time for both mobile devices and cloud-based applications",
+        "Integrated wireless communication for software products to send/receive data from IoT devices"
+      ]
+    },
+    {
+      "company": "Wentworth Institute of Technology",
+      "position": "Learning Lab Leader & Math FSG Tutor",
+      "website": "http://wit.edu",
+      "startDate": "January 2016",
+      "endDate": "December 2017",
+      "summary": "Boston, Massachusetts, United States",
+      "highlights": [
+        "Created learning strategy and held a 2-hour session to help approximately 15 students per week in Mathematics and Computer Science",
+        "Facilitated study group along with professors to help students excel in various Mathematics subjects"
+      ]
+    },
+    {
+      "company": "Wentworth Institute of Technology",
+      "position": "Lab Monitor",
+      "website": "http://wit.edu",
+      "startDate": "Sepember 2015",
+      "endDate": "June 2016",
+      "summary": "Boston, Massachusetts, United States",
+      "highlights": ["Managed computing and printing equipment at the Wentworth's Print Lab Center"]
+    },
+    {
+      "company": "Freelance",
+      "position": "Website Developer/Designer",
+      "website": "",
+      "startDate": "August 2015",
+      "endDate": "April 2017",
+      "summary": "",
+      "highlights": ["Developed and designed websites for small businesses and non-profit organizations"]
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "HackWITUs",
+      "position": "Head of Organizers",
+      "website": "http://hackwit.us/",
+      "startDate": "January 2017",
+      "endDate": "December 2017",
+      "summary": "A hackathon for students by students, with a mission to promote diversity and accessibility in our tech community",
+      "highlights": [
+        "Led a team of 18 to launch Wentworth’s first annual student-run Hackathon with over 200 participants",
+        "Managed finances and promotional materials for the event, raising over $30,000 from sponsors",
+        "Built website and registration infrastructure using AWS"
+      ]
+    },
+    {
+      "organization": "Japan Boston Festival",
+      "position": "Volunteer",
+      "website": "http://www.japanfestivalboston.org/",
+      "startDate": "April 2016",
+      "endDate": "April 2019",
+      "summary": "Annual Japanese culture festival in Boston",
+      "highlights": ["Volunteered at food booth and lead a team to keep the festival as clean and tidy as possible"]
+    },
+    {
+      "organization": "New York Cares",
+      "position": "Volunteer",
+      "website": "https://www.newyorkcares.org/",
+      "startDate": "March 2015",
+      "endDate": "December 2015",
+      "summary": "Meets pressing community needs by mobilizing caring New Yorkers in volunteer service",
+      "highlights": ["Renovated parks in New York"]
+    },
+    {
+      "organization": "VietxNepal",
+      "position": "Technology Associate",
+      "website": "https://www.vietxnepal.org/",
+      "startDate": "June 2015",
+      "endDate": "August 2015",
+      "summary": "VietxNepal is a fundraising group created by Vietnamese student to support Nepal after the earthquake.",
+      "highlights": ["Developed promotion materials and website for the non-profit organizations"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Wentworth Institute of Technology",
+      "area": "Computer Science",
+      "studyType": "Bachelor of Science",
+      "startDate": "August 2015",
+      "endDate": "August 2018",
+      "gpa": "3.7",
+      "courses": [
+        "Algorithms",
+        "Computer Organization",
+        "Computer Science I & II",
+        "Data Structures",
+        "Databases",
+        "Differential Equations",
+        "Discrete Math",
+        "Engineering Calculus I & II",
+        "Intro to Artificial Intelligence",
+        "Intro to Numerical Analysis",
+        "Intro to Programming Language",
+        "Linear Algebra and Matrix Theory",
+        "Machine Learning",
+        "Network Programming",
+        "Parallel and Distributed Programming",
+        "Probability and Statistics",
+        "Software Engineering",
+        "WWW App Development"
+      ]
+    }
+  ],
+  "awards": [],
+  "publications": [],
+  "skills": [
+    {
+      "name": "Full-Stack Application Development",
+      "level": "Expert",
+      "keywords": [
+        "Javascipt",
+        "React",
+        "React Native",
+        "Kotlin",
+        "TypeScript",
+        "NodeJS",
+        "GraphQL",
+        "Git",
+        "Amplify",
+        "Ant Design",
+        "Material Design",
+        "Agile"
+      ]
+    },
+    {
+      "name": "Cloud Infrastructures",
+      "level": "Competent",
+      "keywords": ["AWS", "Azure", "Docker/Helm/Kubernetes", "DialogFlow", "ElasticStack", "Terraform"]
+    },
+    {
+      "name": "Internet of Things Development",
+      "level": "Competent",
+      "keywords": ["Bluetooth/BLE", "MQTT", "Arduino/Raspberry Pi"]
+    }
+  ],
+  "languages": [
+    {
+      "language": "Vietnamese",
+      "fluency": "Native speaker"
+    },
+    {
+      "language": "English",
+      "fluency": "Fluent"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Arceos",
+      "description": "Full-stack application with micro-frontend architecture to perform miscellaneous tasks",
+      "highlights": ["Built using React, Firebase, and Django"],
+      "keywords": [],
+      "startDate": "January 2020",
+      "endDate": "Present",
+      "url": "",
+      "roles": [],
+      "entity": "",
+      "type": ""
+    },
+    {
+      "name": "MIRA",
+      "description": "Home automation system including a smart mirror, voicecontrolled lights and motion sensors",
+      "highlights": [],
+      "keywords": [],
+      "startDate": "June 2017",
+      "endDate": "Present",
+      "url": "",
+      "roles": [],
+      "entity": "",
+      "type": ""
+    },
+    {
+      "name": "Uzuto",
+      "description": "Wedding landing page and wedding guest management system",
+      "highlights": ["Built using React, and AWS Amplify"],
+      "keywords": [],
+      "startDate": "November 2019",
+      "endDate": "February 2020",
+      "url": "",
+      "roles": [],
+      "entity": "",
+      "type": ""
+    },
+    {
+      "name": "Smart City",
+      "description": "Smart city system with AI-enabled vehicles that can communicate with each other to avoid collision",
+      "highlights": [],
+      "keywords": [],
+      "startDate": "May 2018",
+      "endDate": "September 2018",
+      "url": "",
+      "roles": [],
+      "entity": "",
+      "type": "Research"
+    },
+    {
+      "name": "Boltius",
+      "description": "Full-stack application to efficiently manage clubs and organizations",
+      "highlights": ["Built using React, GraphQL, and Fastify"],
+      "keywords": [],
+      "startDate": "December 2016",
+      "endDate": "August 2017",
+      "url": "",
+      "roles": [],
+      "entity": "",
+      "type": ""
+    }
+  ],
+  "interests": [
+    {
+      "name": "Technology",
+      "keywords": [
+        "Web Developments",
+        "Internet of Things",
+        "Robotics",
+        "Machine Learning/Artifial Intelligence",
+        "Automation"
+      ]
+    },
+    { "name": "Hobbies", "keywords": ["Programming", "Travellings", "Cooking", "Tinkering"] }
+  ],
+  "references": []
+}

@@ -1,7 +1,6 @@
 import React, { useContext, useMemo } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, useMediaQuery } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { useMediaQuery } from "@material-ui/core";
 import LayoutContext from "../../../context/layout";
 import MainInfo from "./mainInfo";
 import ContactInfo from "./contactInfo";
