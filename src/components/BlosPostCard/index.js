@@ -32,7 +32,7 @@ export default function BlogPostCard({ post, showActions, updatePostState, updat
           </Typography>
           <div style={{ marginTop: 12, marginBottom: 12, textAlign: "left" }}>
             {get(post, "tags", []).map((item, index) => (
-              <span style={{ marginRight: 8 }} key={`${item} ${index}`}>
+              <span style={{ marginRight: 8, marginBottom: 4 }} key={`${item} ${index}`}>
                 <Chip color="primary" label={item} />
               </span>
             ))}
