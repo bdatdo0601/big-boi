@@ -20,6 +20,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import useStyles from "./styleHooks";
 import MaterialListItem from "./MaterialListItem";
 import "./index.less";
+import { VERSION } from "../../utils/constants";
 
 const a11yProps = index => ({
   id: `simple-tab-${index}`,
@@ -165,6 +166,9 @@ export default function AppNavigation({
             <CircularProgress style={{ marginLeft: "6%" }} />
           )}
         </List>
+        <Typography variant="subtitle1" color="textSecondary" style={{ marginLeft: "1rem" }}>
+          Version {VERSION}
+        </Typography>
       </Drawer>
       {children}
     </div>

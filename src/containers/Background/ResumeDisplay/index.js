@@ -263,12 +263,15 @@ const ResumeDisplay = () => (
         </Grid>
       </Grid>
     </Grid>
+
     <Grid item xl={8} lg={8} md={12} xs={12} style={{ padding: 4 }}>
       <Grid container>
         <Grid item xl={12} xs={12} md={12}>
+          <div className="page-break" />
           <Experiences />
         </Grid>
         <Grid item xl={12} xs={12} md={12}>
+          <div className="page-break" />
           <Volunteer />
         </Grid>
       </Grid>

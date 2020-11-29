@@ -48,6 +48,13 @@ export const getImageMeta = async url =>
     };
   });
 
+export const fetchFileToJSON = async url => {
+  const response = await fetch(url, { headers: { "Content-Type": "application/json", Accept: "application/json" } });
+  const json = await response.json();
+  return json;
+};
+
 export default {
   getImageMeta,
+  fetchFileToJSON,
 };

@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from "react";
 import { Storage } from "aws-amplify";
 import { get } from "lodash";
 
@@ -24,6 +25,84 @@ export const getPhotoURL = (key, prefix = PHOTO_UPLOAD_PREFIX, level = "public")
 
 export const deletePhoto = async file => {
   await Storage.remove(file.key);
+};
+
+export const useUploadFile = () => {
+  const [loading, setLoading] = useState(false);
+  const uploadFile = useCallback(async (file, key, prefix, level) => {
+    try {
+      setLoading(true);
+      const uploaded = await uploadPhoto(file, key, prefix, level);
+      setLoading(false);
+      return uploaded;
+    } catch (err) {
+      setLoading(false);
+      throw err;
+    }
+  }, []);
+
+  return {
+    loading,
+    uploadFile,
+  };
+};
+
+export const useGetFile = (key, prefix) => {
+  const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchFile = useCallback(async () => {
+    try {
+      setLoading(true);
+      const fetchedFile = await getPhoto(key, prefix);
+      setFile(fetchedFile);
+      setLoading(false);
+      return fetchedFile;
+    } catch (err) {
+      setLoading(false);
+      setError(err);
+      throw err;
+    }
+  }, [key, prefix]);
+
+  useEffect(() => {
+    fetchFile().then();
+  }, [fetchFile]);
+
+  return {
+    file,
+    loading,
+    fetchFile,
+    error,
+  };
+};
+
+export const useLazyGetFile = (key, prefix) => {
+  const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchFile = useCallback(async () => {
+    try {
+      setLoading(true);
+      const fetchedFile = await getPhoto(key, prefix);
+      setFile(fetchedFile);
+      setLoading(false);
+      return fetchedFile;
+    } catch (err) {
+      setLoading(false);
+      setError(err);
+      throw err;
+    }
+  }, [key, prefix]);
+
+  return {
+    file,
+    loading,
+    fetchFile,
+    error,
+  };
 };
 
 export default {

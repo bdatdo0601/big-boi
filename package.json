@@ -11,9 +11,12 @@
     "autoprefixer": "^9.7.4",
     "aws-amplify": "^2.2.2",
     "aws-amplify-react": "^3.1.3",
+    "axios": "^0.21.0",
     "clsx": "^1.0.4",
     "highlight.js": "^10.4.0",
     "html-react-parser": "^0.14.2",
+    "jsoneditor": "^9.1.4",
+    "jsoneditor-react": "^3.1.0",
     "lodash": "^4.17.15",
     "markdown-it": "^12.0.2",
     "markdown-it-highlightjs": "^3.3.1",
@@ -30,6 +33,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^4.0.1",
     "react-spring": "^9.0.0-rc.3",
+    "react-to-pdf": "^0.0.13",
+    "react-to-print": "^2.11.0",
     "react-use-gesture": "^6.0.14",
     "react-vitae": "^1.0.3",
     "uuid": "^3.4.0"
@@ -38,10 +43,11 @@
     "build:styles": "postcss tailwind.css -o src/styles.css",
     "prebuild": "yarn build:styles",
     "prestart": "yarn build:styles",
-    "start": "react-app-rewired start",
-    "build": "node postinstall.js && cross-env GENERATE_SOURCEMAP=false react-app-rewired build",
+    "start": "cross-env REACT_APP_VERSION=$npm_package_version react-app-rewired start",
+    "build": "node postinstall.js && cross-env GENERATE_SOURCEMAP=false REACT_APP_VERSION=$npm_package_version react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "release": "standard-release"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -70,6 +76,7 @@
     "prettier": "^1.19.1",
     "react-app-rewire-less": "^2.1.3",
     "replace-in-file": "^6.1.0",
+    "standard-version": "^9.0.0",
     "tailwindcss": "^1.1.4"
   }
 }
