@@ -18,7 +18,7 @@ export default function PostDisplay() {
   const history = useHistory();
   const { postID } = useParams();
   const postDataInputs = useMemo(() => ({ id: postID }), [postID]);
-  const { data: rawDefaultData, loading } = useAWSAPI(getPost, postDataInputs);
+  const { data: rawDefaultData, loading } = useAWSAPI(getPost, postDataInputs, "API_KEY");
   const post = useMemo(() => {
     const fetchedData = get(rawDefaultData, "data.getPost", {});
     const postData = JSON.parse(get(fetchedData, "data", "{}"));
