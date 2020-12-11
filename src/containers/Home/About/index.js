@@ -1,5 +1,4 @@
 import React from "react";
-import ImagesDisplay from "./imagesDisplay";
 
 export default function About() {
   return (
@@ -13,9 +12,7 @@ export default function About() {
         justifyContent: "center",
         alignItems: "center",
       }}
-    >
-      <ImagesDisplay />
-    </div>
+    />
   );
 }
 

@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { GridList, GridListTile, CircularProgress, useMediaQuery } from "@material-ui/core";
-import { fetchPhotos } from "../../../utils/awsStorage";
-import useGetDataList from "../../../utils/hooks/useGetDataList";
-import ImageGridDisplay from "../../../components/ImageGridDisplay";
-import { formatGridList } from "../../../utils";
+import { fetchPhotos } from "../../utils/awsStorage";
+import useGetDataList from "../../utils/hooks/useGetDataList";
+import ImageGridDisplay from "../../components/ImageGridDisplay";
+import { formatGridList } from "../../utils";
 
 export default function ImagesDisplay({ imageCols, cellHeight }) {
   const { data, loading } = useGetDataList(fetchPhotos);

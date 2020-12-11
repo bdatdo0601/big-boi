@@ -37,6 +37,7 @@
     "react-to-print": "^2.11.0",
     "react-use-gesture": "^6.0.14",
     "react-vitae": "^1.0.3",
+    "styled-components": "^5.2.1",
     "uuid": "^3.4.0"
   },
   "scripts": {

@@ -2,14 +2,17 @@ import React from "react";
 import { Auth } from "aws-amplify";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import HomeIcon from "@material-ui/icons/Home";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
-import CommentIcon from "@material-ui/icons/Comment";
-import AssignmentIndSharpIcon from "@material-ui/icons/AssignmentIndSharp";
-import CreateIcon from "@material-ui/icons/Create";
-import AccountTree from "@material-ui/icons/AccountTree";
+import {
+  ImageOutlined,
+  AccountTree,
+  Create as CreateIcon,
+  AssignmentIndSharp as AssignmentIndSharpIcon,
+  ExitToApp as ExitToAppIcon,
+  Dashboard as DashboardIcon,
+  MeetingRoom as MeetingRoomIcon,
+  Comment as CommentIcon,
+  Home as HomeIcon,
+} from "@material-ui/icons";
 import { Typography, Button } from "@material-ui/core";
 import Home from "./containers/Home";
 import Blogs from "./containers/Blogs";
@@ -19,6 +22,7 @@ import AdminDashboard from "./containers/AdminDashboard";
 import BlogManager from "./containers/BlogManager";
 import BlogCreation from "./containers/BlogManager/Creation";
 import PostDisplay from "./containers/Blogs/PostDisplay";
+import Gallery from "./containers/Gallery";
 
 export const ROUTE_TYPE = {
   PUBLIC: {
@@ -105,6 +109,14 @@ export default [
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
     hidden: async () => true,
+  },
+  {
+    name: "Gallery",
+    icon: <ImageOutlined />,
+    component: Gallery,
+    path: "/gallery",
+    exact: true,
+    type: ROUTE_TYPE.PUBLIC,
   },
   {
     name: "Projects",
