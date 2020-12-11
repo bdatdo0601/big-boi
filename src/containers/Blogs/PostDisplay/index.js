@@ -1,18 +1,13 @@
 import { Button, Chip, CircularProgress, Paper, Typography } from "@material-ui/core";
 import { ArrowBackOutlined } from "@material-ui/icons";
-import MarkdownIt from "markdown-it";
-import MarkdownItHighlightJSPlugins from "markdown-it-highlightjs";
-import htmlParser from "html-react-parser";
 import { get, merge } from "lodash";
 import React, { useMemo } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
+import MarkdownDisplayer from "../../../components/MarkdownDisplayer";
 import { getPost } from "../../../graphql/queries";
 import { useAWSAPI } from "../../../utils/awsAPI";
 import "./index.less";
-
-// Initialize a markdown parser
-const mdParser = new MarkdownIt(/* Markdown-it options */).use(MarkdownItHighlightJSPlugins);
 
 export default function PostDisplay() {
   const history = useHistory();
@@ -24,8 +19,6 @@ export default function PostDisplay() {
     const postData = JSON.parse(get(fetchedData, "data", "{}"));
     return merge({ ...fetchedData, data: postData }, { id: postID });
   }, [rawDefaultData, postID]);
-
-  const postContentRawHTML = useMemo(() => mdParser.render(get(post, "data.text", "")), [post]);
 
   if (loading) {
     return <CircularProgress style={{ margin: "3rem" }} />;
@@ -58,11 +51,8 @@ export default function PostDisplay() {
         </div>
       </Paper>
 
-      <Paper
-        style={{ padding: "2rem", marginTop: "1rem" }}
-        className="post-markdown-content section-container html-wrap"
-      >
-        {htmlParser(postContentRawHTML)}
+      <Paper style={{ marginTop: 12 }} className="post-markdown-content section-container html-wrap">
+        <MarkdownDisplayer style={{ padding: "2rem" }} value={get(post, "data.text", "")} />
       </Paper>
     </div>
   );
