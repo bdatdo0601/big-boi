@@ -128,6 +128,7 @@ export default function AppNavigation({
         classes={{
           paper: classes.drawerPaper,
         }}
+        onClose={handleDrawerClose}
       >
         <div className={classes.drawerHeader}>
           <Typography variant="h6" noWrap style={{ marginLeft: 12 }}>

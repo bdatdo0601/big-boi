@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   ImageOutlined,
-  AccountTree,
+  // AccountTree,
   Create as CreateIcon,
   AssignmentIndSharp as AssignmentIndSharpIcon,
   ExitToApp as ExitToAppIcon,
@@ -12,17 +12,19 @@ import {
   MeetingRoom as MeetingRoomIcon,
   Comment as CommentIcon,
   Home as HomeIcon,
+  ListAltOutlined,
 } from "@material-ui/icons";
 import { Typography, Button } from "@material-ui/core";
 import Home from "./containers/Home";
 import Blogs from "./containers/Blogs";
 import Background from "./containers/Background";
-import Projects from "./containers/Projects";
+// import Projects from "./containers/Projects";
 import AdminDashboard from "./containers/AdminDashboard";
 import BlogManager from "./containers/BlogManager";
 import BlogCreation from "./containers/BlogManager/Creation";
 import PostDisplay from "./containers/Blogs/PostDisplay";
 import Gallery from "./containers/Gallery";
+import ChangeLogs from "./containers/Changelogs";
 
 export const ROUTE_TYPE = {
   PUBLIC: {
@@ -32,6 +34,10 @@ export const ROUTE_TYPE = {
   PRIVATE: {
     name: "Management",
     withAuth: true,
+  },
+  DEV: {
+    name: "For Nerds",
+    withAuth: false,
   },
 };
 
@@ -118,13 +124,22 @@ export default [
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
   },
+  // {
+  //   name: "Projects",
+  //   icon: <AccountTree />,
+  //   component: Projects,
+  //   path: "/projects",
+  //   exact: true,
+  //   type: ROUTE_TYPE.PUBLIC,
+  // },
   {
-    name: "Projects",
-    icon: <AccountTree />,
-    component: Projects,
-    path: "/projects",
+    name: "Change Logs",
+    icon: <ListAltOutlined />,
+    component: ChangeLogs,
+    path: "/change-logs",
     exact: true,
-    type: ROUTE_TYPE.PUBLIC,
+    type: ROUTE_TYPE.DEV,
+    hidden: async () => false,
   },
   {
     name: "Login",
