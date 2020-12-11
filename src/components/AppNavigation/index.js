@@ -71,7 +71,13 @@ export default function AppNavigation({
           [classes.appBarShift]: open,
         })}
       >
-        <Grid className="appbar-grid" container justify="space-between" alignItems="center" alignContent="center">
+        <Grid
+          className="appbar-grid"
+          container
+          justify="space-between"
+          alignItems="center"
+          alignContent="space-between"
+        >
           <Grid item xs={12} md={3} lg={3}>
             <Toolbar>
               <IconButton
@@ -90,10 +96,10 @@ export default function AppNavigation({
             </Toolbar>
           </Grid>
           {isBigScreen && (
-            <Grid item xs={9} md={9} lg={9}>
+            <Grid item xs={8} md={8} lg={8} style={{ textAlign: "right" }}>
               {(groupedDrawerContent[""] || []).some(item => item.path === location.pathname) && (
                 <Tabs
-                  style={{ width: "100%", right: 0, minWidth: 500 }}
+                  style={{ width: 800, right: 0, marginRight: 8 }}
                   value={location.pathname}
                   aria-label="header tabs"
                   onChange={(_, value) => {
@@ -101,7 +107,12 @@ export default function AppNavigation({
                   }}
                 >
                   {(groupedDrawerContent[""] || []).map((item, index) => (
-                    <Tab label={item.name} key={item.name} value={item.path} {...a11yProps(index)} />
+                    <Tab
+                      label={<Typography variant="button">{item.name}</Typography>}
+                      key={item.name}
+                      value={item.path}
+                      {...a11yProps(index)}
+                    />
                   ))}
                 </Tabs>
               )}
