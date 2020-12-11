@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/bdatdo0601/big-boi/compare/v1.0.3...v1.1.0) (2020-12-11)
+
+
+### Features
+
+* add changelogs ([4ba9d13](https://github.com/bdatdo0601/big-boi/commit/4ba9d13dfc1083894f6f7b67dbb8e1f21ed7cbe5))
+* moving images to gallery ([8ce6814](https://github.com/bdatdo0601/big-boi/commit/8ce6814054aaa2752c295e7eec0d090ccbf7db6e))
+
+
+### Bug Fixes
+
+* refactor markdown style and component ([fd32163](https://github.com/bdatdo0601/big-boi/commit/fd32163da97733831174e4695752eb69bb85cca9))
+* tab navigation css ([ae2b1a9](https://github.com/bdatdo0601/big-boi/commit/ae2b1a98831a11a78b42140b66b4968b5c12d478))
+
 ### [1.0.3](https://github.com/bdatdo0601/big-boi/compare/v1.0.2...v1.0.3) (2020-11-29)
 
 
