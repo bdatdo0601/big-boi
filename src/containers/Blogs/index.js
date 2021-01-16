@@ -6,6 +6,7 @@ import { useAWSAPI } from "../../utils/awsAPI";
 import { postByUpdatedAt } from "../../graphql/queries";
 import { POST_STATE } from "../../utils/constants";
 import BlogPostCard from "../../components/BlosPostCard";
+import "./index.less";
 
 export default function Blogs() {
   const query = useMemo(() => ({ status: POST_STATE.PUBLISHED, sortDirection: "DESC", limit: 10000 }), []);
@@ -13,11 +14,11 @@ export default function Blogs() {
   const { data: rawData } = useAWSAPI(postByUpdatedAt, query, "API_KEY");
   const posts = useMemo(() => get(rawData, "data.PostByUpdatedAt.items", []), [rawData]);
   return (
-    <div className="container-div">
+    <div className="blog-container-div">
       <Typography variant="h2">Blogs</Typography>
       <Grid container justify="flex-start" style={{ margin: 12 }}>
         {posts.map(post => (
-          <Grid item key={post.id} style={{ marginLeft: 16 }}>
+          <Grid item key={post.id} style={{ margin: 8 }}>
             <BlogPostCard
               post={post}
               showState={false}

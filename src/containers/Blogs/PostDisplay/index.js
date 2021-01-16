@@ -25,7 +25,7 @@ export default function PostDisplay() {
   }
 
   return (
-    <div style={{ margin: "3rem" }}>
+    <div style={{ padding: "3%", width: "100vw" }}>
       <Button
         startIcon={<ArrowBackOutlined />}
         color="primary"
@@ -45,7 +45,7 @@ export default function PostDisplay() {
         <div style={{ marginTop: 8, marginBottom: 8, textAlign: "left" }}>
           {get(post, "tags", []).map((item, index) => (
             <span style={{ marginRight: 8 }} key={`${item} ${index}`}>
-              <Chip color="primary" label={item} />
+              <Chip color="primary" label={item} style={{ marginTop: 8 }} />
             </span>
           ))}
         </div>

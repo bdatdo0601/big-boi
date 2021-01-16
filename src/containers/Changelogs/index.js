@@ -11,7 +11,7 @@ export default function ChangeLogs() {
   const { text } = useGetTextFileFromURL(CHANGELOG_URL);
 
   return (
-    <Paper style={{ margin: "2rem" }} className="section-container html-wrap">
+    <Paper style={{ margin: "3%" }} className="section-container html-wrap">
       <MarkdownDisplayer value={text} style={{ padding: "2rem", marginTop: "1rem" }} />
     </Paper>
   );

@@ -45,7 +45,7 @@ export default function BlogManager() {
   );
 
   return (
-    <div className="container-div">
+    <div className="blog-container-div">
       <Typography variant="h3">Blog Manager</Typography>
       {loading ? <CircularProgress /> : null}
       <div style={{ marginTop: 12 }}>
@@ -63,7 +63,7 @@ export default function BlogManager() {
         </Button>
         <Grid container justify="flex-start">
           {posts.map(post => (
-            <Grid item key={post.id}>
+            <Grid item key={post.id} style={{ margin: 8 }}>
               <BlogPostCard
                 post={post}
                 updatePostState={updatePostState}

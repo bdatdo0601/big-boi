@@ -45,7 +45,7 @@ export default function Background() {
       </ReactToPrint>
       <Paper
         className="resume-preview"
-        style={{ margin: "2rem", padding: 12 }}
+        style={{ margin: "3%", padding: 12 }}
         ref={ref => {
           targetRef.current = ref;
         }}
