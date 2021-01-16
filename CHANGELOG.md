@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/bdatdo0601/big-boi/compare/v1.1.0...v1.2.0) (2021-01-16)
+
+
+### Features
+
+* move desciptive data into resume json ([6ac45a1](https://github.com/bdatdo0601/big-boi/commit/6ac45a1855727ffa386ecbcbfad8858b9990f204))
+
+
+### Bug Fixes
+
+* UI for mobile performance ([973c9ba](https://github.com/bdatdo0601/big-boi/commit/973c9ba5f1594f504c341974ca8337baf1f74cf1))
+* Update Default Resume Data ([1543769](https://github.com/bdatdo0601/big-boi/commit/1543769ba49c849b5858175bde1099de4e8a44cd))
+
 ## [1.1.0](https://github.com/bdatdo0601/big-boi/compare/v1.0.3...v1.1.0) (2020-12-11)
 
 
