@@ -6,7 +6,7 @@
     "email": "dat.b.do@gmail.com",
     "phone": "(347) 389-2684",
     "website": "https://dat.do/",
-    "summary": "Software Engineer with a demonstrated history of working in the oil & energy industry and currently working in the retail industry. Skilled in Software/UI/UX Development (Full Stack, React, Ant, Material), Cloud Development (AWS, Azure), Continuous Infrastructure Deployment (Terraform, CircleCI, Jenkins), and Agile Methodology. Graduated with a Bachelor of Science (B.S.) focused in Computer Science from Wentworth Institute of Technology",
+    "summary": "Software Engineer with a demonstrated history of working in the energy industry and currently working in the retail industry. Skilled in Software/UI/UX Development (Full-Stack, Ant Design, Material UI), Cloud Development (AWS, Azure), Continuous Infrastructure Deployment (Terraform, CircleCI, Jenkins), and Agile Methodology. Graduated with a Bachelor of Science (B.S.) focused in Computer Science from Wentworth Institute of Technology",
     "location": {
       "address": "28 Greenleaf ST",
       "postalCode": "MA 02148",
@@ -207,6 +207,11 @@
       "keywords": ["AWS", "Azure", "Docker/Helm/Kubernetes", "DialogFlow", "ElasticStack", "Terraform"]
     },
     {
+      "name": "Continuous Integration/Deployment",
+      "level": "Competent",
+      "keywords": ["CircleCI", "Jenkins", "CodeCoverage", "WhiteSource"]
+    },
+    {
       "name": "Internet of Things Development",
       "level": "Competent",
       "keywords": ["Bluetooth/BLE", "MQTT", "Arduino/Raspberry Pi"]
@@ -226,7 +231,7 @@
     {
       "name": "RC Vehicle VR",
       "description": "Modding RC Car with camera and microcontrollers then stream its video feeds to a VR headset with <100ms latency",
-      "highlights": ["Built using React, Firebase, and Django"],
+      "highlights": ["Built using Arduino, Raspberry Pi, Node, and Python"],
       "keywords": [],
       "startDate": "August 2020",
       "endDate": "Present",

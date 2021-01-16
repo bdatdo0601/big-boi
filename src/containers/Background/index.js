@@ -37,7 +37,7 @@ export default function Background() {
       <ReactToPrint content={() => targetRef.current} documentTitle={`${moment().format("MMDDYYYY")}_DatDoResume`}>
         <PrintContextConsumer>
           {({ handlePrint }) => (
-            <Button onClick={handlePrint} variant="contained" color="primary">
+            <Button onClick={handlePrint} variant="contained" color="primary" style={{ marginTop: 12 }}>
               Generate Resume
             </Button>
           )}
