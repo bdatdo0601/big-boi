@@ -6,7 +6,7 @@
     "email": "dat.b.do@gmail.com",
     "phone": "(347) 389-2684",
     "website": "https://dat.do/",
-    "summary": "Software Engineer with a demonstrated history of working in the oil & energy industry. Skilled in Computer Science, Amazon Web Services (AWS), iOS Development, Agile Methodologies. Strong engineering professional with a Bachelor of Science (B.S.) focused in Computer Science from Wentworth Institute of Technology.",
+    "summary": "Software Engineer with a demonstrated history of working in the oil & energy industry and currently working in the retail industry. Skilled in Software/UI/UX Development (Full Stack, React, Ant, Material), Cloud Development (AWS, Azure), Continuous Infrastructure Deployment (Terraform, CircleCI, Jenkins), and Agile Methodology. Graduated with a Bachelor of Science (B.S.) focused in Computer Science from Wentworth Institute of Technology",
     "location": {
       "address": "28 Greenleaf ST",
       "postalCode": "MA 02148",
@@ -39,11 +39,22 @@
   },
   "work": [
     {
+      "company": "Amazon",
+      "position": "Software Development Engineer II",
+      "website": "https://amazon.com",
+      "startDate": "January 2021",
+      "endDate": "Present",
+      "summary": "New York City, New York, United States",
+      "highlights": [
+        "Developing solutions within Retail Delivery Experience space that reaches over 10 millions of customers per day"
+      ]
+    },
+    {
       "company": "Shell TechWorks",
       "position": "Software Engineer",
-      "website": "http://shell.com",
+      "website": "https://shell.com",
       "startDate": "December 2018",
-      "endDate": "Present",
+      "endDate": "January 2021",
       "summary": "Boston, Massachusetts, United States",
       "highlights": [
         "Developing and designing software solutions to improve safety and efficiency for the energy industry",
@@ -56,7 +67,7 @@
     {
       "company": "Shell TechWorks",
       "position": "Software Engineer Intern",
-      "website": "http://shell.com",
+      "website": "https://shell.com",
       "startDate": "April 2017",
       "endDate": "April 2018",
       "summary": "Boston, Massachusetts, United States",
@@ -69,7 +80,7 @@
     {
       "company": "Wentworth Institute of Technology",
       "position": "Learning Lab Leader & Math FSG Tutor",
-      "website": "http://wit.edu",
+      "website": "https://wit.edu",
       "startDate": "January 2016",
       "endDate": "December 2017",
       "summary": "Boston, Massachusetts, United States",
@@ -81,7 +92,7 @@
     {
       "company": "Wentworth Institute of Technology",
       "position": "Lab Monitor",
-      "website": "http://wit.edu",
+      "website": "https://wit.edu",
       "startDate": "Sepember 2015",
       "endDate": "June 2016",
       "summary": "Boston, Massachusetts, United States",
@@ -101,7 +112,7 @@
     {
       "organization": "HackWITUs",
       "position": "Head of Organizers",
-      "website": "http://hackwit.us/",
+      "website": "https://hackwit.us/",
       "startDate": "January 2017",
       "endDate": "December 2017",
       "summary": "A hackathon for students by students, with a mission to promote diversity and accessibility in our tech community",
@@ -114,7 +125,7 @@
     {
       "organization": "Japan Boston Festival",
       "position": "Volunteer",
-      "website": "http://www.japanfestivalboston.org/",
+      "website": "https://www.japanfestivalboston.org/",
       "startDate": "April 2016",
       "endDate": "April 2019",
       "summary": "Annual Japanese culture festival in Boston",
@@ -213,6 +224,18 @@
   ],
   "projects": [
     {
+      "name": "RC Vehicle VR",
+      "description": "Modding RC Car with camera and microcontrollers then stream its video feeds to a VR headset with <100ms latency",
+      "highlights": ["Built using React, Firebase, and Django"],
+      "keywords": [],
+      "startDate": "August 2020",
+      "endDate": "Present",
+      "url": "",
+      "roles": [],
+      "entity": "",
+      "type": ""
+    },
+    {
       "name": "Arceos",
       "description": "Full-stack application with micro-frontend architecture to perform miscellaneous tasks",
       "highlights": ["Built using React, Firebase, and Django"],
@@ -286,5 +309,53 @@
     },
     { "name": "Hobbies", "keywords": ["Programming", "Travellings", "Cooking", "Tinkering"] }
   ],
-  "references": []
+  "references": [],
+  "custom": {
+    "bio": [
+      "I came from Vietnam to the United States when I was 15 for high school and then pursued a Bachelor's Degree in Computer Science at Wentworth Institute of Technology until 2018. At the moment, I am developing cool stuff as a Software Dev Engineer at Amazon",
+      "I wrote my first line of code in 2010 and it has been my passion ever since. I usually find myself discovering new technologies and using them to tackle and automate issues that I face in my daily life.",
+      "If I am not at my tech station, I am probably either in the kitchen experimenting new dishes or outside traveling to new places (fun fact: I did a road trip from East coast to West coast solely by Greyhound buses back in 2015).",
+      "I am always open to new opportunities and challenges. If you would like to reach me, feel free to drop me a message using any method under the Contact box.",
+      "Thank you for visiting and reading this 😊!"
+    ],
+    "keywordTags": ["Puns Admirer", "Tech Enthusiast", "Programmer", "Former SWE @ STW", "SDE II @ Amazon"],
+    "contacts": [
+      {
+        "key": "Email",
+        "icon": {
+          "type": "Icon",
+          "value": "Email"
+        },
+        "value": "dat.b.do@gmail.com",
+        "link": "mailto:dat.b.do@gmail.com"
+      },
+      {
+        "key": "Phone Number",
+        "icon": {
+          "type": "Icon",
+          "value": "Phone"
+        },
+        "value": "(+1) 347-389-2684",
+        "link": "tel:+13473892684"
+      },
+      {
+        "key": "GitHub",
+        "icon": {
+          "type": "Icon",
+          "value": "GitHub"
+        },
+        "value": "bdatdo0601",
+        "link": "https://www.github.com/bdatdo0601"
+      },
+      {
+        "key": "LinkedIn",
+        "icon": {
+          "type": "Icon",
+          "value": "LinkedIn"
+        },
+        "value": "Dat Do",
+        "link": "https://linkedin.com/in/datdo/"
+      }
+    ]
+  }
 }

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Button, Card, CircularProgress, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { JsonEditor as Editor } from "jsoneditor-react";
-import { CloudUploadOutlined } from "@material-ui/icons";
+import { CloudUploadOutlined, RestoreOutlined } from "@material-ui/icons";
 import "jsoneditor-react/es/editor.min.css";
 import { isEqual } from "lodash";
 import { useSnackbar } from "notistack";
@@ -32,6 +32,28 @@ export default function ResumeSchemaEditor() {
     setResume(defaultFile);
   }, [defaultFile]);
 
+  const onUploadResume = useCallback(
+    async newResume => {
+      try {
+        const blob = new Blob([JSON.stringify(newResume)], { type: "application/json" });
+        await uploadFile(blob, RESUME.SCHEMA_FILE, RESUME.PREFIX, "public");
+        await fetchFile();
+        enqueueSnackbar("Resume Updated", {
+          variant: "success",
+          anchorOrigin: { vertical: "top", horizontal: "center" },
+          autoHideDuration: 2000,
+        });
+      } catch (err) {
+        enqueueSnackbar(`Can't Updated Resume ${err.message}`, {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "center" },
+          autoHideDuration: 2000,
+        });
+      }
+    },
+    [enqueueSnackbar, fetchFile, uploadFile]
+  );
+
   if (loading) {
     return <CircularProgress />;
   }
@@ -44,27 +66,18 @@ export default function ResumeSchemaEditor() {
         color="primary"
         startIcon={<CloudUploadOutlined />}
         disabled={isEqual(resume, defaultFile)}
-        onClick={async () => {
-          try {
-            const blob = new Blob([JSON.stringify(resume)], { type: "application/json" });
-            await uploadFile(blob, RESUME.SCHEMA_FILE, RESUME.PREFIX, "public");
-            await fetchFile();
-            enqueueSnackbar("Resume Updated", {
-              variant: "success",
-              anchorOrigin: { vertical: "top", horizontal: "center" },
-              autoHideDuration: 2000,
-            });
-          } catch (err) {
-            enqueueSnackbar(`Can't Updated Resume ${err.message}`, {
-              variant: "error",
-              anchorOrigin: { vertical: "top", horizontal: "center" },
-              autoHideDuration: 2000,
-            });
-          }
-        }}
+        onClick={async () => onUploadResume(resume)}
         style={{ margin: 12 }}
       >
         Update
+      </Button>
+      <Button
+        variant="contained"
+        startIcon={<RestoreOutlined />}
+        onClick={async () => onUploadResume(DEFAULT_RESUME)}
+        style={{ margin: 12 }}
+      >
+        Reset to Default
       </Button>
       <Editor
         value={resume}

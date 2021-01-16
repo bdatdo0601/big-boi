@@ -5,8 +5,6 @@ import BLANK_INDEX_CARD from "../../../assets/blank-index-card.jpg";
 import DataStack from "../../../components/DataStack";
 import LandingProfile from "../../../components/Profile";
 
-const keywordListMap = ["Puns Admirer", "Tech Enthusiast", "Programmer", "Software Engineer @ STW"];
-
 const MainInfo = ({ keywords, containerStyle, className, animation }) => (
   <div
     className={`px-4 ${className}`}
@@ -59,7 +57,7 @@ MainInfo.propTypes = {
 
 MainInfo.defaultProps = {
   className: "",
-  keywords: keywordListMap,
+  keywords: [],
   containerStyle: {},
   animation: false,
 };

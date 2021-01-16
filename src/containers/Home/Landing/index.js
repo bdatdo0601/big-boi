@@ -6,14 +6,12 @@ import MainInfo from "./mainInfo";
 import ContactInfo from "./contactInfo";
 import WelcomeInfo from "./welcomeInfo";
 
-const keywordListMap = ["Puns Admirer", "Tech Enthusiast", "Programmer", "Software Engineer @ STW"];
-
-export default function Landing({ keywords }) {
+export default function Landing({ keywords, contacts, bio }) {
   const { globalAnimation } = useContext(LayoutContext);
   const isFullSize = useMediaQuery("(min-width:1280px)");
   const contactInfo = useMemo(
-    () => ({ key: "contact-info", Component: ContactInfo, props: { animation: globalAnimation } }),
-    [globalAnimation]
+    () => ({ key: "contact-info", Component: ContactInfo, props: { animation: globalAnimation, contacts } }),
+    [globalAnimation, contacts]
   );
   const mainInfo = useMemo(
     () => ({
@@ -23,7 +21,7 @@ export default function Landing({ keywords }) {
     }),
     [globalAnimation, keywords]
   );
-  const welcomeInfo = useMemo(() => ({ key: "welcome-info", Component: WelcomeInfo, props: {} }), []);
+  const welcomeInfo = useMemo(() => ({ key: "welcome-info", Component: WelcomeInfo, props: { bio } }), [bio]);
   const items = useMemo(
     () => (isFullSize ? [welcomeInfo, mainInfo, contactInfo] : [mainInfo, welcomeInfo, contactInfo]),
     [welcomeInfo, mainInfo, contactInfo, isFullSize]
@@ -49,8 +47,12 @@ export default function Landing({ keywords }) {
 
 Landing.propTypes = {
   keywords: PropTypes.arrayOf(PropTypes.string),
+  contacts: PropTypes.arrayOf(PropTypes.object),
+  bio: PropTypes.arrayOf(PropTypes.string),
 };
 
 Landing.defaultProps = {
-  keywords: keywordListMap,
+  keywords: [],
+  contacts: [],
+  bio: [],
 };

@@ -4,7 +4,6 @@ import { Paper, Typography, Grid } from "@material-ui/core";
 import { animated, useSpring } from "react-spring";
 import { useDrag } from "react-use-gesture";
 import ContactButton from "../../../components/ContactButton";
-import CONTACT_INFO from "../../../assets/default-contact";
 
 const AnimatedPaper = animated(Paper);
 
@@ -53,6 +52,6 @@ ContactInfo.propTypes = {
 
 ContactInfo.defaultProps = {
   className: "px-8 py-8",
-  contacts: CONTACT_INFO,
+  contacts: [],
   animation: false,
 };
