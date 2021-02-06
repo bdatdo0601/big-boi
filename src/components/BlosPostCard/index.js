@@ -6,11 +6,19 @@ import { capitalize, get } from "lodash";
 
 import { POST_STATE } from "../../utils/constants";
 
-export default function BlogPostCard({ post, showActions, updatePostState, updatingPost, onPostClick, showState }) {
+export default function BlogPostCard({
+  post,
+  showActions,
+  updatePostState,
+  updatingPost,
+  onPostClick,
+  showState,
+  width,
+}) {
   return (
     <Card
       style={{
-        width: 350,
+        width,
         margin: 4,
         textAlign: "left",
         opacity: post.status === POST_STATE.ARCHIVED ? 0.5 : 1,
@@ -86,9 +94,11 @@ BlogPostCard.propTypes = {
   updatingPost: PropTypes.bool,
   onPostClick: PropTypes.func,
   showState: PropTypes.bool,
+  width: PropTypes.number,
 };
 
 BlogPostCard.defaultProps = {
+  width: 350,
   updatePostState: () => {},
   showActions: false,
   updatingPost: false,

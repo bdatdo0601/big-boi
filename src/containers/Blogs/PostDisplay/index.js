@@ -3,6 +3,7 @@ import { ArrowBackOutlined } from "@material-ui/icons";
 import { get, merge } from "lodash";
 import React, { useMemo } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import MarkdownDisplayer from "../../../components/MarkdownDisplayer";
 import { getPost } from "../../../graphql/queries";
@@ -26,6 +27,12 @@ export default function PostDisplay() {
 
   return (
     <div style={{ padding: "3%", width: "100vw" }}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{get(post, "title", "Blog Post")}</title>
+        <link rel="canonical" href={`${window.location.origin}/blogs/post/${postID}`} />
+        <meta name="description" content={get(post, "description", "")} />
+      </Helmet>
       <Button
         startIcon={<ArrowBackOutlined />}
         color="primary"

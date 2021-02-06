@@ -16,10 +16,11 @@ export default function Blogs() {
   return (
     <div className="blog-container-div">
       <Typography variant="h2">Blogs</Typography>
-      <Grid container justify="flex-start" style={{ margin: 12 }}>
+      <Grid container justify="flex-start">
         {posts.map(post => (
-          <Grid item key={post.id} style={{ margin: 8 }}>
+          <Grid item key={post.id} xl={12} xs={12} md={12} sm={12} lg={12} style={{ margin: 12 }}>
             <BlogPostCard
+              width="100%"
               post={post}
               showState={false}
               onPostClick={() => {
