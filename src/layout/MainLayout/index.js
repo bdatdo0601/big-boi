@@ -47,7 +47,7 @@ export default function MainLayout({ children, name }) {
       <Helmet>
         <meta charSet="utf-8" />
         <title>{WEBSITE_TITLE}</title>
-        <link rel="canonical" href={`${window.location.origin}`} />
+        <link rel="canonical" href={`${window.location.href}`} />
         <meta name="description" content="This is Dat'a Website" />
       </Helmet>
       <Particles

@@ -8,14 +8,11 @@ export default function WelcomeInfo({ bio }) {
   const { globalAnimation } = useContext(LayoutContext);
   return (
     <ProfileCard
-      header={<Typography variant="h5">Welcome</Typography>}
+      header={<Typography variant="h5">Hello There!</Typography>}
       contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
       animation={globalAnimation}
     >
-      <Typography variant="h5">This is my website</Typography>
-      <Typography variant="caption" style={{ color: "grey" }}>
-        Feel free to play around!
-      </Typography>
+      <Typography variant="h5">Welcome to my Website</Typography>
       <div className="mx-4 my-2 text-left">
         {bio.map(item => (
           <Typography key={item} variant="body1" paragraph>

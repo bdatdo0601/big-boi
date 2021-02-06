@@ -12,26 +12,16 @@ export const LayoutContextProvider = ({ children }) => {
   const theme = createMuiTheme({
     palette: {
       type: isDark ? "dark" : "light",
+
       primary: {
         // light: will be calculated from palette.primary.main,
-        main: "#388e3c",
-        light: "#66bb6a",
-        dark: "#2e7d32",
+        main: "#43a047",
         // dark: will be calculated from palette.primary.main,
         // contrastText: will be calculated to contrast with palette.primary.main
       },
       secondary: {
-        light: "#42a5f5",
         main: "#1976d2",
-        dark: "#1e88e5",
       },
-      // Used by `getContrastText()` to maximize the contrast between
-      // the background and the text.
-      contrastThreshold: 3,
-      // Used by the functions below to shift a color's luminance by approximately
-      // two indexes within its tonal palette.
-      // E.g., shift from Red 500 to Red 300 or Red 700.
-      tonalOffset: 0.2,
     },
   });
   return (

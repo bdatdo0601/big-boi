@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { Button, makeStyles } from "@material-ui/core";
 import * as Icons from "@material-ui/icons";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   button: {
     backgroundColor: "transparent",
-    color: theme.palette.secondary.dark,
+    // color: theme.palette.secondary.main,
     boxShadow: "none",
   },
 }));
