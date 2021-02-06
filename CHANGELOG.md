@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/bdatdo0601/big-boi/compare/v1.2.1...v1.3.0) (2021-02-06)
+
+
+### Features
+
+* attempt turning into PWA ([640c5a4](https://github.com/bdatdo0601/big-boi/commit/640c5a47135d193643c0ee57ec4cbf0e82ec925d))
+
+
+### Bug Fixes
+
+* add page title and change blog UI ([ede0797](https://github.com/bdatdo0601/big-boi/commit/ede07975418a161d74d912c22406b345606a1a4c))
+* update theme ([5dc0c73](https://github.com/bdatdo0601/big-boi/commit/5dc0c735b58561430da848fecc633c1c5d019231))
+
 ### [1.2.1](https://github.com/bdatdo0601/big-boi/compare/v1.2.0...v1.2.1) (2021-01-16)
 
 
