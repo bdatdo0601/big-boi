@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Auth } from "aws-amplify";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -15,16 +15,17 @@ import {
   ListAltOutlined,
 } from "@material-ui/icons";
 import { Typography, Button } from "@material-ui/core";
-import Home from "./containers/Home";
-import Blogs from "./containers/Blogs";
-import Background from "./containers/Background";
-// import Projects from "./containers/Projects";
 import AdminDashboard from "./containers/AdminDashboard";
 import BlogManager from "./containers/BlogManager";
 import BlogCreation from "./containers/BlogManager/Creation";
-import PostDisplay from "./containers/Blogs/PostDisplay";
-import Gallery from "./containers/Gallery";
-import ChangeLogs from "./containers/Changelogs";
+
+const Blogs = lazy(() => import("./containers/Blogs"));
+const Background = lazy(() => import("./containers/Background"));
+// const Projects = lazy(() => import("./containers/Projects"));
+const PostDisplay = lazy(() => import("./containers/Blogs/PostDisplay"));
+const Gallery = lazy(() => import("./containers/Gallery"));
+const ChangeLogs = lazy(() => import("./containers/Changelogs"));
+const Home = lazy(() => import("./containers/Home"));
 
 export const ROUTE_TYPE = {
   PUBLIC: {

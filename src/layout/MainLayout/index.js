@@ -1,16 +1,18 @@
-import React, { useContext, useEffect } from "react";
+import React, { lazy, Suspense, useContext, useEffect } from "react";
 import { isFunction, groupBy } from "lodash";
 import PropTypes from "prop-types";
-import Particles from "react-particles-js";
 import clsx from "clsx";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
+import { CircularProgress } from "@material-ui/core";
 import useStyles from "./styleHooks";
 import AppNavigation from "../../components/AppNavigation";
 import LayoutContext from "../../context/layout";
 import routes from "../../routes";
 import particleConfig from "./particleConfig";
 import { WEBSITE_TITLE } from "../../utils/constants";
+
+const Particles = lazy(() => import("react-particles-js"));
 
 export default function MainLayout({ children, name }) {
   const classes = useStyles();
@@ -50,10 +52,12 @@ export default function MainLayout({ children, name }) {
         <link rel="canonical" href={`${window.location.href}`} />
         <meta name="description" content="This is Dat'a Website" />
       </Helmet>
-      <Particles
-        style={{ width: "100vw", height: "100vh", position: "fixed", zIndex: -1, top: 0, left: 0 }}
-        params={particleConfig(isDark)}
-      />
+      <Suspense fallback={<CircularProgress />}>
+        <Particles
+          style={{ width: "100vw", height: "100vh", position: "fixed", zIndex: -1, top: 0, left: 0 }}
+          params={particleConfig(isDark)}
+        />
+      </Suspense>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,

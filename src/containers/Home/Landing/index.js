@@ -28,7 +28,6 @@ export default function Landing({ keywords, contacts, bio }) {
   );
   return (
     <Grid
-      className="px-2"
       container
       justify={isFullSize ? "center" : "flex-start"}
       alignItems="center"
