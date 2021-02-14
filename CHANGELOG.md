@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/bdatdo0601/big-boi/compare/v1.3.0...v1.3.1) (2021-02-14)
+
+
+### Bug Fixes
+
+* add yarn install ([69ac368](https://github.com/bdatdo0601/big-boi/commit/69ac368b44a6469e6d4c7c0695cc2bd598ad19b3))
+* refactor some documentation ([e833bb6](https://github.com/bdatdo0601/big-boi/commit/e833bb68d2a699328c280e4ef0648f84463274d1))
+* remove pull commit ([4c15854](https://github.com/bdatdo0601/big-boi/commit/4c15854a07ae68c25e2c5c86fb4dda5468a9c11e))
+* update command ([7a30d08](https://github.com/bdatdo0601/big-boi/commit/7a30d0802d6fdfb0f9e590aaa2ac878292d1ad1c))
+* update github workflow ([cb67c95](https://github.com/bdatdo0601/big-boi/commit/cb67c95d11d7126de037d08a9d869fb7b116bee9))
+
 ## [1.3.0](https://github.com/bdatdo0601/big-boi/compare/v1.2.1...v1.3.0) (2021-02-06)
 
 
