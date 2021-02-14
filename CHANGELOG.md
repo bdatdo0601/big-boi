@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.4](https://github.com/bdatdo0601/big-boi/compare/v1.3.3...v1.3.4) (2021-02-14)
+
+
+### Bug Fixes
+
+* update tags ([c20b2c3](https://github.com/bdatdo0601/big-boi/commit/c20b2c32f459ca8d1f196020f07f72efcd479c3b))
+
 ### [1.3.3](https://github.com/bdatdo0601/big-boi/compare/v1.3.2...v1.3.3) (2021-02-14)
 
 
