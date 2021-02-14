@@ -48,6 +48,10 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: amplify env pull --restore
           
       # Deploy Amplify
       - name: deploy
