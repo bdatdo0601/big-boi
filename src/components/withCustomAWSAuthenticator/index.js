@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { useEffect } from "react";
 import { Hub } from "aws-amplify";
-import { Authenticator, SignUp, Greetings } from "aws-amplify-react";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 import { useSnackbar } from "notistack";
 import { get } from "lodash";
 
-const AuthenticatorWrapper = ({ children, authState }) => {
+export const useAuthenticateEffect = () => {
   const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
     Hub.listen("auth", res => {
@@ -23,24 +22,6 @@ const AuthenticatorWrapper = ({ children, authState }) => {
       Hub.remove("auth");
     };
   }, [enqueueSnackbar]);
-  return <>{authState && authState === "signedIn" ? children : null}</>;
 };
 
-AuthenticatorWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
-  authState: PropTypes.string,
-};
-
-AuthenticatorWrapper.defaultProps = {
-  authState: "",
-};
-
-const withCustomAWSAuthenticator = Component => props => (
-  <Authenticator hide={[SignUp, Greetings]} includeGreetings={false} theme={{ formContainer: { width: "100vw" } }}>
-    <AuthenticatorWrapper {...props}>
-      <Component {...props} />
-    </AuthenticatorWrapper>
-  </Authenticator>
-);
-
-export default withCustomAWSAuthenticator;
+export default withAuthenticator;
