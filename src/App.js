@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { groupBy } from "lodash";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Amplify from "aws-amplify";
+import Analytics from "@aws-amplify/analytics";
 import { CircularProgress } from "@material-ui/core";
 
 import awsconfig from "./aws-exports";
@@ -12,7 +13,7 @@ import withCustomAWSAuthenticator, { useAuthenticateEffect } from "./components/
 import "./App.css";
 
 Amplify.configure(awsconfig);
-
+Analytics.enable();
 const groupedRoutes = groupBy(routes, "type.name");
 
 function App() {

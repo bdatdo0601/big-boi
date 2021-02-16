@@ -43,5 +43,11 @@
         }
       }
     }
+  },
+  "analytics": {
+    "bigboianalytics": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

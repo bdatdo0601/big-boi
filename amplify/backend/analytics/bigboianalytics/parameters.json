@@ -1,0 +1,21 @@
+{
+    "appName": "bigboianalytics",
+    "roleName": "pinpointLambdaRoled337eb4e",
+    "cloudformationPolicyName": "cloudformationPolicyd337eb4e",
+    "cloudWatchPolicyName": "cloudWatchPolicyd337eb4e",
+    "pinpointPolicyName": "pinpointPolicyd337eb4e",
+    "authPolicyName": "pinpoint_amplify_d337eb4e",
+    "unauthPolicyName": "pinpoint_amplify_d337eb4e",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
