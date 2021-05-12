@@ -24,7 +24,7 @@
     "moment": "^2.29.1",
     "node-notifier": "^9.0.0",
     "notistack": "^0.9.7",
-    "postcss": "^8.2.6",
+    "postcss": "^8.2.10",
     "postcss-cli": "^8.3.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
