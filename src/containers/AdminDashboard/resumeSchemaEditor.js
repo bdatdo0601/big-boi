@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Card, CircularProgress, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { JsonEditor as Editor } from "jsoneditor-react";
+// import the react-json-view component
+import ReactJson from "react-json-view";
 import { CloudUploadOutlined, RestoreOutlined } from "@material-ui/icons";
-import "jsoneditor-react/es/editor.min.css";
 import { isEqual } from "lodash";
 import { useSnackbar } from "notistack";
 
@@ -79,12 +79,17 @@ export default function ResumeSchemaEditor() {
       >
         Reset to Default
       </Button>
-      <Editor
-        value={resume}
-        onChange={newJSONFile => {
-          setResume(newJSONFile);
-        }}
-      />
+      <div className="text-left">
+        <ReactJson
+          src={resume}
+          theme="monokai"
+          enableClipboard
+          collapsed
+          onEdit={({ updated_src: updatedJSON }) => {
+            setResume(updatedJSON);
+          }}
+        />
+      </div>
     </Card>
   );
 }
