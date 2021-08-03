@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/bdatdo0601/big-boi/compare/v1.3.5...v1.4.0) (2021-08-03)
+
+
+### Features
+
+* add analytics ([eb447b5](https://github.com/bdatdo0601/big-boi/commit/eb447b52f82d2cbe8e963649ef72adbe66d38504))
+
+
+### Bug Fixes
+
+* update dependencies ([fc6235d](https://github.com/bdatdo0601/big-boi/commit/fc6235d1209ca62a0d66dfc2bd1fe01f7d6e8879))
+
 ### [1.3.5](https://github.com/bdatdo0601/big-boi/compare/v1.3.4...v1.3.5) (2021-02-15)
 
 
