@@ -45,7 +45,7 @@ export default function BlogManager() {
   );
 
   return (
-    <div className="blog-container-div">
+    <div className="blog-container-div text-center px-4 py-8">
       <Typography variant="h3">Blog Manager</Typography>
       {loading ? <CircularProgress /> : null}
       <div style={{ marginTop: 12 }}>
