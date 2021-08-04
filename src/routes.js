@@ -1,5 +1,5 @@
 import React, { lazy } from "react";
-import { Auth } from "aws-amplify";
+import { Auth } from "@aws-amplify/auth";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import {

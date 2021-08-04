@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Storage } from "aws-amplify";
+import { Storage } from "@aws-amplify/storage";
 import { get } from "lodash";
 
 import awsconfig from "../aws-exports";

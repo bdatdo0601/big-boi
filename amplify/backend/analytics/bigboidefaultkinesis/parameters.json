@@ -1,0 +1,12 @@
+{
+  "kinesisStreamName": "bigboidefaultkinesis",
+  "kinesisStreamShardCount": 1,
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "authPolicyName": "kinesis_amplify_f16414fe",
+  "unauthPolicyName": "kinesis_amplify_f16414fe"
+}

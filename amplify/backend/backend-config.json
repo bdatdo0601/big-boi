@@ -48,6 +48,10 @@
     "bigboianalytics": {
       "service": "Pinpoint",
       "providerPlugin": "awscloudformation"
+    },
+    "bigboidefaultkinesis": {
+      "service": "Kinesis",
+      "providerPlugin": "awscloudformation"
     }
   }
 }

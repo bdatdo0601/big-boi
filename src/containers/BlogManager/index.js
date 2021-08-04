@@ -11,6 +11,7 @@ import { listPosts } from "../../graphql/queries";
 import "./index.less";
 import { updatePost } from "../../graphql/mutations";
 import BlogPostCard from "../../components/BlosPostCard";
+import { recordEvent } from "../../utils/awsAnalytics";
 
 export default function BlogManager() {
   const history = useHistory();
@@ -26,6 +27,7 @@ export default function BlogManager() {
       try {
         const variables = { input: { id: get(post, "id"), status: state } };
         await mutatePost(variables);
+        recordEvent("BLOG_POST", get(variables, "input", {}));
         enqueueSnackbar("Post updated", {
           variant: "success",
           anchorOrigin: { vertical: "top", horizontal: "center" },

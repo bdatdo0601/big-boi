@@ -1,4 +1,4 @@
-import { API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from "@aws-amplify/api";
 import { merge } from "lodash";
 import { useCallback, useEffect, useState } from "react";
 

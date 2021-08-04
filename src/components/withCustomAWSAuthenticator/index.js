@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Hub } from "aws-amplify";
+import { Hub } from "@aws-amplify/core";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { useSnackbar } from "notistack";
 import { get } from "lodash";

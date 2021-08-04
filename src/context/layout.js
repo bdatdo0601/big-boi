@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/core";
+import { createTheme } from "@material-ui/core/styles";
 
 const LayoutContext = React.createContext();
 
@@ -9,7 +10,7 @@ export const LayoutContextProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(true);
   const [animation, setAnimation] = useState(true);
   const [globalAnimation, setGlobalAnimation] = useState(true);
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: isDark ? "dark" : "light",
 
