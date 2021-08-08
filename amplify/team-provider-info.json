@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "bigboi327b1f0d": {}
+      },
+      "function": {
+        "bigboifirehoselambda": {
+          "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+          "s3Key": "amplify-builds/bigboifirehoselambda-3537384d344361725679-build.zip"
+        }
       }
     }
   }

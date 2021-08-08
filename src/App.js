@@ -14,24 +14,20 @@ import "./App.css";
 
 Amplify.configure({
   ...awsconfig,
-  Analytics: {
-    disabled: false,
-    AWSPinpoint: {
-      appId: awsconfig.aws_mobile_analytics_app_id,
-      region: awsconfig.aws_mobile_analytics_app_region,
-    },
-  },
 });
 
 Analytics.configure({
   AWSKinesisProvider: {
-    region: awsconfig.aws_mobile_analytics_app_region,
+    region: awsconfig.aws_project_region,
+    bufferSize: 1,
   },
-  // AWSKinesisFirehoseProvider: {
-  //   region: awsconfig.aws_mobile_analytics_app_region,
-  // }
 });
-Analytics.addPluggable(new AWSKinesisProvider());
+Analytics.addPluggable(
+  new AWSKinesisProvider({
+    region: awsconfig.aws_project_region,
+    bufferSize: 1,
+  })
+);
 // Analytics.addPluggable(new AWSKinesisFirehoseProvider());
 Analytics.enable();
 const groupedRoutes = groupBy(routes, "type.name");

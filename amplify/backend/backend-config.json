@@ -44,6 +44,13 @@
       }
     }
   },
+  "function": {
+    "bigboifirehoselambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
   "analytics": {
     "bigboianalytics": {
       "service": "Pinpoint",
@@ -52,6 +59,34 @@
     "bigboidefaultkinesis": {
       "service": "Kinesis",
       "providerPlugin": "awscloudformation"
+    },
+    "bigboidefaultkinesisfirehose": {
+      "service": "KinesisFirehose",
+      "providerPlugin": "awscloudformation",
+      "dependson": [
+        {
+          "category": "storage",
+          "resourceName": "bigboicontent",
+          "attributes": [
+            "BucketName"
+          ]
+        },
+        {
+          "category": "analytics",
+          "resourceName": "bigboidefaultkinesis",
+          "attributes": [
+            "kinesisStreamArn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "bigboifirehoselambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   }
 }

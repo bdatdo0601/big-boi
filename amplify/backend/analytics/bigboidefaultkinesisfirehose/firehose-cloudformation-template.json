@@ -1,0 +1,293 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Kinesis Firehose resource stack creation using Amplify CLI",
+    "Parameters": {
+        "env": {
+            "Type": "String"
+        },
+        "deliveryStreamName": {
+            "Type": "String"
+        },
+        "deliveryStreamType": {
+            "Type": "String"
+        },
+        "authPolicyName": {
+            "Type": "String"
+        },
+        "unauthPolicyName": {
+            "Type": "String"
+        },
+        "authRoleName": {
+            "Type": "String"
+        },
+        "unauthRoleName": {
+            "Type": "String"
+        },
+        "roleName": {
+            "Type": "String"
+        },
+        "cloudWatchPolicyName": {
+            "Type": "String"
+        },
+        "kinesisPolicyName": {
+            "Type": "String"
+        },
+        "s3PolicyName": {
+            "Type": "String"
+        },
+        "analyticsbigboidefaultkinesiskinesisStreamArn": {
+            "Type": "String"
+        },
+        "storagebigboicontentBucketName": {
+            "Type": "String"
+        },
+        "functionbigboifirehoselambdaName": {
+            "Type": "String"
+        },
+        "functionbigboifirehoselambdaArn": {
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "FirehoseProcessingRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "RoleName": {
+                    "Ref": "roleName"
+                },
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "firehose.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Policies": [
+                    {
+                        "PolicyName": {
+                            "Ref": "cloudWatchPolicyName"
+                        },
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "logs:CreateLogGroup",
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents"
+                                    ],
+                                    "Resource": "arn:aws:logs:*:*:*"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "PolicyName": {
+                            "Ref": "kinesisPolicyName"
+                        },
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "kinesis:*"
+                                    ],
+                                    "Resource": [
+                                        {
+                                            "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "PolicyName": {
+                            "Ref": "s3PolicyName"
+                        },
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "s3:*"
+                                    ],
+                                    "Resource": [
+                                        {
+                                            "Fn::Join": [
+                                                "",
+                                                [
+                                                    "arn:aws:s3:::",
+                                                    {
+                                                        "Ref": "storagebigboicontentBucketName"
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "KinesisFirehoseDeliveryStream": {
+            "Type": "AWS::KinesisFirehose::DeliveryStream",
+            "Properties": {
+                "DeliveryStreamName": {
+                    "Fn::Join": [
+                        "-",
+                        [
+                            {
+                                "Ref": "deliveryStreamName"
+                            },
+                            {
+                                "Ref": "env"
+                            }
+                        ]
+                    ]
+                },
+                "DeliveryStreamType": {
+                    "Ref": "deliveryStreamType"
+                },
+                "KinesisStreamSourceConfiguration": {
+                    "KinesisStreamARN": {
+                        "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
+                    },
+                    "RoleARN": {
+                        "Fn::GetAtt": [
+                            "FirehoseProcessingRole",
+                            "Arn"
+                        ]
+                    }
+                },
+                "ExtendedS3DestinationConfiguration": {
+                    "BucketARN": {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:aws:s3:::",
+                                {
+                                    "Ref": "storagebigboicontentBucketName"
+                                }
+                            ]
+                        ]
+                    },
+                    "BufferingHints": {
+                        "IntervalInSeconds": "60",
+                        "SizeInMBs": "50"
+                    },
+                    "CompressionFormat": "UNCOMPRESSED",
+                    "Prefix": "firehose/",
+                    "RoleARN": {
+                        "Fn::GetAtt": [
+                            "FirehoseProcessingRole",
+                            "Arn"
+                        ]
+                    },
+                    "ProcessingConfiguration": {
+                        "Enabled": "true",
+                        "Processors": [
+                            {
+                                "Parameters": [
+                                    {
+                                        "ParameterName": "LambdaArn",
+                                        "ParameterValue": {
+                                            "Ref": "functionbigboifirehoselambdaArn"
+                                        }
+                                    }
+                                ],
+                                "Type": "Lambda"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "CognitoUnauthPolicy": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyName": {
+                    "Ref": "unauthPolicyName"
+                },
+                "Roles": [
+                    {
+                        "Ref": "unauthRoleName"
+                    }
+                ],
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "firehose:PutRecord",
+                                "firehose:PutRecordBatch"
+                            ],
+                            "Resource": {
+                                "Fn::GetAtt": [
+                                    "KinesisFirehoseDeliveryStream",
+                                    "Arn"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "CognitoAuthPolicy": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyName": {
+                    "Ref": "authPolicyName"
+                },
+                "Roles": [
+                    {
+                        "Ref": "authRoleName"
+                    }
+                ],
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "firehose:PutRecord",
+                                "firehose:PutRecordBatch"
+                            ],
+                            "Resource": {
+                                "Fn::GetAtt": [
+                                    "KinesisFirehoseDeliveryStream",
+                                    "Arn"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "DeliveryStreamArn": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "KinesisFirehoseDeliveryStream",
+                    "Arn"
+                ]
+            }
+        }
+    }
+}
