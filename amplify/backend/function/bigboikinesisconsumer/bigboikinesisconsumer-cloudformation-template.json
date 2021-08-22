@@ -15,6 +15,14 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "analyticsbigboidefaultkinesiskinesisStreamArn": {
+      "Type": "String",
+      "Default": "analyticsbigboidefaultkinesiskinesisStreamArn"
+    },
+    "functionbigboibigboilambdalayerArn": {
+      "Type": "String",
+      "Default": "functionbigboibigboilambdalayerArn"
     }
   },
   "Conditions": {
@@ -47,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "bigboifirehoselambda",
+            "bigboikinesisconsumer",
             {
               "Fn::Join": [
                 "",
                 [
-                  "bigboifirehoselambda",
+                  "bigboikinesisconsumer",
                   "-",
                   {
                     "Ref": "env"
@@ -79,7 +87,11 @@
           ]
         },
         "Runtime": "nodejs14.x",
-        "Layers": [],
+        "Layers": [
+          {
+            "Ref": "functionbigboibigboilambdalayerArn"
+          }
+        ],
         "Timeout": 25
       }
     },
@@ -89,12 +101,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "bigboiLambdaRolefb7b6d9d",
+            "bigboiLambdaRolea300bc0f",
             {
               "Fn::Join": [
                 "",
                 [
-                  "bigboiLambdaRolefb7b6d9d",
+                  "bigboiLambdaRolea300bc0f",
                   "-",
                   {
                     "Ref": "env"
@@ -163,6 +175,61 @@
             }
           ]
         }
+      }
+    },
+    "LambdaTriggerPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy-",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "kinesis:DescribeStream",
+                "kinesis:DescribeStreamSummary",
+                "kinesis:GetRecords",
+                "kinesis:GetShardIterator",
+                "kinesis:ListShards",
+                "kinesis:ListStreams",
+                "kinesis:SubscribeToShard"
+              ],
+              "Resource": {
+                "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "LambdaEventSourceMapping": {
+      "Type": "AWS::Lambda::EventSourceMapping",
+      "DependsOn": [
+        "LambdaTriggerPolicy",
+        "LambdaExecutionRole"
+      ],
+      "Properties": {
+        "BatchSize": 1,
+        "Enabled": true,
+        "EventSourceArn": {
+          "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
+        },
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "LambdaFunction",
+            "Arn"
+          ]
+        },
+        "StartingPosition": "LATEST"
       }
     }
   },

@@ -16,9 +16,13 @@
         "bigboi327b1f0d": {}
       },
       "function": {
-        "bigboifirehoselambda": {
+        "bigboikinesisconsumer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboifirehoselambda-3537384d344361725679-build.zip"
+          "s3Key": "amplify-builds/bigboikinesisconsumer-37514465306b314f306e-build.zip"
+        },
+        "bigboibigboilambdalayer": {
+          "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion8236f354-build.zip"
         }
       }
     }
