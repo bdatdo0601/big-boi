@@ -1,0 +1,11 @@
+{
+  "snsTopicDisplayName": "bigboinotifications",
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "authPolicyName": "sns_amplify_f16415fe",
+  "unauthPolicyName": "sns_amplify_f16415fe"
+}

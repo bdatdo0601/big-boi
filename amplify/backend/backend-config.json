@@ -44,6 +44,12 @@
       }
     }
   },
+  "notifications": {
+    "bigboinotification": {
+      "service": "SNS",
+      "providerPlugin": "awscloudformation"
+    }
+  },
   "function": {
     "bigboibigboilambdalayer": {
       "providerPlugin": "awscloudformation",
@@ -67,6 +73,13 @@
           "resourceName": "bigboidefaultkinesis",
           "attributes": [
             "kinesisStreamArn"
+          ]
+        },
+        {
+          "category": "notifications",
+          "resourceName": "bigboinotification",
+          "attributes": [
+            "snsTopicArn"
           ]
         }
       ]
