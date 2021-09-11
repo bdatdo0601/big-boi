@@ -1,98 +1,85 @@
 {
-  "hosting": {
-    "S3AndCloudFront": {
-      "service": "S3AndCloudFront",
-      "providerPlugin": "awscloudformation"
-    }
-  },
-  "auth": {
-    "bigboi327b1f0d": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
-    }
-  },
-  "storage": {
-    "bigboicontent": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation"
-    }
-  },
-  "api": {
-    "bigboiapi": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authbigboi327b1f0d"
-            }
-          },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "API_KEY",
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 365,
-                "description": "Public read key"
-              }
-            }
-          ]
+    "hosting": {
+        "S3AndCloudFront": {
+            "service": "S3AndCloudFront",
+            "providerPlugin": "awscloudformation"
         }
-      }
-    }
-  },
-  "notifications": {
-    "bigboinotification": {
-      "service": "SNS",
-      "providerPlugin": "awscloudformation"
-    }
-  },
-  "function": {
-    "bigboibigboilambdalayer": {
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
     },
-    "bigboikinesisconsumer": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "bigboibigboilambdalayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
-          "category": "analytics",
-          "resourceName": "bigboidefaultkinesis",
-          "attributes": [
-            "kinesisStreamArn"
-          ]
-        },
-        {
-          "category": "notifications",
-          "resourceName": "bigboinotification",
-          "attributes": [
-            "snsTopicArn"
-          ]
+    "auth": {
+        "bigboi327b1f0d": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false
         }
-      ]
-    }
-  },
-  "analytics": {
-    "bigboianalytics": {
-      "service": "Pinpoint",
-      "providerPlugin": "awscloudformation"
     },
-    "bigboidefaultkinesis": {
-      "service": "Kinesis",
-      "providerPlugin": "awscloudformation"
+    "storage": {
+        "bigboicontent": {
+            "service": "S3",
+            "providerPlugin": "awscloudformation"
+        }
+    },
+    "api": {
+        "bigboiapi": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "defaultAuthentication": {
+                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+                        "userPoolConfig": {
+                            "userPoolId": "authbigboi327b1f0d"
+                        }
+                    },
+                    "additionalAuthenticationProviders": [
+                        {
+                            "authenticationType": "API_KEY",
+                            "apiKeyConfig": {
+                                "apiKeyExpirationDays": 365,
+                                "description": "Public read key"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "function": {
+        "bigboibigboilambdalayer": {
+            "providerPlugin": "awscloudformation",
+            "service": "LambdaLayer",
+            "build": true
+        },
+        "bigboikinesisconsumer": {
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda",
+            "dependsOn": [
+                {
+                    "category": "function",
+                    "resourceName": "bigboibigboilambdalayer",
+                    "attributes": [
+                        "Arn"
+                    ]
+                },
+                {
+                    "category": "analytics",
+                    "resourceName": "bigboidefaultkinesis",
+                    "attributes": [
+                        "kinesisStreamArn"
+                    ]
+                }
+            ]
+        }
+    },
+    "analytics": {
+        "bigboianalytics": {
+            "service": "Pinpoint",
+            "providerPlugin": "awscloudformation"
+        },
+        "bigboidefaultkinesis": {
+            "service": "Kinesis",
+            "providerPlugin": "awscloudformation"
+        }
     }
-  }
 }

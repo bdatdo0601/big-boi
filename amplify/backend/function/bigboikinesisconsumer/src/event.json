@@ -1,20 +1,5 @@
 {
-  "Records": [
-      {
-          "kinesis": {
-              "kinesisSchemaVersion": "1.0",
-              "partitionKey": "partition-us-east-1:76b2a80a-3fa8-4a66-a0e5-5da1319fbac7",
-              "sequenceNumber": "49620770030960603994186530106341665232583331965449535490",
-              "data": "eyJpZCI6ImJkOGM5ZGI3LWU4NDAtNDY0My04NmQ4LTA3MjgzNTY3NmU4MSIsInN0YXR1cyI6IkRSQUZUIn0=",
-              "approximateArrivalTimestamp": 1629590604.837
-          },
-          "eventSource": "aws:kinesis",
-          "eventVersion": "1.0",
-          "eventID": "shardId-000000000000:49620770030960603994186530106341665232583331965449535490",
-          "eventName": "aws:kinesis:record",
-          "invokeIdentityArn": "arn:aws:iam::142037127835:role/bigboiLambdaRolea300bc0f-dev",
-          "awsRegion": "us-east-1",
-          "eventSourceARN": "arn:aws:kinesis:us-east-1:142037127835:stream/bigboidefaultkinesis-dev"
-      }
-  ]
+  "key1": "value1",
+  "key2": "value2",
+  "key3": "value3"
 }
