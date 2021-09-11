@@ -1,0 +1,209 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "id": "6293d2b3-5fde-4bf0-8b69-14734283f7bd",
+            "source": "Personal",
+            "contentType": "BlogPost.Update",
+            "content": {},
+            "metadata": {
+                "timestamp": 112904812049,
+                "sourceURL": "https"
+            },
+            "publishInfo": {
+                "subject": "Dat",
+                "subjectLink": "https://www.dat.do",
+                "action": "just updated",
+                "target": "his blog post",
+                "targetLink": "https://www.test.com/",
+                "message": "Dat just updated his blog post"
+            }
+        }
+    ],
+    "required": [
+        "id",
+        "source",
+        "contentType",
+        "content",
+        "metadata",
+        "publishInfo"
+    ],
+    "properties": {
+        "id": {
+            "$id": "#/properties/id",
+            "type": "string",
+            "title": "The id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "6293d2b3-5fde-4bf0-8b69-14734283f7bd"
+            ]
+        },
+        "source": {
+            "$id": "#/properties/source",
+            "type": "string",
+            "title": "The source schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "Personal"
+            ]
+        },
+        "contentType": {
+            "$id": "#/properties/contentType",
+            "type": "string",
+            "title": "The contentType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "BlogPost.Update"
+            ]
+        },
+        "content": {
+            "$id": "#/properties/content",
+            "type": "object",
+            "title": "The content schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {}
+            ],
+            "required": [],
+            "additionalProperties": true
+        },
+        "metadata": {
+            "$id": "#/properties/metadata",
+            "type": "object",
+            "title": "The metadata schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "timestamp": 112904812049,
+                    "sourceURL": "https"
+                }
+            ],
+            "required": [
+                "timestamp",
+                "sourceURL"
+            ],
+            "properties": {
+                "timestamp": {
+                    "$id": "#/properties/metadata/properties/timestamp",
+                    "type": "integer",
+                    "title": "The timestamp schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                        112904812049
+                    ]
+                },
+                "sourceURL": {
+                    "$id": "#/properties/metadata/properties/sourceURL",
+                    "type": "string",
+                    "title": "The sourceURL schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "https"
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "publishInfo": {
+            "$id": "#/properties/publishInfo",
+            "type": "object",
+            "title": "The publishInfo schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "subject": "Dat",
+                    "subjectLink": "https://www.dat.do",
+                    "action": "just updated",
+                    "target": "his blog post",
+                    "targetLink": "https://www.test.com/",
+                    "message": "Dat just updated his blog post"
+                }
+            ],
+            "required": [
+                "subject",
+                "subjectLink",
+                "action",
+                "target",
+                "targetLink",
+                "message"
+            ],
+            "properties": {
+                "subject": {
+                    "$id": "#/properties/publishInfo/properties/subject",
+                    "type": "string",
+                    "title": "The subject schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "Dat"
+                    ]
+                },
+                "subjectLink": {
+                    "$id": "#/properties/publishInfo/properties/subjectLink",
+                    "type": "string",
+                    "title": "The subjectLink schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "https://www.dat.do"
+                    ]
+                },
+                "action": {
+                    "$id": "#/properties/publishInfo/properties/action",
+                    "type": "string",
+                    "title": "The action schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "just updated"
+                    ]
+                },
+                "target": {
+                    "$id": "#/properties/publishInfo/properties/target",
+                    "type": "string",
+                    "title": "The target schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "his blog post"
+                    ]
+                },
+                "targetLink": {
+                    "$id": "#/properties/publishInfo/properties/targetLink",
+                    "type": "string",
+                    "title": "The targetLink schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "https://www.test.com/"
+                    ]
+                },
+                "message": {
+                    "$id": "#/properties/publishInfo/properties/message",
+                    "type": "string",
+                    "title": "The message schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "Dat just updated his blog post"
+                    ]
+                }
+            },
+            "additionalProperties": true
+        }
+    },
+    "additionalProperties": true
+}
