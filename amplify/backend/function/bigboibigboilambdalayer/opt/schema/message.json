@@ -8,12 +8,13 @@
     "examples": [
         {
             "id": "6293d2b3-5fde-4bf0-8b69-14734283f7bd",
-            "source": "Personal",
-            "contentType": "BlogPost.Update",
+            "sourceID": "shardId-000000000000:49620770030960603994186530106341665232583331965449535490",
+            "source": "aws:kinesis:record",
+            "contentType": "Personal.BlogPost.Update",
             "content": {},
             "metadata": {
                 "timestamp": 112904812049,
-                "sourceURL": "https"
+                "sourceURI": "arn:aws:kinesis:us-east-1:142037127835:stream/bigboidefaultkinesis-dev"
             },
             "publishInfo": {
                 "subject": "Dat",
@@ -27,6 +28,7 @@
     ],
     "required": [
         "id",
+        "sourceID",
         "source",
         "contentType",
         "content",
@@ -44,6 +46,16 @@
                 "6293d2b3-5fde-4bf0-8b69-14734283f7bd"
             ]
         },
+        "sourceID": {
+            "$id": "#/properties/sourceID",
+            "type": "string",
+            "title": "The sourceID schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "shardId-000000000000:49620770030960603994186530106341665232583331965449535490"
+            ]
+        },
         "source": {
             "$id": "#/properties/source",
             "type": "string",
@@ -51,7 +63,7 @@
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "Personal"
+                "aws:kinesis:record"
             ]
         },
         "contentType": {
@@ -61,7 +73,7 @@
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "BlogPost.Update"
+                "Personal.BlogPost.Update"
             ]
         },
         "content": {
@@ -85,12 +97,12 @@
             "examples": [
                 {
                     "timestamp": 112904812049,
-                    "sourceURL": "https"
+                    "sourceURI": "arn:aws:kinesis:us-east-1:142037127835:stream/bigboidefaultkinesis-dev"
                 }
             ],
             "required": [
                 "timestamp",
-                "sourceURL"
+                "sourceURI"
             ],
             "properties": {
                 "timestamp": {
@@ -103,14 +115,14 @@
                         112904812049
                     ]
                 },
-                "sourceURL": {
-                    "$id": "#/properties/metadata/properties/sourceURL",
+                "sourceURI": {
+                    "$id": "#/properties/metadata/properties/sourceURI",
                     "type": "string",
-                    "title": "The sourceURL schema",
+                    "title": "The sourceURI schema",
                     "description": "An explanation about the purpose of this instance.",
                     "default": "",
                     "examples": [
-                        "https"
+                        "arn:aws:kinesis:us-east-1:142037127835:stream/bigboidefaultkinesis-dev"
                     ]
                 }
             },

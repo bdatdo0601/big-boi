@@ -9,14 +9,13 @@ export const recordEvent = (name, attributes, ...args) => {
   const event = {
     name,
     attributes,
-    data: attributes,
+    data: { ...attributes, contentType: name },
     streamName: `bigboidefaultkinesis-${env}`,
     ...args,
   };
   try {
     Analytics.record(event);
     Analytics.record(event, "AWSKinesis");
-    // Analytics.record(event, "AWSKinesisFirehose");
   } catch (err) {
     console.error(err);
   }
