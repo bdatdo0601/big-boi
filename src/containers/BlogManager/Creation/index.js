@@ -8,7 +8,6 @@ import "react-markdown-editor-lite/lib/index.css";
 import { CheckBoxOutlined } from "@material-ui/icons";
 import { useHistory, useParams } from "react-router-dom";
 import { get, isEmpty, merge, trim } from "lodash";
-import { useSnackbar } from "notistack";
 
 import "./index.less";
 import { uploadPhoto, getPhotoURL } from "../../../utils/awsStorage";
@@ -16,16 +15,26 @@ import { useAWSAPI, useLazyAWSAPI } from "../../../utils/awsAPI";
 import { getPost } from "../../../graphql/queries";
 import { createPost, updatePost } from "../../../graphql/mutations";
 import { POST_STATE } from "../../../utils/constants";
+import { useDataUpdateWrapper } from "../../../utils/hooks";
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
 
 // Initialize a markdown parser
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
+const DataUpdateOptions = {
+  snackBar: {
+    successMessage: "Blog Post Updated",
+    errorMessage: "Unable to Update Blog Post",
+  },
+  logging: {
+    eventType: "Personal.BlogPost.Update",
+  },
+};
+
 export default function BlogCreation() {
   const history = useHistory();
   const { postID } = useParams();
-  const { enqueueSnackbar } = useSnackbar();
 
   const defaultDataInputs = useMemo(() => ({ id: postID }), [postID]);
   const { execute: postPost, loading: postingPost } = useLazyAWSAPI(createPost);
@@ -42,34 +51,25 @@ export default function BlogCreation() {
     setData(defaultData);
   }, [defaultData]);
 
-  const onSubmit = useCallback(async () => {
-    try {
-      const variables = {
-        input: {
-          id: get(data, "id"),
-          title: get(data, "title"),
-          data: JSON.stringify(get(data, "data", {})),
-          tags: get(data, "tags"),
-          description: get(data, "description"),
-          status: POST_STATE.DRAFT,
-        },
-      };
-      isEmpty(get(rawDefaultData, "data.getPost", {})) ? await postPost(variables) : await mutatePost(variables);
-      enqueueSnackbar("Post updated", {
-        variant: "success",
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-        autoHideDuration: 2000,
-      });
-      history.replace("/blogmanager");
-    } catch (err) {
-      console.error(err);
-      enqueueSnackbar("Unable to submit", {
-        variant: "error",
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-        autoHideDuration: 2000,
-      });
-    }
-  }, [enqueueSnackbar, data, mutatePost, postPost, rawDefaultData, history]);
+  const updateBlogPostData = useCallback(async () => {
+    const variables = {
+      input: {
+        id: get(data, "id"),
+        title: get(data, "title"),
+        data: JSON.stringify(get(data, "data", {})),
+        tags: get(data, "tags"),
+        description: get(data, "description"),
+        status: POST_STATE.DRAFT,
+      },
+    };
+    isEmpty(get(rawDefaultData, "data.getPost", {})) ? await postPost(variables) : await mutatePost(variables);
+    return variables.input;
+  }, [data, mutatePost, postPost, rawDefaultData]);
+  const onPostUpdateBlogData = useCallback(async () => {
+    history.replace("/blogmanager");
+  }, [history]);
+
+  const [onSubmit] = useDataUpdateWrapper(updateBlogPostData, onPostUpdateBlogData, DataUpdateOptions);
 
   if (loading) {
     return <CircularProgress style={{ marginTop: 16 }} />;

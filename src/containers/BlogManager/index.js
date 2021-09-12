@@ -4,47 +4,46 @@ import { get } from "lodash";
 import { v4 as uuid } from "uuid";
 import { useHistory } from "react-router-dom";
 import { AddRounded } from "@material-ui/icons";
-import { useSnackbar } from "notistack";
 
 import { useAWSAPI, useLazyAWSAPI } from "../../utils/awsAPI";
 import { listPosts } from "../../graphql/queries";
 import "./index.less";
 import { updatePost } from "../../graphql/mutations";
 import BlogPostCard from "../../components/BlosPostCard";
-import { recordEvent } from "../../utils/awsAnalytics";
+import { useDataUpdateWrapper } from "../../utils/hooks";
+
+const DataUpdateOptions = {
+  snackBar: {
+    successMessage: "Blog Status Updated",
+    errorMessage: "Unable to Update Blog Post Status",
+  },
+  logging: {
+    eventType: "Personal.BlogPost.StatusUpdate",
+  },
+};
 
 export default function BlogManager() {
   const history = useHistory();
   const query = useMemo(() => ({ limit: 10000 }), []);
   const { data: rawData, loading, execute: refetch } = useAWSAPI(listPosts, query);
   const { execute: mutatePost, loading: updatingPost } = useLazyAWSAPI(updatePost);
-  const { enqueueSnackbar } = useSnackbar();
 
   const posts = useMemo(() => get(rawData, "data.listPosts.items", []), [rawData]);
 
-  const updatePostState = useCallback(
+  const updateBlogStatusData = useCallback(
     async (post, state) => {
-      try {
-        const variables = { input: { id: get(post, "id"), status: state } };
-        await mutatePost(variables);
-        recordEvent("BLOG_POST", get(variables, "input", {}));
-        enqueueSnackbar("Post updated", {
-          variant: "success",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
-          autoHideDuration: 2000,
-        });
-        await refetch();
-      } catch (err) {
-        console.error(err);
-        enqueueSnackbar("Unable to update", {
-          variant: "error",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
-          autoHideDuration: 2000,
-        });
-      }
+      const variables = { input: { id: get(post, "id"), status: state } };
+      await mutatePost(variables);
+      return variables.input;
     },
-    [enqueueSnackbar, mutatePost, refetch]
+    [mutatePost]
   );
+
+  const onPostUpdateBlogStatusData = useCallback(async () => {
+    await refetch();
+  }, [refetch]);
+
+  const [updatePostState] = useDataUpdateWrapper(updateBlogStatusData, onPostUpdateBlogStatusData, DataUpdateOptions);
 
   return (
     <div className="blog-container-div text-center px-4 py-8">
