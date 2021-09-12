@@ -13,7 +13,6 @@ export const recordEvent = (name, attributes, ...args) => {
     streamName: `bigboidefaultkinesis-${env}`,
     ...args,
   };
-  console.log(event);
   try {
     Analytics.record(event);
     Analytics.record(event, "AWSKinesis");
