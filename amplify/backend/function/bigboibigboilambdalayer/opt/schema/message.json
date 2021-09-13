@@ -10,7 +10,7 @@
             "id": "6293d2b3-5fde-4bf0-8b69-14734283f7bd",
             "sourceID": "shardId-000000000000:49620770030960603994186530106341665232583331965449535490",
             "source": "aws:kinesis:record",
-            "contentType": "Personal.BlogPost.Update",
+            "eventType": "Personal.BlogPost.Update",
             "content": {},
             "metadata": {
                 "timestamp": 112904812049,
@@ -30,7 +30,7 @@
         "id",
         "sourceID",
         "source",
-        "contentType",
+        "eventType",
         "content",
         "metadata",
         "publishInfo"
@@ -66,10 +66,10 @@
                 "aws:kinesis:record"
             ]
         },
-        "contentType": {
-            "$id": "#/properties/contentType",
+        "eventType": {
+            "$id": "#/properties/eventType",
             "type": "string",
-            "title": "The contentType schema",
+            "title": "The eventType schema",
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
@@ -102,7 +102,9 @@
             ],
             "required": [
                 "timestamp",
-                "sourceURI"
+                "sourceURI",
+                "visibility",
+                "sourceMessage"
             ],
             "properties": {
                 "timestamp": {
@@ -124,6 +126,35 @@
                     "examples": [
                         "arn:aws:kinesis:us-east-1:142037127835:stream/bigboidefaultkinesis-dev"
                     ]
+                },
+                "visibility": {
+                    "$id": "#/properties/metadata/properties/visibility",
+                    "type": "string",
+                    "title": "Visibility",
+                    "description": "Whether it is intended to be seen in public",
+                    "default": "private",
+                    "examples": [
+                        "public",
+                        "private"
+                    ]
+                },
+                "isValid": {
+                    "$id": "#/properties/metadata/properties/isValid",
+                    "type": "boolean",
+                    "title": "isValid",
+                    "description": "Whether the message can be consumed properly",
+                    "default": false,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "sourceMessage": {
+                    "$id": "#/properties/metadata/properties/sourceMessage",
+                    "type": "object",
+                    "title": "sourceMessage",
+                    "description": "Raw message from the source",
+                    "default": {}
                 }
             },
             "additionalProperties": true
