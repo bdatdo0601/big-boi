@@ -18,11 +18,11 @@
       "function": {
         "bigboikinesisconsumer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboikinesisconsumer-6b4e5565554168556c71-build.zip"
+          "s3Key": "amplify-builds/bigboikinesisconsumer-6f614a304867665a4d30-build.zip"
         },
         "bigboibigboilambdalayer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion30febeb5-build.zip"
+          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion98865a7d-build.zip"
         }
       }
     }

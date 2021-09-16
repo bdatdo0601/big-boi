@@ -1,4 +1,4 @@
-const get = require("lodash.get");
+const { get } = require("lodash");
 const { v4: uuid } = require("uuid");
 const MessageSchema = require("/opt/schema/message.json");
 
@@ -38,7 +38,7 @@ exports.handler = async event => {
       return event;
     }));
     // Validate events
-    console.log(event);
+    console.log(events);
     // Propagate to SNS topic
     res = events;
   } else {
