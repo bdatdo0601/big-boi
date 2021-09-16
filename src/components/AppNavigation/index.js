@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { isEmpty } from "lodash";
 import PropTypes from "prop-types";
-import uuid from "uuid";
+import { v4 as uuid } from "uuid";
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";

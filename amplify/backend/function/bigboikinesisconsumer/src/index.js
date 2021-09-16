@@ -38,11 +38,11 @@ exports.handler = async event => {
       return event;
     }));
     // Validate events
-
+    console.log(event);
     // Propagate to SNS topic
     res = events;
   } else {
-    res += 'Kinesis records not present in event';
+    res = { error: 'Kinesis records not present in event' };
   }
 
   return Promise.resolve(res);
