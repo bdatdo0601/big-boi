@@ -11,6 +11,7 @@ import "./index.less";
 import { updatePost } from "../../graphql/mutations";
 import BlogPostCard from "../../components/BlosPostCard";
 import { useDataUpdateWrapper } from "../../utils/hooks";
+import EventType from "../../assets/event-type.json";
 
 const DataUpdateOptions = {
   snackBar: {
@@ -18,7 +19,7 @@ const DataUpdateOptions = {
     errorMessage: "Unable to Update Blog Post Status",
   },
   logging: {
-    eventType: "Personal.BlogPost.StatusUpdate",
+    eventType: EventType.Personal.BlogPost.StatusUpdate,
   },
 };
 

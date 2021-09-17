@@ -16,6 +16,7 @@ import { getPost } from "../../../graphql/queries";
 import { createPost, updatePost } from "../../../graphql/mutations";
 import { POST_STATE } from "../../../utils/constants";
 import { useDataUpdateWrapper } from "../../../utils/hooks";
+import EventType from "../../../assets/event-type.json";
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
 
@@ -28,7 +29,7 @@ const DataUpdateOptions = {
     errorMessage: "Unable to Update Blog Post",
   },
   logging: {
-    eventType: "Personal.BlogPost.Update",
+    eventType: EventType.Personal.BlogPost.Update,
   },
 };
 

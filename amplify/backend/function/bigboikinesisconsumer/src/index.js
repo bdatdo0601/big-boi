@@ -1,6 +1,9 @@
 const { get } = require("lodash");
 const { v4: uuid } = require("uuid");
+
 const MessageSchema = require("/opt/schema/message.json");
+const { identifySource } = require("/opt/packages/SourceIdentifier");
+const { formatEventByEventType } = require("/opt/packages/EventType");
 
 const constructInitialEventFromKinesis = (record) => {
    // Extrapolate data
@@ -13,7 +16,7 @@ const constructInitialEventFromKinesis = (record) => {
      id: uuid(),
      sourceID: eventID,
      source: eventName,
-     eventType: get(data, "eventType", "Unknown"),
+     eventType: get(eventData, "eventType", null),
      content: eventData,
      metadata: {
        timestamp: approximateArrivalTimestamp,
@@ -27,17 +30,19 @@ const constructInitialEventFromKinesis = (record) => {
 
 exports.handler = async event => {
   // insert code to be executed by your lambda trigger
-  console.log(JSON.stringify(event, null, 2));
-  let res = '';
+  let res = {};
   if ('Records' in event) {
     const events = await Promise.all(get(event, "Records").map(async record => {
-      // Identify Event Source to populate metadata
+      // Construct intial event source
       const event = constructInitialEventFromKinesis(record);
-      // Populate publish info
+      // Identify Event Type
+      const eventType = identifySource(event);
+      // Populate metadata and publish info
+      const resultEvent = formatEventByEventType(event, eventType);
 
-      return event;
+      return resultEvent;
     }));
-    // Validate events
+    // TODO: Validate events and separate to different topic
     console.log(events);
     // Propagate to SNS topic
     res = events;

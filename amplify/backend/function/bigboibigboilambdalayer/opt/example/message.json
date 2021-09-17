@@ -8,9 +8,14 @@
         "timestamp": 112904812049,
         "sourceURI": "arn:aws:kinesis:us-east-1:142037127835:stream/bigboidefaultkinesis-dev",
         "visibility": "public",
-        "sourceMessage": {}
+        "sourceMessage": {},
+        "additionalData": {}
     },
     "publishInfo": {
+        "icon": {
+            "type": "Icon",
+            "value": "info"
+        },
         "subject": "Dat",
         "subjectLink": "https://www.dat.do",
         "action": "just updated",

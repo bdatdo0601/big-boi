@@ -1,0 +1,8 @@
+{
+    "Personal": {
+        "BlogPost": {
+            "Update": "Personal.BlogPost.Update",
+            "StatusUpdate": "Personal.BlogPost.StatusUpdate"
+        }
+    }
+}

@@ -3,6 +3,10 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@recursive/assign": "^2.0.2",
+    "axios": "^0.21.4",
+    "graphql": "^15.5.3",
+    "graphql-tag": "^2.12.5",
     "jsonschema": "^1.4.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",

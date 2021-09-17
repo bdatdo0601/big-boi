@@ -7,5 +7,17 @@
       "version": "Always choose latest version",
       "isLatestVersionSelected": true
     }
-  ]
+  ],
+  "permissions": {
+    "api": {
+      "bigboiapi": [
+        "read"
+      ]
+    },
+    "analytics": {
+      "bigboidefaultkinesis": [
+        "read"
+      ]
+    }
+  }
 }
