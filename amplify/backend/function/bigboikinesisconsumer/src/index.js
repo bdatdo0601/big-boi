@@ -51,9 +51,9 @@ exports.handler = async event => {
     // TODO: properly handle invalid event
     const validEvents = events.filter(evt => get(evt, "metadata.isValid", false));
     for (const evt of validEvents) {
+      // Propagate to SNS topic
       await publishMessage(evt);
     }
-    // Propagate to SNS topic
     res = events;
   } else {
     res = { error: 'Kinesis records not present in event' };
