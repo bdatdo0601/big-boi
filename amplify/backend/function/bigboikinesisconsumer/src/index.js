@@ -36,13 +36,11 @@ exports.handler = async event => {
       // Construct intial event source
       const event = constructInitialEventFromKinesis(record);
       // Identify Event Type
-      const eventType = identifySource(event);
-      // Populate metadata and publish info
-      const resultEvent = formatEventByEventType(event, eventType);
-
+      const eventType = await identifySource(event);
+      // Populate metadata and publish info and validate events
+      const resultEvent = await formatEventByEventType(event, eventType);
       return resultEvent;
     }));
-    // TODO: Validate events and separate to different topic
     console.log(events);
     // Propagate to SNS topic
     res = events;

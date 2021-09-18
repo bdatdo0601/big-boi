@@ -1,4 +1,4 @@
-const { get, includes, lowerCase } = require("lodash");
+const { get, includes, lowerCase, isEmpty } = require("lodash");
 const assign = require('@recursive/assign');
 const axios = require('axios');
 const gql = require('graphql-tag');
@@ -17,6 +17,7 @@ const queryGraphQLData = async (query, variables, accessorString) => {
           variables,
         }
       });
+    console.log(JSON.stringify(graphqlData.data, null, 4));
     return get(graphqlData, accessorString, {});
 }
 
@@ -30,8 +31,25 @@ const EventType = {
         BlogPost: {
             Update: {
                 eventType: "Personal.BlogPost.Update",
-                populateMetadata: async evt => {},
-                populatePublishInfo: async evt => {},
+                populateMetadata: async evt => evt,
+                populatePublishInfo: async evt => {
+                    const contentStatus = get(evt, "content.status");
+                    const target =  includes(["PUBLISHED"], contentStatus) && `\"${get(evt, "content.title")}\"`;
+                    const targetLink = includes(["PUBLISHED"], contentStatus) && `https://www.dat.do/blogs/post/${get(evt, "content.id")}`;
+                    const publishInfo = {
+                        icon: {
+                            type: "Icon",
+                            value: "info"
+                        },
+                        ...PersonalPublishInfo,
+                        action: lowerCase(contentStatus),
+                        target,
+                        targetLink,
+                        message: `${PersonalPublishInfo.subject} just ${lowerCase(contentStatus)} a blog post ${target ? `: ${target}` : ""}`
+                    }
+                    return assign(evt, { publishInfo })
+                },
+                validateEvent: async evt => assign(evt, { metadata: { isValid: true } })
             },
             StatusUpdate: {
                 eventType: "Personal.BlogPost.StatusUpdate",
@@ -49,7 +67,7 @@ const EventType = {
                         }
                     `
 
-                    const additionalData = await queryGraphQLData(getBlogPost, { input: { id: get(evt, "content.id") } }, "data.data.getPost");
+                    const additionalData = await queryGraphQLData(getBlogPost, { id: get(evt, "content.id") }, "data.data.getPost");
                     return assign(evt, {
                         metadata: {
                             visibility: "public",
@@ -60,7 +78,7 @@ const EventType = {
                 populatePublishInfo: async evt => {
                     const contentStatus = get(evt, "content.status");
                     const target =  includes(["PUBLISHED"], contentStatus) && `\"${get(evt, "metadata.additionalData.title")}\"`;
-                    const targetLink = includes(["PUBLISHED"], contentStatus) && `https://www.dat.do/blogs/post/${get(evnt, "content.id")}`;
+                    const targetLink = includes(["PUBLISHED"], contentStatus) && `https://www.dat.do/blogs/post/${get(evt, "content.id")}`;
                     const publishInfo = {
                         icon: {
                             type: "Icon",
@@ -70,10 +88,11 @@ const EventType = {
                         action: lowerCase(contentStatus),
                         target,
                         targetLink,
-                        message: `Dat just ${lowerCase(contentStatus)} a blog post ${target && `: ${target}`}`
+                        message: `${PersonalPublishInfo.subject} just ${lowerCase(contentStatus)} a blog post ${target ? `: ${target}` : ""}`
                     }
                     return assign(evt, { publishInfo })
                 },
+                validateEvent: async evt => assign(evt, { metadata: { isValid: !isEmpty(get(evt, "metadata.additionalData", {})) } })
             }
         }
     },
@@ -81,13 +100,14 @@ const EventType = {
         eventType: "Unknown",
         populateMetadata: async evt => evt,
         populatePublishInfo: async evt => evt,
+        validateEvent: async evt => assign(evt, { metadata: { isValid: false } })
     }
 };
 
 exports.formatEventByEventType = async (evt, eventType) => {
     const eventTypeProcessor = get(EventType, eventType, EventType.Unknown);
-    console.log(evt, eventType);
     let event = await eventTypeProcessor.populateMetadata(evt);
     event = await eventTypeProcessor.populatePublishInfo(evt);
+    event = await eventTypeProcessor.validateEvent(evt);
     return event;
 }
