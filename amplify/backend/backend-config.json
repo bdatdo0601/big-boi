@@ -89,6 +89,10 @@
     "bigboidefaultkinesis": {
       "service": "Kinesis",
       "providerPlugin": "awscloudformation"
+    },
+    "bigboinotification": {
+      "service": "SNS",
+      "providerPlugin": "awscloudformation"
     }
   }
 }
