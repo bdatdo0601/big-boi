@@ -42,15 +42,12 @@
                         ]
                     ]
                 },
-                "ContentBasedDeduplication": true,
-                "FifoTopic": true,
                 "TopicName": {
                     "Fn::Join": [
                         "",
                         [
                             { "Ref": "snsTopic" },
-                            { "Ref": "env" },
-                            ".fifo"
+                            { "Ref": "env" }
                         ]
                     ]
                 }

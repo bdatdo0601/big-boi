@@ -22,7 +22,11 @@
         },
         "bigboibigboilambdalayer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersione34ad4d7-build.zip"
+          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersionca4e577d-build.zip"
+        },
+        "bigboimessagestoring": {
+          "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+          "s3Key": "amplify-builds/bigboimessagestoring-6278674b454e73595257-build.zip"
         }
       }
     }
