@@ -34,7 +34,7 @@
     },
     "analyticsbigboinotificationsnsTopicArn": {
       "Type": "String",
-      "Default": "analyticsbigboinotificationsnsTopicArn"
+      "Default": "arn:aws:sns:us-east-1:142037127835:bigboinotificationdev"
     }
   },
   "Conditions": {
@@ -218,7 +218,8 @@
     },
     "LambdaInvokePermission": {
       "DependsOn": [
-        "LambdaFunction"
+        "LambdaFunction",
+        "LambdaSNSSubscription"
       ],
       "Type": "AWS::Lambda::Permission",
       "Properties": {

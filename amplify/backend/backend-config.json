@@ -102,13 +102,6 @@
           ]
         },
         {
-          "category": "analytics",
-          "resourceName": "bigboinotification",
-          "attributes": [
-            "snsTopicArn"
-          ]
-        },
-        {
           "category": "function",
           "resourceName": "bigboibigboilambdalayer",
           "attributes": [

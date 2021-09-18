@@ -163,3 +163,60 @@ export const deleteComment = /* GraphQL */ `
     }
   }
 `;
+export const updateEventMessageData = /* GraphQL */ `
+  mutation UpdateEventMessageData(
+    $input: UpdateEventMessageDataInput!
+    $condition: ModelEventMessageDataConditionInput
+  ) {
+    updateEventMessageData(input: $input, condition: $condition) {
+      id
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEventMessageData = /* GraphQL */ `
+  mutation DeleteEventMessageData(
+    $input: DeleteEventMessageDataInput!
+    $condition: ModelEventMessageDataConditionInput
+  ) {
+    deleteEventMessageData(input: $input, condition: $condition) {
+      id
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createEventMessageData = /* GraphQL */ `
+  mutation CreateEventMessageData(
+    $input: CreateEventMessageDataInput!
+    $condition: ModelEventMessageDataConditionInput
+  ) {
+    createEventMessageData(input: $input, condition: $condition) {
+      id
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+    }
+  }
+`;

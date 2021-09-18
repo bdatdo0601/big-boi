@@ -33,3 +33,21 @@ type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(
   post: Post @connection(fields: ["postID"])
   content: String!
 }
+
+# TODO: improve message details
+type EventMessageData @model @key(name: "byTimestamp", fields: ["timestamp"], queryField: "EventMessageByTimestamp") @auth(
+  rules: [
+      { allow: owner }, # owner can update, delete, and read
+      { allow: private, operations: [read, create] }, # signed in users who are not the owner can read write
+      { allow: public, operations: [read, create] } # unauthenticated users can read
+    ]
+) {
+  id: ID!
+  sourceID: String!
+  source: String!
+  eventType: String!
+  content: AWSJSON!
+  metadata: AWSJSON!
+  publishInfo: AWSJSON!
+  timestamp: AWSTimestamp!
+}

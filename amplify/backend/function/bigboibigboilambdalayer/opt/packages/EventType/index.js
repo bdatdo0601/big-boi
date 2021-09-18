@@ -17,7 +17,6 @@ const queryGraphQLData = async (query, variables, accessorString) => {
           variables,
         }
       });
-    console.log(JSON.stringify(graphqlData.data, null, 4));
     return get(graphqlData, accessorString, {});
 }
 

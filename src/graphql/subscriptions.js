@@ -145,3 +145,51 @@ export const onDeleteComment = /* GraphQL */ `
     }
   }
 `;
+export const onCreateEventMessageData = /* GraphQL */ `
+  subscription OnCreateEventMessageData {
+    onCreateEventMessageData {
+      id
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEventMessageData = /* GraphQL */ `
+  subscription OnUpdateEventMessageData {
+    onUpdateEventMessageData {
+      id
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEventMessageData = /* GraphQL */ `
+  subscription OnDeleteEventMessageData {
+    onDeleteEventMessageData {
+      id
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+    }
+  }
+`;
