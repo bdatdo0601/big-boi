@@ -1,4 +1,10 @@
-const { get } = require("lodash");
+/* Amplify Params - DO NOT EDIT
+	API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT
+	API_BIGBOIAPI_GRAPHQLAPIIDOUTPUT
+	API_BIGBOIAPI_GRAPHQLAPIKEYOUTPUT
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT */const { get } = require("lodash");
 const { v4: uuid } = require("uuid");
 
 const MessageSchema = require("/opt/schema/message.json");

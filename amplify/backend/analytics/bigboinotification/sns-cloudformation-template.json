@@ -46,11 +46,11 @@
                 "FifoTopic": true,
                 "TopicName": {
                     "Fn::Join": [
-                        ".",
+                        "",
                         [
                             { "Ref": "snsTopic" },
                             { "Ref": "env" },
-                            "fifo"
+                            ".fifo"
                         ]
                     ]
                 }
@@ -71,7 +71,7 @@
                             "sns:Subscribe"
                         ],
                         "Resource": {
-                            "Fn::GetAtt": ["SimpleNotificationServiceTopic", "Arn"]
+                            "Ref": "SimpleNotificationServiceTopic"
                         }
                     }]
                 }
@@ -92,7 +92,7 @@
                             "sns:*"
                         ],
                         "Resource": {
-                            "Fn::GetAtt": ["SimpleNotificationServiceTopic", "Arn"]
+                            "Ref": "SimpleNotificationServiceTopic"
                         }
                     }]
                 }
@@ -101,7 +101,10 @@
     },
     "Outputs": {
         "snsTopicArn": {
-            "Value": {"Fn::GetAtt": ["SimpleNotificationServiceTopic", "Arn"] }
+            "Value": { "Ref": "SimpleNotificationServiceTopic" }
+        },
+        "snsTopicName": {
+            "Value": { "Fn::GetAtt": ["SimpleNotificationServiceTopic", "TopicName"] }
         }
     }
 }

@@ -65,13 +65,6 @@
           ]
         },
         {
-          "category": "analytics",
-          "resourceName": "bigboidefaultkinesis",
-          "attributes": [
-            "kinesisStreamArn"
-          ]
-        },
-        {
           "category": "function",
           "resourceName": "bigboibigboilambdalayer",
           "attributes": [

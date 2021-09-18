@@ -16,10 +16,6 @@
     "s3Key": {
       "Type": "String"
     },
-    "analyticsbigboidefaultkinesiskinesisStreamArn": {
-      "Type": "String",
-      "Default": "analyticsbigboidefaultkinesiskinesisStreamArn"
-    },
     "functionbigboibigboilambdalayerArn": {
       "Type": "String",
       "Default": "functionbigboibigboilambdalayerArn"
@@ -98,9 +94,6 @@
             },
             "API_BIGBOIAPI_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apibigboiapiGraphQLAPIKeyOutput"
-            },
-            "ANALYTICS_BIGBOIDEFAULTKINESIS_KINESISSTREAMARN": {
-              "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
             }
           }
         },
