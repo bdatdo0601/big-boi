@@ -31,6 +31,14 @@
     "apibigboiapiGraphQLAPIKeyOutput": {
       "Type": "String",
       "Default": "apibigboiapiGraphQLAPIKeyOutput"
+    },
+    "analyticsbigboinotificationsnsTopicArn": {
+      "Type": "String",
+      "Default": "analyticsbigboinotificationsnsTopicArn"
+    },
+    "analyticsbigboidefaultkinesiskinesisStreamArn": {
+      "Type": "String",
+      "Default": "analyticsbigboidefaultkinesiskinesisStreamArn"
     }
   },
   "Conditions": {
@@ -94,6 +102,9 @@
             },
             "API_BIGBOIAPI_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apibigboiapiGraphQLAPIKeyOutput"
+            },
+            "ANALYTICS_BIGBOINOTIFICATION_SNSTOPICARN": {
+              "Ref": "analyticsbigboinotificationsnsTopicArn"
             }
           }
         },
@@ -188,6 +199,15 @@
                     }
                   }
                 ]
+              }
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "sns:Publish"
+              ],
+              "Resource": {
+                "Ref": "analyticsbigboinotificationsnsTopicArn"
               }
             }
           ]
@@ -291,6 +311,24 @@
                   ]
                 }
               ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "kinesis:*"
+              ],
+              "Resource": {
+                "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
+              }
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "sns:*"
+              ],
+              "Resource": {
+                "Ref": "analyticsbigboinotificationsnsTopicArn"
+              }
             }
           ]
         }

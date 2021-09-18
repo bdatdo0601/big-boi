@@ -70,6 +70,20 @@
           "attributes": [
             "Arn"
           ]
+        },
+        {
+          "category": "analytics",
+          "resourceName": "bigboinotification",
+          "attributes": [
+            "snsTopicArn"
+          ]
+        },
+        {
+          "category": "analytics",
+          "resourceName": "bigboidefaultkinesis",
+          "attributes": [
+            "kinesisStreamArn"
+          ]
         }
       ]
     }

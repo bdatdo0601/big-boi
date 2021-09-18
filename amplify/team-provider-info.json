@@ -18,7 +18,7 @@
       "function": {
         "bigboikinesisconsumer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboikinesisconsumer-783134723053626a4377-build.zip"
+          "s3Key": "amplify-builds/bigboikinesisconsumer-7672784c326a4a65726f-build.zip"
         },
         "bigboibigboilambdalayer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
