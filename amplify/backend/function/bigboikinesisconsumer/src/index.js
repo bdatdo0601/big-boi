@@ -7,9 +7,9 @@
 Amplify Params - DO NOT EDIT */const { get } = require("lodash");
 const { v4: uuid } = require("uuid");
 
-const MessageSchema = require("/opt/schema/message.json");
 const { identifySource } = require("/opt/packages/SourceIdentifier");
 const { formatEventByEventType } = require("/opt/packages/EventType");
+const { publishMessage } = require("/opt/packages/MessagePublisher");
 
 const constructInitialEventFromKinesis = (record) => {
    // Extrapolate data
@@ -47,7 +47,12 @@ exports.handler = async event => {
       const resultEvent = await formatEventByEventType(event, eventType);
       return resultEvent;
     }));
-    console.log(events);
+    // Only sent out valid event
+    // TODO: properly handle invalid event
+    const validEvents = events.filter(evt => get(evt, "metadata.isValid", false));
+    for (const evt of validEvents) {
+      await publishMessage(evt);
+    }
     // Propagate to SNS topic
     res = events;
   } else {
