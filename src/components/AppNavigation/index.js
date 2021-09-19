@@ -87,7 +87,8 @@ export default function AppNavigation({
                 edge="start"
                 className={clsx(classes.menuButton, open && classes.hide)}
                 style={{ outline: "none" }}
-                size="large">
+                size="large"
+              >
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" noWrap className={open ? classes.hide : ""}>
