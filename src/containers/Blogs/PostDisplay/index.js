@@ -1,5 +1,5 @@
-import { Button, Chip, CircularProgress, Paper, Typography } from "@material-ui/core";
-import { ArrowBackOutlined } from "@material-ui/icons";
+import { Button, Chip, CircularProgress, Paper, Typography } from "@mui/material";
+import { ArrowBackOutlined } from "@mui/icons-material";
 import { get, merge } from "lodash";
 import React, { useMemo } from "react";
 import { useHistory, useParams } from "react-router-dom";

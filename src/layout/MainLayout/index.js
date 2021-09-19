@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@mui/material";
 import useStyles from "./styleHooks";
 import AppNavigation from "../../components/AppNavigation";
 import LayoutContext from "../../context/layout";

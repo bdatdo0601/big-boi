@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from "react";
-import { Button, CircularProgress, Grid, Typography } from "@material-ui/core";
+import { Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { get } from "lodash";
 import { v4 as uuid } from "uuid";
 import { useHistory } from "react-router-dom";
-import { AddRounded } from "@material-ui/icons";
+import { AddRounded } from "@mui/icons-material";
 
 import { useAWSAPI, useLazyAWSAPI } from "../../utils/awsAPI";
 import { listPosts } from "../../graphql/queries";
@@ -63,7 +63,7 @@ export default function BlogManager() {
         >
           Add New Blog
         </Button>
-        <Grid container justify="flex-start">
+        <Grid container justifyContent="flex-start">
           {posts.map(post => (
             <Grid item key={post.id} style={{ margin: 8 }}>
               <BlogPostCard

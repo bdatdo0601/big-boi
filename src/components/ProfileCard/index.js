@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardHeader, CardContent, CardActions } from "@material-ui/core";
+import { Card, CardHeader, CardContent, CardActions } from "@mui/material";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
 import { useDrag } from "react-use-gesture";

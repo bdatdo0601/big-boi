@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, CircularProgress, Paper, Typography } from "@material-ui/core";
+import { Button, CircularProgress, Paper, Typography } from "@mui/material";
 import { ResumeProvider } from "react-vitae";
 import moment from "moment";
 import ReactToPrint, { PrintContextConsumer } from "react-to-print";

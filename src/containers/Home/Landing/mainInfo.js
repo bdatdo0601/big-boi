@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import PropTypes from "prop-types";
-import { Typography, CircularProgress } from "@material-ui/core";
+import { Typography, CircularProgress } from "@mui/material";
 import BLANK_INDEX_CARD from "../../../assets/blank-index-card.jpg";
 import LandingProfile from "../../../components/Profile";
 

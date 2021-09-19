@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Card, CircularProgress, Typography } from "@material-ui/core";
+import { Button, Card, CircularProgress, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 // import the react-json-view component
 import ReactJson from "react-json-view";
-import { CloudUploadOutlined, RestoreOutlined } from "@material-ui/icons";
+import { CloudUploadOutlined, RestoreOutlined } from "@mui/icons-material";
 import { isEqual } from "lodash";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "notistack-v5";
 
 import "./index.less";
 

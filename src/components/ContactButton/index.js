@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, makeStyles } from "@material-ui/core";
-import * as Icons from "@material-ui/icons";
+import { Button } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import * as Icons from "@mui/icons-material";
 
 const useStyles = makeStyles(() => ({
   button: {

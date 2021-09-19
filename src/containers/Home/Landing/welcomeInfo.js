@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import ProfileCard from "../../../components/ProfileCard";
 import LayoutContext from "../../../context/layout";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { GridList, GridListTile, CircularProgress, useMediaQuery } from "@material-ui/core";
+import { ImageList, ImageListItem, CircularProgress, useMediaQuery } from "@mui/material";
 import { fetchPhotos } from "../../utils/awsStorage";
 import useGetDataList from "../../utils/hooks/useGetDataList";
 import ImageGridDisplay from "../../components/ImageGridDisplay";
@@ -12,18 +12,13 @@ export default function ImagesDisplay({ imageCols, cellHeight }) {
   if (loading) return <CircularProgress style={{ marginTop: 16 }} />;
   return (
     <>
-      <GridList
-        cols={isWeb ? imageCols : 1}
-        style={{ width: "100%", marginTop: 32 }}
-        spacing={4}
-        cellHeight={cellHeight}
-      >
+      <ImageList cols={isWeb ? imageCols : 1} style={{ width: "100%", marginTop: 32, cellHeight }} spacing={4}>
         {formatGridList(data, imageCols, isWeb).map(image => (
-          <GridListTile key={image.key} cols={image.metaData.cols} rows={1}>
+          <ImageListItem key={image.key} cols={image.metaData.cols} rows={1}>
             <ImageGridDisplay url={image.url} name={image.key} animation />
-          </GridListTile>
+          </ImageListItem>
         ))}
-      </GridList>
+      </ImageList>
     </>
   );
 }

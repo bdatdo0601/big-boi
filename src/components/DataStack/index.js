@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { useSprings, animated, to as interpolate } from "react-spring";
 import { useDrag } from "react-use-gesture";
 import "./index.less";
-import { useTheme } from "@material-ui/core";
+import { useTheme } from "@mui/material";
 
 // These two are just helpers, they curate spring data, values that are later being interpolated into css
 const to = i => ({ x: 0, y: i * -4, scale: 1, rot: -10 + Math.random() * 20, delay: i * 100 });

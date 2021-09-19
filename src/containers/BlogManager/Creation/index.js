@@ -1,11 +1,11 @@
 import React, { useMemo, useState, useEffect, useCallback } from "react";
 import { v4 as uuid } from "uuid";
-import { Button, Chip, CircularProgress, Paper, TextField, Typography } from "@material-ui/core";
+import { Button, Chip, CircularProgress, Paper, TextField, Typography } from "@mui/material";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
-import { CheckBoxOutlined } from "@material-ui/icons";
+import { CheckBoxOutlined } from "@mui/icons-material";
 import { useHistory, useParams } from "react-router-dom";
 import { get, isEmpty, merge, trim } from "lodash";
 

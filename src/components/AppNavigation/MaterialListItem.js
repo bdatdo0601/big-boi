@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import { Collapse, List, useTheme, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import { Collapse, List, useTheme, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 
 const MaterialListItem = ({ item, level, onClick, isSelected }) => {
   const [open, setOpen] = useState(item.defaultOpen);

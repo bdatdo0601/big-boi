@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import React, { useContext } from "react";
 import ProfileCard from "../../components/ProfileCard";
 import LayoutContext from "../../context/layout";

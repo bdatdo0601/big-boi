@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { SnackbarProvider } from "notistack";
+import { SnackbarProvider } from "notistack-v5";
 import { LayoutContextProvider } from "./layout";
 import { EventMessageContextProvider } from "./eventmessage";
 

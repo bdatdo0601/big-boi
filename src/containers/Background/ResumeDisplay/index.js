@@ -10,8 +10,8 @@ import {
   StepLabel,
   Stepper,
   Typography,
-} from "@material-ui/core";
-import { Facebook, GitHub, LinkedIn, Twitter } from "@material-ui/icons";
+} from "@mui/material";
+import { Facebook, GitHub, LinkedIn, Twitter } from "@mui/icons-material";
 import { get } from "lodash";
 import React from "react";
 import {

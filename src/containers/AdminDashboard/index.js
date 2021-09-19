@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Grid } from "@material-ui/core";
+import { Typography, Grid } from "@mui/material";
 import { fetchPhotos, uploadPhoto, deletePhoto } from "../../utils/awsStorage";
 import PhotoUpload from "./photoUpload";
 import ResumeSchemaEditor from "./resumeSchemaEditor";

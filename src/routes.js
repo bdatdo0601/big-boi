@@ -13,8 +13,8 @@ import {
   Comment as CommentIcon,
   Home as HomeIcon,
   ListAltOutlined,
-} from "@material-ui/icons";
-import { Typography, Button } from "@material-ui/core";
+} from "@mui/icons-material";
+import { Typography, Button } from "@mui/material";
 import AdminDashboard from "./containers/AdminDashboard";
 import BlogManager from "./containers/BlogManager";
 import BlogCreation from "./containers/BlogManager/Creation";

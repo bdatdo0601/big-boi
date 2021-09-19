@@ -3,19 +3,19 @@ import { isEmpty } from "lodash";
 import PropTypes from "prop-types";
 import { v4 as uuid } from "uuid";
 import clsx from "clsx";
-import { useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { useMediaQuery, Switch, FormControlLabel, CircularProgress, Grid, Tabs, Tab } from "@material-ui/core";
+import { useTheme } from "@mui/material/styles";
+import Drawer from "@mui/material/Drawer";
+import CssBaseline from "@mui/material/CssBaseline";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { useMediaQuery, Switch, FormControlLabel, CircularProgress, Grid, Tabs, Tab } from "@mui/material";
 import { useHistory, useLocation } from "react-router-dom";
 import useStyles from "./styleHooks";
 import MaterialListItem from "./MaterialListItem";
@@ -74,7 +74,7 @@ export default function AppNavigation({
         <Grid
           className="appbar-grid"
           container
-          justify="space-between"
+          justifyContent="space-between"
           alignItems="center"
           alignContent="space-between"
         >
@@ -87,7 +87,7 @@ export default function AppNavigation({
                 edge="start"
                 className={clsx(classes.menuButton, open && classes.hide)}
                 style={{ outline: "none" }}
-              >
+                size="large">
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" noWrap className={open ? classes.hide : ""}>
@@ -134,7 +134,7 @@ export default function AppNavigation({
           <Typography variant="h6" noWrap style={{ marginLeft: 12 }}>
             {name}
           </Typography>
-          <IconButton onClick={handleDrawerClose} style={{ outline: "none" }}>
+          <IconButton onClick={handleDrawerClose} style={{ outline: "none" }} size="large">
             {theme.direction === "ltr" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>

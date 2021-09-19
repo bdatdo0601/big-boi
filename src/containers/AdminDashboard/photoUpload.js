@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, Typography, CircularProgress, Grid } from "@material-ui/core";
+import { Card, Typography, CircularProgress, Grid } from "@mui/material";
 import { DropzoneArea } from "material-ui-dropzone";
 import PropTypes from "prop-types";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "notistack-v5";
 import { useDropzoneStyles } from "./styleHooks";
 import useGetDataList from "../../utils/hooks/useGetDataList";
 import ImageFilePreview from "../../components/ImageFilePreview";

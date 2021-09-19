@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
-import { Button, Card, CardActionArea, CardActions, CardContent, Chip, Typography } from "@material-ui/core";
+import { Button, Card, CardActionArea, CardActions, CardContent, Chip, Typography } from "@mui/material";
 import { capitalize, get } from "lodash";
 
 import { POST_STATE } from "../../utils/constants";
@@ -94,7 +94,7 @@ BlogPostCard.propTypes = {
   updatingPost: PropTypes.bool,
   onPostClick: PropTypes.func,
   showState: PropTypes.bool,
-  width: PropTypes.number,
+  width: PropTypes.any,
 };
 
 BlogPostCard.defaultProps = {

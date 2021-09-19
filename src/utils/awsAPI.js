@@ -58,16 +58,16 @@ export const useAWSAPI = (operation, input, authMode = "AMAZON_COGNITO_USER_POOL
   };
 };
 
-export const useSubscriptionAWSAPI = (subscription, onNext, onError) => {
+export const useSubscriptionAWSAPI = (subscription, onNext, onError, authMode = "AMAZON_COGNITO_USER_POOLS") => {
   useEffect(() => {
-    const subsInstance = API.graphql(graphqlOperation(subscription)).subscribe({
+    const subsInstance = API.graphql({ ...graphqlOperation(subscription), authMode }).subscribe({
       next: onNext,
       error: onError,
     });
     return () => {
       subsInstance.unsubscribe();
     };
-  }, [onError, onNext, subscription]);
+  }, [onError, onNext, subscription, authMode]);
 };
 
 export const useLazyAWSAPI = (operation, input, authMode = "AMAZON_COGNITO_USER_POOLS") => {

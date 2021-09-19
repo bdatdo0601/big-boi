@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "notistack-v5";
 import { get, merge } from "lodash";
 
 import { recordEvent } from "../awsAnalytics";

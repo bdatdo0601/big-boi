@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { toInteger, get } from "lodash";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "notistack-v5";
 
 import { useAWSAPI, useSubscriptionAWSAPI } from "../utils/awsAPI";
 
@@ -57,8 +57,7 @@ export const EventMessageContextProvider = ({ children }) => {
   const { data: rawMessages, loading, execute: refetch } = useAWSAPI(listEventMessageDatas, variableInputs, "API_KEY");
 
   const onNewDataNotified = useCallback(
-    async ({ value, provider }) => {
-      console.log(value, provider);
+    async ({ value }) => {
       const rawNewList = await refetch();
       const newList = get(rawNewList, "data.listEventMessageDatas.items", []);
       const newData = formatItem(newList.find(item => item.id === get(value, "data.onCreateEventMessageData.id")));
@@ -76,8 +75,7 @@ export const EventMessageContextProvider = ({ children }) => {
     () => get(rawMessages, "data.listEventMessageDatas.items", []).map(item => formatItem(item)),
     [rawMessages]
   );
-  console.log(messages);
-  useSubscriptionAWSAPI(onCreateEventMessageData, onNewDataNotified, console.error);
+  useSubscriptionAWSAPI(onCreateEventMessageData, onNewDataNotified, console.error, "API_KEY");
   return <EventMessageContext.Provider value={{ messages, loading }}>{children}</EventMessageContext.Provider>;
 };
 

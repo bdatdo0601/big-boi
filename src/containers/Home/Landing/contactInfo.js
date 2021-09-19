@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Paper, Typography, Grid } from "@material-ui/core";
+import { Paper, Typography, Grid } from "@mui/material";
 import { animated, useSpring } from "react-spring";
 import { useDrag } from "react-use-gesture";
 import ContactButton from "../../../components/ContactButton";

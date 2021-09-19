@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from "react";
-import { Grid, useMediaQuery } from "@material-ui/core";
+import { Grid, useMediaQuery } from "@mui/material";
 import PropTypes from "prop-types";
 import LayoutContext from "../../../context/layout";
 import MainInfo from "./mainInfo";
@@ -29,14 +29,14 @@ export default function Landing({ keywords, contacts, bio }) {
   return (
     <Grid
       container
-      justify={isFullSize ? "center" : "flex-start"}
+      justifyContent={isFullSize ? "center" : "flex-start"}
       alignItems="center"
       alignContent="center"
       spacing={10}
       style={{ minHeight: "80vh", marginBottom: "2rem" }}
     >
       {items.map(({ Component, props, key }) => (
-        <Grid item xs={12} md={12} lg={4} key={key}>
+        <Grid item xs={12} md={12} lg={4} key={key} style={{ paddingLeft: 0 }}>
           <Component {...props} />
         </Grid>
       ))}

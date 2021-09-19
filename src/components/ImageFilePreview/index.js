@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Chip, Avatar, withStyles, Tooltip } from "@material-ui/core";
+import { Chip, Avatar, Tooltip } from "@mui/material";
+
+import withStyles from '@mui/styles/withStyles';
 
 const HtmlTooltip = withStyles(theme => ({
   tooltip: {
