@@ -6,11 +6,11 @@ import { EventMessageContextProvider } from "./eventmessage";
 
 export default function ContextProvider({ children }) {
   return (
-    <SnackbarProvider>
-      <EventMessageContextProvider>
-        <LayoutContextProvider>{children}</LayoutContextProvider>
-      </EventMessageContextProvider>
-    </SnackbarProvider>
+    <LayoutContextProvider>
+      <SnackbarProvider>
+        <EventMessageContextProvider>{children}</EventMessageContextProvider>
+      </SnackbarProvider>
+    </LayoutContextProvider>
   );
 }
 

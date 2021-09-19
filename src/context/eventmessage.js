@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
-import { toInteger, get } from "lodash";
+import { toInteger, get, sortBy, reverse } from "lodash";
 import { useSnackbar } from "notistack-v5";
 
 import { useAWSAPI, useSubscriptionAWSAPI } from "../utils/awsAPI";
@@ -72,7 +72,13 @@ export const EventMessageContextProvider = ({ children }) => {
   );
 
   const messages = useMemo(
-    () => get(rawMessages, "data.listEventMessageDatas.items", []).map(item => formatItem(item)),
+    () =>
+      reverse(
+        sortBy(
+          get(rawMessages, "data.listEventMessageDatas.items", []).map(item => formatItem(item)),
+          "timestamp"
+        )
+      ),
     [rawMessages]
   );
   useSubscriptionAWSAPI(onCreateEventMessageData, onNewDataNotified, console.error, "API_KEY");
