@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/bdatdo0601/big-boi/compare/v1.4.0...v1.5.0) (2021-09-19)
+
+
+### Features
+
+* add firehose cloudformation ([a10910f](https://github.com/bdatdo0601/big-boi/commit/a10910f1f303da9fbaf529499e0811c3e466f14e))
+* add lambda layer ([afdbaa8](https://github.com/bdatdo0601/big-boi/commit/afdbaa88cc2e1334133497f346cc35edffee0bc9))
+* add notification service ([f9a053b](https://github.com/bdatdo0601/big-boi/commit/f9a053b87edeec74cd5477bf4baddf665328d37b))
+* add sns cf template ([b7c693c](https://github.com/bdatdo0601/big-boi/commit/b7c693cd0432bfb6fd04c3f74d52365231e78597))
+* add sns dependency to lambda ([aeaa396](https://github.com/bdatdo0601/big-boi/commit/aeaa3963596925d37e20294444cf372581f75f4e))
+* complete message publish for kinesis ([d7e43a5](https://github.com/bdatdo0601/big-boi/commit/d7e43a5df72127ec4485cb13ad5183dd3fd3d8c4))
+* create action log v1 ([b85ff98](https://github.com/bdatdo0601/big-boi/commit/b85ff9884ccf09b21b4211bf71fc7632a74906e3))
+* create event message data ([d0f8689](https://github.com/bdatdo0601/big-boi/commit/d0f86893b428485207bbb9efcbb625e48b28f2a1))
+* created event message context ([6220a4b](https://github.com/bdatdo0601/big-boi/commit/6220a4b8dcb722d337d187807eb7039b7c491b62))
+* drive message from kinesis to egresslambda ([e0e56a5](https://github.com/bdatdo0601/big-boi/commit/e0e56a53f88bb63ca66afc395a76bcdf8672feb0))
+* integrate kinesis ([6c0638d](https://github.com/bdatdo0601/big-boi/commit/6c0638d13b35657f985c80cc94fd54732881ae71))
+* published to sns ([b2833c1](https://github.com/bdatdo0601/big-boi/commit/b2833c1f1fe5deb53d91bb5b9d72b7d522deb85c))
+* working on event ([ae70bb4](https://github.com/bdatdo0601/big-boi/commit/ae70bb462de176b7184d3777ce70746f78c5b8a0))
+
+
+### Bug Fixes
+
+* allow publish message ([3e5ba16](https://github.com/bdatdo0601/big-boi/commit/3e5ba1603012ff48b570378a2a67285930605327))
+* log blog post event update ([890f32f](https://github.com/bdatdo0601/big-boi/commit/890f32f428ce82e8d37ea06629f72152525bad53))
+* migration mui ([8074c84](https://github.com/bdatdo0601/big-boi/commit/8074c8465208ca89160bc6c8d167c40eddb06057))
+* remove kinesis firehose ([556b173](https://github.com/bdatdo0601/big-boi/commit/556b173500222321307bb8762901021da1020a67))
+* start working on consuming message ([1f649ea](https://github.com/bdatdo0601/big-boi/commit/1f649eaadae6f1d03ad8309975c240a2a020db0e))
+* update amplify ([3384324](https://github.com/bdatdo0601/big-boi/commit/3384324a29c47fccf09fb712e5ef604da264d222))
+* update amplify ([bca776f](https://github.com/bdatdo0601/big-boi/commit/bca776fafe81f3195b1bb4192404c70945ab3c70))
+* update blog manager ui ([d8dda9a](https://github.com/bdatdo0601/big-boi/commit/d8dda9a672655dda2b54b1623d58deeb96b70d7b))
+* update JSON editor ([5daef61](https://github.com/bdatdo0601/big-boi/commit/5daef61444d0918297be152af3d2b026f2f14c11))
+* update lambda layers ([ecd8f5b](https://github.com/bdatdo0601/big-boi/commit/ecd8f5b69c6641b345aa97172d7856bb5bc7f974))
+* update lambda to leverage lambda layers ([6e020c9](https://github.com/bdatdo0601/big-boi/commit/6e020c99e45329142d019975b256487f576b3acc))
+
 ## [1.4.0](https://github.com/bdatdo0601/big-boi/compare/v1.3.5...v1.4.0) (2021-08-03)
 
 
