@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.2](https://github.com/bdatdo0601/big-boi/compare/v1.5.1...v1.5.2) (2021-09-20)
+
+
+### Bug Fixes
+
+* update color template ([d566cc0](https://github.com/bdatdo0601/big-boi/commit/d566cc03bc49fbaf968f034578babb2ad0d61292))
+
 ### [1.5.1](https://github.com/bdatdo0601/big-boi/compare/v1.5.0...v1.5.1) (2021-09-19)
 
 ## [1.5.0](https://github.com/bdatdo0601/big-boi/compare/v1.4.0...v1.5.0) (2021-09-19)
