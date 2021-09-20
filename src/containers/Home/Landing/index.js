@@ -49,7 +49,14 @@ export default function Landing({ keywords, contacts, bio }) {
       style={{ minHeight: "80vh", marginBottom: "2rem" }}
     >
       {items.map(item => (
-        <Grid item xs={12} md={12} lg={4} key={isArray(item) ? item[0].key : item.key} style={{ paddingLeft: 0 }}>
+        <Grid
+          item
+          xs={12}
+          md={12}
+          lg={4}
+          key={isArray(item) ? item[0].key : item.key}
+          style={{ paddingLeft: "1rem", paddingRight: "1rem" }}
+        >
           {isArray(item) ? (
             <Grid
               container
@@ -60,7 +67,14 @@ export default function Landing({ keywords, contacts, bio }) {
               spacing={2}
             >
               {item.map(({ Component, props, key }) => (
-                <Grid item xs={12} md={12} lg={12} key={key} style={{ paddingLeft: 0 }}>
+                <Grid
+                  item
+                  xs={12}
+                  md={12}
+                  lg={12}
+                  key={key}
+                  style={{ paddingLeft: "1rem", paddingRight: "1rem", width: "100%" }}
+                >
                   <Component {...props} />
                 </Grid>
               ))}

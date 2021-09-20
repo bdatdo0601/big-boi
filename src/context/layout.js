@@ -16,7 +16,7 @@ export const LayoutContextProvider = ({ children }) => {
       ...(!isDark
         ? {
             primary: {
-              main: "#94735a",
+              main: "#de736a",
             },
             secondary: {
               main: "#4a83c5",
@@ -27,10 +27,10 @@ export const LayoutContextProvider = ({ children }) => {
           }
         : {
             primary: {
-              main: "#4a83c5",
+              main: "#d54a52",
             },
             secondary: {
-              main: "#736a73",
+              main: "#313962",
             },
             error: {
               main: "#d54a52",

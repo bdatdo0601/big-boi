@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, useMediaQuery } from "@mui/material";
 import useStyles from "./styleHooks";
 import AppNavigation from "../../components/AppNavigation";
 import LayoutContext from "../../context/layout";
@@ -16,6 +16,7 @@ const Particles = lazy(() => import("react-particles-js"));
 
 export default function MainLayout({ children, name }) {
   const classes = useStyles();
+  const isFullSize = useMediaQuery("(min-width:1280px)");
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const [routeList, setRouteList] = React.useState([]);
@@ -52,12 +53,14 @@ export default function MainLayout({ children, name }) {
         <link rel="canonical" href={`${window.location.href}`} />
         <meta name="description" content="This is Dat'a Website" />
       </Helmet>
-      <Suspense fallback={<CircularProgress />}>
-        <Particles
-          style={{ width: "100vw", height: "100vh", position: "fixed", zIndex: -1, top: 0, left: 0 }}
-          params={particleConfig(isDark)}
-        />
-      </Suspense>
+      {isFullSize && (
+        <Suspense fallback={<CircularProgress />}>
+          <Particles
+            style={{ width: "100vw", height: "100vh", position: "fixed", zIndex: -1, top: 0, left: 0 }}
+            params={particleConfig(isDark)}
+          />
+        </Suspense>
+      )}
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
