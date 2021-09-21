@@ -106,6 +106,8 @@ export default function AppNavigation({
                   onChange={(_, value) => {
                     history.push(value);
                   }}
+                  textColor="secondary"
+                  indicatorColor="secondary"
                 >
                   {(groupedDrawerContent[""] || []).map((item, index) => (
                     <Tab

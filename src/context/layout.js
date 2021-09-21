@@ -16,13 +16,16 @@ export const LayoutContextProvider = ({ children }) => {
       ...(!isDark
         ? {
             primary: {
-              main: "#de736a",
+              main: "#4a5a73",
             },
             secondary: {
               main: "#4a83c5",
             },
             error: {
-              main: "#ac2020",
+              main: "#cd4a31",
+            },
+            info: {
+              main: "#4183ee",
             },
           }
         : {
@@ -30,10 +33,13 @@ export const LayoutContextProvider = ({ children }) => {
               main: "#d54a52",
             },
             secondary: {
-              main: "#313962",
+              main: "#736a73",
             },
             error: {
-              main: "#d54a52",
+              main: "#834a4a",
+            },
+            info: {
+              main: "#cddef6",
             },
           }),
       /** .palette.primary

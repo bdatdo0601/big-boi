@@ -88,6 +88,12 @@ export default function ResumeSchemaEditor() {
           onEdit={({ updated_src: updatedJSON }) => {
             setResume(updatedJSON);
           }}
+          onDelete={({ updated_src: updatedJSON }) => {
+            setResume(updatedJSON);
+          }}
+          onAdd={({ updated_src: updatedJSON }) => {
+            setResume(updatedJSON);
+          }}
         />
       </div>
     </Card>

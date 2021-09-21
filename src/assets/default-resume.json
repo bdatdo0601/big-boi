@@ -8,9 +8,9 @@
     "website": "https://dat.do/",
     "summary": "Software Engineer with a demonstrated history of working in the energy industry and currently working in the retail industry. Skilled in Software/UI/UX Development (Full-Stack, Ant Design, Material UI), Cloud Development (AWS, Azure), Continuous Infrastructure Deployment (Terraform, CircleCI, Jenkins), and Agile Methodology. Graduated with a Bachelor of Science (B.S.) focused in Computer Science from Wentworth Institute of Technology",
     "location": {
-      "address": "28 Greenleaf ST",
-      "postalCode": "MA 02148",
-      "city": "Malden",
+      "address": "Apt 3, 601 Morgan Ave",
+      "postalCode": "NY 11222",
+      "city": "Brooklyn",
       "countryCode": "US",
       "region": "Massachusetts"
     },
@@ -46,7 +46,8 @@
       "endDate": "Present",
       "summary": "New York City, New York, United States",
       "highlights": [
-        "Developing solutions within Retail Delivery Experience space that reaches over 10 millions of customers per day"
+        "Developing solutions within Retail Delivery Experience space that reaches over 10 millions of customers per day",
+        "Creating infrastructure to enable and expand sub same day delivery to customer in multiple regions"
       ]
     },
     {
@@ -96,7 +97,9 @@
       "startDate": "Sepember 2015",
       "endDate": "June 2016",
       "summary": "Boston, Massachusetts, United States",
-      "highlights": ["Managed computing and printing equipment at the Wentworth's Print Lab Center"]
+      "highlights": [
+        "Managed computing and printing equipment at the Wentworth's Print Lab Center"
+      ]
     },
     {
       "company": "Freelance",
@@ -105,10 +108,25 @@
       "startDate": "August 2015",
       "endDate": "April 2017",
       "summary": "",
-      "highlights": ["Developed and designed websites for small businesses and non-profit organizations"]
+      "highlights": [
+        "Developed and designed websites for small businesses and non-profit organizations"
+      ]
     }
   ],
   "volunteer": [
+    {
+      "organization": "Developh Vietnam",
+      "position": "Technical Leader",
+      "startDate": "February 2021",
+      "endDate": "Present",
+      "summary": "Developh Vietnam is a community based organization dedicated to deliver engineer education to everyone who is interested",
+      "highlights": [
+        "Design and teach a DIY full stack development course to help over 30 students with various background build their first software product",
+        "Organize a team of 10 mentors to provide assistance, technical resources to our students",
+        "Run workshops and webinar series to introduce students to best Software Engineering practices"
+      ],
+      "website": "https://www.develophvn.tech"
+    },
     {
       "organization": "HackWITUs",
       "position": "Head of Organizers",
@@ -117,7 +135,7 @@
       "endDate": "December 2017",
       "summary": "A hackathon for students by students, with a mission to promote diversity and accessibility in our tech community",
       "highlights": [
-        "Led a team of 18 to launch Wentworth’s first annual student-run Hackathon with over 200 participants",
+        "Led a team of 18 to launch Wentworthâs first annual student-run Hackathon with over 200 participants",
         "Managed finances and promotional materials for the event, raising over $30,000 from sponsors",
         "Built website and registration infrastructure using AWS"
       ]
@@ -129,7 +147,9 @@
       "startDate": "April 2016",
       "endDate": "April 2019",
       "summary": "Annual Japanese culture festival in Boston",
-      "highlights": ["Volunteered at food booth and lead a team to keep the festival as clean and tidy as possible"]
+      "highlights": [
+        "Volunteered at food booth and lead a team to keep the festival as clean and tidy as possible"
+      ]
     },
     {
       "organization": "New York Cares",
@@ -138,7 +158,9 @@
       "startDate": "March 2015",
       "endDate": "December 2015",
       "summary": "Meets pressing community needs by mobilizing caring New Yorkers in volunteer service",
-      "highlights": ["Renovated parks in New York"]
+      "highlights": [
+        "Renovated parks in New York"
+      ]
     },
     {
       "organization": "VietxNepal",
@@ -147,7 +169,9 @@
       "startDate": "June 2015",
       "endDate": "August 2015",
       "summary": "VietxNepal is a fundraising group created by Vietnamese student to support Nepal after the earthquake.",
-      "highlights": ["Developed promotion materials and website for the non-profit organizations"]
+      "highlights": [
+        "Developed promotion materials and website for the non-profit organizations"
+      ]
     }
   ],
   "education": [
@@ -204,17 +228,33 @@
     {
       "name": "Cloud Infrastructures",
       "level": "Competent",
-      "keywords": ["AWS", "Azure", "Docker/Helm/Kubernetes", "DialogFlow", "ElasticStack", "Terraform"]
+      "keywords": [
+        "AWS",
+        "Azure",
+        "Docker/Helm/Kubernetes",
+        "DialogFlow",
+        "ElasticStack",
+        "Terraform"
+      ]
     },
     {
       "name": "Continuous Integration/Deployment",
       "level": "Competent",
-      "keywords": ["CircleCI", "Jenkins", "CodeCoverage", "WhiteSource"]
+      "keywords": [
+        "CircleCI",
+        "Jenkins",
+        "CodeCoverage",
+        "WhiteSource"
+      ]
     },
     {
       "name": "Internet of Things Development",
       "level": "Competent",
-      "keywords": ["Bluetooth/BLE", "MQTT", "Arduino/Raspberry Pi"]
+      "keywords": [
+        "Bluetooth/BLE",
+        "MQTT",
+        "Arduino/Raspberry Pi"
+      ]
     }
   ],
   "languages": [
@@ -231,7 +271,9 @@
     {
       "name": "RC Vehicle VR",
       "description": "Modding RC Car with camera and microcontrollers then stream its video feeds to a VR headset with <100ms latency",
-      "highlights": ["Built using Arduino, Raspberry Pi, Node, and Python"],
+      "highlights": [
+        "Built using Arduino, Raspberry Pi, Node, and Python"
+      ],
       "keywords": [],
       "startDate": "August 2020",
       "endDate": "Present",
@@ -243,7 +285,9 @@
     {
       "name": "Arceos",
       "description": "Full-stack application with micro-frontend architecture to perform miscellaneous tasks",
-      "highlights": ["Built using React, Firebase, and Django"],
+      "highlights": [
+        "Built using React, Firebase, and Django"
+      ],
       "keywords": [],
       "startDate": "January 2020",
       "endDate": "Present",
@@ -267,7 +311,9 @@
     {
       "name": "Uzuto",
       "description": "Wedding landing page and wedding guest management system",
-      "highlights": ["Built using React, and AWS Amplify"],
+      "highlights": [
+        "Built using React, and AWS Amplify"
+      ],
       "keywords": [],
       "startDate": "November 2019",
       "endDate": "February 2020",
@@ -291,7 +337,9 @@
     {
       "name": "Boltius",
       "description": "Full-stack application to efficiently manage clubs and organizations",
-      "highlights": ["Built using React, GraphQL, and Fastify"],
+      "highlights": [
+        "Built using React, GraphQL, and Fastify"
+      ],
       "keywords": [],
       "startDate": "December 2016",
       "endDate": "August 2017",
@@ -312,18 +360,32 @@
         "Automation"
       ]
     },
-    { "name": "Hobbies", "keywords": ["Programming", "Travellings", "Cooking", "Tinkering"] }
+    {
+      "name": "Hobbies",
+      "keywords": [
+        "Programming",
+        "Travellings",
+        "Cooking",
+        "Tinkering"
+      ]
+    }
   ],
   "references": [],
   "custom": {
     "bio": [
-      "I came from Vietnam to the United States when I was 15 for high school and then pursued a Bachelor's Degree in Computer Science at Wentworth Institute of Technology until 2018. At the moment, I am developing cool stuff as a Software Dev Engineer at Amazon",
-      "I wrote my first line of code in 2010 and it has been my passion ever since. I usually find myself discovering new technologies and using them to tackle and automate issues that I face in my daily life.",
-      "If I am not at my tech station, I am probably either in the kitchen experimenting new dishes or outside traveling to new places (fun fact: I did a road trip from East coast to West coast solely by Greyhound buses back in 2015).",
-      "I am always open to new opportunities and challenges. If you would like to reach me, feel free to drop me a message using any method under the Contact box.",
-      "Thank you for visiting and reading this 😊!"
+      "I graduated with a Bachelor's Degree in Computer Science at Wentworth Institute of Technology back in 2018. At the moment, I am developing cool stuff as a Software Development Engineer 2 at Amazon.com.",
+      "Outside of that, I am the type of person that love to try everything: building random stuff, experimenting new dish in my kitchen, volunteering/mentoring, and even traveling across country solely by bus.",
+      "Of course this would include meeting new people and getting introduced to exciting opportunities and challenges. If you would like to reach me, please drop me a message using any method under the Contact box.",
+      "Thank you for being here! There is a lot of hidden stuff around this website, feel free to try to find them all."
     ],
-    "keywordTags": ["Puns Admirer", "Tech Enthusiast", "Programmer", "Former SWE @ STW", "SDE II @ Amazon"],
+    "keywordTags": [
+      "Puns Admirer",
+      "Tech Enthusiast",
+      "Programmer",
+      "Former SWE @ STW",
+      "Technical Leader @ Developh Vietnam",
+      "SDE II @ Amazon"
+    ],
     "contacts": [
       {
         "key": "Email",

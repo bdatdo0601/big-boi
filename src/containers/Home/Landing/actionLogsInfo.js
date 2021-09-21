@@ -59,9 +59,9 @@ const ActionLogRow = props => {
         variant="filled"
         icon={icon}
         severity={get(item, "publishInfo.messageType", "info")}
-        style={{ width: "100%", height: 100 }}
+        style={{ width: "100%", height: 90, overflowY: "auto" }}
       >
-        <AlertTitle>
+        <AlertTitle style={{}}>
           {messages.map((msg, i) => (isString(msg) ? <span key={`${msg} ${i}`}>{msg}</span> : msg))}
         </AlertTitle>
         {moment(item && item.createdAt).format("MM/DD/YY hh:mm a")}
@@ -105,7 +105,7 @@ export default function ActionLogsInfo({ className, animation }) {
       <FixedSizeList
         height={300}
         width="100%"
-        itemSize={120}
+        itemSize={100}
         layout="vertical"
         itemCount={messages.length}
         overscanCount={0}
