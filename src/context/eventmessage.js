@@ -1,16 +1,29 @@
 import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
-import moment from "moment";
-import { toInteger, get, sortBy, reverse } from "lodash";
+import { get } from "lodash";
 import { useSnackbar } from "notistack-v5";
 
 import { useAWSAPI, useSubscriptionAWSAPI } from "../utils/awsAPI";
 
 const EventMessageContext = React.createContext();
 
-const listEventMessageDatas = /* GraphQL */ `
-  query ListEventMessageDatas($filter: ModelEventMessageDataFilterInput, $limit: Int, $nextToken: String) {
-    listEventMessageDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+const listEventMessagesByTimeStamp = /* GraphQL */ `
+  query EventMessageByTimestamp(
+    $type: String
+    $timestamp: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventMessageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    EventMessageByTimestamp(
+      type: $type
+      timestamp: $timestamp
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
         eventType
@@ -24,9 +37,9 @@ const listEventMessageDatas = /* GraphQL */ `
   }
 `;
 
-const onCreateEventMessageData = /* GraphQL */ `
-  subscription OnCreateEventMessageData {
-    onCreateEventMessageData {
+const onCreateEventMessage = /* GraphQL */ `
+  subscription OnCreateEventMessage {
+    onCreateEventMessage {
       id
     }
   }
@@ -41,26 +54,23 @@ export const EventMessageContextProvider = ({ children }) => {
   const { enqueueSnackbar } = useSnackbar();
   const variableInputs = useMemo(
     () => ({
+      type: "Event",
       limit: 100,
-      filter: {
-        timestamp: {
-          ge: toInteger(
-            moment()
-              .subtract(1, "month")
-              .unix()
-          ),
-        },
-      },
+      sortDirection: "DESC",
     }),
     []
   );
-  const { data: rawMessages, loading, execute: refetch } = useAWSAPI(listEventMessageDatas, variableInputs, "API_KEY");
+  const { data: rawMessages, loading, execute: refetch } = useAWSAPI(
+    listEventMessagesByTimeStamp,
+    variableInputs,
+    "API_KEY"
+  );
 
   const onNewDataNotified = useCallback(
     async ({ value }) => {
       const rawNewList = await refetch();
-      const newList = get(rawNewList, "data.listEventMessageDatas.items", []);
-      const newData = formatItem(newList.find(item => item.id === get(value, "data.onCreateEventMessageData.id")));
+      const newList = get(rawNewList, "data.EventMessageByTimestamp.items", []);
+      const newData = formatItem(newList.find(item => item.id === get(value, "data.onCreateEventMessage.id")));
 
       enqueueSnackbar(get(newData, "publishInfo.message"), {
         variant: "info",
@@ -72,16 +82,10 @@ export const EventMessageContextProvider = ({ children }) => {
   );
 
   const messages = useMemo(
-    () =>
-      reverse(
-        sortBy(
-          get(rawMessages, "data.listEventMessageDatas.items", []).map(item => formatItem(item)),
-          "timestamp"
-        )
-      ),
+    () => get(rawMessages, "data.EventMessageByTimestamp.items", []).map(item => formatItem(item)),
     [rawMessages]
   );
-  useSubscriptionAWSAPI(onCreateEventMessageData, onNewDataNotified, console.error, "API_KEY");
+  useSubscriptionAWSAPI(onCreateEventMessage, onNewDataNotified, console.error, "API_KEY");
   return <EventMessageContext.Provider value={{ messages, loading }}>{children}</EventMessageContext.Provider>;
 };
 

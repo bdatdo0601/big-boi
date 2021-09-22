@@ -163,13 +163,14 @@ export const deleteComment = /* GraphQL */ `
     }
   }
 `;
-export const updateEventMessageData = /* GraphQL */ `
-  mutation UpdateEventMessageData(
-    $input: UpdateEventMessageDataInput!
-    $condition: ModelEventMessageDataConditionInput
+export const updateEventMessage = /* GraphQL */ `
+  mutation UpdateEventMessage(
+    $input: UpdateEventMessageInput!
+    $condition: ModelEventMessageConditionInput
   ) {
-    updateEventMessageData(input: $input, condition: $condition) {
+    updateEventMessage(input: $input, condition: $condition) {
       id
+      type
       sourceID
       source
       eventType
@@ -182,13 +183,14 @@ export const updateEventMessageData = /* GraphQL */ `
     }
   }
 `;
-export const deleteEventMessageData = /* GraphQL */ `
-  mutation DeleteEventMessageData(
-    $input: DeleteEventMessageDataInput!
-    $condition: ModelEventMessageDataConditionInput
+export const deleteEventMessage = /* GraphQL */ `
+  mutation DeleteEventMessage(
+    $input: DeleteEventMessageInput!
+    $condition: ModelEventMessageConditionInput
   ) {
-    deleteEventMessageData(input: $input, condition: $condition) {
+    deleteEventMessage(input: $input, condition: $condition) {
       id
+      type
       sourceID
       source
       eventType
@@ -201,13 +203,14 @@ export const deleteEventMessageData = /* GraphQL */ `
     }
   }
 `;
-export const createEventMessageData = /* GraphQL */ `
-  mutation CreateEventMessageData(
-    $input: CreateEventMessageDataInput!
-    $condition: ModelEventMessageDataConditionInput
+export const createEventMessage = /* GraphQL */ `
+  mutation CreateEventMessage(
+    $input: CreateEventMessageInput!
+    $condition: ModelEventMessageConditionInput
   ) {
-    createEventMessageData(input: $input, condition: $condition) {
+    createEventMessage(input: $input, condition: $condition) {
       id
+      type
       sourceID
       source
       eventType

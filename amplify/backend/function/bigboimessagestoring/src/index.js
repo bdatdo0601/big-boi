@@ -25,12 +25,10 @@ const mutateGraphQLData = async (query, variables) => {
           variables,
         }
       });
-    console.log(JSON.stringify(response.data, null, 4));
     return true;
 }
 
 exports.handler = async (event) => {
-    console.log(JSON.stringify(event, null, 4));
     if ('Records' in event) {
         const messages = await Promise.all(get(event, "Records", []).map(async record => {
             // TODO collect sns data
@@ -38,11 +36,11 @@ exports.handler = async (event) => {
             if (!isEmpty(message)) {
                 // Save to AppSync
                 const createEventMessage = gql`
-                        mutation CreateEventMessageData(
-                            $input: CreateEventMessageDataInput!
-                            $condition: ModelEventMessageDataConditionInput
+                        mutation CreateEventMessage(
+                            $input: CreateEventMessageInput!
+                            $condition: ModelEventMessageConditionInput
                         ) {
-                            createEventMessageData(input: $input, condition: $condition) {
+                            createEventMessage(input: $input, condition: $condition) {
                                 id
                             }
                         }
@@ -50,10 +48,11 @@ exports.handler = async (event) => {
                 const variables = {
                     input: {
                         ...message,
+                        type: "Event",
                         content: JSON.stringify(get(message, "content", {})),
                         metadata: JSON.stringify(get(message, "metadata", {})),
                         publishInfo: JSON.stringify(get(message, "publishInfo", {})),
-                        timestamp: toInteger(get(message, "metadata.timestamp", moment().valueOf()))
+                        timestamp: moment(get(message, "metadata.timestamp", moment().valueOf())).toISOString()
                     }
                 }
                 await mutateGraphQLData(createEventMessage, variables);

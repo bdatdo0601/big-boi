@@ -145,10 +145,11 @@ export const onDeleteComment = /* GraphQL */ `
     }
   }
 `;
-export const onCreateEventMessageData = /* GraphQL */ `
-  subscription OnCreateEventMessageData {
-    onCreateEventMessageData {
+export const onCreateEventMessage = /* GraphQL */ `
+  subscription OnCreateEventMessage {
+    onCreateEventMessage {
       id
+      type
       sourceID
       source
       eventType
@@ -161,10 +162,11 @@ export const onCreateEventMessageData = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateEventMessageData = /* GraphQL */ `
-  subscription OnUpdateEventMessageData {
-    onUpdateEventMessageData {
+export const onUpdateEventMessage = /* GraphQL */ `
+  subscription OnUpdateEventMessage {
+    onUpdateEventMessage {
       id
+      type
       sourceID
       source
       eventType
@@ -177,10 +179,11 @@ export const onUpdateEventMessageData = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteEventMessageData = /* GraphQL */ `
-  subscription OnDeleteEventMessageData {
-    onDeleteEventMessageData {
+export const onDeleteEventMessage = /* GraphQL */ `
+  subscription OnDeleteEventMessage {
+    onDeleteEventMessage {
       id
+      type
       sourceID
       source
       eventType

@@ -49,7 +49,6 @@ const ActionLogRow = props => {
       : result;
     return result;
   }, [item]);
-
   return (
     <AnimatedListItem
       key={index}
@@ -64,7 +63,7 @@ const ActionLogRow = props => {
         <AlertTitle style={{}}>
           {messages.map((msg, i) => (isString(msg) ? <span key={`${msg} ${i}`}>{msg}</span> : msg))}
         </AlertTitle>
-        {moment(item && item.createdAt).format("MM/DD/YY hh:mm a")}
+        {moment(item && item.createdAt).format("MM/DD/YY hh:mm:ss a")}
       </Alert>
     </AnimatedListItem>
   );

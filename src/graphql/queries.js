@@ -135,10 +135,11 @@ export const listComments = /* GraphQL */ `
     }
   }
 `;
-export const getEventMessageData = /* GraphQL */ `
-  query GetEventMessageData($id: ID!) {
-    getEventMessageData(id: $id) {
+export const getEventMessage = /* GraphQL */ `
+  query GetEventMessage($id: ID!) {
+    getEventMessage(id: $id) {
       id
+      type
       sourceID
       source
       eventType
@@ -151,19 +152,16 @@ export const getEventMessageData = /* GraphQL */ `
     }
   }
 `;
-export const listEventMessageDatas = /* GraphQL */ `
-  query ListEventMessageDatas(
-    $filter: ModelEventMessageDataFilterInput
+export const listEventMessages = /* GraphQL */ `
+  query ListEventMessages(
+    $filter: ModelEventMessageFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listEventMessageDatas(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+    listEventMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        type
         sourceID
         source
         eventType
@@ -180,13 +178,15 @@ export const listEventMessageDatas = /* GraphQL */ `
 `;
 export const eventMessageByTimestamp = /* GraphQL */ `
   query EventMessageByTimestamp(
-    $timestamp: AWSTimestamp
+    $type: String
+    $timestamp: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
-    $filter: ModelEventMessageDataFilterInput
+    $filter: ModelEventMessageFilterInput
     $limit: Int
     $nextToken: String
   ) {
     EventMessageByTimestamp(
+      type: $type
       timestamp: $timestamp
       sortDirection: $sortDirection
       filter: $filter
@@ -195,6 +195,7 @@ export const eventMessageByTimestamp = /* GraphQL */ `
     ) {
       items {
         id
+        type
         sourceID
         source
         eventType
