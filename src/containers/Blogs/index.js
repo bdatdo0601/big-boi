@@ -16,7 +16,7 @@ export default function Blogs() {
   return (
     <div className="blog-container-div">
       <Typography variant="h2">Blogs</Typography>
-      <Grid container justifyContent="flex-start">
+      <Grid container justifyContent="center" alignItems="center" alignContent="center">
         {posts.map(post => (
           <Grid item key={post.id} xl={12} xs={12} md={12} sm={12} lg={12} style={{ margin: 12 }}>
             <BlogPostCard

@@ -19,7 +19,8 @@ export default function BlogPostCard({
     <Card
       style={{
         width,
-        margin: 4,
+        maxWidth: 1000,
+        margin: "0 auto",
         textAlign: "left",
         opacity: post.status === POST_STATE.ARCHIVED ? 0.5 : 1,
       }}
