@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import ReactJson from "react-json-view";
 import { CloudUploadOutlined, RestoreOutlined } from "@mui/icons-material";
 import { isEqual } from "lodash";
-import { useSnackbar } from "notistack-v5";
 
 import "./index.less";
 
@@ -13,9 +12,20 @@ import DEFAULT_RESUME from "../../assets/default-resume.json";
 import { useGetFile, useUploadFile } from "../../utils/awsStorage";
 import { RESUME } from "../../utils/constants";
 import { fetchFileToJSON } from "../../utils";
+import { useDataUpdateWrapper } from "../../utils/hooks";
+import EventType from "../../assets/event-type.json";
+
+const DataUpdateOptions = {
+  snackBar: {
+    successMessage: "Resume Data Updated",
+    errorMessage: "Unable to Update Resume Data",
+  },
+  logging: {
+    eventType: EventType.Personal.Resume.Update,
+  },
+};
 
 export default function ResumeSchemaEditor() {
-  const { enqueueSnackbar } = useSnackbar();
   const { file, loading, fetchFile } = useGetFile(RESUME.SCHEMA_FILE, RESUME.PREFIX);
   const { uploadFile } = useUploadFile();
   const [defaultFile, setDefaultFile] = useState(DEFAULT_RESUME);
@@ -32,27 +42,20 @@ export default function ResumeSchemaEditor() {
     setResume(defaultFile);
   }, [defaultFile]);
 
-  const onUploadResume = useCallback(
+  const updateResume = useCallback(
     async newResume => {
-      try {
-        const blob = new Blob([JSON.stringify(newResume)], { type: "application/json" });
-        await uploadFile(blob, RESUME.SCHEMA_FILE, RESUME.PREFIX, "public");
-        await fetchFile();
-        enqueueSnackbar("Resume Updated", {
-          variant: "success",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
-          autoHideDuration: 2000,
-        });
-      } catch (err) {
-        enqueueSnackbar(`Can't Updated Resume ${err.message}`, {
-          variant: "error",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
-          autoHideDuration: 2000,
-        });
-      }
+      const blob = new Blob([JSON.stringify(newResume)], { type: "application/json" });
+      await uploadFile(blob, RESUME.SCHEMA_FILE, RESUME.PREFIX, "public");
+      return newResume;
     },
-    [enqueueSnackbar, fetchFile, uploadFile]
+    [uploadFile]
   );
+
+  const onPostUpdateResume = useCallback(async () => {
+    await fetchFile();
+  }, [fetchFile]);
+
+  const [onUploadResume] = useDataUpdateWrapper(updateResume, onPostUpdateResume, DataUpdateOptions);
 
   if (loading) {
     return <CircularProgress />;

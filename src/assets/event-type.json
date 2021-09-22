@@ -3,6 +3,9 @@
         "BlogPost": {
             "Update": "Personal.BlogPost.Update",
             "StatusUpdate": "Personal.BlogPost.StatusUpdate"
+        },
+        "Resume": {
+            "Update": "Personal.Resume.Update"
         }
     }
 }
