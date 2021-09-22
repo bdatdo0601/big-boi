@@ -14,7 +14,7 @@ export default function ImagesDisplay({ imageCols, cellHeight }) {
     <>
       <ImageList cols={isWeb ? imageCols : 1} style={{ width: "100%", marginTop: 32, cellHeight }} spacing={4}>
         {formatGridList(data, imageCols, isWeb).map(image => (
-          <ImageListItem key={image.key} cols={image.metaData.cols} rows={1}>
+          <ImageListItem key={image.key} cols={3} rows={3}>
             <ImageGridDisplay url={image.url} name={image.key} animation />
           </ImageListItem>
         ))}

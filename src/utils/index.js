@@ -18,7 +18,7 @@ export const formatGridList = (data, colAmount, isWeb) => {
     } else if (item.metaData.aspectWidth > item.metaData.aspectHeight) {
       cols = Math.min(item.metaData.aspectWidth, isWeb ? 4 : 1);
     } else {
-      cols = Math.min(item.metaData.aspectWidth, isWeb ? 2 : 1);
+      cols = Math.min(item.metaData.aspectWidth, isWeb ? 4 : 1);
     }
     amount += cols;
     if (isWeb && Math.abs(colAmount - amount) <= 3) {
