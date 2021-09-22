@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/bdatdo0601/big-boi/compare/v1.5.4...v1.6.0) (2021-09-22)
+
+
+### Features
+
+* add resume update to action logs ([26e0ac4](https://github.com/bdatdo0601/big-boi/commit/26e0ac4a45a59d40ad4c0d4deeac9f2b44e385b9))
+
+
+### Bug Fixes
+
+* team provider json ([eb1f54b](https://github.com/bdatdo0601/big-boi/commit/eb1f54b19b9af88e9086a7fe98a2a31f2061c32f))
+* update gallery display ([f6feafe](https://github.com/bdatdo0601/big-boi/commit/f6feafe020ad241216c38a4ea0ea6c435e9f2159))
+* update upload logic ([c30c113](https://github.com/bdatdo0601/big-boi/commit/c30c113a79def1ab0946b978c6ff7554da3a1d93))
+
 ### [1.5.4](https://github.com/bdatdo0601/big-boi/compare/v1.5.3...v1.5.4) (2021-09-22)
 
 
