@@ -10,6 +10,8 @@ Amplify Params - DO NOT EDIT */
 const { Client } = require("@notionhq/client");
 const { get } = require("lodash");
 
+const { notionBlocksToMarkdown } = require("./NotionBlocksToMarkDown");
+
 const RootBlockID = process.env.NOTION_BLOGPOST_BLOCKID;
 const auth = process.env.NOTION_INTEGRATION_TOKEN;
 
@@ -31,6 +33,7 @@ const retrievePageData = async (client, pageID) => {
     return rawBlogPostData
 }
 
+
 exports.handler = async (event) => {
     const client = new Client({ 
         auth
@@ -39,8 +42,10 @@ exports.handler = async (event) => {
 
     const blogPosts = await Promise.all(notionBlogPosts.map(async blogPostOGData => {
         const rawBlogPostData = await retrievePageData(client, get(blogPostOGData, "id"));
-        console.log(JSON.stringify(rawBlogPostData, null, 4));
+        const markdownText =  await notionBlocksToMarkdown(get(rawBlogPostData, "results", []));
     }));
+
+
 
     return { errors: [] };
 };
