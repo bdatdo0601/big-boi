@@ -26,18 +26,21 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authbigboi327b1f0d"
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "description": "public access"
             }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "API_KEY",
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 365,
-                "description": "Public read key"
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authbigboi327b1f0d"
               }
+            },
+            {
+              "authenticationType": "AWS_IAM"
             }
           ]
         }
@@ -88,6 +91,29 @@
       ]
     },
     "bigboimessagestoring": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "bigboiapi",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "bigboibigboilambdalayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "bigboiblogpoller": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

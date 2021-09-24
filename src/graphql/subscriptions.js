@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost {
-    onCreatePost {
+  subscription OnCreatePost($owner: String) {
+    onCreatePost(owner: $owner) {
       id
       title
       description
@@ -12,6 +12,7 @@ export const onCreatePost = /* GraphQL */ `
       data
       updatedAt
       createdAt
+      owner
       comments {
         items {
           id
@@ -19,6 +20,7 @@ export const onCreatePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -26,8 +28,8 @@ export const onCreatePost = /* GraphQL */ `
   }
 `;
 export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost {
-    onUpdatePost {
+  subscription OnUpdatePost($owner: String) {
+    onUpdatePost(owner: $owner) {
       id
       title
       description
@@ -36,6 +38,7 @@ export const onUpdatePost = /* GraphQL */ `
       data
       updatedAt
       createdAt
+      owner
       comments {
         items {
           id
@@ -43,6 +46,7 @@ export const onUpdatePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -50,8 +54,8 @@ export const onUpdatePost = /* GraphQL */ `
   }
 `;
 export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost {
-    onDeletePost {
+  subscription OnDeletePost($owner: String) {
+    onDeletePost(owner: $owner) {
       id
       title
       description
@@ -60,6 +64,7 @@ export const onDeletePost = /* GraphQL */ `
       data
       updatedAt
       createdAt
+      owner
       comments {
         items {
           id
@@ -67,6 +72,7 @@ export const onDeletePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -74,8 +80,8 @@ export const onDeletePost = /* GraphQL */ `
   }
 `;
 export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment {
-    onCreateComment {
+  subscription OnCreateComment($owner: String) {
+    onCreateComment(owner: $owner) {
       id
       postID
       content
@@ -90,16 +96,18 @@ export const onCreateComment = /* GraphQL */ `
         data
         updatedAt
         createdAt
+        owner
         comments {
           nextToken
         }
       }
+      owner
     }
   }
 `;
 export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment {
-    onUpdateComment {
+  subscription OnUpdateComment($owner: String) {
+    onUpdateComment(owner: $owner) {
       id
       postID
       content
@@ -114,16 +122,18 @@ export const onUpdateComment = /* GraphQL */ `
         data
         updatedAt
         createdAt
+        owner
         comments {
           nextToken
         }
       }
+      owner
     }
   }
 `;
 export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment {
-    onDeleteComment {
+  subscription OnDeleteComment($owner: String) {
+    onDeleteComment(owner: $owner) {
       id
       postID
       content
@@ -138,10 +148,12 @@ export const onDeleteComment = /* GraphQL */ `
         data
         updatedAt
         createdAt
+        owner
         comments {
           nextToken
         }
       }
+      owner
     }
   }
 `;

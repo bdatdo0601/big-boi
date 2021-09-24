@@ -7,7 +7,7 @@ enum PostStatus {
 type Post @model @key(name: "byUpdatedAt", fields: ["status", "updatedAt"], queryField: "PostByUpdatedAt")  @auth(
     rules: [
       { allow: owner }, # owner can update, delete, and read
-      { allow: private, operations: [read] }, # signed in users who are not the owner can read
+      { allow: private, provider: iam }, # signed in users who are not the owner can read
       { allow: public, operations: [read] } # unauthenticated users can read
     ]
   ) {
@@ -24,7 +24,7 @@ type Post @model @key(name: "byUpdatedAt", fields: ["status", "updatedAt"], quer
 type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(
     rules: [
       { allow: owner }, # owner can update, delete, and read
-      { allow: private, operations: [read] }, # signed in users who are not the owner can read
+      { allow: private, provider: iam }, # signed in users who are not the owner can read
       { allow: public, operations: [read] } # unauthenticated users can read
     ]
   ) {

@@ -15,6 +15,7 @@ export const createPost = /* GraphQL */ `
       data
       updatedAt
       createdAt
+      owner
       comments {
         items {
           id
@@ -22,6 +23,7 @@ export const createPost = /* GraphQL */ `
           content
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -42,6 +44,7 @@ export const updatePost = /* GraphQL */ `
       data
       updatedAt
       createdAt
+      owner
       comments {
         items {
           id
@@ -49,6 +52,7 @@ export const updatePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -69,6 +73,7 @@ export const deletePost = /* GraphQL */ `
       data
       updatedAt
       createdAt
+      owner
       comments {
         items {
           id
@@ -76,6 +81,7 @@ export const deletePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -102,10 +108,12 @@ export const createComment = /* GraphQL */ `
         data
         updatedAt
         createdAt
+        owner
         comments {
           nextToken
         }
       }
+      owner
     }
   }
 `;
@@ -129,10 +137,12 @@ export const updateComment = /* GraphQL */ `
         data
         updatedAt
         createdAt
+        owner
         comments {
           nextToken
         }
       }
+      owner
     }
   }
 `;
@@ -156,10 +166,32 @@ export const deleteComment = /* GraphQL */ `
         data
         updatedAt
         createdAt
+        owner
         comments {
           nextToken
         }
       }
+      owner
+    }
+  }
+`;
+export const createEventMessage = /* GraphQL */ `
+  mutation CreateEventMessage(
+    $input: CreateEventMessageInput!
+    $condition: ModelEventMessageConditionInput
+  ) {
+    createEventMessage(input: $input, condition: $condition) {
+      id
+      type
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -189,26 +221,6 @@ export const deleteEventMessage = /* GraphQL */ `
     $condition: ModelEventMessageConditionInput
   ) {
     deleteEventMessage(input: $input, condition: $condition) {
-      id
-      type
-      sourceID
-      source
-      eventType
-      content
-      metadata
-      publishInfo
-      timestamp
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createEventMessage = /* GraphQL */ `
-  mutation CreateEventMessage(
-    $input: CreateEventMessageInput!
-    $condition: ModelEventMessageConditionInput
-  ) {
-    createEventMessage(input: $input, condition: $condition) {
       id
       type
       sourceID

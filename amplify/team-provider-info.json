@@ -27,6 +27,11 @@
         "bigboimessagestoring": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
           "s3Key": "amplify-builds/bigboimessagestoring-74666b6f4b6355654f30-build.zip"
+        },
+        "bigboiblogpoller": {
+          "notionIntegrationToken": "secret_bVdmMRSASiSDteN3AcHutJhA4xo0DpK6FHXsC8WDHbp",
+          "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+          "s3Key": "amplify-builds/bigboiblogpoller-4e6a77334978682f4664-build.zip"
         }
       }
     }

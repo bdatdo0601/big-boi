@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "api": {
+      "bigboiapi": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "bigboibigboilambdalayer",
+      "env": "dev",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "notionIntegrationToken",
+      "environmentVariableName": "NOTION_INTEGRATION_TOKEN"
+    }
+  ]
+}
