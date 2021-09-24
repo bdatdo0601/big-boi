@@ -2,7 +2,7 @@
 import React from "react";
 import { Card, Typography, CircularProgress, Grid, Button } from "@mui/material";
 import PropTypes from "prop-types";
-import { useSnackbar } from "notistack-v5";
+import { useSnackbar } from "notistack";
 import { UploadFile } from "@mui/icons-material";
 
 import { useDropzoneStyles } from "./styleHooks";

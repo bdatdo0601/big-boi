@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { get } from "lodash";
-import { useSnackbar } from "notistack-v5";
+import { useSnackbar } from "notistack";
 
 import { useAWSAPI, useSubscriptionAWSAPI } from "../utils/awsAPI";
 
