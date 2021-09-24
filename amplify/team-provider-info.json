@@ -26,7 +26,7 @@
         },
         "bigboimessagestoring": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboimessagestoring-336168615a377a554e71-build.zip"
+          "s3Key": "amplify-builds/bigboimessagestoring-74666b6f4b6355654f30-build.zip"
         }
       }
     }
