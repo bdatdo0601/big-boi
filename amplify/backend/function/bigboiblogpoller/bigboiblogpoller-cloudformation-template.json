@@ -16,9 +16,6 @@
     "s3Key": {
       "Type": "String"
     },
-    "notionIntegrationToken": {
-      "Type": "String"
-    },
     "apibigboiapiGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apibigboiapiGraphQLAPIIdOutput"
@@ -31,9 +28,15 @@
       "Type": "String",
       "Default": "apibigboiapiGraphQLAPIKeyOutput"
     },
-    "functionbigboibigboilambdalayerArn": {
+    "storagebigboicontentBucketName": {
       "Type": "String",
-      "Default": "functionbigboibigboilambdalayerArn"
+      "Default": "storagebigboicontentBucketName"
+    },
+    "notionIntegrationToken": {
+      "Type": "String"
+    },
+    "notionBlogpostBlockid": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -98,8 +101,14 @@
             "API_BIGBOIAPI_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apibigboiapiGraphQLAPIKeyOutput"
             },
+            "STORAGE_BIGBOICONTENT_BUCKETNAME": {
+              "Ref": "storagebigboicontentBucketName"
+            },
             "NOTION_INTEGRATION_TOKEN": {
               "Ref": "notionIntegrationToken"
+            },
+            "NOTION_BLOGPOST_BLOCKID": {
+              "Ref": "notionBlogpostBlockid"
             }
           }
         },
@@ -110,11 +119,6 @@
           ]
         },
         "Runtime": "nodejs14.x",
-        "Layers": [
-          {
-            "Ref": "functionbigboibigboilambdalayerArn"
-          }
-        ],
         "Timeout": 25
       }
     },
@@ -215,6 +219,45 @@
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "s3:ListBucket",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storagebigboicontentBucketName"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storagebigboicontentBucketName"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
             {
               "Effect": "Allow",
               "Action": [

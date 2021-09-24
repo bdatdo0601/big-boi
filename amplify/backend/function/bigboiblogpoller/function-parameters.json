@@ -1,5 +1,13 @@
 {
   "permissions": {
+    "storage": {
+      "bigboicontent": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
     "api": {
       "bigboiapi": [
         "create",
@@ -22,6 +30,10 @@
     {
       "cloudFormationParameterName": "notionIntegrationToken",
       "environmentVariableName": "NOTION_INTEGRATION_TOKEN"
+    },
+    {
+      "cloudFormationParameterName": "notionBlogpostBlockid",
+      "environmentVariableName": "NOTION_BLOGPOST_BLOCKID"
     }
   ]
 }

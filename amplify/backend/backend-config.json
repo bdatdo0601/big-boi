@@ -119,19 +119,19 @@
       "service": "Lambda",
       "dependsOn": [
         {
+          "category": "storage",
+          "resourceName": "bigboicontent",
+          "attributes": [
+            "BucketName"
+          ]
+        },
+        {
           "category": "api",
           "resourceName": "bigboiapi",
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput",
             "GraphQLAPIKeyOutput"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "bigboibigboilambdalayer",
-          "attributes": [
-            "Arn"
           ]
         }
       ]

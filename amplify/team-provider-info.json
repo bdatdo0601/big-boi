@@ -29,9 +29,10 @@
           "s3Key": "amplify-builds/bigboimessagestoring-74666b6f4b6355654f30-build.zip"
         },
         "bigboiblogpoller": {
-          "notionIntegrationToken": "secret_bVdmMRSASiSDteN3AcHutJhA4xo0DpK6FHXsC8WDHbp",
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboiblogpoller-4e6a77334978682f4664-build.zip"
+          "s3Key": "amplify-builds/bigboiblogpoller-76384750424d546f5561-build.zip",
+          "notionIntegrationToken": "secret_bVdmMRSASiSDteN3AcHutJhA4xo0DpK6FHXsC8WDHbp",
+          "notionBlogpostBlockid": "4459e03a0cca4cf7a895ff0a5ce5e3c3"
         }
       }
     }
