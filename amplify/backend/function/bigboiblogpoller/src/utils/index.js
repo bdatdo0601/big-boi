@@ -3,7 +3,23 @@ const AWS = require("aws-sdk");
 const urlParse = require("url").URL;
 const graphql = require('graphql');
 const { print } = graphql;
+const { get } = require("lodash");
+const axios = require('axios');
 
+exports.queryGraphQLData = async (query, variables, accessorString) => {
+    const graphqlData = await axios({
+        url: process.env.API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT,
+        method: 'post',
+        headers: {
+          'x-api-key': process.env.API_BIGBOIAPI_GRAPHQLAPIKEYOUTPUT
+        },
+        data: {
+          query: print(query),
+          variables,
+        }
+      });
+    return get(graphqlData, accessorString, graphqlData);
+}
 
 const DefaultSignedMutationConfig = {
     endpoint: process.env.API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT,
@@ -59,5 +75,5 @@ exports.signedGraphQLMutationRequest = async (query, variables, isUsingAPIKey = 
         httpRequest.end();
     });
 
-    return true;
+    return data;
 }

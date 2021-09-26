@@ -22,15 +22,15 @@
         },
         "bigboibigboilambdalayer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion48e79d0f-build.zip"
+          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion230481f0-build.zip"
         },
         "bigboimessagestoring": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboimessagestoring-657751374b3431386641-build.zip"
+          "s3Key": "amplify-builds/bigboimessagestoring-59347a617663536d6d61-build.zip"
         },
         "bigboiblogpoller": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboiblogpoller-547a704e4d4478675273-build.zip",
+          "s3Key": "amplify-builds/bigboiblogpoller-64397a69484864384461-build.zip",
           "notionIntegrationToken": "secret_bVdmMRSASiSDteN3AcHutJhA4xo0DpK6FHXsC8WDHbp",
           "notionBlogpostBlockid": "4459e03a0cca4cf7a895ff0a5ce5e3c3"
         }

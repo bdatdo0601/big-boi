@@ -17,7 +17,7 @@ const queryGraphQLData = async (query, variables, accessorString) => {
           variables,
         }
       });
-    return get(graphqlData, accessorString, {});
+    return get(graphqlData, accessorString, graphqlData);
 }
 
 const PersonalPublishInfo = {
