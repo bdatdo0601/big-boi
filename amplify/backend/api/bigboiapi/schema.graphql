@@ -38,8 +38,8 @@ type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(
 type EventMessage @model @key(name: "byTimestamp", fields: ["type", "timestamp"], queryField: "EventMessageByTimestamp") @auth(
   rules: [
       { allow: owner }, # owner can update, delete, and read
-      { allow: private, operations: [read, create] }, # signed in users who are not the owner can read write
-      { allow: public, operations: [read, create] } # unauthenticated users can read
+      { allow: private, provider: iam }, # signed in users who are not the owner can read write
+      { allow: public, operations: [read] } # unauthenticated users can read
     ]
 ) {
   id: ID!
