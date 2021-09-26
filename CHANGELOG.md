@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/bdatdo0601/big-boi/compare/v1.6.0...v1.7.0) (2021-09-26)
+
+
+### Features
+
+* created blogpoller lambda ([cdf4b58](https://github.com/bdatdo0601/big-boi/commit/cdf4b58f221a76e7b98aa990b272d04f010a786b))
+* finish updating notion blog polling ([000eb41](https://github.com/bdatdo0601/big-boi/commit/000eb41de7e7ac40ad761f31440a2c700def8b06))
+* initialize notion blog polling ([421cc4b](https://github.com/bdatdo0601/big-boi/commit/421cc4b9d3072851309d3c5495a3d0d3bc9d7333))
+
+
+### Bug Fixes
+
+* allow notion blogs ([6e94ef5](https://github.com/bdatdo0601/big-boi/commit/6e94ef59ef45a3ea6329164ebbb87a436794a43f))
+* break words ([05dca59](https://github.com/bdatdo0601/big-boi/commit/05dca59fa5f90530213bbd74fc51a29e084567c0))
+* change to IAM auth for lambda ([a6a666d](https://github.com/bdatdo0601/big-boi/commit/a6a666ddf853789226832216dd40b33f12f1fc07))
+* initial integration with notion ([6932f14](https://github.com/bdatdo0601/big-boi/commit/6932f14e3c14059296a7de3a6ca66d904154409f))
+* initial integration with notion ([d0cda64](https://github.com/bdatdo0601/big-boi/commit/d0cda64f83126f3a050c59b66ef74c849eaff8c8))
+* update authorization logic ([0b59817](https://github.com/bdatdo0601/big-boi/commit/0b598173b3f94ea408a25f5d3ed9e3e824183c22))
+* update notion metadata ([b8d38fe](https://github.com/bdatdo0601/big-boi/commit/b8d38fe835bd70da488507304474c5d3a04e01e4))
+* update some notions ([1ddbb08](https://github.com/bdatdo0601/big-boi/commit/1ddbb08f4ba008b3b5160ccda0cc21fcda5911bd))
+
 ## [1.6.0](https://github.com/bdatdo0601/big-boi/compare/v1.5.4...v1.6.0) (2021-09-22)
 
 
