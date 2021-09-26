@@ -12,20 +12,23 @@ const moment = require("moment");
 const https = require('https');
 const AWS = require("aws-sdk");
 const urlParse = require("url").URL;
+const graphql = require('graphql');
+const { print } = graphql;
+
 
 const DefaultSignedMutationConfig = {
-    endpoint: new urlParse(process.env.API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT).hostname.toString(),
+    endpoint: process.env.API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT,
     region: process.env.REGION,
     method: "POST",
     path: "/graphql",
     headers: {
-        host: process.env.API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT,
+        host: new urlParse(process.env.API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT).hostname.toString(),
         "Content-Type": "application/json",
     },
     apiKey: process.env.API_BIGBOIAPI_GRAPHQLAPIKEYOUTPUT,
 }
 
-const signedGraphQLMutationRequest = async (query, variables, operationName, isUsingAPIKey = false, config = DefaultSignedMutationConfig) => {
+const signedGraphQLMutationRequest = async (query, variables, isUsingAPIKey = false, config = DefaultSignedMutationConfig) => {
     const req = new AWS.HttpRequest(config.endpoint, config.region);
 
     req.method = config.method;
@@ -35,8 +38,7 @@ const signedGraphQLMutationRequest = async (query, variables, operationName, isU
         ...config.headers
     }
     req.body = JSON.stringify({
-        query,
-        operationName,
+        query: print(query),
         variables
     });
 
@@ -48,7 +50,7 @@ const signedGraphQLMutationRequest = async (query, variables, operationName, isU
     }
 
     const data = await new Promise((resolve, reject) => {
-        const httpRequest = https.request({ ...req, host: endpoint }, (result) => {
+        const httpRequest = https.request({ ...req, host: config.headers.host }, (result) => {
             let data = "";
 
             result.on("data", (chunk) => {
@@ -98,7 +100,7 @@ exports.handler = async (event) => {
                         timestamp: moment(get(message, "metadata.timestamp", moment().valueOf())).toISOString()
                     }
                 }
-                await signedGraphQLMutationRequest(createEventMessage, variables, "createEventMessage");
+                await signedGraphQLMutationRequest(createEventMessage, variables);
             }
         }));
         return messages;

@@ -26,7 +26,7 @@
         },
         "bigboimessagestoring": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboimessagestoring-485074566c5566512f65-build.zip"
+          "s3Key": "amplify-builds/bigboimessagestoring-657751374b3431386641-build.zip"
         },
         "bigboiblogpoller": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",

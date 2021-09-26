@@ -79,7 +79,7 @@ export const useLazyAWSAPI = (operation, input, authMode = "AMAZON_COGNITO_USER_
       try {
         setLoading(true);
         const formattedOperation = graphqlOperation(operation, variables, ...args);
-        const retrievedData = await API.graphql(formattedOperation);
+        const retrievedData = await API.graphql({ ...formattedOperation, authMode });
         setData(retrievedData);
         setLoading(false);
         return retrievedData;
@@ -89,7 +89,7 @@ export const useLazyAWSAPI = (operation, input, authMode = "AMAZON_COGNITO_USER_
         throw err;
       }
     },
-    [input, operation]
+    [input, operation, authMode]
   );
 
   const fetchMore = useCallback(
