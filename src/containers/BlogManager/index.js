@@ -26,8 +26,8 @@ const DataUpdateOptions = {
 export default function BlogManager() {
   const history = useHistory();
   const query = useMemo(() => ({ limit: 10000 }), []);
-  const { data: rawData, loading, execute: refetch } = useAWSAPI(listPosts, query);
-  const { execute: mutatePost, loading: updatingPost } = useLazyAWSAPI(updatePost);
+  const { data: rawData, loading, execute: refetch } = useAWSAPI(listPosts, query, "AWS_IAM");
+  const { execute: mutatePost, loading: updatingPost } = useLazyAWSAPI(updatePost, "AWS_IAM");
 
   const posts = useMemo(() => get(rawData, "data.listPosts.items", []), [rawData]);
 
@@ -72,7 +72,10 @@ export default function BlogManager() {
                 showActions
                 updatingPost={updatingPost}
                 onPostClick={() => {
-                  history.push(`/blogmanager/update/${post.id}`);
+                  const postData = JSON.parse(get(post, "data", "{}"));
+                  if (!get(postData, "type")) {
+                    history.push(`/blogmanager/update/${post.id}`);
+                  }
                 }}
               />
             </Grid>

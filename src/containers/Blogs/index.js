@@ -8,6 +8,10 @@ import { POST_STATE } from "../../utils/constants";
 import BlogPostCard from "../../components/BlosPostCard";
 import "./index.less";
 
+const BlogPostSource = {
+  NOTION: "notion",
+};
+
 export default function Blogs() {
   const query = useMemo(() => ({ status: POST_STATE.PUBLISHED, sortDirection: "DESC", limit: 10000 }), []);
   const history = useHistory();
@@ -24,7 +28,17 @@ export default function Blogs() {
               post={post}
               showState={false}
               onPostClick={() => {
-                history.push(`/blogs/post/${post.id}`);
+                const postData = JSON.parse(get(post, "data", "{}"));
+                if (!get(postData, "type")) {
+                  history.push(`/blogmanager/update/${post.id}`);
+                }
+                switch (get(postData, "type")) {
+                  case BlogPostSource.NOTION:
+                    window.location.href = get(postData, "url");
+                    break;
+                  default:
+                    break;
+                }
               }}
             />
           </Grid>

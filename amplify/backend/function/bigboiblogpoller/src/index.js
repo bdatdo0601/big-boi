@@ -116,7 +116,7 @@ exports.handler = async () => {
                 data: JSON.stringify(data),
                 tags: [],
                 description: "This blog is written in Notion",
-                status: get(item, "attributes.archived", true) ? "ARCHIVED" : "DRAFT",
+                status: get(item, "attributes.archived", true) ? "ARCHIVED" : "PUBLISHED",
                 updatedAt: get(item, "attributes.updatedAt"),
             }
         }
