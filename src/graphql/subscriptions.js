@@ -158,8 +158,8 @@ export const onDeleteComment = /* GraphQL */ `
   }
 `;
 export const onCreateEventMessage = /* GraphQL */ `
-  subscription OnCreateEventMessage {
-    onCreateEventMessage {
+  subscription OnCreateEventMessage($owner: String) {
+    onCreateEventMessage(owner: $owner) {
       id
       type
       sourceID
@@ -171,12 +171,13 @@ export const onCreateEventMessage = /* GraphQL */ `
       timestamp
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateEventMessage = /* GraphQL */ `
-  subscription OnUpdateEventMessage {
-    onUpdateEventMessage {
+  subscription OnUpdateEventMessage($owner: String) {
+    onUpdateEventMessage(owner: $owner) {
       id
       type
       sourceID
@@ -188,12 +189,13 @@ export const onUpdateEventMessage = /* GraphQL */ `
       timestamp
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteEventMessage = /* GraphQL */ `
-  subscription OnDeleteEventMessage {
-    onDeleteEventMessage {
+  subscription OnDeleteEventMessage($owner: String) {
+    onDeleteEventMessage(owner: $owner) {
       id
       type
       sourceID
@@ -205,6 +207,7 @@ export const onDeleteEventMessage = /* GraphQL */ `
       timestamp
       createdAt
       updatedAt
+      owner
     }
   }
 `;

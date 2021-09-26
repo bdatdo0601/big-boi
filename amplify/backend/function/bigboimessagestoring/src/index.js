@@ -6,25 +6,68 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-const { get, isEmpty, toInteger } = require("lodash");
-const axios = require('axios');
+const { get, isEmpty } = require("lodash");
 const gql = require('graphql-tag');
-const graphql = require('graphql');
 const moment = require("moment");
-const { print } = graphql;
+const https = require('https');
+const AWS = require("aws-sdk");
+const urlParse = require("url").URL;
 
-const mutateGraphQLData = async (query, variables) => {
-    const response = await axios({
-        url: process.env.API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT,
-        method: 'post',
-        headers: {
-          'x-api-key': process.env.API_BIGBOIAPI_GRAPHQLAPIKEYOUTPUT
-        },
-        data: {
-          query: print(query),
-          variables,
-        }
-      });
+const DefaultSignedMutationConfig = {
+    endpoint: new urlParse(process.env.API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT).hostname.toString(),
+    region: process.env.REGION,
+    method: "POST",
+    path: "/graphql",
+    headers: {
+        host: process.env.API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT,
+        "Content-Type": "application/json",
+    },
+    apiKey: process.env.API_BIGBOIAPI_GRAPHQLAPIKEYOUTPUT,
+}
+
+const signedGraphQLMutationRequest = async (query, variables, operationName, isUsingAPIKey = false, config = DefaultSignedMutationConfig) => {
+    const req = new AWS.HttpRequest(config.endpoint, config.region);
+
+    req.method = config.method;
+    req.path = config.path;
+    req.headers = {
+        ...req.headers,
+        ...config.headers
+    }
+    req.body = JSON.stringify({
+        query,
+        operationName,
+        variables
+    });
+
+    if (isUsingAPIKey) {
+        req.headers["x-api-key"] = config.apiKey;
+    } else {
+        const signer = new AWS.Signers.V4(req, "appsync", true);
+        signer.addAuthorization(AWS.config.credentials, AWS.util.date.getDate());
+    }
+
+    const data = await new Promise((resolve, reject) => {
+        const httpRequest = https.request({ ...req, host: endpoint }, (result) => {
+            let data = "";
+
+            result.on("data", (chunk) => {
+                data += chunk;
+            });
+
+            result.on("end", () => {
+                resolve(JSON.parse(data.toString()));
+            });
+
+            result.on("error", (err) => {
+                reject(err);
+            })
+        });
+
+        httpRequest.write(req.body);
+        httpRequest.end();
+    });
+
     return true;
 }
 
@@ -55,7 +98,7 @@ exports.handler = async (event) => {
                         timestamp: moment(get(message, "metadata.timestamp", moment().valueOf())).toISOString()
                     }
                 }
-                await mutateGraphQLData(createEventMessage, variables);
+                await signedGraphQLMutationRequest(createEventMessage, variables, "createEventMessage");
             }
         }));
         return messages;

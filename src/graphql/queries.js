@@ -157,6 +157,7 @@ export const getEventMessage = /* GraphQL */ `
       timestamp
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -179,6 +180,7 @@ export const listEventMessages = /* GraphQL */ `
         timestamp
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -213,6 +215,7 @@ export const eventMessageByTimestamp = /* GraphQL */ `
         timestamp
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }

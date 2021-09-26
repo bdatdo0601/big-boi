@@ -192,6 +192,7 @@ export const createEventMessage = /* GraphQL */ `
       timestamp
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -212,6 +213,7 @@ export const updateEventMessage = /* GraphQL */ `
       timestamp
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -232,6 +234,7 @@ export const deleteEventMessage = /* GraphQL */ `
       timestamp
       createdAt
       updatedAt
+      owner
     }
   }
 `;
