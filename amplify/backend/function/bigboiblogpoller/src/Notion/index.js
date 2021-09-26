@@ -1,14 +1,30 @@
 const { range, get } = require("lodash");
-
+const moment = require("moment");
 
 exports.getNotionBlogPosts = async (client, block_id) => {
     const rawData = await client.blocks.children.list({ block_id });
     return get(rawData, "results", []).filter(item => item.type === "child_page");
 }
 
+const PropertyConverter = {
+    title: (data) => get(data, "title", []).map(item => get(item, "plain_text", "")).join("") || "Untitled",
+}
+
 exports.retrievePageMetadata = async (client, pageID) => {
     const rawBlogPostData = await client.pages.retrieve({ page_id: pageID });
-    return rawBlogPostData;
+    const BlogPostAttributes = {
+        ...Object.entries(PropertyConverter).reduce((acc, [key, converter]) => ({
+            ...acc,
+            [key]: converter(get(rawBlogPostData, `properties.${key}`))
+        }), {}),
+        archived: get(rawBlogPostData, "archived", true),
+        type: "Notion",
+        id: get(rawBlogPostData, "id"),
+        url: get(rawBlogPostData, "url"),
+        createdAt: moment(get(rawBlogPostData, "created_time")).toISOString(),
+        updatedAt: moment(get(rawBlogPostData, "last_edited_time")).toISOString(),
+    }
+    return { ...rawBlogPostData, attributes: BlogPostAttributes };
 }
 
 
