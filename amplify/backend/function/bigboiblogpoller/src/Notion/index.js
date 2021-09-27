@@ -20,7 +20,7 @@ exports.retrievePageMetadata = async (client, pageID) => {
         archived: get(rawBlogPostData, "archived", true),
         type: "Notion",
         id: get(rawBlogPostData, "id"),
-        url: get(rawBlogPostData, "url"),
+        url: `https://datdo.notion.site/${get(rawBlogPostData, "id").replace(/-/g, "")}`,
         createdAt: moment(get(rawBlogPostData, "created_time")).toISOString(),
         updatedAt: moment(get(rawBlogPostData, "last_edited_time")).toISOString(),
     }
