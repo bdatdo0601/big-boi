@@ -40,11 +40,11 @@ exports.handler = async event => {
   if ('Records' in event) {
     const events = await Promise.all(get(event, "Records").map(async record => {
       // Construct intial event source
-      const event = constructInitialEventFromKinesis(record);
+      const ev = constructInitialEventFromKinesis(record);
       // Identify Event Type
-      const eventType = await identifySource(event);
+      const eventType = await identifySource(ev);
       // Populate metadata and publish info and validate events
-      const resultEvent = await formatEventByEventType(event, eventType);
+      const resultEvent = await formatEventByEventType(ev, eventType);
       return resultEvent;
     }));
     // Only sent out valid event
