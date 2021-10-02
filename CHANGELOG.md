@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/bdatdo0601/big-boi/compare/v1.7.0...v1.8.0) (2021-10-02)
+
+
+### Features
+
+* add architecture page ([1dac630](https://github.com/bdatdo0601/big-boi/commit/1dac630e39f971e429cbec5b6effbbc144aba7a0))
+
+
+### Bug Fixes
+
+* add moment ([937fbc5](https://github.com/bdatdo0601/big-boi/commit/937fbc572860a4d92d4a2c6b960c05739efc5043))
+* update architecture docs ([200aa0b](https://github.com/bdatdo0601/big-boi/commit/200aa0b80088a62aebcb24c9c58c3d985c73c8cf))
+* update some logic for blog poller notion ([a027c7f](https://github.com/bdatdo0601/big-boi/commit/a027c7f35e3ccb7b984b15f3e4ea780b6e6bc5ae))
+* update team provider json ([bb3da16](https://github.com/bdatdo0601/big-boi/commit/bb3da164faaffb4ef6c7da3ade5d1c6b5715ec7f))
+
 ## [1.7.0](https://github.com/bdatdo0601/big-boi/compare/v1.6.0...v1.7.0) (2021-09-26)
 
 
