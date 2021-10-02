@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import {
   ImageOutlined,
   // AccountTree,
+  Map,
   Create as CreateIcon,
   AssignmentIndSharp as AssignmentIndSharpIcon,
   ExitToApp as ExitToAppIcon,
@@ -25,6 +26,7 @@ const Background = lazy(() => import("./containers/Background"));
 const PostDisplay = lazy(() => import("./containers/Blogs/PostDisplay"));
 const Gallery = lazy(() => import("./containers/Gallery"));
 const ChangeLogs = lazy(() => import("./containers/Changelogs"));
+const Architecture = lazy(() => import("./containers/Architecture"));
 const Home = lazy(() => import("./containers/Home"));
 
 export const ROUTE_TYPE = {
@@ -133,6 +135,15 @@ export default [
   //   exact: true,
   //   type: ROUTE_TYPE.PUBLIC,
   // },
+  {
+    name: "Architecture",
+    icon: <Map />,
+    component: Architecture,
+    path: "/architecture",
+    exact: true,
+    type: ROUTE_TYPE.DEV,
+    hidden: async () => false,
+  },
   {
     name: "Change Logs",
     icon: <ListAltOutlined />,
