@@ -30,7 +30,7 @@ export default function Blogs() {
               onPostClick={() => {
                 const postData = JSON.parse(get(post, "data", "{}"));
                 if (!get(postData, "type")) {
-                  history.push(`/blogmanager/update/${post.id}`);
+                  history.push(`/blogs/post/${post.id}`);
                 }
                 switch (get(postData, "type")) {
                   case BlogPostSource.NOTION:
