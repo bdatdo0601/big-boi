@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body.theme-white {
+    --color-text-base: 0, 0, 0;
+    --color-text-secondary: 51, 65, 85;
+    --color-text-link: 99, 102, 241;
+    --color-text-icon: 106, 109, 113;
+
+    --color-accent: 129, 140, 248;
+
+    --color-background-base: 255, 255, 255;
+    --color-background-secondary: 244, 248, 255;
+    --color-background-header: 238, 241, 245;
+
+    --color-background-popover: var(--color-background-header);
+    --color-background-popover-hover: 229, 231, 235;
+    --color-background-popover-overlay: rgba(74, 74, 74, 0.5);
+
+    --color-background-sidebar: 246, 250, 255;
+    --color-background-sidebar-hover: 229, 237, 246;
+
+    --color-border-base: 203, 213, 225;
+
+    --color-ring-base: var(--color-accent);
+
+    --color-scrollbar-thumb: #e2e8f0;
+    --color-scrollbar-thumb-hover: #cbd5e1;
+
+    --color-background-table-head: 213, 223, 239;
+    --color-background-table-odd: 240, 245, 255;
+    --color-text-table-head: 53, 72, 105;
+    --color-text-table-body: 113, 113, 122;
+
+    --color-graph-text: #1e293b;
+    --color-graph-node: #38bdf8;
+    --color-graph-node-hover: #7dd3fc;
+    --color-graph-edge: #94a3b8;
+  }
+
+  body.theme-black {
+    --color-text-base: 255, 255, 255;
+    --color-text-secondary: 199, 206, 214;
+    --color-text-link: 96, 165, 250;
+    --color-text-icon: 96, 108, 133;
+
+    --color-accent: 96, 165, 250;
+
+    --color-background-base: 0, 0, 0;
+    --color-background-secondary: 28, 33, 45;
+    --color-background-header: var(--color-background-base);
+
+    --color-background-popover: 17, 24, 39;
+    --color-background-popover-hover: 31, 41, 55;
+    --color-background-popover-overlay: rgba(60, 60, 60, 0.5);
+
+    --color-background-sidebar: 10, 15, 26;
+    --color-background-sidebar-hover: var(--color-background-popover-hover);
+
+    --color-border-base: 48, 48, 48;
+
+    --color-ring-base: var(--color-accent);
+
+    --color-scrollbar-thumb: #1e293b;
+    --color-scrollbar-thumb-hover: #334155;
+
+    --color-background-table-head: 28, 33, 45;
+    --color-background-table-odd: 14, 17, 23;
+    --color-text-table-head: 206, 216, 239;
+    --color-text-table-body: var(--color-text-secondary);
+
+    --color-graph-text: #e2e8f0;
+    --color-graph-node: #4f46e5;
+    --color-graph-node-hover: #6366f1;
+    --color-graph-edge: #64748b;
+  }
+}
+
+body {
+  @apply bg-skin-base;
+}
+
+@layer components {
+  .header-button {
+    @apply text-skin-base hover:opacity-60 py-2 px-4 rounded focus:outline-none focus:ring focus:ring-skin-base;
+  }
+
+  .note-content {
+    @apply prose-sm bg-skin-base text-skin-base;
+  }
+
+  .note-content a {
+    @apply tw-link;
+  }
+
+  .note-content code {
+    font-size: 1em;
+    @apply rounded py-1 px-2 bg-skin-secondary text-skin-secondary;
+  }
+
+  .tw-link {
+    @apply p-1 rounded text-skin-link underline hover:text-opacity-75 focus:outline-none focus:ring-1 active:ring-1 ring-skin-base;
+  }
+
+  .min-w-80px {
+    min-width: 80px;
+  }
+
+  .tw-popover {
+    @apply p-4 rounded-lg relative text-xs min-w-80px max-w-md max-h-64 overflow-hidden text-skin-base bg-skin-popover shadow transition ease-in-out duration-200;
+  }
+
+  /* tables */
+  .note-content thead {
+    @apply bg-skin-thead;
+  }
+
+  .note-content th {
+    @apply px-6 py-3 text-left text-xs font-medium text-skin-thead uppercase tracking-wider;
+  }
+
+  .note-content tbody > tr:nth-child(odd) {
+    @apply bg-skin-table-odd;
+  }
+
+  .note-content td {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-skin-tbody;
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar {
+    background-color: var(--color-background-base);
+    width: 12px;
+    height: 16px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--color-background-base);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-scrollbar-thumb);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-scrollbar-thumb-hover);
+  }
+}
+/* @layer components {
+
+
+  .note-content ol > li::marker {
+    @apply font-semibold dark:text-blue-200 text-blue-800;
+  }
+} */
+
+.note-content ul {
+  @apply list-inside;
+  list-style-type: disc;
+}
+
+.note-content ol {
+  list-style: decimal;
+}
+
+.note-content ol > li {
+  @apply list-inside;
+}
+
+.note-content li > p {
+  display: inline;
+}
+
+.note-content pre {
+  padding: 0;
+}
+
+.CodeMirror-vscrollbar {
+  overflow: hidden !important;
+}
+
+.cm-editor,
+.cm-scroller {
+  outline: transparent !important;
+}
