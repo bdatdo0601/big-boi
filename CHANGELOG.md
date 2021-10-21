@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/bdatdo0601/big-boi/compare/v1.8.0...v1.9.0) (2021-10-21)
+
+
+### Features
+
+* add enhanced documentation capability ([9a4d3f2](https://github.com/bdatdo0601/big-boi/commit/9a4d3f23cbcc2334c9f82a1d9d33982693ec9c5d))
+
+
+### Bug Fixes
+
+* add and deploy apigateway endpoint ([71730a3](https://github.com/bdatdo0601/big-boi/commit/71730a31ec68c4241f128175b1bc28951ffb5451))
+* add Documentations in place of architecture ([6791fd9](https://github.com/bdatdo0601/big-boi/commit/6791fd9180338808c729c66ad252b053e02fb012))
+* create external api endpoint ([49f4688](https://github.com/bdatdo0601/big-boi/commit/49f46886148937449a1a60f09c867487356e95b7))
+* update deployment solution ([eebc46f](https://github.com/bdatdo0601/big-boi/commit/eebc46fa8d7c95dec8ea417b366484e2634ebee3))
+
 ## [1.8.0](https://github.com/bdatdo0601/big-boi/compare/v1.7.0...v1.8.0) (2021-10-02)
 
 
