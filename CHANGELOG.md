@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://github.com/bdatdo0601/big-boi/compare/v1.9.0...v1.9.1) (2021-10-21)
+
+
+### Bug Fixes
+
+* adcloudfront invalidation ([03fc4c2](https://github.com/bdatdo0601/big-boi/commit/03fc4c2203b7c29bf9f05a2e6da58375024db444))
+
 ## [1.9.0](https://github.com/bdatdo0601/big-boi/compare/v1.8.0...v1.9.0) (2021-10-21)
 
 
