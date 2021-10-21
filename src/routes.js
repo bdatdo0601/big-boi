@@ -26,7 +26,7 @@ const Background = lazy(() => import("./containers/Background"));
 const PostDisplay = lazy(() => import("./containers/Blogs/PostDisplay"));
 const Gallery = lazy(() => import("./containers/Gallery"));
 const ChangeLogs = lazy(() => import("./containers/Changelogs"));
-const Architecture = lazy(() => import("./containers/Architecture"));
+const Documentations = lazy(() => import("./containers/Documentations"));
 const Home = lazy(() => import("./containers/Home"));
 
 export const ROUTE_TYPE = {
@@ -136,10 +136,10 @@ export default [
   //   type: ROUTE_TYPE.PUBLIC,
   // },
   {
-    name: "Architecture",
+    name: "Documentations",
     icon: <Map />,
-    component: Architecture,
-    path: "/architecture",
+    component: Documentations,
+    path: "/documentations",
     exact: true,
     type: ROUTE_TYPE.DEV,
     hidden: async () => false,
