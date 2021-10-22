@@ -1,0 +1,35 @@
+# Project Structure
+
+Refer to [[Website Architecture]] and [[Deployment]] to understand more on usage
+
+```
+.
+├── _layouts
+├── amplify                                         # All AWS Related Resources
+│   └── backend
+│       ├── analytics
+│       ├── api
+│       ├── auth
+│       ├── awscloudformation
+│       ├── function
+│       ├── hosting
+│       ├── notifications
+│       └── storage
+├── big-brain                                       # All Related Documentations (GatsbyJS)
+│   ├── plugins                                     # Custom Plugins
+│   │   └── gatsby-foam-local-plugins
+│   └── src
+│       └── content                                 # MD/MDX Documentations, along with attachments
+├── external_data
+│   └── drawio                                      # DrawIO Diagrams
+├── public                                          # Static meta files for main web app
+└── src                                             # Main Web Application (CRA)
+    ├── __tests__                                   # Testing suite
+    ├── assets                                      # Static Assets
+    ├── components                                  # Reusable Components
+    ├── containers                                  # Each separate pages
+    ├── context                                     # Data Context
+    ├── graphql                                     # GraphQL Queries/Mutations (auto-generated)
+    ├── layout                                      # Shared Layout
+    └── utils                                       # Utilities/Helpers
+```
