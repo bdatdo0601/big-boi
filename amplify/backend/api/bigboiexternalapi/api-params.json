@@ -1,42 +1,36 @@
 {
-  "paths": [
-    {
-      "name": "/event",
-      "lambdaFunction": "bigboikinesisconsumer",
-      "privacy": {
-        "private": true,
-        "auth": [
-          "/POST",
-          "/GET",
-          "/PUT",
-          "/PATCH",
-          "/DELETE"
-        ]
-      },
-      "policyResourceName": "/event"
-    }
-  ],
-  "resourceName": "bigboiexternalapi",
-  "apiName": "bigboiexternalapi",
-  "functionArns": [
-    {
-      "lambdaFunction": "bigboikinesisconsumer"
-    }
-  ],
-  "privacy": {
-    "auth": 1,
-    "unauth": 0,
-    "authRoleName": "amplify-big-boi-dev-142545-authRole",
-    "unAuthRoleName": "amplify-big-boi-dev-142545-unauthRole"
-  },
-  "dependsOn": [
-    {
-      "category": "function",
-      "resourceName": "bigboikinesisconsumer",
-      "attributes": [
-        "Name",
-        "Arn"
-      ]
-    }
-  ]
+    "paths": [
+        {
+            "name": "/event",
+            "lambdaFunction": "bigboikinesisconsumer",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/event"
+        }
+    ],
+    "resourceName": "bigboiexternalapi",
+    "apiName": "bigboiexternalapi",
+    "functionArns": [
+        {
+            "lambdaFunction": "bigboikinesisconsumer"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-big-boi-dev-142545-authRole",
+        "unAuthRoleName": "amplify-big-boi-dev-142545-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "bigboikinesisconsumer",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "0b9e425c"
 }
