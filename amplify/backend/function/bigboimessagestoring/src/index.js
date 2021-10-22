@@ -73,6 +73,7 @@ const signedGraphQLMutationRequest = async (query, variables, isUsingAPIKey = fa
     return true;
 }
 
+// message storing handler
 exports.handler = async (event) => {
     if ('Records' in event) {
         const messages = await Promise.all(get(event, "Records", []).map(async record => {
