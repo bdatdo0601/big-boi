@@ -3,7 +3,11 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@octokit/webhooks-examples": "^4.13.1",
+    "@octokit/webhooks-schemas": "^4.13.1",
     "@recursive/assign": "^2.0.2",
+    "ajv": "^8.6.3",
+    "ajv-formats": "^2.1.1",
     "aws-sdk": "^2.991.0",
     "axios": "^0.21.4",
     "graphql": "^15.5.3",

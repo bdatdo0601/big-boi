@@ -11,6 +11,8 @@ const { identifySource } = require("/opt/packages/SourceIdentifier");
 const { formatEventByEventType } = require("/opt/packages/EventType");
 const { publishMessage } = require("/opt/packages/MessagePublisher");
 
+// IFTTT Documentation https://maker.ifttt.com/use/q6bRYUkNBBJZP4VFhbYj6
+
 const constructInitialEventFromKinesis = (record) => {
    // Extrapolate data
    const { eventID, eventName, kinesis, eventSourceARN } = record;
@@ -56,6 +58,7 @@ exports.handler = async event => {
     }
     res = events;
   } else {
+    console.log(event);
     res = { error: 'Kinesis records not present in event' };
   }
 
