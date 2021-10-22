@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.2](https://github.com/bdatdo0601/big-boi/compare/v1.9.1...v1.9.2) (2021-10-22)
+
+
+### Bug Fixes
+
+* blog post re-reouting ([95da3b5](https://github.com/bdatdo0601/big-boi/commit/95da3b5d7040c61e632e595ece2d8429e7c740d6))
+* enable api keys for external endpoint ([b3dea4f](https://github.com/bdatdo0601/big-boi/commit/b3dea4f683b80009eb51597f53a65dbcd269aa08))
+
 ### [1.9.1](https://github.com/bdatdo0601/big-boi/compare/v1.9.0...v1.9.1) (2021-10-21)
 
 
