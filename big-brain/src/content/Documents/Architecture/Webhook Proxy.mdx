@@ -1,0 +1,15 @@
+# Webhook Proxy
+
+Services (Github, Medium, etc) generally expect server API to have no validation or handle custom validation within logic.
+This forces a decisions point: whether to create a proxy that would capture these webhook or handle the custom validation ourselves if we want to keep our endpoints secure
+
+## Solutions
+
+### Maker IFTTT
+
+[IFTTT](https://maker.ifttt.com/) is a service that allows us to hook anything to anything and it consist of an endpoint that allow an unique link for different services
+This allow us to manage service categorization from proxy level, while stil keep it somewhat secure (the URL should not be publicized)
+
+```bash
+$ curl -X POST -H "Content-Type: application/json" -d '{"this":[{"is":{"some":["test","data"]}}]}' https://maker.ifttt.com/trigger/{event}/json/with/key/<USER-KEY>
+```
