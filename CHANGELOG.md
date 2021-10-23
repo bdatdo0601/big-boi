@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.3](https://github.com/bdatdo0601/big-boi/compare/v1.9.2...v1.9.3) (2021-10-23)
+
+
+### Bug Fixes
+
+* integrate and categorize github webhooks ([60ddf19](https://github.com/bdatdo0601/big-boi/commit/60ddf1986753f581a370b46391d40e32fe9e99aa))
+* re-deploy message storing ([7fbde8b](https://github.com/bdatdo0601/big-boi/commit/7fbde8b6f10a793fa6c94a1c72c0e1fd49f2ac1b))
+* refactor and add route for private event messages ([03ff6d7](https://github.com/bdatdo0601/big-boi/commit/03ff6d72c55c500ae695be4128bd863e28344ddf))
+* refactor consumer ingress ([794c0d9](https://github.com/bdatdo0601/big-boi/commit/794c0d96267ed8eed9608eb3a99f6aab57f99ab1))
+* refactor event type processors ([18f8a95](https://github.com/bdatdo0601/big-boi/commit/18f8a95bb00b1333606dde8f301288e4994680e8))
+
 ### [1.9.2](https://github.com/bdatdo0601/big-boi/compare/v1.9.1...v1.9.2) (2021-10-22)
 
 
