@@ -24,7 +24,7 @@ exports.handler = async handlerEvent => {
   // Only sent out valid event
   // TODO: properly handle invalid event
   const validEvents = events.filter(evt => get(evt, "metadata.isValid", false));
-  const invalidEvents = events.filter(evt => !get(evt, "metadata.isValid", true));
+  const invalidEvents = events.filter(evt => !get(evt, "metadata.isValid", false));
   for (const evt of validEvents) {
     // Propagate to SNS topic
     await publishMessage(evt);
