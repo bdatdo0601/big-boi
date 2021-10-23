@@ -36,6 +36,6 @@ exports.handler = async handlerEvent => {
   }
 
   const response = await EventSourcesProcessors[eventSource].getResponses(responseData);
-
-  return Promise.resolve(response);
+  console.info(response);
+  return response;
 };

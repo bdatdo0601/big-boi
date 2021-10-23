@@ -43,7 +43,8 @@ exports.apiGatewayEventSourceProcessor = {
     getResponses: (responseData) => {
         return {
             statusCode: 200,
-            body: responseData,
+            body: JSON.stringify(responseData),
+            isBase64Encoded: false
         }
     }
 }
