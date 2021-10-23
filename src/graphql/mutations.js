@@ -238,3 +238,66 @@ export const deleteEventMessage = /* GraphQL */ `
     }
   }
 `;
+export const createPrivateEventMessage = /* GraphQL */ `
+  mutation CreatePrivateEventMessage(
+    $input: CreatePrivateEventMessageInput!
+    $condition: ModelPrivateEventMessageConditionInput
+  ) {
+    createPrivateEventMessage(input: $input, condition: $condition) {
+      id
+      type
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updatePrivateEventMessage = /* GraphQL */ `
+  mutation UpdatePrivateEventMessage(
+    $input: UpdatePrivateEventMessageInput!
+    $condition: ModelPrivateEventMessageConditionInput
+  ) {
+    updatePrivateEventMessage(input: $input, condition: $condition) {
+      id
+      type
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deletePrivateEventMessage = /* GraphQL */ `
+  mutation DeletePrivateEventMessage(
+    $input: DeletePrivateEventMessageInput!
+    $condition: ModelPrivateEventMessageConditionInput
+  ) {
+    deletePrivateEventMessage(input: $input, condition: $condition) {
+      id
+      type
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

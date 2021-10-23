@@ -18,15 +18,15 @@
       "function": {
         "bigboikinesisconsumer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboikinesisconsumer-454f313653706e324758-build.zip"
+          "s3Key": "amplify-builds/bigboikinesisconsumer-616959664367534b326a-build.zip"
         },
         "bigboibigboilambdalayer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion7b7db49c-build.zip"
+          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersionf1b3bd63-build.zip"
         },
         "bigboimessagestoring": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboimessagestoring-78437737793036426e77-build.zip"
+          "s3Key": "amplify-builds/bigboimessagestoring-6352532f4b6267426c76-build.zip"
         },
         "bigboiblogpoller": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",

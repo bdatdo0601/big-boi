@@ -6,43 +6,73 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-const { get, isEmpty } = require("lodash");
+const { get } = require("lodash");
 const gql = require('graphql-tag');
 const moment = require("moment");
 const { signedGraphQLMutationRequest } = require("/opt/packages/utils/signedGraphQLMutationRequest");
+const { getEventRetrieverSource, EventRetrieverProcessors } = require("/opt/packages/EventRetriever");
+
+const createEventMessage = gql`
+    mutation CreateEventMessage(
+        $input: CreateEventMessageInput!
+        $condition: ModelEventMessageConditionInput
+    ) {
+        createEventMessage(input: $input, condition: $condition) {
+            id
+        }
+    }
+`
+
+const createPrivateEventMessage = gql`
+    mutation CreatePrivateEventMessage(
+        $input: CreatePrivateEventMessageInput!
+        $condition: ModelPrivateEventMessageConditionInput
+    ) {
+        createPrivateEventMessage(input: $input, condition: $condition) {
+            id
+        }
+    }
+`
+
+const generateVariableInput = message => ({
+    input: {
+        ...message,
+        type: "Event",
+        content: JSON.stringify(get(message, "content", {})),
+        metadata: JSON.stringify(get(message, "metadata", {})),
+        publishInfo: JSON.stringify(get(message, "publishInfo", {})),
+        timestamp: moment(get(message, "metadata.timestamp", moment().valueOf())).toISOString()
+    }
+})
 
 // message storing handler
-exports.handler = async (event) => {
-    if ('Records' in event) {
-        const messages = await Promise.all(get(event, "Records", []).map(async record => {
-            // TODO collect sns data
-            const message = JSON.parse(get(record, "Sns.Message", "{}"));
-            if (!isEmpty(message)) {
-                // Save to AppSync
-                const createEventMessage = gql`
-                        mutation CreateEventMessage(
-                            $input: CreateEventMessageInput!
-                            $condition: ModelEventMessageConditionInput
-                        ) {
-                            createEventMessage(input: $input, condition: $condition) {
-                                id
-                            }
-                        }
-                    `
-                const variables = {
-                    input: {
-                        ...message,
-                        type: "Event",
-                        content: JSON.stringify(get(message, "content", {})),
-                        metadata: JSON.stringify(get(message, "metadata", {})),
-                        publishInfo: JSON.stringify(get(message, "publishInfo", {})),
-                        timestamp: moment(get(message, "metadata.timestamp", moment().valueOf())).toISOString()
-                    }
-                }
-                await signedGraphQLMutationRequest(createEventMessage, variables);
-            }
-        }));
-        return messages;
+exports.handler = async (handlerEvent) => {
+    const eventRetrieverSource = getEventRetrieverSource(handlerEvent);
+
+    if (!eventRetrieverSource) {
+      console.error("Invalid Event Retriever Source", handlerEvent);
+      return { statusCode: 400, body: "{}", isBase64Encoded: false };
     }
-    return { error: "Invalid messages" };
+
+    const messages = EventRetrieverProcessors[eventRetrieverSource].retrieveEvents(handlerEvent);
+    
+    await Promise.all(messages.map(async message => {
+        const variables = generateVariableInput(message);
+        const visibility = get(message, "metadata.visibility", "private");
+        let graphQLQuery = null;
+        switch (visibility) {
+            case "public":
+                graphQLQuery = createEventMessage;
+                break;
+            case "private":
+                graphQLQuery = createPrivateEventMessage;
+                break;
+            default:
+                graphQLQuery = createPrivateEventMessage;
+                break; 
+        }
+        await signedGraphQLMutationRequest(graphQLQuery, variables);
+    }));
+
+    return { messages, statusCode: 200 };
 };

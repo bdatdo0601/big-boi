@@ -4,7 +4,7 @@ const { PersonalPublishInfo } = require("../../../helpers/constants");
 
 
 module.exports = {
-    populateMetadata: async evt => evt,
+    populateMetadata: async evt => assign(evt, { metadata: { visibility: "public" } }),
     populatePublishInfo: async evt => {
         const contentStatus = get(evt, "content.status");
         const target =  includes(["PUBLISHED"], contentStatus) && `\"${get(evt, "content.title")}\"`;

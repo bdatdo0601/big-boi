@@ -211,3 +211,57 @@ export const onDeleteEventMessage = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePrivateEventMessage = /* GraphQL */ `
+  subscription OnCreatePrivateEventMessage($owner: String) {
+    onCreatePrivateEventMessage(owner: $owner) {
+      id
+      type
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdatePrivateEventMessage = /* GraphQL */ `
+  subscription OnUpdatePrivateEventMessage($owner: String) {
+    onUpdatePrivateEventMessage(owner: $owner) {
+      id
+      type
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeletePrivateEventMessage = /* GraphQL */ `
+  subscription OnDeletePrivateEventMessage($owner: String) {
+    onDeletePrivateEventMessage(owner: $owner) {
+      id
+      type
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

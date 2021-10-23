@@ -14,6 +14,11 @@ const { getEventSource, EventSourcesProcessors } = require("./eventSourceProcess
 exports.handler = async handlerEvent => {
   const eventSource = getEventSource(handlerEvent);
 
+  if (!eventSource) {
+    console.error("Invalid Event Source", handlerEvent);
+    return { statusCode: 400, body: "{}", isBase64Encoded: false };
+  }
+
   const events = await Promise.all(EventSourcesProcessors[eventSource].retrieveInitialEvents(handlerEvent).map(async record => {
     // Identify Event Type
     const eventType = await identifySource(record);

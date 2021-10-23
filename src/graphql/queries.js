@@ -221,3 +221,85 @@ export const eventMessageByTimestamp = /* GraphQL */ `
     }
   }
 `;
+export const getPrivateEventMessage = /* GraphQL */ `
+  query GetPrivateEventMessage($id: ID!) {
+    getPrivateEventMessage(id: $id) {
+      id
+      type
+      sourceID
+      source
+      eventType
+      content
+      metadata
+      publishInfo
+      timestamp
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listPrivateEventMessages = /* GraphQL */ `
+  query ListPrivateEventMessages(
+    $filter: ModelPrivateEventMessageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPrivateEventMessages(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        sourceID
+        source
+        eventType
+        content
+        metadata
+        publishInfo
+        timestamp
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const privateEventMessageByTimestamp = /* GraphQL */ `
+  query PrivateEventMessageByTimestamp(
+    $type: String
+    $timestamp: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPrivateEventMessageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    PrivateEventMessageByTimestamp(
+      type: $type
+      timestamp: $timestamp
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        sourceID
+        source
+        eventType
+        content
+        metadata
+        publishInfo
+        timestamp
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
