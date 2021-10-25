@@ -1,37 +1,17 @@
 const assign = require('@recursive/assign');
-const GITHUB_SCHEMA = require("../../../../schema/github_webhooks.json");
-const Ajv = require("ajv");
-const addFormats = require("ajv-formats");
 const { singular } = require("pluralize");
 const { isEmpty, get, pick, uniq, capitalize } = require('lodash');
 const { PersonalPublishInfo } = require('../helpers/constants');
 
-const getGithubWebhookActionInfo = async githubEvent => {
-    console.time("action info")
-    const ajv = new Ajv({
-        strict: true,
-        strictTypes: true,
-        strictTuples: true,
-        allErrors: true,
-    });
-    addFormats(ajv);
-    ajv.addKeyword("tsAdditionalProperties");
-    
-    ajv.compile(GITHUB_SCHEMA);
-    console.timeLog("action info", "finish initialize ajv")
-    const webhookAction = Object.keys(GITHUB_SCHEMA.definitions)
-    .filter(key => !key.includes("$")) // only use event with action
-    .find(key => {
-        return ajv.validate(`#/definitions/${key}`, githubEvent);
-    })
-    console.timeLog("action info", "validate webhook")
-    return webhookAction && webhookAction.replace(/(\_event)/g, "");
+const SPECIAL_GITHUB_ACTION_TO_URL = {
+    push: "compare",
+    fork: "forkee.html_url" 
 }
 
 module.exports = {
     populateMetadata: async evt => {
         const sourceMessage = get(evt, "metadata.sourceMessage");
-        const githubActionType = await getGithubWebhookActionInfo(sourceMessage);
+        const githubActionType = get(evt, "metadata.sourceMessage.headers.X-GitHub-Event");
         if (!githubActionType) {
             return evt;
         }
@@ -45,9 +25,10 @@ module.exports = {
         
         const isDatTheSender = PersonalPublishInfo.githubHandle === get(evt, "content.sender.login");
         const githubActionType = get(evt, "content.githubActionType");
-        const githubAction = get(evt, "content.action");
+        const formattedActionType = singular(githubActionType);
+        const githubAction = get(evt, "content.action", `${formattedActionType}ed`);
         const subject = isDatTheSender ? PersonalPublishInfo.subject : "Someone else";
-        const target = `${capitalize(githubActionType.replace(/\_/g, " "))}${isDatTheSender ? "" : " from Dat's GitHub"}`;
+        const target = `${capitalize(formattedActionType.replace(/\_/g, " "))}${isDatTheSender ? " on GitHub" : " from Dat's GitHub"}`;
         const publishInfo = {
             icon: {
                 type: "Icon",
@@ -58,7 +39,7 @@ module.exports = {
             subject,
             subjectLink: get(evt, "content.sender.html_url"),
             target,
-            targetLink: get(evt, `content.${singular(githubActionType)}.html_url`),
+            targetLink: get(evt, `content.${formattedActionType}.html_url`, get(evt, SPECIAL_GITHUB_ACTION_TO_URL[githubActionType])),
             message: `${subject} just ${githubAction} a/an ${target}`
         }
         return assign(evt, { publishInfo });

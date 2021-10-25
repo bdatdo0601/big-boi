@@ -7,6 +7,14 @@
                 "open": true
             },
             "policyResourceName": "/event"
+        },
+        {
+            "name": "/publicevent",
+            "lambdaFunction": "bigboiwebhookproxy",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/publicevent"
         }
     ],
     "resourceName": "bigboiexternalapi",
@@ -14,6 +22,9 @@
     "functionArns": [
         {
             "lambdaFunction": "bigboikinesisconsumer"
+        },
+        {
+            "lambdaFunction": "bigboiwebhookproxy"
         }
     ],
     "privacy": {
@@ -30,7 +41,15 @@
                 "Name",
                 "Arn"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "bigboiwebhookproxy",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
         }
     ],
-    "uuid": "0b9e425c"
+    "uuid": "24db6a63"
 }

@@ -5,7 +5,7 @@ This forces a decisions point: whether to create a proxy that would capture thes
 
 ## Solutions
 
-### Maker IFTTT
+### Option 1: Maker IFTTT
 
 [IFTTT](https://maker.ifttt.com/) is a service that allows us to hook anything to anything and it consist of an endpoint that allow an unique link for different services
 This allow us to manage service categorization from proxy level, while stil keep it somewhat secure (the URL should not be publicized)
@@ -13,3 +13,7 @@ This allow us to manage service categorization from proxy level, while stil keep
 ```bash
 $ curl -X POST -H "Content-Type: application/json" -d '{"this":[{"is":{"some":["test","data"]}}]}' https://maker.ifttt.com/trigger/{event}/json/with/key/<USER-KEY>
 ```
+
+### Option 2: Public Webhook Proxy through API Gateway and Lambda
+
+IFTT unfortunately does not support passing through headers, which cause us to miss some information (particularly event type in GitHub)

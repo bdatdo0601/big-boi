@@ -1,0 +1,14 @@
+{
+  "lambdaLayers": [],
+  "secretNames": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "apiEndpoint",
+      "environmentVariableName": "API_ENDPOINT"
+    },
+    {
+      "cloudFormationParameterName": "apiKey",
+      "environmentVariableName": "API_KEY"
+    }
+  ]
+}

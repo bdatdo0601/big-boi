@@ -13,9 +13,9 @@ const constructInitialEventFromApiGateway = (record, bodyData, handlerEvent) => 
       eventType: get(bodyData, "eventType", null),
       content: {},
       metadata: {
-        timestamp: moment(get(bodyData, "timestamp"), "Mon DD, YYYY [at] hh:mma").valueOf(),
+        timestamp: moment(get(bodyData, "timestamp")).valueOf(),
         sourceURI: get(handlerEvent, "headers.X-Amzn-Trace-Id"),
-        sourceMessage: record,
+        sourceMessage: { ...record, headers: get(handlerEvent, "headers") },
       }
     }
     

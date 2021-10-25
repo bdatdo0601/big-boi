@@ -18,12 +18,12 @@ const AnimatedListItem = animated(ListItem);
 const ActionLogRow = props => {
   const { data, index, style } = props;
   const [animateProps] = useSpring(() => ({
-    transform: [0, 0],
-    from: { transform: [200, 0] },
+    to: { opacity: 1 },
+    from: { opacity: 0 },
     width: "100%",
     config: {
       mass: 1,
-      tension: 500,
+      tension: 50,
     },
   }));
 
@@ -50,10 +50,7 @@ const ActionLogRow = props => {
     return result;
   }, [item]);
   return (
-    <AnimatedListItem
-      key={index}
-      style={{ ...animateProps, ...style, transform: animateProps.transform.to((x, y) => `translate(${x}px, ${y}px)`) }}
-    >
+    <AnimatedListItem key={index} style={{ ...animateProps, ...style }}>
       <Alert
         variant="filled"
         icon={
