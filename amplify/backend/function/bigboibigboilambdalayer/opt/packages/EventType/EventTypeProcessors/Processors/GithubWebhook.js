@@ -27,8 +27,8 @@ module.exports = {
         const githubActionType = get(evt, "content.githubActionType");
         const formattedActionType = singular(githubActionType);
         const githubAction = get(evt, "content.action", `${formattedActionType}ed`);
-        const subject = isDatTheSender ? PersonalPublishInfo.subject : "Someone else";
-        const target = `${capitalize(formattedActionType.replace(/\_/g, " "))}${isDatTheSender ? " on GitHub" : " from Dat's GitHub"}`;
+        const subject = isDatTheSender ? PersonalPublishInfo.subject : get(evt, "content.sender.login");
+        const target = `${has(evt, "content.action") ? capitalize(formattedActionType.replace(/\_/g, " ")) : ""}${isDatTheSender ? " on GitHub" : " on Dat's GitHub"}`;
         const publishInfo = {
             icon: {
                 type: "Icon",
@@ -39,8 +39,8 @@ module.exports = {
             subject,
             subjectLink: get(evt, "content.sender.html_url"),
             target,
-            targetLink: get(evt, `content.${formattedActionType}.html_url`, get(evt, SPECIAL_GITHUB_ACTION_TO_URL[githubActionType])),
-            message: `${subject} just ${githubAction} a/an ${target}`
+            targetLink: get(evt, `content.${formattedActionType}.html_url`, get(evt, `metadata.sourceMessage.${SPECIAL_GITHUB_ACTION_TO_URL[githubActionType]}`, get(evt, "content.repository.html_url"))),
+            message: `${subject} just ${githubAction}${has(evt, "content.action") ? " a/an " : " "}${target}`
         }
         return assign(evt, { publishInfo });
     },

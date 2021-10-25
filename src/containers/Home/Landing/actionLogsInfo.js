@@ -61,7 +61,7 @@ const ActionLogRow = props => {
           )
         }
         severity={get(item, "publishInfo.messageType", "info")}
-        style={{ width: "100%", height: 90, overflowY: "auto" }}
+        style={{ width: "100%", height: 70, overflowY: "auto" }}
       >
         <AlertTitle style={{}}>
           {messages.map((msg, i) => (isString(msg) ? <span key={`${msg} ${i}`}>{msg}</span> : msg))}
@@ -107,7 +107,7 @@ export default function ActionLogsInfo({ className, animation }) {
       <FixedSizeList
         height={300}
         width="100%"
-        itemSize={100}
+        itemSize={80}
         layout="vertical"
         itemCount={messages.length}
         overscanCount={0}
