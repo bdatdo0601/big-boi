@@ -1,4 +1,4 @@
-const { capitalize, set } = require("lodash");
+const { capitalize } = require("lodash");
 const { readdirSync } = require("fs");
 const { resolve } = require("path")
 const dot = require("dot-object");
@@ -25,7 +25,6 @@ const getEventTypeProcessorsFromDir = (rootDir, objectPath = "") => {
             eventTypes[`${entityPath}.eventType`] = entityPath;
         }
     }
-    console.log(eventTypes);
     return objectPath ? eventTypes : dot.object(eventTypes);
 }
 const EventTypeProcessors = getEventTypeProcessorsFromDir(processorsDir);

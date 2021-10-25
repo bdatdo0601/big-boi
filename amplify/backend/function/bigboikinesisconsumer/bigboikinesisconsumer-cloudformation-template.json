@@ -120,7 +120,7 @@
             "Ref": "functionbigboibigboilambdalayerArn"
           }
         ],
-        "Timeout": 25
+        "Timeout": 120
       }
     },
     "LambdaExecutionRole": {

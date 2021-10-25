@@ -29,7 +29,7 @@ const ActionLogRow = props => {
 
   const item = data[index];
 
-  const icon = get(item, "publishInfo.icon.type") === "Icon" ? Icons[get(item, "publishInfo.icon.value")] : undefined;
+  const Icon = get(item, "publishInfo.icon.type") === "Icon" && Icons[get(item, "publishInfo.icon.value")];
 
   const messages = useMemo(() => {
     let result = [get(item, "publishInfo.message")];
@@ -56,7 +56,13 @@ const ActionLogRow = props => {
     >
       <Alert
         variant="filled"
-        icon={icon}
+        icon={
+          Icon && (
+            <Link href={get(item, "publishInfo.icon.link")}>
+              <Icon />
+            </Link>
+          )
+        }
         severity={get(item, "publishInfo.messageType", "info")}
         style={{ width: "100%", height: 90, overflowY: "auto" }}
       >

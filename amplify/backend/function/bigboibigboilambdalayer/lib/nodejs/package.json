@@ -17,7 +17,13 @@
     "jsonschema": "^1.4.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
+    "pluralize": "^8.0.0",
     "uuid": "^8.3.2"
   },
-  "devDependencies": {}
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.3"
+  }
 }
