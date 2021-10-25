@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.4](https://github.com/bdatdo0601/big-boi/compare/v1.9.3...v1.9.4) (2021-10-25)
+
+
+### Bug Fixes
+
+* decrease each action row ([b6bd4ed](https://github.com/bdatdo0601/big-boi/commit/b6bd4ed511bb62e6340ad16cfe2a933f5c511591))
+* update github ([dfd8257](https://github.com/bdatdo0601/big-boi/commit/dfd8257d1e4018595f7c381d5c9042f49f2df2d6))
+* version 0 of github event ([7af76d3](https://github.com/bdatdo0601/big-boi/commit/7af76d345bd7394c5aeb22720dbfafa236a86cf8))
+
 ### [1.9.3](https://github.com/bdatdo0601/big-boi/compare/v1.9.2...v1.9.3) (2021-10-23)
 
 
