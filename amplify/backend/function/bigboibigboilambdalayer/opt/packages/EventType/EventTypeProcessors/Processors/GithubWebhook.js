@@ -1,6 +1,6 @@
 const assign = require('@recursive/assign');
 const { singular } = require("pluralize");
-const { isEmpty, get, pick, uniq, capitalize } = require('lodash');
+const { isEmpty, get, pick, uniq, capitalize, has } = require('lodash');
 const { PersonalPublishInfo } = require('../helpers/constants');
 
 const SPECIAL_GITHUB_ACTION_TO_URL = {
