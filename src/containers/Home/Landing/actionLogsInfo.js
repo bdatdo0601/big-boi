@@ -52,18 +52,19 @@ const ActionLogRow = props => {
   return (
     <AnimatedListItem key={index} style={{ ...animateProps, ...style }}>
       <Alert
+        className="hide-scrollbar"
         variant="filled"
         icon={
           Icon && (
-            <Link href={get(item, "publishInfo.icon.link")}>
+            <Link href={get(item, "publishInfo.icon.link")} style={{}}>
               <Icon />
             </Link>
           )
         }
         severity={get(item, "publishInfo.messageType", "info")}
-        style={{ width: "100%", height: 70, overflowY: "auto" }}
+        style={{ width: "100%", height: 70, overflow: "auto" }}
       >
-        <AlertTitle style={{}}>
+        <AlertTitle style={{ whiteSpace: "nowrap", width: "100%" }}>
           {messages.map((msg, i) => (isString(msg) ? <span key={`${msg} ${i}`}>{msg}</span> : msg))}
         </AlertTitle>
         {moment(item && item.createdAt).format("MM/DD/YY hh:mm:ss a")}
