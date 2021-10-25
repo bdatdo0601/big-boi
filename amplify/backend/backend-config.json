@@ -155,6 +155,29 @@
             "GraphQLAPIEndpointOutput",
             "GraphQLAPIKeyOutput"
           ]
+        },
+        {
+          "category": "api",
+          "resourceName": "bigboiexternalapi",
+          "attributes": [
+            "ApiName",
+            "ApiId"
+          ]
+        },
+        {
+          "category": "analytics",
+          "resourceName": "bigboianalytics",
+          "attributes": [
+            "Id",
+            "Region"
+          ]
+        },
+        {
+          "category": "analytics",
+          "resourceName": "bigboidefaultkinesis",
+          "attributes": [
+            "kinesisStreamArn"
+          ]
         }
       ]
     },

@@ -32,6 +32,26 @@
       "Type": "String",
       "Default": "storagebigboicontentBucketName"
     },
+    "apibigboiexternalapiApiName": {
+      "Type": "String",
+      "Default": "apibigboiexternalapiApiName"
+    },
+    "apibigboiexternalapiApiId": {
+      "Type": "String",
+      "Default": "apibigboiexternalapiApiId"
+    },
+    "analyticsbigboianalyticsId": {
+      "Type": "String",
+      "Default": "analyticsbigboianalyticsId"
+    },
+    "analyticsbigboianalyticsRegion": {
+      "Type": "String",
+      "Default": "analyticsbigboianalyticsRegion"
+    },
+    "analyticsbigboidefaultkinesiskinesisStreamArn": {
+      "Type": "String",
+      "Default": "analyticsbigboidefaultkinesiskinesisStreamArn"
+    },
     "notionIntegrationToken": {
       "Type": "String"
     },
@@ -103,6 +123,21 @@
             },
             "STORAGE_BIGBOICONTENT_BUCKETNAME": {
               "Ref": "storagebigboicontentBucketName"
+            },
+            "API_BIGBOIEXTERNALAPI_APINAME": {
+              "Ref": "apibigboiexternalapiApiName"
+            },
+            "API_BIGBOIEXTERNALAPI_APIID": {
+              "Ref": "apibigboiexternalapiApiId"
+            },
+            "ANALYTICS_BIGBOIANALYTICS_ID": {
+              "Ref": "analyticsbigboianalyticsId"
+            },
+            "ANALYTICS_BIGBOIANALYTICS_REGION": {
+              "Ref": "analyticsbigboianalyticsRegion"
+            },
+            "ANALYTICS_BIGBOIDEFAULTKINESIS_KINESISSTREAMARN": {
+              "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
             },
             "NOTION_INTEGRATION_TOKEN": {
               "Ref": "notionIntegrationToken"
@@ -310,6 +345,124 @@
                   ]
                 }
               ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "apigateway:POST",
+                "apigateway:PUT",
+                "apigateway:GET",
+                "apigateway:HEAD",
+                "apigateway:OPTIONS",
+                "apigateway:PATCH",
+                "apigateway:DELETE"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      "::/restapis/",
+                      {
+                        "Ref": "apibigboiexternalapiApiName"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "mobiletargeting:Put*",
+                "mobiletargeting:Create*",
+                "mobiletargeting:Send*",
+                "mobiletargeting:Get*",
+                "mobiletargeting:List*",
+                "mobiletargeting:Update*",
+                "mobiletargeting:Delete*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:mobiletargeting:",
+                      {
+                        "Ref": "analyticsbigboianalyticsRegion"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apps/",
+                      {
+                        "Ref": "analyticsbigboianalyticsId"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:mobiletargeting:",
+                      {
+                        "Ref": "analyticsbigboianalyticsRegion"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apps/",
+                      {
+                        "Ref": "analyticsbigboianalyticsId"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "kinesis:CreateStream",
+                "kinesis:RegisterStreamConsumer",
+                "kinesis:AddTagsToStream",
+                "kinesis:ListShards",
+                "kinesis:ListStreams",
+                "kinesis:ListStreamConsumers",
+                "kinesis:DescribeStream",
+                "kinesis:DescribeStreamSummary",
+                "kinesis:DescribeStreamConsumer",
+                "kinesis:GetRecords",
+                "kinesis:GetShardIterator",
+                "kinesis:SubscribeToShard",
+                "kinesis:DescribeLimits",
+                "kinesis:ListTagsForStream",
+                "kinesis:SubscribeToShard",
+                "kinesis:EnableEnhancedMonitoring",
+                "kinesis:DisableEnhancedMonitoring",
+                "kinesis:IncreaseStreamRetentionPeriod",
+                "kinesis:DecreaseStreamRetentionPeriod",
+                "kinesis:MergeShards",
+                "kinesis:PutRecord",
+                "kinesis:PutRecords",
+                "kinesis:SplitShard",
+                "kinesis:UpdateShardCount",
+                "kinesis:DeleteStream",
+                "kinesis:DeregisterStreamConsumer",
+                "kinesis:RemoveTagsFromStream"
+              ],
+              "Resource": {
+                "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
+              }
             }
           ]
         }

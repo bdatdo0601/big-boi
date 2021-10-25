@@ -14,6 +14,26 @@
         "read",
         "update",
         "delete"
+      ],
+      "bigboiexternalapi": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "analytics": {
+      "bigboianalytics": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "bigboidefaultkinesis": [
+        "create",
+        "read",
+        "update",
+        "delete"
       ]
     }
   },

@@ -13,11 +13,11 @@ const constructInitialEventFromKinesis = (record) => {
       sourceID: eventID,
       source: eventName,
       eventType: get(eventData, "eventType", null),
-      content: eventData,
+      content: {},
       metadata: {
         timestamp: approximateArrivalTimestamp,
         sourceURI: eventSourceARN,
-        sourceMessage: record,
+        sourceMessage: { ...record, eventData },
       }
     }
     

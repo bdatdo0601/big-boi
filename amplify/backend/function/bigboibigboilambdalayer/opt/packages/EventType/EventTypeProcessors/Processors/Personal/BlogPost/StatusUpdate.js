@@ -19,8 +19,9 @@ module.exports = {
             }
         `
 
-        const additionalData = await queryGraphQLData(getBlogPost, { id: get(evt, "content.id") }, "data.data.getPost");
+        const additionalData = await queryGraphQLData(getBlogPost, { id: get(evt, "metadata.sourceMessage.eventData.id") }, "data.data.getPost");
         return assign(evt, {
+            content: get(evt, "metadata.sourceMessage.eventData"),
             metadata: {
                 visibility: "public",
                 additionalData
