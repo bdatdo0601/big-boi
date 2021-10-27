@@ -56,16 +56,7 @@ The goal here is to keep notes of it so we can raise awareness
 - Is Rest API with just API Key enough security? Would there be trade off if there are more security measure there?
 - How open should incoming data validation be?
 
-### Message Categorizer
-
-#### Current State
-
-- Every message will first need to be determined its `eventType` then go through proper transformation to become a `message` that system can understand
-- These categorizer are currently just a giant JSON object with transform, validate functions
-
-#### Open Questions
-
-- There will be future messages with different event type coming in. How do we keep this maintainable and flexible? (a solution here might be `node-transformer-json`)
+### [[Message Categorizer]]
 
 ### Message visibility
 
