@@ -28,7 +28,8 @@ module.exports = {
         const formattedActionType = singular(githubActionType);
         const githubAction = get(evt, "content.action", `${formattedActionType}ed`);
         const subject = isDatTheSender ? PersonalPublishInfo.subject : get(evt, "content.sender.login");
-        const target = `${has(evt, "content.action") ? capitalize(formattedActionType.replace(/\_/g, " ")) : ""}${isDatTheSender ? " on GitHub" : " on Dat's GitHub"}`;
+        const title = has(evt, `content.${formattedActionType}`) ? get(evt, `content.${formattedActionType}.title`) : capitalize(formattedActionType.replace(/\_/g, " "))
+        const target = `${has(evt, "content.action") ? title : ""}${isDatTheSender ? " on GitHub" : " on Dat's GitHub"}`;
         const publishInfo = {
             icon: {
                 type: "Icon",

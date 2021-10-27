@@ -6,11 +6,11 @@ import { Paper, Typography, Alert, AlertTitle, ListItem, Link } from "@mui/mater
 import { animated, useSpring } from "react-spring";
 import { useDrag } from "react-use-gesture";
 import { FixedSizeList } from "react-window";
-import * as Icons from "@mui/icons-material";
 
 import ReactStringReplacer from "../../../utils/reactStringReplacer";
 import EventMessageContext from "../../../context/eventmessage";
 import "./index.less";
+import DataIcon from "../../../components/DataIcon";
 
 const AnimatedPaper = animated(Paper);
 const AnimatedListItem = animated(ListItem);
@@ -28,8 +28,6 @@ const ActionLogRow = props => {
   }));
 
   const item = data[index];
-
-  const Icon = get(item, "publishInfo.icon.type") === "Icon" && Icons[get(item, "publishInfo.icon.value")];
 
   const messages = useMemo(() => {
     let result = [get(item, "publishInfo.message")];
@@ -55,11 +53,11 @@ const ActionLogRow = props => {
         className="hide-scrollbar"
         variant="filled"
         icon={
-          Icon && (
-            <Link href={get(item, "publishInfo.icon.link")} style={{}}>
-              <Icon />
-            </Link>
-          )
+          <DataIcon
+            href={get(item, "publishInfo.icon.link")}
+            value={get(item, "publishInfo.icon.value")}
+            type={get(item, "publishInfo.icon.type")}
+          />
         }
         severity={get(item, "publishInfo.messageType", "info")}
         style={{ width: "100%", height: 70, overflow: "auto" }}

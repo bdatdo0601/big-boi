@@ -23,6 +23,7 @@ const { Client } = require("@notionhq/client");
 const { get } = require("lodash");
 const gql = require('graphql-tag');
 const moment = require("moment");
+const axios = require("axios");
 
 const { getNotionBlogPosts, retrievePageMetadata } = require("./Notion");
 const { queryGraphQLData, signedGraphQLMutationRequest } = require("./utils");
@@ -124,6 +125,9 @@ const synchronizeNotionBlogPosts = async (currentBlogPosts) => {
   const deletingBlogPosts = [
     ...currentBlogPosts.filter(item => get(JSON.parse(item.data), "type") === BlogPostSource.NOTION && !notionBlogPosts.find(post => post.id === item.id)),
   ]
+
+  const eventsToPush = [];
+
   await Promise.all(newBlogPosts.map(async item => {
     const data = {
       rawData: item,
@@ -144,11 +148,19 @@ const synchronizeNotionBlogPosts = async (currentBlogPosts) => {
         updatedAt: get(item, "attributes.updatedAt"),
       }
     }
-
-    return await signedGraphQLMutationRequest(createPost, variables);
+    await signedGraphQLMutationRequest(createPost, variables);
+    eventsToPush.push({ eventData: { ...variables.input, data } });
   }));
 
   await Promise.all(updatingBlogPosts.map(async item => {
+    const data = {
+      rawData: item,
+      attributes: get(item, "attributes", {}),
+      immutability: ["ARCHIVED"],
+      url: get(item, "attributes.url"),
+      type: BlogPostSource.NOTION,
+      text: "",
+    }
     const variables = {
       input: {
         id: get(item, "attributes.id"),
@@ -159,8 +171,8 @@ const synchronizeNotionBlogPosts = async (currentBlogPosts) => {
         updatedAt: get(item, "attributes.updatedAt"),
       }
     }
-
-    return await signedGraphQLMutationRequest(updatePost, variables);
+    await signedGraphQLMutationRequest(updatePost, variables);
+    eventsToPush.push({ eventData: { ...variables.input, data } });
   }));
 
   await Promise.all(deletingBlogPosts.map(async item => {
@@ -170,8 +182,19 @@ const synchronizeNotionBlogPosts = async (currentBlogPosts) => {
       }
     }
 
-    return await signedGraphQLMutationRequest(deletePost, variables);
+    await signedGraphQLMutationRequest(deletePost, variables);
   }));
+
+  // push to events key
+  await axios.post(`${process.env.EVENT_API_ENDPOINT}/event`, { 
+    eventType: "Personal.BlogPost.Notion",
+    timestamp: moment().valueOf(),
+    events: eventsToPush
+  }, { 
+      headers: {
+          "x-api-key": process.env.EVENT_API_KEY,
+      } 
+  });
 }
 
 

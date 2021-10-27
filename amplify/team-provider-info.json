@@ -18,11 +18,11 @@
       "function": {
         "bigboikinesisconsumer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboikinesisconsumer-69722f78563457653159-build.zip"
+          "s3Key": "amplify-builds/bigboikinesisconsumer-786f6752416433313767-build.zip"
         },
         "bigboibigboilambdalayer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersioneeda351f-build.zip"
+          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion602bfe29-build.zip"
         },
         "bigboimessagestoring": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
@@ -30,9 +30,11 @@
         },
         "bigboiblogpoller": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboiblogpoller-3275727942433648424e-build.zip",
+          "s3Key": "amplify-builds/bigboiblogpoller-59655844654b794a5139-build.zip",
           "notionIntegrationToken": "secret_bVdmMRSASiSDteN3AcHutJhA4xo0DpK6FHXsC8WDHbp",
-          "notionBlogpostBlockid": "4459e03a0cca4cf7a895ff0a5ce5e3c3"
+          "notionBlogpostBlockid": "4459e03a0cca4cf7a895ff0a5ce5e3c3",
+          "eventApiKey": "jgmj2loTvO31fX4xWOq4saxCay4gNRVx5taSLKHr",
+          "eventApiEndpoint": "https://api.datbdo.com"
         },
         "bigboiwebhookproxy": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",

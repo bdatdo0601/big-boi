@@ -57,6 +57,12 @@
     },
     "notionBlogpostBlockid": {
       "Type": "String"
+    },
+    "eventApiKey": {
+      "Type": "String"
+    },
+    "eventApiEndpoint": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -144,6 +150,12 @@
             },
             "NOTION_BLOGPOST_BLOCKID": {
               "Ref": "notionBlogpostBlockid"
+            },
+            "EVENT_API_KEY": {
+              "Ref": "eventApiKey"
+            },
+            "EVENT_API_ENDPOINT": {
+              "Ref": "eventApiEndpoint"
             }
           }
         },

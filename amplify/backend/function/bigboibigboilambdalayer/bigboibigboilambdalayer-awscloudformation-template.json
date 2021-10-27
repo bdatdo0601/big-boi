@@ -20,7 +20,7 @@
     }
   },
   "Resources": {
-    "LambdaLayerVersioneeda351f": {
+    "LambdaLayerVersion602bfe29": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "CompatibleRuntimes": {
@@ -51,13 +51,87 @@
       "DeletionPolicy": "Delete",
       "UpdateReplacePolicy": "Retain"
     },
-    "LambdaLayerPermissionPrivateeeda351f": {
+    "LambdaLayerPermissionPrivate602bfe29": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
         "LayerVersionArn": {
-          "Ref": "LambdaLayerVersioneeda351f"
+          "Ref": "LambdaLayerVersion602bfe29"
         },
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersion083a0d4d": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs14.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion083a0d4d-build.zip"
+        },
+        "Description": "Updated layer version 2021-10-25T17:46:34.175Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "bigboibigboilambdalayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionPrivate083a0d4d": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:142037127835:layer:bigboibigboilambdalayer-dev:60",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersioneeda351f": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs14.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersioneeda351f-build.zip"
+        },
+        "Description": "Updated layer version 2021-10-25T03:37:01.349Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "bigboibigboilambdalayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionPrivateeeda351f": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:142037127835:layer:bigboibigboilambdalayer-dev:59",
         "Principal": {
           "Ref": "AWS::AccountId"
         }
@@ -1409,7 +1483,7 @@
   "Outputs": {
     "Arn": {
       "Value": {
-        "Ref": "LambdaLayerVersioneeda351f"
+        "Ref": "LambdaLayerVersion602bfe29"
       }
     }
   }

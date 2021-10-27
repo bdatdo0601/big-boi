@@ -54,6 +54,14 @@
     {
       "cloudFormationParameterName": "notionBlogpostBlockid",
       "environmentVariableName": "NOTION_BLOGPOST_BLOCKID"
+    },
+    {
+      "cloudFormationParameterName": "eventApiKey",
+      "environmentVariableName": "EVENT_API_KEY"
+    },
+    {
+      "cloudFormationParameterName": "eventApiEndpoint",
+      "environmentVariableName": "EVENT_API_ENDPOINT"
     }
   ]
 }
