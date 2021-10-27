@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.5](https://github.com/bdatdo0601/big-boi/compare/v1.9.4...v1.9.5) (2021-10-27)
+
+
+### Bug Fixes
+
+* include has in dependency ([e0e5a2d](https://github.com/bdatdo0601/big-boi/commit/e0e5a2d7f39860af2a476cca1c00534d29332699))
+* pipe notion blog ([81bc833](https://github.com/bdatdo0601/big-boi/commit/81bc833d0b08d84be13a3c56867412ea982e0f3b))
+* update action logs row styling ([c74dccc](https://github.com/bdatdo0601/big-boi/commit/c74dccc42632e88d50cce440a2c36a8353ab5e43))
+* update amplify ([dfc9a19](https://github.com/bdatdo0601/big-boi/commit/dfc9a1931060ed6032635522d0f61737234e63a6))
+* update kinesis event formatter to be consistent with api gateway ([db6b819](https://github.com/bdatdo0601/big-boi/commit/db6b819ed7a6b51b74c1cfa8b782cc73de976412))
+
 ### [1.9.4](https://github.com/bdatdo0601/big-boi/compare/v1.9.3...v1.9.4) (2021-10-25)
 
 
