@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.6](https://github.com/bdatdo0601/big-boi/compare/v1.9.5...v1.9.6) (2021-11-24)
+
+
+### Bug Fixes
+
+* add custom resume ([6d6b3e8](https://github.com/bdatdo0601/big-boi/commit/6d6b3e8f786172b5702ab505f08c9bdadca89cc8))
+* update deps ([e96c95d](https://github.com/bdatdo0601/big-boi/commit/e96c95d1f9de1bacde1249794f8b1cafd0d7af05))
+
 ### [1.9.5](https://github.com/bdatdo0601/big-boi/compare/v1.9.4...v1.9.5) (2021-10-27)
 
 
