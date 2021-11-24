@@ -12,7 +12,6 @@ import "./index.less";
 
 export default function Background() {
   const targetRef = useRef(null);
-
   const { file, loading } = useGetFile(RESUME.SCHEMA_FILE, RESUME.PREFIX);
   const [resume, setResume] = useState(null);
   useEffect(() => {
@@ -37,12 +36,22 @@ export default function Background() {
       <ReactToPrint content={() => targetRef.current} documentTitle={`${moment().format("MMDDYYYY")}_DatDoResume`}>
         <PrintContextConsumer>
           {({ handlePrint }) => (
-            <Button onClick={handlePrint} variant="contained" color="primary" style={{ marginTop: 12 }}>
+            <Button onClick={handlePrint} variant="contained" color="primary" style={{ marginTop: 12, marginRight: 8 }}>
               Generate Resume
             </Button>
           )}
         </PrintContextConsumer>
       </ReactToPrint>
+      <Button
+        onClick={() => {
+          window.location.href = `${window.location.protocol}//${window.location.host}/custom/resume.pdf`;
+        }}
+        variant="contained"
+        color="primary"
+        style={{ marginTop: 12, marginLeft: 8 }}
+      >
+        Get Custom Resume
+      </Button>
       <Paper
         className="resume-preview"
         style={{ margin: "3%", padding: 12 }}
