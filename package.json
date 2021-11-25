@@ -41,6 +41,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-app-rewired": "^2.1.5",
+    "react-clear-browser-cache": "^0.2.3",
     "react-dom": "^16.12.0",
     "react-fast-marquee": "^1.2.1",
     "react-helmet": "^6.1.0",
@@ -76,13 +77,14 @@
   },
   "scripts": {
     "build:styles": "postcss tailwind.css -o src/styles.css",
-    "prebuild": "yarn build:styles",
+    "prebuild": "yarn generate-build-meta && yarn build:styles",
     "prestart": "yarn build:styles",
     "start": "cross-env REACT_APP_VERSION=$npm_package_version react-app-rewired start",
     "build": "node postinstall.js && cross-env GENERATE_SOURCEMAP=false REACT_APP_VERSION=$npm_package_version react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "release": "standard-version"
+    "release": "standard-version",
+    "generate-build-meta": "node ./node_modules/react-clear-browser-cache/bin/cli.js"
   },
   "eslintConfig": {
     "extends": "react-app"
