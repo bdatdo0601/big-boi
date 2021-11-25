@@ -13,9 +13,9 @@ export const createPost = /* GraphQL */ `
       status
       tags
       data
+      postType
       updatedAt
       createdAt
-      owner
       comments {
         items {
           id
@@ -23,7 +23,6 @@ export const createPost = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -42,9 +41,9 @@ export const updatePost = /* GraphQL */ `
       status
       tags
       data
+      postType
       updatedAt
       createdAt
-      owner
       comments {
         items {
           id
@@ -52,7 +51,6 @@ export const updatePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -71,9 +69,9 @@ export const deletePost = /* GraphQL */ `
       status
       tags
       data
+      postType
       updatedAt
       createdAt
-      owner
       comments {
         items {
           id
@@ -81,7 +79,6 @@ export const deletePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -106,14 +103,13 @@ export const createComment = /* GraphQL */ `
         status
         tags
         data
+        postType
         updatedAt
         createdAt
-        owner
         comments {
           nextToken
         }
       }
-      owner
     }
   }
 `;
@@ -135,14 +131,13 @@ export const updateComment = /* GraphQL */ `
         status
         tags
         data
+        postType
         updatedAt
         createdAt
-        owner
         comments {
           nextToken
         }
       }
-      owner
     }
   }
 `;
@@ -164,14 +159,13 @@ export const deleteComment = /* GraphQL */ `
         status
         tags
         data
+        postType
         updatedAt
         createdAt
-        owner
         comments {
           nextToken
         }
       }
-      owner
     }
   }
 `;

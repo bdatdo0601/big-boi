@@ -6,7 +6,7 @@ enum PostStatus {
 
 type Post @model @key(name: "byUpdatedAt", fields: ["status", "updatedAt"], queryField: "PostByUpdatedAt")  @auth(
     rules: [
-      { allow: owner, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
+      { allow: private, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
       { allow: private, provider: iam, operations: [read, create, update, delete] }, # iam lambda access
       { allow: public, operations: [read] } # unauthenticated users can read
     ]
@@ -17,13 +17,14 @@ type Post @model @key(name: "byUpdatedAt", fields: ["status", "updatedAt"], quer
   status: PostStatus!
   tags: [String]
   data: AWSJSON!
+  postType: String
   updatedAt: AWSDateTime!
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
 }
 
 type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(
     rules: [
-      { allow: owner, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
+      { allow: private, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
       { allow: private, provider: iam, operations: [read, create, update, delete] }, # iam lambda access
       { allow: public, operations: [read] } # unauthenticated users can read
     ]
