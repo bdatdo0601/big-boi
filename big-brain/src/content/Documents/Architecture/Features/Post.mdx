@@ -1,0 +1,83 @@
+# Post
+
+Initially, Post represent a Blog Post, which can be viewed in specific pages. However, I want this to be a little bit more dynamic,
+accomodate various news source. Some example maybe a post fetched from Notion, a tweet, etc.
+
+## Current Data State
+
+Here is the old data schema
+
+```graphql
+type Post @model @key(name: "byUpdatedAt", fields: ["status", "updatedAt"], queryField: "PostByUpdatedAt")  @auth(
+    rules: [
+      { allow: owner, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
+      { allow: private, provider: iam, operations: [read, create, update, delete] }, # iam lambda access
+      { allow: public, operations: [read] } # unauthenticated users can read
+    ]
+  ) {
+  id: ID!
+  title: String!
+  description: String
+  status: PostStatus!
+  tags: [String]
+  data: AWSJSON!
+  updatedAt: AWSDateTime!
+  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+}
+
+type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(
+    rules: [
+      { allow: owner, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
+      { allow: private, provider: iam, operations: [read, create, update, delete] }, # iam lambda access
+      { allow: public, operations: [read] } # unauthenticated users can read
+    ]
+  ) {
+  id: ID!
+  postID: ID!
+  post: Post @connection(fields: ["postID"])
+  content: String!
+}
+```
+
+## New Requirements
+
+- Other than our own blog post, other external source post should only have a single post state. Other state management must be owned by the source itself.
+Logged in users will have the ability to delete any post
+- Post renderer should render based on post type (which should make this a property at root level)
+
+## New schema
+
+```graphql
+type Post @model @key(name: "byUpdatedAt", fields: ["status", "updatedAt"], queryField: "PostByUpdatedAt")  @auth(
+    rules: [
+      { allow: private, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
+      { allow: private, provider: iam, operations: [read, create, update, delete] }, # iam lambda access
+      { allow: public, operations: [read] } # unauthenticated users can read
+    ]
+  ) {
+  id: ID!
+  title: String!
+  description: String
+  status: PostStatus!
+  tags: [String]
+  data: AWSJSON!
+  postType: String
+  updatedAt: AWSDateTime!
+  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+}
+
+type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(
+    rules: [
+      { allow: private, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
+      { allow: private, provider: iam, operations: [read, create, update, delete] }, # iam lambda access
+      { allow: public, operations: [read] } # unauthenticated users can read
+    ]
+  ) {
+  id: ID!
+  postID: ID!
+  post: Post @connection(fields: ["postID"])
+  content: String!
+}
+```
+
+

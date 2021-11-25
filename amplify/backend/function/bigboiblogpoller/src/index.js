@@ -186,15 +186,17 @@ const synchronizeNotionBlogPosts = async (currentBlogPosts) => {
   }));
 
   // push to events key
-  await axios.post(`${process.env.EVENT_API_ENDPOINT}/event`, { 
-    eventType: "Personal.BlogPost.Notion",
-    timestamp: moment().valueOf(),
-    events: eventsToPush
-  }, { 
-      headers: {
-          "x-api-key": process.env.EVENT_API_KEY,
-      } 
-  });
+  if (eventsToPush.length > 0) {
+    await axios.post(`${process.env.EVENT_API_ENDPOINT}/event`, { 
+      eventType: "Personal.BlogPost.Notion",
+      timestamp: moment().valueOf(),
+      events: eventsToPush
+    }, { 
+        headers: {
+            "x-api-key": process.env.EVENT_API_KEY,
+        } 
+    });
+  }
 }
 
 
