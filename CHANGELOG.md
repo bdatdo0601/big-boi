@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/bdatdo0601/big-boi/compare/v1.9.6...v1.10.0) (2021-11-25)
+
+
+### Features
+
+* add twitter thoughts ([04b8a70](https://github.com/bdatdo0601/big-boi/commit/04b8a70f8952c463d111af5b263d6d871859c747))
+
+
+### Bug Fixes
+
+* update Data Icon ([da87e6a](https://github.com/bdatdo0601/big-boi/commit/da87e6ac1864c81ad2ad5c31ed32ba4f405fc0f8))
+* update gql schema ([cf48307](https://github.com/bdatdo0601/big-boi/commit/cf48307340ad784b074f1dc85a7764f45517e6ac))
+* update post format to accomodate more type ([77b6058](https://github.com/bdatdo0601/big-boi/commit/77b605832db61d3923e9a454639dd88f0b55099c))
+
 ### [1.9.6](https://github.com/bdatdo0601/big-boi/compare/v1.9.5...v1.9.6) (2021-11-24)
 
 
