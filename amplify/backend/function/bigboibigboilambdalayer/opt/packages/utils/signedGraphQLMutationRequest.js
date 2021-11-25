@@ -57,7 +57,7 @@ const signedGraphQLMutationRequest = async (query, variables, isUsingAPIKey = fa
         httpRequest.write(req.body);
         httpRequest.end();
     });
-
+    console.log("Request to graphql ", data);
     return true;
 }
 

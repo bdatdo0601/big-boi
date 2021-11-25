@@ -20,7 +20,7 @@ export default function Blogs() {
   return (
     <div className="blog-container-div">
       <Typography variant="h2">Blogs</Typography>
-      <Paper style={{ height: "100%", maxWidth: 1100, padding: 24, marginTop: 12, overflow: "auto" }} elevation={1}>
+      <Paper style={{ height: "100%", maxWidth: 600, padding: 24, marginTop: 12, overflow: "auto" }} elevation={1}>
         <Grid container justifyContent="center" alignItems="center" alignContent="center">
           {posts.map(post => (
             <Grid item key={get(post, "id")} xl={12} xs={12} md={12} sm={12} lg={12} style={{ margin: 12 }}>

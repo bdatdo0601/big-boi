@@ -9,6 +9,7 @@ const DataIcon = ({ type, value, href, alt }) => {
   const style = useMemo(() => ({ width: 24, height: 24, maxWidth: 24 }), []);
   switch (type) {
     case "Icon":
+    case "icon":
       return href ? (
         <Link href={href} style={{}}>
           {Icon && <Icon />}

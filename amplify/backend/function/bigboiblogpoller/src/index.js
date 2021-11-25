@@ -34,7 +34,8 @@ const auth = process.env.NOTION_INTEGRATION_TOKEN;
 const Owner = "5655c0b7-1480-4e60-bdb0-125b81faec5a";
 
 const BlogPostSource = {
-  NOTION: "notion"
+  NOTION: "notion",
+  TWITTER: "twitter"
 };
 
 const listBlogPost = gql`

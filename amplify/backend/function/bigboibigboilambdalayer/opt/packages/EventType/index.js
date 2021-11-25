@@ -7,11 +7,12 @@ exports.formatEventByEventType = async (evt, eventType) => {
     try {
         console.log(`Processed with event type ${eventType}`)
         let event = await eventTypeProcessor.populateMetadata(evt);
-        console.log("Populated Metadata");
-        event = await eventTypeProcessor.populatePublishInfo(evt);
-        console.log("Populated Publish Info");
-        event = await eventTypeProcessor.validateEvent(evt);
-        console.log("Validated Event");
+        event = await eventTypeProcessor.populatePublishInfo(event);
+        if (eventTypeProcessor.processEvent) {
+            console.log("Event needs to be processed");
+            await eventTypeProcessor.processEvent(event);
+        }
+        event = await eventTypeProcessor.validateEvent(event);
         return event;
     } catch (errors) {
         console.error(errors);
