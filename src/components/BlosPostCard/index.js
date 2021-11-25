@@ -14,6 +14,8 @@ export default function BlogPostCard({
   onPostClick,
   showState,
   width,
+  deletePost,
+  deletingPost,
 }) {
   return (
     <Card
@@ -30,7 +32,7 @@ export default function BlogPostCard({
         <CardContent>
           {showState && (
             <Typography color="textSecondary" gutterBottom>
-              {capitalize(post.status)}
+              {`${get(post, "postType") ? `[${capitalize(get(post, "postType"))}] ` : ""}${capitalize(post.status)}`}
             </Typography>
           )}
           <Typography gutterBottom variant="h5" component="h2">
@@ -55,7 +57,7 @@ export default function BlogPostCard({
         <CardActions>
           <Button
             size="small"
-            disabled={updatingPost}
+            disabled={updatingPost || get(post, "postType")}
             onClick={() => {
               updatePostState(post, POST_STATE.DRAFT);
             }}
@@ -65,7 +67,7 @@ export default function BlogPostCard({
           <Button
             size="small"
             color="primary"
-            disabled={updatingPost}
+            disabled={updatingPost || get(post, "postType")}
             onClick={() => {
               updatePostState(post, POST_STATE.PUBLISHED);
             }}
@@ -74,13 +76,26 @@ export default function BlogPostCard({
           </Button>
           <Button
             size="small"
-            color="secondary"
-            disabled={updatingPost}
+            color="warning"
+            disabled={updatingPost || get(post, "postType")}
             onClick={() => {
               updatePostState(post, POST_STATE.ARCHIVED);
             }}
           >
             Archived
+          </Button>
+          <Button
+            size="small"
+            color="error"
+            disabled={deletingPost}
+            onClick={() => {
+              // eslint-disable-next-line
+              if (window.confirm("Are you sure?")) {
+                deletePost(post);
+              }
+            }}
+          >
+            Delete
           </Button>
         </CardActions>
       )}
@@ -94,6 +109,8 @@ BlogPostCard.propTypes = {
   showActions: PropTypes.bool,
   updatingPost: PropTypes.bool,
   onPostClick: PropTypes.func,
+  deletePost: PropTypes.func,
+  deletingPost: PropTypes.bool,
   showState: PropTypes.bool,
   width: PropTypes.any,
 };
@@ -102,6 +119,8 @@ BlogPostCard.defaultProps = {
   width: 350,
   updatePostState: () => {},
   showActions: false,
+  deletePost: () => {},
+  deletingPost: false,
   updatingPost: false,
   onPostClick: () => {},
   showState: true,

@@ -30,7 +30,7 @@
         },
         "bigboiblogpoller": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboiblogpoller-786d46637773364a587a-build.zip",
+          "s3Key": "amplify-builds/bigboiblogpoller-3250417a56497a473035-build.zip",
           "notionIntegrationToken": "secret_bVdmMRSASiSDteN3AcHutJhA4xo0DpK6FHXsC8WDHbp",
           "notionBlogpostBlockid": "4459e03a0cca4cf7a895ff0a5ce5e3c3",
           "eventApiKey": "jgmj2loTvO31fX4xWOq4saxCay4gNRVx5taSLKHr",

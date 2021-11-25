@@ -24,6 +24,7 @@ const Blogs = lazy(() => import("./containers/Blogs"));
 const Background = lazy(() => import("./containers/Background"));
 // const Projects = lazy(() => import("./containers/Projects"));
 const PostDisplay = lazy(() => import("./containers/Blogs/PostDisplay"));
+const NotionPostDisplay = lazy(() => import("./containers/Blogs/NotionPostDisplay"));
 const Gallery = lazy(() => import("./containers/Gallery"));
 const ChangeLogs = lazy(() => import("./containers/Changelogs"));
 const Documentations = lazy(() => import("./containers/Documentations"));
@@ -115,6 +116,15 @@ export default [
     icon: <CommentIcon />,
     component: PostDisplay,
     path: "/blogs/post/:postID",
+    exact: true,
+    type: ROUTE_TYPE.PUBLIC,
+    hidden: async () => true,
+  },
+  {
+    name: "Post Display",
+    icon: <CommentIcon />,
+    component: NotionPostDisplay,
+    path: "/blogs/notion/:notionPostID",
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
     hidden: async () => true,

@@ -31,6 +31,8 @@ const { queryGraphQLData, signedGraphQLMutationRequest } = require("./utils");
 const RootBlockID = process.env.NOTION_BLOGPOST_BLOCKID;
 const auth = process.env.NOTION_INTEGRATION_TOKEN;
 
+const Owner = "5655c0b7-1480-4e60-bdb0-125b81faec5a";
+
 const BlogPostSource = {
   NOTION: "notion"
 };
@@ -132,7 +134,6 @@ const synchronizeNotionBlogPosts = async (currentBlogPosts) => {
     const data = {
       rawData: item,
       attributes: get(item, "attributes", {}),
-      immutability: ["ARCHIVED"],
       url: get(item, "attributes.url"),
       type: BlogPostSource.NOTION,
       text: "",
@@ -143,6 +144,9 @@ const synchronizeNotionBlogPosts = async (currentBlogPosts) => {
         title: get(item, "attributes.title"),
         data: JSON.stringify(data),
         tags: [],
+        externalLink: get(item, "attributes.url"),
+        postType: BlogPostSource.NOTION,
+        owner: Owner,
         description: "This blog is written in Notion",
         status: get(item, "attributes.archived", true) ? "ARCHIVED" : "PUBLISHED",
         updatedAt: get(item, "attributes.updatedAt"),
@@ -156,7 +160,6 @@ const synchronizeNotionBlogPosts = async (currentBlogPosts) => {
     const data = {
       rawData: item,
       attributes: get(item, "attributes", {}),
-      immutability: ["ARCHIVED"],
       url: get(item, "attributes.url"),
       type: BlogPostSource.NOTION,
       text: "",
@@ -166,6 +169,9 @@ const synchronizeNotionBlogPosts = async (currentBlogPosts) => {
         id: get(item, "attributes.id"),
         title: get(item, "attributes.title"),
         tags: [],
+        externalLink: get(item, "attributes.url"),
+        postType: BlogPostSource.NOTION,
+        owner: Owner,
         description: "This blog is written in Notion",
         ...(get(item, "attributes.archived", true) ? { status: "ARCHIVED" } : {}),
         updatedAt: get(item, "attributes.updatedAt"),

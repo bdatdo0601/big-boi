@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import { get } from "lodash";
 import { useHistory } from "react-router-dom";
 import { useAWSAPI } from "../../utils/awsAPI";
@@ -20,30 +20,31 @@ export default function Blogs() {
   return (
     <div className="blog-container-div">
       <Typography variant="h2">Blogs</Typography>
-      <Grid container justifyContent="center" alignItems="center" alignContent="center">
-        {posts.map(post => (
-          <Grid item key={post.id} xl={12} xs={12} md={12} sm={12} lg={12} style={{ margin: 12 }}>
-            <BlogPostCard
-              width="100%"
-              post={post}
-              showState={false}
-              onPostClick={() => {
-                const postData = JSON.parse(get(post, "data", "{}"));
-                if (!get(postData, "type")) {
-                  history.push(`/blogs/post/${post.id}`);
-                }
-                switch (get(postData, "type")) {
-                  case BlogPostSource.NOTION:
-                    window.location.href = get(postData, "url");
-                    break;
-                  default:
-                    break;
-                }
-              }}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      <Paper style={{ height: "100%", maxWidth: 1100, padding: 24, marginTop: 12, overflow: "auto" }} elevation={1}>
+        <Grid container justifyContent="center" alignItems="center" alignContent="center">
+          {posts.map(post => (
+            <Grid item key={get(post, "id")} xl={12} xs={12} md={12} sm={12} lg={12} style={{ margin: 12 }}>
+              <BlogPostCard
+                width="100%"
+                post={post}
+                showState={false}
+                onPostClick={() => {
+                  switch (get(post, "postType")) {
+                    case BlogPostSource.NOTION:
+                      window.open(get(post, "externalLink"));
+                      break;
+                    case null:
+                      history.push(`/blogs/post/${get(post, "id")}`);
+                      break;
+                    default:
+                      break;
+                  }
+                }}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Paper>
     </div>
   );
 }

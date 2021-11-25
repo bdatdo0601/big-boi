@@ -12,12 +12,15 @@ export const onCreatePost = /* GraphQL */ `
       data
       postType
       updatedAt
+      externalLink
+      owner
       createdAt
       comments {
         items {
           id
           postID
           content
+          owner
           createdAt
           updatedAt
         }
@@ -37,12 +40,15 @@ export const onUpdatePost = /* GraphQL */ `
       data
       postType
       updatedAt
+      externalLink
+      owner
       createdAt
       comments {
         items {
           id
           postID
           content
+          owner
           createdAt
           updatedAt
         }
@@ -62,12 +68,15 @@ export const onDeletePost = /* GraphQL */ `
       data
       postType
       updatedAt
+      externalLink
+      owner
       createdAt
       comments {
         items {
           id
           postID
           content
+          owner
           createdAt
           updatedAt
         }
@@ -82,6 +91,7 @@ export const onCreateComment = /* GraphQL */ `
       id
       postID
       content
+      owner
       createdAt
       updatedAt
       post {
@@ -93,6 +103,8 @@ export const onCreateComment = /* GraphQL */ `
         data
         postType
         updatedAt
+        externalLink
+        owner
         createdAt
         comments {
           nextToken
@@ -107,6 +119,7 @@ export const onUpdateComment = /* GraphQL */ `
       id
       postID
       content
+      owner
       createdAt
       updatedAt
       post {
@@ -118,6 +131,8 @@ export const onUpdateComment = /* GraphQL */ `
         data
         postType
         updatedAt
+        externalLink
+        owner
         createdAt
         comments {
           nextToken
@@ -132,6 +147,7 @@ export const onDeleteComment = /* GraphQL */ `
       id
       postID
       content
+      owner
       createdAt
       updatedAt
       post {
@@ -143,6 +159,8 @@ export const onDeleteComment = /* GraphQL */ `
         data
         postType
         updatedAt
+        externalLink
+        owner
         createdAt
         comments {
           nextToken

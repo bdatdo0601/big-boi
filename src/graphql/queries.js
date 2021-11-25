@@ -12,12 +12,15 @@ export const getPost = /* GraphQL */ `
       data
       postType
       updatedAt
+      externalLink
+      owner
       createdAt
       comments {
         items {
           id
           postID
           content
+          owner
           createdAt
           updatedAt
         }
@@ -42,6 +45,8 @@ export const listPosts = /* GraphQL */ `
         data
         postType
         updatedAt
+        externalLink
+        owner
         createdAt
         comments {
           nextToken
@@ -77,6 +82,8 @@ export const postByUpdatedAt = /* GraphQL */ `
         data
         postType
         updatedAt
+        externalLink
+        owner
         createdAt
         comments {
           nextToken
@@ -92,6 +99,7 @@ export const getComment = /* GraphQL */ `
       id
       postID
       content
+      owner
       createdAt
       updatedAt
       post {
@@ -103,6 +111,8 @@ export const getComment = /* GraphQL */ `
         data
         postType
         updatedAt
+        externalLink
+        owner
         createdAt
         comments {
           nextToken
@@ -122,6 +132,7 @@ export const listComments = /* GraphQL */ `
         id
         postID
         content
+        owner
         createdAt
         updatedAt
         post {
@@ -133,6 +144,8 @@ export const listComments = /* GraphQL */ `
           data
           postType
           updatedAt
+          externalLink
+          owner
           createdAt
         }
       }

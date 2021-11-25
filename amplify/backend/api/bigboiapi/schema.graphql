@@ -19,7 +19,9 @@ type Post @model @key(name: "byUpdatedAt", fields: ["status", "updatedAt"], quer
   data: AWSJSON!
   postType: String
   updatedAt: AWSDateTime!
+  externalLink: String
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+  owner: String
 }
 
 type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(
@@ -33,6 +35,7 @@ type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(
   postID: ID!
   post: Post @connection(fields: ["postID"])
   content: String!
+  owner: String
 }
 
 # TODO: improve message details
