@@ -1,11 +1,29 @@
 .blog-container-div {
   text-align: center;
   width: 100%;
-  padding: 3%;
+  padding-top: 3%;
   height: calc(100vh - 64px);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.masonry-blog {
+  height: 100%;
+  width: 100%;
+  padding: 24;
+  margin-top: 24;
+  overflow: auto;
+  border-radius: 12;
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
+}
+
+.masonry-blog-column {
+  padding-left: 10px; /* gutter size */
+  background-clip: padding-box;
 }

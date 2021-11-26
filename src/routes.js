@@ -104,7 +104,7 @@ export default [
     type: ROUTE_TYPE.PUBLIC,
   },
   {
-    name: "Blogs",
+    name: "Blogs & Thoughts",
     icon: <CommentIcon />,
     component: Blogs,
     path: "/blogs",
