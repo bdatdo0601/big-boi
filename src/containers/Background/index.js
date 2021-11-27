@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, CircularProgress, Paper, Typography } from "@mui/material";
 import { ResumeProvider } from "react-vitae";
-import moment from "moment";
-import ReactToPrint, { PrintContextConsumer } from "react-to-print";
 
 import ResumeDisplay from "./ResumeDisplay";
 import { useGetFile } from "../../utils/awsStorage";
@@ -33,7 +31,7 @@ export default function Background() {
   return (
     <div className="container-div">
       <Typography variant="h3">Background</Typography>
-      <ReactToPrint content={() => targetRef.current} documentTitle={`${moment().format("MMDDYYYY")}_DatDoResume`}>
+      {/* <ReactToPrint content={() => targetRef.current} documentTitle={`${moment().format("MMDDYYYY")}_DatDoResume`}>
         <PrintContextConsumer>
           {({ handlePrint }) => (
             <Button onClick={handlePrint} variant="contained" color="primary" style={{ marginTop: 12, marginRight: 8 }}>
@@ -41,7 +39,7 @@ export default function Background() {
             </Button>
           )}
         </PrintContextConsumer>
-      </ReactToPrint>
+      </ReactToPrint> */}
       <Button
         onClick={() => {
           window.location.href = `${window.location.protocol}//${window.location.host}/custom/resume.pdf`;
@@ -52,14 +50,13 @@ export default function Background() {
       >
         Get Custom Resume
       </Button>
-      <Paper
-        className="resume-preview"
-        style={{ margin: "3%", padding: 12 }}
-        ref={ref => {
-          targetRef.current = ref;
-        }}
-      >
-        <div className="resume-wrapper">
+      <Paper className="resume-preview" style={{ margin: "3%", padding: 12 }}>
+        <div
+          className="resume-wrapper"
+          ref={ref => {
+            targetRef.current = ref;
+          }}
+        >
           <ResumeProvider resume={resume}>
             <ResumeDisplay />
           </ResumeProvider>
