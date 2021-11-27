@@ -59,9 +59,11 @@ export default function Background() {
           targetRef.current = ref;
         }}
       >
-        <ResumeProvider resume={resume}>
-          <ResumeDisplay />
-        </ResumeProvider>
+        <div className="resume-wrapper">
+          <ResumeProvider resume={resume}>
+            <ResumeDisplay />
+          </ResumeProvider>
+        </div>
       </Paper>
     </div>
   );

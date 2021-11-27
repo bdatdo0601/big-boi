@@ -1,3 +1,9 @@
+html, body {
+    width: 100vw !important;
+    overflow-x: hidden;
+    position: fixed;
+}
+
 button {
     outline: none;
 }

@@ -18,6 +18,7 @@ const DefaultCardContent = ({ post, showState, onPostClick, width, isDark }) => 
       textAlign: "left",
       opacity: post.status === POST_STATE.ARCHIVED ? 0.5 : 1,
       borderRadius: "10px",
+      padding: 8,
     }}
     raised
     elevation={3}
@@ -69,7 +70,7 @@ DefaultCardContent.defaultProps = {
 const TwitterCardContent = ({ post, isDark }) => {
   const postData = useMemo(() => JSON.parse(get(post, "data", "{}")), [post]);
   return (
-    <div className="tweet-wrapper" style={{ margin: 8 }}>
+    <div className="tweet-wrapper" style={{ margin: 8, padding: 8 }}>
       <Tweet tweetId={get(postData, "tweetID")} options={{ theme: isDark ? "dark" : "light", align: "center" }} />
     </div>
   );
@@ -111,7 +112,7 @@ export default function BlogPostCard({
     <>
       <CardContentData post={post} showState={showState} onPostClick={onPostClick} width={width} isDark={isDark} />
       {showActions && (
-        <CardActions>
+        <CardActions style={{ display: "flex", justifyContent: "center" }}>
           <Button
             size="small"
             disabled={updatingPost || get(post, "postType")}

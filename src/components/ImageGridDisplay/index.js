@@ -8,9 +8,8 @@ import "./index.less";
 export default function ImageGridDisplay({ url, name, animation, style }) {
   const [animateProps, setAnimateProps] = useSpring(() => ({
     transform: [0, 0],
-    objectFit: "cover",
+    objectFit: "contain",
     width: "100%",
-    minHeight: "100%",
     ...style,
     from: { transform: animation ? [0, -200] : [0, 0] },
     config: {

@@ -1,9 +1,10 @@
 import React, { useCallback, useMemo } from "react";
-import { Button, CircularProgress, Grid, Typography } from "@mui/material";
+import { Button, CircularProgress, Typography, useMediaQuery } from "@mui/material";
 import { get } from "lodash";
 import { v4 as uuid } from "uuid";
 import { useHistory } from "react-router-dom";
 import { AddRounded } from "@mui/icons-material";
+import Masonry from "react-masonry-css";
 
 import { useAWSAPI, useLazyAWSAPI } from "../../utils/awsAPI";
 import { listPosts } from "../../graphql/queries";
@@ -26,6 +27,7 @@ const DataUpdateOptions = {
 export default function BlogManager() {
   const history = useHistory();
   const query = useMemo(() => ({ limit: 10000 }), []);
+  const isWeb = useMediaQuery("(min-width:1200px)");
   const { data: rawData, loading, execute: refetch } = useAWSAPI(listPosts, query, "AWS_IAM");
   const { execute: mutatePost, loading: updatingPost } = useLazyAWSAPI(updatePost, "AWS_IAM");
   const { execute: deletePostRequest, loading: deletingPost } = useLazyAWSAPI(deletePostQuery, "AWS_IAM");
@@ -74,30 +76,31 @@ export default function BlogManager() {
         >
           Add New Blog
         </Button>
-        <Grid container justifyContent="center">
+        <Masonry breakpointCols={isWeb ? 3 : 1} className="masonry-blog" columnClassName="masonry-blog-column">
           {posts.map(post => (
-            <Grid item key={post.id} style={{ margin: 8 }}>
-              <BlogPostCard
-                post={post}
-                updatePostState={updatePostState}
-                deletePost={deletePost}
-                showActions
-                updatingPost={updatingPost}
-                deletingPost={deletingPost}
-                onPostClick={() => {
-                  if (!get(post, "postType")) {
-                    history.push(`/blogmanager/update/${post.id}`);
-                    return;
-                  }
+            <BlogPostCard
+              post={post}
+              updatePostState={updatePostState}
+              deletePost={deletePost}
+              showActions
+              updatingPost={updatingPost}
+              deletingPost={deletingPost}
+              onPostClick={() => {
+                if (!get(post, "postType")) {
+                  history.push(`/blogmanager/update/${post.id}`);
+                  return;
+                }
+                if (
+                  get(post, "externalLink") &&
                   // eslint-disable-next-line
-                  if (get(post, "externalLink") && window.confirm(`Do you want to navigate to external link: ${get(post, "postType")}`)) {
-                    window.location.href = get(post, "externalLink");
-                  }
-                }}
-              />
-            </Grid>
+                  window.confirm(`Do you want to navigate to external link: ${get(post, "postType")}`)
+                ) {
+                  window.location.href = get(post, "externalLink");
+                }
+              }}
+            />
           ))}
-        </Grid>
+        </Masonry>
       </div>
     </div>
   );

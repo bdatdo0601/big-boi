@@ -1,23 +1,28 @@
-.resume-preview {
-    @media all {
-        .page-break {
-            display: none;
+.resume-wrapper {
+    overflow-y: scroll;
+    height: 80vh;
+    padding-bottom: 5rem;
+    .resume-preview {
+        @media all {
+            .page-break {
+                display: none;
+            }
         }
-    }
-
-    @media print {
-        width: 100%;
-        padding: 0px !important;
-        margin: 0px !important;
-
-        .page-break {
-            margin-top: 1rem;
-            display: block;
-            page-break-before: auto;
+    
+        @media print {
+            width: 100%;
+            padding: 0px !important;
+            margin: 0px !important;
+    
+            .page-break {
+                margin-top: 1rem;
+                display: block;
+                page-break-before: auto;
+            }
         }
-    }
-
-    @page {
-        size: auto;
+    
+        @page {
+            size: auto;
+        }
     }
 }

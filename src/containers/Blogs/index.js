@@ -22,7 +22,7 @@ export default function Blogs() {
   const posts = useMemo(() => get(rawData, "data.PostByUpdatedAt.items", []), [rawData]);
   return (
     <div className="blog-container-div">
-      <Typography variant="h2" style={{ marginBottom: 12 }}>
+      <Typography variant={isWeb ? "h2" : "h4"} style={{ marginBottom: 12 }}>
         Blogs & Thoughts
       </Typography>
       <Masonry breakpointCols={isWeb ? 3 : 1} className="masonry-blog" columnClassName="masonry-blog-column">

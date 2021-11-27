@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import ProfileCard from "../../components/ProfileCard";
 import LayoutContext from "../../context/layout";
 import ImagesDisplay from "./imagesDisplay";
+import "./index.less";
 
 const descriptions = [
   "I put in here some of my best memory with friends and families, along with my interest outside of programming.",
@@ -37,7 +38,9 @@ export default function Gallery() {
           ))}
         </div>
       </ProfileCard>
-      <ImagesDisplay />
+      <div className="images-display-wrapper">
+        <ImagesDisplay />
+      </div>
     </div>
   );
 }
