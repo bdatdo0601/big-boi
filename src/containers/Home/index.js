@@ -6,6 +6,7 @@ import About from "./About";
 import { useGetFile } from "../../utils/awsStorage";
 import { RESUME } from "../../utils/constants";
 import { fetchFileToJSON } from "../../utils";
+import "./index.less";
 
 export default function Home() {
   const { file, loading } = useGetFile(RESUME.SCHEMA_FILE, RESUME.PREFIX);
