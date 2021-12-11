@@ -1,0 +1,27 @@
+# Authentication
+
+For this project, Authetication needs to be done right. While we are doing this initially just for resume review, which is pretty simple case, we might want to expand to other usecases
+
+This docs will cover and keep track of everything authentication related
+
+## Decision Overview
+
+We will use **[Cognito User Pool](https://aws.amazon.com/cognito/)** as our base authentication solution. The main reason for this is it will play very well with Amplify eco-system and other part of AWS Service (which is where we host our stuff)
+
+We will also use Google Federated authentication as well to allow easy access for new mentor/mentee that we would be interested in
+
+All signup, signin, etc flow have been incorporated out of the box with this user Pool
+
+## User-related attributes
+
+For now, the only information that tie to our users are their email address. as part of [[ResumeFixerUpper]], we want to keep user as anonymous as possible.
+
+In case we might need other info (name, phone-number, etc) for future use-case, user consent will be needed and user must be able to fully control it
+
+## Role-based access
+
+By Default, all member are mentee
+
+Permission groups: `Mentors` and `Admins`. All data access will have logic based on this to ensure our security access
+
+We will start with referral system to be promoted either `Mentors` or `Admins`
