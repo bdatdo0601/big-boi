@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.10](https://github.com/bdatdo0601/big-boi/compare/v1.10.9...v1.10.10) (2022-01-17)
+
+
+### Bug Fixes
+
+* update amplify deployment ([dd1a12a](https://github.com/bdatdo0601/big-boi/commit/dd1a12a58f554f29552d98882c23513a9fa36a9a))
+
 ### [1.10.9](https://github.com/bdatdo0601/big-boi/compare/v1.10.8...v1.10.9) (2022-01-17)
 
 
