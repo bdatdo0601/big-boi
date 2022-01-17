@@ -58,10 +58,7 @@ export default function PostDisplay() {
         </div>
       </Paper>
 
-      <Paper
-        style={{ marginTop: 12, marginBottom: "2rem" }}
-        className="post-markdown-content html-wrap"
-      >
+      <Paper style={{ marginTop: 12, marginBottom: "2rem" }} className="post-markdown-content html-wrap">
         <MarkdownDisplayer style={{ padding: "2rem" }} value={get(post, "data.text", "")} />
       </Paper>
     </div>
