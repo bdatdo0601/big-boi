@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "paths": {
+    "/event": {
+      "permissions": {
+        "setting": "open"
+      },
+      "lambdaFunction": "bigboikinesisconsumer"
+    },
+    "/publicevent": {
+      "permissions": {
+        "setting": "open"
+      },
+      "lambdaFunction": "bigboiwebhookproxy"
+    }
+  }
+}
