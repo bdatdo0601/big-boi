@@ -36,7 +36,7 @@ const signedGraphQLMutationRequest = async (query, variables, isUsingAPIKey = fa
         const signer = new AWS.Signers.V4(req, "appsync", true);
         signer.addAuthorization(AWS.config.credentials, AWS.util.date.getDate());
     }
-
+    console.log("Request to graphql", query, variables)
     const data = await new Promise((resolve, reject) => {
         const httpRequest = https.request({ ...req, host: config.headers.host }, (result) => {
             let data = "";
@@ -57,7 +57,7 @@ const signedGraphQLMutationRequest = async (query, variables, isUsingAPIKey = fa
         httpRequest.write(req.body);
         httpRequest.end();
     });
-    console.log("Request to graphql ", data);
+    console.log("Response to graphql ", data);
     return true;
 }
 

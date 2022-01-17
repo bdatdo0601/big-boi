@@ -15,7 +15,7 @@ const constructInitialEventFromKinesis = (record) => {
       eventType: get(eventData, "eventType", null),
       content: {},
       metadata: {
-        timestamp: approximateArrivalTimestamp,
+        timestamp: approximateArrivalTimestamp * 1000, // arrive as seconds where we want milliseconds
         sourceURI: eventSourceARN,
         sourceMessage: { ...record, eventData },
       }

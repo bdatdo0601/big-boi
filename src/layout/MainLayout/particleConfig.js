@@ -8,13 +8,13 @@ export default isDark => ({
       },
     },
     color: {
-      value: isDark ? "#ffffff" : "#000",
+      value: isDark ? "#ffffff" : "#736a73",
     },
     shape: {
       type: "circle",
       stroke: {
         width: 10,
-        color: isDark ? "#ffffff" : "#000",
+        color: isDark ? "#ffffff" : "#736a73",
       },
       polygon: {
         nb_sides: 7,
@@ -48,7 +48,7 @@ export default isDark => ({
     line_linked: {
       enable: true,
       distance: 200,
-      color: isDark ? "#ffffff" : "#000",
+      color: isDark ? "#ffffff" : "#736a73",
       opacity: 0.1736124811591,
       width: 1,
     },

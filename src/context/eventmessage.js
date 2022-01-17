@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
-import { get, sortBy, reverse } from "lodash";
+import { get, sortBy, reverse, isEmpty } from "lodash";
 import { useSnackbar } from "notistack";
 
 import { useAWSAPI, useSubscriptionAWSAPI } from "../utils/awsAPI";
@@ -71,12 +71,13 @@ export const EventMessageContextProvider = ({ children }) => {
       const rawNewList = await refetch();
       const newList = get(rawNewList, "data.EventMessageByTimestamp.items", []);
       const newData = formatItem(newList.find(item => item.id === get(value, "data.onCreateEventMessage.id")));
-
-      enqueueSnackbar(get(newData, "publishInfo.message"), {
-        variant: "info",
-        anchorOrigin: { vertical: "top", horizontal: "right" },
-        autoHideDuration: 2000,
-      });
+      if (!isEmpty(get(newData, "publishInfo.message"))) {
+        enqueueSnackbar(get(newData, "publishInfo.message"), {
+          variant: "info",
+          anchorOrigin: { vertical: "top", horizontal: "right" },
+          autoHideDuration: 2000,
+        });
+      }
     },
     [enqueueSnackbar, refetch]
   );

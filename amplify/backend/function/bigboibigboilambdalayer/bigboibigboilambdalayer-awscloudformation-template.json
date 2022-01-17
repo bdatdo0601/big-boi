@@ -20,7 +20,7 @@
     }
   },
   "Resources": {
-    "LambdaLayerVersion0ef51b57": {
+    "LambdaLayerVersion348e2791": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "CompatibleRuntimes": {
@@ -51,13 +51,50 @@
       "DeletionPolicy": "Delete",
       "UpdateReplacePolicy": "Retain"
     },
-    "LambdaLayerPermissionPrivate0ef51b57": {
+    "LambdaLayerPermissionPrivate348e2791": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
         "LayerVersionArn": {
-          "Ref": "LambdaLayerVersion0ef51b57"
+          "Ref": "LambdaLayerVersion348e2791"
         },
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersion0ef51b57": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs14.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion0ef51b57-build.zip"
+        },
+        "Description": "Updated layer version 2021-11-25T05:49:35.715Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "bigboibigboilambdalayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionPrivate0ef51b57": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:142037127835:layer:bigboibigboilambdalayer-dev:67",
         "Principal": {
           "Ref": "AWS::AccountId"
         }
@@ -114,7 +151,7 @@
   "Outputs": {
     "Arn": {
       "Value": {
-        "Ref": "LambdaLayerVersion0ef51b57"
+        "Ref": "LambdaLayerVersion348e2791"
       }
     }
   }

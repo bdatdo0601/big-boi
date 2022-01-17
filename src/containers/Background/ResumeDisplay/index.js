@@ -129,7 +129,7 @@ const Competencies = () => {
 const Experiences = () => {
   const experiences = useWork();
   return (
-    <Card elevation={3} style={{ marginTop: 8, width: "100%", padding: 12 }}>
+    <Card elevation={3} style={{ width: "100%", padding: 12 }}>
       <Typography variant="h5">Experiences</Typography>
       <Stepper orientation="vertical" style={{ textAlign: "left" }} nonLinear>
         {experiences.map(item => (
@@ -243,7 +243,7 @@ const Interests = () => {
 };
 
 const ResumeDisplay = () => (
-  <Grid container style={{ width: "100%" }}>
+  <Grid container style={{ width: "100%" }} justifyContent="flex-start">
     <Grid item xl={4} lg={4} md={12} xs={12} style={{ padding: 4 }}>
       <Grid container>
         <Grid item xl={12} xs={12} md={12}>

@@ -70,6 +70,9 @@ export default function AppNavigation({
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
+        style={{
+          zIndex: 300
+        }}
       >
         <Grid
           className="appbar-grid"

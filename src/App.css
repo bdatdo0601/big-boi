@@ -9,6 +9,7 @@ button {
 }
 
 .container-div {
+    height: calc(100vh - 64px);
     max-width: 100vw;
     text-align: center;
     padding: 1%;

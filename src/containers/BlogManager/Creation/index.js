@@ -77,9 +77,9 @@ export default function BlogCreation() {
   }
 
   return (
-    <div className="container-div" style={{ padding: 32 }}>
+    <div className="container-div" style={{ padding: 8 }}>
       <Typography variant="h3">Blog Creation</Typography>
-      <Paper style={{ padding: 64, marginTop: 8 }}>
+      <Paper style={{ padding: 16, marginTop: 8 }}>
         <TextField
           variant="outlined"
           id="standard-basic"
@@ -130,37 +130,38 @@ export default function BlogCreation() {
             </span>
           ))}
         </div>
-        <MdEditor
-          style={{ height: "70vh", marginTop: "5rem" }}
-          config={{
-            markdownClass: "editor-pane",
-            imageAccept: ".jpg, .png, .gif",
-            allowPasteImage: true,
-          }}
-          value={get(data, "data.text", "")}
-          renderHTML={text => mdParser.render(text)}
-          onImageUpload={async file => {
-            const prefix = `${postID}-Images/`.replace(/\s+/g, "_");
-            const key = `${uuid()}-${get(file, "name", "Image")}`.replace(/\s+/g, "_");
-            const { key: uploadedKey } = await uploadPhoto(file, key, prefix);
-            return getPhotoURL(uploadedKey, "");
-          }}
-          onChange={({ text }) => {
-            setData(currentData => ({ ...currentData, data: { text } }));
-          }}
-        />
-        {postingPost || updatingPost ? <CircularProgress /> : null}
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ width: "60%", marginTop: 8 }}
-          startIcon={<CheckBoxOutlined />}
-          disabled={postingPost || updatingPost}
-          onClick={onSubmit}
-        >
-          Submit
-        </Button>
       </Paper>
+
+      <MdEditor
+        style={{ height: "70vh", marginTop: "1rem" }}
+        config={{
+          markdownClass: "post-markdown-content",
+          imageAccept: ".jpg, .png, .gif",
+          allowPasteImage: true,
+        }}
+        value={get(data, "data.text", "")}
+        renderHTML={text => mdParser.render(text)}
+        onImageUpload={async file => {
+          const prefix = `${postID}-Images/`.replace(/\s+/g, "_");
+          const key = `${uuid()}-${get(file, "name", "Image")}`.replace(/\s+/g, "_");
+          const { key: uploadedKey } = await uploadPhoto(file, key, prefix);
+          return getPhotoURL(uploadedKey, "");
+        }}
+        onChange={({ text }) => {
+          setData(currentData => ({ ...currentData, data: { text } }));
+        }}
+      />
+      {postingPost || updatingPost ? <CircularProgress /> : null}
+      <Button
+        variant="contained"
+        color="primary"
+        style={{ width: "60%", marginTop: 8 }}
+        startIcon={<CheckBoxOutlined />}
+        disabled={postingPost || updatingPost}
+        onClick={onSubmit}
+      >
+        Submit
+      </Button>
     </div>
   );
 }

@@ -26,7 +26,7 @@ export default function PostDisplay() {
   }
 
   return (
-    <div style={{ padding: "3%", width: "100vw" }}>
+    <div className="blog-post-container-div" style={{ padding: "3%", width: "100vw" }}>
       <Helmet>
         <meta charSet="utf-8" />
         <title>{get(post, "title", "Blog Post")}</title>
@@ -58,7 +58,10 @@ export default function PostDisplay() {
         </div>
       </Paper>
 
-      <Paper style={{ marginTop: 12 }} className="post-markdown-content section-container html-wrap">
+      <Paper
+        style={{ marginTop: 12, marginBottom: "2rem" }}
+        className="post-markdown-content html-wrap"
+      >
         <MarkdownDisplayer style={{ padding: "2rem" }} value={get(post, "data.text", "")} />
       </Paper>
     </div>

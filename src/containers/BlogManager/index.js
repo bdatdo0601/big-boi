@@ -60,7 +60,7 @@ export default function BlogManager() {
   const [updatePostState] = useDataUpdateWrapper(updateBlogStatusData, onPostUpdateBlogStatusData, DataUpdateOptions);
 
   return (
-    <div className="blog-container-div text-center px-4 py-8">
+    <div className="blog-manager-container-div text-center px-4 py-8">
       <Typography variant="h3">Blog Manager</Typography>
       {loading ? <CircularProgress /> : null}
       <div style={{ marginTop: 12 }}>
@@ -76,7 +76,11 @@ export default function BlogManager() {
         >
           Add New Blog
         </Button>
-        <Masonry breakpointCols={isWeb ? 3 : 1} className="masonry-blog" columnClassName="masonry-blog-column">
+        <Masonry
+          breakpointCols={isWeb ? 3 : 1}
+          className="masonry-blog-manager"
+          columnClassName="masonry-blog-column-manager"
+        >
           {posts.map(post => (
             <BlogPostCard
               post={post}
