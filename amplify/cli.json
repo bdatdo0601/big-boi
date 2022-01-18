@@ -43,6 +43,9 @@
       "rekognition": 0,
       "textract": 0,
       "comprehend": 0
+    },
+    "project": {
+      "overrides": true
     }
   }
 }
