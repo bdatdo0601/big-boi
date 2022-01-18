@@ -1,0 +1,395 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-big-boi-dev-142545-authRole",
+      "UnauthRoleArn": "arn:aws:iam::142037127835:role/amplify-big-boi-dev-142545-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::142037127835:role/amplify-big-boi-dev-142545-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+      "UnauthRoleName": "amplify-big-boi-dev-142545-unauthRole",
+      "StackName": "amplify-big-boi-dev-142545",
+      "StackId": "arn:aws:cloudformation:us-east-1:142037127835:stack/amplify-big-boi-dev-142545/53d60820-3a28-11ea-b0fe-12e727a79a85",
+      "AmplifyAppId": "d2vxpb6a8hxx0o"
+    }
+  },
+  "hosting": {
+    "S3AndCloudFront": {
+      "service": "S3AndCloudFront",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "CloudFrontSecureURL": "https://ddadut4du9yp0.cloudfront.net",
+        "S3BucketSecureURL": "https://big-boi-hosting-bucket-dev.s3.amazonaws.com",
+        "CloudFrontOriginAccessIdentity": "E2GW8FF1W4OQBU",
+        "WebsiteURL": "http://big-boi-hosting-bucket-dev.s3-website-us-east-1.amazonaws.com",
+        "CloudFrontDistributionID": "E253J34DV0J1TR",
+        "Region": "us-east-1",
+        "HostingBucketName": "big-boi-hosting-bucket-dev",
+        "CloudFrontDomainName": "ddadut4du9yp0.cloudfront.net"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.524Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/hosting/template.json",
+        "logicalId": "hostingS3AndCloudFront"
+      }
+    }
+  },
+  "auth": {
+    "bigboi327b1f0d": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "AppClientSecret": "142mgpc9qaqd0s0tu3j39lq2cvom7ahcaq6n51lg35icuse1t4sb",
+        "UserPoolId": "us-east-1_j7AZnJB0u",
+        "AppClientIDWeb": "6io0etls3l41k490lob4ithfna",
+        "AppClientID": "9ar5l1o8qgk3ff3nuvaippee7",
+        "IdentityPoolId": "us-east-1:3db96280-98db-4beb-8092-9d407e9a782d",
+        "IdentityPoolName": "bigboi327b1f0d_identitypool_327b1f0d__dev",
+        "UserPoolName": "bigboi327b1f0d_userpool_327b1f0d"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.527Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/auth/bigboi327b1f0d-cloudformation-template.yml",
+        "logicalId": "authbigboi327b1f0d"
+      },
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
+    }
+  },
+  "storage": {
+    "bigboicontent": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "BucketName": "bigboicontent-bucketdev-dev",
+        "Region": "us-east-1"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.528Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+        "logicalId": "storagebigboicontent"
+      }
+    }
+  },
+  "api": {
+    "bigboiapi": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "description": "public access"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authbigboi327b1f0d"
+              }
+            },
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
+        },
+        "GraphQLAPIIdOutput": "y2hg5kdmyba6zmxbdmsd2wzzoy",
+        "GraphQLAPIEndpointOutput": "https://7zoznypydzhnvou2wyfueuuyky.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-quuiolfepjd7jdodghdb23cqva"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.529Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apibigboiapi"
+      }
+    },
+    "bigboiexternalapi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "bigboikinesisconsumer",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "bigboiwebhookproxy",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "output": {
+        "ApiName": "bigboiexternalapi",
+        "RootUrl": "https://ofqiui2tpi.execute-api.us-east-1.amazonaws.com/dev",
+        "ApiId": "ofqiui2tpi"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.530Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/api/bigboiexternalapi-cloudformation-template.json",
+        "logicalId": "apibigboiexternalapi"
+      }
+    }
+  },
+  "function": {
+    "bigboibigboilambdalayer": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true,
+      "output": {
+        "Arn": "arn:aws:lambda:us-east-1:142037127835:layer:bigboibigboilambdalayer-dev:69"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.530Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboibigboilambdalayer-awscloudformation-template.json",
+        "logicalId": "functionbigboibigboilambdalayer"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+        "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion74aefed8-build.zip"
+      }
+    },
+    "bigboikinesisconsumer": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "bigboiapi",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "bigboibigboilambdalayer",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
+          "category": "analytics",
+          "resourceName": "bigboinotification",
+          "attributes": [
+            "snsTopicArn"
+          ]
+        },
+        {
+          "category": "analytics",
+          "resourceName": "bigboidefaultkinesis",
+          "attributes": [
+            "kinesisStreamArn"
+          ]
+        }
+      ],
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:142037127835:function:bigboikinesisconsumer-dev",
+        "Name": "bigboikinesisconsumer-dev",
+        "LambdaExecutionRole": "bigboiLambdaRolea300bc0f-dev"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.531Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboikinesisconsumer-cloudformation-template.json",
+        "logicalId": "functionbigboikinesisconsumer"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+        "s3Key": "amplify-builds/bigboikinesisconsumer-4f5832336d5275646564-build.zip"
+      }
+    },
+    "bigboimessagestoring": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "bigboiapi",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "bigboibigboilambdalayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ],
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:142037127835:function:bigboimessagestoring-dev",
+        "Name": "bigboimessagestoring-dev",
+        "LambdaExecutionRole": "bigboiLambdaRole50f77f9b-dev"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.532Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboimessagestoring-cloudformation-template.json",
+        "logicalId": "functionbigboimessagestoring"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+        "s3Key": "amplify-builds/bigboimessagestoring-6352532f4b6267426c76-build.zip"
+      }
+    },
+    "bigboiblogpoller": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "bigboicontent",
+          "attributes": [
+            "BucketName"
+          ]
+        },
+        {
+          "category": "api",
+          "resourceName": "bigboiapi",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "api",
+          "resourceName": "bigboiexternalapi",
+          "attributes": [
+            "ApiName",
+            "ApiId"
+          ]
+        },
+        {
+          "category": "analytics",
+          "resourceName": "bigboianalytics",
+          "attributes": [
+            "Id",
+            "Region"
+          ]
+        },
+        {
+          "category": "analytics",
+          "resourceName": "bigboidefaultkinesis",
+          "attributes": [
+            "kinesisStreamArn"
+          ]
+        }
+      ],
+      "output": {
+        "Region": "us-east-1",
+        "CloudWatchEventRule": "amplify-big-boi-dev-142545-functio-CloudWatchEvent-J9PFCI29OBRZ",
+        "Arn": "arn:aws:lambda:us-east-1:142037127835:function:bigboiblogpoller-dev",
+        "Name": "bigboiblogpoller-dev",
+        "LambdaExecutionRole": "bigboiLambdaRole0114ed15-dev"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.535Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboiblogpoller-cloudformation-template.json",
+        "logicalId": "functionbigboiblogpoller"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+        "s3Key": "amplify-builds/bigboiblogpoller-56574d316f3665766338-build.zip"
+      }
+    },
+    "bigboiwebhookproxy": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:142037127835:function:bigboiwebhookproxy-dev",
+        "Name": "bigboiwebhookproxy-dev",
+        "LambdaExecutionRole": "bigboiLambdaRoledddc4761-dev"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.536Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboiwebhookproxy-cloudformation-template.json",
+        "logicalId": "functionbigboiwebhookproxy"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+        "s3Key": "amplify-builds/bigboiwebhookproxy-34394137624267723234-build.zip"
+      }
+    }
+  },
+  "analytics": {
+    "bigboianalytics": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "appName": "bigboianalytics-dev",
+        "Region": "us-east-1",
+        "Id": "24644c8c27fe4b40bfd36da65b7c8666"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.537Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/analytics/pinpoint-cloudformation-template.json",
+        "logicalId": "analyticsbigboianalytics"
+      }
+    },
+    "bigboidefaultkinesis": {
+      "service": "Kinesis",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "kinesisStreamId": "bigboidefaultkinesis-dev",
+        "kinesisStreamShardCount": "1",
+        "kinesisStreamArn": "arn:aws:kinesis:us-east-1:142037127835:stream/bigboidefaultkinesis-dev"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.538Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/analytics/kinesis-cloudformation-template.json",
+        "logicalId": "analyticsbigboidefaultkinesis"
+      }
+    },
+    "bigboinotification": {
+      "service": "SNS",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "snsTopicArn": "arn:aws:sns:us-east-1:142037127835:bigboinotificationdev",
+        "snsTopicName": "bigboinotificationdev"
+      },
+      "lastPushTimeStamp": "2022-01-18T02:14:28.539Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/analytics/sns-cloudformation-template.json",
+        "logicalId": "analyticsbigboinotification"
+      }
+    }
+  }
+}
