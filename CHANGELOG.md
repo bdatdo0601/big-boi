@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.14](https://github.com/bdatdo0601/big-boi/compare/v1.10.13...v1.10.14) (2022-01-18)
+
+
+### Bug Fixes
+
+* add amplify meta ([a79448a](https://github.com/bdatdo0601/big-boi/commit/a79448a09612fd8af199919e72f1f29861f76358))
+
 ### [1.10.13](https://github.com/bdatdo0601/big-boi/compare/v1.10.12...v1.10.13) (2022-01-18)
 
 
