@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
-import { groupBy } from "lodash";
+import { get, groupBy, has } from "lodash";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Amplify from "@aws-amplify/core";
 import Analytics, { AWSKinesisProvider } from "@aws-amplify/analytics";
 import { CircularProgress } from "@mui/material";
 
 import awsconfig from "./aws-exports";
-import routes, { errorRoutes, ROUTE_TYPE } from "./routes";
+import routes, { errorRoutes, ROUTE_TYPE, subdomainRouteMap } from "./routes";
 import ContextProvider from "./context";
 import Layout from "./layout";
 import withCustomAWSAuthenticator, { useAuthenticateEffect } from "./components/withCustomAWSAuthenticator";
@@ -30,7 +30,10 @@ Analytics.addPluggable(
 );
 // Analytics.addPluggable(new AWSKinesisFirehoseProvider());
 Analytics.enable();
-const groupedRoutes = groupBy(routes, "type.name");
+const subdomain = window.location.host.split(".")[0];
+const groupedRoutes = has(subdomainRouteMap, subdomain)
+  ? groupBy(get(subdomainRouteMap, subdomain, []), "type.name")
+  : groupBy(routes, "type.name");
 
 function App() {
   useAuthenticateEffect();

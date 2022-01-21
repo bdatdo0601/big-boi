@@ -14,11 +14,13 @@ import {
   Comment as CommentIcon,
   Home as HomeIcon,
   ListAltOutlined,
+  LinkOutlined,
 } from "@mui/icons-material";
 import { Typography, Button } from "@mui/material";
 import AdminDashboard from "./containers/AdminDashboard";
 import BlogManager from "./containers/BlogManager";
 import BlogCreation from "./containers/BlogManager/Creation";
+import Reference from "./containers/Reference";
 
 const Blogs = lazy(() => import("./containers/Blogs"));
 const Background = lazy(() => import("./containers/Background"));
@@ -76,6 +78,29 @@ ErrorPage.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
+export const subdomainRouteMap = {
+  reference: [
+    {
+      name: "Reference",
+      icon: <LinkOutlined />,
+      component: Reference,
+      path: "/",
+      exact: true,
+      type: ROUTE_TYPE.PUBLIC,
+    },
+  ],
+  link: [
+    {
+      name: "Reference",
+      icon: <LinkOutlined />,
+      component: Reference,
+      path: "/",
+      exact: true,
+      type: ROUTE_TYPE.PUBLIC,
+    },
+  ],
+};
+
 export const errorRoutes = [
   {
     name: "Error",
@@ -92,6 +117,14 @@ export default [
     icon: <HomeIcon />,
     component: Home,
     path: "/",
+    exact: true,
+    type: ROUTE_TYPE.PUBLIC,
+  },
+  {
+    name: "Reference",
+    icon: <LinkOutlined />,
+    component: Reference,
+    path: "/reference",
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
   },
