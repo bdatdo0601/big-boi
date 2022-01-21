@@ -277,3 +277,105 @@ export const onDeletePrivateEventMessage = /* GraphQL */ `
     }
   }
 `;
+export const onCreateReference = /* GraphQL */ `
+  subscription OnCreateReference($owner: String) {
+    onCreateReference(owner: $owner) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const onUpdateReference = /* GraphQL */ `
+  subscription OnUpdateReference($owner: String) {
+    onUpdateReference(owner: $owner) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const onDeleteReference = /* GraphQL */ `
+  subscription OnDeleteReference($owner: String) {
+    onDeleteReference(owner: $owner) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const onCreatePrivateReference = /* GraphQL */ `
+  subscription OnCreatePrivateReference($owner: String) {
+    onCreatePrivateReference(owner: $owner) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const onUpdatePrivateReference = /* GraphQL */ `
+  subscription OnUpdatePrivateReference($owner: String) {
+    onUpdatePrivateReference(owner: $owner) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const onDeletePrivateReference = /* GraphQL */ `
+  subscription OnDeletePrivateReference($owner: String) {
+    onDeletePrivateReference(owner: $owner) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;

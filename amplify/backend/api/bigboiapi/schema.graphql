@@ -73,3 +73,80 @@ type PrivateEventMessage @model @key(name: "byTimestamp", fields: ["type", "time
   publishInfo: AWSJSON!
   timestamp: AWSDateTime!
 }
+
+type Reference
+  @model
+  @key(
+    name: "byUpdatedAt"
+    fields: ["type", "updatedAt"]
+    queryField: "ReferenceByUpdatedAt"
+  )
+  @key(
+    name: "byClickCount"
+    fields: ["type", "clickCount"]
+    queryField: "ReferenceByClickCount"
+  )
+  @searchable
+  @auth(
+    rules: [
+      {
+        allow: owner
+        provider: userPools
+        operations: [read, create, update, delete]
+      } # owner can update, delete, and read
+      {
+        allow: private
+        provider: iam
+        operations: [read, create, update, delete]
+      } # iam lambda access write
+      { allow: public, operations: [read] } # unauthenticated users can read
+    ]
+  ) {
+  id: ID!
+  title: String!
+  url: String
+  description: String
+  extraData: AWSJSON
+  type: String
+  clickCount: Int
+  updatedAt: AWSDateTime!
+  tags: [String]
+}
+
+type PrivateReference
+  @model
+  @key(
+    name: "byUpdatedAt"
+    fields: ["type", "updatedAt"]
+    queryField: "PrivateReferenceByUpdatedAt"
+  )
+  @key(
+    name: "byClickCount"
+    fields: ["type", "clickCount"]
+    queryField: "PrivateReferenceByClickCount"
+  )
+  @searchable
+  @auth(
+    rules: [
+      {
+        allow: owner
+        provider: userPools
+        operations: [read, create, update, delete]
+      } # owner can update, delete, and read
+      {
+        allow: private
+        provider: iam
+        operations: [read, create, update, delete]
+      } # iam lambda access write
+    ]
+  ) {
+  id: ID!
+  title: String!
+  url: String
+  description: String
+  extraData: AWSJSON
+  type: String
+  clickCount: Int
+  updatedAt: AWSDateTime!
+  tags: [String]
+}

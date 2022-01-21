@@ -15,6 +15,11 @@
       "auth": {
         "bigboi327b1f0d": {}
       },
+      "api": {
+        "bigboiapi": {
+          "ElasticSearchInstanceType": "t2.medium.elasticsearch"
+        }
+      },
       "function": {
         "bigboikinesisconsumer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",

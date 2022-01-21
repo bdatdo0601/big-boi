@@ -313,3 +313,123 @@ export const deletePrivateEventMessage = /* GraphQL */ `
     }
   }
 `;
+export const createReference = /* GraphQL */ `
+  mutation CreateReference(
+    $input: CreateReferenceInput!
+    $condition: ModelReferenceConditionInput
+  ) {
+    createReference(input: $input, condition: $condition) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const updateReference = /* GraphQL */ `
+  mutation UpdateReference(
+    $input: UpdateReferenceInput!
+    $condition: ModelReferenceConditionInput
+  ) {
+    updateReference(input: $input, condition: $condition) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const deleteReference = /* GraphQL */ `
+  mutation DeleteReference(
+    $input: DeleteReferenceInput!
+    $condition: ModelReferenceConditionInput
+  ) {
+    deleteReference(input: $input, condition: $condition) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const createPrivateReference = /* GraphQL */ `
+  mutation CreatePrivateReference(
+    $input: CreatePrivateReferenceInput!
+    $condition: ModelPrivateReferenceConditionInput
+  ) {
+    createPrivateReference(input: $input, condition: $condition) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const updatePrivateReference = /* GraphQL */ `
+  mutation UpdatePrivateReference(
+    $input: UpdatePrivateReferenceInput!
+    $condition: ModelPrivateReferenceConditionInput
+  ) {
+    updatePrivateReference(input: $input, condition: $condition) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const deletePrivateReference = /* GraphQL */ `
+  mutation DeletePrivateReference(
+    $input: DeletePrivateReferenceInput!
+    $condition: ModelPrivateReferenceConditionInput
+  ) {
+    deletePrivateReference(input: $input, condition: $condition) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;

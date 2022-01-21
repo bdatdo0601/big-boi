@@ -313,3 +313,291 @@ export const privateEventMessageByTimestamp = /* GraphQL */ `
     }
   }
 `;
+export const getReference = /* GraphQL */ `
+  query GetReference($id: ID!) {
+    getReference(id: $id) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const listReferences = /* GraphQL */ `
+  query ListReferences(
+    $filter: ModelReferenceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listReferences(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        url
+        description
+        extraData
+        type
+        clickCount
+        updatedAt
+        tags
+        createdAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const referenceByUpdatedAt = /* GraphQL */ `
+  query ReferenceByUpdatedAt(
+    $type: String
+    $updatedAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelReferenceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ReferenceByUpdatedAt(
+      type: $type
+      updatedAt: $updatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        url
+        description
+        extraData
+        type
+        clickCount
+        updatedAt
+        tags
+        createdAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const referenceByClickCount = /* GraphQL */ `
+  query ReferenceByClickCount(
+    $type: String
+    $clickCount: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelReferenceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ReferenceByClickCount(
+      type: $type
+      clickCount: $clickCount
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        url
+        description
+        extraData
+        type
+        clickCount
+        updatedAt
+        tags
+        createdAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const searchReferences = /* GraphQL */ `
+  query SearchReferences(
+    $filter: SearchableReferenceFilterInput
+    $sort: SearchableReferenceSortInput
+    $limit: Int
+    $nextToken: String
+    $from: Int
+  ) {
+    searchReferences(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
+      items {
+        id
+        title
+        url
+        description
+        extraData
+        type
+        clickCount
+        updatedAt
+        tags
+        createdAt
+        owner
+      }
+      nextToken
+      total
+    }
+  }
+`;
+export const getPrivateReference = /* GraphQL */ `
+  query GetPrivateReference($id: ID!) {
+    getPrivateReference(id: $id) {
+      id
+      title
+      url
+      description
+      extraData
+      type
+      clickCount
+      updatedAt
+      tags
+      createdAt
+      owner
+    }
+  }
+`;
+export const listPrivateReferences = /* GraphQL */ `
+  query ListPrivateReferences(
+    $filter: ModelPrivateReferenceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPrivateReferences(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        url
+        description
+        extraData
+        type
+        clickCount
+        updatedAt
+        tags
+        createdAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const privateReferenceByUpdatedAt = /* GraphQL */ `
+  query PrivateReferenceByUpdatedAt(
+    $type: String
+    $updatedAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPrivateReferenceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    PrivateReferenceByUpdatedAt(
+      type: $type
+      updatedAt: $updatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        url
+        description
+        extraData
+        type
+        clickCount
+        updatedAt
+        tags
+        createdAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const privateReferenceByClickCount = /* GraphQL */ `
+  query PrivateReferenceByClickCount(
+    $type: String
+    $clickCount: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPrivateReferenceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    PrivateReferenceByClickCount(
+      type: $type
+      clickCount: $clickCount
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        url
+        description
+        extraData
+        type
+        clickCount
+        updatedAt
+        tags
+        createdAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const searchPrivateReferences = /* GraphQL */ `
+  query SearchPrivateReferences(
+    $filter: SearchablePrivateReferenceFilterInput
+    $sort: SearchablePrivateReferenceSortInput
+    $limit: Int
+    $nextToken: String
+    $from: Int
+  ) {
+    searchPrivateReferences(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
+      items {
+        id
+        title
+        url
+        description
+        extraData
+        type
+        clickCount
+        updatedAt
+        tags
+        createdAt
+        owner
+      }
+      nextToken
+      total
+    }
+  }
+`;
