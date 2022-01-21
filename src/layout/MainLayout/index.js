@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useContext, useEffect } from "react";
-import { isFunction, groupBy } from "lodash";
+import { isFunction, groupBy, has } from "lodash";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { Helmet } from "react-helmet";
@@ -8,11 +8,14 @@ import { CircularProgress, useMediaQuery } from "@mui/material";
 import useStyles from "./styleHooks";
 import AppNavigation from "../../components/AppNavigation";
 import LayoutContext from "../../context/layout";
-import routes from "../../routes";
+import routes, { subdomainRouteMap } from "../../routes";
 import particleConfig from "./particleConfig";
 import { WEBSITE_TITLE } from "../../utils/constants";
 
 const Particles = lazy(() => import("react-particles-js"));
+
+const subdomain = window.location.host.split(".")[0];
+const isSubdomainRoute = has(subdomainRouteMap, subdomain);
 
 export default function MainLayout({ children, name }) {
   const classes = useStyles();
@@ -33,6 +36,7 @@ export default function MainLayout({ children, name }) {
       setOpen={setOpen}
       name={name}
       open={open}
+      isSubdomainRoute={isSubdomainRoute}
       groupedDrawerContent={groupBy(
         routeList.filter(route => !route.hidden),
         "type.name"

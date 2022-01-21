@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { isEmpty } from "lodash";
+import { capitalize, isEmpty } from "lodash";
 import PropTypes from "prop-types";
 import { v4 as uuid } from "uuid";
 import clsx from "clsx";
@@ -30,6 +30,18 @@ const a11yProps = index => ({
   },
 });
 
+const subdomain = window.location.host.split(".")[0];
+
+const getDomainWithoutSubdomain = () => {
+  const urlParts = window.location.hostname.split(".");
+
+  const mainDomain = urlParts
+    .slice(0)
+    .slice(-(urlParts.length === 4 ? 3 : 2))
+    .join(".");
+
+  return mainDomain === "localhost" ? `http://${mainDomain}:3000` : `https://${mainDomain}`;
+};
 export default function AppNavigation({
   children,
   name,
@@ -42,6 +54,7 @@ export default function AppNavigation({
   isSelected,
   globalAnimation,
   setGlobalAnimation,
+  isSubdomainRoute,
 }) {
   const classes = useStyles();
   const theme = useTheme();
@@ -83,23 +96,28 @@ export default function AppNavigation({
         >
           <Grid item xs={12} md={3} lg={3}>
             <Toolbar>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                className={clsx(classes.menuButton, open && classes.hide)}
-                style={{ outline: "none" }}
-                size="large"
-              >
-                <MenuIcon />
-              </IconButton>
+              {!isSubdomainRoute && (
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={handleDrawerOpen}
+                  edge="start"
+                  className={clsx(classes.menuButton, open && classes.hide)}
+                  style={{ outline: "none" }}
+                  size="large"
+                >
+                  <MenuIcon />
+                </IconButton>
+              )}
               <Typography variant="h6" noWrap className={open ? classes.hide : ""}>
-                {name}
+                <a href={getDomainWithoutSubdomain()} style={{ fontWeight: "bold" }}>
+                  {name}
+                </a>
+                {isSubdomainRoute && <a href={window.location.href}>: {capitalize(subdomain)}</a>}
               </Typography>
             </Toolbar>
           </Grid>
-          {isBigScreen && (
+          {isBigScreen && !isSubdomainRoute && (
             <Grid item xs={8} md={8} lg={8} style={{ textAlign: "right" }}>
               {(groupedDrawerContent[""] || []).some(item => item.path === location.pathname) && (
                 <Tabs
@@ -205,8 +223,10 @@ AppNavigation.propTypes = {
   setOpen: PropTypes.func.isRequired,
   globalAnimation: PropTypes.bool.isRequired,
   setGlobalAnimation: PropTypes.func.isRequired,
+  isSubdomainRoute: PropTypes.bool,
 };
 
 AppNavigation.defaultProps = {
   name: "Dat Do",
+  isSubdomainRoute: false,
 };
