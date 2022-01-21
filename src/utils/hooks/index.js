@@ -43,7 +43,7 @@ export const useDataUpdateWrapper = (
           get(options, "snackBar.successMessage", "Data Updated"),
           get(options, "snackBar.successMessageConfig", {})
         );
-        await postUpdateFn();
+        await postUpdateFn(updatedData, ...args);
       } catch (err) {
         console.error(err);
         enqueueSnackbar(

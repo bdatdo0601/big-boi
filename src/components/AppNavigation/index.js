@@ -96,19 +96,17 @@ export default function AppNavigation({
         >
           <Grid item xs={12} md={3} lg={3}>
             <Toolbar>
-              {!isSubdomainRoute && (
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  onClick={handleDrawerOpen}
-                  edge="start"
-                  className={clsx(classes.menuButton, open && classes.hide)}
-                  style={{ outline: "none" }}
-                  size="large"
-                >
-                  <MenuIcon />
-                </IconButton>
-              )}
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={clsx(classes.menuButton, open && classes.hide)}
+                style={{ outline: "none" }}
+                size="large"
+              >
+                <MenuIcon />
+              </IconButton>
               <Typography variant="h6" noWrap className={open ? classes.hide : ""}>
                 <a href={getDomainWithoutSubdomain()} style={{ fontWeight: "bold" }}>
                   {name}
@@ -156,7 +154,9 @@ export default function AppNavigation({
       >
         <div className={classes.drawerHeader}>
           <Typography variant="h6" noWrap style={{ marginLeft: 12 }}>
-            {name}
+            <a href={getDomainWithoutSubdomain()} style={{ fontWeight: "bold" }}>
+              {name}
+            </a>
           </Typography>
           <IconButton onClick={handleDrawerClose} style={{ outline: "none" }} size="large">
             {theme.direction === "ltr" ? <ChevronLeftIcon /> : <ChevronRightIcon />}

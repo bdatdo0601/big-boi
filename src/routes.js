@@ -88,15 +88,28 @@ export const subdomainRouteMap = {
       exact: true,
       type: ROUTE_TYPE.PUBLIC,
     },
-  ],
-  link: [
     {
-      name: "Reference",
-      icon: <LinkOutlined />,
-      component: Reference,
-      path: "/",
+      name: "Logout",
+      icon: <MeetingRoomIcon />,
+      component: ({ history }) => {
+        Auth.signOut().then(() => {
+          history.replace("/");
+        });
+        return null;
+      },
+      path: "/logout",
       exact: true,
-      type: ROUTE_TYPE.PUBLIC,
+      type: ROUTE_TYPE.PRIVATE,
+      hidden: async () => !(await isAuthExist()),
+    },
+    {
+      name: "Login",
+      icon: <ExitToAppIcon />,
+      component: () => <Redirect to="/" />,
+      path: "/login",
+      exact: true,
+      type: ROUTE_TYPE.PRIVATE,
+      hidden: async () => isAuthExist(),
     },
   ],
 };

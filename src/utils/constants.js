@@ -15,6 +15,11 @@ export const RESUME = {
   SCHEMA_FILE: "schema.json",
 };
 
+export const REFERENCE_TAGS = {
+  PREFIX: "reference/",
+  FILE_NAME: "reference_tags.json",
+};
+
 export default {
   POST_STATE,
   PHOTO_UPLOAD_PREFIX,

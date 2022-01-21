@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useContext, useEffect } from "react";
-import { isFunction, groupBy, has } from "lodash";
+import { isFunction, groupBy, has, get } from "lodash";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { Helmet } from "react-helmet";
@@ -17,6 +17,8 @@ const Particles = lazy(() => import("react-particles-js"));
 const subdomain = window.location.host.split(".")[0];
 const isSubdomainRoute = has(subdomainRouteMap, subdomain);
 
+const domainRoutes = isSubdomainRoute ? get(subdomainRouteMap, subdomain, []) : routes;
+
 export default function MainLayout({ children, name }) {
   const classes = useStyles();
   const isFullSize = useMediaQuery("(min-width:1280px)");
@@ -26,7 +28,7 @@ export default function MainLayout({ children, name }) {
   const { setIsDark, isDark, globalAnimation, setGlobalAnimation } = useContext(LayoutContext);
   useEffect(() => {
     Promise.all(
-      routes.map(async item => ({ ...item, hidden: isFunction(item.hidden) ? await item.hidden() : item.hidden }))
+      domainRoutes.map(async item => ({ ...item, hidden: isFunction(item.hidden) ? await item.hidden() : item.hidden }))
     ).then(resolvedRoutes => {
       setRouteList(resolvedRoutes);
     });

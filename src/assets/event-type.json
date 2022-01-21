@@ -6,6 +6,9 @@
         },
         "Resume": {
             "Update": "Personal.Resume.Update"
+        },
+        "Reference": {
+            "Update": "Personal.Reference.Update"
         }
     }
 }
