@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { isArray, isString, uniq } from "lodash";
+import { isArray, isString, uniq, uniqBy } from "lodash";
 import PropTypes from "prop-types";
 
 import { useGetFile, useUploadFile } from "../../utils/awsStorage";
@@ -15,6 +15,24 @@ export const ReferenceContextProvider = ({ children }) => {
   );
   const { uploadFile, loading: uploading } = useUploadFile();
   const [suggestedReferenceTags, setSuggestedReferenceTags] = useState([]);
+  const [refetchFns, setRefetchFns] = useState([]);
+
+  const registerRefetch = useCallback((name, refetchFn) => {
+    setRefetchFns(existingRefetchFns => uniqBy([...existingRefetchFns, { name, refetchFn }], "name"));
+  }, []);
+
+  const deregisterRefetch = useCallback(name => {
+    setRefetchFns(existingRefetchFns => existingRefetchFns.filter(item => item.name !== name));
+  }, []);
+
+  const requestRefetch = useCallback(async () => {
+    await Promise.all(
+      refetchFns.map(async obj => {
+        await obj.refetchFn();
+      })
+    );
+  }, [refetchFns]);
+
   useEffect(() => {
     if (referenceTagsStorage) {
       fetchFileToJSON(referenceTagsStorage)
@@ -55,6 +73,9 @@ export const ReferenceContextProvider = ({ children }) => {
         syncReferenceTags,
         updateLocalReferenceTags,
         loading: getFileLoading || uploading,
+        registerRefetch,
+        deregisterRefetch,
+        requestRefetch,
       }}
     >
       {children}

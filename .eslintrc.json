@@ -18,6 +18,7 @@
   "plugins": ["react", "babel", "react-hooks"],
   "parser": "babel-eslint",
   "rules": {
+    "arrow-body-style": "off",
     "no-await-in-loop": "off",
     "max-len": "off", //handle by prettier
     "comma-dangle": "off",

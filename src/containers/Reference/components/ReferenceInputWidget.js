@@ -1,19 +1,9 @@
 import React, { useState, useContext, useEffect, useMemo, useCallback } from "react";
-import {
-  Autocomplete,
-  Box,
-  Button,
-  FormControlLabel,
-  IconButton,
-  Paper,
-  Switch,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Autocomplete, Box, Button, FormControlLabel, IconButton, Paper, Switch, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { AddOutlined, DeleteOutline } from "@mui/icons-material";
-import { get } from "lodash";
+import { get, isNull } from "lodash";
 import { v4 as uuid } from "uuid";
 import ReferenceContext from "../context";
 import {
@@ -48,7 +38,9 @@ const ReferenceInputWidget = ({ existingReference }) => {
   const { execute: postPrivateReference, loading: creatingPrivateReference } = useLazyAWSAPI(createPrivateReference);
   const { execute: changeReference, loading: updatingReference } = useLazyAWSAPI(updateReference);
   const { execute: changePrivateReference, loading: updatingPrivateReference } = useLazyAWSAPI(updatePrivateReference);
-  const { suggestedReferenceTags, updateLocalReferenceTags, syncReferenceTags } = useContext(ReferenceContext);
+  const { suggestedReferenceTags, updateLocalReferenceTags, syncReferenceTags, requestRefetch } = useContext(
+    ReferenceContext
+  );
   const { register, handleSubmit, reset, setValue } = useForm();
   const [referenceTagInputs, setReferenceTagInputs] = useState(get(existingReference, "tags", []).map(() => uuid()));
 
@@ -109,22 +101,23 @@ const ReferenceInputWidget = ({ existingReference }) => {
   }, [reset]);
   const onPostSubmit = useCallback(async () => {
     await syncReferenceTags();
+    await requestRefetch();
     onReset();
-  }, [syncReferenceTags, onReset]);
+  }, [syncReferenceTags, onReset, requestRefetch]);
 
   const [onSubmit] = useDataUpdateWrapper(onReferenceMutate, onPostSubmit, DataUpdateOptions);
 
   return (
     <Paper className="p-6 text-left" elevation={3}>
       <Box component="form" noValidate autoComplete="off">
-        <div className="flex justify-between">
-          <Typography variant="h5">{existingReference ? "Update" : "New"} Reference</Typography>
+        <div className="flex justify-end">
           <div>
             <FormControlLabel
               control={<Switch defaultChecked={get(existingReference, "isPrivate", true)} {...register("isPrivate")} />}
               label="Private"
+              disabled={!isNull(existingReference)}
             />
-            <Button color="secondary" className="mx-2" onClick={onReset}>
+            <Button color="secondary" className="mx-2" onClick={onReset} disabled={!isNull(existingReference)}>
               Reset
             </Button>
             <Button
@@ -142,15 +135,15 @@ const ReferenceInputWidget = ({ existingReference }) => {
         <TextField
           id="reference-title"
           label="Title"
-          variant="standard"
-          className="w-full my-2"
+          variant="outlined"
+          className="w-1/2 my-2 pr-2"
           {...register("title")}
         />
         <TextField
           id="reference-link"
           label="Link"
-          variant="standard"
-          className="w-full my-2"
+          variant="outlined"
+          className="w-1/2 my-2"
           placeholder="Links reference"
           {...register("url")}
         />
