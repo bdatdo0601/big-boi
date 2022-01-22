@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/bdatdo0601/big-boi/compare/v1.10.14...v1.11.0) (2022-01-22)
+
+
+### Features
+
+* add reference data object ([51a440d](https://github.com/bdatdo0601/big-boi/commit/51a440da26b3234e2ac3e8201047cbb03bc1b742))
+* allow add or update references ([8e36f93](https://github.com/bdatdo0601/big-boi/commit/8e36f933ec5187a1a2c32c1c005aab38addbe56d))
+* Reference Feature to collect url ([6611602](https://github.com/bdatdo0601/big-boi/commit/6611602777bfbbec25ee812dfad47029cd532006))
+
+
+### Bug Fixes
+
+* initialize reference route and subdomain reference ([3996dbb](https://github.com/bdatdo0601/big-boi/commit/3996dbb2b8f1042f369a38a945db68b2de911f7a))
+* make sure subdomain route can't navigate to bad links ([d219234](https://github.com/bdatdo0601/big-boi/commit/d219234e8686bd5dd47f0b440fe3011f7af9c72d))
+
 ### [1.10.14](https://github.com/bdatdo0601/big-boi/compare/v1.10.13...v1.10.14) (2022-01-18)
 
 
