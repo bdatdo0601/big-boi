@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/bdatdo0601/big-boi/compare/v1.11.0...v1.12.0) (2022-01-22)
+
+
+### Features
+
+* add share-target route ([d580ae1](https://github.com/bdatdo0601/big-boi/commit/d580ae187fbbd6515839275e993afeaaeaf2f03e))
+
 ## [1.11.0](https://github.com/bdatdo0601/big-boi/compare/v1.10.14...v1.11.0) (2022-01-22)
 
 
