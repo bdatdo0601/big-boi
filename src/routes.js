@@ -21,6 +21,7 @@ import AdminDashboard from "./containers/AdminDashboard";
 import BlogManager from "./containers/BlogManager";
 import BlogCreation from "./containers/BlogManager/Creation";
 import Reference from "./containers/Reference";
+import ShareTarget from "./containers/ShareTarget";
 
 const Blogs = lazy(() => import("./containers/Blogs"));
 const Background = lazy(() => import("./containers/Background"));
@@ -89,6 +90,15 @@ export const subdomainRouteMap = {
       type: ROUTE_TYPE.PUBLIC,
     },
     {
+      name: "Share-Target",
+      icon: <LinkOutlined />,
+      component: ShareTarget,
+      path: "/share-target",
+      exact: true,
+      hidden: true,
+      type: ROUTE_TYPE.PUBLIC,
+    },
+    {
       name: "Logout",
       icon: <MeetingRoomIcon />,
       component: ({ history }) => {
@@ -139,6 +149,15 @@ export default [
     component: Reference,
     path: "/reference",
     exact: true,
+    type: ROUTE_TYPE.PUBLIC,
+  },
+  {
+    name: "Share-Target",
+    icon: <LinkOutlined />,
+    component: ShareTarget,
+    path: "/share-target",
+    exact: true,
+    hidden: true,
     type: ROUTE_TYPE.PUBLIC,
   },
   {
