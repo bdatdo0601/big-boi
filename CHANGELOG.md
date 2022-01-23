@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.1](https://github.com/bdatdo0601/big-boi/compare/v1.13.0...v1.13.1) (2022-01-23)
+
+
+### Bug Fixes
+
+* discord interaction ([8b7feec](https://github.com/bdatdo0601/big-boi/commit/8b7feec3f3f6b444253f60dfe23f1f7f3d4c7ced))
+* update additional search string ([0d04717](https://github.com/bdatdo0601/big-boi/commit/0d04717d6bbd45c6c2560f98659d07e3a8db708e))
+
 ## [1.13.0](https://github.com/bdatdo0601/big-boi/compare/v1.12.1...v1.13.0) (2022-01-23)
 
 
