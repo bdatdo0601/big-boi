@@ -3,7 +3,7 @@ import { Autocomplete, Box, Button, FormControlLabel, IconButton, Paper, Switch,
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { AddOutlined, DeleteOutline } from "@mui/icons-material";
-import { get, isNull } from "lodash";
+import { get, isNull, uniq } from "lodash";
 import { v4 as uuid } from "uuid";
 import ReferenceContext from "../context";
 import {
@@ -73,7 +73,7 @@ const ReferenceInputWidget = ({ existingReference }) => {
           title: get(data, "title"),
           url: get(data, "url"),
           type: "REFERENCES",
-          tags: referenceTagInputs.map(input => get(data, `tags.${input}`)).filter(item => item),
+          tags: uniq(referenceTagInputs.map(input => get(data, `tags.${input}`)).filter(item => item)),
         },
       };
       updateLocalReferenceTags(existingReferenceTags => [...existingReferenceTags, ...get(variables, "input.tags")]);

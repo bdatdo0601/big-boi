@@ -1,4 +1,4 @@
-import { has, set, get, last } from "lodash";
+import { has, set, get, last, capitalize } from "lodash";
 
 export const convertToReferenceRenderedData = data =>
   data.reduce(
@@ -11,7 +11,7 @@ export const convertToReferenceRenderedData = data =>
       tags.forEach(tag => {
         const tagSplitted = tag.split(".");
         tagSplitted.reduce((tagSplittedAcc, currentSplit) => {
-          tagSplittedAcc.push(currentSplit);
+          tagSplittedAcc.push(capitalize(currentSplit));
           const rawPath = `children.${tagSplittedAcc.join(".children.")}`;
           if (!has(acc, rawPath)) {
             set(acc, rawPath, {
