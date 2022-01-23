@@ -1,9 +1,10 @@
-import React, { useState, useContext, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useContext, useEffect, useMemo, useCallback, useRef } from "react";
+import API from "@aws-amplify/api";
 import { Autocomplete, Box, Button, FormControlLabel, IconButton, Paper, Switch, TextField } from "@mui/material";
 import PropTypes from "prop-types";
-import { useForm } from "react-hook-form";
+import { useForm, useController } from "react-hook-form";
 import { AddOutlined, DeleteOutline } from "@mui/icons-material";
-import { get, isNull, uniq } from "lodash";
+import { get, isNull, uniq, debounce } from "lodash";
 import { v4 as uuid } from "uuid";
 import ReferenceContext from "../context";
 import {
@@ -41,13 +42,49 @@ const ReferenceInputWidget = ({ existingReference }) => {
   const { suggestedReferenceTags, updateLocalReferenceTags, syncReferenceTags, requestRefetch } = useContext(
     ReferenceContext
   );
-  const { register, handleSubmit, reset, setValue } = useForm();
+  const { register, handleSubmit, reset, setValue, watch, getValues, control } = useForm();
+  const {
+    field: { onChange: onSwitchChange, onBlur: onSwitchBlue, value: switchValue, ref: switchRef },
+  } = useController({
+    name: "isPrivate",
+    control,
+    defaultValue: true,
+  });
   const [referenceTagInputs, setReferenceTagInputs] = useState(get(existingReference, "tags", []).map(() => uuid()));
+  const [isURLMetadataFetching, setIsURLMetadataFetching] = useState(false);
 
   const loading = useMemo(
-    () => creatingReference || creatingPrivateReference || updatingReference || updatingPrivateReference,
-    [creatingReference, creatingPrivateReference, updatingReference, updatingPrivateReference]
+    () =>
+      creatingReference ||
+      creatingPrivateReference ||
+      updatingReference ||
+      updatingPrivateReference ||
+      isURLMetadataFetching,
+    [creatingReference, creatingPrivateReference, updatingReference, updatingPrivateReference, isURLMetadataFetching]
   );
+
+  const watchURL = watch("url");
+
+  const onURLChange = useRef(
+    debounce(async newURL => {
+      setIsURLMetadataFetching(true);
+      if (isNull(existingReference)) {
+        const response = await API.post("bigboiexternalapi", "/url-metadata", { body: { url: newURL } });
+        const isPrivate = get(response, "isPrivate", true);
+        setValue("isPrivate", isPrivate);
+        if (!isPrivate && !get(getValues(), "title")) {
+          setValue("title", get(response, "title"));
+        }
+      }
+      setIsURLMetadataFetching(false);
+    }, 200)
+  );
+
+  useEffect(() => {
+    if (watchURL) {
+      onURLChange.current(watchURL);
+    }
+  }, [watchURL]);
 
   useEffect(() => {
     if (existingReference) {
@@ -113,7 +150,18 @@ const ReferenceInputWidget = ({ existingReference }) => {
         <div className="flex justify-end">
           <div>
             <FormControlLabel
-              control={<Switch defaultChecked={get(existingReference, "isPrivate", true)} {...register("isPrivate")} />}
+              control={
+                <Switch
+                  ref={switchRef}
+                  checked={switchValue}
+                  onChange={(event, value) => {
+                    event.preventDefault();
+                    onSwitchChange(value);
+                  }}
+                  onBlur={onSwitchBlue}
+                  value={switchValue}
+                />
+              }
               label="Private"
               disabled={!isNull(existingReference)}
             />
@@ -133,19 +181,20 @@ const ReferenceInputWidget = ({ existingReference }) => {
           </div>
         </div>
         <TextField
-          id="reference-title"
-          label="Title"
-          variant="outlined"
-          className="w-1/2 my-2 pr-2"
-          {...register("title")}
-        />
-        <TextField
           id="reference-link"
           label="Link"
           variant="outlined"
-          className="w-1/2 my-2"
+          className="lg:w-1/2 xl:w-1/2 sm:w-full xs:w-full w-full my-2 pr-2"
           placeholder="Links reference"
+          disabled={loading}
           {...register("url")}
+        />
+        <TextField
+          id="reference-title"
+          label="Title"
+          variant="outlined"
+          className="lg:w-1/2 xl:w-1/2 sm:w-full xs:w-full w-full my-2"
+          {...register("title")}
         />
         <div className="grid grid-cols-3 gap-4 w-full">
           {referenceTagInputs.map((input, index) => (
@@ -156,6 +205,7 @@ const ReferenceInputWidget = ({ existingReference }) => {
                 freeSolo
                 autoSelect
                 options={suggestedReferenceTags}
+                disabled={loading}
                 renderOption={(props, option) => (
                   <li {...props}>
                     <IconButton

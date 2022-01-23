@@ -43,9 +43,18 @@
         },
         "bigboiwebhookproxy": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboiwebhookproxy-34394137624267723234-build.zip",
+          "s3Key": "amplify-builds/bigboiwebhookproxy-4972454e3546374b3675-build.zip",
           "apiEndpoint": "https://api.datbdo.com",
           "apiKey": "jgmj2loTvO31fX4xWOq4saxCay4gNRVx5taSLKHr"
+        },
+        "bigboiutilitydiscordinteraction": {
+          "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+          "s3Key": "amplify-builds/bigboiutilitydiscordinteraction-5a49317552396861576e-build.zip",
+          "discordApplicationPublicKey": "35ebaa8659754d4b22416a0729bdf755c44113f1ff78a05b9723b3ec68928de0"
+        },
+        "bigboiurlmetadataresolver": {
+          "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+          "s3Key": "amplify-builds/bigboiurlmetadataresolver-7839646c4134432b764b-build.zip"
         }
       }
     }

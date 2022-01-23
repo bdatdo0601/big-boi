@@ -1,0 +1,113 @@
+{
+  "resource":"/discord/interaction",
+  "path":"/discord/interaction",
+  "httpMethod":"POST",
+  "headers":{
+     "CloudFront-Forwarded-Proto":"https",
+     "CloudFront-Is-Desktop-Viewer":"true",
+     "CloudFront-Is-Mobile-Viewer":"false",
+     "CloudFront-Is-SmartTV-Viewer":"false",
+     "CloudFront-Is-Tablet-Viewer":"false",
+     "CloudFront-Viewer-Country":"US",
+     "content-type":"application/json",
+     "Host":"api.datbdo.com",
+     "User-Agent":"Discord-Interactions/1.0 (+https://discord.com)",
+     "Via":"1.1 3ba4c01e89cbea15846c7d4a61b1242c.cloudfront.net (CloudFront)",
+     "X-Amz-Cf-Id":"ZEQD6LpAtq5YxVDyzqE0VpvnQQwOCM9swmg6OUhDCoQm26oZzASLcw==",
+     "X-Amzn-Trace-Id":"Root=1-61eda053-0b1978ec4287b62a23d72697",
+     "X-Forwarded-For":"35.196.132.85, 130.176.210.4",
+     "X-Forwarded-Port":"443",
+     "X-Forwarded-Proto":"https",
+     "x-signature-ed25519":"ed4fbdbf99e7482f6c95877d259ca849c1f4662e1f8941f943d0e0099c930ca68d3474cf63855ea9ac19bf776cdc21e470a39a23f9540f4127ba070561defa09",
+     "x-signature-timestamp":"1642963027"
+  },
+  "multiValueHeaders":{
+     "CloudFront-Forwarded-Proto":[
+        "https"
+     ],
+     "CloudFront-Is-Desktop-Viewer":[
+        "true"
+     ],
+     "CloudFront-Is-Mobile-Viewer":[
+        "false"
+     ],
+     "CloudFront-Is-SmartTV-Viewer":[
+        "false"
+     ],
+     "CloudFront-Is-Tablet-Viewer":[
+        "false"
+     ],
+     "CloudFront-Viewer-Country":[
+        "US"
+     ],
+     "content-type":[
+        "application/json"
+     ],
+     "Host":[
+        "api.datbdo.com"
+     ],
+     "User-Agent":[
+        "Discord-Interactions/1.0 (+https://discord.com)"
+     ],
+     "Via":[
+        "1.1 3ba4c01e89cbea15846c7d4a61b1242c.cloudfront.net (CloudFront)"
+     ],
+     "X-Amz-Cf-Id":[
+        "ZEQD6LpAtq5YxVDyzqE0VpvnQQwOCM9swmg6OUhDCoQm26oZzASLcw=="
+     ],
+     "X-Amzn-Trace-Id":[
+        "Root=1-61eda053-0b1978ec4287b62a23d72697"
+     ],
+     "X-Forwarded-For":[
+        "35.196.132.85, 130.176.210.4"
+     ],
+     "X-Forwarded-Port":[
+        "443"
+     ],
+     "X-Forwarded-Proto":[
+        "https"
+     ],
+     "x-signature-ed25519":[
+        "ed4fbdbf99e7482f6c95877d259ca849c1f4662e1f8941f943d0e0099c930ca68d3474cf63855ea9ac19bf776cdc21e470a39a23f9540f4127ba070561defa09"
+     ],
+     "x-signature-timestamp":[
+        "1642963027"
+     ]
+  },
+  "queryStringParameters":null,
+  "multiValueQueryStringParameters":null,
+  "pathParameters":null,
+  "stageVariables":null,
+  "requestContext":{
+     "resourceId":"9gayyl",
+     "resourcePath":"/discord/interaction",
+     "httpMethod":"POST",
+     "extendedRequestId":"MaX9GHrLIAMFXQQ=",
+     "requestTime":"23/Jan/2022:18:37:07 +0000",
+     "path":"/discord/interaction",
+     "accountId":"142037127835",
+     "protocol":"HTTP/1.1",
+     "stage":"dev",
+     "domainPrefix":"api",
+     "requestTimeEpoch":1642963027677,
+     "requestId":"10b116dc-d0a7-4b79-b202-1b9a71d54ea3",
+     "identity":{
+        "cognitoIdentityPoolId":null,
+        "accountId":null,
+        "cognitoIdentityId":null,
+        "caller":null,
+        "sourceIp":"35.196.132.85",
+        "principalOrgId":null,
+        "accessKey":null,
+        "cognitoAuthenticationType":null,
+        "cognitoAuthenticationProvider":null,
+        "userArn":null,
+        "userAgent":"Discord-Interactions/1.0 (+https://discord.com)",
+        "user":null
+     },
+     "domainName":"api.datbdo.com",
+     "apiId":"ofqiui2tpi"
+  },
+  "body":"{\"application_id\":\"934831945437810768\",\"id\":\"934879439127449621\",\"token\":\"aW50ZXJhY3Rpb246OTM0ODc5NDM5MTI3NDQ5NjIxOjdrdWNzSXZUNXFYSVJLV3dUa1Y4NGNNV1h0dFAyc1pZSUppQlIyZkxrV1NpREtIZFR6UVRoVjNYN1lBY0tIVllORFNsbWFsVWRHU1NKRGxQQ0ZabTdOdkRWV0VQb2JRUzIxQ2UzZmFRalh4QlJhSkhpVUw4VlJlNkw1SEJ3dU03\",\"type\":1,\"user\":{\"avatar\":\"1db367b1f2e91db875844b7ddbfd041d\",\"discriminator\":\"8611\",\"id\":\"143190607408398336\",\"public_flags\":0,\"username\":\"DatDo\"},\"version\":1}",
+  "isBase64Encoded":false
+}

@@ -12,6 +12,20 @@
         "setting": "open"
       },
       "lambdaFunction": "bigboiwebhookproxy"
+    },
+    "/discord/interaction": {
+      "name": "/discord/interaction",
+      "lambdaFunction": "bigboiutilitydiscordinteraction",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/url-metadata": {
+      "name": "/url-metadata",
+      "lambdaFunction": "bigboiurlmetadataresolver",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "api": {
+      "bigboiapi": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "discordApplicationPublicKey",
+      "environmentVariableName": "DISCORD_APPLICATION_PUBLIC_KEY"
+    }
+  ]
+}

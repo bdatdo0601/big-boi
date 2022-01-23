@@ -65,6 +65,22 @@
             "Name",
             "Arn"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "bigboiutilitydiscordinteraction",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "bigboiurlmetadataresolver",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
       ]
     }
@@ -182,6 +198,27 @@
       ]
     },
     "bigboiwebhookproxy": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "bigboiutilitydiscordinteraction": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "bigboiapi",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        }
+      ]
+    },
+    "bigboiurlmetadataresolver": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
