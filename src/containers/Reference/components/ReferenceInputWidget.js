@@ -196,7 +196,7 @@ const ReferenceInputWidget = ({ existingReference }) => {
           className="lg:w-1/2 xl:w-1/2 sm:w-full xs:w-full w-full my-2"
           {...register("title")}
         />
-        <div className="grid grid-cols-3 gap-4 w-full">
+        <div className="lg:grid xl:grid 2xl:grid lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-4 w-full">
           {referenceTagInputs.map((input, index) => (
             <div key={input} className="flex my-2 mr-2 w-full">
               <Autocomplete

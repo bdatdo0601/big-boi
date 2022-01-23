@@ -18,6 +18,8 @@ const Searchable = () => {
           { title: { wildcard: `${searchQuery || ""}*` } },
           { url: { wildcard: `${searchQuery || ""}*` } },
           { tags: { wildcard: `${searchQuery || ""}*` } },
+          // eslint-disable-next-line
+          { tags: { regexp: `.*\.${searchQuery}.*` } },
           { title: { match: searchQuery } },
           { url: { match: searchQuery } },
           { tags: { match: searchQuery } },
