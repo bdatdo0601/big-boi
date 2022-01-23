@@ -34,11 +34,13 @@ const ReferenceDisplayWidget = ({ data, loading }) => {
         </List>
       )}
       <Grid container>
-        {Object.values(get(data, "children", {})).map(item => (
-          <Grid item key={get(item, "name")} lg={12} xl={level > 0 ? 12 : 6} md={12} xs={12} sm={12}>
-            <ReferenceDisplayWidget data={item} loading={loading} bordered />
-          </Grid>
-        ))}
+        {Object.values(get(data, "children", {}))
+          .filter(item => get(item, "references", []).length !== 0 || !isEmpty(get(item, "children")))
+          .map(item => (
+            <Grid item key={get(item, "name")} lg={12} xl={level > 0 ? 12 : 6} md={12} xs={12} sm={12}>
+              <ReferenceDisplayWidget data={item} loading={loading} bordered />
+            </Grid>
+          ))}
       </Grid>
     </div>
   );

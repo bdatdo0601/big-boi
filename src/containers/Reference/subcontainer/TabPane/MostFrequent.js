@@ -7,7 +7,7 @@ import ReferenceDisplayWidget from "../../components/ReferenceDisplayWidget";
 import ReferenceContext from "../../context";
 
 const MostFrequent = () => {
-  const query = useMemo(() => ({ type: "REFERENCES", sortDirection: "DESC", limit: 100 }), []);
+  const query = useMemo(() => ({ type: "REFERENCES", sortDirection: "DESC", limit: 10000 }), []);
   const { data: rawPublicData, loading: publicDataLoading, execute: refetchReference } = useAWSAPI(
     referenceByClickCount,
     query,

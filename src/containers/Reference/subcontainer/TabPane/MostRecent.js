@@ -7,7 +7,7 @@ import ReferenceDisplayWidget from "../../components/ReferenceDisplayWidget";
 import ReferenceContext from "../../context";
 
 const MostRecent = () => {
-  const query = useMemo(() => ({ type: "REFERENCES", sortDirection: "DESC", limit: 100 }), []);
+  const query = useMemo(() => ({ type: "REFERENCES", sortDirection: "DESC", limit: 10000 }), []);
   const { data: rawPublicData, loading: publicDataLoading, execute: refetchReference } = useAWSAPI(
     referenceByUpdatedAt,
     query,

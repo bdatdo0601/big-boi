@@ -1,6 +1,6 @@
-import React, { useContext, useMemo, useState, useRef, useEffect } from "react";
-import { debounce, get, sortBy } from "lodash";
-import { Autocomplete, IconButton, Paper, TextField } from "@mui/material";
+import React, { useContext, useMemo, useState, useRef, useEffect, useCallback } from "react";
+import { debounce, get, lowerCase, sortBy } from "lodash";
+import { Autocomplete, IconButton, Paper, TextField, Typography } from "@mui/material";
 import { DeleteOutline } from "@mui/icons-material";
 import { searchPrivateReferences, searchReferences } from "../../../graphql/queries";
 import { useAWSAPI } from "../../../utils/awsAPI";
@@ -18,6 +18,9 @@ const Searchable = () => {
           { title: { wildcard: `${searchQuery || ""}*` } },
           { url: { wildcard: `${searchQuery || ""}*` } },
           { tags: { wildcard: `${searchQuery || ""}*` } },
+          { title: { match: searchQuery } },
+          { url: { match: searchQuery } },
+          { tags: { match: searchQuery } },
         ],
       },
       limit: 100,
@@ -37,10 +40,15 @@ const Searchable = () => {
     ReferenceContext
   );
 
+  const resetSearchQuery = useCallback(() => {
+    setAutoCompleteText("");
+    setSearchQuery("");
+  }, []);
+
   useEffect(() => {
     registerRefetch("Searchable", async () =>
       Promise.all(
-        [refetchReference, refetchPrivateReference].map(async fn => {
+        [refetchReference, refetchPrivateReference, resetSearchQuery].map(async fn => {
           fn();
         })
       )
@@ -48,7 +56,7 @@ const Searchable = () => {
     return () => {
       deregisterRefetch("Searchable");
     };
-  }, [registerRefetch, refetchReference, refetchPrivateReference, deregisterRefetch]);
+  }, [registerRefetch, refetchReference, refetchPrivateReference, deregisterRefetch, resetSearchQuery]);
 
   const isLoading = useMemo(() => publicDataLoading || privateDataLoading, [publicDataLoading, privateDataLoading]);
   const data = useMemo(() => {
@@ -62,12 +70,11 @@ const Searchable = () => {
       ],
       "clickCount"
     );
-
     return convertToReferenceRenderedData(combinedData);
   }, [rawPrivateData, rawPublicData]);
   const onSearch = useRef(
     debounce(newText => {
-      setSearchQuery(newText);
+      setSearchQuery(lowerCase(newText));
     }, 200)
   );
   return (
@@ -112,7 +119,13 @@ const Searchable = () => {
         />
       </div>
 
-      <ReferenceDisplayWidget data={data} loading={isLoading} />
+      {searchQuery ? (
+        <ReferenceDisplayWidget data={data} loading={isLoading} />
+      ) : (
+        <Typography variant="subtitle1" className="pl-4 my-2 text-gray-600">
+          Search references
+        </Typography>
+      )}
     </Paper>
   );
 };

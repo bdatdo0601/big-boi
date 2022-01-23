@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { IconButton, Link, Modal, Paper, Typography } from "@mui/material";
 import { get } from "lodash";
-import { DeleteOutlined, EditOutlined } from "@mui/icons-material";
+import { DeleteOutlined, EditOutlined, VisibilityOffOutlined } from "@mui/icons-material";
 import { useLazyAWSAPI } from "../../../utils/awsAPI";
 import {
   deletePrivateReference,
@@ -71,6 +71,7 @@ const ReferenceRenderer = ({ reference }) => {
         {get(reference, "title")}
       </Link>
       <span>
+        {get(reference, "isPrivate") && <VisibilityOffOutlined className="mr-2 text-gray-600" />}
         <IconButton disabled={loading} onClick={toggleModal}>
           <EditOutlined />
         </IconButton>
