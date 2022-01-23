@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/bdatdo0601/big-boi/compare/v1.12.1...v1.13.0) (2022-01-23)
+
+
+### Features
+
+* add auto title filler ([39aa3d9](https://github.com/bdatdo0601/big-boi/commit/39aa3d9c99091239849da04df369a12b56ae2fac))
+
+
+### Bug Fixes
+
+* some styling and behavior of reference ([dc5f06b](https://github.com/bdatdo0601/big-boi/commit/dc5f06b860c6a062c12f61da632b3939213e03ba))
+
 ### [1.12.1](https://github.com/bdatdo0601/big-boi/compare/v1.12.0...v1.12.1) (2022-01-23)
 
 
