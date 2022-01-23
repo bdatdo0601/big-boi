@@ -49,7 +49,7 @@
         },
         "bigboiutilitydiscordinteraction": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboiutilitydiscordinteraction-5a49317552396861576e-build.zip",
+          "s3Key": "amplify-builds/bigboiutilitydiscordinteraction-57584c7a44623264586d-build.zip",
           "discordApplicationPublicKey": "35ebaa8659754d4b22416a0729bdf755c44113f1ff78a05b9723b3ec68928de0"
         },
         "bigboiurlmetadataresolver": {
