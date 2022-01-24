@@ -31,15 +31,21 @@ const ReferenceRenderer = ({ reference, showTags }) => {
   );
 
   const onLinkClick = useCallback(async () => {
-    const variables = {
-      input: {
-        id: get(reference, "id"),
-        clickCount: get(reference, "clickCount", 0) + 1,
-      },
-    };
-    get(reference, "isPrivate", true) ? await changePrivateReference(variables) : await changeReference(variables);
-    window.open(get(reference, "url"), "_blank");
-    await requestRefetch();
+    try {
+      const variables = {
+        input: {
+          id: get(reference, "id"),
+          clickCount: get(reference, "clickCount", 0) + 1,
+        },
+      };
+      get(reference, "isPrivate", true) ? await changePrivateReference(variables) : await changeReference(variables);
+    } catch (err) {
+      // eslint-disable-next-line
+      console.warn("Unable to count clicks: ", err);
+    } finally {
+      window.open(get(reference, "url"), "_blank");
+      await requestRefetch();
+    }
   }, [reference, changeReference, changePrivateReference, requestRefetch]);
 
   const onLinkDelete = useCallback(async () => {
