@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { isArray, isString, uniq, uniqBy } from "lodash";
 import PropTypes from "prop-types";
+import Auth from "@aws-amplify/auth";
 
 import { useGetFile, useUploadFile } from "../../utils/awsStorage";
 import { REFERENCE_TAGS } from "../../utils/constants";
@@ -16,6 +17,13 @@ export const ReferenceContextProvider = ({ children }) => {
   const { uploadFile, loading: uploading } = useUploadFile();
   const [suggestedReferenceTags, setSuggestedReferenceTags] = useState([]);
   const [refetchFns, setRefetchFns] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then(user => setCurrentUser(user))
+      .catch(() => setCurrentUser(null));
+  }, []);
 
   const registerRefetch = useCallback((name, refetchFn) => {
     setRefetchFns(existingRefetchFns => uniqBy([...existingRefetchFns, { name, refetchFn }], "name"));
@@ -76,6 +84,7 @@ export const ReferenceContextProvider = ({ children }) => {
         registerRefetch,
         deregisterRefetch,
         requestRefetch,
+        currentUser,
       }}
     >
       {children}
