@@ -1,10 +1,11 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import { CircularProgress, Typography, List, ListItem, Grid } from "@mui/material";
+import { CircularProgress, Typography, List, ListItem, Grid, FormControlLabel, Switch } from "@mui/material";
 import { get, isEmpty } from "lodash";
+import useLocalStorageState from "use-local-storage-state";
 import ReferenceRenderer from "./ReferenceRenderer";
 
-const ReferenceDisplayWidget = ({ data, loading }) => {
+const TreeReferenceDisplayWidget = ({ data, loading }) => {
   const level = useMemo(
     () =>
       get(data, "path", "")
@@ -38,7 +39,7 @@ const ReferenceDisplayWidget = ({ data, loading }) => {
           .filter(item => get(item, "references", []).length !== 0 || !isEmpty(get(item, "children")))
           .map(item => (
             <Grid item key={get(item, "name")} lg={12} xl={level > 0 ? 12 : 6} md={12} xs={12} sm={12}>
-              <ReferenceDisplayWidget data={item} loading={loading} bordered />
+              <TreeReferenceDisplayWidget data={item} loading={loading} bordered />
             </Grid>
           ))}
       </Grid>
@@ -46,9 +47,54 @@ const ReferenceDisplayWidget = ({ data, loading }) => {
   );
 };
 
-ReferenceDisplayWidget.propTypes = {
+TreeReferenceDisplayWidget.propTypes = {
   data: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
+};
+
+TreeReferenceDisplayWidget.defaultProps = {};
+
+const ReferenceDisplayWidget = ({ data, listData, widgetKey, ...props }) => {
+  const [isDisplayTreeReference, setIsDisplayTreeReference] = useLocalStorageState(
+    `isDisplayTreeReference${widgetKey}`,
+    true
+  );
+
+  return (
+    <div>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={isDisplayTreeReference}
+            onChange={(e, newValue) => {
+              e.preventDefault();
+              setIsDisplayTreeReference(newValue);
+            }}
+          />
+        }
+        label="Tree View"
+      />
+
+      {isDisplayTreeReference ? (
+        <TreeReferenceDisplayWidget data={data} {...props} />
+      ) : (
+        <List>
+          {(listData || []).map(item => (
+            <ListItem key={get(item, "id")} className="mt-1 px-2 p-0">
+              <ReferenceRenderer showTags reference={item} />
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </div>
+  );
+};
+
+ReferenceDisplayWidget.propTypes = {
+  data: PropTypes.object.isRequired,
+  listData: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  widgetKey: PropTypes.string.isRequired,
 };
 
 ReferenceDisplayWidget.defaultProps = {};

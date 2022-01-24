@@ -61,19 +61,22 @@ const Searchable = () => {
   }, [registerRefetch, refetchReference, refetchPrivateReference, deregisterRefetch, resetSearchQuery]);
 
   const isLoading = useMemo(() => publicDataLoading || privateDataLoading, [publicDataLoading, privateDataLoading]);
-  const data = useMemo(() => {
-    const combinedData = sortBy(
-      [
-        ...get(rawPublicData, "data.searchReferences.items", []).map(item => ({ ...item, isPrivate: false })),
-        ...get(rawPrivateData, "data.searchPrivateReferences.items", []).map(item => ({
-          ...item,
-          isPrivate: true,
-        })),
-      ],
-      "clickCount"
-    );
-    return convertToReferenceRenderedData(combinedData);
-  }, [rawPrivateData, rawPublicData]);
+  const combinedData = useMemo(
+    () =>
+      sortBy(
+        [
+          ...get(rawPublicData, "data.searchReferences.items", []).map(item => ({ ...item, isPrivate: false })),
+          ...get(rawPrivateData, "data.searchPrivateReferences.items", []).map(item => ({
+            ...item,
+            isPrivate: true,
+          })),
+        ],
+        "clickCount"
+      ),
+    [rawPrivateData, rawPublicData]
+  );
+
+  const treeData = useMemo(() => convertToReferenceRenderedData(combinedData), [combinedData]);
   const onSearch = useRef(
     debounce(newText => {
       setSearchQuery(lowerCase(newText));
@@ -122,7 +125,7 @@ const Searchable = () => {
       </div>
 
       {searchQuery ? (
-        <ReferenceDisplayWidget data={data} loading={isLoading} />
+        <ReferenceDisplayWidget widgetKey="searchable" data={treeData} listData={combinedData} loading={isLoading} />
       ) : (
         <Typography variant="subtitle1" className="pl-4 my-2 text-gray-600">
           Search references

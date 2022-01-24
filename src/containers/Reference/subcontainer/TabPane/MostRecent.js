@@ -34,22 +34,24 @@ const MostRecent = () => {
     };
   }, [registerRefetch, refetchReference, refetchPrivateReference, deregisterRefetch]);
 
-  const data = useMemo(() => {
-    const combinedData = sortBy(
-      [
-        ...get(rawPublicData, "data.ReferenceByUpdatedAt.items", []).map(item => ({ ...item, isPrivate: false })),
-        ...get(rawPrivateData, "data.PrivateReferenceByUpdatedAt.items", []).map(item => ({
-          ...item,
-          isPrivate: true,
-        })),
-      ],
-      "updatedAt"
-    );
+  const combinedData = useMemo(
+    () =>
+      sortBy(
+        [
+          ...get(rawPublicData, "data.ReferenceByUpdatedAt.items", []).map(item => ({ ...item, isPrivate: false })),
+          ...get(rawPrivateData, "data.PrivateReferenceByUpdatedAt.items", []).map(item => ({
+            ...item,
+            isPrivate: true,
+          })),
+        ],
+        "updatedAt"
+      ),
+    [rawPrivateData, rawPublicData]
+  );
 
-    return convertToReferenceRenderedData(combinedData);
-  }, [rawPrivateData, rawPublicData]);
+  const treeData = useMemo(() => convertToReferenceRenderedData(combinedData), [combinedData]);
 
-  return <ReferenceDisplayWidget data={data} loading={isLoading} />;
+  return <ReferenceDisplayWidget widgetKey="mostRecent" data={treeData} listData={combinedData} loading={isLoading} />;
 };
 
 export default MostRecent;

@@ -33,24 +33,28 @@ const MostFrequent = () => {
     };
   }, [registerRefetch, refetchReference, refetchPrivateReference, deregisterRefetch]);
 
-  const data = useMemo(() => {
-    const combinedData = reverse(
-      sortBy(
-        [
-          ...get(rawPublicData, "data.ReferenceByClickCount.items", []).map(item => ({ ...item, isPrivate: false })),
-          ...get(rawPrivateData, "data.PrivateReferenceByClickCount.items", []).map(item => ({
-            ...item,
-            isPrivate: true,
-          })),
-        ],
-        "clickCount"
-      )
-    );
+  const combinedData = useMemo(
+    () =>
+      reverse(
+        sortBy(
+          [
+            ...get(rawPublicData, "data.ReferenceByClickCount.items", []).map(item => ({ ...item, isPrivate: false })),
+            ...get(rawPrivateData, "data.PrivateReferenceByClickCount.items", []).map(item => ({
+              ...item,
+              isPrivate: true,
+            })),
+          ],
+          "clickCount"
+        )
+      ),
+    [rawPrivateData, rawPublicData]
+  );
 
-    return convertToReferenceRenderedData(combinedData);
-  }, [rawPrivateData, rawPublicData]);
+  const treeData = useMemo(() => convertToReferenceRenderedData(combinedData), [combinedData]);
 
-  return <ReferenceDisplayWidget data={data} loading={isLoading} />;
+  return (
+    <ReferenceDisplayWidget widgetKey="mostFrequent" data={treeData} listData={combinedData} loading={isLoading} />
+  );
 };
 
 export default MostFrequent;
