@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.4](https://github.com/bdatdo0601/big-boi/compare/v1.14.3...v1.14.4) (2022-01-24)
+
+
+### Bug Fixes
+
+* additional styling behavior reference issue ([fc4b935](https://github.com/bdatdo0601/big-boi/commit/fc4b93552e48c3a32d15b388c846bd998485ec9a))
+* title change will equate to private link ([ff3f65a](https://github.com/bdatdo0601/big-boi/commit/ff3f65ae77c1057cbe6d675efb8d8465db5ad55b))
+
 ### [1.14.3](https://github.com/bdatdo0601/big-boi/compare/v1.14.2...v1.14.3) (2022-01-24)
 
 
