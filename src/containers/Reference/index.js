@@ -1,7 +1,8 @@
+import React, { useEffect, useState } from "react";
 import Auth from "@aws-amplify/auth";
 import { ExpandMoreOutlined } from "@mui/icons-material";
 import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import ReferenceInputWidget from "./components/ReferenceInputWidget";
 import { ReferenceContextProvider } from "./context";
 import Searchable from "./subcontainer/Searchable";
@@ -13,8 +14,8 @@ const Items = [
     key: "Searchable",
     Component: Searchable,
     span: {
-      xl: 6,
-      lg: 6,
+      xl: 12,
+      lg: 12,
       md: 12,
       sm: 12,
       xs: 12,
@@ -24,8 +25,8 @@ const Items = [
     key: "ReferenceTabs",
     Component: ReferenceTabs,
     span: {
-      xl: 6,
-      lg: 6,
+      xl: 12,
+      lg: 12,
       md: 12,
       sm: 12,
       xs: 12,
@@ -35,6 +36,10 @@ const Items = [
 
 export default function Reference() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isReferenceCreationExpanded, setIsReferenceCreationExpanded] = useLocalStorageState(
+    "isReferenceCreationExpanded",
+    true
+  );
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
@@ -48,7 +53,13 @@ export default function Reference() {
         <Grid container spacing={2}>
           {currentUser && (
             <Grid item xs={12} md={12} lg={12} xl={12}>
-              <Accordion defaultExpanded>
+              <Accordion
+                expanded={isReferenceCreationExpanded}
+                onChange={(e, newValue) => {
+                  e.preventDefault();
+                  setIsReferenceCreationExpanded(newValue);
+                }}
+              >
                 <AccordionSummary
                   expandIcon={<ExpandMoreOutlined />}
                   aria-controls="panel1a-content"

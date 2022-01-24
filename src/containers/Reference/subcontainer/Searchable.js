@@ -1,6 +1,6 @@
 import React, { useContext, useMemo, useState, useRef, useEffect, useCallback } from "react";
 import { debounce, get, lowerCase, sortBy } from "lodash";
-import { Autocomplete, IconButton, Paper, TextField, Typography } from "@mui/material";
+import { Autocomplete, IconButton, Paper, TextField } from "@mui/material";
 import { DeleteOutline } from "@mui/icons-material";
 import { searchPrivateReferences, searchReferences } from "../../../graphql/queries";
 import { useAWSAPI } from "../../../utils/awsAPI";
@@ -115,7 +115,7 @@ const Searchable = () => {
           renderInput={params => (
             <TextField
               id="reference-search-text-field"
-              label="Search Box"
+              label="Search Reference Here"
               variant="outlined"
               placeholder="Search References"
               {...params}
@@ -124,12 +124,8 @@ const Searchable = () => {
         />
       </div>
 
-      {searchQuery ? (
+      {searchQuery && (
         <ReferenceDisplayWidget widgetKey="searchable" data={treeData} listData={combinedData} loading={isLoading} />
-      ) : (
-        <Typography variant="subtitle1" className="pl-4 my-2 text-gray-600">
-          Search references
-        </Typography>
       )}
     </Paper>
   );

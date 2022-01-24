@@ -59,40 +59,40 @@ const ReferenceRenderer = ({ reference, showTags }) => {
   }, [reference, removeReference, removePrivateReference, requestRefetch]);
 
   return (
-    <span className="flex justify-between align-middle w-full">
-      <Modal
-        open={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-        }}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Paper className="p-12">
-          <Typography variant="h5">Update Reference</Typography>
-          <ReferenceInputWidget existingReference={reference} />
-        </Paper>
-      </Modal>
-      <span>
-        <Tooltip placement="top" title={`Visited ${get(reference, "clickCount")} time(s)`}>
+    <Tooltip placement="top-end" title={`Visited ${get(reference, "clickCount")} time(s)`}>
+      <span className="flex justify-between align-middle w-full">
+        <Modal
+          open={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+          }}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Paper className="p-12">
+            <Typography variant="h5">Update Reference</Typography>
+            <ReferenceInputWidget existingReference={reference} />
+          </Paper>
+        </Modal>
+        <span>
           <Link className="m-0 mr-2" href="#" onClick={onLinkClick}>
             {get(reference, "title")}
           </Link>
-        </Tooltip>
-        {showTags &&
-          get(reference, "tags", []).map(item => <Chip className="mr-2" key={item} size="small" label={item} />)}
-      </span>
+          {showTags &&
+            get(reference, "tags", []).map(item => <Chip className="mr-2" key={item} size="small" label={item} />)}
+        </span>
 
-      <span>
-        {get(reference, "isPrivate") && <VisibilityOffOutlined className="mr-2 text-gray-600" />}
-        <IconButton disabled={loading} onClick={toggleModal}>
-          <EditOutlined />
-        </IconButton>
-        <IconButton color="error" disabled={loading} onClick={onLinkDelete}>
-          <DeleteOutlined />
-        </IconButton>
+        <span>
+          {get(reference, "isPrivate") && <VisibilityOffOutlined className="mr-2 text-gray-600" />}
+          <IconButton disabled={loading} onClick={toggleModal}>
+            <EditOutlined />
+          </IconButton>
+          <IconButton color="error" disabled={loading} onClick={onLinkDelete}>
+            <DeleteOutlined />
+          </IconButton>
+        </span>
       </span>
-    </span>
+    </Tooltip>
   );
 };
 

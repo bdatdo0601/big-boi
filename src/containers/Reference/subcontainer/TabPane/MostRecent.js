@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo } from "react";
-import { get, sortBy } from "lodash";
+import { get, reverse, sortBy } from "lodash";
 import { privateReferenceByUpdatedAt, referenceByUpdatedAt } from "../../../../graphql/queries";
 import { useAWSAPI } from "../../../../utils/awsAPI";
 import { convertToReferenceRenderedData } from "../../utils";
@@ -36,15 +36,17 @@ const MostRecent = () => {
 
   const combinedData = useMemo(
     () =>
-      sortBy(
-        [
-          ...get(rawPublicData, "data.ReferenceByUpdatedAt.items", []).map(item => ({ ...item, isPrivate: false })),
-          ...get(rawPrivateData, "data.PrivateReferenceByUpdatedAt.items", []).map(item => ({
-            ...item,
-            isPrivate: true,
-          })),
-        ],
-        "updatedAt"
+      reverse(
+        sortBy(
+          [
+            ...get(rawPublicData, "data.ReferenceByUpdatedAt.items", []).map(item => ({ ...item, isPrivate: false })),
+            ...get(rawPrivateData, "data.PrivateReferenceByUpdatedAt.items", []).map(item => ({
+              ...item,
+              isPrivate: true,
+            })),
+          ],
+          "updatedAt"
+        )
       ),
     [rawPrivateData, rawPublicData]
   );
