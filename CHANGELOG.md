@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/bdatdo0601/big-boi/compare/v1.13.1...v1.14.0) (2022-01-24)
+
+
+### Features
+
+* add list view for reference dipslay ([39ec05e](https://github.com/bdatdo0601/big-boi/commit/39ec05ef92530f0d3e261d5d75aa37b96e21529a))
+
 ### [1.13.1](https://github.com/bdatdo0601/big-boi/compare/v1.13.0...v1.13.1) (2022-01-23)
 
 
