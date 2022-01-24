@@ -70,14 +70,20 @@ const ReferenceInputWidget = ({ existingReference }) => {
       setIsURLMetadataFetching(true);
       if (isNull(existingReference)) {
         const response = await API.post("bigboiexternalapi", "/url-metadata", { body: { url: newURL } });
-        const isPrivate = get(response, "isPrivate", true);
-        setValue("isPrivate", isPrivate);
-        if (!isPrivate && !get(getValues(), "title")) {
+        if (!get(getValues(), "title")) {
+          const isPrivate = get(response, "isPrivate", true);
+          setValue("isPrivate", isPrivate);
           setValue("title", get(response, "title"));
         }
       }
       setIsURLMetadataFetching(false);
     }, 200)
+  );
+
+  const onTitleChange = useRef(
+    debounce(() => {
+      setValue("isPrivate", true);
+    }, 100)
   );
 
   useEffect(() => {
@@ -194,7 +200,7 @@ const ReferenceInputWidget = ({ existingReference }) => {
           label="Title"
           variant="outlined"
           className="lg:w-1/2 xl:w-1/2 sm:w-full xs:w-full w-full my-2"
-          {...register("title")}
+          {...register("title", { onChange: onTitleChange.current })}
         />
         <div className="lg:grid xl:grid 2xl:grid lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-4 w-full">
           {referenceTagInputs.map((input, index) => (
