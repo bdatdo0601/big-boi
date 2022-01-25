@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/bdatdo0601/big-boi/compare/v1.14.4...v1.15.0) (2022-01-25)
+
+
+### Features
+
+* allow drag-n-drop ([3cd9e3e](https://github.com/bdatdo0601/big-boi/commit/3cd9e3e3de3b5377578b583420be515122279f83))
+
 ### [1.14.4](https://github.com/bdatdo0601/big-boi/compare/v1.14.3...v1.14.4) (2022-01-24)
 
 
