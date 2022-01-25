@@ -20,6 +20,10 @@ export const REFERENCE_TAGS = {
   FILE_NAME: "reference_tags.json",
 };
 
+export const DragDropTypes = {
+  LINK: "LINK",
+};
+
 export default {
   POST_STATE,
   PHOTO_UPLOAD_PREFIX,

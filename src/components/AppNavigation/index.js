@@ -84,7 +84,7 @@ export default function AppNavigation({
           [classes.appBarShift]: open,
         })}
         style={{
-          zIndex: 300,
+          zIndex: 50,
         }}
       >
         <Grid

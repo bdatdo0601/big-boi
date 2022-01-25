@@ -8,6 +8,16 @@ export const gcd = (a, b) => {
   return gcd(b, a % b);
 };
 
+export const isTouchDevice = () => {
+  return (
+    !!(
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window ||
+        (window.DocumentTouch && typeof document !== "undefined" && document instanceof window.DocumentTouch))
+    ) || !!(typeof navigator !== "undefined" && (navigator.maxTouchPoints || navigator.msMaxTouchPoints))
+  );
+};
+
 export const formatGridList = (data, colAmount, isWeb) => {
   let amount = 0;
   if (data.length <= 0) return [];

@@ -59,7 +59,7 @@ export default function MainLayout({ children, name }) {
         <link rel="canonical" href={`${window.location.href}`} />
         <meta name="description" content="This is Dat'a Website" />
       </Helmet>
-      {isFullSize && (
+      {isFullSize && !isSubdomainRoute && (
         <Suspense fallback={<CircularProgress />}>
           <Particles
             style={{ width: "100vw", height: "100vh", position: "fixed", zIndex: -1, top: 0, left: 0 }}

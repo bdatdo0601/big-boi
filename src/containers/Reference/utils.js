@@ -28,7 +28,7 @@ export const convertToReferenceRenderedData = data =>
           .split(".")
           .map(item => startCase(item))
           .join(".children.")}`;
-        get(acc, tagPath).references.push(currentItem);
+        get(acc, tagPath).references.push({ ...currentItem, rawPath: tagPath, path: tag });
       });
       return acc;
     },

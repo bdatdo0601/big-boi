@@ -6,10 +6,12 @@ import { useSnackbar } from "notistack";
 import {
   ContentCopyOutlined,
   DeleteOutlined,
+  DragIndicatorOutlined,
   EditOutlined,
   ShareOutlined,
   VisibilityOffOutlined,
 } from "@mui/icons-material";
+import { useDrag } from "react-dnd";
 import { useLazyAWSAPI } from "../../../utils/awsAPI";
 import {
   deletePrivateReference,
@@ -19,6 +21,7 @@ import {
 } from "../../../graphql/mutations";
 import ReferenceContext from "../context";
 import ReferenceInputWidget from "./ReferenceInputWidget";
+import { DragDropTypes } from "../../../utils/constants";
 
 function fallbackCopyTextToClipboard(text) {
   const textArea = document.createElement("textarea");
@@ -54,7 +57,14 @@ const copyTextToClipboard = async text => {
   }
 };
 
-const ReferenceRenderer = ({ reference, showTags }) => {
+const ReferenceRenderer = ({ reference, showTags, draggable }) => {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: DragDropTypes.LINK,
+    item: reference,
+    collect: monitor => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
   const { enqueueSnackbar } = useSnackbar();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { execute: changeReference, loading: updatingReference } = useLazyAWSAPI(updateReference);
@@ -101,11 +111,7 @@ const ReferenceRenderer = ({ reference, showTags }) => {
   }, [reference, removeReference, removePrivateReference, requestRefetch]);
 
   return (
-    <Tooltip
-      placement="top-end"
-      followCursor
-      title={currentUser ? `Visited ${get(reference, "clickCount")} time(s)` : ""}
-    >
+    <div ref={drag} style={{ opacity: isDragging ? 0.5 : 1 }} className="w-full">
       <span className="flex justify-between align-middle w-full">
         <Modal
           open={isModalOpen}
@@ -121,6 +127,7 @@ const ReferenceRenderer = ({ reference, showTags }) => {
           </Paper>
         </Modal>
         <span>
+          {currentUser && draggable && <DragIndicatorOutlined ref={drag} style={{ cursor: "move" }} />}
           {get(reference, "isPrivate") && <VisibilityOffOutlined className="mr-2 text-gray-600" />}
           <Link className="m-0 mr-2" href="#" onClick={onLinkClick}>
             {get(reference, "title")}
@@ -128,57 +135,64 @@ const ReferenceRenderer = ({ reference, showTags }) => {
           {showTags &&
             get(reference, "tags", []).map(item => <Chip className="mr-2" key={item} size="small" label={item} />)}
         </span>
-
-        <span>
-          <IconButton
-            disabled={loading}
-            onClick={async () => {
-              await copyTextToClipboard(get(reference, "url"));
-              enqueueSnackbar(`"${get(reference, "title")}" URL Copied`, {
-                variant: "info",
-                anchorOrigin: { vertical: "top", horizontal: "left" },
-              });
-            }}
-          >
-            <ContentCopyOutlined />
-          </IconButton>
-          {navigator.canShare && navigator.canShare() && (
+        <Tooltip
+          placement="top-end"
+          followCursor
+          title={currentUser ? `Visited ${get(reference, "clickCount")} time(s)` : ""}
+        >
+          <span>
             <IconButton
               disabled={loading}
               onClick={async () => {
-                await navigator.share({
-                  title: get(reference, "title"),
-                  url: get(reference, "url"),
-                  text: `${get(reference, "title")} [${get(reference, "tags", []).join(", ")}]`,
+                await copyTextToClipboard(get(reference, "url"));
+                enqueueSnackbar(`"${get(reference, "title")}" URL Copied`, {
+                  variant: "info",
+                  anchorOrigin: { vertical: "top", horizontal: "left" },
                 });
               }}
             >
-              <ShareOutlined />
+              <ContentCopyOutlined />
             </IconButton>
-          )}
-          {currentUser && (
-            <IconButton disabled={loading} onClick={toggleModal}>
-              <EditOutlined />
-            </IconButton>
-          )}
-          {currentUser && (
-            <IconButton color="error" disabled={loading} onClick={onLinkDelete}>
-              <DeleteOutlined />
-            </IconButton>
-          )}
-        </span>
+            {navigator.canShare && navigator.canShare() && (
+              <IconButton
+                disabled={loading}
+                onClick={async () => {
+                  await navigator.share({
+                    title: get(reference, "title"),
+                    url: get(reference, "url"),
+                    text: `${get(reference, "title")} [${get(reference, "tags", []).join(", ")}]`,
+                  });
+                }}
+              >
+                <ShareOutlined />
+              </IconButton>
+            )}
+            {currentUser && (
+              <IconButton disabled={loading} onClick={toggleModal}>
+                <EditOutlined />
+              </IconButton>
+            )}
+            {currentUser && (
+              <IconButton color="error" disabled={loading} onClick={onLinkDelete}>
+                <DeleteOutlined />
+              </IconButton>
+            )}
+          </span>
+        </Tooltip>
       </span>
-    </Tooltip>
+    </div>
   );
 };
 
 ReferenceRenderer.propTypes = {
   reference: PropTypes.object.isRequired,
   showTags: PropTypes.bool,
+  draggable: PropTypes.bool,
 };
 
 ReferenceRenderer.defaultProps = {
   showTags: false,
+  draggable: false,
 };
 
 export default ReferenceRenderer;

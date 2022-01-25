@@ -2,6 +2,7 @@ import { Paper, Tab, Tabs } from "@mui/material";
 import React, { useMemo, useState } from "react";
 import MostFrequent from "./TabPane/MostFrequent";
 import MostRecent from "./TabPane/MostRecent";
+import TagAlphabetical from "./TabPane/TagAlphabetical";
 
 function a11yProps(index) {
   return {
@@ -11,8 +12,9 @@ function a11yProps(index) {
 }
 
 const TABS = [
-  { name: "Most Recent", Component: MostRecent },
-  { name: "Most Frequent", Component: MostFrequent },
+  { name: "Recently Updated", Component: MostRecent },
+  { name: "Tag Based", Component: TagAlphabetical },
+  { name: "Frequently Visited", Component: MostFrequent },
 ];
 
 const ReferenceTabs = () => {

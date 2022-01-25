@@ -82,7 +82,9 @@ const ReferenceInputWidget = ({ existingReference }) => {
 
   const onTitleChange = useRef(
     debounce(() => {
-      setValue("isPrivate", true);
+      if (!existingReference) {
+        setValue("isPrivate", true);
+      }
     }, 100)
   );
 
