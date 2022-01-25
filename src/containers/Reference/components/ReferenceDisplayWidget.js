@@ -70,7 +70,7 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
   }
 
   return (
-    <div className={`drop-shadow-lg pl-1 ${level > 1 ? "border-l-2 ml-2" : "mb-2"} ${isOver ? "border-blue-600" : ""}`}>
+    <div className={`pl-1 ${level > 0 ? "border-l-2" : ""} ${isOver ? "border-blue-600" : ""}`}>
       <div ref={drop}>
         {level !== 0 && <Typography className="mx-2 mb-1">{get(data, "name")}</Typography>}
         {get(data, "references", []).length !== 0 && (
@@ -87,7 +87,16 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
         {Object.values(get(data, "children", {}))
           .filter(item => get(item, "references", []).length !== 0 || !isEmpty(get(item, "children")))
           .map(item => (
-            <Grid item key={get(item, "name")} lg={level > 0 ? 12 : 6} xl={level > 0 ? 12 : 4} md={12} xs={12} sm={12}>
+            <Grid
+              item
+              key={get(item, "name")}
+              lg={level > 0 ? 12 : 6}
+              xl={level > 0 ? 12 : 4}
+              md={12}
+              xs={12}
+              sm={12}
+              className={level === 0 ? "mt-2" : "mt-1"}
+            >
               <TreeReferenceDisplayWidget data={item} loading={loading} bordered />
             </Grid>
           ))}
