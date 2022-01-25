@@ -58,7 +58,7 @@ const copyTextToClipboard = async text => {
 };
 
 const ReferenceRenderer = ({ reference, showTags, draggable }) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
     type: DragDropTypes.LINK,
     item: reference,
     collect: monitor => ({
@@ -111,23 +111,36 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
   }, [reference, removeReference, removePrivateReference, requestRefetch]);
 
   return (
-    <div ref={drag} style={{ opacity: isDragging ? 0.5 : 1 }} className="w-full">
-      <span className="flex justify-between align-middle w-full">
-        <Modal
-          open={isModalOpen}
-          onClose={() => {
-            setIsModalOpen(false);
-          }}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Paper className="p-12">
-            <Typography variant="h5">Update Reference</Typography>
-            <ReferenceInputWidget existingReference={reference} />
-          </Paper>
-        </Modal>
+    <div ref={dragPreview} style={{ opacity: isDragging ? 0.5 : 1 }} className="w-full flex">
+      <Modal
+        open={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Paper className="p-12">
+          <Typography variant="h5">Update Reference</Typography>
+          <ReferenceInputWidget existingReference={reference} />
+        </Paper>
+      </Modal>
+      {currentUser && draggable && (
+        <span ref={drag}>
+          <DragIndicatorOutlined
+            className={isDragging ? "text-blue-600" : "text-gray-600"}
+            style={{ cursor: "move" }}
+          />
+        </span>
+      )}
+      <span
+        className="flex justify-between align-middle w-full ml-1"
+        onDragStart={e => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
         <span>
-          {currentUser && draggable && <DragIndicatorOutlined ref={drag} style={{ cursor: "move" }} />}
           {get(reference, "isPrivate") && <VisibilityOffOutlined className="mr-2 text-gray-600" />}
           <Link className="m-0 mr-2" href="#" onClick={onLinkClick}>
             {get(reference, "title")}
