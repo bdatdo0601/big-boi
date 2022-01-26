@@ -11,6 +11,26 @@ import { useLazyAWSAPI } from "../../../utils/awsAPI";
 import { updatePrivateReference, updateReference } from "../../../graphql/mutations";
 import ReferenceContext from "../context";
 
+const getSpanFromLevel = level => {
+  if (level <= 0) {
+    return { lg: 12, xl: 12, md: 12, xs: 12, sm: 12 };
+  }
+  if (level > 0 && level < 2) {
+    return { lg: 4, xl: 4, md: 12, xs: 12, sm: 12 };
+  }
+  return { lg: 12, xl: 12, md: 12, xs: 12, sm: 12 };
+};
+
+const getListItemSpanFromLevel = level => {
+  if (level <= 0) {
+    return { lg: 12, xl: 12, md: 12, xs: 12, sm: 12 };
+  }
+  if (level > 0 && level < 2) {
+    return { lg: 6, xl: 4, md: 12, xs: 12, sm: 12 };
+  }
+  return { lg: 12, xl: 12, md: 12, xs: 12, sm: 12 };
+};
+
 const TreeReferenceDisplayWidget = ({ data, loading }) => {
   const { execute: changeReference, loading: updatingReference } = useLazyAWSAPI(updateReference);
   const { execute: changePrivateReference, loading: updatingPrivateReference } = useLazyAWSAPI(updatePrivateReference);
@@ -25,7 +45,10 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
         const variables = {
           input: {
             id: get(item, "id"),
-            tags: uniq([...get(item, "tags", []).filter(tag => tag !== get(item, "path")), get(data, "path")]),
+            tags: uniq([
+              ...get(item, "tags", []).filter(tag => tag !== get(item, "path")),
+              get(data, "path").replace(/s+/g, ""),
+            ]),
           },
         };
         get(item, "isPrivate", true) ? await changePrivateReference(variables) : await changeReference(variables);
@@ -70,16 +93,20 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
   }
 
   return (
-    <div className={`pl-1 ${level > 0 ? "border-l-2" : ""} ${isOver ? "border-blue-600" : ""}`}>
+    <div className={`${level > 0 ? "border-l-2 pl-2" : ""} ${isOver ? "border-blue-600" : ""}`}>
       <div ref={drop}>
         {level !== 0 && <Typography className="mx-2 mb-1">{get(data, "name")}</Typography>}
         {get(data, "references", []).length !== 0 && (
           <List>
-            {get(data, "references", []).map(item => (
-              <ListItem key={get(item, "id")} className="mt-1 px-2 p-0">
-                <ReferenceRenderer reference={item} draggable />
-              </ListItem>
-            ))}
+            <Grid container>
+              {get(data, "references", []).map(item => (
+                <Grid item key={get(item, "id")} {...getListItemSpanFromLevel(level)}>
+                  <ListItem className="mt-1 px-2 p-0">
+                    <ReferenceRenderer reference={item} draggable />
+                  </ListItem>
+                </Grid>
+              ))}
+            </Grid>
           </List>
         )}
       </div>
@@ -87,16 +114,7 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
         {Object.values(get(data, "children", {}))
           .filter(item => get(item, "references", []).length !== 0 || !isEmpty(get(item, "children")))
           .map(item => (
-            <Grid
-              item
-              key={get(item, "name")}
-              lg={level > 0 ? 12 : 6}
-              xl={level > 0 ? 12 : 4}
-              md={12}
-              xs={12}
-              sm={12}
-              className={level === 0 ? "mt-2" : "mt-1"}
-            >
+            <Grid item key={get(item, "name")} {...getSpanFromLevel(level)} className={level === 0 ? "mb-8" : "mt-1"}>
               <TreeReferenceDisplayWidget data={item} loading={loading} bordered />
             </Grid>
           ))}
