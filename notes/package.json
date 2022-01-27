@@ -12,6 +12,6 @@
     "load": "tiddlywiki tiddlynotes --load empty.html",
     "tiddlywiki": "tiddlywiki",
     "start:dev": "tiddlywiki tiddlynotes --listen username=username password=password",
-    "start": "tiddlywiki tiddlynotes --listen username=${process.env.USERNAME} password=${process.env.PASSWORD}"
+    "start": "tiddlywiki tiddlynotes --listen username=$USERNAME password=$PASSWORD"
   }
 }
