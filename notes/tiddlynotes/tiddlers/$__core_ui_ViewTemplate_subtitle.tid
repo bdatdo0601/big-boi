@@ -1,0 +1,15 @@
+created: 20200429172942326
+modified: 20200430222342476
+revision: 0
+tags: $:/tags/ViewTemplate
+title: $:/core/ui/ViewTemplate/subtitle
+type: text/vnd.tiddlywiki
+
+<div class="tc-subtitle">
+<$link to={{!!modifier}}>
+<$view field="modifier"/>
+</$link>
+<$list filter="[is[current]has[modified]]">updated <$view field="modified" format="relativedate"/></$list>
+<$list filter="[is[current]has[created]]"><span style="float:right">created: <$view field="created" format="date" template="0DD MMM YYYY"/>
+</span></$list>
+</div>

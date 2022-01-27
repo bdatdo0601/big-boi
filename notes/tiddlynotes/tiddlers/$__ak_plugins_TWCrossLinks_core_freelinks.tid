@@ -1,0 +1,38 @@
+caption: Freelinks
+created: 20200430051330741
+creator: akhater
+modified: 20200524203946520
+modifier: akhater
+revision: 0
+tags: $:/tags/TWCrossLinks
+title: $:/ak/plugins/TWCrossLinks/core/freelinks
+type: text/vnd.tiddlywiki
+
+\define fullMatchPattern()
+\b$(currentTiddler)$\b(?i)
+\end
+
+\define PartialMatchPattern()
+$(currentTiddler)$(?i)
+\end
+
+\define bmention() [[$(currentTiddler)$]]
+\define mention() $(currentTiddler)$
+
+<$list filter="[[$:/ak/plugins/TWCrossLinks/config/default]getindex[UseFullMatch4Freelinks]match[true]then<fullMatchPattern>else<PartialMatchPattern>]" variable=pattern>
+    <$list filter="[regexp:title<pattern>] [regexp:text<pattern>] -[all[current]backlinks[]] -[all[current]tagging[]] -[is[current]] -[tag[hide]] -[is[system]]" emptyMessage="No freelinks to this tiddler" variable=result>
+        <$list filter="[<currentTiddler>split[ ]nth[2]then<bmention>else<mention>]" variable=mentions >
+        <$action-mysetfield $tiddler=<<result>>  $timestamp="no" mentions=<<mentions>> />
+        <$list filter="[[$:/ak/plugins/TWCrossLinks/config/default]getindex[TranscludeInboundLinks]] -[[true]]" variable=var1>
+            <div class="tc-menu-list-item"> <$link to=<<result>> ><$view tiddler=<<result>> field=title> </$view></$link> </div> 
+        </$list>
+        <$list filter="[[$:/ak/plugins/TWCrossLinks/config/default]getindex[TranscludeInboundLinks]] -[[false]]" variable=var1>
+            <div class="tc-menu-list-item">
+                <div class="trans-container">
+                    <$link to=<<result>> ><$view tiddler=<<result>> field=title> </$view></$link>
+                    <span class="trans-content">  <$context term=<<currentTiddler>> tiddler=<<result>> /> </span>
+                </div>
+            </div>
+        </$list>
+    </$list>
+</$list>

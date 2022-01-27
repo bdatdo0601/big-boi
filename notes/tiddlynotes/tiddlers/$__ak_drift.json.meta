@@ -1,0 +1,12 @@
+created: 20200518090028282
+description: Collect. Organize. Grow. your ideas
+list: changelog
+modified: 20200518125614149
+name: Drift
+plugin-priority: 1
+plugin-type: plugin
+revision: 0
+tags: 
+title: $:/ak/drift
+type: application/json
+version: 0.1.0

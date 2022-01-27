@@ -1,0 +1,22 @@
+caption: Map
+created: 20200524202905963
+modified: 20200524202906047
+revision: 0
+title: $:/plugins/felixhayashi/tiddlymap/hook/editor
+type: text/vnd.tiddlywiki
+
+\define width() calc(100% - 15px)
+
+<div class="tmap-mobile-editor">
+  <div class="tmap-flash-message tmap-warning">
+    The editor is not displayed in mobile mode.
+  </div>
+</div>
+<div class="tmap-desktop-editor">
+  <$tiddlymap
+    class="tmap-sidebar-map-editor"
+    editor="advanced"
+    object-id="main_editor"
+    click-to-use="false">
+  </$tiddlymap>
+</div>

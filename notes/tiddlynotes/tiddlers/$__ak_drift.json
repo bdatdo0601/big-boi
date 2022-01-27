@@ -1,0 +1,72 @@
+{
+    "tiddlers": {
+        "$:/ak/drift/macros/cross-list-links-draggable": {
+            "text": "\\define cross-list-links-draggable-drop-actions()\n<$vars sourceTiddler={{{ [<actionTiddler>listed[]] +[limit[1]]}}}>\n    <$list filter=\"[<sourceTiddler>] -[<targetTiddler>]\">\n        <$action-listops $tiddler=<<sourceTiddler>> $field=<<targetField>> $subfilter=\"-[<actionTiddler>]\"        />\n    </$list>\n    <$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter=\"+[insertbefore:currentTiddler<actionTiddler>]\"/>\n</$vars>\n\\end\n\n\\define drop-actions()\n<$vars oldFolder={{{ [<actionTiddler>listed[]] +[subfilter<folders>] +[limit[1]]}}}>\n<$action-listops $tiddler=<<oldFolder>>       $field=\"list\" $subfilter=\"-[<actionTiddler>]\"        />\n<$action-listops $tiddler=<<__folder__>> $subfilter='+[insertbefore:currentTiddler<actionTiddler>]'/>\n</$vars>\n\\end\n\n\\define cross-list-links-draggable(tiddler,field:\"list\",type:\"ul\",subtype:\"li\",class:\"\",itemTemplate)\n\\whitespace trim\n<span class=\"tc-links-draggable-list\">\n<$vars targetTiddler=\"\"\"$tiddler$\"\"\" targetField=\"\"\"$field$\"\"\">\n<$type$ class=\"$class$\">\n<$list filter=\"[list[$tiddler$!!$field$]]\">\n<$droppable actions=<<cross-list-links-draggable-drop-actions>> tag=\"\"\"$subtype$\"\"\" enable=<<tv-enable-drag-and-drop>>>\n<div class=\"tc-droppable-placeholder\"/>\n<div>\n<$transclude tiddler=\"\"\"$itemTemplate$\"\"\">\n<$link to={{!!title}}>\n<$transclude field=\"caption\">\n<$view field=\"title\"/>\n</$transclude>\n</$link>\n</$transclude>\n</div>\n</$droppable>\n</$list>\n</$type$>\n<$tiddler tiddler=\"\">\n<$droppable actions=<<cross-list-links-draggable-drop-actions>> tag=\"div\" enable=<<tv-enable-drag-and-drop>>>\n<div class=\"tc-droppable-placeholder\">\n&nbsp;\n</div>\n<div style=\"height:0.5em;\"/>\n</$droppable>\n</$tiddler>\n</$vars>\n</span>\n\\end\n",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/ak/drift/macros/cross-list-links-draggable",
+            "tags": "$:/tags/Macro",
+            "modified": "20200514092718704",
+            "keywords": "Week",
+            "created": "20200514050011521"
+        },
+        "$:/ak/drift/macros/spoiler": {
+            "text": "\\define spoiler(text)\n<$reveal type=\"nomatch\" stateTitle=\"$:/temp/TWSpoilerState\" stateIndex=<<currentTiddler>> text=\"show\" default=\"hide\">\n   <$button class=<<tv-config-toolbar-class>> setTitle=\"$:/temp/TWSpoilerState\" setIndex=<<currentTiddler>> setTo=\"show\">[...]</$button> \n</$reveal>\n<$reveal type=\"match\" stateTitle=\"$:/temp/TWSpoilerState\" stateIndex=<<currentTiddler>> text=\"show\" default=\"hide\" >\n   <$button class=<<tv-config-toolbar-class>> setTitle=\"$:/temp/TWSpoilerState\" setIndex=<<currentTiddler>> setTo=\"hide\"> [$text$]\n</$button> \n</$reveal>\n\\end",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/ak/drift/macros/spoiler",
+            "tags": "$:/tags/Macro",
+            "modified": "20200514053357027",
+            "keywords": "[[Example: Spoiler]]",
+            "created": "20200514051115471"
+        },
+        "$:/ak/drift/stylesheet": {
+            "text": "<$list filter=\"[[$:/ak/drift/TweaksDB]getindex[showulil]] -[[false]]\" variable=showulil>\nul, li {\n    list-style-position: inside;\n}\n</$list>\n\n<$list filter=\"[[$:/ak/drift/TweaksDB]getindex[wrapulil]] -[[false]]\" variable=wrapulil>\nul, li {\n   white-space: normal !important;\n   text-align: justify;\n}\n</$list>\n\nmark.blue { background-color: #15f4ee; } \nmark.green { background-color: #39ff14; }\nmark.yellow { background-color: #ccff00; }\nmark.orange { background-color: #FF9933; }\nmark.pink { background-color: #ff69b4; }\n",
+            "bag": "default",
+            "revision": "7",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/ak/drift/stylesheet",
+            "tags": "$:/tags/Stylesheet",
+            "modified": "20200518124020690",
+            "created": "20200504140221596"
+        },
+        "$:/ak/drift/TweaksDB": {
+            "text": "{\n    \"showulil\": \"false\",\n    \"wrapulil\": \"true\"\n}",
+            "bag": "default",
+            "revision": "21",
+            "type": "application/json",
+            "title": "$:/ak/drift/TweaksDB",
+            "modified": "20200518123826581",
+            "created": "20200504142801555"
+        },
+        "$:/ak/drift/TweaksPanel": {
+            "created": "20200504132533468",
+            "text": "<$checkbox tiddler=\"$:/ak/drift/TweaksDB\" index=\"showulil\" checked=\"true\" unchecked=\"false\" default=\"false\"> Show Bullets & Numbers</$checkbox>\n\n<$checkbox tiddler=\"$:/ak/drift/TweaksDB\" index=\"wrapulil\" checked=\"true\" unchecked=\"false\" default=\"false\"> Check this box if you use long bullet or numbered lists </$checkbox>\n\n,,<div style=\"float:right\">Drift vesion: {{$:/ak/drift!!version}}</div>,,",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/ak/drift/TweaksPanel",
+            "tags": "$:/tags/ControlPanel/Appearance",
+            "modified": "20200518092431074",
+            "caption": "Drift Tweaks"
+        },
+        "$:/ak/drift/ui/transclude.css": {
+            "text": ".tc-sidebar-lists button.tc-btn-mini { \n   color: rgb(179,179,179);\n}\n.tooltip {\n  position: relative;\n  display: inline-block;\n}\n\n.tooltip .tooltiptext {\n  visibility: hidden;\n  overflow: hidden;\n  margin-top: -2em;\n  padding: 5px;\n  display: block;\n  \n  /* Position the tooltip */\n  position: absolute;\n  z-index: 80;\n  \n  /*  \n  top: 20px;\n  left: 20px;  */\n\n  float: right;  \n  opacity: 0;\n  \n   /* transition: opacity 0.3s; */\n}\n\n.tooltip .tooltiptext::after {\n  position: relative;\n  overflow: hidden;\n  margin: 0;\n  padding: 0;\n  border: 1px;\n}\n\n.tooltip:hover > .tooltiptext {\n   margin-top:-5px;\n  visibility: visible;\n  opacity: 1;\n  width: 100vw;\n  max-width: 32em;\n  height: 100vw;\n  max-height: 32em;\n}\n\n.resp-iframe {\n    position: rel;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    border: 1px;\n}\n",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/css",
+            "title": "$:/ak/drift/ui/transclude.css",
+            "tags": "$:/tags/Stylesheet",
+            "modified": "20200505112301926",
+            "created": "20200427215400270"
+        },
+        "$:/ak/drift/changelog": {
+            "created": "20200518090927118",
+            "modified": "20200518091434873",
+            "title": "$:/ak/drift/changelog",
+            "text": "''v0.1.0'' - 2020-05-16\n\n* Drift is now a plugin for ease of updates\n\n''v0.0.30'' - 2020-05-14\n\n* Added [[$:/ak/drift/macros/cross-list-links-draggable]] macro\n* Added [[$:/ak/drift/macros/spoiler]] macro\n\n''v0.0.21'' - 2020-05-13\n\n* Enabling Daily Notes button in the top toolbar \n\n''v0.0.15'' - 2020-05-08\n\n* Highlighted text \n* Bug fix\n\n''v0.0.10'' - 2020-05-05\n\n* Bug fix\n\n''v0.0.9'' - 2020-05-05\n\n* Added a fix for long Bullet and list items under \"Control Panel\" -> \"Appearance\"  -> \"Drift Tweaks\"\n\n\n''v0.0.8'' - 2020-05-04\n\n* Fixed pop-up transclude bug\n\n''v0.0.6'' - 2020-05-04\n\n* Added \"Drift Tweaks\" under \"Control Panel\" -> \"Appearance\" \n* Added option to show the Bullet Points and Numbers can be found under  \"Control Panel\" -> \"Appearance\"  -> \"Drift Tweaks\"\n\n''v0.0.4'' - 2020-05-04\n\n* Enabled a \"Light Palette\" and the toggle switch {{$:/themes/jd/Mono/Buttons/switch-palette}} is now in the top bar, give it a try\n\n''v0.0.2'' - 2020-05-02\n\n* Fixing view on mobile when \"Zoomin\" Story view is selected\n\n''v0.0.1'' - 2020-05-02\n\n*Initial release"
+        }
+    }
+}

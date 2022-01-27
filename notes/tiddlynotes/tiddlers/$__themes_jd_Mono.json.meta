@@ -1,0 +1,16 @@
+author: JD
+core-version: >=5.1.19
+created: 20190202102252527
+creator: jd
+dependents: $:/themes/tiddlywiki/vanilla
+description: For writing long texts
+list: contents
+modified: 20200429114215254
+modifier: jd
+name: Mono
+plugin-type: theme
+revision: 0
+source: http://j.d.mono.tiddlyspot.com
+title: $:/themes/jd/Mono
+type: application/json
+version: 1.0.32

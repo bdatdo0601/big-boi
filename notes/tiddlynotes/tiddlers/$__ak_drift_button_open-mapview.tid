@@ -1,0 +1,36 @@
+caption: {{$:/core/images/globe}} Map View
+created: 20200523124757023
+description: Opens Map View
+mentions: TiddlyWiki
+modified: 20200524202949201
+revision: 0
+tags: $:/tags/PageControls
+title: $:/ak/drift/button/open-mapview
+tmap.id: 3dfd8fba-3b89-4d10-a388-3da4551e4e0d
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\define Map-view-button()
+<$button tooltip="Open Map View" aria-label="Open MapView"  class="""$(tv-config-toolbar-class)$ $class$""">
+    <$list filter="[<tv-config-toolbar-icons>match[yes]]">
+        {{$:/core/images/globe}}
+    </$list>
+    <$list filter="[<tv-config-toolbar-text>match[yes]]">
+        <span class="tc-btn-text"><$text text="Open MapView"/></span>
+    </$list>
+    <$action-setfield $tiddler="$:/ak/drift/mapview" tags="$:/tags/SideBar" />
+    <$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" text="800px" />
+    <$action-setfield $tiddler="$:/state/sidebar" text="yes" />
+    <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/ak/drift/mapview" />
+</$button>
+\end
+
+
+<<Map-view-button>>
+
+<$list filter="[[$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth]get[text]!match[350px]]" >
+    <$list filter="[[$:/state/sidebar]get[text]match[no]]">
+        <$action-mysetfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" text="350px" />
+        <$action-mysetfield $tiddler="$:/ak/drift/mapview" $field="tags" $value=""/>
+    </$list>
+</$list>

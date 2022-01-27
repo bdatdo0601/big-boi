@@ -1,0 +1,6 @@
+created: 20220127174008420
+modified: 20220127174020135
+tags: 
+title: $:/config/markdown/renderWikiTextPragma
+
+\rules only html image macrocallinline syslink transcludeinline wikilink filteredtranscludeblock macrocallblock transcludeblock prettylink

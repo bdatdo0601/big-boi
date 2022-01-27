@@ -1,0 +1,23 @@
+created: 20200524204725161
+mentions: Tiddly
+modified: 20200524205057422
+revision: 2
+title: Welcome to Drift
+tmap.id: b3fd71f9-3ba5-43b7-afc8-56bbba480d6f
+
+This is an early attempt to integrate TiddlyMap into drift
+
+Thanks for alpha testing it.
+
+<-- This map should show and handle all different types of links that TWCrosslinks can
+
+* Backlinks
+* Keywords
+* Freelinks
+* Tags
+
+Please do *NOT* install this on your main TiddlyWiki as it has not been tested yet and I don't want you to lose any data
+
+But please load on it all different kind of Tiddlers with all the above link and let me know what you think.
+
+Cheers

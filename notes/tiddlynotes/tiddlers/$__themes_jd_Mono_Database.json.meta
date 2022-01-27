@@ -1,0 +1,9 @@
+created: 20190202114537700
+creator: jd
+list: $:/core/ui/Buttons/new-tiddler $:/core/ui/Buttons/control-panel $:/core/ui/Buttons/save-wiki $:/core/ui/Buttons/new-journal $:/ak/plugins/DailyNotes/buttons/open-DailyNotes $:/themes/jd/Mono/Buttons/switch-palette $:/ak/drift/button/open-mapview $:/themes/jd/Mono/Buttons/searchbar $:/core/ui/TopBar/menu
+modified: 20200524203017830
+modifier: jd
+revision: 0
+tags: 
+title: $:/themes/jd/Mono/Database
+type: application/json

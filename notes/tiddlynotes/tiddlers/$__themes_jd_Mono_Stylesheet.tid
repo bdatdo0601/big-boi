@@ -1,0 +1,670 @@
+created: 20190130145325995
+creator: jd
+modified: 20200518113600856
+modifier: jd
+revision: 0
+tags: $:/tags/Stylesheet
+title: $:/themes/jd/Mono/Stylesheet
+type: text/vnd.tiddlywiki
+
+\define bkrpnt() {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}
+\define sidebar() {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}
+\define fontsize() {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}}
+
+
+
+/* MAIN */
+
+@media (min-width: <<bkrpnt>>) {
+.tc-sidebar-scrollable {
+    position: fixed;
+    top: {{$:/themes/jd/Mono/Database##header-position-desktop}};
+    left: 0;
+    bottom: 0;
+    right: unset;
+    width: <<sidebar>>;
+    margin: 0;
+    padding: 0 2em 2em 2em;
+}
+.tc-story-river {
+    width: calc(100% - <<sidebar>>);
+    padding: 0 2em 4em 2em;
+}
+<$list filter="[[$:/view]!text[zoomin]]">
+.tc-story-river { top: 0.25em; }
+</$list>
+<$list filter="[[$:/view]text[zoomin]]">
+.tc-story-river {
+    top: calc({{$:/themes/jd/Mono/Database##header-position-desktop}} + 0.25em);
+}
+</$list>
+<$list filter="[[$:/state/sidebar]!text[no]]" variable="stateCheck">
+.tc-story-river {
+    left: <<sidebar>>;
+    right: 0;
+}
+</$list>
+<$list filter="[[$:/state/sidebar]text[no]]" variable="stateCheck">
+.tc-story-river {
+    left: calc(<<sidebar>> / 2);
+    right: calc(<<sidebar>> / 2);
+}
+</$list>
+.tc-tiddler-frame {
+    margin: 0 0 2em 0;
+    width: 100%;
+    border-radius: 1px;
+    <<box-shadow "2px 2px 5px rgba(0, 0, 0, 0.15)">>
+}
+.tc-storyview-zoomin-tiddler {
+    width: calc(100% - 4em) !important;
+}
+}
+
+@media (max-width: <<bkrpnt>>) {
+.tc-sidebar-scrollable { padding: 0 1em 2em 1em; }
+<$list filter="[[$:/view]!text[zoomin]]">
+.tc-sidebar-header { padding: 0; }
+</$list>
+<$list filter="[[$:/view]text[zoomin]]">
+.tc-sidebar-header { 
+    padding-top: {{$:/themes/jd/Mono/Database##header-position-desktop}};
+    padding-right: 0em;
+    padding-bottom: 0em;
+    padding-left: 0em;
+}
+</$list>
+.tc-tiddler-frame { margin-bottom: 2px !important; }
+}
+
+<$list filter="[[$:/state/sidebar]!text[no]]" variable="stateCheck">
+@media (max-width: <<bkrpnt>>) {
+.tc-story-river { display: none; }
+}
+</$list>
+
+<$list filter="[[$:/state/sidebar]text[no]]" variable="stateCheck">
+@media (max-width: <<bkrpnt>>) {
+.tc-sidebar-scrollable { padding-top: 0; padding-bottom: 0; }
+}
+</$list>
+
+<$list filter="[[$:/themes/tiddlywiki/vanilla/options/stickytitles]text[yes]]" variable="stateCheck">
+@media (min-width: <<bkrpnt>>) {
+.tc-tiddler-title {
+    top: calc({{$:/themes/jd/Mono/Database##header-position-desktop}} - .25em);
+}
+}
+
+.tc-titlebar {
+    line-height: 0;
+}
+
+@media (max-width: <<bkrpnt>>) {
+<$list filter="[[$:/state/searchbar]text[show]]">
+.tc-tiddler-edit-frame .tc-tiddler-title {
+    top: {{$:/themes/jd/Mono/Database##header-position-mobile-yes-searchbar}};
+}
+.tc-tiddler-view-frame .tc-tiddler-title {
+    top: {{$:/themes/jd/Mono/Database##header-position-mobile-yes-searchbar}};
+}
+</$list>
+<$list filter="[[$:/state/searchbar]!text[show]]">
+.tc-tiddler-title {
+    top: {{$:/themes/jd/Mono/Database##header-position-mobile-no-searchbar}};
+}
+</$list>
+}
+</$list>
+
+.tc-sidebar-scrollable .tc-tab-buttons,
+.tc-topbar .tc-page-controls button,
+.tc-topbar .tc-search button {
+    padding: 0;
+}
+
+/* TOPBAR */
+
+<$list filter="[[$:/view]!text[zoomin]]">
+<$list filter="[[$:/config/topbar/sticky]!text[no]]">
+.tc-topbar { position: sticky; }
+@media (max-width: <<bkrpnt>>) { 
+.tc-story-river { margin-top: -2.5em; }
+}
+</$list>
+<$list filter="[[$:/config/topbar/sticky]text[no]]">
+.tc-topbar { position: fixed; }
+@media (min-width: <<bkrpnt>>) { 
+.tc-topbar { height: 56px; }
+.tc-story-river { margin-top: 56px; }
+}
+<$list filter="[[$:/state/searchbar]!text[hide]]">
+@media (max-width: <<bkrpnt>>) { 
+.tc-topbar { height: 94px; }
+.tc-story-river { margin-top: calc(48px + 1em); }
+}
+</$list>
+<$list filter="[[$:/state/searchbar]text[hide]]">
+@media (max-width: <<bkrpnt>>) { 
+.tc-topbar { height: 48px; }
+.tc-story-river { margin-top: 1em; }
+}
+</$list>
+</$list>
+</$list>
+
+<$list filter="[[$:/view]text[zoomin]]">
+.tc-topbar { position: fixed; }
+</$list>
+
+.tc-topbar {
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.25em 1em;
+    background: <<colour page-background>>;
+    z-index: 900;
+}
+
+@media (min-width: <<bkrpnt>>) {
+.tc-topbar {
+    padding: 1em 2em;
+    max-height: {{$:/themes/jd/Mono/Database##header-position-desktop}};
+}
+}
+
+@media (max-width: <<bkrpnt>>) {
+.tc-topbar > * {
+    width: 100%;
+}
+.tc-topbar .tc-topbar-left {
+    padding: 0.75em 0;
+}
+.tc-topbar .tc-topbar-right .tc-search {
+    margin-bottom: 0.5em;
+}
+.tc-topbar-right {
+    font-size: 1.25em !important;
+}
+.tc-topbar .tc-page-controls {
+    justify-content: space-between;
+    width: 100%;
+}
+}
+
+.tc-topbar .tc-page-controls,
+.tc-topbar .tc-search {
+    display: flex;
+    align-items: center;
+}
+
+/* TOPBAR SEARCH */
+
+.tc-topbar .tc-search {
+    border: 1px solid <<colour table-border>>;
+    background: <<colour page-background>>;
+    border-radius: 0;
+    padding: 0.25em;
+}
+.tc-topbar .tc-search input {
+    border: none;
+    background: transparent;
+    width: 100%;
+}
+.tc-topbar .tc-search .tc-reveal {
+    display: flex;
+}
+
+/* controls */
+
+.tc-topbar .tc-page-controls {
+    margin: 0;
+}
+.tc-topbar .tc-page-controls button > span,
+.tc-topbar .tc-page-controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* DROPDOWNS */
+
+.tc-drop-down,
+.tc-block-dropdown {
+    <<box-shadow "2px 2px 5px rgba(0, 0, 0, 0.25)">>
+    border-radius: 1px;
+}
+
+@media (max-width: <<bkrpnt>>) {
+
+.tc-search .tc-drop-down,
+.tc-search .tc-block-dropdown,
+.tc-page-controls .tc-drop-down,
+.tc-page-controls .tc-block-dropdown {
+    position:fixed;
+    left:1em;
+    min-width: calc(100% - 2em);
+    max-width: calc(100% - 2em);
+    max-height: calc(100% - 10em);
+    overflow: auto;
+}
+
+.tc-drop-down,
+.tc-block-dropdown {
+    max-height: 22em;
+    overflow: auto;
+    font-size: calc(<<fontsize>>*1.2) !important;
+    font-weight: normal;
+    line-height: 1.2;
+}
+}
+
+/* TOPBAR SEARCH DROPDOWN */
+
+.tc-block-dropdown.tc-search-drop-down {
+    padding: 0.5em;
+}
+
+.tc-block-dropdown.tc-search-drop-down .tc-tab-buttons {
+    margin-bottom: -3px;
+    padding-top: 0;
+}
+
+.tc-block-dropdown.tc-search-drop-down .tc-search-results { width: 100%; }
+
+.tc-block-dropdown.tc-search-drop-down .tc-search { display: none; }
+
+@media (min-width: <<bkrpnt>>) {
+.tc-block-dropdown.tc-search-drop-down {
+    margin: 0 0 0 -24em;
+    width: calc(100% + 24em);
+    max-height: 42em;
+    overflow: auto;
+}
+.tc-topbar-right .tc-search .tc-block-dropdown,
+.tc-topbar-right .tc-search .tc-drop-down {
+    position: absolute;
+    right: 0;
+}
+.tc-topbar-right .tc-search .tc-drop-down {
+    padding: 1em;
+    min-width: 10em;
+    max-width: 10em;
+}
+}
+
+@media (max-width: <<bkrpnt>>) {
+.tc-block-dropdown.tc-search-drop-down {
+    margin: 0;
+    width: 100%;
+    overflow: auto;
+}
+}
+
+/* TOPBAR SEARCH DROPDOWN FLEX */
+
+/* .tc-block-dropdown.tc-search-drop-down { display: flex; } on searchbar template under reveal */
+
+.tc-block-dropdown.tc-search-drop-down > p {
+    display: flex;
+    margin: 0;
+    width: 100%;
+}
+
+.tc-block-dropdown.tc-search-drop-down > p >.tc-tab-set {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.tc-block-dropdown.tc-search-drop-down > p >.tc-tab-set > .tc-tab-content {
+    display: flex;
+    flex: 1 1 auto;
+    overflow: auto;
+    margin-top: 0;
+}
+
+
+<$reveal type="match" state="$:/state/styled-frames" text="yes" default="yes">
+
+/* VIEW & EDIT FRAME */
+
+.tc-subtitle,
+.tc-tiddler-edit-frame input.tc-titlebar.tc-edit-texteditor,
+.tc-tiddler-view-frame .tc-titlebar h2.tc-title {
+    font-family: monospace;
+}
+
+/* VIEW FRAME */
+
+.tc-tiddler-view-frame .tc-title {
+    font-weight: bold;
+}
+
+.tc-tiddler-view-frame .tc-tiddler-title {
+    font-size: 1.5em;
+    margin: 0 -1em;
+    padding: 0.25em 1em;
+}
+
+.tc-tiddler-view-frame .tc-titlebar {
+    font-size: 1em;
+}
+
+.tc-tiddler-view-frame .tc-titlebar h2.tc-title {
+    font-size: 0.75em;
+}
+
+.tc-tiddler-view-frame .tc-tiddler-controls {
+    font-size: 1.5em;
+}
+
+.tc-tiddler-view-frame .tc-tiddler-controls,
+.tc-tiddler-view-frame .tc-tiddler-controls > span > button, 
+.tc-tiddler-view-frame .tc-tiddler-controls > span > span > button, 
+.tc-tiddler-view-frame .tc-tiddler-controls > span > span > span > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tc-tiddler-view-frame .tc-tiddler-title-icon svg {
+    max-height: 0.65em;
+}
+
+/* EDIT FRAME */
+
+.tc-tiddler-edit-frame .tc-tiddler-edit-title {
+    color: transparent;
+    line-height: 0;
+}
+
+.tc-tiddler-edit-frame input.tc-titlebar.tc-edit-texteditor {
+    font-size: 1.2em; 
+}
+
+.tc-tiddler-edit-frame .tc-message-box { margin: 0; }
+
+.tc-tiddler-edit-frame iframe.tc-edit-texteditor { margin-top: 0 !important; }
+
+.tc-tiddler-edit-frame .tc-editor-toolbar { background: <<colour tiddler-editor-border>>; }
+
+.tc-tiddler-edit-frame .tc-editor-toolbar .tc-btn-invisible  { background: transparent; }
+
+.tc-tiddler-edit-frame .tc-editor-toolbar .tc-btn-invisible {
+    transition: 200ms fill;
+    fill: <<colour foreground>>;
+}
+
+.tc-tiddler-edit-frame .tc-editor-toolbar .tc-btn-invisible:hover {
+    background: transparent;
+    fill: <<colour primary>>;
+}
+
+input::placeholder {
+   font-size: 0.9em; 
+}
+
+.tc-tiddler-edit-frame input.tc-titlebar.tc-edit-texteditor, 
+.tc-tiddler-edit-frame .tc-edit-tags, 
+.tc-tiddler-edit-frame .tc-edit-field-add-name input.tc-edit-texteditor, 
+.tc-tiddler-edit-frame .tc-edit-field-add-value input.tc-edit-texteditor, 
+.tc-tiddler-edit-frame input.tc-edit-typeeditor.tc-popup-handle, 
+.tc-tiddler-edit-frame input.tc-edit-texteditor.tc-popup-handle {
+    border: 1px solid <<colour background>>; 
+    border-bottom: 1px solid <<colour tiddler-editor-border>>;
+    <<box-shadow "none">>
+} 
+
+.tc-tiddler-edit-frame textarea { 
+    border: 1px solid <<colour tiddler-editor-border>>;
+    <<box-shadow "none">>
+} 
+
+.tc-tiddler-edit-frame textarea,
+.tc-tiddler-edit-frame iframe.tc-edit-texteditor {
+    font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
+    border: 1px solid <<colour background>>; 
+    <<box-shadow "none">>
+}
+
+.tc-tiddler-edit-frame input.tc-titlebar.tc-edit-texteditor {
+    font-weight: bold;
+}
+
+.tc-tiddler-edit-frame .tc-type-selector {
+    padding-bottom: 10px;
+    border-bottom: 1px solid <<colour tiddler-editor-border>>;
+}
+
+</$reveal>
+
+
+/* TIMELINE */
+
+.jd-timeline-wrapper {
+    position: relative;
+}
+@media (max-width: <<bkrpnt>>) {
+.jd-timeline-wrapper {
+    padding: 0 1em;
+    width: 100%;
+}
+}
+ .jd-paperview-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.25em 0;
+}
+.jd-paperview {
+    position:relative;
+    width: 31%;
+    margin: 1%;
+    overflow:hidden;
+    border: 0.5px solid {{$:/themes/jd/Mono/Database##grid-item-border}};
+    border-radius: 1px;
+    <<box-shadow "2px 2px 5px rgba(0, 0, 0, 0.09)">>
+    text-align: left;
+}
+@media (min-width: <<bkrpnt>>) {
+.jd-paperview { height: 26em; }
+}
+@media (max-width: <<bkrpnt>>) {
+.jd-paperview { height: 12em; }
+}
+.jd-paperview,
+.jd-paperview-end {
+    background: {{$:/themes/jd/Mono/Database##grid-item-background}} !important;
+}
+.jd-paperview-end {
+    position: absolute;
+    bottom: 0;
+    left:0;
+    width: 100%;
+    height: 5px;
+}
+.jd-paperview-internal {
+    transform: scale(0.7);
+    position: absolute;
+    width: 110%;
+    height: 100%;
+    top: -5%;
+    left: -5%;
+    pointer-events: none;
+}
+.jd-paperview-wrapper .tc-menu-list-subitem { width: 100%; }
+
+@media (min-width: <<bkrpnt>>) {
+.jd-paperview-end {
+    box-shadow: 0 0 10px 10px {{$:/themes/jd/Mono/Database##grid-item-background}};
+}
+}
+
+@media (max-width: <<bkrpnt>>) {
+.jd-paperview-end {
+    box-shadow: 0 0 5px 5px {{$:/themes/jd/Mono/Database##grid-item-background}};
+}
+
+}
+.jd-paperview-date {
+    padding: 0.1em 0;
+}
+.jd-paperview-date {
+    position: sticky;
+    z-index: 1;
+    background: {{$:/themes/jd/Mono/Database##header-background}};
+    box-shadow: 0 0 2px 2px {{$:/themes/jd/Mono/Database##header-background}};
+}
+
+@media (min-width: <<bkrpnt>>) {
+.jd-paperview-date {
+    top: {{$:/themes/jd/Mono/Database##header-position-desktop}};
+}
+}
+
+@media (max-width: <<bkrpnt>>) {
+<$list filter="[[$:/state/searchbar]text[show]]">
+.jd-paperview-date {
+    top: {{$:/themes/jd/Mono/Database##header-position-mobile-yes-searchbar}};
+}
+</$list>
+<$list filter="[[$:/state/searchbar]!text[show]]">
+.jd-paperview-date {
+    top: {{$:/themes/jd/Mono/Database##header-position-mobile-no-searchbar}};
+}
+</$list>
+}
+
+
+/* MISC */
+
+hr {
+    border: none;
+    border-top: 1px solid <<colour table-border>>;
+    height: 1px;
+}
+
+.tc-sidebar-scrollable .tc-tab-buttons,
+.tc-tiddler-frame .tc-tab-buttons {
+    margin-bottom: -3px;
+}
+
+.tc-story-river .tc-tab-buttons.tc-vertical button {
+    border-top: 1px solid <<colour tab-border>>;
+    border-left: 1px solid <<colour tab-border>>;
+    border-bottom: 1px solid <<colour tab-border>>;
+    border-right: 1px solid transparent;
+}
+
+.tc-story-river .tc-tab-buttons.tc-vertical .tc-tab-selected {
+    border-top: 1px solid <<colour tab-border-selected>>;
+    border-left: 1px solid <<colour tab-border-selected>>;
+    border-bottom: 1px solid <<colour tab-border-selected>>;
+    border-right: 1px solid transparent;
+}
+
+.tc-sidebar-lists .tc-tab-set .tc-tab-divider {
+    border-top: none;
+    height: 1px;
+    background-image: linear-gradient(left, <<colour sidebar-tab-divider>> 20%, transparent 100%);
+    background-image: -o-linear-gradient(left, <<colour sidebar-tab-divider>> 20%, transparent 100%);
+    background-image: -moz-linear-gradient(left, <<colour sidebar-tab-divider>> 20%, transparent 100%);
+    background-image: -webkit-linear-gradient(left, <<colour sidebar-tab-divider>> 20%, transparent 100%);
+    background-image: -ms-linear-gradient(left, <<colour sidebar-tab-divider>> 20%, transparent 100%);
+}
+
+/* SIDEBAR MORE TAB BUTTONS */
+
+.tc-more-sidebar .tc-tab-buttons.tc-vertical {
+    margin-top: 1em;
+}
+
+.tc-more-sidebar .tc-tab-buttons.tc-vertical > button {
+    margin-bottom: -1px;
+    border-top: 1px solid <<colour sidebar-tab-border>>;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid <<colour sidebar-tab-border>>;
+    border-left: 1px solid <<colour sidebar-tab-border>>;
+}
+
+.tc-more-sidebar .tc-tab-buttons.tc-vertical > button.tc-tab-selected {
+    border-top: 1px solid <<colour sidebar-tab-border-selected>>;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid <<colour sidebar-tab-border-selected>>;
+    border-left: 1px solid <<colour sidebar-tab-border-selected>>;
+}
+
+.tc-more-sidebar .tc-tab-content.tc-vertical {
+    margin-left: 1px;
+}
+
+ul, li {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tc-menu-list-item {
+    padding-left: 5px;
+    text-indent: -5px;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    -webkit-word-break: break-all !important;
+    -moz-word-break: break-all !important;
+    -ms-word-break: break-all !important;
+    -o-word-break: break-all !important;
+    word-break: break-all !important;
+}
+
+button, input { outline: none; }
+
+button, input:not([type]) {
+    border-radius: 2px;
+}
+
+input:not([type]) {
+    border: 1px solid <<colour tiddler-editor-border>>;
+    padding: 2px 4px;
+    margin: 2px;
+}
+
+button {
+    border: 1px solid <<colour button-border>>;
+    padding: 6px 16px;
+    margin: 2px;
+}
+
+@media (max-width: <<bkrpnt>>) {
+.desktop-only {
+    display: none !important; pointer-events: none;
+}
+}
+
+@media (min-width: <<bkrpnt>>) {
+.mobile-only {
+    display: none !important; pointer-events: none;
+}
+}
+
+.tc-topbar.tc-topbar-left,
+.tc-topbar.tc-topbar-right {
+    display: none; pointer-events: none;
+}
+
+.tc-dropzone > p,
+.tc-topbar p,
+.tc-sidebar-lists-template > p,
+.tc-topbar .tc-sidebar-lists > p { margin: 0; }
+
+@media (min-width: <<bkrpnt>>) {
+div::-webkit-scrollbar { background: rgba(0, 0, 0, 0.12); }
+div::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.12); }
+}
+
+.tc-notification {
+    <<box-shadow "2px 2px 5px rgba(0, 0, 0, 0.45)">>
+    border-radius: 1px;
+}

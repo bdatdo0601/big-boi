@@ -1,0 +1,9 @@
+created: 20190202142826323
+creator: jd
+modified: 20200429115547333
+modifier: jd
+revision: 0
+title: $:/config/EmptyStoryMessage
+type: text/vnd.tiddlywiki
+
+{{$:/themes/jd/Mono/EmptyStoryMessage}}

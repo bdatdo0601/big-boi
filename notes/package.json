@@ -1,0 +1,17 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "tiddlywiki": "^5.2.1"
+  },
+  "scripts": {
+    "clean": "rm -rf tiddlynotes/",
+    "setup": "tiddlywiki tiddlynotes --init server",
+    "load": "tiddlywiki tiddlynotes --load empty.html",
+    "tiddlywiki": "tiddlywiki",
+    "start:dev": "tiddlywiki tiddlynotes --listen username=username password=password",
+    "start": "tiddlywiki tiddlynotes --listen username=${process.env.USERNAME} password=${process.env.PASSWORD}"
+  }
+}

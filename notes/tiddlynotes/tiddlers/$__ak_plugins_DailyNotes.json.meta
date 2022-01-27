@@ -1,0 +1,10 @@
+created: 20200509172404131
+description: Interstitial Journaling Plugin
+list: readme change.log
+modified: 20200516174258258
+name: DailyNotes
+plugin-type: plugin
+revision: 0
+title: $:/ak/plugins/DailyNotes
+type: application/json
+version: 0.0.20

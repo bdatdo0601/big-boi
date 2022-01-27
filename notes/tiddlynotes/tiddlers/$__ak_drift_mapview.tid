@@ -1,0 +1,14 @@
+caption: Map
+created: 20200524195209768
+modified: 20220127174242210
+revision: 1
+tags: 
+title: $:/ak/drift/mapview
+type: text/vnd.tiddlywiki
+
+\define width() calc(100% - 15px)
+
+
+<$tmap view="Live View" editor="advanced" toggleEnlargedMode="halfscreen" ></$tmap>
+
+

@@ -1,0 +1,12 @@
+created: 20200523123714651
+modified: 20200524202949278
+revision: 0
+tags: $:/tags/Stylesheet
+title: $:/ak/drift/stylesheets/tmapfix.css
+tmap.id: 05f53741-e0cc-4df0-944b-55ec3b4e7afa
+type: text/vnd.tiddlywiki
+
+div.tmap-widget {
+ width: calc(100% - 15px) !important;
+}
+
