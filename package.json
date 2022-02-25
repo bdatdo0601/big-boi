@@ -93,7 +93,8 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "release": "standard-version && git push --follow-tags origin develop",
-    "generate-build-meta": "node ./node_modules/react-clear-browser-cache/bin/cli.js"
+    "generate-build-meta": "node ./node_modules/react-clear-browser-cache/bin/cli.js",
+    "deploy:notes": "cd notes && yarn deploy:heroku"
   },
   "eslintConfig": {
     "extends": "react-app"

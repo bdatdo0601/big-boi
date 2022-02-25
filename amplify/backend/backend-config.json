@@ -68,7 +68,7 @@
         },
         {
           "category": "function",
-          "resourceName": "bigboiutilitydiscordinteraction",
+          "resourceName": "bigboiurlmetadataresolver",
           "attributes": [
             "Name",
             "Arn"
@@ -76,7 +76,7 @@
         },
         {
           "category": "function",
-          "resourceName": "bigboiurlmetadataresolver",
+          "resourceName": "bigboiutilitydiscordinteraction",
           "attributes": [
             "Name",
             "Arn"

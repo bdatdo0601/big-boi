@@ -1,0 +1,123 @@
+{
+  "resource":"/bot/interaction",
+  "path":"/bot/interaction",
+  "httpMethod":"GET",
+  "headers":{
+     "Accept":"*/*",
+     "Accept-Encoding":"deflate, gzip",
+     "CloudFront-Forwarded-Proto":"https",
+     "CloudFront-Is-Desktop-Viewer":"true",
+     "CloudFront-Is-Mobile-Viewer":"false",
+     "CloudFront-Is-SmartTV-Viewer":"false",
+     "CloudFront-Is-Tablet-Viewer":"false",
+     "CloudFront-Viewer-Country":"IE",
+     "Host":"api.datbdo.com",
+     "User-Agent":"facebookplatform/1.0 (+http://developers.facebook.com)",
+     "Via":"1.1 7309328e91f012108061822748228b68.cloudfront.net (CloudFront)",
+     "X-Amz-Cf-Id":"Aoqk1BhatCLx_owUrgzNuy1G61RIzcZojhjqOES-JEHszmUN-NCKTw==",
+     "X-Amzn-Trace-Id":"Root=1-61f6027d-60f13b2623e043901a506726",
+     "X-Forwarded-For":"31.13.127.39, 15.158.16.18",
+     "X-Forwarded-Port":"443",
+     "X-Forwarded-Proto":"https"
+  },
+  "multiValueHeaders":{
+     "Accept":[
+        "*/*"
+     ],
+     "Accept-Encoding":[
+        "deflate, gzip"
+     ],
+     "CloudFront-Forwarded-Proto":[
+        "https"
+     ],
+     "CloudFront-Is-Desktop-Viewer":[
+        "true"
+     ],
+     "CloudFront-Is-Mobile-Viewer":[
+        "false"
+     ],
+     "CloudFront-Is-SmartTV-Viewer":[
+        "false"
+     ],
+     "CloudFront-Is-Tablet-Viewer":[
+        "false"
+     ],
+     "CloudFront-Viewer-Country":[
+        "IE"
+     ],
+     "Host":[
+        "api.datbdo.com"
+     ],
+     "User-Agent":[
+        "facebookplatform/1.0 (+http://developers.facebook.com)"
+     ],
+     "Via":[
+        "1.1 7309328e91f012108061822748228b68.cloudfront.net (CloudFront)"
+     ],
+     "X-Amz-Cf-Id":[
+        "Aoqk1BhatCLx_owUrgzNuy1G61RIzcZojhjqOES-JEHszmUN-NCKTw=="
+     ],
+     "X-Amzn-Trace-Id":[
+        "Root=1-61f6027d-60f13b2623e043901a506726"
+     ],
+     "X-Forwarded-For":[
+        "31.13.127.39, 15.158.16.18"
+     ],
+     "X-Forwarded-Port":[
+        "443"
+     ],
+     "X-Forwarded-Proto":[
+        "https"
+     ]
+  },
+  "queryStringParameters":{
+     "hub.challenge":"1109444099",
+     "hub.mode":"subscribe",
+     "hub.verify_token":"SUPER_SECRET"
+  },
+  "multiValueQueryStringParameters":{
+     "hub.challenge":[
+        "1109444099"
+     ],
+     "hub.mode":[
+        "subscribe"
+     ],
+     "hub.verify_token":[
+        "SUPER_SECRET"
+     ]
+  },
+  "pathParameters":null,
+  "stageVariables":null,
+  "requestContext":{
+     "resourceId":"86qrjh",
+     "resourcePath":"/bot/interaction",
+     "httpMethod":"GET",
+     "extendedRequestId":"MvVTnHhhoAMFyPg=",
+     "requestTime":"30/Jan/2022:03:14:05 +0000",
+     "path":"/bot/interaction",
+     "accountId":"142037127835",
+     "protocol":"HTTP/1.1",
+     "stage":"dev",
+     "domainPrefix":"api",
+     "requestTimeEpoch":1643512445391,
+     "requestId":"aa3d1db7-6e76-4217-8011-1f7b7d74f899",
+     "identity":{
+        "cognitoIdentityPoolId":null,
+        "accountId":null,
+        "cognitoIdentityId":null,
+        "caller":null,
+        "sourceIp":"31.13.127.39",
+        "principalOrgId":null,
+        "accessKey":null,
+        "cognitoAuthenticationType":null,
+        "cognitoAuthenticationProvider":null,
+        "userArn":null,
+        "userAgent":"facebookplatform/1.0 (+http://developers.facebook.com)",
+        "user":null
+     },
+     "domainName":"api.datbdo.com",
+     "apiId":"ofqiui2tpi"
+  },
+  "body":null,
+  "isBase64Encoded":false
+}

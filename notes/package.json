@@ -12,6 +12,7 @@
     "load": "tiddlywiki tiddlynotes --load empty.html",
     "tiddlywiki": "tiddlywiki",
     "start:dev": "tiddlywiki tiddlynotes --listen username=username password=password",
-    "start": "tiddlywiki tiddlynotes --listen host=0.0.0.0 port=$PORT username=$USERNAME password=$PASSWORD"
+    "start": "tiddlywiki tiddlynotes --listen host=0.0.0.0 port=$PORT username=$USERNAME password=$PASSWORD",
+    "deploy:heroku": "git push heroku HEAD:master "
   }
 }

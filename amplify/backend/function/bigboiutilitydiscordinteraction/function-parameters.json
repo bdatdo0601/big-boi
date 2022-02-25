@@ -15,5 +15,8 @@
       "cloudFormationParameterName": "discordApplicationPublicKey",
       "environmentVariableName": "DISCORD_APPLICATION_PUBLIC_KEY"
     }
+  ],
+  "secretNames": [
+    "VERIFY_TOKEN"
   ]
 }

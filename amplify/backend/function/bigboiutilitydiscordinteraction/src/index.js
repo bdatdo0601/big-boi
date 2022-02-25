@@ -1,3 +1,17 @@
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const aws = require('aws-sdk');
+
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["VERIFY_TOKEN"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
 /* Amplify Params - DO NOT EDIT
 	API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT
 	API_BIGBOIAPI_GRAPHQLAPIIDOUTPUT
@@ -6,55 +20,84 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 const { get } = require("lodash");
-const nacl = require('tweetnacl');
+const aws = require('aws-sdk');
 
-// Your public key can be found on your application in the Developer Portal
-const PUBLIC_KEY = process.env.DISCORD_APPLICATION_PUBLIC_KEY;
-
-const isVerified = (evt) => {
-    try {
-        const signature = get(evt, "headers.x-signature-ed25519", "");
-        const timestamp = get(evt, "headers.x-signature-timestamp", "");
-        const rawBody = get(evt, "body"); // rawBody is expected to be a string, not raw bytes
-        return nacl.sign.detached.verify(
-            Buffer.from(timestamp + rawBody),
-            Buffer.from(signature, 'hex'),
-            Buffer.from(PUBLIC_KEY, 'hex')
-        );
-    } catch (err) {
-        console.warn("verification failed: ", err);
-        return false;
+const getRequestData = (evt) => {
+    const httpMethod = get(evt, "httpMethod");
+    
+    switch (httpMethod) {
+        case "GET":
+            return get(evt, "queryStringParameters", {});
+        case "POST":
+            return JSON.parse(get(evt, "body", "{}"));
+        default:
+            return {}
     }
-} 
+};
 
-exports.handler = async (event) => {
-    console.log("Receive Event: ", event);
+const validateVerificationRequest = async (requestData) => {
+    // Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+    const tokenName = "VERIFY_TOKEN"
 
-    if (!isVerified(event)) {
-        console.error("Event Not Verified");
+    const mode = requestData["hub.mode"];
+    const token = requestData["hub.verify_token"];
+    const challenge = requestData["hub.challenge"];
+
+    if (!mode || !token || !challenge) {
+        return null;
+    }
+
+    const { Parameters } = await (new aws.SSM())
+        .getParameters({
+            Names: [tokenName].map(secretName => process.env[secretName]),
+            WithDecryption: true,
+        })
+        .promise();
+    const secret = get(Parameters, "0.Value");
+    if (!secret) {
+        return null;
+    }
+
+    if (mode === "subscribe" && token === secret) {
         return {
-            statusCode: 401,
-            body: "Invalid request signature",
+            statusCode: 200,
+            //  Uncomment below to enable CORS requests
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "*"
             }, 
+            body: challenge,
         }
     }
+    return {
+        statusCode: 403,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "*"
+        }
+    };
+}
 
-    const requestData = JSON.parse(get(event, "body", "{}"));
+exports.handler = async (event) => {
+    console.log("Receive Event: ", event);
+
+    const requestData = getRequestData(event);
     console.log("request data: ", requestData)
-    const result = {
-        type: get(requestData, "type")
+
+    const validationResponse = await validateVerificationRequest(requestData);
+
+    if (validationResponse) {
+        return validationResponse;
     }
+
     const response = {
-        statusCode: 200,
+        statusCode: 501,
         //  Uncomment below to enable CORS requests
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "*"
         }, 
-        body: JSON.stringify(result),
+        body: null,
     };
     return response;
 };

@@ -49,8 +49,9 @@
         },
         "bigboiutilitydiscordinteraction": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboiutilitydiscordinteraction-57584c7a44623264586d-build.zip",
-          "discordApplicationPublicKey": "35ebaa8659754d4b22416a0729bdf755c44113f1ff78a05b9723b3ec68928de0"
+          "s3Key": "amplify-builds/bigboiutilitydiscordinteraction-2b354b79364839365845-build.zip",
+          "discordApplicationPublicKey": "35ebaa8659754d4b22416a0729bdf755c44113f1ff78a05b9723b3ec68928de0",
+          "secretsPathAmplifyAppId": "d2vxpb6a8hxx0o"
         },
         "bigboiurlmetadataresolver": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
