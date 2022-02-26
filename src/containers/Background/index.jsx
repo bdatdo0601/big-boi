@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, CircularProgress, Paper, Typography } from "@mui/material";
-import { ResumeProvider } from "react-vitae";
+import { ResumeProvider } from "../../components/Vitae";
 
 import ResumeDisplay from "./ResumeDisplay";
 import { useGetFile } from "../../utils/awsStorage";

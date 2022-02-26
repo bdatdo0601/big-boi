@@ -2,7 +2,7 @@ import React, { useContext, useMemo } from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
 import { Button, Card, CardActionArea, CardActions, CardContent, Chip, Typography, Divider } from "@mui/material";
-import { capitalize, get } from "lodash";
+import { capitalize, get, isString } from "lodash";
 import { Tweet } from "react-twitter-widgets";
 
 import { POST_STATE } from "../../utils/constants";
@@ -58,7 +58,7 @@ DefaultCardContent.propTypes = {
   isDark: PropTypes.bool.isRequired,
   showState: PropTypes.bool,
   onPostClick: PropTypes.func,
-  width: PropTypes.number,
+  width: PropTypes.any,
 };
 
 DefaultCardContent.defaultProps = {
@@ -115,7 +115,7 @@ export default function BlogPostCard({
         <CardActions style={{ display: "flex", justifyContent: "center" }}>
           <Button
             size="small"
-            disabled={updatingPost || get(post, "postType")}
+            disabled={isString(get(updatingPost || post, "postType"))}
             onClick={() => {
               updatePostState(post, POST_STATE.DRAFT);
             }}
@@ -125,7 +125,7 @@ export default function BlogPostCard({
           <Button
             size="small"
             color="primary"
-            disabled={updatingPost || get(post, "postType")}
+            disabled={isString(get(updatingPost || post, "postType"))}
             onClick={() => {
               updatePostState(post, POST_STATE.PUBLISHED);
             }}
@@ -135,7 +135,7 @@ export default function BlogPostCard({
           <Button
             size="small"
             color="warning"
-            disabled={updatingPost || get(post, "postType")}
+            disabled={isString(get(updatingPost || post, "postType"))}
             onClick={() => {
               updatePostState(post, POST_STATE.ARCHIVED);
             }}

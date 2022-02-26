@@ -1,22 +1,28 @@
 import React from "react";
+import { styled } from '@mui/material/styles';
 import PropTypes from "prop-types";
 import { Button } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import * as Icons from "@mui/icons-material";
 
-const useStyles = makeStyles(() => ({
-  button: {
+const PREFIX = 'index';
+
+const classes = {
+  button: `${PREFIX}-button`
+};
+
+const StyledButton = styled(Button)(() => ({
+  [`&.${classes.button}`]: {
     backgroundColor: "transparent",
     // color: theme.palette.secondary.main,
     boxShadow: "none",
-  },
+  }
 }));
 
 export default function ContactButton({ contact }) {
-  const classes = useStyles();
+
   const ContactIcon = Icons[contact.icon.value];
   return (
-    <Button
+    <StyledButton
       variant="text"
       size="large"
       className={classes.button}
@@ -24,7 +30,7 @@ export default function ContactButton({ contact }) {
       style={{ outline: "none", marginTop: 12 }}
     >
       <a href={contact.link}>{contact.value}</a>
-    </Button>
+    </StyledButton>
   );
 }
 

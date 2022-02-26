@@ -7,6 +7,7 @@ import { TouchBackend } from "react-dnd-touch-backend";
 import { LayoutContextProvider } from "./layout";
 import { EventMessageContextProvider } from "./eventmessage";
 import { isTouchDevice } from "../utils";
+import "@aws-amplify/ui-react/styles.css"; // default theme
 
 export default function ContextProvider({ children }) {
   return (

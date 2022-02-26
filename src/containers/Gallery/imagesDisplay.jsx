@@ -16,7 +16,7 @@ export default function ImagesDisplay({ imageCols }) {
     <>
       <Masonry breakpointCols={isWeb ? 3 : 1} className="masonry-image" columnClassName="masonry-image-column">
         {formatGridList(data, imageCols, isWeb).map(image => (
-          <ImageGridDisplay url={image.url} name={image.key} animation />
+          <ImageGridDisplay url={image.url} name={image.key} key={image.key} animation />
         ))}
       </Masonry>
     </>

@@ -24,4 +24,4 @@ export const useAuthenticateEffect = () => {
   }, [enqueueSnackbar]);
 };
 
-export default withAuthenticator;
+export default (Component) => withAuthenticator(Component, { hideSignUp: true });

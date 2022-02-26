@@ -17,10 +17,96 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useMediaQuery, Switch, FormControlLabel, CircularProgress, Grid, Tabs, Tab } from "@mui/material";
 import { useHistory, useLocation } from "react-router-dom";
-import useStyles from "./styleHooks";
+import { styled } from "@mui/material/styles";
 import MaterialListItem from "./MaterialListItem";
 import "./index.less";
 import { VERSION } from "../../utils/constants";
+
+const drawerWidth = 240;
+
+const classes = {
+  root: "AppNavigationRoot",
+  appBar: "AppNavigationAppbar",
+  appBarShift: "AppNavigationAppBarShift",
+  menuButton: "AppNavigationmenuButton",
+  hide: "AppNavigationhide",
+  drawer: "AppNavigationdrawer",
+  drawerHeader: "AppNavigationDrawerHeader",
+  drawerPaper: "AppNavigationDrawerPaper",
+  darkModeSwitch: "AppNavigationdarkModeSwitch",
+  content: "AppNavigationcontent",
+  contentShift: "AppNavigationcontentShift",
+};
+
+const AppNavigationRoot = styled("div")(({ theme }) => ({
+  [`&.${classes.root}`]: {
+    display: "flex",
+  },
+  [`& .${classes.appBar}`]: {
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  [`& .${classes.appBarShift}`]: {
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+      transition: theme.transitions.create(["margin", "width"], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+  },
+  [`& .${classes.menuButton}`]: {
+    marginRight: theme.spacing(2),
+  },
+  [`& .${classes.hide}`]: {
+    display: "none",
+    transition: theme.transitions.create("display", {
+      easing: theme.transitions.easing.easeIn,
+      duration: theme.transitions.duration.standard,
+    }),
+  },
+  [`& .${classes.drawer}`]: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  [`& .${classes.drawerPaper}`]: {
+    width: drawerWidth,
+  },
+  [`& .${classes.drawerHeader}`]: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
+    justifyContent: "space-between",
+  },
+  [`& .${classes.darkModeSwitch}`]: {
+    paddingLeft: theme.spacing(2),
+    marginBottom: "5%",
+  },
+  [`& .${classes.content}`]: {
+    padding: theme.spacing(3),
+    [theme.breakpoints.up("sm")]: {
+      flexGrow: 1,
+      transition: theme.transitions.create("margin", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      marginLeft: -drawerWidth,
+    },
+  },
+  [`& .${classes.contentShift}`]: {
+    [theme.breakpoints.up("sm")]: {
+      transition: theme.transitions.create("margin", {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
+    },
+  },
+}));
 
 const a11yProps = index => ({
   id: `simple-tab-${index}`,
@@ -56,7 +142,6 @@ export default function AppNavigation({
   setGlobalAnimation,
   isSubdomainRoute,
 }) {
-  const classes = useStyles();
   const theme = useTheme();
   const isBigScreen = useMediaQuery("(min-width:1070px)");
   const isWeb = useMediaQuery("(min-width:600px)");
@@ -76,7 +161,7 @@ export default function AppNavigation({
     setOpen(false);
   };
   return (
-    <div className={classes.root}>
+    <AppNavigationRoot className={classes.root}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -152,7 +237,14 @@ export default function AppNavigation({
         }}
         onClose={handleDrawerClose}
       >
-        <div className={classes.drawerHeader}>
+        <div
+          className={classes.drawerHeader}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           <Typography variant="h6" noWrap style={{ marginLeft: 12 }}>
             <a href={getDomainWithoutSubdomain()} style={{ fontWeight: "bold" }}>
               {name}
@@ -166,11 +258,13 @@ export default function AppNavigation({
           className={classes.darkModeSwitch}
           control={<Switch checked={isDark} onChange={e => setIsDark(e.target.checked)} />}
           label="Dark Mode"
+          style={{ marginBottom: "5%", paddingLeft: 12 }}
         />
         <FormControlLabel
           className={classes.darkModeSwitch}
           control={<Switch checked={globalAnimation} onChange={e => setGlobalAnimation(e.target.checked)} />}
           label="Animation"
+          style={{ marginBottom: "5%", paddingLeft: 12 }}
         />
         <List>
           {!isEmpty(groupedDrawerContent) ? (
@@ -207,7 +301,7 @@ export default function AppNavigation({
         </Typography>
       </Drawer>
       {children}
-    </div>
+    </AppNavigationRoot>
   );
 }
 

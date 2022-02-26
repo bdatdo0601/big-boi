@@ -23,6 +23,7 @@ export default function Gallery() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        height: "calc(100vh - 64px)",
       }}
     >
       <ProfileCard

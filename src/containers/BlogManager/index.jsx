@@ -83,6 +83,7 @@ export default function BlogManager() {
         >
           {posts.map(post => (
             <BlogPostCard
+              key={get(post, "id")}
               post={post}
               updatePostState={updatePostState}
               deletePost={deletePost}

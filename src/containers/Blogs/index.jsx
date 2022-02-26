@@ -28,6 +28,7 @@ export default function Blogs() {
       <Masonry breakpointCols={isWeb ? 3 : 1} className="masonry-blog" columnClassName="masonry-blog-column">
         {posts.map(post => (
           <BlogPostCard
+            key={get(post, "id")}
             width="100%"
             post={post}
             showState={false}

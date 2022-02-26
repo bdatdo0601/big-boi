@@ -4,13 +4,49 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
-import { CircularProgress, useMediaQuery } from "@mui/material";
-import useStyles from "./styleHooks";
+import { CircularProgress, styled, useMediaQuery } from "@mui/material";
 import AppNavigation from "../../components/AppNavigation";
 import LayoutContext from "../../context/layout";
 import routes, { subdomainRouteMap } from "../../routes";
 import particleConfig from "./particleConfig";
 import { WEBSITE_TITLE } from "../../utils/constants";
+
+const drawerWidth = 240;
+
+const classes = {
+  drawerHeader: "LayoutdrawerHeader",
+  content: "LayoutContent",
+  contentShift: "LayoutContentShift",
+};
+
+const StyledMain = styled(`main`)(({ theme }) => ({
+  [`& .${classes.drawerHeader}`]: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
+    justifyContent: "space-between",
+  },
+  [`&.${classes.content}`]: {
+    [theme.breakpoints.up("sm")]: {
+      flexGrow: 1,
+      transition: theme.transitions.create("margin", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      marginLeft: -drawerWidth,
+    },
+  },
+  [`& .${classes.contentShift}`]: {
+    [theme.breakpoints.up("sm")]: {
+      transition: theme.transitions.create("margin", {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
+    },
+  },
+}));
 
 const Particles = lazy(() => import("react-particles-js"));
 
@@ -20,7 +56,6 @@ const isSubdomainRoute = has(subdomainRouteMap, subdomain);
 const domainRoutes = isSubdomainRoute ? get(subdomainRouteMap, subdomain, []) : routes;
 
 export default function MainLayout({ children, name }) {
-  const classes = useStyles();
   const isFullSize = useMediaQuery("(min-width:1280px)");
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
@@ -67,14 +102,14 @@ export default function MainLayout({ children, name }) {
           />
         </Suspense>
       )}
-      <main
+      <StyledMain
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
         <div className={classes.drawerHeader} />
         {children}
-      </main>
+      </StyledMain>
     </AppNavigation>
   );
 }

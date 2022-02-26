@@ -23,7 +23,7 @@ import {
   useProjects,
   useVolunteer,
   useInterests,
-} from "react-vitae";
+} from "../../../components/Vitae";
 
 const IconMapper = {
   Facebook: <Facebook />,
