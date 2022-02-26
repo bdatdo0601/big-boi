@@ -89,8 +89,7 @@
     "start": "cross-env VITE_VERSION=$npm_package_version vite",
     "build": "node postinstall.js && cross-env VITE_VERSION=$npm_package_version vite build",
     "preview": "cross-env VITE_VERSION=$npm_package_version vite preview",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject",
+    "test": "vitest",
     "release": "standard-version && git push --follow-tags origin develop",
     "generate-build-meta": "node ./node_modules/react-clear-browser-cache/bin/cli.js",
     "deploy:notes": "cd notes && yarn deploy:heroku"
@@ -112,6 +111,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react-refresh": "^1.3.6",
+    "@vitest/ui": "^0.5.5",
+    "c8": "^7.11.0",
     "cross-env": "^7.0.2",
     "customize-cra": "^0.9.1",
     "eslint-config-airbnb": "^18.0.1",
@@ -119,6 +120,8 @@
     "eslint-config-react-app": "^5.1.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "happy-dom": "^2.41.0",
+    "jsdom": "^19.0.0",
     "less": "^4.1.2",
     "less-loader": "^5.0.0",
     "mkdirp": "0.5.5",
@@ -129,6 +132,7 @@
     "vite": "^2.8.4",
     "vite-plugin-env-compatible": "^1.1.1",
     "vite-plugin-pwa": "^0.11.13",
-    "vite-plugin-svgr": "^1.0.1"
+    "vite-plugin-svgr": "^1.0.1",
+    "vitest": "^0.5.5"
   }
 }

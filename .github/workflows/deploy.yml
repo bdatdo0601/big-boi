@@ -53,8 +53,7 @@ jobs:
         run: |
           yarn install
           # build and test
-          # npm run build
-          # npm run test
+          yarn test --run
 
       # Deploy Amplify
       - name: deploy
