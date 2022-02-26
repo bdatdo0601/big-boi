@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/bdatdo0601/big-boi/compare/v1.15.3...v1.16.0) (2022-02-26)
+
+
+### Features
+
+* add tiddly notes ([47e588b](https://github.com/bdatdo0601/big-boi/commit/47e588b83dc7f566808c63553864efe9c5536059))
+* migration to vite ([3b84dc1](https://github.com/bdatdo0601/big-boi/commit/3b84dc1c8aff9e1c06a231a58051ba310ebf630d))
+
+
+### Bug Fixes
+
+* add Procfile ([312ae6f](https://github.com/bdatdo0601/big-boi/commit/312ae6f9ba68861af47bad4123d62ea0bc0e3dbf))
+* **notes:** update deployment port and host ([a0c5632](https://github.com/bdatdo0601/big-boi/commit/a0c56321d99cbd30726f8d080d5b787155c41b69))
+* Update amplify ([9cd4c14](https://github.com/bdatdo0601/big-boi/commit/9cd4c145f68acc06f6e9b557ddbf60386665fd15))
+* update port ([c44866e](https://github.com/bdatdo0601/big-boi/commit/c44866e71574f8041d4d33f25edb2c3e63e70b38))
+* username password passing ([de3f6f2](https://github.com/bdatdo0601/big-boi/commit/de3f6f201870e80670666c4b28d373a8225aaab2))
+
 ### [1.15.3](https://github.com/bdatdo0601/big-boi/compare/v1.15.2...v1.15.3) (2022-01-26)
 
 
