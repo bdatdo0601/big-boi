@@ -77,7 +77,7 @@ export default function Reference() {
         </Accordion>
       )}
       <DndScrollingDiv className="reference-container-div my-16 md:my-2 lg:my-2 xl:my-2 2xl:my-2 py-2 px-1">
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{ marginBottom: "10%", width: "100vw" }}>
           {Items.map(item => (
             <Grid item key={item.key} {...item.span} className="">
               <item.Component />
