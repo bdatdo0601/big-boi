@@ -126,6 +126,10 @@ const getDomainWithoutSubdomain = () => {
     .slice(-(urlParts.length === 4 ? 3 : 2))
     .join(".");
 
+  if (navigator.userAgent === "ReactSnap") {
+    return "/";
+  }
+
   return mainDomain === "localhost" ? `http://${mainDomain}:3000` : `https://${mainDomain}`;
 };
 export default function AppNavigation({

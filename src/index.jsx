@@ -11,12 +11,19 @@ import "highlight.js/styles/atom-one-dark.css";
 
 hljs.initHighlightingOnLoad();
 
-ReactDOM.render(
+const rootElement = document.getElementById("root");
+
+const AppWithBoundary = () => (
   <ClearBrowserCacheBoundary auto fallback="Loading" duration={60000}>
     <App />
-  </ClearBrowserCacheBoundary>,
-  document.getElementById("root")
+  </ClearBrowserCacheBoundary>
 );
+
+if (rootElement.hasChildNodes()) {
+  ReactDOM.hydrate(<AppWithBoundary />, rootElement);
+} else {
+  ReactDOM.render(<AppWithBoundary />, rootElement);
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

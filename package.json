@@ -97,6 +97,12 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "reactSnap": {
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -126,6 +132,7 @@
     "less-loader": "^5.0.0",
     "mkdirp": "0.5.5",
     "prettier": "^1.19.1",
+    "react-snap": "^1.23.0",
     "replace-in-file": "^6.2.0",
     "standard-version": "^9.1.0",
     "tailwindcss": "^1.1.4",
