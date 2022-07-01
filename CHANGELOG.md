@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.3](https://github.com/bdatdo0601/big-boi/compare/v1.16.2...v1.16.3) (2022-07-01)
+
+
+### Bug Fixes
+
+* add react snap but require more development ([7b22589](https://github.com/bdatdo0601/big-boi/commit/7b225899e2e7a13f8f63847a29ea9f1607ee6b62))
+
 ### [1.16.2](https://github.com/bdatdo0601/big-boi/compare/v1.16.1...v1.16.2) (2022-03-23)
 
 
