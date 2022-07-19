@@ -16,7 +16,7 @@
     "json-transformer-node": "^1.0.6",
     "jsonschema": "^1.4.0",
     "lodash": "^4.17.21",
-    "moment": "^2.29.2",
+    "moment": "^2.29.1",
     "pluralize": "^8.0.0",
     "uuid": "^8.3.2"
   },
