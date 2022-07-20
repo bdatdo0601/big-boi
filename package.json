@@ -1,6 +1,6 @@
 {
   "name": "big-boi",
-  "version": "1.16.4",
+  "version": "1.16.5",
   "private": true,
   "dependencies": {
     "@aws-amplify/analytics": "^5.0.8",
