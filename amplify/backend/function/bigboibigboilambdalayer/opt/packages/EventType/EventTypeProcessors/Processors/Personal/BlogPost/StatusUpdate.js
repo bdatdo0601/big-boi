@@ -1,6 +1,8 @@
 const { get, includes, lowerCase, isEmpty } = require("lodash");
 const assign = require('@recursive/assign');
 const gql = require('graphql-tag');
+const slugify = require('slugify');
+
 const { queryGraphQLData } = require("../../../../../utils/queryGraphQLData");
 const { PersonalPublishInfo, redeployBlogSite } = require("../../../helpers/constants");
 
@@ -31,7 +33,7 @@ module.exports = {
     populatePublishInfo: async evt => {
         const contentStatus = get(evt, "content.status");
         const target =  includes(["PUBLISHED"], contentStatus) && `\"${get(evt, "metadata.additionalData.title")}\"`;
-        const targetLink = includes(["PUBLISHED"], contentStatus) && `https://www.datbdo.com/blogs/${get(evt, "content.id")}`;
+        const targetLink = includes(["PUBLISHED"], contentStatus) && `https://www.datbdo.com/blogs/${slugify(get(evt, "metadata.additionalData.title"))}`;
         const publishInfo = {
             icon: {
                 type: "Icon",
