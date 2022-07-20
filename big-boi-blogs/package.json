@@ -16,6 +16,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@jcoreio/poll": "^2.3.1",
     "@mdx-js/mdx": "v1",
     "@mdx-js/react": "v1",
     "@theme-ui/color": "^0.11.3",
@@ -50,7 +51,8 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-twitter-widgets": "^1.11.0",
     "slugify": "^1.6.5",
-    "theme-ui": "^0.14.6"
+    "theme-ui": "^0.14.6",
+    "tiny-polling": "^1.1.0"
   },
   "devDependencies": {
     "dotenv": "^16.0.1"

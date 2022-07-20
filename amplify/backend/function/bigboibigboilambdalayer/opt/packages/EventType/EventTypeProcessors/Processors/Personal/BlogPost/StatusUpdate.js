@@ -2,7 +2,7 @@ const { get, includes, lowerCase, isEmpty } = require("lodash");
 const assign = require('@recursive/assign');
 const gql = require('graphql-tag');
 const { queryGraphQLData } = require("../../../../../utils/queryGraphQLData");
-const { PersonalPublishInfo } = require("../../../helpers/constants");
+const { PersonalPublishInfo, redeployBlogSite } = require("../../../helpers/constants");
 
 module.exports = {
     populateMetadata: async evt => {
@@ -31,7 +31,7 @@ module.exports = {
     populatePublishInfo: async evt => {
         const contentStatus = get(evt, "content.status");
         const target =  includes(["PUBLISHED"], contentStatus) && `\"${get(evt, "metadata.additionalData.title")}\"`;
-        const targetLink = includes(["PUBLISHED"], contentStatus) && `https://www.dat.do/blogs/post/${get(evt, "content.id")}`;
+        const targetLink = includes(["PUBLISHED"], contentStatus) && `https://www.datbdo.com/blogs/${get(evt, "content.id")}`;
         const publishInfo = {
             icon: {
                 type: "Icon",
@@ -45,5 +45,8 @@ module.exports = {
         }
         return assign(evt, { publishInfo })
     },
-    validateEvent: async evt => assign(evt, { metadata: { isValid: !isEmpty(get(evt, "metadata.additionalData", {})) } })
+    validateEvent: async evt => {
+        await redeployBlogSite();
+        return assign(evt, { metadata: { isValid: !isEmpty(get(evt, "metadata.additionalData", {})) } })
+    }
 };

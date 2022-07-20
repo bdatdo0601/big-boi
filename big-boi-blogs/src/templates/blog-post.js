@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { Badge, Box, Text, Themed, Link } from "theme-ui";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -12,6 +12,7 @@ import { PageElement } from "../components/page-element";
 
 import PageLayout from "../layouts/page-layout";
 import { mdxTheme } from "../gatsby-plugin-theme-ui";
+import slugify from "slugify";
 
 const formatDate = date => format(new Date(date), "d-MMM-u");
 const ThemedComponents = Object.keys(mdxTheme)
@@ -19,6 +20,17 @@ const ThemedComponents = Object.keys(mdxTheme)
   .reduce((acc, currentKey) => ({ ...acc, [currentKey]: Themed[currentKey] }), {});
 
 const BlogPost = ({ pageContext: { title, data } }) => {
+  useEffect(() => {
+    if (window.parent && window !== window.parent) {
+      window.parent.postMessage(
+        JSON.stringify({
+          site: { name: title },
+          path: `/${slugify(title)}`,
+        }),
+        "*"
+      );
+    }
+  }, [title]);
   if (data.postType) {
     return <h1>{title}</h1>;
   }

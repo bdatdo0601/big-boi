@@ -83,7 +83,7 @@ const Searchable = () => {
     }, 200)
   );
   return (
-    <Paper className="p-2 m-2 text-left">
+    <Paper className="p-4 m-2 text-left">
       <div className="flex my-4 mr-2 w-full">
         <Autocomplete
           id="reference-search"

@@ -39,6 +39,18 @@
     "analyticsbigboidefaultkinesiskinesisStreamArn": {
       "Type": "String",
       "Default": "analyticsbigboidefaultkinesiskinesisStreamArn"
+    },
+    "blogDeployToken": {
+      "Type": "String"
+    },
+    "blogDeployWebhook": {
+      "Type": "String"
+    },
+    "blogDeployProjectId": {
+      "Type": "String"
+    },
+    "blogDeployBranch": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -105,6 +117,18 @@
             },
             "ANALYTICS_BIGBOINOTIFICATION_SNSTOPICARN": {
               "Ref": "analyticsbigboinotificationsnsTopicArn"
+            },
+            "BLOG_DEPLOY_TOKEN": {
+              "Ref": "blogDeployToken"
+            },
+            "BLOG_DEPLOY_WEBHOOK": {
+              "Ref": "blogDeployWebhook"
+            },
+            "BLOG_DEPLOY_PROJECT_ID": {
+              "Ref": "blogDeployProjectId"
+            },
+            "BLOG_DEPLOY_BRANCH": {
+              "Ref": "blogDeployBranch"
             }
           }
         },

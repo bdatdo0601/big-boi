@@ -1247,7 +1247,7 @@
     core-js-pure "^3.20.2"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.12.5", "@babel/runtime@^7.17.8", "@babel/runtime@^7.18.0", "@babel/runtime@^7.3.1":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.12.0", "@babel/runtime@^7.12.5", "@babel/runtime@^7.17.8", "@babel/runtime@^7.18.0", "@babel/runtime@^7.3.1":
   version "7.18.9"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.9.tgz#b4fcfce55db3d2e5e080d2490f608a3b9f407f4a"
   integrity sha512-lkqXDcvlFT5rvEjiu6+QYO+1GXrEHRo2LOtS7E4GtX5ESIZOgepqsZBVIj6Pv+a6zqsya9VCgiK1KAK4BvJDAw==
@@ -1836,6 +1836,13 @@
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
   integrity sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==
+
+"@jcoreio/poll@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@jcoreio/poll/-/poll-2.3.1.tgz#66e46b84264adb90a645af002186100b2d158233"
+  integrity sha512-NKtnakQBJVwu5//JgR2NIL1chYSEtiSXT4qj19Ia7CXqAG7WvzRSBa8nZtNyFwnNVMMP0UXz1g1JfLq1KYXBeA==
+  dependencies:
+    "@babel/runtime" "^7.12.0"
 
 "@jimp/bmp@^0.16.1":
   version "0.16.1"
@@ -12752,6 +12759,11 @@ timm@^1.6.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/timm/-/timm-1.7.1.tgz#96bab60c7d45b5a10a8a4d0f0117c6b7e5aff76f"
   integrity sha512-IjZc9KIotudix8bMaBW6QvMuq64BrJWFs1+4V0lXwWGQZwH+LnX87doAYhem4caOEusRP9/g6jVDQmZ8XOk1nw==
+
+tiny-polling@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/tiny-polling/-/tiny-polling-1.1.0.tgz#77f944b239282ab5db84e64bc13cf6e0aa6fe7c6"
+  integrity sha512-LdqCqtZKzkhQmsQXNkKZ2ub4EsUK9N0w0qiHW7UQplGv/s84+CnT6Vz5znZo8TYtiR/agtMgyl1Sf+SpiBinsw==
 
 tinycolor2@^1.4.1:
   version "1.4.2"

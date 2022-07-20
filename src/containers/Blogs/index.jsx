@@ -1,52 +1,30 @@
-import React, { useMemo } from "react";
-import { Typography, useMediaQuery } from "@mui/material";
-import { get } from "lodash";
-import { useHistory } from "react-router-dom";
-import Masonry from "react-masonry-css";
-
-import { useAWSAPI } from "../../utils/awsAPI";
-import { postByUpdatedAt } from "../../graphql/queries";
-import { POST_STATE } from "../../utils/constants";
-import BlogPostCard from "../../components/BlosPostCard";
+import React, { useRef, useEffect } from "react";
 import "./index.less";
 
-const BlogPostSource = {
-  NOTION: "notion",
-};
+const blogURL = process.env.NODE_ENV === "development" ? "http://localhost:8000" : "https://blogs.datbdo.com";
 
 export default function Blogs() {
-  const isWeb = useMediaQuery("(min-width:1200px)");
-  const query = useMemo(() => ({ status: POST_STATE.PUBLISHED, sortDirection: "DESC", limit: 10000 }), []);
-  const history = useHistory();
-  const { data: rawData } = useAWSAPI(postByUpdatedAt, query, "API_KEY");
-  const posts = useMemo(() => get(rawData, "data.PostByUpdatedAt.items", []), [rawData]);
+  const iframeRef = useRef(null);
+  useEffect(() => {
+    window.addEventListener("message", function(e) {
+      // Get the sent data
+      const data = e.data;
+      // If you encode the message in JSON before sending them,
+      // then decode here
+      const decoded = JSON.parse(data);
+      window.history.replaceState(null, decoded.site.name, `/blogs${decoded.path}`);
+    });
+    return () => {
+      window.removeEventListener("message");
+    };
+  }, []);
   return (
-    <div className="blog-container-div">
-      <Typography variant={isWeb ? "h2" : "h4"} style={{ marginBottom: 12 }}>
-        Blogs & Thoughts
-      </Typography>
-      <Masonry breakpointCols={isWeb ? 3 : 1} className="masonry-blog" columnClassName="masonry-blog-column">
-        {posts.map(post => (
-          <BlogPostCard
-            key={get(post, "id")}
-            width="100%"
-            post={post}
-            showState={false}
-            onPostClick={() => {
-              switch (get(post, "postType")) {
-                case BlogPostSource.NOTION:
-                  window.open(get(post, "externalLink"));
-                  break;
-                case null:
-                  history.push(`/blogs/post/${get(post, "id")}`);
-                  break;
-                default:
-                  break;
-              }
-            }}
-          />
-        ))}
-      </Masonry>
-    </div>
+    <iframe
+      src={`${blogURL}/${window.location.pathname.replace("/blogs", "")}`}
+      className="w-full h-screen"
+      ref={e => {
+        iframeRef.current = e;
+      }}
+    />
   );
 }

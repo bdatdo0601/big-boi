@@ -40,7 +40,11 @@ const classes = {
 
 const AppNavigationRoot = styled("div")(({ theme }) => ({
   [`&.${classes.root}`]: {
-    display: "flex",
+    // display: "flex",
+    paddingLeft: drawerWidth,
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: 0,
+    },
   },
   [`& .${classes.appBar}`]: {
     transition: theme.transitions.create(["margin", "width"], {

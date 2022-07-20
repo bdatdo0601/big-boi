@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from "gatsby";
-import React from "react";
+import React, { useEffect } from "react";
 import { Themed } from "theme-ui";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import GeneralBlogPost from "../components/GeneralBlogPost";
@@ -15,10 +15,7 @@ const Home = () => {
           name
         }
       }
-      allBlogPost(
-        filter: {status: {eq: "PUBLISHED"}}
-        sort: {fields: updatedAt, order: DESC}
-      ) {
+      allBlogPost(filter: { status: { eq: "PUBLISHED" } }, sort: { fields: updatedAt, order: DESC }) {
         nodes {
           data {
             attributes {
@@ -54,6 +51,17 @@ const Home = () => {
     }
   `);
 
+  useEffect(() => {
+    if (window.parent && window !== window.parent) {
+      window.parent.postMessage(
+        JSON.stringify({
+          site,
+          path: "/",
+        }),
+        "*"
+      );
+    }
+  }, [site]);
   return (
     <PageElement>
       <PageLayout>

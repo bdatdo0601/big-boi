@@ -19,7 +19,7 @@ body.light {
 /************ DARK MODE **************/
 
 body.dark {
-  --main-bg: #000000;
+  --main-bg: #282a36;
   --note-bg: #0a0d11;
   --text: #fafafc;
   --separator: #252525;

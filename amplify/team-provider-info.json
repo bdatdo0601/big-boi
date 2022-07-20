@@ -23,11 +23,15 @@
       "function": {
         "bigboikinesisconsumer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboikinesisconsumer-4f5832336d5275646564-build.zip"
+          "s3Key": "amplify-builds/bigboikinesisconsumer-4f5832336d5275646564-build.zip",
+          "blogDeployToken": "2wW8xza1mzECtCoYvkxb4F04",
+          "blogDeployWebhook": "https://api.vercel.com/v1/integrations/deploy/prj_lJsgGRkeFjleext52xjWDNzA2r0Z/c3wHQbC5Ya",
+          "blogDeployProjectId": "prj_lJsgGRkeFjleext52xjWDNzA2r0Z",
+          "blogDeployBranch": "develop"
         },
         "bigboibigboilambdalayer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion74aefed8-build.zip"
+          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersiondfd051f5-build.zip"
         },
         "bigboimessagestoring": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",

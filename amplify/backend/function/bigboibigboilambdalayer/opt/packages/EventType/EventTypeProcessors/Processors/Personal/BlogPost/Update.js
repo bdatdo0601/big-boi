@@ -8,7 +8,7 @@ module.exports = {
     populatePublishInfo: async evt => {
         const contentStatus = get(evt, "content.status");
         const target =  includes(["PUBLISHED"], contentStatus) && `\"${get(evt, "content.title")}\"`;
-        const targetLink = includes(["PUBLISHED"], contentStatus) && `https://www.dat.do/blogs/post/${get(evt, "content.id")}`;
+        const targetLink = includes(["PUBLISHED"], contentStatus) && `https://www.datbdo.com/blogs/${get(evt, "content.id")}`;
         const publishInfo = {
             icon: {
                 type: "Icon",
@@ -22,5 +22,8 @@ module.exports = {
         }
         return assign(evt, { publishInfo })
     },
-    validateEvent: async evt => assign(evt, { metadata: { isValid: true } })
+    validateEvent: async evt => {
+        await redeployBlogSite();
+        return assign(evt, { metadata: { isValid: true } })
+    }
 }

@@ -3,9 +3,11 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@jcoreio/poll": "^2.3.1",
     "@octokit/webhooks-examples": "^4.13.1",
     "@octokit/webhooks-schemas": "^4.13.1",
     "@recursive/assign": "^2.0.2",
+    "@skumtron/poll": "^1.0.0",
     "ajv": "^8.6.3",
     "ajv-formats": "^2.1.1",
     "aws-sdk": "^2.991.0",
