@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.7](https://github.com/bdatdo0601/big-boi/compare/v1.16.6...v1.16.7) (2022-07-20)
+
+
+### Bug Fixes
+
+* add gtag ([4c8693e](https://github.com/bdatdo0601/big-boi/commit/4c8693e7504f7f4657227db63e410327d54c2631))
+
 ### [1.16.6](https://github.com/bdatdo0601/big-boi/compare/v1.16.5...v1.16.6) (2022-07-20)
 
 
