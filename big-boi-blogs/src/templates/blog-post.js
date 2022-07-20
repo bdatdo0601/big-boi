@@ -37,7 +37,23 @@ const BlogPost = ({ pageContext: { title, data } }) => {
   return (
     <PageElement>
       <PageLayout>
-        <GatsbyLink to="/" style={{ textDecoration: "none" }}>
+        <GatsbyLink
+          to="/"
+          onClick={e => {
+            if (window.parent && window.parent !== window) {
+              window.parent.postMessage(
+                JSON.stringify({
+                  site: { name: "" },
+                  path: "/",
+                  navigateToPath: true,
+                }),
+                "*"
+              );
+              e.preventDefault();
+            }
+          }}
+          style={{ textDecoration: "none" }}
+        >
           <Link as="div" sx={{ color: "muted", ":hover": { cursor: "pointer" } }}>
             <FaArrowLeft /> Back for more posts
           </Link>

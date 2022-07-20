@@ -55,7 +55,7 @@ const Home = () => {
     if (window.parent && window !== window.parent) {
       window.parent.postMessage(
         JSON.stringify({
-          site,
+          site: site.siteMetadata,
           path: "/",
         }),
         "*"

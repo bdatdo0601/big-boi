@@ -1,30 +1,51 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, Fragment, useState } from "react";
+import { Helmet } from "react-helmet";
+import { useHistory } from "react-router-dom";
 import "./index.less";
 
 const blogURL = process.env.NODE_ENV === "development" ? "http://localhost:8000" : "https://blogs.datbdo.com";
 
 export default function Blogs() {
   const iframeRef = useRef(null);
+  const history = useHistory();
+  const [currentData, setCurrentData] = useState({ site: { name: "Dat Do's Blogs and Thoughts" }, path: "/" });
   useEffect(() => {
-    window.addEventListener("message", function(e) {
+    const messageHandler = e => {
       // Get the sent data
       const data = e.data;
       // If you encode the message in JSON before sending them,
       // then decode here
-      const decoded = JSON.parse(data);
-      window.history.replaceState(null, decoded.site.name, `/blogs${decoded.path}`);
-    });
-    return () => {
-      window.removeEventListener("message");
+      try {
+        const decoded = JSON.parse(data);
+        if (decoded.site && decoded.path) {
+          setCurrentData(decoded);
+          if (decoded.navigateToPath && decoded.path) {
+            history.push(`/blogs${decoded.path}`);
+          }
+        }
+      } catch (err) {}
     };
-  }, []);
+
+    window.addEventListener("message", messageHandler);
+    return () => {
+      window.removeEventListener("message", messageHandler);
+    };
+  }, [history]);
   return (
-    <iframe
-      src={`${blogURL}/${window.location.pathname.replace("/blogs", "")}`}
-      className="w-full h-screen"
-      ref={e => {
-        iframeRef.current = e;
-      }}
-    />
+    <Fragment>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{currentData.site.name}</title>
+        <link rel="canonical" href={`${window.location.hostname}/blogs${currentData.path}`} />
+        <meta name="description" content={currentData.site.description} />
+      </Helmet>
+      <iframe
+        src={`${blogURL}/${window.location.pathname.replace("/blogs", "")}`}
+        className="w-full h-screen"
+        ref={e => {
+          iframeRef.current = e;
+        }}
+      />
+    </Fragment>
   );
 }

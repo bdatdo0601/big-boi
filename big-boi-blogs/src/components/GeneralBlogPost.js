@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "react";
 import { Box, Card, Heading, Link, Text } from "theme-ui";
 import slugify from "slugify";
 import { format } from "date-fns";
-import { get } from "lodash";
+import { get, capitalize } from "lodash";
 import { Tweet } from "react-twitter-widgets";
 
 const BlogPostSource = {
@@ -25,6 +25,19 @@ const BlogPost = ({ node, index }) => (
     <Link
       href={!node.postType ? slugify(node.title) : node.externalLink}
       target={!node.postType ? "_self" : "_blank"}
+      onClick={e => {
+        if (!node.postType && window.parent && window.parent !== window) {
+          window.parent.postMessage(
+            JSON.stringify({
+              site: { name: node.title },
+              path: `/${slugify(node.title)}`,
+              navigateToPath: true,
+            }),
+            "*"
+          );
+          e.preventDefault();
+        }
+      }}
       sx={{
         textDecoration: "none",
         display: "flex",
@@ -63,7 +76,7 @@ const BlogPost = ({ node, index }) => (
           <Text sx={{ mb: 1, color: "text" }}>{node.description}</Text>
         </Box>
         <Box sx={{ p: 3 }}>
-          <Text>{!node.postType ? "View Post" : "Go to Notion"}</Text>
+          <Text>{!node.postType ? "View Post" : `Go to ${capitalize(node.postType)}`}</Text>
         </Box>
       </Card>
     </Link>
