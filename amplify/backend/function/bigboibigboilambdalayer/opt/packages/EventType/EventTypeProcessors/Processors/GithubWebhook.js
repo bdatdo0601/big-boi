@@ -16,14 +16,15 @@ module.exports = {
             return evt;
         }
         const contentData = pick(sourceMessage, uniq([singular(githubActionType), "sender", "repository", "action"]));
-        return assign(evt, { metadata: { visibility: "public" }, content: { githubActionType, ...contentData  } })
+        const isDatTheSender = PersonalPublishInfo.githubHandle === get(contentData, "sender.login");
+        return assign(evt, { metadata: { visibility: isDatTheSender ? "public" : "private" }, content: { githubActionType, isDatTheSender, ...contentData  } })
     },
     populatePublishInfo: async evt => {
         if (isEmpty(get(evt, "content"))) {
             return evt;
         }
         
-        const isDatTheSender = PersonalPublishInfo.githubHandle === get(evt, "content.sender.login");
+        const isDatTheSender = get(evt, "content.isDatTheSender");
         const githubActionType = get(evt, "content.githubActionType");
         const formattedActionType = singular(githubActionType);
         const githubAction = get(evt, "content.action", `${formattedActionType}ed`);
