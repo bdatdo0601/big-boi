@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.0](https://github.com/bdatdo0601/big-boi/compare/v1.16.8...v1.17.0) (2022-07-21)
+
+
+### Features
+
+* add reading time ([1a54dbc](https://github.com/bdatdo0601/big-boi/commit/1a54dbcf4742130b93463ebbef225148912672ac))
+
+
+### Bug Fixes
+
+* update styling for background, changelogs, gallery ([e249b40](https://github.com/bdatdo0601/big-boi/commit/e249b4082499a6d63e0dfd370343079604e8d2d4))
+
 ### [1.16.8](https://github.com/bdatdo0601/big-boi/compare/v1.16.7...v1.16.8) (2022-07-21)
 
 
