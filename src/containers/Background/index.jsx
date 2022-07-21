@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Button, CircularProgress, Paper, Typography } from "@mui/material";
 import { ResumeProvider } from "../../components/Vitae";
 
@@ -7,9 +7,12 @@ import { useGetFile } from "../../utils/awsStorage";
 import { RESUME } from "../../utils/constants";
 import { fetchFileToJSON } from "../../utils";
 import "./index.less";
+import ProfileCard from "../../components/ProfileCard";
+import LayoutContext from "../../context/layout";
 
 export default function Background() {
   const targetRef = useRef(null);
+  const { globalAnimation } = useContext(LayoutContext);
   const { file, loading } = useGetFile(RESUME.SCHEMA_FILE, RESUME.PREFIX);
   const [resume, setResume] = useState(null);
   useEffect(() => {
@@ -30,27 +33,26 @@ export default function Background() {
 
   return (
     <div className="container-div">
-      <Typography variant="h3">Background</Typography>
-      {/* <ReactToPrint content={() => targetRef.current} documentTitle={`${moment().format("MMDDYYYY")}_DatDoResume`}>
-        <PrintContextConsumer>
-          {({ handlePrint }) => (
-            <Button onClick={handlePrint} variant="contained" color="primary" style={{ marginTop: 12, marginRight: 8 }}>
-              Generate Resume
-            </Button>
-          )}
-        </PrintContextConsumer>
-      </ReactToPrint> */}
-      <Button
-        onClick={() => {
-          window.location.href = `${window.location.protocol}//${window.location.host}/custom/resume.pdf`;
-        }}
-        variant="contained"
-        color="primary"
-        style={{ marginTop: 12, marginLeft: 8 }}
+      <ProfileCard
+        header={<Typography variant="h4">Background</Typography>}
+        contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
+        animation={false}
+        cardStyle={{ maxWidth: 600, width: "100%", marginTop: 24, marginBottom: 12 }}
       >
-        Get Custom Resume
-      </Button>
-      <Paper className="resume-preview" style={{ margin: "3%", padding: 12 }}>
+        <div className="mx-4 my-2" style={{ textAlign: "center" }}>
+          <Button
+            onClick={() => {
+              window.location.href = `${window.location.protocol}//${window.location.host}/custom/resume.pdf`;
+            }}
+            variant="contained"
+            color="primary"
+            style={{ marginTop: 12, marginLeft: 8 }}
+          >
+            Get Custom Resume
+          </Button>
+        </div>
+      </ProfileCard>
+      <Paper className="resume-preview" style={{ marginTop: 12, padding: 12 }}>
         <div
           className="resume-wrapper"
           ref={ref => {

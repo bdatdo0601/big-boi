@@ -1,6 +1,6 @@
-const IMAGE_KEY = 'image'
+const IMAGE_KEY = "image";
 
-export const transformImages = (imageArray) => {
+export const transformImages = imageArray => {
   if (Array.isArray(imageArray)) {
     return imageArray.reduce((images, image, index) => {
       images[`${IMAGE_KEY}${index + 1}`] =
@@ -8,14 +8,14 @@ export const transformImages = (imageArray) => {
           ? image.url
             ? image.url[0].childImageSharp
             : image.childImageSharp
-          : null
+          : null;
 
-      return images
-    }, {})
+      return images;
+    }, {});
   }
-  return {}
-}
+  return {};
+};
 
 export const isIframe = () => {
   return window.parent && window.parent !== window;
-}
+};

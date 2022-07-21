@@ -15,7 +15,7 @@ export default function Gallery() {
 
   return (
     <div
-      className="mx-12 py-8"
+      className="mx-12 py-2"
       style={{
         zIndex: 2,
         textAlign: "center",
@@ -26,21 +26,23 @@ export default function Gallery() {
         height: "calc(100vh - 64px)",
       }}
     >
-      <ProfileCard
-        header={<Typography variant="h4">Gallery</Typography>}
-        contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
-        animation={globalAnimation}
-      >
-        <div className="mx-4 my-2" style={{ textAlign: "left" }}>
-          {descriptions.map(item => (
-            <Typography key={item} variant="body1" paragraph>
-              {item}
-            </Typography>
-          ))}
-        </div>
-      </ProfileCard>
       <div className="images-display-wrapper">
-        <ImagesDisplay />
+        <ProfileCard
+          header={<Typography variant="h4">Gallery</Typography>}
+          contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
+          animation={globalAnimation}
+        >
+          <div className="mx-4 my-2" style={{ textAlign: "left" }}>
+            {descriptions.map(item => (
+              <Typography key={item} variant="body1" paragraph>
+                {item}
+              </Typography>
+            ))}
+          </div>
+        </ProfileCard>
+        <div className="my-4">
+          <ImagesDisplay />
+        </div>
       </div>
     </div>
   );
