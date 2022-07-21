@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.8](https://github.com/bdatdo0601/big-boi/compare/v1.16.7...v1.16.8) (2022-07-21)
+
+
+### Bug Fixes
+
+* make non owner commit private event ([41303e6](https://github.com/bdatdo0601/big-boi/commit/41303e6afe463d3e12a44108457742a4ca553e1b))
+
 ### [1.16.7](https://github.com/bdatdo0601/big-boi/compare/v1.16.6...v1.16.7) (2022-07-20)
 
 
