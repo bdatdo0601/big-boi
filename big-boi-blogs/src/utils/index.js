@@ -15,3 +15,7 @@ export const transformImages = (imageArray) => {
   }
   return {}
 }
+
+export const isIframe = () => {
+  return window.parent && window.parent !== window;
+}

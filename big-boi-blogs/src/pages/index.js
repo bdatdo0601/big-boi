@@ -5,6 +5,7 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import GeneralBlogPost from "../components/GeneralBlogPost";
 import { PageElement } from "../components/page-element";
 import PageLayout from "../layouts/page-layout";
+import { isIframe } from "../utils";
 
 const Home = () => {
   const { site, allBlogPost } = useStaticQuery(graphql`
@@ -52,7 +53,7 @@ const Home = () => {
   `);
 
   useEffect(() => {
-    if (window.parent && window !== window.parent) {
+    if (isIframe()) {
       window.parent.postMessage(
         JSON.stringify({
           site: site.siteMetadata,

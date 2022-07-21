@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import { Badge, Box, Text, Themed, Link } from "theme-ui";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -7,12 +7,15 @@ import { mix } from "@theme-ui/color";
 import { format } from "date-fns";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link as GatsbyLink } from "gatsby";
+import readingTime from "reading-time/lib/reading-time";
 
 import { PageElement } from "../components/page-element";
 
 import PageLayout from "../layouts/page-layout";
 import { mdxTheme } from "../gatsby-plugin-theme-ui";
 import slugify from "slugify";
+import { get } from "lodash";
+import { isIframe } from "../utils";
 
 const formatDate = date => format(new Date(date), "d-MMM-u");
 const ThemedComponents = Object.keys(mdxTheme)
@@ -21,7 +24,7 @@ const ThemedComponents = Object.keys(mdxTheme)
 
 const BlogPost = ({ pageContext: { title, data } }) => {
   useEffect(() => {
-    if (window.parent && window !== window.parent) {
+    if (isIframe()) {
       window.parent.postMessage(
         JSON.stringify({
           site: { name: title },
@@ -31,16 +34,19 @@ const BlogPost = ({ pageContext: { title, data } }) => {
       );
     }
   }, [title]);
+
+  const readingStats = useMemo(() => readingTime(get(data, "data.text", "")), [data]);
   if (data.postType) {
     return <h1>{title}</h1>;
   }
+
   return (
     <PageElement>
       <PageLayout>
         <GatsbyLink
           to="/"
           onClick={e => {
-            if (window.parent && window.parent !== window) {
+            if (isIframe()) {
               window.parent.postMessage(
                 JSON.stringify({
                   site: { name: "" },
@@ -54,7 +60,7 @@ const BlogPost = ({ pageContext: { title, data } }) => {
           }}
           style={{ textDecoration: "none" }}
         >
-          <Link as="div" sx={{ color: "muted", ":hover": { cursor: "pointer" } }}>
+          <Link as="div" sx={{ color: "secondary", ":hover": { cursor: "pointer" } }}>
             <FaArrowLeft /> Back for more posts
           </Link>
         </GatsbyLink>
@@ -73,6 +79,24 @@ const BlogPost = ({ pageContext: { title, data } }) => {
               {item}
             </Badge>
           ))}
+        </Box>
+        <Box
+          sx={{
+            width: ["100%", "100%"],
+          }}
+        >
+          {data.updatedAt && (
+            <Text
+              as="div"
+              sx={{
+                color: "muted",
+                textAlign: ["left"],
+                marginTop: 2,
+              }}
+            >
+              {readingStats.text} - {readingStats.words} words
+            </Text>
+          )}
         </Box>
         <Box
           sx={{

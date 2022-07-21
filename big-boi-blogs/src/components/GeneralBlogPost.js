@@ -5,6 +5,7 @@ import slugify from "slugify";
 import { format } from "date-fns";
 import { get, capitalize } from "lodash";
 import { Tweet } from "react-twitter-widgets";
+import { isIframe } from "../utils";
 
 const BlogPostSource = {
   NOTION: "notion",
@@ -26,7 +27,7 @@ const BlogPost = ({ node, index }) => (
       href={!node.postType ? slugify(node.title) : node.externalLink}
       target={!node.postType ? "_self" : "_blank"}
       onClick={e => {
-        if (!node.postType && window.parent && window.parent !== window) {
+        if (!node.postType && isIframe()) {
           window.parent.postMessage(
             JSON.stringify({
               site: { name: node.title },

@@ -26,12 +26,11 @@
         "HostingBucketName": "big-boi-hosting-bucket-dev",
         "CloudFrontDomainName": "ddadut4du9yp0.cloudfront.net"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.969Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/hosting/template.json",
         "logicalId": "hostingS3AndCloudFront"
-      },
-      "lastPushDirHash": "uHjp9I0xT5fHaGvECEBKgCXZpTE="
+      }
     }
   },
   "auth": {
@@ -49,7 +48,7 @@
         "IdentityPoolName": "bigboi327b1f0d_identitypool_327b1f0d__dev",
         "UserPoolName": "bigboi327b1f0d_userpool_327b1f0d"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.971Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/auth/bigboi327b1f0d-cloudformation-template.yml",
         "logicalId": "authbigboi327b1f0d"
@@ -73,8 +72,7 @@
         "verificationMechanisms": [
           "EMAIL"
         ]
-      },
-      "lastPushDirHash": "tskzEHan2yROgtyWHiA2ZvX+maw="
+      }
     }
   },
   "storage": {
@@ -85,12 +83,11 @@
         "BucketName": "bigboicontent-bucketdev-dev",
         "Region": "us-east-1"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.973Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
         "logicalId": "storagebigboicontent"
-      },
-      "lastPushDirHash": "nNunvV1ZuFIVl9FFV18kbO0Wjb0="
+      }
     }
   },
   "api": {
@@ -122,12 +119,11 @@
         "GraphQLAPIEndpointOutput": "https://7zoznypydzhnvou2wyfueuuyky.appsync-api.us-east-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-quuiolfepjd7jdodghdb23cqva"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.974Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apibigboiapi"
-      },
-      "lastPushDirHash": "kPjGhHxLH2wsIk0F01VMpjnSBr8="
+      }
     },
     "bigboiexternalapi": {
       "service": "API Gateway",
@@ -171,12 +167,11 @@
         "RootUrl": "https://ofqiui2tpi.execute-api.us-east-1.amazonaws.com/dev",
         "ApiId": "ofqiui2tpi"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.975Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/api/bigboiexternalapi-cloudformation-template.json",
         "logicalId": "apibigboiexternalapi"
-      },
-      "lastPushDirHash": "pkShKet3UY23xTsErE2QntYflxY="
+      }
     }
   },
   "function": {
@@ -185,22 +180,22 @@
       "service": "LambdaLayer",
       "build": true,
       "output": {
-        "Arn": "arn:aws:lambda:us-east-1:142037127835:layer:bigboibigboilambdalayer-dev:78"
+        "Arn": "arn:aws:lambda:us-east-1:142037127835:layer:bigboibigboilambdalayer-dev:79"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:40.016Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboibigboilambdalayer-awscloudformation-template.json",
         "logicalId": "functionbigboibigboilambdalayer"
       },
+      "lastBuildTimeStamp": "2022-07-21T03:20:30.566Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-07-21T03:20:34.514Z",
+      "distZipFilename": "bigboibigboilambdalayer-LambdaLayerVersionb54b3687-build.zip",
+      "latestPushedVersionHash": "7304716e60eb360cd91c9e14f2650303356ad5ad71be45b09b4cf41416063a4f",
       "s3Bucket": {
         "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-        "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion37c21600-build.zip"
-      },
-      "lastBuildTimeStamp": "2022-07-21T02:46:39.778Z",
-      "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2022-07-20T14:18:56.673Z",
-      "distZipFilename": "bigboibigboilambdalayer-LambdaLayerVersion37c21600-build.zip",
-      "latestPushedVersionHash": "1310d20f6f4e3733f34e113f765dcd0d4e4bfc1f603c1b8e618dda0195676606"
+        "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersionb54b3687-build.zip"
+      }
     },
     "bigboikinesisconsumer": {
       "build": true,
@@ -244,7 +239,7 @@
         "Name": "bigboikinesisconsumer-dev",
         "LambdaExecutionRole": "bigboiLambdaRolea300bc0f-dev"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.978Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboikinesisconsumer-cloudformation-template.json",
         "logicalId": "functionbigboikinesisconsumer"
@@ -252,12 +247,7 @@
       "s3Bucket": {
         "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
         "s3Key": "amplify-builds/bigboikinesisconsumer-4f5832336d5275646564-build.zip"
-      },
-      "lastBuildTimeStamp": "2022-07-21T02:46:39.780Z",
-      "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2022-07-21T02:46:42.054Z",
-      "distZipFilename": "bigboikinesisconsumer-4f5832336d5275646564-build.zip",
-      "lastPushDirHash": "9YapVTWmZ2qiWAMSPYA7Xz1KG2Q="
+      }
     },
     "bigboimessagestoring": {
       "build": true,
@@ -287,7 +277,7 @@
         "Name": "bigboimessagestoring-dev",
         "LambdaExecutionRole": "bigboiLambdaRole50f77f9b-dev"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.982Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboimessagestoring-cloudformation-template.json",
         "logicalId": "functionbigboimessagestoring"
@@ -295,12 +285,7 @@
       "s3Bucket": {
         "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
         "s3Key": "amplify-builds/bigboimessagestoring-6352532f4b6267426c76-build.zip"
-      },
-      "lastBuildTimeStamp": "2022-07-21T02:46:39.781Z",
-      "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2022-07-21T02:46:42.070Z",
-      "distZipFilename": "bigboimessagestoring-6352532f4b6267426c76-build.zip",
-      "lastPushDirHash": "Fde1PjnW+yeZAvApJb/HoT53UC8="
+      }
     },
     "bigboiblogpoller": {
       "build": true,
@@ -354,7 +339,7 @@
         "Name": "bigboiblogpoller-dev",
         "LambdaExecutionRole": "bigboiLambdaRole0114ed15-dev"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.983Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboiblogpoller-cloudformation-template.json",
         "logicalId": "functionbigboiblogpoller"
@@ -362,12 +347,7 @@
       "s3Bucket": {
         "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
         "s3Key": "amplify-builds/bigboiblogpoller-56574d316f3665766338-build.zip"
-      },
-      "lastBuildTimeStamp": "2022-07-21T02:46:39.782Z",
-      "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2022-07-21T02:46:48.061Z",
-      "distZipFilename": "bigboiblogpoller-56574d316f3665766338-build.zip",
-      "lastPushDirHash": "/Ock/uf9nf1se57HN1wRAMfWFdo="
+      }
     },
     "bigboiwebhookproxy": {
       "build": true,
@@ -379,7 +359,7 @@
         "Name": "bigboiwebhookproxy-dev",
         "LambdaExecutionRole": "bigboiLambdaRoledddc4761-dev"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.984Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboiwebhookproxy-cloudformation-template.json",
         "logicalId": "functionbigboiwebhookproxy"
@@ -387,12 +367,7 @@
       "s3Bucket": {
         "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
         "s3Key": "amplify-builds/bigboiwebhookproxy-4972454e3546374b3675-build.zip"
-      },
-      "lastBuildTimeStamp": "2022-07-21T02:46:39.783Z",
-      "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2022-07-21T02:46:46.834Z",
-      "distZipFilename": "bigboiwebhookproxy-4972454e3546374b3675-build.zip",
-      "lastPushDirHash": "dNO/zoTG2n+eNM9SRKOyJPf+Vx0="
+      }
     },
     "bigboiutilitydiscordinteraction": {
       "build": true,
@@ -409,53 +384,41 @@
           ]
         }
       ],
-      "lastBuildTimeStamp": "2022-07-21T02:46:39.784Z",
-      "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2022-07-21T02:46:45.906Z",
-      "distZipFilename": "bigboiutilitydiscordinteraction-2b354b79364839365845-build.zip",
-      "s3Bucket": {
-        "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-        "s3Key": "amplify-builds/bigboiutilitydiscordinteraction-2b354b79364839365845-build.zip"
-      },
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboiutilitydiscordinteraction-cloudformation-template.json",
-        "logicalId": "functionbigboiutilitydiscordinteraction"
-      },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
       "output": {
         "Region": "us-east-1",
         "Arn": "arn:aws:lambda:us-east-1:142037127835:function:bigboiutilitydiscordinteraction-dev",
         "Name": "bigboiutilitydiscordinteraction-dev",
         "LambdaExecutionRole": "bigboiLambdaRolecbfd1b59-dev"
       },
-      "lastPushDirHash": "OmGbFdkMk964cL8A5FEku36CEjA=",
-      "lastDevBuildTimeStamp": "2022-01-30T03:45:55.993Z"
+      "lastPushTimeStamp": "2022-07-21T03:22:37.987Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboiutilitydiscordinteraction-cloudformation-template.json",
+        "logicalId": "functionbigboiutilitydiscordinteraction"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+        "s3Key": "amplify-builds/bigboiutilitydiscordinteraction-2b354b79364839365845-build.zip"
+      }
     },
     "bigboiurlmetadataresolver": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "lastDevBuildTimeStamp": "2022-01-23T20:47:22.726Z",
-      "lastBuildType": "PROD",
-      "lastBuildTimeStamp": "2022-07-21T02:46:39.786Z",
-      "lastPackageTimeStamp": "2022-07-21T02:46:50.452Z",
-      "distZipFilename": "bigboiurlmetadataresolver-7839646c4134432b764b-build.zip",
-      "s3Bucket": {
-        "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-        "s3Key": "amplify-builds/bigboiurlmetadataresolver-7839646c4134432b764b-build.zip"
-      },
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboiurlmetadataresolver-cloudformation-template.json",
-        "logicalId": "functionbigboiurlmetadataresolver"
-      },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
       "output": {
         "Region": "us-east-1",
         "Arn": "arn:aws:lambda:us-east-1:142037127835:function:bigboiurlmetadataresolver-dev",
         "Name": "bigboiurlmetadataresolver-dev",
         "LambdaExecutionRole": "bigboiLambdaRole1ab7d5c3-dev"
       },
-      "lastPushDirHash": "S0zOO9AxMXMrJ5PbZKX7fV1BByw="
+      "lastPushTimeStamp": "2022-07-21T03:22:37.989Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/function/bigboiurlmetadataresolver-cloudformation-template.json",
+        "logicalId": "functionbigboiurlmetadataresolver"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+        "s3Key": "amplify-builds/bigboiurlmetadataresolver-7839646c4134432b764b-build.zip"
+      }
     }
   },
   "analytics": {
@@ -467,12 +430,11 @@
         "Region": "us-east-1",
         "Id": "24644c8c27fe4b40bfd36da65b7c8666"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.990Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/analytics/pinpoint-cloudformation-template.json",
         "logicalId": "analyticsbigboianalytics"
-      },
-      "lastPushDirHash": "n+0O0/i57mtZrPiQV3rWL0k0/ng="
+      }
     },
     "bigboidefaultkinesis": {
       "service": "Kinesis",
@@ -482,12 +444,11 @@
         "kinesisStreamShardCount": "1",
         "kinesisStreamArn": "arn:aws:kinesis:us-east-1:142037127835:stream/bigboidefaultkinesis-dev"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.991Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/analytics/kinesis-cloudformation-template.json",
         "logicalId": "analyticsbigboidefaultkinesis"
-      },
-      "lastPushDirHash": "AULG9enB4L5frBYO9b7kTfEMorY="
+      }
     },
     "bigboinotification": {
       "service": "SNS",
@@ -496,12 +457,11 @@
         "snsTopicArn": "arn:aws:sns:us-east-1:142037127835:bigboinotificationdev",
         "snsTopicName": "bigboinotificationdev"
       },
-      "lastPushTimeStamp": "2022-07-21T02:49:05.046Z",
+      "lastPushTimeStamp": "2022-07-21T03:22:37.992Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-big-boi-dev-142545-deployment/amplify-cfn-templates/analytics/sns-cloudformation-template.json",
         "logicalId": "analyticsbigboinotification"
-      },
-      "lastPushDirHash": "IU5xDIfRaT+6tHn9fwg2kjoqniw="
+      }
     }
   }
 }
