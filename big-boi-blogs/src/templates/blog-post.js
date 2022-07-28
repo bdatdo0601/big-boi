@@ -43,10 +43,9 @@ const BlogPost = ({ pageContext: { title, data } }) => {
   if (data.postType) {
     return <h1>{title}</h1>;
   }
-
   return (
     <PageElement>
-      <PageLayout>
+      <PageLayout siteDescription={get(data, "data.description", "")}>
         <GatsbyLink
           to="/"
           onClick={e => {

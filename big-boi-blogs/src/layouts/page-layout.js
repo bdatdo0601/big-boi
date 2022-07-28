@@ -11,7 +11,7 @@ import { useConfig } from "../data/use-config";
 import { isIframe } from "../utils";
 import { FaAngleDoubleRight } from "react-icons/fa";
 
-const PageLayout = ({ children }) => {
+const PageLayout = ({ children, siteDescription }) => {
   const {
     site: {
       siteMetadata: { name, description, keywords, siteUrl, siteImage, lang },
@@ -42,7 +42,7 @@ const PageLayout = ({ children }) => {
                   type="website"
                   title={name}
                   titleTemplate={titleTemplate}
-                  description={description}
+                  description={siteDescription || description}
                   siteUrl={siteUrl}
                   canonical={pathname}
                   image={siteImage}
@@ -58,7 +58,7 @@ const PageLayout = ({ children }) => {
                       if (isIframe()) {
                         window.parent.postMessage(
                           JSON.stringify({
-                            site: { name, description, keywords, siteUrl, siteImage, lang },
+                            site: { name, description: siteDescription || description, keywords, siteUrl, siteImage, lang },
                             path: blogSite,
                             newSite: true,
                             navigateToPath: true,
