@@ -16,6 +16,7 @@ import { mdxTheme } from "../gatsby-plugin-theme-ui";
 import slugify from "slugify";
 import { get } from "lodash";
 import { isIframe } from "../utils";
+import { useConfig } from "../data/use-config";
 
 const formatDate = date => format(new Date(date), "d-MMM-u");
 const ThemedComponents = Object.keys(mdxTheme)
@@ -23,6 +24,9 @@ const ThemedComponents = Object.keys(mdxTheme)
   .reduce((acc, currentKey) => ({ ...acc, [currentKey]: Themed[currentKey] }), {});
 
 const BlogPost = ({ pageContext: { title, data } }) => {
+  const {
+    site: { siteMetadata },
+  } = useConfig();
   useEffect(() => {
     if (isIframe()) {
       window.parent.postMessage(
@@ -49,7 +53,7 @@ const BlogPost = ({ pageContext: { title, data } }) => {
             if (isIframe()) {
               window.parent.postMessage(
                 JSON.stringify({
-                  site: { name: "" },
+                  site: siteMetadata,
                   path: "/",
                   navigateToPath: true,
                 }),

@@ -6,16 +6,14 @@ import GeneralBlogPost from "../components/GeneralBlogPost";
 import { PageElement } from "../components/page-element";
 import PageLayout from "../layouts/page-layout";
 import { isIframe } from "../utils";
+import { useConfig } from "../data/use-config";
 
 const Home = () => {
-  const { site, allBlogPost } = useStaticQuery(graphql`
+  const {
+    site: { siteMetadata },
+  } = useConfig();
+  const { allBlogPost } = useStaticQuery(graphql`
     query {
-      site {
-        siteMetadata {
-          description
-          name
-        }
-      }
       allBlogPost(filter: { status: { eq: "PUBLISHED" } }, sort: { fields: updatedAt, order: DESC }) {
         nodes {
           data {
@@ -56,18 +54,18 @@ const Home = () => {
     if (isIframe()) {
       window.parent.postMessage(
         JSON.stringify({
-          site: site.siteMetadata,
+          site: siteMetadata,
           path: "/",
         }),
         "*"
       );
     }
-  }, [site]);
+  }, [siteMetadata]);
   return (
     <PageElement>
       <PageLayout>
-        <Themed.h1>{site.siteMetadata.name}</Themed.h1>
-        <p>{site.siteMetadata.description}</p>
+        <Themed.h1>{siteMetadata.name}</Themed.h1>
+        <p>{siteMetadata.description}</p>
 
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 900: 2, 1200: 3 }}>
           <Masonry>
