@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.17.1](https://github.com/bdatdo0601/big-boi/compare/v1.17.0...v1.17.1) (2022-07-28)
+
+
+### Bug Fixes
+
+* add re-route between main site and blog site ([6365f39](https://github.com/bdatdo0601/big-boi/commit/6365f397011ad29541da5405d12c865e3b4c4ea5))
+
 ## [1.17.0](https://github.com/bdatdo0601/big-boi/compare/v1.16.8...v1.17.0) (2022-07-21)
 
 
