@@ -45,7 +45,7 @@ const BlogPost = ({ pageContext: { title, data } }) => {
   }
   return (
     <PageElement>
-      <PageLayout siteDescription={get(data, "data.description", "")}>
+      <PageLayout siteDescription={get(data, "description", "")}>
         <GatsbyLink
           to="/"
           onClick={e => {
