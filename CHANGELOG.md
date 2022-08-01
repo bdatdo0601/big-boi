@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.17.3](https://github.com/bdatdo0601/big-boi/compare/v1.17.2...v1.17.3) (2022-08-01)
+
+
+### Bug Fixes
+
+* routing issue and error pages ([f69c9ad](https://github.com/bdatdo0601/big-boi/commit/f69c9ade868e39ae3ea001adf9ec2063e9a290ed))
+
 ### [1.17.2](https://github.com/bdatdo0601/big-boi/compare/v1.17.1...v1.17.2) (2022-08-01)
 
 
