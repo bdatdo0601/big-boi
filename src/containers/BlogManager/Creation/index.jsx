@@ -5,6 +5,7 @@ import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
+import "./visual_md.less";
 import { CheckBoxOutlined } from "@mui/icons-material";
 import { useHistory, useParams } from "react-router-dom";
 import { get, isEmpty, merge, trim } from "lodash";
