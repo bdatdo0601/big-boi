@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.17.2](https://github.com/bdatdo0601/big-boi/compare/v1.17.1...v1.17.2) (2022-08-01)
+
+
+### Bug Fixes
+
+* add description to metadata ([d0e571c](https://github.com/bdatdo0601/big-boi/commit/d0e571cde2479c4956642139e30c616654bd0036))
+* update blog styling ([5584be7](https://github.com/bdatdo0601/big-boi/commit/5584be735d98d842ddc9a874793fedd89e1325ab))
+* update window usage in gatsby ([c9eceb5](https://github.com/bdatdo0601/big-boi/commit/c9eceb59a0eb8a2849fda4a8696696d756d64aa4))
+
 ### [1.17.1](https://github.com/bdatdo0601/big-boi/compare/v1.17.0...v1.17.1) (2022-07-28)
 
 
