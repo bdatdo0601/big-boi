@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.17.4](https://github.com/bdatdo0601/big-boi/compare/v1.17.3...v1.17.4) (2022-08-05)
+
+
+### Bug Fixes
+
+* routing deployment to message storing responsibility ([63274b2](https://github.com/bdatdo0601/big-boi/commit/63274b22d6b5a86faf6ad07791f1986c52c574f4))
+
 ### [1.17.3](https://github.com/bdatdo0601/big-boi/compare/v1.17.2...v1.17.3) (2022-08-01)
 
 
