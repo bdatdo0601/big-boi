@@ -18,22 +18,5 @@
       ]
     }
   },
-  "environmentVariableList": [
-    {
-      "cloudFormationParameterName": "blogDeployToken",
-      "environmentVariableName": "BLOG_DEPLOY_TOKEN"
-    },
-    {
-      "cloudFormationParameterName": "blogDeployWebhook",
-      "environmentVariableName": "BLOG_DEPLOY_WEBHOOK"
-    },
-    {
-      "cloudFormationParameterName": "blogDeployProjectId",
-      "environmentVariableName": "BLOG_DEPLOY_PROJECT_ID"
-    },
-    {
-      "cloudFormationParameterName": "blogDeployBranch",
-      "environmentVariableName": "BLOG_DEPLOY_BRANCH"
-    }
-  ]
+  "environmentVariableList": []
 }

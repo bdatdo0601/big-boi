@@ -35,6 +35,18 @@
     "analyticsbigboinotificationsnsTopicArn": {
       "Type": "String",
       "Default": "arn:aws:sns:us-east-1:142037127835:bigboinotificationdev"
+    },
+    "blogDeployWebhook": {
+      "Type": "String"
+    },
+    "blogDeployToken": {
+      "Type": "String"
+    },
+    "blogDeployProjectId": {
+      "Type": "String"
+    },
+    "blogDeployBranch": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -98,6 +110,18 @@
             },
             "API_BIGBOIAPI_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apibigboiapiGraphQLAPIKeyOutput"
+            },
+            "BLOG_DEPLOY_WEBHOOK": {
+              "Ref": "blogDeployWebhook"
+            },
+            "BLOG_DEPLOY_TOKEN": {
+              "Ref": "blogDeployToken"
+            },
+            "BLOG_DEPLOY_PROJECT_ID": {
+              "Ref": "blogDeployProjectId"
+            },
+            "BLOG_DEPLOY_BRANCH": {
+              "Ref": "blogDeployBranch"
             }
           }
         },

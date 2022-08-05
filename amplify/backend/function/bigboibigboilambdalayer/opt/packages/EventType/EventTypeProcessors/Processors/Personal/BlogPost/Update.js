@@ -5,7 +5,7 @@ const { PersonalPublishInfo } = require("../../../helpers/constants");
 
 
 module.exports = {
-    populateMetadata: async evt => assign(evt, { metadata: { visibility: "public" }, content: get(evt, "metadata.sourceMessage.eventData") }),
+    populateMetadata: async evt => assign(evt, { metadata: { visibility: "public", blogChange: true }, content: get(evt, "metadata.sourceMessage.eventData") }),
     populatePublishInfo: async evt => {
         const contentStatus = get(evt, "content.status");
         const target =  includes(["PUBLISHED"], contentStatus) && `\"${get(evt, "content.title")}\"`;
@@ -24,7 +24,6 @@ module.exports = {
         return assign(evt, { publishInfo })
     },
     validateEvent: async evt => {
-        await redeployBlogSite();
         return assign(evt, { metadata: { isValid: true } })
     }
 }

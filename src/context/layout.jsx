@@ -5,6 +5,36 @@ import { createTheme } from "@mui/material/styles";
 
 const LayoutContext = React.createContext();
 
+const darkThemeOverride = {
+  primary: {
+    main: "#5a83cd",
+  },
+  secondary: {
+    main: "#bd527b",
+  },
+  error: {
+    main: "#9c4131",
+  },
+  info: {
+    main: "#413941",
+  },
+};
+
+const lightThemeOverride = {
+  primary: {
+    main: "#4a5a73",
+  },
+  secondary: {
+    main: "#4a83c5",
+  },
+  error: {
+    main: "#cd4a31",
+  },
+  info: {
+    main: "#4183ee",
+  },
+};
+
 export const LayoutContextProvider = ({ children }) => {
   const [layout, setLayout] = useState();
   const [isDark, setIsDark] = useState(true);
@@ -13,35 +43,7 @@ export const LayoutContextProvider = ({ children }) => {
   const theme = createTheme({
     palette: {
       mode: isDark ? "dark" : "light",
-      ...(!isDark
-        ? {
-            primary: {
-              main: "#4a5a73",
-            },
-            secondary: {
-              main: "#4a83c5",
-            },
-            error: {
-              main: "#cd4a31",
-            },
-            info: {
-              main: "#4183ee",
-            },
-          }
-        : {
-            primary: {
-              main: "#d54a52",
-            },
-            secondary: {
-              main: "#736a73",
-            },
-            error: {
-              main: "#834a4a",
-            },
-            info: {
-              main: "#cddef6",
-            },
-          }),
+      ...(!isDark ? lightThemeOverride : darkThemeOverride),
       /** .palette.primary
       .palette.secondary
       .palette.error

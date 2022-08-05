@@ -4,7 +4,7 @@ const gql = require('graphql-tag');
 const slugify = require('slugify');
 
 const { queryGraphQLData } = require("../../../../../utils/queryGraphQLData");
-const { PersonalPublishInfo, redeployBlogSite } = require("../../../helpers/constants");
+const { PersonalPublishInfo } = require("../../../helpers/constants");
 
 module.exports = {
     populateMetadata: async evt => {
@@ -26,6 +26,7 @@ module.exports = {
             content: get(evt, "metadata.sourceMessage.eventData"),
             metadata: {
                 visibility: "public",
+                blogChange: true,
                 additionalData
             }
         })
@@ -48,7 +49,6 @@ module.exports = {
         return assign(evt, { publishInfo })
     },
     validateEvent: async evt => {
-        await redeployBlogSite();
         return assign(evt, { metadata: { isValid: !isEmpty(get(evt, "metadata.additionalData", {})) } })
     }
 };

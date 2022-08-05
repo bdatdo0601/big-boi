@@ -9,7 +9,7 @@ const { signedGraphQLMutationRequest } = require("../../../../../utils/signedGra
 const Owner = "5655c0b7-1480-4e60-bdb0-125b81faec5a";
 
 module.exports = {
-    populateMetadata: async evt => assign(evt, { metadata: { visibility: "public" }, content: { ...get(evt, "metadata.sourceMessage"), tweetID: last(get(evt, "metadata.sourceMessage.link").split("/")) } }),
+    populateMetadata: async evt => assign(evt, { metadata: { visibility: "public", blogChange: true }, content: { ...get(evt, "metadata.sourceMessage"), tweetID: last(get(evt, "metadata.sourceMessage.link").split("/")) } }),
     populatePublishInfo: async evt => {
         const target = "a thought";
         const targetLink = get(evt, "content.link");
