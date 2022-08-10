@@ -138,7 +138,7 @@ const PageIndexSidebar = ({ sideBarOpen }) => {
     <aside
       aria-hidden={!sideBarOpen}
       className={classNames(
-        'overflow-y-auto flex-shrink-0 bg-skin-sidebar text-sm text-skin-base select-none border-r border-skin-base transition-all motion-reduce:transition-none',
+        'overflow-y-auto flex-shrink-0 bg-skin-sidebar text-md text-skin-base select-none border-r border-skin-base transition-all motion-reduce:transition-none',
         sideBarOpen ? 'w-3/4 md:w-1/2 lg:w-1/3 2xl:w-96' : 'w-0'
       )}
     >

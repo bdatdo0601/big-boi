@@ -48,7 +48,7 @@
 
     --color-accent: 96, 165, 250;
 
-    --color-background-base: 0, 0, 0;
+    --color-background-base: 34, 34, 34;
     --color-background-secondary: 28, 33, 45;
     --color-background-header: var(--color-background-base);
 
@@ -56,25 +56,25 @@
     --color-background-popover-hover: 31, 41, 55;
     --color-background-popover-overlay: rgba(60, 60, 60, 0.5);
 
-    --color-background-sidebar: 10, 15, 26;
+    --color-background-sidebar: 41, 32, 41;
     --color-background-sidebar-hover: var(--color-background-popover-hover);
 
-    --color-border-base: 48, 48, 48;
+    --color-border-base: 139, 41, 98;
 
     --color-ring-base: var(--color-accent);
 
-    --color-scrollbar-thumb: #1e293b;
-    --color-scrollbar-thumb-hover: #334155;
+    --color-scrollbar-thumb: #5a83cd;
+    --color-scrollbar-thumb-hover: #395a9c;
 
     --color-background-table-head: 28, 33, 45;
     --color-background-table-odd: 14, 17, 23;
     --color-text-table-head: 206, 216, 239;
     --color-text-table-body: var(--color-text-secondary);
 
-    --color-graph-text: #e2e8f0;
-    --color-graph-node: #4f46e5;
-    --color-graph-node-hover: #6366f1;
-    --color-graph-edge: #64748b;
+    --color-graph-text: #fafafa;
+    --color-graph-node: #8b2962;
+    --color-graph-node-hover: #bd527b;
+    --color-graph-edge: #5a83cd;
   }
 }
 
@@ -96,7 +96,7 @@ body {
   }
 
   .note-content code {
-    font-size: 1em;
+    font-size: 1rem;
     @apply rounded py-1 px-2 bg-skin-secondary text-skin-secondary;
   }
 

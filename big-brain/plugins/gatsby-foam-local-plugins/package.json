@@ -49,6 +49,7 @@
         "gatsby-plugin-mdx": "^2.14.1",
         "gatsby-plugin-postcss": "4.12.0",
         "gatsby-plugin-sharp": "^3.12.0",
+        "gatsby-plugin-theme-ui": "^0.14.7",
         "gatsby-plugin-use-dark-mode": "^1.3.0",
         "gatsby-remark-autolink-headers": "^4.9.0",
         "gatsby-remark-copy-linked-files": "^4.9.0",

@@ -3,7 +3,6 @@
 .note-container .obstructed-label {
   display: block;
   text-decoration: none;
-  font-size: 17px;
   line-height: 40px;
   font-weight: 500;
   writing-mode: vertical-lr;
@@ -26,6 +25,12 @@
 
 .note-content img {
   max-width: 100%;
+  image-rendering: -moz-crisp-edges; /* Firefox */
+  image-rendering: -o-crisp-edges; /* Opera */
+  image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
+  background-color: #fafafa;
 }
 
 @media screen and (max-width: 800px) {
@@ -65,4 +70,180 @@
     opacity: 1;
     pointer-events: all;
   }
+}
+
+.note-content {
+  --theme-ui-colors-text: #ffffff;
+  --theme-ui-colors-background: #282a36;
+  --theme-ui-colors-muted: #8394ca;
+  --theme-ui-colors-highlight: #5a6084;
+  --theme-ui-colors-surface: #323442;
+  --theme-ui-colors-primary: #ff79c6;
+  --theme-ui-colors-secondary: #8be9fd;
+  --theme-ui-colors-success: #50fa7b;
+  --theme-ui-colors-error: #ff5555;
+  --theme-ui-colors-black: #000000;
+  color: var(--theme-ui-colors-text);
+  background-color: var(--theme-ui-colors-background);
+  font-family: Inconsolata, monospace;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.note-content * {
+  box-sizing: border-box;
+}
+.note-content input:-webkit-autofill:first-line {
+  color: var(--theme-ui-colors-primary) !important;
+}
+.note-content a {
+  -webkit-transition: 0.2s linear box-shadow;
+  transition: 0.2s linear box-shadow;
+}
+.note-content a:focus {
+  outline: none;
+  box-shadow: 0 2px 0 0 var(--theme-ui-colors-primary);
+}
+.note-content body {
+  margin: 0;
+}
+.note-content h1 {
+  color: var(--theme-ui-colors-primary);
+  font-weight: 700;
+  margin-top: 0px;
+  margin-bottom: 1rem;
+}
+.note-content h1 a {
+  color: inherit;
+}
+.note-content h1::before {
+  content: "→";
+  color: var(--theme-ui-colors-success);
+  margin-right: 2rem;
+}
+.note-content h1::after {
+  content: "()";
+  color: var(--theme-ui-colors-secondary);
+  margin-left: 1rem;
+}
+.note-content h2 {
+  color: var(--theme-ui-colors-primary);
+  font-weight: 700;
+  margin-top: 0px;
+  margin-bottom: 1rem;
+}
+.note-content h2 a {
+  color: inherit;
+}
+.note-content h2::before {
+  content: "→";
+  color: var(--theme-ui-colors-success);
+  margin-right: 2rem;
+}
+.note-content h2::after {
+  content: "()";
+  color: var(--theme-ui-colors-secondary);
+  margin-left: 1rem;
+}
+.note-content h3 {
+  color: var(--theme-ui-colors-secondary);
+  font-weight: 700;
+  margin-top: 0px;
+  margin-bottom: 3px;
+}
+.note-content h3 a {
+  color: inherit;
+}
+.note-content h4 {
+  color: var(--theme-ui-colors-text);
+  font-weight: 700;
+  margin-top: 0px;
+  margin-bottom: 3px;
+}
+.note-content h4 a {
+  color: inherit;
+}
+.note-content h5 {
+  color: var(--theme-ui-colors-success);
+  font-weight: 700;
+  margin-top: 0px;
+  margin-bottom: 3px;
+}
+.note-content h5 a {
+  color: inherit;
+}
+.note-content h6 {
+  color: var(--theme-ui-colors-error);
+  font-weight: 700;
+  margin-top: 0px;
+  margin-bottom: 3px;
+}
+.note-content h6 a {
+  color: inherit;
+}
+.note-content p {
+  margin-top: 0rem;
+  margin-bottom: 3rem;
+}
+.note-content p code {
+  color: inherit;
+  background-color: var(--theme-ui-colors-surface);
+  font-size: 13px;
+  padding: 1rem;
+}
+.note-content img {
+  max-width: 100%;
+}
+.note-content hr {
+  border: none;
+  margin-top: 0rem;
+  margin-bottom: 3rem;
+}
+.note-content ol {
+  margin-top: 0rem;
+  margin-bottom: 3rem;
+  padding-left: 0.25rem;
+}
+.note-content ul {
+  margin-top: 0rem;
+  margin-bottom: 3rem;
+  padding-left: 24px;
+  list-style: square;
+}
+.note-content li {
+  margin-bottom: 1;
+}
+.note-content li code {
+  color: inherit;
+  background-color: var(--theme-ui-colors-surface);
+  font-size: 13px;
+  padding: 1rem;
+}
+.note-content table {
+  border-collapse: collapse;
+  margin-bottom: 3rem;
+  border: none;
+}
+.note-content table thead tr th {
+  border: 1px solid var(--theme-ui-colors-surface);
+  padding: 8px 16px;
+}
+.note-content table thead td {
+  color: #666;
+}
+.note-content blockquote {
+  color: var(--theme-ui-colors-text);
+  border-radius: 0rem;
+  border-left-color: muted;
+  border-left-style: solid;
+  border-left-width: 2rem;
+  margin-top: 0rem;
+  margin-left: 2rem;
+  margin-bottom: 3rem;
+  margin-right: 0rem;
+}
+.note-content blockquote p {
+  padding: 3px;
+  margin-bottom: 0rem;
 }

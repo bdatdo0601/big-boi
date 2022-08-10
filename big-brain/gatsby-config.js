@@ -4,6 +4,7 @@ module.exports = {
     description: `Place to document all research, architecture, best practices, etc`
   },
   plugins: [
+    "gatsby-plugin-theme-ui",
     {
       resolve: `gatsby-foam-local-plugins`,
       options: {

@@ -42,7 +42,7 @@ module.exports = (options) => {
           name: contentPath,
           ignore,
         },
-      },
+      },   
       `gatsby-transformer-markdown-references`,
       ...searchIndexes(options),
       {

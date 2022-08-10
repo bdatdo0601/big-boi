@@ -10,7 +10,7 @@ const Header = ({ sideBarOpen, setSideBarOpen, sidebarDisabled }) => {
   const siteMetadata = useSiteMetadata();
 
   return (
-    <header className="pl-4 pr-8 w-full flex flex-wrap justify-between items-center bg-skin-header text-skin-base border-b border-skin-base z-10">
+    <header className="pl-4 pr-8 py-4 w-full flex flex-wrap justify-between items-center bg-skin-header text-skin-base border-b border-skin-base z-10">
       <div className="flex items-center justify-between">
         <div>
           {!sidebarDisabled && (

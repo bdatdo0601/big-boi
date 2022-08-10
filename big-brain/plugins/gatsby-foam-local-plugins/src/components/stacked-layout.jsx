@@ -16,7 +16,6 @@ import NoteWrapper from './note-wrapper';
 import PageIndexSidebar from './page-index-sidebar';
 import SEO from './seo';
 import './stacked-layout.css';
-import './theme.css';
 
 let themeInitialized = false;
 
