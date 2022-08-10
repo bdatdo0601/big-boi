@@ -6,11 +6,13 @@ import slugify from "slugify";
 import { format } from "date-fns";
 import { get, capitalize } from "lodash";
 import { Tweet } from "react-twitter-widgets";
+import { InstagramEmbed } from "react-social-media-embed";
 import { isIframe } from "../utils";
 
 const BlogPostSource = {
   NOTION: "notion",
   Twitter: "Twitter",
+  Instagram: "Instagram",
 };
 
 const BlogPost = ({ node, index }) => (
@@ -111,6 +113,54 @@ const TwitterBlogPost = ({ node }) => {
   );
 };
 
+const InstagramBlogPost = ({ node, index }) => {
+  const postData = useMemo(() => get(node, "data", "{}"), [node]);
+  return (
+    <Box
+      key={index}
+      sx={{
+        display: "flex",
+        flex: "1 1 auto",
+        flexDirection: "column",
+        margin: "8px 8px 8px 0px",
+        borderRadius: "50%",
+      }}
+    >
+      <Link href={node.externalLink} target="_blank" style={{ textDecoration: "inherit" }}>
+        <Card
+          sx={{
+            display: "flex",
+            flex: "1 1 auto",
+            flexDirection: "column",
+            minHeight: "1px",
+            borderRadius: "10px",
+          }}
+        >
+          <div style={{ margin: 12 }}>
+            <InstagramEmbed url={get(postData, "link")} embedPlaceholder={<BlogPost node={node} />} />
+          </div>
+          <Box
+            sx={{
+              display: "flex",
+              flex: "1 1 auto",
+              flexDirection: "column",
+              px: 3,
+            }}
+          >
+            <Text sx={{ mb: 1, color: "muted" }}>{format(new Date(node.createdAt), "d-MMM-u")}</Text>
+            <Text variant="styles.p" sx={{ color: "secondary" }}>
+              {node.description}
+            </Text>
+          </Box>
+          <Box sx={{ p: 3 }}>
+            <Text>{`Go to ${capitalize(node.postType)}`}</Text>
+          </Box>
+        </Card>
+      </Link>
+    </Box>
+  );
+};
+
 const GeneralBlogPost = ({ node, ...props }) => {
   switch (get(node, "postType")) {
     case BlogPostSource.NOTION:
@@ -118,6 +168,8 @@ const GeneralBlogPost = ({ node, ...props }) => {
       return <BlogPost node={node} {...props} />;
     case BlogPostSource.Twitter:
       return <TwitterBlogPost node={node} {...props} />;
+    case BlogPostSource.Instagram:
+      return <InstagramBlogPost node={node} {...props} />;
     default:
       return get(node, "postType");
   }

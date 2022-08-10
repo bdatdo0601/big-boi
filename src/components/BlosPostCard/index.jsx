@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Button, Card, CardActionArea, CardActions, CardContent, Chip, Typography, Divider } from "@mui/material";
 import { capitalize, get, isString } from "lodash";
 import { Tweet } from "react-twitter-widgets";
+import { InstagramEmbed } from "react-social-media-embed";
 
 import { POST_STATE } from "../../utils/constants";
 import "./index.less";
@@ -81,10 +82,46 @@ TwitterCardContent.propTypes = {
   isDark: PropTypes.bool.isRequired,
 };
 
+const InstgramCardContent = ({ post, width }) => {
+  const postData = useMemo(() => JSON.parse(get(post, "data", "{}")), [post]);
+  console.log(postData);
+  return (
+    <Card
+      style={{
+        width,
+        maxWidth: 550,
+        margin: "12px auto",
+        textAlign: "left",
+        opacity: post.status === POST_STATE.ARCHIVED ? 0.5 : 1,
+        borderRadius: "10px",
+        padding: 16,
+      }}
+      raised
+      elevation={3}
+    >
+      <InstagramEmbed url={get(postData, "link")} />
+      <Divider style={{ marginBottom: 10 }} />
+      <Typography variant="body" color="textSecondary" component="p" style={{ marginBottom: 10 }}>
+        {postData.text}
+      </Typography>
+      <Typography variant="body2" color="textSecondary" component="p">
+        Updated At: {moment(postData.updatedAt).format("hh:mma MMM DD YYYY")}
+      </Typography>
+    </Card>
+  );
+};
+
+InstgramCardContent.propTypes = {
+  post: PropTypes.object.isRequired,
+  isDark: PropTypes.bool.isRequired,
+};
+
 const CardContentData = ({ post, ...props }) => {
   switch (get(post, "postType")) {
     case "Twitter":
       return <TwitterCardContent post={post} {...props} />;
+    case "Instagram":
+      return <InstgramCardContent post={post} {...props} />;
     default:
       return <DefaultCardContent post={post} {...props} />;
   }
