@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.18.0](https://github.com/bdatdo0601/big-boi/compare/v1.17.5...v1.18.0) (2022-08-10)
+
+
+### Features
+
+* add Instagram to blogpost stream ([6e30f22](https://github.com/bdatdo0601/big-boi/commit/6e30f22553ed9a153e0d867b911ea6ec0f5d72bf))
+
 ### [1.17.5](https://github.com/bdatdo0601/big-boi/compare/v1.17.4...v1.17.5) (2022-08-10)
 
 
