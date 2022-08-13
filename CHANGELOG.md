@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://github.com/bdatdo0601/big-boi/compare/v1.18.0...v1.19.0) (2022-08-13)
+
+
+### Features
+
+* add share button to blogs ([b6723c3](https://github.com/bdatdo0601/big-boi/commit/b6723c359599f2c94d19ffde65a138fcd0438906))
+
+
+### Bug Fixes
+
+* add google GA ([5632c9e](https://github.com/bdatdo0601/big-boi/commit/5632c9e93afc68f6c1ea8175457ebc31880fa843))
+* add subscription form ([e766c24](https://github.com/bdatdo0601/big-boi/commit/e766c2459e99e47f30a7ca7d84a564d5e0f5e64c))
+
 ## [1.18.0](https://github.com/bdatdo0601/big-boi/compare/v1.17.5...v1.18.0) (2022-08-10)
 
 
