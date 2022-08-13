@@ -4,7 +4,7 @@ import { persist } from 'zustand/middleware';
 const useThemeState = create(
   persist(
     (set) => ({
-      theme: 'theme-white',
+      theme: 'theme-black',
       setTheme: (nTheme) => {
         document.querySelector('body').className = nTheme;
         set(() => ({

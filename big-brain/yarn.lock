@@ -6605,6 +6605,14 @@ gatsby-plugin-compile-es6-packages@^2.1.1:
     "@babel/runtime" "^7.0.0"
     regex-escape "^3.4.8"
 
+gatsby-plugin-google-gtag@^4.20.0:
+  version "4.20.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-gtag/-/gatsby-plugin-google-gtag-4.20.0.tgz#47351a0e5cde0d7a476eeca091b10aedb525c301"
+  integrity sha512-+YK6UDmA76frkUganVi/CY6r7vBewxK3gnbRqRlNsxQWQe/WUGzk3OmBLHjca6WFlaLywGZ9bsNs8UxL9Ku1Ew==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    minimatch "^3.1.2"
+
 gatsby-plugin-image@^1.14.1:
   version "1.14.2"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-image/-/gatsby-plugin-image-1.14.2.tgz#3955e370d8eb96cd3675001220f315a66ad8ea06"

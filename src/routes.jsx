@@ -22,6 +22,7 @@ import BlogManager from "./containers/BlogManager";
 import BlogCreation from "./containers/BlogManager/Creation";
 import Reference from "./containers/Reference";
 import ShareTarget from "./containers/ShareTarget";
+import usePageTracking from "./utils/hooks/usePageTracking";
 
 const Blogs = lazy(() => import("./containers/Blogs"));
 const Background = lazy(() => import("./containers/Background"));
@@ -44,6 +45,13 @@ export const ROUTE_TYPE = {
     name: "For Nerds",
     withAuth: false,
   },
+};
+
+const withAnalytics = Component => {
+  return props => {
+    usePageTracking();
+    return <Component {...props} />;
+  };
 };
 
 const isAuthExist = async () => {
@@ -130,7 +138,7 @@ export const errorRoutes = [
     hidden: true,
     type: "Error",
   },
-];
+].map(item => ({ ...item, component: item.component ? withAnalytics(item.component) : undefined }));
 
 export default [
   {
@@ -258,4 +266,4 @@ export default [
     type: ROUTE_TYPE.PRIVATE,
     hidden: async () => !(await isAuthExist()),
   },
-];
+].map(item => ({ ...item, component: item.component ? withAnalytics(item.component) : undefined }));
