@@ -55,7 +55,7 @@ export default function Blogs() {
       />
       <iframe
         src={`${blogURL}${location.pathname.replace("/blogs", "")}`}
-        className="w-full h-screen"
+        className="blog-container-div"
         ref={e => {
           iframeRef.current = e;
         }}

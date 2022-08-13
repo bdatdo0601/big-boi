@@ -4,12 +4,14 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
-import { CircularProgress, styled, useMediaQuery } from "@mui/material";
+import { CircularProgress, Fab, styled, Tooltip, useMediaQuery, Modal } from "@mui/material";
 import AppNavigation from "../../components/AppNavigation";
 import LayoutContext from "../../context/layout";
 import routes, { subdomainRouteMap } from "../../routes";
 import particleConfig from "./particleConfig";
 import { WEBSITE_TITLE } from "../../utils/constants";
+import { NewspaperOutlined } from "@mui/icons-material";
+import SubscriptionForm from "../../components/SubscriptionForm";
 
 const drawerWidth = 240;
 
@@ -17,9 +19,20 @@ const classes = {
   drawerHeader: "LayoutdrawerHeader",
   content: "LayoutContent",
   contentShift: "LayoutContentShift",
+  subscriptionButton: "LayoutContentSubscriptionButton",
 };
 
+const StyledFAB = styled(Fab)(({ theme }) => ({
+  display: "fixed",
+  bottom: 80,
+  [theme.breakpoints.up("sm")]: {
+    left: "93%",
+  },
+  left: "80%",
+}));
+
 const StyledMain = styled(`main`)(({ theme }) => ({
+  [`& .${classes.subscriptionButton}`]: {},
   [`& .${classes.drawerHeader}`]: {
     display: "flex",
     alignItems: "center",
@@ -59,6 +72,7 @@ export default function MainLayout({ children, name }) {
   const isFullSize = useMediaQuery("(min-width:1280px)");
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
+  const [subscriptionOpen, setSubscriptionOpen] = React.useState(false);
   const [routeList, setRouteList] = React.useState([]);
   const { setIsDark, isDark, globalAnimation, setGlobalAnimation } = useContext(LayoutContext);
   useEffect(() => {
@@ -69,48 +83,75 @@ export default function MainLayout({ children, name }) {
     });
   }, [setRouteList, history.location.pathname]);
   return (
-    <AppNavigation
-      setOpen={setOpen}
-      name={name}
-      open={open}
-      isSubdomainRoute={isSubdomainRoute}
-      groupedDrawerContent={groupBy(
-        routeList.filter(route => !route.hidden),
-        "type.name"
-      )}
-      onItemClick={item => {
-        history.push(item.path);
-        setOpen(false);
-      }}
-      setIsDark={setIsDark}
-      isDark={isDark}
-      globalAnimation={globalAnimation}
-      setGlobalAnimation={setGlobalAnimation}
-      isSelected={item => history.location.pathname === item.path}
-    >
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>{WEBSITE_TITLE}</title>
-        <link rel="canonical" href={`${window.location.href}`} />
-        <meta name="description" content="This is Dat'a Website" />
-      </Helmet>
-      {isFullSize && !isSubdomainRoute && (
-        <Suspense fallback={<CircularProgress />}>
-          <Particles
-            style={{ width: "100vw", height: "100vh", position: "fixed", zIndex: -1, top: 0, left: 0 }}
-            params={particleConfig(isDark)}
-          />
-        </Suspense>
-      )}
-      <StyledMain
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
+    <React.Fragment>
+      <Modal
+        open={subscriptionOpen}
+        onClose={() => {
+          setSubscriptionOpen(false);
+        }}
+        aria-labelledby="newsletter-subscription"
+        aria-describedby="stay-updated-with-my-content"
       >
-        <div className={classes.drawerHeader} />
-        {children}
-      </StyledMain>
-    </AppNavigation>
+        <SubscriptionForm
+          onCloseModal={() => {
+            setSubscriptionOpen(false);
+          }}
+        />
+      </Modal>
+      <AppNavigation
+        setOpen={setOpen}
+        name={name}
+        open={open}
+        isSubdomainRoute={isSubdomainRoute}
+        groupedDrawerContent={groupBy(
+          routeList.filter(route => !route.hidden),
+          "type.name"
+        )}
+        onItemClick={item => {
+          history.push(item.path);
+          setOpen(false);
+        }}
+        setIsDark={setIsDark}
+        isDark={isDark}
+        globalAnimation={globalAnimation}
+        setGlobalAnimation={setGlobalAnimation}
+        isSelected={item => history.location.pathname === item.path}
+      >
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>{WEBSITE_TITLE}</title>
+          <link rel="canonical" href={`${window.location.href}`} />
+          <meta name="description" content="This is Dat'a Website" />
+        </Helmet>
+        {isFullSize && !isSubdomainRoute && (
+          <Suspense fallback={<CircularProgress />}>
+            <Particles
+              style={{ width: "100vw", height: "100vh", position: "fixed", zIndex: -1, top: 0, left: 0 }}
+              params={particleConfig(isDark)}
+            />
+          </Suspense>
+        )}
+        <StyledMain
+          className={clsx(classes.content, {
+            [classes.contentShift]: open,
+          })}
+        >
+          <div className={classes.drawerHeader} />
+          {children}
+        </StyledMain>
+      </AppNavigation>
+      <Tooltip title="Subscribe to my updates!" placement="left">
+        <StyledFAB
+          color="primary"
+          className={classes.subscriptionButton}
+          onClick={() => {
+            setSubscriptionOpen(true);
+          }}
+        >
+          <NewspaperOutlined />
+        </StyledFAB>
+      </Tooltip>
+    </React.Fragment>
   );
 }
 
