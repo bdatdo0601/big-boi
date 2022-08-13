@@ -8,6 +8,18 @@ import { format } from "date-fns";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link as GatsbyLink } from "gatsby";
 import readingTime from "reading-time/lib/reading-time";
+import {
+  EmailShareButton,
+  EmailIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  RedditShareButton,
+  RedditIcon,
+  TwitterShareButton,
+  TwitterIcon,
+} from "react-share";
 
 import { PageElement } from "../components/page-element";
 
@@ -38,7 +50,7 @@ const BlogPost = ({ pageContext: { title, data } }) => {
       );
     }
   }, [title]);
-
+  const blogLink = `${siteMetadata.siteUrl}/${slugify(title)}`;
   const readingStats = useMemo(() => readingTime(get(data, "data.text", "")), [data]);
   if (data.postType) {
     return <h1>{title}</h1>;
@@ -82,6 +94,30 @@ const BlogPost = ({ pageContext: { title, data } }) => {
               {item}
             </Badge>
           ))}
+        </Box>
+        <Box
+          sx={{
+            width: ["100%", "100%"],
+          }}
+        >
+          <Text as="div" sx={{ color: "muted", display: "flex", alignContent: "center" }}>
+            Share:{" "}
+            <FacebookShareButton url={blogLink} style={{ marginLeft: 2, marginRight: 2 }}>
+              <FacebookIcon size={32} round />
+            </FacebookShareButton>
+            <TwitterShareButton url={blogLink} style={{ marginLeft: 2, marginRight: 2 }}>
+              <TwitterIcon size={32} round />
+            </TwitterShareButton>
+            <LinkedinShareButton url={blogLink} style={{ marginLeft: 2, marginRight: 2 }}>
+              <LinkedinIcon size={32} round />
+            </LinkedinShareButton>
+            <RedditShareButton url={blogLink} style={{ marginLeft: 2, marginRight: 2 }}>
+              <RedditIcon size={32} round />
+            </RedditShareButton>
+            <EmailShareButton url={blogLink} style={{ marginLeft: 2, marginRight: 2 }}>
+              <EmailIcon size={32} round />
+            </EmailShareButton>
+          </Text>
         </Box>
         <Box
           sx={{
