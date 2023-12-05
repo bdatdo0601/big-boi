@@ -42,7 +42,7 @@
     "node-notifier": "^9.0.0",
     "notistack": "^2.0.3",
     "pluralize": "^8.0.0",
-    "postcss": "^8.2.10",
+    "postcss": "^8.4.31",
     "postcss-cli": "^8.3.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
