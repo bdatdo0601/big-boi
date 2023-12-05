@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.3](https://github.com/bdatdo0601/big-boi/compare/v1.19.2...v1.19.3) (2023-12-05)
+
+
+### Bug Fixes
+
+* instagram ([74ca385](https://github.com/bdatdo0601/big-boi/commit/74ca38588b26e942241a6aa14428dd17812fffbb))
+
 ### [1.19.2](https://github.com/bdatdo0601/big-boi/compare/v1.19.1...v1.19.2) (2023-02-19)
 
 
