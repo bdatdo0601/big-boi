@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.2](https://github.com/bdatdo0601/big-boi/compare/v1.19.1...v1.19.2) (2023-02-19)
+
+
+### Bug Fixes
+
+* move button to top ([8f235de](https://github.com/bdatdo0601/big-boi/commit/8f235deb28037883a60714ae5b355c0693f3f612))
+* update landing page ([c2b17d6](https://github.com/bdatdo0601/big-boi/commit/c2b17d6fc50cbd3df8c705c486ac55e66368f551))
+* update resume editor ([e5345d2](https://github.com/bdatdo0601/big-boi/commit/e5345d2349d51f4cb5bd1e56a116c3a393ed3f30))
+
+### [1.19.1](https://github.com/bdatdo0601/big-boi/compare/v1.19.0...v1.19.1) (2023-02-18)
+
+
+### Bug Fixes
+
+* change to local open search ([1fb7028](https://github.com/bdatdo0601/big-boi/commit/1fb7028ec5ac3b0b76d7dbd0fff707f7a2034e29))
+
 ## [1.19.0](https://github.com/bdatdo0601/big-boi/compare/v1.18.0...v1.19.0) (2022-08-13)
 
 

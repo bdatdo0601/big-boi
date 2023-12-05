@@ -16,9 +16,8 @@
         "bigboi327b1f0d": {}
       },
       "api": {
-        "bigboiapi": {
-          "ElasticSearchInstanceType": "t2.medium.elasticsearch"
-        }
+        "bigboiapi": {},
+        "bigboiexternalapi": {}
       },
       "function": {
         "bigboikinesisconsumer": {
@@ -61,6 +60,17 @@
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
           "s3Key": "amplify-builds/bigboiurlmetadataresolver-7839646c4134432b764b-build.zip"
         }
+      },
+      "hosting": {
+        "S3AndCloudFront": {}
+      },
+      "storage": {
+        "bigboicontent": {}
+      },
+      "analytics": {
+        "bigboianalytics": {},
+        "bigboidefaultkinesis": {},
+        "bigboinotification": {}
       }
     }
   }

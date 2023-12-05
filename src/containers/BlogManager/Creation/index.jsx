@@ -80,7 +80,17 @@ export default function BlogCreation() {
   return (
     <div className="container-div" style={{ padding: 8 }}>
       <Typography variant="h3">Blog Creation</Typography>
-      <Paper style={{ padding: 16, marginTop: 8 }}>
+      <Paper style={{ padding: 16, marginTop: 8, display: "flex", flexDirection: "column" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginTop: 8, marginBottom: 8 }}
+          startIcon={<CheckBoxOutlined />}
+          disabled={postingPost || updatingPost}
+          onClick={onSubmit}
+        >
+          Submit
+        </Button>
         <TextField
           variant="outlined"
           id="standard-basic"
@@ -132,7 +142,6 @@ export default function BlogCreation() {
           ))}
         </div>
       </Paper>
-
       <MdEditor
         style={{ height: "70vh", marginTop: "1rem" }}
         config={{
@@ -153,16 +162,6 @@ export default function BlogCreation() {
         }}
       />
       {postingPost || updatingPost ? <CircularProgress /> : null}
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ width: "60%", marginTop: 8 }}
-        startIcon={<CheckBoxOutlined />}
-        disabled={postingPost || updatingPost}
-        onClick={onSubmit}
-      >
-        Submit
-      </Button>
     </div>
   );
 }

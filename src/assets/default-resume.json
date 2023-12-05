@@ -47,6 +47,9 @@
       "endDate": "Present",
       "summary": "New York City, New York, United States",
       "highlights": [
+        "Deliver sub same day delivery and BOPIS experience to Amazon customers, scaling from ideation to over 1000 stores across North America region",
+        "Champion program's operational excellence, providing serverless monitoring system that manage 2000 orders per day with capability to scale up 50x throughput",
+        "Drive alignment across multiple service and partner team to deliver functionality across order life cycle such as fulfillment, exception, and cancellation",
         "Design and implement an automation pipeline for seller store provisioning, integrating directly with over 20 services across Amazon Retail software stack",
         "Lead the effort to manage and organize team’s internal knowledge management consist of over 200 documents in various stages",
         "Maintain operational excellence through creating detailed debugging mechanism, enable faster",
@@ -378,18 +381,13 @@
   "references": [],
   "custom": {
     "bio": [
-      "I graduated with a Bachelor's Degree in Computer Science at Wentworth Institute of Technology back in 2018. At the moment, I am developing cool stuff as a Software Development Engineer 2 at Amazon.com.",
-      "Outside of that, I am the type of person that love to try everything: building random stuff, experimenting new dish in my kitchen, volunteering/mentoring, and even traveling across country solely by bus.",
-      "Of course this would include meeting new people and getting introduced to exciting opportunities and challenges. If you would like to reach me, please drop me a message using any method under the Contact box.",
-      "Thank you for being here! There is a lot of hidden stuff around this website, feel free to try to find them all."
+      "Just a nerd building stuff, writing blogs, and trying (sometimes too hard) to be social. Thanks for visiting my website!"
     ],
     "keywordTags": [
       "Puns Admirer",
-      "Tech Enthusiast",
-      "Programmer",
       "Former SWE @ STW",
-      "Technical Leader @ Developh Vietnam",
-      "SDE II @ Amazon"
+      "Mods @ Viet Tech",
+      "Founding SDE II @ Amazon Today"
     ],
     "contacts": [
       {

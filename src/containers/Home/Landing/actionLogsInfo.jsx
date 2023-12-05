@@ -11,6 +11,8 @@ import ReactStringReplacer from "../../../utils/reactStringReplacer";
 import EventMessageContext from "../../../context/eventmessage";
 import "./index.less";
 import DataIcon from "../../../components/DataIcon";
+import ProfileCard from "../../../components/ProfileCard";
+import LayoutContext from "../../../context/layout";
 
 const AnimatedPaper = animated(Paper);
 const AnimatedListItem = animated(ListItem);
@@ -77,32 +79,18 @@ ActionLogRow.propTypes = {
   style: PropTypes.object.isRequired,
 };
 
-export default function ActionLogsInfo({ className, animation }) {
+export default function ActionLogsInfo() {
   const { messages } = useContext(EventMessageContext);
-  const [animateProps, setAnimateProps] = useSpring(() => ({
-    display: "flex",
-    flexDirection: "column",
-    textAlign: "left",
-    transform: [0, 0],
-    from: animation ? { transform: [0, -200] } : {},
-    config: {
-      mass: 10,
-    },
-  }));
-  // Set the drag hook and define component movement based on gesture data
-  const bind = useDrag(({ down, movement: [mx, my] }) => {
-    setAnimateProps({ transform: down && animation ? [mx, my] : [0, 0], config: { mass: 3 } });
-  });
+  const { globalAnimation } = useContext(LayoutContext);
   return (
-    <AnimatedPaper
-      className={className}
-      elevation={3}
-      {...bind()}
-      style={{ ...animateProps, transform: animateProps.transform.to((x, y) => `translate(${x}px, ${y}px)`) }}
+    <ProfileCard
+      header={<Typography variant="h5">What I've been doing</Typography>}
+      contentStyle={{
+        paddingLeft: 16,
+        paddingRight: 16,
+      }}
+      animation={globalAnimation}
     >
-      <Typography variant="h4" style={{ marginBottom: 8 }}>
-        Action Logs
-      </Typography>
       <FixedSizeList
         height={300}
         width="100%"
@@ -114,7 +102,7 @@ export default function ActionLogsInfo({ className, animation }) {
       >
         {ActionLogRow}
       </FixedSizeList>
-    </AnimatedPaper>
+    </ProfileCard>
   );
 }
 
