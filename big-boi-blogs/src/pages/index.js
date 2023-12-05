@@ -7,6 +7,7 @@ import { PageElement } from "../components/page-element";
 import PageLayout from "../layouts/page-layout";
 import { isIframe } from "../utils";
 import { useConfig } from "../data/use-config";
+import { uniqBy } from "lodash";
 
 const Home = () => {
   const {
@@ -69,7 +70,7 @@ const Home = () => {
 
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 900: 2, 1200: 3 }}>
           <Masonry>
-            {allBlogPost.nodes.map((node, index) => {
+            {uniqBy(allBlogPost.nodes, "description").map((node, index) => {
               return <GeneralBlogPost key={index} node={node} index={index} />;
             })}
           </Masonry>

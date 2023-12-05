@@ -4,7 +4,7 @@ import { Box, Card, Heading, Link, Text } from "theme-ui";
 import { Location } from "@reach/router";
 import slugify from "slugify";
 import { format } from "date-fns";
-import { get, capitalize } from "lodash";
+import { get, capitalize, trim } from "lodash";
 import { Tweet } from "react-twitter-widgets";
 import { InstagramEmbed } from "react-social-media-embed";
 import { isIframe } from "../utils";
@@ -115,6 +115,7 @@ const TwitterBlogPost = ({ node }) => {
 
 const InstagramBlogPost = ({ node, index }) => {
   const postData = useMemo(() => get(node, "data", "{}"), [node]);
+  const link = useMemo(() => get(postData, "link", "").replace("instagr.am", "instagram.com"), [postData]);
   return (
     <Box
       key={index}
@@ -137,7 +138,13 @@ const InstagramBlogPost = ({ node, index }) => {
           }}
         >
           <div style={{ margin: 12 }}>
-            <InstagramEmbed url={get(postData, "link")} embedPlaceholder={<BlogPost node={node} />} />
+            <InstagramEmbed
+              url={link}
+              width="100%"
+              embedPlaceholder={
+                <BlogPost node={{ ...node, title: `Instagram: "${trim(node.description)}"`, description: "" }} />
+              }
+            />
           </div>
           <Box
             sx={{
