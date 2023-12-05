@@ -9,10 +9,13 @@ export default function WelcomeInfo({ bio }) {
   return (
     <ProfileCard
       header={<Typography variant="h5">Hello There!</Typography>}
-      contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
+      contentStyle={{
+        paddingLeft: 16,
+        paddingRight: 16,
+      }}
+      cardStyle={{ maxWidth: 600, margin: "0 auto" }}
       animation={globalAnimation}
     >
-      <Typography variant="h5">Welcome to my Website</Typography>
       <div className="mx-4 my-2 text-left">
         {bio.map(item => (
           <Typography key={item} variant="body1" paragraph>

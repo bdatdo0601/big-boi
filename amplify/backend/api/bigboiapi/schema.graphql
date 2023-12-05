@@ -86,7 +86,6 @@ type Reference
     fields: ["type", "clickCount"]
     queryField: "ReferenceByClickCount"
   )
-  @searchable
   @auth(
     rules: [
       {
@@ -125,7 +124,6 @@ type PrivateReference
     fields: ["type", "clickCount"]
     queryField: "PrivateReferenceByClickCount"
   )
-  @searchable
   @auth(
     rules: [
       {

@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Card, CircularProgress, Typography } from "@mui/material";
 import PropTypes from "prop-types";
-// import the react-json-view component
-import ReactJson from "react-json-view";
+import { JsonEditor as Editor } from "jsoneditor-react";
+import "brace";
+import "brace/mode/json";
+import "brace/theme/github";
+import Ajv from "ajv";
 import { CloudUploadOutlined, RestoreOutlined } from "@mui/icons-material";
 import { isEqual } from "lodash";
 
@@ -14,6 +17,8 @@ import { RESUME } from "../../utils/constants";
 import { fetchFileToJSON } from "../../utils";
 import { useDataUpdateWrapper } from "../../utils/hooks";
 import EventType from "../../assets/event-type.json";
+
+const ajv = new Ajv({ allErrors: true, verbose: true });
 
 const DataUpdateOptions = {
   snackBar: {
@@ -62,7 +67,7 @@ export default function ResumeSchemaEditor() {
   }
 
   return (
-    <Card className="my-8 mx-16 py-4 px-8 resume-schema-editor">
+    <Card className="my-8 mx-16 py-4 px-8 resume-schema-editor max-h-full">
       <Typography variant="h5">Resume Schema Editor</Typography>
       <Button
         variant="contained"
@@ -83,19 +88,10 @@ export default function ResumeSchemaEditor() {
         Reset to Default
       </Button>
       <div className="text-left">
-        <ReactJson
-          src={resume}
-          theme="monokai"
-          enableClipboard
-          collapsed
-          onEdit={({ updated_src: updatedJSON }) => {
-            setResume(updatedJSON);
-          }}
-          onDelete={({ updated_src: updatedJSON }) => {
-            setResume(updatedJSON);
-          }}
-          onAdd={({ updated_src: updatedJSON }) => {
-            setResume(updatedJSON);
+        <Editor
+          value={resume}
+          onChange={data => {
+            setResume(data);
           }}
         />
       </div>

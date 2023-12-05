@@ -19,7 +19,7 @@ export default function Landing({ keywords, contacts, bio }) {
       span: {
         xs: 12,
         md: 12,
-        lg: 4,
+        lg: 12,
       },
     }),
     [globalAnimation, contacts]
@@ -32,7 +32,7 @@ export default function Landing({ keywords, contacts, bio }) {
       span: {
         xs: 12,
         md: 12,
-        lg: 4,
+        lg: 12,
       },
     }),
     [globalAnimation, keywords]
@@ -58,34 +58,35 @@ export default function Landing({ keywords, contacts, bio }) {
       span: {
         xs: 12,
         md: 12,
-        lg: 4,
+        lg: 12,
       },
     }),
     [bio]
   );
-  const items = useMemo(
-    () =>
-      isFullSize
-        ? [welcomeInfo, mainInfo, contactInfo, actionLogsInfo]
-        : [mainInfo, welcomeInfo, contactInfo, actionLogsInfo],
-    [welcomeInfo, mainInfo, contactInfo, isFullSize, actionLogsInfo]
-  );
+  const items = useMemo(() => [mainInfo, welcomeInfo, contactInfo, actionLogsInfo], [
+    welcomeInfo,
+    mainInfo,
+    contactInfo,
+    isFullSize,
+    actionLogsInfo,
+  ]);
   return (
-    <div style={{ width: "100%", maxWidth: 1900, margin: "0 auto" }}>
+    <div style={{ width: "100%", maxWidth: 1600, margin: "0 auto" }}>
       <Grid
         container
-        justifyContent={isFullSize ? "center" : "flex-start"}
+        justifyContent="center"
         alignItems="center"
         alignContent="center"
+        direction="column"
         spacing={10}
-        style={{ minHeight: "80vh", marginBottom: "2rem" }}
+        style={{ minHeight: "80vh", marginBottom: "2rem", textAlign: "center" }}
       >
         {items.map(item => (
           <Grid
             item
             {...item.span}
             key={isArray(item) ? item[0].key : item.key}
-            style={{ paddingLeft: "1rem", paddingRight: "1rem" }}
+            style={{ paddingLeft: "1rem", paddingRight: "1rem", width: "100%" }}
           >
             {isArray(item) ? (
               <Grid

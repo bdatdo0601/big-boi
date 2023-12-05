@@ -1,37 +1,22 @@
 {
-  "hosting": {
-    "S3AndCloudFront": {
-      "service": "S3AndCloudFront",
-      "providerPlugin": "awscloudformation"
-    }
-  },
-  "auth": {
-    "bigboi327b1f0d": {
-      "service": "Cognito",
+  "analytics": {
+    "bigboianalytics": {
       "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
-    }
-  },
-  "storage": {
-    "bigboicontent": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation"
+      "service": "Pinpoint"
+    },
+    "bigboidefaultkinesis": {
+      "providerPlugin": "awscloudformation",
+      "service": "Kinesis"
+    },
+    "bigboinotification": {
+      "providerPlugin": "awscloudformation",
+      "service": "SNS"
     }
   },
   "api": {
     "bigboiapi": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
       "output": {
         "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 365,
-              "description": "public access"
-            }
-          },
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AMAZON_COGNITO_USER_POOLS",
@@ -42,200 +27,425 @@
             {
               "authenticationType": "AWS_IAM"
             }
-          ]
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "description": "public access"
+            },
+            "authenticationType": "API_KEY"
+          }
         }
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
     },
     "bigboiexternalapi": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
-          "category": "function",
-          "resourceName": "bigboikinesisconsumer",
           "attributes": [
             "Name",
             "Arn"
-          ]
+          ],
+          "category": "function",
+          "resourceName": "bigboikinesisconsumer"
         },
         {
-          "category": "function",
-          "resourceName": "bigboiwebhookproxy",
           "attributes": [
             "Name",
             "Arn"
-          ]
+          ],
+          "category": "function",
+          "resourceName": "bigboiwebhookproxy"
         },
         {
-          "category": "function",
-          "resourceName": "bigboiurlmetadataresolver",
           "attributes": [
             "Name",
             "Arn"
-          ]
+          ],
+          "category": "function",
+          "resourceName": "bigboiurlmetadataresolver"
         },
         {
-          "category": "function",
-          "resourceName": "bigboiutilitydiscordinteraction",
           "attributes": [
             "Name",
             "Arn"
-          ]
+          ],
+          "category": "function",
+          "resourceName": "bigboiutilitydiscordinteraction"
         }
-      ]
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {
+    "bigboi327b1f0d": {
+      "customAuth": false,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
     }
   },
   "function": {
     "bigboibigboilambdalayer": {
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
-    },
-    "bigboikinesisconsumer": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "bigboiapi",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "bigboibigboilambdalayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
-          "category": "analytics",
-          "resourceName": "bigboinotification",
-          "attributes": [
-            "snsTopicArn"
-          ]
-        },
-        {
-          "category": "analytics",
-          "resourceName": "bigboidefaultkinesis",
-          "attributes": [
-            "kinesisStreamArn"
-          ]
-        }
-      ]
-    },
-    "bigboimessagestoring": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "bigboiapi",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "bigboibigboilambdalayer",
-          "attributes": [
-            "Arn"
-          ]
-        }
-      ]
+      "service": "LambdaLayer"
     },
     "bigboiblogpoller": {
       "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
       "dependsOn": [
         {
-          "category": "storage",
-          "resourceName": "bigboicontent",
           "attributes": [
             "BucketName"
-          ]
+          ],
+          "category": "storage",
+          "resourceName": "bigboicontent"
         },
         {
-          "category": "api",
-          "resourceName": "bigboiapi",
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput",
             "GraphQLAPIKeyOutput"
-          ]
+          ],
+          "category": "api",
+          "resourceName": "bigboiapi"
         },
         {
-          "category": "api",
-          "resourceName": "bigboiexternalapi",
           "attributes": [
             "ApiName",
             "ApiId"
-          ]
+          ],
+          "category": "api",
+          "resourceName": "bigboiexternalapi"
         },
         {
-          "category": "analytics",
-          "resourceName": "bigboianalytics",
           "attributes": [
             "Id",
             "Region"
-          ]
+          ],
+          "category": "analytics",
+          "resourceName": "bigboianalytics"
         },
         {
-          "category": "analytics",
-          "resourceName": "bigboidefaultkinesis",
           "attributes": [
             "kinesisStreamArn"
-          ]
+          ],
+          "category": "analytics",
+          "resourceName": "bigboidefaultkinesis"
         }
-      ]
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     },
-    "bigboiwebhookproxy": {
+    "bigboikinesisconsumer": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "bigboiapi"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "bigboibigboilambdalayer"
+        },
+        {
+          "attributes": [
+            "snsTopicArn"
+          ],
+          "category": "analytics",
+          "resourceName": "bigboinotification"
+        },
+        {
+          "attributes": [
+            "kinesisStreamArn"
+          ],
+          "category": "analytics",
+          "resourceName": "bigboidefaultkinesis"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "bigboimessagestoring": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "bigboiapi"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "bigboibigboilambdalayer"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "bigboiurlmetadataresolver": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
     "bigboiutilitydiscordinteraction": {
       "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
       "dependsOn": [
         {
-          "category": "api",
-          "resourceName": "bigboiapi",
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput",
             "GraphQLAPIKeyOutput"
-          ]
+          ],
+          "category": "api",
+          "resourceName": "bigboiapi"
         }
-      ]
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     },
-    "bigboiurlmetadataresolver": {
+    "bigboiwebhookproxy": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
-  "analytics": {
-    "bigboianalytics": {
-      "service": "Pinpoint",
-      "providerPlugin": "awscloudformation"
+  "hosting": {
+    "S3AndCloudFront": {
+      "providerPlugin": "awscloudformation",
+      "service": "S3AndCloudFront"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_bigboibigboilambdalayer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboibigboilambdalayer"
+        }
+      ]
     },
-    "bigboidefaultkinesis": {
-      "service": "Kinesis",
-      "providerPlugin": "awscloudformation"
+    "AMPLIFY_function_bigboibigboilambdalayer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboibigboilambdalayer"
+        }
+      ]
     },
-    "bigboinotification": {
-      "service": "SNS",
-      "providerPlugin": "awscloudformation"
+    "AMPLIFY_function_bigboiblogpoller_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiblogpoller_eventApiEndpoint": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiblogpoller_eventApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiblogpoller_notionBlogpostBlockid": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiblogpoller_notionIntegrationToken": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiblogpoller_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboikinesisconsumer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboikinesisconsumer"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboikinesisconsumer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboikinesisconsumer"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_blogDeployBranch": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_blogDeployProjectId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_blogDeployToken": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_blogDeployWebhook": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiurlmetadataresolver_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiurlmetadataresolver"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiurlmetadataresolver_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiurlmetadataresolver"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiutilitydiscordinteraction_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiutilitydiscordinteraction"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiutilitydiscordinteraction_discordApplicationPublicKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiutilitydiscordinteraction"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiutilitydiscordinteraction_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiutilitydiscordinteraction"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiutilitydiscordinteraction_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiutilitydiscordinteraction"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiwebhookproxy_apiEndpoint": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiwebhookproxy"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiwebhookproxy_apiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiwebhookproxy"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiwebhookproxy_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiwebhookproxy"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiwebhookproxy_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiwebhookproxy"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "bigboicontent": {
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
     }
   }
 }
