@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.4](https://github.com/bdatdo0601/big-boi/compare/v1.19.3...v1.19.4) (2023-12-05)
+
+
+### Bug Fixes
+
+* update yarn.lock ([00d4f01](https://github.com/bdatdo0601/big-boi/commit/00d4f01b164ff6822f358e903d9d691cf3ddf311))
+
 ### [1.19.3](https://github.com/bdatdo0601/big-boi/compare/v1.19.2...v1.19.3) (2023-12-05)
 
 
