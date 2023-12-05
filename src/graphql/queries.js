@@ -422,39 +422,6 @@ export const referenceByClickCount = /* GraphQL */ `
     }
   }
 `;
-export const searchReferences = /* GraphQL */ `
-  query SearchReferences(
-    $filter: SearchableReferenceFilterInput
-    $sort: SearchableReferenceSortInput
-    $limit: Int
-    $nextToken: String
-    $from: Int
-  ) {
-    searchReferences(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-    ) {
-      items {
-        id
-        title
-        url
-        description
-        extraData
-        type
-        clickCount
-        updatedAt
-        tags
-        createdAt
-        owner
-      }
-      nextToken
-      total
-    }
-  }
-`;
 export const getPrivateReference = /* GraphQL */ `
   query GetPrivateReference($id: ID!) {
     getPrivateReference(id: $id) {
@@ -565,39 +532,6 @@ export const privateReferenceByClickCount = /* GraphQL */ `
         owner
       }
       nextToken
-    }
-  }
-`;
-export const searchPrivateReferences = /* GraphQL */ `
-  query SearchPrivateReferences(
-    $filter: SearchablePrivateReferenceFilterInput
-    $sort: SearchablePrivateReferenceSortInput
-    $limit: Int
-    $nextToken: String
-    $from: Int
-  ) {
-    searchPrivateReferences(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-    ) {
-      items {
-        id
-        title
-        url
-        description
-        extraData
-        type
-        clickCount
-        updatedAt
-        tags
-        createdAt
-        owner
-      }
-      nextToken
-      total
     }
   }
 `;

@@ -1,56 +1,47 @@
 import React, { useContext, useMemo, useState, useRef, useEffect, useCallback } from "react";
-import { debounce, get, lowerCase, sortBy } from "lodash";
+import { debounce, flatMap, get, lowerCase, sortBy } from "lodash";
 import { Autocomplete, IconButton, Paper, TextField } from "@mui/material";
 import { DeleteOutline } from "@mui/icons-material";
-import { searchPrivateReferences, searchReferences } from "../../../graphql/queries";
-import { useAWSAPI } from "../../../utils/awsAPI";
+import FlexSearch from "flexsearch/dist/flexsearch.bundle";
+import { listPrivateReferences, listReferences } from "../../../graphql/queries";
+import { useAWSAPIGetAll } from "../../../utils/awsAPI";
 import { convertToReferenceRenderedData } from "../utils";
 import ReferenceDisplayWidget from "../components/ReferenceDisplayWidget";
 import ReferenceContext from "../context";
 
+const documentSearchStore = new FlexSearch.Document({
+  document: {
+    id: "id",
+    index: ["title", "url", "tags"],
+  },
+  tokenize: "full"
+});
+
 const Searchable = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResult, setSearchResult] = useState({});
   const [autoCompleteText, setAutoCompleteText] = useState("");
-  const query = useMemo(
-    () => ({
-      filter: {
-        or: [
-          { title: { wildcard: `${searchQuery || ""}*` } },
-          { url: { wildcard: `${searchQuery || ""}*` } },
-          { tags: { wildcard: `${searchQuery || ""}*` } },
-          // eslint-disable-next-line
-          { tags: { regexp: `.*\.${searchQuery}.*` } },
-          { title: { match: searchQuery } },
-          { url: { match: searchQuery } },
-          { tags: { match: searchQuery } },
-        ],
-      },
-      limit: 100,
-    }),
-    [searchQuery]
-  );
-  const { data: rawPublicData, loading: publicDataLoading, execute: refetchReference } = useAWSAPI(
-    searchReferences,
+  const query = useMemo(() => ({ limit: 10000 }), []);
+  const { data: rawPublicData, loading: publicDataLoading, execute: refetchReference } = useAWSAPIGetAll(
+    listReferences,
     query,
     "API_KEY"
   );
-  const { data: rawPrivateData, loading: privateDataLoading, execute: refetchPrivateReference } = useAWSAPI(
-    searchPrivateReferences,
+  const { data: rawPrivateData, loading: privateDataLoading, execute: refetchPrivateReference } = useAWSAPIGetAll(
+    listPrivateReferences,
     query
   );
   const { updateLocalReferenceTags, syncReferenceTags, registerRefetch, deregisterRefetch } = useContext(
     ReferenceContext
   );
 
-  const resetSearchQuery = useCallback(() => {
+  const resetAutoCompleteText = useCallback(() => {
     setAutoCompleteText("");
-    setSearchQuery("");
   }, []);
 
   useEffect(() => {
     registerRefetch("Searchable", async () =>
       Promise.all(
-        [refetchReference, refetchPrivateReference, resetSearchQuery].map(async fn => {
+        [refetchReference, refetchPrivateReference, resetAutoCompleteText].map(async fn => {
           fn();
         })
       )
@@ -58,28 +49,41 @@ const Searchable = () => {
     return () => {
       deregisterRefetch("Searchable");
     };
-  }, [registerRefetch, refetchReference, refetchPrivateReference, deregisterRefetch, resetSearchQuery]);
+  }, [registerRefetch, refetchReference, refetchPrivateReference, deregisterRefetch, resetAutoCompleteText]);
 
   const isLoading = useMemo(() => publicDataLoading || privateDataLoading, [publicDataLoading, privateDataLoading]);
   const combinedData = useMemo(
     () =>
       sortBy(
         [
-          ...get(rawPublicData, "data.searchReferences.items", []).map(item => ({ ...item, isPrivate: false })),
-          ...get(rawPrivateData, "data.searchPrivateReferences.items", []).map(item => ({
-            ...item,
-            isPrivate: true,
-          })),
+          ...flatMap(rawPublicData, singleQuery =>
+            get(singleQuery, "data.listReferences.items", []).map(item => ({ ...item, isPrivate: false }))
+          ),
+          ...flatMap(rawPrivateData, singleQuery =>
+            get(singleQuery, "data.listPrivateReferences.items", []).map(item => ({
+              ...item,
+              isPrivate: true,
+            }))
+          ),
         ],
         "clickCount"
       ),
     [rawPrivateData, rawPublicData]
   );
 
-  const treeData = useMemo(() => convertToReferenceRenderedData(combinedData), [combinedData]);
+  useEffect(() => {
+    for (const item of combinedData) {
+      documentSearchStore.add(item);
+    }
+  }, [combinedData]);
+
   const onSearch = useRef(
-    debounce(newText => {
-      setSearchQuery(lowerCase(newText));
+    debounce((newText, combinedData) => {
+      const data = documentSearchStore.search(newText);
+
+      const searchedData = combinedData.filter(item => flatMap(data, "result").includes(item.id));
+
+      setSearchResult({ treeData: convertToReferenceRenderedData(searchedData), listData: searchedData });
     }, 200)
   );
   return (
@@ -93,7 +97,7 @@ const Searchable = () => {
           value={autoCompleteText}
           onInputChange={(e, newValue) => {
             setAutoCompleteText(newValue);
-            onSearch.current(newValue);
+            onSearch.current(newValue, combinedData);
           }}
           options={[]}
           renderOption={(props, option) => (
@@ -124,8 +128,13 @@ const Searchable = () => {
         />
       </div>
 
-      {searchQuery && (
-        <ReferenceDisplayWidget widgetKey="searchable" data={treeData} listData={combinedData} loading={isLoading} />
+      {autoCompleteText && (
+        <ReferenceDisplayWidget
+          widgetKey="searchable"
+          data={get(searchResult, "treeData", {})}
+          listData={get(searchResult,"listData", [])}
+          loading={isLoading}
+        />
       )}
     </Paper>
   );
