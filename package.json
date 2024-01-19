@@ -145,7 +145,7 @@
     "replace-in-file": "^6.2.0",
     "standard-version": "^9.1.0",
     "tailwindcss": "^1.1.4",
-    "vite": "^2.9.13",
+    "vite": "^2.9.17",
     "vite-plugin-env-compatible": "^1.1.1",
     "vite-plugin-pwa": "^0.11.13",
     "vite-plugin-svgr": "^1.0.1",
