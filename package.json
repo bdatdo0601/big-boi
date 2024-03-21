@@ -2,6 +2,9 @@
   "name": "big-boi",
   "version": "1.19.4",
   "private": true,
+  "engines": {
+    "node": ">=16"
+  },
   "dependencies": {
     "@aws-amplify/analytics": "^5.0.8",
     "@aws-amplify/api": "^4.0.8",

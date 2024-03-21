@@ -4,6 +4,9 @@
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "engines": {
+    "node": ">=16"
+  },
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@mdx-js/react": "v1",
