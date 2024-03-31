@@ -43,7 +43,7 @@ jobs:
           amplify_command: configure
           amplify_env: dev
           amplify_arguments: '--restore'
-          amplify_cli_version: 9.1.0
+          amplify_cli_version: 12.10.3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -61,7 +61,7 @@ jobs:
         with:
           amplify_command: publish
           amplify_env: dev
-          amplify_cli_version: 9.1.0
+          amplify_cli_version: 12.10.3
           amplify_arguments: '--force --yes -c'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
