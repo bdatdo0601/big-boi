@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.7](https://github.com/bdatdo0601/big-boi/compare/v1.19.6...v1.19.7) (2024-03-31)
+
+
+### Bug Fixes
+
+* update to node v18 ([6b5f061](https://github.com/bdatdo0601/big-boi/commit/6b5f061e9fc18018547f2d418ee3553e062a893c))
+
 ### [1.19.6](https://github.com/bdatdo0601/big-boi/compare/v1.19.5...v1.19.6) (2024-03-31)
 
 
