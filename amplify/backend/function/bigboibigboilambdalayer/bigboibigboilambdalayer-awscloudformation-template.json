@@ -20,11 +20,54 @@
     }
   },
   "Resources": {
+    "LambdaLayerVersionc931a3a8": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": {
+          "Ref": "runtimes"
+        },
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        },
+        "Description": {
+          "Ref": "description"
+        },
+        "LayerName": {
+          "Fn::Sub": [
+            "bigboibigboilambdalayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionPrivatec931a3a8": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "LambdaLayerVersionc931a3a8"
+        },
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
     "LambdaLayerVersiond82cd404": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "CompatibleRuntimes": [
-          "nodejs14.x"
+          "nodejs18.x"
         ],
         "Content": {
           "S3Bucket": {
@@ -61,7 +104,7 @@
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "CompatibleRuntimes": [
-          "nodejs14.x"
+          "nodejs18.x"
         ],
         "Content": {
           "S3Bucket": {
@@ -98,7 +141,7 @@
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "CompatibleRuntimes": [
-          "nodejs14.x"
+          "nodejs18.x"
         ],
         "Content": {
           "S3Bucket": {
@@ -145,7 +188,7 @@
   "Outputs": {
     "Arn": {
       "Value": {
-        "Ref": "LambdaLayerVersiond82cd404"
+        "Ref": "LambdaLayerVersionc931a3a8"
       }
     }
   }
