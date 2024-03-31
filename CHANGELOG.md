@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.5](https://github.com/bdatdo0601/big-boi/compare/v1.19.4...v1.19.5) (2024-03-31)
+
+
+### Bug Fixes
+
+* update package.json ([af1a4eb](https://github.com/bdatdo0601/big-boi/commit/af1a4ebcf67c1e6dd071a08d139d04ea7bc94055))
+* update resume ([34cfa47](https://github.com/bdatdo0601/big-boi/commit/34cfa47125a8e4c208338265e01f4c77651f54c6))
+* update workflow ([cff2f3e](https://github.com/bdatdo0601/big-boi/commit/cff2f3e53af9e86d0cab48d9330077e7a04af2ea))
+
 ### [1.19.4](https://github.com/bdatdo0601/big-boi/compare/v1.19.3...v1.19.4) (2023-12-05)
 
 
