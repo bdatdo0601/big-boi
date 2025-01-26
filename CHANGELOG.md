@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.11](https://github.com/bdatdo0601/big-boi/compare/v1.20.10...v1.20.11) (2025-01-26)
+
+
+### Bug Fixes
+
+* revert package json build ([a8bcade](https://github.com/bdatdo0601/big-boi/commit/a8bcade2158269f0ed04705a5408bf77ce73a15f))
+* update workflow ([eadc9c0](https://github.com/bdatdo0601/big-boi/commit/eadc9c05d4f9196c8855c5f684f67ca18f899298))
+
 ### [1.20.10](https://github.com/bdatdo0601/big-boi/compare/v1.20.9...v1.20.10) (2025-01-26)
 
 
