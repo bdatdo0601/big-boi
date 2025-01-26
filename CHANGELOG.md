@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.8](https://github.com/bdatdo0601/big-boi/compare/v1.20.7...v1.20.8) (2025-01-26)
+
+
+### Bug Fixes
+
+* remove postinstall ([d9ddfb2](https://github.com/bdatdo0601/big-boi/commit/d9ddfb29309438e872eb7a2a63573e217b8f4ddf))
+* revert back to gatsby source ddb ([6c1f9d1](https://github.com/bdatdo0601/big-boi/commit/6c1f9d1b1e8f275d274cce2c74e135a269636499))
+
 ### [1.20.7](https://github.com/bdatdo0601/big-boi/compare/v1.20.6...v1.20.7) (2025-01-26)
 
 
