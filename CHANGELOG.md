@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.5](https://github.com/bdatdo0601/big-boi/compare/v1.20.4...v1.20.5) (2025-01-26)
+
+
+### Bug Fixes
+
+* pnpm ([cfbe0a2](https://github.com/bdatdo0601/big-boi/commit/cfbe0a2c8dd0c8e7df2f28924b4c2400c7517ef1))
+
 ### [1.20.4](https://github.com/bdatdo0601/big-boi/compare/v1.20.3...v1.20.4) (2025-01-26)
 
 
