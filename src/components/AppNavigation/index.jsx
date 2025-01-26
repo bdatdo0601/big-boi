@@ -119,12 +119,14 @@ const AppNavigationRoot = styled("div")(({ theme }) => ({
     }),
   },
   [`& .${classes.contentShift}`]: {
-    marginLeft: drawerWidth,
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    width: `calc(100% - ${drawerWidth}px)`,
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+    }
   },
 }));
 

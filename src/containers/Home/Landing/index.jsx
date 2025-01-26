@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from "react";
-import { Grid, useMediaQuery } from "@mui/material";
+import { Grid2 as Grid, useMediaQuery } from "@mui/material";
 import { isArray } from "lodash";
 import PropTypes from "prop-types";
 import LayoutContext from "../../../context/layout";
