@@ -31,14 +31,15 @@ jobs:
       - name: Run a one-line script
         run: echo "Deploying"
 
-      - name: use node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-
       - uses: pnpm/action-setup@v4
         with:
           version: 10
+
+      - name: use node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       # Configure amplify
       - name: configure amplify
@@ -56,9 +57,9 @@ jobs:
       - name: install, build and test
         run: |
           curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=10.0.0 sh -
-          pnpm run install
+          pnpm install
           # build and test
-          pnpm run test --run
+          pnpm test --run
 
       # Deploy Amplify
       - name: deploy
