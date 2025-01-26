@@ -37,6 +37,11 @@ export default defineConfig({
       },
     }),
     envCompatible(/* options */),
-    VitePWA()
+    VitePWA({
+      registerType: "autoUpdate",
+      workbox: {
+        maximumFileSizeToCacheInBytes: 5 * 1024 ** 2, // 5 MB or set to something else
+      }
+    })
   ],
 });
