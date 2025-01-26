@@ -15,31 +15,22 @@ export default function Gallery() {
 
   return (
     <div
-      className="mx-12 py-2"
-      style={{
-        zIndex: 2,
-        textAlign: "center",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "calc(100vh - 64px)",
-      }}
+      className="mx-12 py-18"
     >
+      <ProfileCard
+        header={<Typography className="text-primary" variant="h4">Gallery</Typography>}
+        contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
+        animation={globalAnimation}
+      >
+        <div className="mx-4 my-2 text-input" style={{ textAlign: "left" }}>
+          {descriptions.map((item) => (
+            <Typography key={item} variant="body1" paragraph>
+              {item}
+            </Typography>
+          ))}
+        </div>
+      </ProfileCard>
       <div className="images-display-wrapper">
-        <ProfileCard
-          header={<Typography variant="h4">Gallery</Typography>}
-          contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
-          animation={globalAnimation}
-        >
-          <div className="mx-4 my-2" style={{ textAlign: "left" }}>
-            {descriptions.map(item => (
-              <Typography key={item} variant="body1" paragraph>
-                {item}
-              </Typography>
-            ))}
-          </div>
-        </ProfileCard>
         <div className="my-4">
           <ImagesDisplay />
         </div>

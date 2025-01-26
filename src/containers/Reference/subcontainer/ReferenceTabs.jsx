@@ -23,7 +23,7 @@ const ReferenceTabs = () => {
   const currentTab = useMemo(() => TABS[currentTabIndex], [currentTabIndex]);
 
   return (
-    <Paper className="p-4 m-2">
+    <div className="p-4 m-2 bg-accent">
       <Tabs
         value={currentTabIndex}
         onChange={(e, newVal) => {
@@ -38,7 +38,7 @@ const ReferenceTabs = () => {
       <div className="text-left mt-4">
         <currentTab.Component />
       </div>
-    </Paper>
+    </div>
   );
 };
 

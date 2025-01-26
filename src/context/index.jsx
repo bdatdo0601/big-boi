@@ -4,6 +4,7 @@ import { SnackbarProvider } from "notistack";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
+import { ThemeProvider } from "@mui/material/styles";
 import { LayoutContextProvider } from "./layout";
 import { EventMessageContextProvider } from "./eventmessage";
 import { isTouchDevice } from "../utils";

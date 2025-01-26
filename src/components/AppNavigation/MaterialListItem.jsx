@@ -76,7 +76,7 @@ MaterialListItem.defaultProps = {
   isSelected: () => false,
   item: null,
   level: 1,
-  onClick: () => {},
+  onClick: () => { /** */ },
 };
 
 export default MaterialListItem;

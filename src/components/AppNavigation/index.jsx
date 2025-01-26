@@ -19,17 +19,16 @@ import {
   Switch,
   FormControlLabel,
   CircularProgress,
-  Grid,
+  Grid2 as Grid,
   Tabs,
   Tab,
 } from "@mui/material";
 import { useHistory, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import MaterialListItem from "./MaterialListItem";
-import "./index.less";
 import { VERSION } from "../../utils/constants";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const classes = {
   root: "AppNavigationRoot",
@@ -56,7 +55,7 @@ const AppNavigationRoot = styled("div")(({ theme }) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    background: "var(--foreground)",
+    background: "var(--muted)",
     color: "var(--input)",
   },
   [`& .${classes.appBarShift}`]: {
@@ -85,17 +84,33 @@ const AppNavigationRoot = styled("div")(({ theme }) => ({
   },
   [`& .${classes.drawerPaper}`]: {
     width: drawerWidth,
+    background: "var(--foreground)",
+    color: "var(--input)",
   },
   [`& .${classes.drawerHeader}`]: {
     display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
   [`& .${classes.darkModeSwitch}`]: {
     paddingLeft: theme.spacing(2),
     marginBottom: "5%",
+    "& .MuiSwitch-thumb": {
+      boxSizing: "border-box",
+      width: 22,
+      height: 22,
+      backgroundColor: "var(--primary)",
+    },
+    "& .MuiSwitch-track": {
+      borderRadius: 26 / 2,
+      backgroundColor: "var(--primary-foreground)",
+      opacity: 1,
+      transition: theme.transitions.create(["background-color"], {
+        duration: 500,
+      }),
+    },
   },
   [`& .${classes.content}`]: {
     transition: theme.transitions.create("margin", {
@@ -161,10 +176,15 @@ export default function AppNavigation({
   const location = useLocation();
 
   useEffect(() => {
-    if (isDark) {
-      document.body.classList.add("dark");
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (
+      isDark &&
+      !("theme" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      document.documentElement.classList.add("dark");
     } else {
-      document.body.classList.remove("dark");
+      document.documentElement.classList.remove("dark");
     }
   }, [isDark]);
 
@@ -216,7 +236,7 @@ export default function AppNavigation({
                 className={open ? classes.hide : ""}
               >
                 <a
-                  className="text-2xl font-bold text-background"
+                  className="ml-2 font-bold text-input"
                   href={getDomainWithoutSubdomain()}
                 >
                   {name}
@@ -227,35 +247,39 @@ export default function AppNavigation({
               </Typography>
             </Toolbar>
           </Grid>
-          {isBigScreen && !isSubdomainRoute && (
-            <Grid item xs={8} md={8} lg={8} style={{ textAlign: "right" }}>
-              {(groupedDrawerContent[""] || []).some(
-                (item) => item.path === location.pathname
-              ) && (
-                <Tabs
-                  style={{ width: 800, right: 0, marginRight: 8 }}
-                  value={location.pathname}
-                  aria-label="header tabs"
-                  onChange={(_, value) => {
-                    history.push(value);
-                  }}
-                  textColor="secondary"
-                  indicatorColor="secondary"
-                >
-                  {(groupedDrawerContent[""] || []).map((item, index) => (
-                    <Tab
-                      label={
-                        <Typography variant="button">{item.name}</Typography>
-                      }
-                      key={item.name}
-                      value={item.path}
-                      {...a11yProps(index)}
-                    />
-                  ))}
-                </Tabs>
-              )}
-            </Grid>
-          )}
+          {isBigScreen &&
+            !isSubdomainRoute &&
+            (groupedDrawerContent[""] || []).some(
+              (item) => item.path === location.pathname
+            ) && (
+              <Tabs
+                style={{ right: 0, marginRight: 8 }}
+                value={location.pathname}
+                aria-label="header tabs"
+                onChange={(_, value) => {
+                  history.push(value);
+                }}
+                textColor="inherit"
+              >
+                {(groupedDrawerContent[""] || []).map((item, index) => (
+                  <Tab
+                    label={
+                      <Typography
+                        variant="button"
+                        className={clsx({
+                          "text-primary": item.path === location.pathname,
+                        })}
+                      >
+                        <span className="text-lg">{item.name}</span>
+                      </Typography>
+                    }
+                    key={item.name}
+                    value={item.path}
+                    {...a11yProps(index)}
+                  />
+                ))}
+              </Tabs>
+            )}
         </Grid>
       </AppBar>
       <Drawer
@@ -276,12 +300,14 @@ export default function AppNavigation({
             justifyContent: "space-between",
           }}
         >
-          <a
-            href={getDomainWithoutSubdomain()}
-            className="text-2xl font-bold ml-2 text-background"
-          >
-            {name}
-          </a>
+          <Typography variant="h5" noWrap className="ml-2">
+            <a
+              className="ml-2 font-bold text-input"
+              href={getDomainWithoutSubdomain()}
+            >
+              {name}
+            </a>
+          </Typography>
           <IconButton
             onClick={handleDrawerClose}
             style={{ outline: "none" }}

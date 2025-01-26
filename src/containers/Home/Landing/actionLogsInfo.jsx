@@ -2,7 +2,14 @@ import React, { useContext, useMemo } from "react";
 import { flattenDeep, get, isString } from "lodash";
 import PropTypes from "prop-types";
 import moment from "moment";
-import { Paper, Typography, Alert, AlertTitle, ListItem, Link } from "@mui/material";
+import {
+  Paper,
+  Typography,
+  Alert,
+  AlertTitle,
+  ListItem,
+  Link,
+} from "@mui/material";
 import { animated, useSpring } from "react-spring";
 import { useDrag } from "@use-gesture/react";
 import { FixedSizeList } from "react-window";
@@ -14,10 +21,9 @@ import DataIcon from "../../../components/DataIcon";
 import ProfileCard from "../../../components/ProfileCard";
 import LayoutContext from "../../../context/layout";
 
-const AnimatedPaper = animated(Paper);
 const AnimatedListItem = animated(ListItem);
 
-const ActionLogRow = props => {
+const ActionLogRow = (props) => {
   const { data, index, style } = props;
   const [animateProps] = useSpring(() => ({
     to: { opacity: 1 },
@@ -34,7 +40,7 @@ const ActionLogRow = props => {
   const messages = useMemo(() => {
     let result = [get(item, "publishInfo.message")];
     const linkifyString = (textData, textToLink, link) =>
-      textData.map(msg =>
+      textData.map((msg) =>
         ReactStringReplacer(msg, textToLink, (match, i) => (
           <Link key={`${match} ${i}`} href={link}>
             {match}
@@ -42,33 +48,47 @@ const ActionLogRow = props => {
         ))
       );
     result = get(item, "publishInfo.subject")
-      ? flattenDeep(linkifyString(result, get(item, "publishInfo.subject"), get(item, "publishInfo.subjectLink")))
+      ? flattenDeep(
+          linkifyString(
+            result,
+            get(item, "publishInfo.subject"),
+            get(item, "publishInfo.subjectLink")
+          )
+        )
       : result;
     result = get(item, "publishInfo.target")
-      ? flattenDeep(linkifyString(result, get(item, "publishInfo.target"), get(item, "publishInfo.targetLink")))
+      ? flattenDeep(
+          linkifyString(
+            result,
+            get(item, "publishInfo.target"),
+            get(item, "publishInfo.targetLink")
+          )
+        )
       : result;
     return result;
   }, [item]);
   return (
     <AnimatedListItem key={index} style={{ ...animateProps, ...style }}>
-      <Alert
-        className="hide-scrollbar"
-        variant="filled"
-        icon={
+      <div
+        className="hide-scrollbar rounded-lg bg-secondary text-input pl-4 py-2 flex flex-row gap-3 align-center items-center"
+        style={{ width: "100%", height: 70, overflow: "auto" }}
+      >
+        <div>
           <DataIcon
             href={get(item, "publishInfo.icon.link")}
             value={get(item, "publishInfo.icon.value")}
             type={get(item, "publishInfo.icon.type")}
           />
-        }
-        severity={get(item, "publishInfo.messageType", "info")}
-        style={{ width: "100%", height: 70, overflow: "auto" }}
-      >
-        <AlertTitle style={{ whiteSpace: "nowrap", width: "100%" }}>
-          {messages.map((msg, i) => (isString(msg) ? <span key={`${msg} ${i}`}>{msg}</span> : msg))}
-        </AlertTitle>
-        {moment(item && item.createdAt).format("MM/DD/YY hh:mm:ss a")}
-      </Alert>
+        </div>
+        <div>
+          <AlertTitle style={{ whiteSpace: "nowrap", width: "100%" }}>
+            {messages.map((msg, i) =>
+              isString(msg) ? <span key={`${msg} ${i}`} className="text-input">{msg}</span> : msg
+            )}
+          </AlertTitle>
+          {moment(item && item.createdAt).format("MM/DD/YY hh:mm:ss a")}
+        </div>
+      </div>
     </AnimatedListItem>
   );
 };
@@ -84,7 +104,11 @@ export default function ActionLogsInfo() {
   const { globalAnimation } = useContext(LayoutContext);
   return (
     <ProfileCard
-      header={<Typography variant="h5">What I've been doing</Typography>}
+      header={
+        <Typography className="text-primary" variant="h5">
+          What I've been doing
+        </Typography>
+      }
       contentStyle={{
         paddingLeft: 16,
         paddingRight: 16,

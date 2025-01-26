@@ -1,5 +1,11 @@
 import React from "react";
-import { Card, CardHeader, CardContent, CardActions, styled } from "@mui/material";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  styled,
+} from "@mui/material";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
 import { useDrag } from "@use-gesture/react";
@@ -12,8 +18,13 @@ const classes = {
   headerContent: "headerContent",
 };
 
-const AnimatedCardStyled = styled(AnimatedCard)(({ theme }) => ({
-  [`&.${classes.card}`]: { position: "relative", overflow: "visible", borderRadius: "10px" },
+const AnimatedCardStyled = styled(AnimatedCard)(() => ({
+  [`&.${classes.card}`]: {
+    position: "relative",
+    overflow: "visible",
+    borderRadius: "10px",
+    backgroundColor: "var(--card)",
+  },
   [`& .${classes.cardHeader}`]: {
     display: "inline-block",
     width: "100%",
@@ -34,8 +45,7 @@ const AnimatedCardStyled = styled(AnimatedCard)(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: theme.palette.secondary.main,
-    // backgroundImage: `linear-gradient(to bottom right, ${theme.palette.primary.main}, ${theme.palette.secondary.main});`,
+    backgroundColor: "var(--card-foreground)",
   },
 }));
 
@@ -72,14 +82,23 @@ function ProfileCard({
       className={classes.card}
       style={{
         ...animateProps,
-        transform: animateProps.transform.to((x, y) => `translate(${x}px, ${y}px)`),
+        transform: animateProps.transform.to(
+          (x, y) => `translate(${x}px, ${y}px)`
+        ),
       }}
       {...bind()}
     >
       <CardHeader
         className={classes.cardHeader}
         subheader={
-          <div style={{ zIndex: 2, overflow: "visible", marginBottom: "24px", ...headerWrapperStyle }}>
+          <div
+            style={{
+              zIndex: 2,
+              overflow: "visible",
+              marginBottom: "24px",
+              ...headerWrapperStyle,
+            }}
+          >
             <div className={classes.headerContent} style={headerStyle}>
               {header}
             </div>

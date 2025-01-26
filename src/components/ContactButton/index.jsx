@@ -13,7 +13,7 @@ const classes = {
 const StyledButton = styled(Button)(() => ({
   [`&.${classes.button}`]: {
     backgroundColor: "transparent",
-    // color: theme.palette.secondary.main,
+    color: "var(--input)",
     boxShadow: "none",
   }
 }));

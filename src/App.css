@@ -1,13 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
 
 @layer base {
   :root {
     --background: #cdcde6;
-    --foreground: #317b41;
+    --foreground: #73bd73;
  
-    --muted: #73bd73;
+    --muted: #317b41;
     --muted-foreground: #8be68b;
  
     --popover: #7b8bb4;
@@ -16,16 +16,16 @@
     --border: #fafafa;
     --input: #2a2a2a;
  
-    --card: #a4b4cd;
+    --card: #fafafa;
     --card-foreground: #7b8bb4;
  
     --primary: #d54a73;
     --primary-foreground: #fafafa;
  
-    --secondary: #83294a;
-    --secondary-foreground: #a4b4cd;
+    --secondary: #a4b4cd;
+    --secondary-foreground: #83294a;
  
-    --accent: #83294a;
+    --accent: #fafafa;
     --accent-foreground: #ff7b94;
  
     --destructive: #E93D3D;
@@ -62,14 +62,14 @@
   }
  
   .dark {
-    --background: #313962;
-    --foreground: #4a83c5;
+    --background: #292029;
+    --foreground: #395a9c;
  
-    --muted: #7ba4f6;
-    --muted-foreground: #acacac;
+    --muted: #413941;
+    --muted-foreground: #5a83cd;
  
-    --accent: #cdcdcd;
-    --accent-foreground: #dedede;
+    --accent: #2a2a2a;
+    --accent-foreground: #8b2962;
  
     --popover: #736a73;
     --popover-foreground: #a4c5f6;
@@ -77,14 +77,14 @@
     --border: #2a2a2a;
     --input: #fafafa;
  
-    --card: #736a73;
-    --card-foreground: #a4c5f6;
+    --card: #622041;
+    --card-foreground: #bd527b;
  
-    --primary: #d54a52;
-    --primary-foreground: #2a2a2a;
+    --primary: #e6dede;
+    --primary-foreground: #18316a;
  
-    --secondary: #834a4a;
-    --secondary-foreground: #cddef6;
+    --secondary: #18316a;
+    --secondary-foreground: #e6dede;
  
     --destructive: #E93D3D;
     --destructive-foreground: #FAFAFA;
@@ -118,12 +118,102 @@
     --sidebar-border: #24242C;
     --sidebar-ring: #3B82F6;
   }
-  * {
+}
+
+@theme {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
   }
   body {
     @apply bg-background text-input
-  }
-  a {
-    outline: none;
   }
 }

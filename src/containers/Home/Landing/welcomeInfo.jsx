@@ -8,7 +8,7 @@ export default function WelcomeInfo({ bio }) {
   const { globalAnimation } = useContext(LayoutContext);
   return (
     <ProfileCard
-      header={<Typography variant="h5">Hello There!</Typography>}
+      header={<Typography className="text-primary" variant="h5">Hello There!</Typography>}
       contentStyle={{
         paddingLeft: 16,
         paddingRight: 16,
@@ -18,7 +18,7 @@ export default function WelcomeInfo({ bio }) {
     >
       <div className="mx-4 my-2 text-left">
         {bio.map(item => (
-          <Typography key={item} variant="body1" paragraph>
+          <Typography key={item} variant="body1" className="text-input">
             {item}
           </Typography>
         ))}

@@ -26,7 +26,6 @@ const DefaultCardContent = ({ post, showState, onPostClick, isDark }) => (
       textAlign: "left",
       opacity: post.status === POST_STATE.ARCHIVED ? 0.5 : 1,
       borderRadius: "10px",
-      padding: 8,
     }}
     raised
     elevation={3}
@@ -34,7 +33,8 @@ const DefaultCardContent = ({ post, showState, onPostClick, isDark }) => (
     <CardActionArea onClick={onPostClick}>
       <CardContent
         style={{
-          backgroundColor: isDark ? "rgb(0, 0, 0)" : "rgb(255,255,255)",
+          backgroundColor: "var(--card)",
+          color: "var(--input)",
           padding: 20,
         }}
       >
@@ -183,7 +183,7 @@ export default function BlogPostCard({
         isDark={isDark}
       />
       {showActions && (
-        <div className="mx-2 rounded-lg" style={{ backgroundColor: "black" }}>
+        <div className="mx-2 rounded-lg" style={{ backgroundColor: "var(--card-foreground)" }}>
           <CardActions style={{ display: "flex", justifyContent: "center" }}>
             <Button
               size="small"

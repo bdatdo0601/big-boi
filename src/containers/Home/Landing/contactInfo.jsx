@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { Paper, Typography, Grid } from "@mui/material";
-import { animated, useSpring } from "react-spring";
-import { useDrag } from "@use-gesture/react";
+import { Paper, Typography, Grid2 as Grid } from "@mui/material";
+import { animated } from "react-spring";
 import ContactButton from "../../../components/ContactButton";
 import ProfileCard from "../../../components/ProfileCard";
 import LayoutContext from "../../../context/layout";
@@ -14,14 +13,14 @@ export default function ContactInfo({ className, contacts }) {
 
   return (
     <ProfileCard
-      header={<Typography variant="h5">Contact Me!</Typography>}
+      header={<Typography className="text-primary" variant="h5">Contact Me!</Typography>}
       contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
       animation={globalAnimation}
       cardStyle={{ maxWidth: 600, margin: "0 auto" }}
     >
       <Grid container style={{ textAlign: "left" }}>
         {contacts.map(contact => (
-          <Grid item lg={12} md={4} xs={12} key={contact.key}>
+          <Grid item lg={12} md={12} xs={12} key={contact.key}>
             <ContactButton contact={contact} />
           </Grid>
         ))}
