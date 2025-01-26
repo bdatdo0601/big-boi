@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.7](https://github.com/bdatdo0601/big-boi/compare/v1.20.6...v1.20.7) (2025-01-26)
+
+
+### Bug Fixes
+
+* remove build meta ([f3f58c5](https://github.com/bdatdo0601/big-boi/commit/f3f58c5a6a37085b5b632eeefac7bd0a19b81a6c))
+* update big brain tailwind ([04c633c](https://github.com/bdatdo0601/big-boi/commit/04c633c89e118561662993c0353c6bd88d633f39))
+* update blog post ([8f1c5bf](https://github.com/bdatdo0601/big-boi/commit/8f1c5bfa7e3c0b60b9be955718f6b2a0e091640f))
+
 ### [1.20.6](https://github.com/bdatdo0601/big-boi/compare/v1.20.5...v1.20.6) (2025-01-26)
 
 
