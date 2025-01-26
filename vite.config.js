@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import reactRefresh from "@vitejs/plugin-react-refresh";
+import react from "@vitejs/plugin-react";
 import svgrPlugin from "vite-plugin-svgr";
 import envCompatible from "vite-plugin-env-compatible";
 import { VitePWA } from "vite-plugin-pwa";
@@ -24,7 +24,7 @@ export default defineConfig({
     include: ["./src/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"]
   },
   plugins: [
-    reactRefresh(),
+    react(),
     svgrPlugin({
       svgrOptions: {
         icon: true,

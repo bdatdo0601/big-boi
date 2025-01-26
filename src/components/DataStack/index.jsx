@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useSprings, animated, to as interpolate } from "react-spring";
-import { useDrag } from "react-use-gesture";
+import { useDrag } from "@use-gesture/react";
 import "./index.less";
 import { useTheme } from "@mui/material";
 

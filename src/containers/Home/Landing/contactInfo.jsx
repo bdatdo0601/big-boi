@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Paper, Typography, Grid } from "@mui/material";
 import { animated, useSpring } from "react-spring";
-import { useDrag } from "react-use-gesture";
+import { useDrag } from "@use-gesture/react";
 import ContactButton from "../../../components/ContactButton";
 import ProfileCard from "../../../components/ProfileCard";
 import LayoutContext from "../../../context/layout";

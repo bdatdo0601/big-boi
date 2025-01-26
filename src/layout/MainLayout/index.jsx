@@ -61,7 +61,7 @@ const StyledMain = styled(`main`)(({ theme }) => ({
   },
 }));
 
-const Particles = lazy(() => import("react-particles-js"));
+const Particles = lazy(() => import("@tsparticles/react"));
 
 const subdomain = window.location.host.split(".")[0];
 const isSubdomainRoute = has(subdomainRouteMap, subdomain);

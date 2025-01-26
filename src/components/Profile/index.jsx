@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
-import { useDrag } from "react-use-gesture";
+import { useDrag } from "@use-gesture/react";
 import { Typography } from "@mui/material";
 import MAIN_PICTURE from "../../assets/main_picture.jpg";
 import LayoutContext from "../../context/layout";

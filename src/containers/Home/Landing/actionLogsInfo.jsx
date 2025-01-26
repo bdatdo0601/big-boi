@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { Paper, Typography, Alert, AlertTitle, ListItem, Link } from "@mui/material";
 import { animated, useSpring } from "react-spring";
-import { useDrag } from "react-use-gesture";
+import { useDrag } from "@use-gesture/react";
 import { FixedSizeList } from "react-window";
 
 import ReactStringReplacer from "../../../utils/reactStringReplacer";

@@ -2,7 +2,7 @@ import React, { useContext, useMemo, useState, useRef, useEffect, useCallback } 
 import { debounce, flatMap, get, lowerCase, sortBy } from "lodash";
 import { Autocomplete, IconButton, Paper, TextField } from "@mui/material";
 import { DeleteOutline } from "@mui/icons-material";
-import FlexSearch from "flexsearch/dist/flexsearch.bundle";
+import FlexSearch from "flexsearch/dist/flexsearch.bundle.min";
 import { listPrivateReferences, listReferences } from "../../../graphql/queries";
 import { useAWSAPIGetAll } from "../../../utils/awsAPI";
 import { convertToReferenceRenderedData } from "../utils";
