@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.9](https://github.com/bdatdo0601/big-boi/compare/v1.20.8...v1.20.9) (2025-01-26)
+
+
+### Bug Fixes
+
+* amplify reconfigure ([be97ab2](https://github.com/bdatdo0601/big-boi/commit/be97ab2910c0ce5c5ab742bcba75eec9e4cf6003))
+* revert big-boi-blogs ([44711d7](https://github.com/bdatdo0601/big-boi/commit/44711d7becade8163a9b4a3303c1737bc57739c1))
+* revert big-brain ([a0f0b95](https://github.com/bdatdo0601/big-boi/commit/a0f0b95d5089e897d2c85152cf640d550df573b7))
+
 ### [1.20.8](https://github.com/bdatdo0601/big-boi/compare/v1.20.7...v1.20.8) (2025-01-26)
 
 
