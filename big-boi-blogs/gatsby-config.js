@@ -30,14 +30,14 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-awsv3-dynamodb",
+      resolve: "gatsby-source-aws-dynamodb",
       options: {
         typeName: "BlogPost",
         accessKeyId: process.env.BLOG_AWS_ACCESS_KEY,
         secretAccessKey: process.env.BLOG_AWS_SECRET_KEY,
         region: process.env.BLOG_AWS_REGION,
         params: {
-          TableName: 'Post-y2hg5kdmyba6zmxbdmsd2wzzoy-dev',
+          TableName: process.env.BLOG_DYNAMODB_TABLE_NAME,
         },
       },
     },
