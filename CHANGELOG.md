@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.0](https://github.com/bdatdo0601/big-boi/compare/v1.19.7...v1.20.0) (2025-01-26)
+
+
+### Features
+
+* upgrade vite and other functionality ([3235b00](https://github.com/bdatdo0601/big-boi/commit/3235b00e2dc76346fab3dee1288fd96bec761ca2))
+
+
+### Bug Fixes
+
+* styling ([58fee85](https://github.com/bdatdo0601/big-boi/commit/58fee85f3a405aa0b4169aaf0a9f01a86d3caf55))
+* styling ([fe8c0b2](https://github.com/bdatdo0601/big-boi/commit/fe8c0b2caf60813a9f08c5fdfc5b82e36363b0c7))
+* update dependency and switch to pnpm ([7cbae40](https://github.com/bdatdo0601/big-boi/commit/7cbae407784f1f3bb12be6b7477898d586966ce5))
+
 ### [1.19.7](https://github.com/bdatdo0601/big-boi/compare/v1.19.6...v1.19.7) (2024-03-31)
 
 
