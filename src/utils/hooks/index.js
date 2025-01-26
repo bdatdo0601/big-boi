@@ -26,7 +26,7 @@ export const DataUpdateWrapperDefaultOptions = {
 
 export const useDataUpdateWrapper = (
   dataUpdateFn = async () => ({}), // Must return updated data
-  postUpdateFn = async () => {},
+  postUpdateFn = async () => {/* empty */ },
   providedOptions = DataUpdateWrapperDefaultOptions
 ) => {
   const { enqueueSnackbar } = useSnackbar();

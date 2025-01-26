@@ -29,7 +29,7 @@ export default function Blogs() {
             }
           }
         }
-      } catch (err) {}
+      } catch (err) { /* empty */ }
     };
 
     window.addEventListener("message", messageHandler);
@@ -40,7 +40,7 @@ export default function Blogs() {
   const titleTemplate = useMemo(() => location.pathname.replace(/\//gm, ""), [location]);
 
   return (
-    <Fragment>
+    <>
       <Seo
         type="website"
         title={get(currentData, "site.name")}
@@ -54,12 +54,13 @@ export default function Blogs() {
         lang={get(currentData, "site.lang", "en")}
       />
       <iframe
+        title="Blog Page"
         src={`${blogURL}${location.pathname.replace("/blogs", "")}`}
         className="blog-container-div"
         ref={e => {
           iframeRef.current = e;
         }}
       />
-    </Fragment>
+    </>
   );
 }

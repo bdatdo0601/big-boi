@@ -21,7 +21,7 @@ const useGetDataList = fetchFn => {
   }, [fetchFn]);
 
   useEffect(() => {
-    getData().then(() => {});
+    getData().then(() => { /* empty */ });
     return () => {
       isSubscribedRef.current = false;
     };

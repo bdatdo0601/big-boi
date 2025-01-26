@@ -1,7 +1,16 @@
 import React, { useContext, useMemo } from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
-import { Button, Card, CardActionArea, CardActions, CardContent, Chip, Typography, Divider } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Chip,
+  Typography,
+  Divider,
+} from "@mui/material";
 import { capitalize, get, isString } from "lodash";
 import { Tweet } from "react-twitter-widgets";
 import { InstagramEmbed } from "react-social-media-embed";
@@ -10,12 +19,10 @@ import { POST_STATE } from "../../utils/constants";
 import "./index.less";
 import LayoutContext from "../../context/layout";
 
-const DefaultCardContent = ({ post, showState, onPostClick, width, isDark }) => (
+const DefaultCardContent = ({ post, showState, onPostClick, isDark }) => (
   <Card
     style={{
-      width,
-      maxWidth: 550,
-      margin: "12px auto",
+      width: "100%",
       textAlign: "left",
       opacity: post.status === POST_STATE.ARCHIVED ? 0.5 : 1,
       borderRadius: "10px",
@@ -25,10 +32,19 @@ const DefaultCardContent = ({ post, showState, onPostClick, width, isDark }) => 
     elevation={3}
   >
     <CardActionArea onClick={onPostClick}>
-      <CardContent style={{ backgroundColor: isDark ? "rgb(0, 0, 0)" : "rgb(255,255,255)", padding: 20 }}>
+      <CardContent
+        style={{
+          backgroundColor: isDark ? "rgb(0, 0, 0)" : "rgb(255,255,255)",
+          padding: 20,
+        }}
+      >
         {showState && (
           <Typography color="textSecondary" gutterBottom>
-            {`${get(post, "postType") ? `[${capitalize(get(post, "postType"))}] ` : ""}${capitalize(post.status)}`}
+            {`${
+              get(post, "postType")
+                ? `[${capitalize(get(post, "postType"))}] `
+                : ""
+            }${capitalize(post.status)}`}
           </Typography>
         )}
         <Typography gutterBottom variant="h5" component="h2">
@@ -40,7 +56,10 @@ const DefaultCardContent = ({ post, showState, onPostClick, width, isDark }) => 
         </Typography>
         <div style={{ marginTop: 12, marginBottom: 12, textAlign: "left" }}>
           {get(post, "tags", []).map((item, index) => (
-            <span style={{ marginRight: 8, marginTop: 4 }} key={`${item} ${index}`}>
+            <span
+              style={{ marginRight: 8, marginTop: 4 }}
+              key={`${item} ${index}`}
+            >
               <Chip color="primary" label={item} style={{ marginTop: 8 }} />
             </span>
           ))}
@@ -64,7 +83,9 @@ DefaultCardContent.propTypes = {
 
 DefaultCardContent.defaultProps = {
   showState: false,
-  onPostClick: () => {},
+  onPostClick: () => {
+    /* test */
+  },
   width: 600,
 };
 
@@ -72,7 +93,10 @@ const TwitterCardContent = ({ post, isDark }) => {
   const postData = useMemo(() => JSON.parse(get(post, "data", "{}")), [post]);
   return (
     <div className="tweet-wrapper" style={{ margin: 8, padding: 8 }}>
-      <Tweet tweetId={get(postData, "tweetID")} options={{ theme: isDark ? "dark" : "light", align: "center" }} />
+      <Tweet
+        tweetId={get(postData, "tweetID")}
+        options={{ theme: isDark ? "dark" : "light", align: "center" }}
+      />
     </div>
   );
 };
@@ -84,7 +108,6 @@ TwitterCardContent.propTypes = {
 
 const InstgramCardContent = ({ post, width }) => {
   const postData = useMemo(() => JSON.parse(get(post, "data", "{}")), [post]);
-  console.log(postData);
   return (
     <Card
       style={{
@@ -101,7 +124,12 @@ const InstgramCardContent = ({ post, width }) => {
     >
       <InstagramEmbed url={get(postData, "link")} />
       <Divider style={{ marginBottom: 10 }} />
-      <Typography variant="body" color="textSecondary" component="p" style={{ marginBottom: 10 }}>
+      <Typography
+        variant="body"
+        color="textSecondary"
+        component="p"
+        style={{ marginBottom: 10 }}
+      >
         {postData.text}
       </Typography>
       <Typography variant="body2" color="textSecondary" component="p">
@@ -146,55 +174,63 @@ export default function BlogPostCard({
 }) {
   const { isDark } = useContext(LayoutContext);
   return (
-    <>
-      <CardContentData post={post} showState={showState} onPostClick={onPostClick} width={width} isDark={isDark} />
+    <div className="mx-auto my-4 flex flex-col gap-0" style={{ maxWidth: 1200 }}>
+      <CardContentData
+        post={post}
+        showState={showState}
+        onPostClick={onPostClick}
+        width={width}
+        isDark={isDark}
+      />
       {showActions && (
-        <CardActions style={{ display: "flex", justifyContent: "center" }}>
-          <Button
-            size="small"
-            disabled={isString(get(updatingPost || post, "postType"))}
-            onClick={() => {
-              updatePostState(post, POST_STATE.DRAFT);
-            }}
-          >
-            Draft
-          </Button>
-          <Button
-            size="small"
-            color="primary"
-            disabled={isString(get(updatingPost || post, "postType"))}
-            onClick={() => {
-              updatePostState(post, POST_STATE.PUBLISHED);
-            }}
-          >
-            Publish
-          </Button>
-          <Button
-            size="small"
-            color="warning"
-            disabled={isString(get(updatingPost || post, "postType"))}
-            onClick={() => {
-              updatePostState(post, POST_STATE.ARCHIVED);
-            }}
-          >
-            Archived
-          </Button>
-          <Button
-            size="small"
-            color="error"
-            disabled={deletingPost}
-            onClick={() => {
-              // eslint-disable-next-line
-              if (window.confirm("Are you sure?")) {
-                deletePost(post);
-              }
-            }}
-          >
-            Delete
-          </Button>
-        </CardActions>
+        <div className="mx-2 rounded-lg" style={{ backgroundColor: "black" }}>
+          <CardActions style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              size="small"
+              disabled={isString(get(updatingPost || post, "postType"))}
+              onClick={() => {
+                updatePostState(post, POST_STATE.DRAFT);
+              }}
+            >
+              Draft
+            </Button>
+            <Button
+              size="small"
+              color="primary"
+              disabled={isString(get(updatingPost || post, "postType"))}
+              onClick={() => {
+                updatePostState(post, POST_STATE.PUBLISHED);
+              }}
+            >
+              Publish
+            </Button>
+            <Button
+              size="small"
+              color="warning"
+              disabled={isString(get(updatingPost || post, "postType"))}
+              onClick={() => {
+                updatePostState(post, POST_STATE.ARCHIVED);
+              }}
+            >
+              Archived
+            </Button>
+            <Button
+              size="small"
+              color="error"
+              disabled={deletingPost}
+              onClick={() => {
+                // eslint-disable-next-line
+                if (window.confirm("Are you sure?")) {
+                  deletePost(post);
+                }
+              }}
+            >
+              Delete
+            </Button>
+          </CardActions>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 
@@ -212,11 +248,17 @@ BlogPostCard.propTypes = {
 
 BlogPostCard.defaultProps = {
   width: 350,
-  updatePostState: () => {},
+  updatePostState: () => {
+    /** */
+  },
   showActions: false,
-  deletePost: () => {},
+  deletePost: () => {
+    /** */
+  },
   deletingPost: false,
   updatingPost: false,
-  onPostClick: () => {},
+  onPostClick: () => {
+    /** */
+  },
   showState: true,
 };

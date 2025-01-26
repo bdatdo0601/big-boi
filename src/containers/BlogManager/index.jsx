@@ -1,15 +1,16 @@
 import React, { useCallback, useMemo } from "react";
-import { Button, CircularProgress, Typography, useMediaQuery } from "@mui/material";
-import { get } from "lodash";
+import { Button, CircularProgress, Typography } from "@mui/material";
+import { get, orderBy } from "lodash";
 import { v4 as uuid } from "uuid";
 import { useHistory } from "react-router-dom";
 import { AddRounded } from "@mui/icons-material";
-import Masonry from "react-masonry-css";
 
 import { useAWSAPI, useLazyAWSAPI } from "../../utils/awsAPI";
 import { listPosts } from "../../graphql/queries";
-import "./index.less";
-import { updatePost, deletePost as deletePostQuery } from "../../graphql/mutations";
+import {
+  updatePost,
+  deletePost as deletePostQuery,
+} from "../../graphql/mutations";
 import BlogPostCard from "../../components/BlosPostCard";
 import { useDataUpdateWrapper } from "../../utils/hooks";
 import EventType from "../../assets/event-type.json";
@@ -27,15 +28,27 @@ const DataUpdateOptions = {
 export default function BlogManager() {
   const history = useHistory();
   const query = useMemo(() => ({ limit: 10000 }), []);
-  const isWeb = useMediaQuery("(min-width:1200px)");
-  const { data: rawData, loading, execute: refetch } = useAWSAPI(listPosts, query, "AWS_IAM");
-  const { execute: mutatePost, loading: updatingPost } = useLazyAWSAPI(updatePost, "AWS_IAM");
-  const { execute: deletePostRequest, loading: deletingPost } = useLazyAWSAPI(deletePostQuery, "AWS_IAM");
+  const {
+    data: rawData,
+    loading,
+    execute: refetch,
+  } = useAWSAPI(listPosts, query, "AWS_IAM");
+  const { execute: mutatePost, loading: updatingPost } = useLazyAWSAPI(
+    updatePost,
+    "AWS_IAM"
+  );
+  const { execute: deletePostRequest, loading: deletingPost } = useLazyAWSAPI(
+    deletePostQuery,
+    "AWS_IAM"
+  );
 
-  const posts = useMemo(() => get(rawData, "data.listPosts.items", []), [rawData]);
+  const posts = useMemo(
+    () => get(rawData, "data.listPosts.items", []),
+    [rawData]
+  );
 
   const deletePost = useCallback(
-    async post => {
+    async (post) => {
       const variables = { input: { id: get(post, "id") } };
       await deletePostRequest(variables);
       await refetch();
@@ -57,10 +70,14 @@ export default function BlogManager() {
     await refetch();
   }, [refetch]);
 
-  const [updatePostState] = useDataUpdateWrapper(updateBlogStatusData, onPostUpdateBlogStatusData, DataUpdateOptions);
+  const [updatePostState] = useDataUpdateWrapper(
+    updateBlogStatusData,
+    onPostUpdateBlogStatusData,
+    DataUpdateOptions
+  );
 
   return (
-    <div className="blog-manager-container-div text-center px-4 py-8">
+    <div className="text-center px-4 py-8 h-screen">
       <Typography variant="h3">Blog Manager</Typography>
       {loading ? <CircularProgress /> : null}
       <div style={{ marginTop: 12 }}>
@@ -68,7 +85,7 @@ export default function BlogManager() {
           variant="contained"
           color="primary"
           startIcon={<AddRounded />}
-          style={{ width: "60%", margin: 8 }}
+          style={{ width: "60%", margin: 8, maxWidth: 400 }}
           onClick={() => {
             const newID = uuid();
             history.push(`/blogmanager/update/${newID}`);
@@ -76,36 +93,39 @@ export default function BlogManager() {
         >
           Add New Blog
         </Button>
-        <Masonry
-          breakpointCols={isWeb ? 3 : 1}
-          className="masonry-blog-manager"
-          columnClassName="masonry-blog-column-manager"
-        >
-          {posts.map(post => (
-            <BlogPostCard
-              key={get(post, "id")}
-              post={post}
-              updatePostState={updatePostState}
-              deletePost={deletePost}
-              showActions
-              updatingPost={updatingPost}
-              deletingPost={deletingPost}
-              onPostClick={() => {
-                if (!get(post, "postType")) {
-                  history.push(`/blogmanager/update/${post.id}`);
-                  return;
-                }
-                if (
-                  get(post, "externalLink") &&
-                  // eslint-disable-next-line
-                  window.confirm(`Do you want to navigate to external link: ${get(post, "postType")}`)
-                ) {
-                  window.location.href = get(post, "externalLink");
-                }
-              }}
-            />
-          ))}
-        </Masonry>
+        <div className="h-full overflow-y-scroll">
+          {orderBy(posts, "createdAt", "desc")
+            .filter((post) => !["Twitter", "Instagram"].includes(post.postType))
+            .map((post) => (
+              <BlogPostCard
+                key={get(post, "id")}
+                post={post}
+                updatePostState={updatePostState}
+                deletePost={deletePost}
+                showActions
+                updatingPost={updatingPost}
+                deletingPost={deletingPost}
+                onPostClick={() => {
+                  if (!get(post, "postType")) {
+                    history.push(`/blogmanager/update/${post.id}`);
+                    return;
+                  }
+                  if (
+                    get(post, "externalLink") &&
+                    // eslint-disable-next-line
+                    window.confirm(
+                      `Do you want to navigate to external link: ${get(
+                        post,
+                        "postType"
+                      )}`
+                    )
+                  ) {
+                    window.location.href = get(post, "externalLink");
+                  }
+                }}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );

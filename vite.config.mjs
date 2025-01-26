@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import svgrPlugin from "vite-plugin-svgr";
 import envCompatible from "vite-plugin-env-compatible";
@@ -23,7 +24,11 @@ export default defineConfig({
     setupFiles: './src/setupTests.js',
     include: ["./src/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"]
   },
+  server: {
+    port: 3000,
+  },
   plugins: [
+    tailwindcss(),
     react(),
     svgrPlugin({
       svgrOptions: {
@@ -32,6 +37,6 @@ export default defineConfig({
       },
     }),
     envCompatible(/* options */),
-    VitePWA(),
+    VitePWA()
   ],
 });

@@ -21,7 +21,7 @@ const Error = () => {
           {({ location }) => {
             const blogSite = location.hostname === "localhost" ? `http://localhost:8000` : `https://blogs.datbdo.com`;
             return (
-              <React.Fragment>
+              <>
                 <Themed.h1> 404 page not found </Themed.h1>
                 <Themed.h3>
                   <Themed.a
@@ -51,7 +51,7 @@ const Error = () => {
                     Go Home <FaHome />
                   </Themed.a>
                 </Themed.h3>
-              </React.Fragment>
+              </>
             );
           }}
         </Location>

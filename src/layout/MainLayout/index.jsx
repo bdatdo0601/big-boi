@@ -81,10 +81,10 @@ export default function MainLayout({ children, name }) {
     ).then(resolvedRoutes => {
       setRouteList(resolvedRoutes);
     });
-  }, [setRouteList, history.location.pathname]);
+  }, []);
   return (
-    <React.Fragment>
-      <Modal
+    <>
+      {/* <Modal
         open={subscriptionOpen}
         onClose={() => {
           setSubscriptionOpen(false);
@@ -97,7 +97,7 @@ export default function MainLayout({ children, name }) {
             setSubscriptionOpen(false);
           }}
         />
-      </Modal>
+      </Modal> */}
       <AppNavigation
         setOpen={setOpen}
         name={name}
@@ -140,7 +140,7 @@ export default function MainLayout({ children, name }) {
           {children}
         </StyledMain>
       </AppNavigation>
-      <Tooltip title="Subscribe to my updates!" placement="left">
+      {/* <Tooltip title="Subscribe to my updates!" placement="left">
         <StyledFAB
           color="primary"
           className={classes.subscriptionButton}
@@ -150,8 +150,8 @@ export default function MainLayout({ children, name }) {
         >
           <NewspaperOutlined />
         </StyledFAB>
-      </Tooltip>
-    </React.Fragment>
+      </Tooltip> */}
+    </>
   );
 }
 
