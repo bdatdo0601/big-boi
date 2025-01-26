@@ -30,7 +30,7 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-aws-dynamodb",
+      resolve: "gatsby-source-dynamodb",
       options: {
         typeName: "BlogPost",
         accessKeyId: process.env.BLOG_AWS_ACCESS_KEY,
