@@ -36,6 +36,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       # Configure amplify
       - name: configure amplify
         uses: ambientlight/amplify-cli-action@0.3.0
