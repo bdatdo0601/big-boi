@@ -55,9 +55,10 @@ jobs:
 
       - name: install, build and test
         run: |
-          yarn install
+          curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=10.0.0 sh -
+          pnpm run install
           # build and test
-          yarn test --run
+          pnpm run test --run
 
       # Deploy Amplify
       - name: deploy
