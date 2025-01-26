@@ -5,7 +5,6 @@ import { v4 as uuid } from "uuid";
 import clsx from "clsx";
 import { useTheme } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -15,7 +14,15 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useMediaQuery, Switch, FormControlLabel, CircularProgress, Grid, Tabs, Tab } from "@mui/material";
+import {
+  useMediaQuery,
+  Switch,
+  FormControlLabel,
+  CircularProgress,
+  Grid,
+  Tabs,
+  Tab,
+} from "@mui/material";
 import { useHistory, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import MaterialListItem from "./MaterialListItem";
@@ -40,8 +47,6 @@ const classes = {
 
 const AppNavigationRoot = styled("div")(({ theme }) => ({
   [`&.${classes.root}`]: {
-    // display: "flex",
-    paddingLeft: drawerWidth,
     [theme.breakpoints.down("sm")]: {
       paddingLeft: 0,
     },
@@ -51,6 +56,8 @@ const AppNavigationRoot = styled("div")(({ theme }) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    background: "var(--foreground)",
+    color: "var(--input)",
   },
   [`& .${classes.appBarShift}`]: {
     [theme.breakpoints.up("sm")]: {
@@ -91,28 +98,22 @@ const AppNavigationRoot = styled("div")(({ theme }) => ({
     marginBottom: "5%",
   },
   [`& .${classes.content}`]: {
-    padding: theme.spacing(3),
-    [theme.breakpoints.up("sm")]: {
-      flexGrow: 1,
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      marginLeft: -drawerWidth,
-    },
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   [`& .${classes.contentShift}`]: {
-    [theme.breakpoints.up("sm")]: {
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    },
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    width: `calc(100% - ${drawerWidth}px)`,
   },
 }));
 
-const a11yProps = index => ({
+const a11yProps = (index) => ({
   id: `simple-tab-${index}`,
   "aria-controls": `simple-tabpanel-${index}`,
   style: {
@@ -134,7 +135,9 @@ const getDomainWithoutSubdomain = () => {
     return "/";
   }
 
-  return mainDomain === "localhost" ? `http://${mainDomain}:3000` : `https://${mainDomain}`;
+  return mainDomain === "localhost"
+    ? `http://${mainDomain}:3000`
+    : `https://${mainDomain}`;
 };
 export default function AppNavigation({
   children,
@@ -158,6 +161,14 @@ export default function AppNavigation({
   const location = useLocation();
 
   useEffect(() => {
+    if (isDark) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [isDark]);
+
+  useEffect(() => {
     setGlobalAnimation(isWeb);
   }, [setGlobalAnimation, isWeb]);
 
@@ -170,7 +181,6 @@ export default function AppNavigation({
   };
   return (
     <AppNavigationRoot className={classes.root}>
-      <CssBaseline />
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -200,17 +210,28 @@ export default function AppNavigation({
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" noWrap className={open ? classes.hide : ""}>
-                <a href={getDomainWithoutSubdomain()} style={{ fontWeight: "bold" }}>
+              <Typography
+                variant="h6"
+                noWrap
+                className={open ? classes.hide : ""}
+              >
+                <a
+                  className="text-2xl font-bold text-background"
+                  href={getDomainWithoutSubdomain()}
+                >
                   {name}
                 </a>
-                {isSubdomainRoute && <a href={window.location.href}>: {capitalize(subdomain)}</a>}
+                {isSubdomainRoute && (
+                  <a href={window.location.href}>: {capitalize(subdomain)}</a>
+                )}
               </Typography>
             </Toolbar>
           </Grid>
           {isBigScreen && !isSubdomainRoute && (
             <Grid item xs={8} md={8} lg={8} style={{ textAlign: "right" }}>
-              {(groupedDrawerContent[""] || []).some(item => item.path === location.pathname) && (
+              {(groupedDrawerContent[""] || []).some(
+                (item) => item.path === location.pathname
+              ) && (
                 <Tabs
                   style={{ width: 800, right: 0, marginRight: 8 }}
                   value={location.pathname}
@@ -223,7 +244,9 @@ export default function AppNavigation({
                 >
                   {(groupedDrawerContent[""] || []).map((item, index) => (
                     <Tab
-                      label={<Typography variant="button">{item.name}</Typography>}
+                      label={
+                        <Typography variant="button">{item.name}</Typography>
+                      }
                       key={item.name}
                       value={item.path}
                       {...a11yProps(index)}
@@ -253,24 +276,46 @@ export default function AppNavigation({
             justifyContent: "space-between",
           }}
         >
-          <Typography variant="h6" noWrap style={{ marginLeft: 12 }}>
-            <a href={getDomainWithoutSubdomain()} style={{ fontWeight: "bold" }}>
-              {name}
-            </a>
-          </Typography>
-          <IconButton onClick={handleDrawerClose} style={{ outline: "none" }} size="large">
-            {theme.direction === "ltr" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          <a
+            href={getDomainWithoutSubdomain()}
+            className="text-2xl font-bold ml-2 text-background"
+          >
+            {name}
+          </a>
+          <IconButton
+            onClick={handleDrawerClose}
+            style={{ outline: "none" }}
+            size="large"
+          >
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
           </IconButton>
         </div>
         <FormControlLabel
           className={classes.darkModeSwitch}
-          control={<Switch checked={isDark} onChange={e => setIsDark(e.target.checked)} />}
+          control={
+            <Switch
+              checked={isDark}
+              onChange={(e) => {
+                const isDark = e.target.checked;
+                setIsDark(isDark);
+              }}
+            />
+          }
           label="Dark Mode"
           style={{ marginBottom: "5%", paddingLeft: 12 }}
         />
         <FormControlLabel
           className={classes.darkModeSwitch}
-          control={<Switch checked={globalAnimation} onChange={e => setGlobalAnimation(e.target.checked)} />}
+          control={
+            <Switch
+              checked={globalAnimation}
+              onChange={(e) => setGlobalAnimation(e.target.checked)}
+            />
+          }
           label="Animation"
           style={{ marginBottom: "5%", paddingLeft: 12 }}
         />
@@ -289,11 +334,11 @@ export default function AppNavigation({
                     {groupedContents}
                   </Typography>
                 )}
-                {groupedDrawerContent[groupedContents].map(item => (
+                {groupedDrawerContent[groupedContents].map((item) => (
                   <MaterialListItem
                     item={item}
                     key={item.name}
-                    onClick={listItem => onItemClick(listItem)}
+                    onClick={(listItem) => onItemClick(listItem)}
                     isSelected={isSelected}
                   />
                 ))}
@@ -304,11 +349,21 @@ export default function AppNavigation({
             <CircularProgress style={{ marginLeft: "6%" }} />
           )}
         </List>
-        <Typography variant="subtitle1" color="textSecondary" style={{ marginLeft: "1rem" }}>
+        <Typography
+          variant="subtitle1"
+          color="textSecondary"
+          style={{ marginLeft: "1rem" }}
+        >
           Version {VERSION}
         </Typography>
       </Drawer>
-      {children}
+      <div
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        {children}
+      </div>
     </AppNavigationRoot>
   );
 }

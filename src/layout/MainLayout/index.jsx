@@ -22,14 +22,14 @@ const classes = {
   subscriptionButton: "LayoutContentSubscriptionButton",
 };
 
-const StyledFAB = styled(Fab)(({ theme }) => ({
-  display: "fixed",
-  bottom: 80,
-  [theme.breakpoints.up("sm")]: {
-    left: "93%",
-  },
-  left: "80%",
-}));
+// const StyledFAB = styled(Fab)(({ theme }) => ({
+//   display: "fixed",
+//   bottom: 80,
+//   [theme.breakpoints.up("sm")]: {
+//     left: "93%",
+//   },
+//   left: "80%",
+// }));
 
 const StyledMain = styled(`main`)(({ theme }) => ({
   [`& .${classes.subscriptionButton}`]: {},
@@ -131,11 +131,7 @@ export default function MainLayout({ children, name }) {
             />
           </Suspense>
         )}
-        <StyledMain
-          className={clsx(classes.content, {
-            [classes.contentShift]: open,
-          })}
-        >
+        <StyledMain>
           <div className={classes.drawerHeader} />
           {children}
         </StyledMain>

@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { ClearBrowserCacheBoundary } from "react-clear-browser-cache";
 
 import hljs from "highlight.js/lib/core";
-import "./styles.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";

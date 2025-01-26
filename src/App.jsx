@@ -11,7 +11,7 @@ import routes, { errorRoutes, ROUTE_TYPE, subdomainRouteMap } from "./routes";
 import ContextProvider from "./context";
 import Layout from "./layout";
 import withCustomAWSAuthenticator, { useAuthenticateEffect } from "./components/withCustomAWSAuthenticator";
-import "./App.css";
+import "./App.css"
 
 Amplify.configure({
   ...awsconfig,

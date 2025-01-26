@@ -1,23 +1,129 @@
-html, body {
-    width: 100vw !important;
-    overflow-x: hidden;
-    position: fixed;
-    background-color: #282a36;
-    min-height: 100vh;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-button {
+@layer base {
+  :root {
+    --background: #cdcde6;
+    --foreground: #317b41;
+ 
+    --muted: #73bd73;
+    --muted-foreground: #8be68b;
+ 
+    --popover: #7b8bb4;
+    --popover-foreground: #b4f694;
+ 
+    --border: #fafafa;
+    --input: #2a2a2a;
+ 
+    --card: #a4b4cd;
+    --card-foreground: #7b8bb4;
+ 
+    --primary: #d54a73;
+    --primary-foreground: #fafafa;
+ 
+    --secondary: #83294a;
+    --secondary-foreground: #a4b4cd;
+ 
+    --accent: #83294a;
+    --accent-foreground: #ff7b94;
+ 
+    --destructive: #E93D3D;
+    --destructive-foreground: #FAFAFA;
+
+    --warning: #F7C94A;
+    --warning-foreground: #FAFAFA;
+
+    --success: #19994F;
+    --success-foreground: #FAFAFA;
+ 
+    --ring: #D4D4D4;
+ 
+    --radius: 0.5rem;
+ 
+    --chart-1: #1E5ADB;
+ 
+    --chart-2: #2B9B76;
+ 
+    --chart-3: #DB8A2C;
+ 
+    --chart-4: #9B4ED8;
+ 
+    --chart-5: #DB3A76;
+ 
+    --sidebar-background: #EBF5F8;
+    --sidebar-foreground: #F2F2F5;
+    --sidebar-primary: #3B82F6;
+    --sidebar-primary-foreground: #FAFAFA;
+    --sidebar-accent: #24242C;
+    --sidebar-accent-foreground: #F2F2F5;
+    --sidebar-border: #24242C;
+    --sidebar-ring: #3B82F6;
+  }
+ 
+  .dark {
+    --background: #313962;
+    --foreground: #4a83c5;
+ 
+    --muted: #7ba4f6;
+    --muted-foreground: #acacac;
+ 
+    --accent: #cdcdcd;
+    --accent-foreground: #dedede;
+ 
+    --popover: #736a73;
+    --popover-foreground: #a4c5f6;
+ 
+    --border: #2a2a2a;
+    --input: #fafafa;
+ 
+    --card: #736a73;
+    --card-foreground: #a4c5f6;
+ 
+    --primary: #d54a52;
+    --primary-foreground: #2a2a2a;
+ 
+    --secondary: #834a4a;
+    --secondary-foreground: #cddef6;
+ 
+    --destructive: #E93D3D;
+    --destructive-foreground: #FAFAFA;
+
+    --warning: #F7C94A;
+    --warning-foreground: #FAFAFA;
+
+    --success: #19994F;
+    --success-foreground: #FAFAFA;
+ 
+    --ring: #D4D4D4;
+ 
+    --radius: 0.5rem;
+ 
+    --chart-1: #1E5ADB;
+ 
+    --chart-2: #2B9B76;
+ 
+    --chart-3: #DB8A2C;
+ 
+    --chart-4: #9B4ED8;
+ 
+    --chart-5: #DB3A76;
+ 
+    --sidebar-background: #EBF5F8;
+    --sidebar-foreground: #F2F2F5;
+    --sidebar-primary: #3B82F6;
+    --sidebar-primary-foreground: #FAFAFA;
+    --sidebar-accent: #24242C;
+    --sidebar-accent-foreground: #F2F2F5;
+    --sidebar-border: #24242C;
+    --sidebar-ring: #3B82F6;
+  }
+  * {
+  }
+  body {
+    @apply bg-background text-input
+  }
+  a {
     outline: none;
-}
-
-.container-div {
-    height: calc(100vh - 64px);
-    max-width: 100vw;
-    text-align: center;
-    padding: 1%;
-}
-
-.MuiGrid-spacing-xs-10 {
-    width: 100% !important;
-    margin: 0 !important;
+  }
 }
