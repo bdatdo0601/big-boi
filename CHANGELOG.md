@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.6](https://github.com/bdatdo0601/big-boi/compare/v1.20.5...v1.20.6) (2025-01-26)
+
+
+### Bug Fixes
+
+* switch back to npm ([82f5207](https://github.com/bdatdo0601/big-boi/commit/82f5207de5fbacee299c3d298cf18127eb46ae3c))
+
 ### [1.20.5](https://github.com/bdatdo0601/big-boi/compare/v1.20.4...v1.20.5) (2025-01-26)
 
 
