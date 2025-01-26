@@ -96,14 +96,14 @@
     "workbox-streams": "^7.3.0"
   },
   "scripts": {
-    "prebuild": "pnpm generate-build-meta",
+    "prebuild": "npm run generate-build-meta",
     "start": "cross-env VITE_VERSION=$npm_package_version vite",
     "build": "node postinstall.js && cross-env VITE_VERSION=$npm_package_version vite build",
     "preview": "cross-env VITE_VERSION=$npm_package_version vite preview",
     "test": "vitest",
     "release": "standard-version && git push --follow-tags origin develop",
     "generate-build-meta": "node ./node_modules/react-clear-browser-cache/bin/cli.js",
-    "deploy:notes": "cd notes && pnpm deploy:heroku"
+    "deploy:notes": "cd notes && npm run deploy:heroku"
   },
   "reactSnap": {
     "puppeteerArgs": [
