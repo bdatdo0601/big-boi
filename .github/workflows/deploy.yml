@@ -57,8 +57,10 @@ jobs:
       - name: install, build and test
         run: |
           pnpm install
-          # build and test
+          # test
           pnpm test --run
+          # build
+          pnpm build
 
       # Deploy Amplify
       - name: deploy
