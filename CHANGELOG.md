@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.13](https://github.com/bdatdo0601/big-boi/compare/v1.20.12...v1.20.13) (2025-01-27)
+
+
+### Bug Fixes
+
+* update amplify ([b443560](https://github.com/bdatdo0601/big-boi/commit/b44356034b37914bfa7be93464e8f41874132197))
+* update amplify ([b6615ec](https://github.com/bdatdo0601/big-boi/commit/b6615ec8c00907b4aaa88b95b3ed6b3a9933a423))
+
 ### [1.20.12](https://github.com/bdatdo0601/big-boi/compare/v1.20.11...v1.20.12) (2025-01-27)
 
 
