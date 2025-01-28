@@ -13,13 +13,6 @@ hljs.initHighlightingOnLoad();
 const rootElement = document.getElementById("root");
 
 const AppWithBoundary = () => {
-  const { isLatestVersion, emptyCacheStorage } = useClearCache();
-
-  useEffect(() => {
-    if (!isLatestVersion) {
-      emptyCacheStorage();
-    }
-  }, [isLatestVersion, emptyCacheStorage]);
   return <App />;
 };
 
