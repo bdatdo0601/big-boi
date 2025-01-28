@@ -198,7 +198,7 @@ const ReferenceDisplayWidget = ({ data, listData, widgetKey, ...props }) => {
               isOver ? "border-red-600 text-red-600" : ""
             } `}
           >
-            <DeleteOutline sx={{ color: "var(--primary)"}} /> Remove Tag
+            <DeleteOutline sx={{ color: "var(--primary)" }} /> Remove Tag
           </div>
         )}
       </div>
