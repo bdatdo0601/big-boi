@@ -1,6 +1,6 @@
 {
   "name": "big-boi",
-  "version": "1.21.2",
+  "version": "1.21.3",
   "private": true,
   "engines": {
     "node": ">=18"
