@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-import { useClearCache } from "react-clear-cache";
 
 import hljs from "highlight.js/lib/core";
 import App from "./App";
