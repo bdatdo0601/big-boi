@@ -7,12 +7,9 @@
     "mushan.vscode-paste-image",
     "hediet.vscode-drawio",
     "pkief.material-icon-theme",
-    "silvenon.mdx",
     "purocean.drawio-preview",
     "graphql.vscode-graphql",
-    "eg2.vscode-npm-script",
     "esbenp.prettier-vscode",
-    "hookyqr.beautify",
     "eamodio.gitlens"
   ]
 }
