@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-import { ClearBrowserCacheBoundary } from "react-clear-browser-cache";
+import { useClearCache } from "react-clear-cache";
 
 import hljs from "highlight.js/lib/core";
 import App from "./App";
@@ -12,17 +12,18 @@ hljs.initHighlightingOnLoad();
 
 const rootElement = document.getElementById("root");
 
-const AppWithBoundary = () => (
-  <ClearBrowserCacheBoundary auto fallback="Loading" duration={60000}>
-    <App />
-  </ClearBrowserCacheBoundary>
-);
+const AppWithBoundary = () => {
+  const { isLatestVersion, emptyCacheStorage } = useClearCache();
 
-if (rootElement.hasChildNodes()) {
-  ReactDOM.hydrate(<AppWithBoundary />, rootElement);
-} else {
-  ReactDOM.render(<AppWithBoundary />, rootElement);
-}
+  useEffect(() => {
+    if (!isLatestVersion) {
+      emptyCacheStorage();
+    }
+  }, [isLatestVersion, emptyCacheStorage]);
+  return <App />;
+};
+
+ReactDOM.render(<AppWithBoundary />, rootElement);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

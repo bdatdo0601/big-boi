@@ -10,7 +10,7 @@ import "./index.less";
 
 export default function Profile({ image, name, wrapperStyle, imageStyle, animation }) {
   const { isDark } = useContext(LayoutContext);
-  const [imageProps, setImageProps] = useSpring(() => ({
+  const [imageProps, api] = useSpring(() => ({
     from: animation ? { opacity: 0, transform: [0, -100] } : {},
     transform: [0, 0],
     opacity: 1,
@@ -24,7 +24,7 @@ export default function Profile({ image, name, wrapperStyle, imageStyle, animati
   }));
   // Set the drag hook and define component movement based on gesture data
   const bind = useDrag(({ down, movement: [mx, my] }) => {
-    setImageProps({
+    api.start({
       transform: down && animation ? [mx, my] : [0, 0],
     });
   });

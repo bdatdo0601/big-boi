@@ -16,6 +16,8 @@ import {
 import { useDataUpdateWrapper } from "../../../utils/hooks";
 import EventType from "../../../assets/event-type.json";
 import { useLazyAWSAPI } from "../../../utils/awsAPI";
+import { StyledTextField } from "../../../components/StyledTextField";
+import { StyledAutocomplete } from "../../../components/StyledAutoComplete";
 
 const DefaultValues = {
   title: "",
@@ -153,10 +155,9 @@ const ReferenceInputWidget = ({ existingReference }) => {
   const [onSubmit] = useDataUpdateWrapper(onReferenceMutate, onPostSubmit, DataUpdateOptions);
 
   return (
-    <Paper className="p-6 text-left" elevation={3}>
-      <Box component="form" noValidate autoComplete="off">
+      <form className="bg-accent text-primary p-4">
         <div className="flex justify-end">
-          <div>
+          <div className="flex flex-row gap-4 my-2">
             <FormControlLabel
               control={
                 <Switch
@@ -173,22 +174,17 @@ const ReferenceInputWidget = ({ existingReference }) => {
               label="Private"
               disabled={!isNull(existingReference)}
             />
-            <Button color="secondary" className="mx-2" onClick={onReset} disabled={!isNull(existingReference)}>
+            <button className="text-red-400 mx-2" onClick={onReset} disabled={!isNull(existingReference)}>
               Reset
-            </Button>
-            <Button
-              color="primary"
-              type="submit"
-              variant="contained"
-              className="mx-2"
+            </button>
+            <button className="text-primary-400 mx-2 bg-foreground py-2 px-4 rounded-lg hover:bg-accent-foreground hover:cursor-pointer" 
               onClick={handleSubmit(onSubmit)}
-              disabled={loading}
-            >
+              disabled={loading}>
               Submit
-            </Button>
+            </button>
           </div>
         </div>
-        <TextField
+        <StyledTextField
           id="reference-link"
           label="Link"
           variant="outlined"
@@ -197,7 +193,7 @@ const ReferenceInputWidget = ({ existingReference }) => {
           disabled={loading}
           {...register("url")}
         />
-        <TextField
+        <StyledTextField
           id="reference-title"
           label="Title"
           variant="outlined"
@@ -207,7 +203,7 @@ const ReferenceInputWidget = ({ existingReference }) => {
         <div className="gap-4 w-full" style={{ maxHeight: "50vh", overflow: "scroll" }}>
           {referenceTagInputs.map((input, index) => (
             <div key={input} className="flex my-2 mr-2 w-full">
-              <Autocomplete
+              <StyledAutocomplete
                 id={`reference-tag-${input}`}
                 className="w-full"
                 freeSolo
@@ -217,14 +213,14 @@ const ReferenceInputWidget = ({ existingReference }) => {
                 renderOption={(props, option) => (
                   <li {...props}>
                     <IconButton
-                      className="text-red-600 mr-2"
+                      className="mr-2"
                       onClick={() => {
                         updateLocalReferenceTags(existingReferenceTags =>
                           existingReferenceTags.filter(item => item !== option)
                         );
                       }}
                     >
-                      <DeleteOutline />
+                      <DeleteOutline sx={{ color: "var(--background)"}} />
                     </IconButton>
                     {option}
                   </li>
@@ -248,7 +244,7 @@ const ReferenceInputWidget = ({ existingReference }) => {
                   syncReferenceTags();
                 }}
               >
-                <DeleteOutline />
+                <DeleteOutline sx={{ color: "var(--input)"}} />
               </IconButton>
             </div>
           ))}
@@ -261,8 +257,7 @@ const ReferenceInputWidget = ({ existingReference }) => {
             Add Tags
           </Button>
         </div>
-      </Box>
-    </Paper>
+      </form>
   );
 };
 

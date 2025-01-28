@@ -8,6 +8,7 @@ import { useAWSAPIGetAll } from "../../../utils/awsAPI";
 import { convertToReferenceRenderedData } from "../utils";
 import ReferenceDisplayWidget from "../components/ReferenceDisplayWidget";
 import ReferenceContext from "../context";
+import { StyledAutocomplete } from "../../../components/StyledAutoComplete";
 
 const documentSearchStore = new FlexSearch.Document({
   document: {
@@ -87,9 +88,9 @@ const Searchable = () => {
     }, 200)
   );
   return (
-    <div className="p-4 m-2 text-left bg-accent text-input">
+    <div className="p-4 m-2 text-left bg-muted rounded-lg text-input">
       <div className="flex my-4 mr-2 w-full">
-        <Autocomplete
+        <StyledAutocomplete
           id="reference-search"
           className="w-full"
           freeSolo

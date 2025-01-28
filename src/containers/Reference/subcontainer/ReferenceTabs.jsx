@@ -23,18 +23,28 @@ const ReferenceTabs = () => {
   const currentTab = useMemo(() => TABS[currentTabIndex], [currentTabIndex]);
 
   return (
-    <div className="p-4 m-2 bg-accent">
-      <Tabs
-        value={currentTabIndex}
-        onChange={(e, newVal) => {
-          setCurrentTabIndex(newVal);
-        }}
-        aria-label="basic tabs example"
-      >
+    <div className="p-4 m-2 bg-muted rounded-lg">
+      <div className="flex flex-start gap-12 py-4 px-2">
         {TABS.map((item, index) => (
-          <Tab key={item.name} label={item.name} {...a11yProps(index)} />
+          <button
+            className="pb-4 hover:cursor-pointer"
+            style={
+              currentTabIndex === index
+                ? {
+                    borderBottom: "var(--primary) solid 1px",
+                  }
+                : {}
+            }
+            key={item.name}
+            {...a11yProps(index)}
+            onClick={() => {
+              setCurrentTabIndex(index);
+            }}
+          >
+            <span className="text-xl">{item.name}</span>
+          </button>
         ))}
-      </Tabs>
+      </div>
       <div className="text-left mt-4">
         <currentTab.Component />
       </div>

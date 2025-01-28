@@ -64,6 +64,25 @@ export const fetchFileToJSON = async url => {
   return json;
 };
 
+export const subdomain = window.location.host.split(".")[0];
+
+export const getDomainWithoutSubdomain = () => {
+  const urlParts = window.location.hostname.split(".");
+
+  const mainDomain = urlParts
+    .slice(0)
+    .slice(-(urlParts.length === 4 ? 3 : 2))
+    .join(".");
+
+  if (navigator.userAgent === "ReactSnap") {
+    return "/";
+  }
+
+  return mainDomain === "localhost"
+    ? `http://${mainDomain}:3000`
+    : `https://${mainDomain}`;
+};
+
 export default {
   getImageMeta,
   fetchFileToJSON,

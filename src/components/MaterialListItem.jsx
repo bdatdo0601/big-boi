@@ -2,30 +2,32 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Collapse, List, useTheme, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { Collapse, List } from "@mui/material";
 
 const MaterialListItem = ({ item, level, onClick, isSelected }) => {
   const [open, setOpen] = useState(item.defaultOpen);
-  const theme = useTheme();
   if (item.children) {
     return (
-      <>
-        <ListItem
-          button
+      <div>
+        <button
+          key={item.name}
           onClick={async () => {
             setOpen(!open);
           }}
-          style={{
-            paddingLeft: theme.spacing(level * 2),
-          }}
+          className="text-left flex flex-row gap-2 hover:bg-accent-foreground hover:cursor-pointer py-2 px-2 hover:rounded-lg"
         >
-          {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
-          <ListItemText primary={item.name} />
+          {item.icon}
+          <span
+            className="text-lg"
+            style={isSelected(item) ? { color: "var(--accent-foreground)" } : {}}
+          >
+            {item.name}
+          </span>
           {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
+        </button>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            {item.children.map(childItem => (
+            {item.children.map((childItem) => (
               <MaterialListItem
                 key={childItem.name}
                 item={childItem}
@@ -36,24 +38,28 @@ const MaterialListItem = ({ item, level, onClick, isSelected }) => {
             ))}
           </List>
         </Collapse>
-      </>
+      </div>
     );
   }
   return (
-    <ListItem
-      button
+    <button
       key={item.name}
-      selected={isSelected(item)}
       onClick={async () => {
         await onClick(item);
       }}
+      className="text-left flex flex-row gap-2 hover:bg-foreground hover:cursor-pointer p-3 hover:rounded-lg"
       style={{
-        paddingLeft: theme.spacing(level * 2),
+        marginLeft: `${level}px`,
       }}
     >
-      {item.icon && <ListItemIcon style={{ paddingRight: 0 }}>{item.icon}</ListItemIcon>}
-      <ListItemText primary={item.name} />
-    </ListItem>
+      {item.icon}
+      <span
+        className="text-lg"
+        style={isSelected(item) ? { color: "var(--accent-foreground)", fontWeight: "bolder" } : {}}
+      >
+        {item.name}
+      </span>
+    </button>
   );
 };
 
@@ -76,7 +82,9 @@ MaterialListItem.defaultProps = {
   isSelected: () => false,
   item: null,
   level: 1,
-  onClick: () => { /** */ },
+  onClick: () => {
+    /** */
+  },
 };
 
 export default MaterialListItem;
