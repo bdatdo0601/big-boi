@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.2](https://github.com/bdatdo0601/big-boi/compare/v1.21.1...v1.21.2) (2025-01-28)
+
+
+### Bug Fixes
+
+* update react spring ([f0589dd](https://github.com/bdatdo0601/big-boi/commit/f0589dd47d68b17d93e72a488c6c31b841360fb7))
+
 ### [1.21.1](https://github.com/bdatdo0601/big-boi/compare/v1.21.0...v1.21.1) (2025-01-28)
 
 
