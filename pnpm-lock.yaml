@@ -175,9 +175,6 @@ importers:
       react:
         specifier: ^16.14.0
         version: 16.14.0
-      react-clear-cache:
-        specifier: ^1.4.14
-        version: 1.4.14(prop-types@15.8.1)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       react-dnd:
         specifier: ^14.0.5
         version: 14.0.5(@types/node@22.10.10)(@types/react@19.0.8)(react@16.14.0)
@@ -2979,11 +2976,6 @@ packages:
     resolution: {integrity: sha512-Yy19y6O2GJq8f7CHf7L0nxL8bf4PZCPaVOCgJrusOeFHY1LvHgYXnmnXg6N5iwAnbgbZCDjo60SiM6IPJi9C5g==}
     peerDependencies:
       react: '>= 16.8.0'
-
-  '@use-it/event-listener@0.1.7':
-    resolution: {integrity: sha512-hgfExDzUU9uTRTPDCpw2s9jWTxcxmpJya3fK5ADpf5VDpSy8WYwY/kh28XE0tUcbsljeP8wfan48QvAQTSSa3Q==}
-    peerDependencies:
-      react: '>=16.8.0'
 
   '@vitejs/plugin-react@4.3.4':
     resolution: {integrity: sha512-SCCPBJtYLdE8PX/7ZQAs1QAZ8Jqwih+0VBLum1EGqmCCQal+MIUqLCzj3ZUy8ufbC0cAM4LRlSTm7IQJwWT4ug==}
@@ -5885,15 +5877,6 @@ packages:
     resolution: {integrity: sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==}
     engines: {node: '>= 0.8'}
 
-  react-clear-cache@1.4.14:
-    resolution: {integrity: sha512-5/9afQ4/utHs+1vODZG1HagirCERqbEYJSjkeKV126BP+r3+1pCvkGOWINhYsiFnOdXh82kD3RlbNv8ljC5Mmw==}
-    engines: {node: '>=8', npm: '>=5'}
-    hasBin: true
-    peerDependencies:
-      prop-types: ^15.7.2
-      react: ^15.0.0 || ^16.0.0
-      react-dom: ^15.0.0 || ^16.0.0
-
   react-devtools-core@6.0.1:
     resolution: {integrity: sha512-II3iSJhnR5nAscYDa9FCgPLq8mO5aEx/EKKtdXYTDnvdFEa3K7gs3jn1SKRXwQf9maOmIilmjnnx7Qy+3annPA==}
 
@@ -7004,11 +6987,6 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
-
-  use-persisted-state@0.3.3:
-    resolution: {integrity: sha512-pCNlvYC8+XjRxwnIut4teGC9f2p9aD88R8OGseQGZa2dvqG/h1vEGk1vRE1IZG0Vf161UDpn+NlW4+UGubQflQ==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0
 
   use-sidecar@1.1.3:
     resolution: {integrity: sha512-Fedw0aZvkhynoPYlA5WXrMCAMm+nSWdZt6lzJQ7Ok8S6Q+VsHmHpRWndVRJ8Be0ZbkfPc5LRYH+5XrzXcEeLRQ==}
@@ -11385,10 +11363,6 @@ snapshots:
       '@use-gesture/core': 10.3.1
       react: 16.14.0
 
-  '@use-it/event-listener@0.1.7(react@16.14.0)':
-    dependencies:
-      react: 16.14.0
-
   '@vitejs/plugin-react@4.3.4(vite@6.0.11(@types/node@22.10.10)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.29.1)(terser@5.37.0)(yaml@2.7.0))':
     dependencies:
       '@babel/core': 7.26.7
@@ -14735,15 +14709,6 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
-  react-clear-cache@1.4.14(prop-types@15.8.1)(react-dom@16.14.0(react@16.14.0))(react@16.14.0):
-    dependencies:
-      minimist: 1.2.8
-      prop-types: 15.8.1
-      react: 16.14.0
-      react-dom: 16.14.0(react@16.14.0)
-      use-persisted-state: 0.3.3(react@16.14.0)
-      uuid: 3.4.0
-
   react-devtools-core@6.0.1:
     dependencies:
       shell-quote: 1.8.2
@@ -16006,11 +15971,6 @@ snapshots:
     dependencies:
       react: 16.14.0
       react-dom: 16.14.0(react@16.14.0)
-
-  use-persisted-state@0.3.3(react@16.14.0):
-    dependencies:
-      '@use-it/event-listener': 0.1.7(react@16.14.0)
-      react: 16.14.0
 
   use-sidecar@1.1.3(@types/react@19.0.8)(react@16.14.0):
     dependencies:

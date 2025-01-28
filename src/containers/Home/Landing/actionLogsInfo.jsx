@@ -10,8 +10,7 @@ import {
   ListItem,
   Link,
 } from "@mui/material";
-import { animated, useSpring } from "react-spring";
-import { useDrag } from "@use-gesture/react";
+import { animated, useSpring } from "@react-spring/web";
 import { FixedSizeList } from "react-window";
 
 import ReactStringReplacer from "../../../utils/reactStringReplacer";

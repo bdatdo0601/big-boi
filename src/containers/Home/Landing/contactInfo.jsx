@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Paper, Typography, Grid2 as Grid } from "@mui/material";
-import { animated } from "react-spring";
+import { animated } from "@react-spring/web";
 import ContactButton from "../../../components/ContactButton";
 import ProfileCard from "../../../components/ProfileCard";
 import LayoutContext from "../../../context/layout";

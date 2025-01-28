@@ -7,7 +7,7 @@ import {
   styled,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 
 const AnimatedCard = animated(Card);

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { animated, useSpring } from "react-spring";
+import { animated, useSpring } from ;
 import { useDrag } from "@use-gesture/react";
 
 import "./index.less";
