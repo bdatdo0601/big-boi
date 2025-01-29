@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://github.com/bdatdo0601/big-boi/compare/v1.21.14...v1.22.0) (2025-01-29)
+
+
+### Features
+
+* migrate to RSBuild ([95f7693](https://github.com/bdatdo0601/big-boi/commit/95f7693b3bce900e567d987bed567c218d01e315))
+
 ### [1.21.14](https://github.com/bdatdo0601/big-boi/compare/v1.21.13...v1.21.14) (2025-01-29)
 
 
