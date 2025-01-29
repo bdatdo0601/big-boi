@@ -1,6 +1,14 @@
 import React, { useCallback, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
-import { CircularProgress, Typography, List, ListItem, Grid, FormControlLabel, Switch } from "@mui/material";
+import {
+  CircularProgress,
+  Typography,
+  List,
+  ListItem,
+  Grid2 as Grid,
+  FormControlLabel,
+  Switch,
+} from "@mui/material";
 import { get, isEmpty, uniq } from "lodash";
 import { DeleteOutline } from "@mui/icons-material";
 import useLocalStorageState from "use-local-storage-state";
@@ -8,10 +16,13 @@ import { useDrop } from "react-dnd";
 import ReferenceRenderer from "./ReferenceRenderer";
 import { DragDropTypes } from "../../../utils/constants";
 import { useLazyAWSAPI } from "../../../utils/awsAPI";
-import { updatePrivateReference, updateReference } from "../../../graphql/mutations";
+import {
+  updatePrivateReference,
+  updateReference,
+} from "../../../graphql/mutations";
 import ReferenceContext from "../context";
 
-const getSpanFromLevel = level => {
+const getSpanFromLevel = (level) => {
   if (level <= 0) {
     return { lg: 12, xl: 12, md: 12, xs: 12, sm: 12 };
   }
@@ -21,7 +32,7 @@ const getSpanFromLevel = level => {
   return { lg: 12, xl: 12, md: 12, xs: 12, sm: 12 };
 };
 
-const getListItemSpanFromLevel = level => {
+const getListItemSpanFromLevel = (level) => {
   if (level <= 0) {
     return { lg: 12, xl: 12, md: 12, xs: 12, sm: 12 };
   }
@@ -32,13 +43,19 @@ const getListItemSpanFromLevel = level => {
 };
 
 const TreeReferenceDisplayWidget = ({ data, loading }) => {
-  const { execute: changeReference, loading: updatingReference } = useLazyAWSAPI(updateReference);
-  const { execute: changePrivateReference, loading: updatingPrivateReference } = useLazyAWSAPI(updatePrivateReference);
+  const { execute: changeReference, loading: updatingReference } =
+    useLazyAWSAPI(updateReference);
+  const { execute: changePrivateReference, loading: updatingPrivateReference } =
+    useLazyAWSAPI(updatePrivateReference);
   const { requestRefetch } = useContext(ReferenceContext);
 
   const onLinkDropToMove = useCallback(
-    async item => {
-      if (updatingPrivateReference || updatingReference || get(item, "path") === get(data, "path")) {
+    async (item) => {
+      if (
+        updatingPrivateReference ||
+        updatingReference ||
+        get(item, "path") === get(data, "path")
+      ) {
         return;
       }
       try {
@@ -46,12 +63,16 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
           input: {
             id: get(item, "id"),
             tags: uniq([
-              ...get(item, "tags", []).filter(tag => tag !== get(item, "path")),
+              ...get(item, "tags", []).filter(
+                (tag) => tag !== get(item, "path")
+              ),
               get(data, "path").replace(/s+/g, ""),
             ]),
           },
         };
-        get(item, "isPrivate", true) ? await changePrivateReference(variables) : await changeReference(variables);
+        get(item, "isPrivate", true)
+          ? await changePrivateReference(variables)
+          : await changeReference(variables);
       } catch (err) {
         // eslint-disable-next-line
         console.error("Unable to delete: ", err);
@@ -59,16 +80,23 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
         await requestRefetch();
       }
     },
-    [data, changeReference, changePrivateReference, requestRefetch, updatingReference, updatingPrivateReference]
+    [
+      data,
+      changeReference,
+      changePrivateReference,
+      requestRefetch,
+      updatingReference,
+      updatingPrivateReference,
+    ]
   );
 
   const [{ isOver }, drop] = useDrop(
     () => ({
       accept: DragDropTypes.LINK,
-      drop: async item => {
+      drop: async (item) => {
         await onLinkDropToMove(item);
       },
-      collect: monitor => ({
+      collect: (monitor) => ({
         isDragging: !!monitor.internalMonitor.isDragging(),
         isOver: !!monitor.isOver(),
       }),
@@ -80,7 +108,7 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
     () =>
       get(data, "path", "")
         .split(".")
-        .filter(item => item).length,
+        .filter((item) => item).length,
     [data]
   );
 
@@ -88,19 +116,32 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
     return <CircularProgress />;
   }
 
-  if (get(data, "references", []).length === 0 && isEmpty(get(data, "children"))) {
+  if (
+    get(data, "references", []).length === 0 &&
+    isEmpty(get(data, "children"))
+  ) {
     return null;
   }
 
   return (
-    <div className={`${level > 0 ? "border-l-2 pl-2" : ""} ${isOver ? "border-blue-600" : ""}`}>
+    <div
+      className={`${level > 0 ? "border-l-2 pl-2" : ""} ${
+        isOver ? "border-blue-600" : ""
+      }`}
+    >
       <div ref={drop}>
-        {level !== 0 && <Typography className="mx-2 mb-1">{get(data, "name")}</Typography>}
+        {level !== 0 && (
+          <Typography className="mx-2 mb-1">{get(data, "name")}</Typography>
+        )}
         {get(data, "references", []).length !== 0 && (
           <List>
             <Grid container>
-              {get(data, "references", []).map(item => (
-                <Grid item key={get(item, "id")} {...getListItemSpanFromLevel(level)}>
+              {get(data, "references", []).map((item) => (
+                <Grid
+                  item
+                  key={get(item, "id")}
+                  {...getListItemSpanFromLevel(level)}
+                >
                   <ListItem className="mt-1 px-2 p-0">
                     <ReferenceRenderer reference={item} draggable />
                   </ListItem>
@@ -112,10 +153,23 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
       </div>
       <Grid container>
         {Object.values(get(data, "children", {}))
-          .filter(item => get(item, "references", []).length !== 0 || !isEmpty(get(item, "children")))
-          .map(item => (
-            <Grid item key={get(item, "name")} {...getSpanFromLevel(level)} className={level === 0 ? "mb-8" : "mt-1"}>
-              <TreeReferenceDisplayWidget data={item} loading={loading} bordered />
+          .filter(
+            (item) =>
+              get(item, "references", []).length !== 0 ||
+              !isEmpty(get(item, "children"))
+          )
+          .map((item) => (
+            <Grid
+              item
+              key={get(item, "name")}
+              {...getSpanFromLevel(level)}
+              className={level === 0 ? "mb-8" : "mt-1"}
+            >
+              <TreeReferenceDisplayWidget
+                data={item}
+                loading={loading}
+                bordered
+              />
             </Grid>
           ))}
       </Grid>
@@ -131,16 +185,16 @@ TreeReferenceDisplayWidget.propTypes = {
 TreeReferenceDisplayWidget.defaultProps = {};
 
 const ReferenceDisplayWidget = ({ data, listData, widgetKey, ...props }) => {
-  const [isDisplayTreeReference, setIsDisplayTreeReference] = useLocalStorageState(
-    `isDisplayTreeReference${widgetKey}`,
-    true
-  );
-  const { execute: changeReference, loading: updatingReference } = useLazyAWSAPI(updateReference);
-  const { execute: changePrivateReference, loading: updatingPrivateReference } = useLazyAWSAPI(updatePrivateReference);
+  const [isDisplayTreeReference, setIsDisplayTreeReference] =
+    useLocalStorageState(`isDisplayTreeReference${widgetKey}`, true);
+  const { execute: changeReference, loading: updatingReference } =
+    useLazyAWSAPI(updateReference);
+  const { execute: changePrivateReference, loading: updatingPrivateReference } =
+    useLazyAWSAPI(updatePrivateReference);
   const { requestRefetch } = useContext(ReferenceContext);
 
   const onLinkDropToDelete = useCallback(
-    async item => {
+    async (item) => {
       if (updatingPrivateReference || updatingReference) {
         return;
       }
@@ -148,10 +202,14 @@ const ReferenceDisplayWidget = ({ data, listData, widgetKey, ...props }) => {
         const variables = {
           input: {
             id: get(item, "id"),
-            tags: get(item, "tags", []).filter(tag => tag !== get(item, "path")),
+            tags: get(item, "tags", []).filter(
+              (tag) => tag !== get(item, "path")
+            ),
           },
         };
-        get(item, "isPrivate", true) ? await changePrivateReference(variables) : await changeReference(variables);
+        get(item, "isPrivate", true)
+          ? await changePrivateReference(variables)
+          : await changeReference(variables);
       } catch (err) {
         // eslint-disable-next-line
         console.error("Unable to delete: ", err);
@@ -159,16 +217,22 @@ const ReferenceDisplayWidget = ({ data, listData, widgetKey, ...props }) => {
         await requestRefetch();
       }
     },
-    [changeReference, changePrivateReference, requestRefetch, updatingReference, updatingPrivateReference]
+    [
+      changeReference,
+      changePrivateReference,
+      requestRefetch,
+      updatingReference,
+      updatingPrivateReference,
+    ]
   );
 
   const [{ isOver, isDragging }, drop] = useDrop(
     () => ({
       accept: DragDropTypes.LINK,
-      drop: async item => {
+      drop: async (item) => {
         await onLinkDropToDelete(item);
       },
-      collect: monitor => ({
+      collect: (monitor) => ({
         isDragging: !!monitor.internalMonitor.isDragging(),
         isOver: !!monitor.isOver(),
       }),
@@ -198,20 +262,20 @@ const ReferenceDisplayWidget = ({ data, listData, widgetKey, ...props }) => {
               isOver ? "border-red-600 text-red-600" : ""
             } `}
           >
-            <DeleteOutline sx={{ color: "var(--primary)" }} /> Remove Tag
+            <DeleteOutline sx={{ color: "var(--destructive)" }} /> Remove Tag
           </div>
         )}
       </div>
       {isDisplayTreeReference ? (
         <TreeReferenceDisplayWidget data={data} {...props} />
       ) : (
-        <List>
-          {(listData || []).map(item => (
-            <ListItem key={get(item, "id")} className="mt-1 px-2 p-0">
+        <div className="min-sm:columns-3 columns-1">
+          {(listData || []).map((item) => (
+            <div key={get(item, "id")} className="mb-2">
               <ReferenceRenderer showTags reference={item} />
-            </ListItem>
+            </div>
           ))}
-        </List>
+        </div>
       )}
     </div>
   );

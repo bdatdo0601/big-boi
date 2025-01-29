@@ -8,7 +8,7 @@ export default function WelcomeInfo({ bio }) {
   const { globalAnimation } = useContext(LayoutContext);
   return (
     <ProfileCard
-      header={<Typography className="text-primary" variant="h5">Hello There!</Typography>}
+      header={<span className="text-2xl text-input">Hello There!</span>}
       contentStyle={{
         paddingLeft: 16,
         paddingRight: 16,

@@ -31,11 +31,7 @@ export default function Background() {
   return (
     <div className="mx-auto flex flex-col items-center">
       <ProfileCard
-        header={
-          <Typography className="text-primary" variant="h4">
-            Background
-          </Typography>
-        }
+        header={<span className="text-3xl text-input">Background</span>}
         contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
         animation={false}
         cardStyle={{

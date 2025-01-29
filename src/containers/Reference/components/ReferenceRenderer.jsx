@@ -111,7 +111,7 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
   }, [reference, removeReference, removePrivateReference, requestRefetch]);
 
   return (
-    <div ref={dragPreview} style={{ opacity: isDragging ? 0.5 : 1 }} className="w-full flex">
+    <div ref={dragPreview} style={{ opacity: isDragging ? 0.5 : 1 }} className="w-full flex border-double p-2 bg-accent rounded-2xl items-center">
       <Modal
         open={isModalOpen}
         onClose={() => {
@@ -128,7 +128,7 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
       {currentUser && draggable && (
         <span ref={drag}>
           <DragIndicatorOutlined
-            className={isDragging ? "text-blue-600" : "text-gray-600"}
+            className={isDragging ? "text-primary" : "text-input"}
             style={{ cursor: "move" }}
           />
         </span>
@@ -140,13 +140,13 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
           e.stopPropagation();
         }}
       >
-        <span>
-          {get(reference, "isPrivate") && <VisibilityOffOutlined className="mr-2 text-gray-600" sx={{ color: "var(--primary)" }}  />}
-          <button className="m-0 mr-2 text-input" href="#" onClick={onLinkClick}>
-            <span className="text-lg text-primary">{get(reference, "title")}</span>
+        <span className="mt-2 mx-2">
+          {get(reference, "isPrivate") && <VisibilityOffOutlined className="mr-2 text-gray-600" sx={{ color: "var(--input)" }}  />}
+          <button className="mr-2 text-input hover:cursor-pointer" href="#" onClick={onLinkClick}>
+            <span className="text-lg text-input underline">{get(reference, "title")}</span>
           </button>
           {showTags &&
-            get(reference, "tags", []).map(item => <Chip className="mr-2" key={item} size="small" label={item} />)}
+            get(reference, "tags", []).map(item => <span className="rounded-xl bg-card py-2 px-3 text-xs italic" key={item}>{item}</span>)}
         </span>
         <Tooltip
           placement="top-end"
@@ -164,7 +164,7 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
                 });
               }}
             >
-              <ContentCopyOutlined sx={{ color: "var(--primary)" }} />
+              <ContentCopyOutlined sx={{ color: "var(--input)" }} />
             </IconButton>
             {navigator.canShare && navigator.canShare() && (
               <IconButton
@@ -177,12 +177,12 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
                   });
                 }}
               >
-                <ShareOutlined sx={{ color: "var(--primary)" }}  />
+                <ShareOutlined sx={{ color: "var(--input)" }}  />
               </IconButton>
             )}
             {currentUser && (
               <IconButton disabled={loading} onClick={toggleModal}>
-                <EditOutlined sx={{ color: "var(--primary)" }} />
+                <EditOutlined sx={{ color: "var(--input)" }} />
               </IconButton>
             )}
             {currentUser && (

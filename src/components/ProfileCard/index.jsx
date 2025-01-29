@@ -31,6 +31,7 @@ const AnimatedCardStyled = styled(AnimatedCard)(() => ({
     padding: "0px",
     marginBottom: 12,
     overflow: "visible",
+    color: "var(--input)",
   },
   [`& .${classes.headerContent}`]: {
     boxShadow:

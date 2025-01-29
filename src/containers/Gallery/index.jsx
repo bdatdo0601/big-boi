@@ -14,11 +14,9 @@ export default function Gallery() {
   const { globalAnimation } = useContext(LayoutContext);
 
   return (
-    <div
-      className="mx-12 py-18"
-    >
+    <div className="mx-12 py-18">
       <ProfileCard
-        header={<Typography className="text-primary" variant="h4">Gallery</Typography>}
+        header={<span className="text-3xl text-input">Gallery</span>}
         contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
         animation={globalAnimation}
       >

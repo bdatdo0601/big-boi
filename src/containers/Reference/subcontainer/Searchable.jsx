@@ -88,7 +88,7 @@ const Searchable = () => {
     }, 200)
   );
   return (
-    <div className="p-4 m-2 text-left bg-muted rounded-lg text-input">
+    <div className="p-4 m-2 text-left bg-card rounded-lg text-input">
       <div className="flex my-4 mr-2 w-full">
         <StyledAutocomplete
           id="reference-search"

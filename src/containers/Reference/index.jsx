@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Auth from "@aws-amplify/auth";
 import { ExpandMoreOutlined } from "@mui/icons-material";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Accordion, AccordionSummary } from "@mui/material";
 import useLocalStorageState from "use-local-storage-state";
 import withScrolling from "react-dnd-scrolling";
 import ReferenceInputWidget from "./components/ReferenceInputWidget";
@@ -72,7 +66,7 @@ export default function Reference() {
               style={{
                 minHeight: 64,
                 flexDirection: "row-reverse",
-                background: "var(--foreground)",
+                background: "var(--card)",
                 color: "var(--input)",
               }}
             >
@@ -83,17 +77,13 @@ export default function Reference() {
         </div>
       )}
       <DndScrollingDiv className="reference-container-div my-16 md:my-2 lg:my-2 xl:my-2 2xl:my-2 pt-2 pb-16 px-1">
-        <Grid
-          container
-          spacing={2}
-          style={{ marginBottom: "10%", width: "100vw" }}
-        >
+        <div>
           {Items.map((item) => (
-            <Grid item key={item.key} {...item.span} className="">
+            <div item key={item.key} {...item.span} className="">
               <item.Component />
-            </Grid>
+            </div>
           ))}
-        </Grid>
+        </div>
       </DndScrollingDiv>
     </ReferenceContextProvider>
   );

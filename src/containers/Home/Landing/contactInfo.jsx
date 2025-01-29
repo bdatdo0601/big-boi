@@ -13,7 +13,7 @@ export default function ContactInfo({ className, contacts }) {
 
   return (
     <ProfileCard
-      header={<Typography className="text-primary" variant="h5">Contact Me!</Typography>}
+      header={<span className="text-2xl text-input">Contact Me!</span>}
       contentStyle={{ paddingLeft: 16, paddingRight: 16 }}
       animation={globalAnimation}
       cardStyle={{ maxWidth: 600, margin: "0 auto" }}

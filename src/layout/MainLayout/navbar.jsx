@@ -22,14 +22,14 @@ export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
   );
 
   return (
-    <div className="bg-accent w-full py-4 pr-12 pl-[2rem] sticky top-0 z-50 shadow-xl flex flex-row justify-between">
+    <div className="bg-muted w-full py-4 pr-12 pl-[2rem] sticky top-0 z-50 shadow-xl flex flex-row justify-between">
       <div className="flex flex-row gap-6 items-center">
         <IconButton
           onClick={() => {
             setDrawerOpen(true);
           }}
         >
-          <Menu sx={{ color: "var(--primary)" }} />
+          <Menu sx={{ color: "var(--input)" }} />
         </IconButton>
         <LogoTitle />
         {isSubdomainRoute && (
@@ -46,12 +46,12 @@ export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
             style={
               tabItem.path === location.pathname
                 ? {
-                    color: "var(--foreground)",
+                    color: "var(--primary)",
                     fontWeight: "bolder",
-                    borderBottom: "2px solid var(--foreground)",
+                    borderBottom: "2px solid var(--primary)",
                   }
                 : {
-                    color: "var(--primary)",
+                    color: "var(--input)",
                   }
             }
             key={tabItem.name}

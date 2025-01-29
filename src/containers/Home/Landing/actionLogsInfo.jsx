@@ -69,7 +69,7 @@ const ActionLogRow = (props) => {
   return (
     <AnimatedListItem key={index} style={{ ...animateProps, ...style }}>
       <div
-        className="hide-scrollbar rounded-lg bg-secondary text-input pl-4 py-2 flex flex-row gap-3 align-center items-center"
+        className="hide-scrollbar rounded-lg bg-accent-foreground text-input pl-4 py-2 flex flex-row gap-3 align-center items-center"
         style={{ width: "100%", height: 70, overflow: "auto" }}
       >
         <div>
@@ -82,7 +82,13 @@ const ActionLogRow = (props) => {
         <div>
           <AlertTitle style={{ whiteSpace: "nowrap", width: "100%" }}>
             {messages.map((msg, i) =>
-              isString(msg) ? <span key={`${msg} ${i}`} className="text-input">{msg}</span> : msg
+              isString(msg) ? (
+                <span key={`${msg} ${i}`} className="text-input">
+                  {msg}
+                </span>
+              ) : (
+                msg
+              )
             )}
           </AlertTitle>
           {moment(item && item.createdAt).format("MM/DD/YY hh:mm:ss a")}
@@ -103,11 +109,7 @@ export default function ActionLogsInfo() {
   const { globalAnimation } = useContext(LayoutContext);
   return (
     <ProfileCard
-      header={
-        <Typography className="text-primary" variant="h5">
-          What I've been doing
-        </Typography>
-      }
+      header={<span className="text-2xl text-input">What I've been doing</span>}
       contentStyle={{
         paddingLeft: 16,
         paddingRight: 16,

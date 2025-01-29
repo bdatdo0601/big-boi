@@ -58,16 +58,16 @@ export const AppDrawer = ({ open, onClose, routeList }) => {
       direction="left"
       style={{ width: 380 }}
     >
-      <div className="bg-accent h-full pb-4 px-4 flex flex-col justify-between overflow-y-scroll">
+      <div className="bg-popover h-full pb-4 px-4 flex flex-col justify-between overflow-y-scroll">
         <div className="flex flex-col gap-4 relative">
-          <div className="flex justify-between items-center sticky top-0 bg-accent py-2">
+          <div className="flex justify-between items-center sticky top-0 bg-popover pt-4">
             <LogoTitle />
             <IconButton
               onClick={onClose}
               style={{ outline: "none" }}
               size="large"
             >
-              <Menu sx={{ color: "var(--primary)" }} />
+              <Menu sx={{ color: "var(--input)" }} />
             </IconButton>
           </div>
           <StyledSwitchDiv className="pt-4 border-y-1">
@@ -85,7 +85,7 @@ export const AppDrawer = ({ open, onClose, routeList }) => {
               label="Dark Mode"
               style={{ marginBottom: "5%", paddingLeft: 12 }}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               className={classes.switch}
               control={
                 <Switch
@@ -96,13 +96,13 @@ export const AppDrawer = ({ open, onClose, routeList }) => {
               }
               label="Animation"
               style={{ marginBottom: "5%", paddingLeft: 12 }}
-            />
+            /> */}
           </StyledSwitchDiv>
           {!isEmpty(groupedContents) &&
             Object.keys(groupedContents).map((groupedContentKey, index) => (
               <div key={JSON.stringify(groupedContentKey) + index} className="border-b-1 pb-4 mt-2 flex-col flex gap-2">
                 {groupedContentKey && (
-                  <span className="text-primary text-xl mb-2">{groupedContentKey}</span>
+                  <span className="text-primary font-black text-xl mb-2">{groupedContentKey}</span>
                 )}
                 {groupedContents[groupedContentKey].map((item) => (
                   <MaterialListItem

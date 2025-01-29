@@ -226,14 +226,14 @@ const ReferenceInputWidget = ({ existingReference }) => {
             disabled={!isNull(existingReference)}
           />
           <button
-            className="text-red-400 mx-2"
+            className="text-destructive mx-2"
             onClick={onReset}
             disabled={!isNull(existingReference)}
           >
             Reset
           </button>
           <button
-            className="text-primary-400 mx-2 bg-foreground py-2 px-4 rounded-lg hover:bg-accent-foreground hover:cursor-pointer"
+            className="text-input mx-2 bg-foreground py-2 px-4 rounded-lg hover:bg-accent-foreground hover:cursor-pointer"
             onClick={handleSubmit(onSubmit)}
             disabled={loading}
           >

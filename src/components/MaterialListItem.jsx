@@ -14,12 +14,12 @@ const MaterialListItem = ({ item, level, onClick, isSelected }) => {
           onClick={async () => {
             setOpen(!open);
           }}
-          className="text-left flex flex-row gap-2 hover:bg-accent-foreground hover:cursor-pointer py-2 px-2 hover:rounded-lg"
+          className="text-left flex flex-row gap-2 hover:bg-accent hover:cursor-pointer py-2 px-2 hover:rounded-lg"
         >
           {item.icon}
           <span
             className="text-lg"
-            style={isSelected(item) ? { color: "var(--accent-foreground)" } : {}}
+            style={isSelected(item) ? { color: "var(--primary)" } : {}}
           >
             {item.name}
           </span>
@@ -47,7 +47,7 @@ const MaterialListItem = ({ item, level, onClick, isSelected }) => {
       onClick={async () => {
         await onClick(item);
       }}
-      className="text-left flex flex-row gap-2 hover:bg-foreground hover:cursor-pointer p-3 hover:rounded-lg"
+      className="text-left flex flex-row gap-2 hover:bg-accent hover:cursor-pointer p-3 hover:rounded-lg"
       style={{
         marginLeft: `${level}px`,
       }}
@@ -55,7 +55,7 @@ const MaterialListItem = ({ item, level, onClick, isSelected }) => {
       {item.icon}
       <span
         className="text-lg"
-        style={isSelected(item) ? { color: "var(--accent-foreground)", fontWeight: "bolder" } : {}}
+        style={isSelected(item) ? { color: "var(--primary)", fontWeight: "bolder" } : {}}
       >
         {item.name}
       </span>
