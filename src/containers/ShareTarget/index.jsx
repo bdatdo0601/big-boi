@@ -79,7 +79,7 @@ const ShareTarget = () => {
 
   return (
     <div>
-      Share Target: {searchParams.getAll().join(", ")}
+      Share Target: {searchParams.toString()}
     </div>
   );
 };
