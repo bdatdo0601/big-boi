@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.24.0](https://github.com/bdatdo0601/big-boi/compare/v1.23.0...v1.24.0) (2025-01-29)
+
+
+### Features
+
+* start migration to typescript ([0aabfea](https://github.com/bdatdo0601/big-boi/commit/0aabfea9c7f8578ecab8c0bc4c21417b3fea6df6))
+
 ## [1.23.0](https://github.com/bdatdo0601/big-boi/compare/v1.22.1...v1.23.0) (2025-01-29)
 
 
