@@ -12,6 +12,11 @@ export default defineConfig({
   html: {
     template: "./index.html",
   },
+  output: {
+    distPath: {
+      root: "build",
+    },
+  },
   source: {
     define: {
       "import.meta.env.SITE_VERSION": JSON.stringify(process.env.SITE_VERSION),
