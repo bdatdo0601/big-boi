@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.6](https://github.com/bdatdo0601/big-boi/compare/v1.21.5...v1.21.6) (2025-01-29)
+
+
+### Bug Fixes
+
+* update to router v7 ([b4414b8](https://github.com/bdatdo0601/big-boi/commit/b4414b8549c6acf49713730fcedcce06e32c0c36))
+
 ### [1.21.5](https://github.com/bdatdo0601/big-boi/compare/v1.21.4...v1.21.5) (2025-01-28)
 
 
