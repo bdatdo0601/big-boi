@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.13](https://github.com/bdatdo0601/big-boi/compare/v1.21.12...v1.21.13) (2025-01-29)
+
+
+### Bug Fixes
+
+* update share target ([809ada8](https://github.com/bdatdo0601/big-boi/commit/809ada80261349d05e47554e7e7286b09b84d9ff))
+
 ### [1.21.12](https://github.com/bdatdo0601/big-boi/compare/v1.21.11...v1.21.12) (2025-01-29)
 
 
