@@ -24,7 +24,7 @@ export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
   );
 
   return (
-    <div className="bg-muted w-full py-4 pr-12 pl-[2rem] sticky top-0 z-50 shadow-xl flex flex-row justify-between">
+    <div className="min-sm:bg-muted max-sm:hidden bg-transparent w-full py-4 pr-12 pl-[2rem] min-sm:sticky min-sm:top-0 min-sm:z-50 min-sm:shadow-xl min-sm:flex flex-row justify-between">
       <div className="flex flex-row gap-6 items-center">
         <IconButton
           onClick={() => {

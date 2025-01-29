@@ -64,7 +64,7 @@ const Items = [
 export default function Reference() {
   return (
     <ReferenceContextProvider>
-      <DndScrollingDiv className="reference-container-div my-16 md:my-2 lg:my-2 xl:my-2 2xl:my-2 pt-2 pb-16 px-1">
+      <DndScrollingDiv className="reference-container-div md:my-2 lg:my-2 xl:my-2 2xl:my-2 pt-2 pb-16 px-1">
         <div className="flex flex-col gap-4">
           {Items.map((item) => (
             <item.Component key={item.key} />

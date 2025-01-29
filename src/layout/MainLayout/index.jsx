@@ -7,6 +7,8 @@ import { WEBSITE_TITLE } from "../../utils/constants";
 import { AppDrawer } from "../../components/AppDrawer";
 import { MainNavbar } from "./navbar";
 import { Hub } from "aws-amplify";
+import { IconButton } from "@mui/material";
+import { Menu } from "@mui/icons-material";
 
 const classes = {
   drawerHeader: "LayoutdrawerHeader",
@@ -59,16 +61,22 @@ export default function MainLayout({ children }) {
         }}
         routeList={routeList}
       />
-      <div className="columns-1 flex-grow relative">
+      <div className="flex flex-col h-full z-10 pb-12">
+        <div className="min-sm:hidden bg-accent shadow-lg w-10 fixed m-4 rounded-full z-10">
+          <IconButton
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            <Menu sx={{ color: "var(--input)" }} />
+          </IconButton>
+        </div>
         <MainNavbar
           setDrawerOpen={setOpen}
           isSubdomainRoute={isSubdomainRoute}
           routeList={routeList}
         />
-        <main>
-          <div className={classes.drawerHeader} />
-          {children}
-        </main>
+        <main>{children}</main>
       </div>
     </div>
   );
