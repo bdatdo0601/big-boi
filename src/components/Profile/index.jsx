@@ -43,7 +43,7 @@ export default function Profile({ image, name, wrapperStyle, imageStyle, animati
     >
       <animated.img
         className="w-56 h-56 profile-image"
-        src={image}
+        src={image || MAIN_PICTURE}
         alt="main_picture"
         style={{ ...imageProps, transform: imageProps.transform.to((x, y) => `translate(${x}px, ${y}px)`) }}
         {...bind()}
