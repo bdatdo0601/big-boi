@@ -58,9 +58,9 @@ export const AppDrawer = ({ open, onClose, routeList }) => {
       direction="left"
       style={{ width: 380 }}
     >
-      <div className="bg-accent h-full py-4 px-4 flex flex-col justify-between">
-        <div className="flex flex-col gap-4">
-          <div className="flex justify-between items-center">
+      <div className="bg-accent h-full pb-4 px-4 flex flex-col justify-between overflow-y-scroll">
+        <div className="flex flex-col gap-4 relative">
+          <div className="flex justify-between items-center sticky top-0 bg-accent py-2">
             <LogoTitle />
             <IconButton
               onClick={onClose}
@@ -118,7 +118,7 @@ export const AppDrawer = ({ open, onClose, routeList }) => {
               </div>
             ))}
         </div>
-        <div>
+        <div className="mt-4">
           <a className="text-lg text-input ml-4" href="/change-logs">
             Version {VERSION} - The Big Boi Project
           </a>
