@@ -1,11 +1,11 @@
 import React, { lazy } from "react";
 import { Auth } from "@aws-amplify/auth";
-import { Redirect } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router";
 import PropTypes from "prop-types";
 import {
   ImageOutlined,
   // AccountTree,
-  Map,
+  Map as MuiMap,
   Create as CreateIcon,
   AssignmentIndSharp as AssignmentIndSharpIcon,
   ExitToApp as ExitToAppIcon,
@@ -47,8 +47,8 @@ export const ROUTE_TYPE = {
   },
 };
 
-const withAnalytics = Component => {
-  return props => {
+const withAnalytics = (Component) => {
+  return (props) => {
     usePageTracking();
     return <Component {...props} />;
   };
@@ -63,23 +63,26 @@ const isAuthExist = async () => {
   }
 };
 
-const ErrorPage = ({ history }) => (
-  <>
-    <Typography variant="h1" style={{ color: "red" }}>
-      404 - Error not found
-    </Typography>
+const ErrorPage = () => {
+  const navigate = useNavigate();
+  return (
+    <>
+      <Typography variant="h1" style={{ color: "red" }}>
+        404 - Error not found
+      </Typography>
 
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={() => {
-        history.replace("/");
-      }}
-    >
-      Go Home
-    </Button>
-  </>
-);
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          navigate("/", { replace: true });
+        }}
+      >
+        Go Home
+      </Button>
+    </>
+  );
+};
 
 ErrorPage.propTypes = {
   history: PropTypes.object.isRequired,
@@ -107,9 +110,10 @@ export const subdomainRouteMap = {
     {
       name: "Logout",
       icon: <MeetingRoomIcon />,
-      component: ({ history }) => {
+      component: () => {
+        const navigate = useNavigate();
         Auth.signOut().then(() => {
-          history.replace("/");
+          navigate("/", { replace: true });
         });
         return null;
       },
@@ -121,7 +125,7 @@ export const subdomainRouteMap = {
     {
       name: "Login",
       icon: <ExitToAppIcon />,
-      component: () => <Redirect to="/" />,
+      component: () => <Navigate replace to="/" />,
       path: "/login",
       exact: true,
       type: ROUTE_TYPE.PRIVATE,
@@ -138,7 +142,10 @@ export const errorRoutes = [
     hidden: true,
     type: "Error",
   },
-].map(item => ({ ...item, component: item.component ? withAnalytics(item.component) : undefined }));
+].map((item) => ({
+  ...item,
+  component: item.component ? withAnalytics(item.component) : undefined,
+}));
 
 export default [
   {
@@ -200,7 +207,7 @@ export default [
   // },
   {
     name: "Documentations",
-    icon: <Map />,
+    icon: <MuiMap />,
     component: Documentations,
     path: "/documentations",
     exact: true,
@@ -219,7 +226,7 @@ export default [
   {
     name: "Login",
     icon: <ExitToAppIcon />,
-    component: () => <Redirect to="/admin" />,
+    component: () => <Navigate to="/admin" />,
     path: "/login",
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
@@ -255,9 +262,10 @@ export default [
   {
     name: "Logout",
     icon: <MeetingRoomIcon />,
-    component: ({ history }) => {
+    component: () => {
+      const navigate = useNavigate();
       Auth.signOut().then(() => {
-        history.replace("/");
+        navigate("/", { replace: true });
       });
       return null;
     },
@@ -266,4 +274,7 @@ export default [
     type: ROUTE_TYPE.PRIVATE,
     hidden: async () => !(await isAuthExist()),
   },
-].map(item => ({ ...item, component: item.component ? withAnalytics(item.component) : undefined }));
+].map((item) => ({
+  ...item,
+  component: item.component ? withAnalytics(item.component) : undefined,
+}));

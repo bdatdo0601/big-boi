@@ -4,7 +4,7 @@ import {
 } from "react";
 import {
   useLocation
-} from "react-router-dom";
+} from "react-router";
 import ReactGA from "react-ga";
 
 const usePageTracking = () => {

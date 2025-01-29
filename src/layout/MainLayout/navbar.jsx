@@ -2,11 +2,11 @@ import { capitalize, get, groupBy, has } from "lodash";
 import { IconButton } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 import { useMemo } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { LogoTitle } from "../../components/LogoTitle";
 
 export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const tabItems = useMemo(
     () =>
@@ -41,7 +41,7 @@ export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
           <button
             className="pb-2 pt-2 hover:cursor-pointer"
             onClick={() => {
-              history.push(tabItem.path);
+              navigate(tabItem.path);
             }}
             style={
               tabItem.path === location.pathname

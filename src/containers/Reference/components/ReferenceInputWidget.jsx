@@ -1,6 +1,19 @@
-import React, { useState, useContext, useEffect, useMemo, useCallback, useRef } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 import API from "@aws-amplify/api";
-import { Autocomplete, Box, Button, FormControlLabel, IconButton, Paper, Switch, TextField } from "@mui/material";
+import {
+  Button,
+  FormControlLabel,
+  IconButton,
+  Switch,
+  TextField,
+} from "@mui/material";
 import PropTypes from "prop-types";
 import { useForm, useController } from "react-hook-form";
 import { AddOutlined, DeleteOutline } from "@mui/icons-material";
@@ -37,22 +50,37 @@ const DataUpdateOptions = {
 };
 
 const ReferenceInputWidget = ({ existingReference }) => {
-  const { execute: postReference, loading: creatingReference } = useLazyAWSAPI(createReference);
-  const { execute: postPrivateReference, loading: creatingPrivateReference } = useLazyAWSAPI(createPrivateReference);
-  const { execute: changeReference, loading: updatingReference } = useLazyAWSAPI(updateReference);
-  const { execute: changePrivateReference, loading: updatingPrivateReference } = useLazyAWSAPI(updatePrivateReference);
-  const { suggestedReferenceTags, updateLocalReferenceTags, syncReferenceTags, requestRefetch } = useContext(
-    ReferenceContext
-  );
-  const { register, handleSubmit, reset, setValue, watch, getValues, control } = useForm();
+  const { execute: postReference, loading: creatingReference } =
+    useLazyAWSAPI(createReference);
+  const { execute: postPrivateReference, loading: creatingPrivateReference } =
+    useLazyAWSAPI(createPrivateReference);
+  const { execute: changeReference, loading: updatingReference } =
+    useLazyAWSAPI(updateReference);
+  const { execute: changePrivateReference, loading: updatingPrivateReference } =
+    useLazyAWSAPI(updatePrivateReference);
   const {
-    field: { onChange: onSwitchChange, onBlur: onSwitchBlue, value: switchValue, ref: switchRef },
+    suggestedReferenceTags,
+    updateLocalReferenceTags,
+    syncReferenceTags,
+    requestRefetch,
+  } = useContext(ReferenceContext);
+  const { register, handleSubmit, reset, setValue, watch, getValues, control } =
+    useForm();
+  const {
+    field: {
+      onChange: onSwitchChange,
+      onBlur: onSwitchBlue,
+      value: switchValue,
+      ref: switchRef,
+    },
   } = useController({
     name: "isPrivate",
     control,
     defaultValue: true,
   });
-  const [referenceTagInputs, setReferenceTagInputs] = useState(get(existingReference, "tags", []).map(() => uuid()));
+  const [referenceTagInputs, setReferenceTagInputs] = useState(
+    get(existingReference, "tags", []).map(() => uuid())
+  );
   const [isURLMetadataFetching, setIsURLMetadataFetching] = useState(false);
 
   const loading = useMemo(
@@ -62,16 +90,24 @@ const ReferenceInputWidget = ({ existingReference }) => {
       updatingReference ||
       updatingPrivateReference ||
       isURLMetadataFetching,
-    [creatingReference, creatingPrivateReference, updatingReference, updatingPrivateReference, isURLMetadataFetching]
+    [
+      creatingReference,
+      creatingPrivateReference,
+      updatingReference,
+      updatingPrivateReference,
+      isURLMetadataFetching,
+    ]
   );
 
   const watchURL = watch("url");
 
   const onURLChange = useRef(
-    debounce(async newURL => {
+    debounce(async (newURL) => {
       setIsURLMetadataFetching(true);
       if (isNull(existingReference)) {
-        const response = await API.post("bigboiexternalapi", "/url-metadata", { body: { url: newURL } });
+        const response = await API.post("bigboiexternalapi", "/url-metadata", {
+          body: { url: newURL },
+        });
         if (!get(getValues(), "title")) {
           const isPrivate = get(response, "isPrivate", true);
           setValue("isPrivate", isPrivate);
@@ -109,7 +145,7 @@ const ReferenceInputWidget = ({ existingReference }) => {
   }, []);
 
   const onReferenceMutate = useCallback(
-    async data => {
+    async (data) => {
       if (!data.title || !data.url) {
         throw new Error("Incomplete Data");
       }
@@ -120,15 +156,26 @@ const ReferenceInputWidget = ({ existingReference }) => {
           title: get(data, "title"),
           url: get(data, "url"),
           type: "REFERENCES",
-          tags: uniq(referenceTagInputs.map(input => get(data, `tags.${input}`)).filter(item => item)),
+          tags: uniq(
+            referenceTagInputs
+              .map((input) => get(data, `tags.${input}`))
+              .filter((item) => item)
+          ),
         },
       };
-      updateLocalReferenceTags(existingReferenceTags => [...existingReferenceTags, ...get(variables, "input.tags")]);
+      updateLocalReferenceTags((existingReferenceTags) => [
+        ...existingReferenceTags,
+        ...get(variables, "input.tags"),
+      ]);
       const isPrivate = get(data, "isPrivate", true);
       if (existingReference) {
-        isPrivate ? await changePrivateReference(variables) : await changeReference(variables);
+        isPrivate
+          ? await changePrivateReference(variables)
+          : await changeReference(variables);
       } else {
-        isPrivate ? await postPrivateReference(variables) : await postReference(variables);
+        isPrivate
+          ? await postPrivateReference(variables)
+          : await postReference(variables);
       }
       return { ...variables.input, isPrivate };
     },
@@ -152,38 +199,49 @@ const ReferenceInputWidget = ({ existingReference }) => {
     onReset();
   }, [syncReferenceTags, onReset, requestRefetch]);
 
-  const [onSubmit] = useDataUpdateWrapper(onReferenceMutate, onPostSubmit, DataUpdateOptions);
+  const [onSubmit] = useDataUpdateWrapper(
+    onReferenceMutate,
+    onPostSubmit,
+    DataUpdateOptions
+  );
 
   return (
-      <form className="bg-accent text-primary p-4">
-        <div className="flex justify-end">
-          <div className="flex flex-row gap-4 my-2">
-            <FormControlLabel
-              control={
-                <Switch
-                  ref={switchRef}
-                  checked={switchValue}
-                  onChange={(event, value) => {
-                    event.preventDefault();
-                    onSwitchChange(value);
-                  }}
-                  onBlur={onSwitchBlue}
-                  value={switchValue}
-                />
-              }
-              label="Private"
-              disabled={!isNull(existingReference)}
-            />
-            <button className="text-red-400 mx-2" onClick={onReset} disabled={!isNull(existingReference)}>
-              Reset
-            </button>
-            <button className="text-primary-400 mx-2 bg-foreground py-2 px-4 rounded-lg hover:bg-accent-foreground hover:cursor-pointer" 
-              onClick={handleSubmit(onSubmit)}
-              disabled={loading}>
-              Submit
-            </button>
-          </div>
+    <form className="bg-accent text-primary p-4">
+      <div className="flex justify-end">
+        <div className="flex flex-row gap-4 my-2">
+          <FormControlLabel
+            control={
+              <Switch
+                ref={switchRef}
+                checked={switchValue}
+                onChange={(event, value) => {
+                  event.preventDefault();
+                  onSwitchChange(value);
+                }}
+                onBlur={onSwitchBlue}
+                value={switchValue}
+              />
+            }
+            label="Private"
+            disabled={!isNull(existingReference)}
+          />
+          <button
+            className="text-red-400 mx-2"
+            onClick={onReset}
+            disabled={!isNull(existingReference)}
+          >
+            Reset
+          </button>
+          <button
+            className="text-primary-400 mx-2 bg-foreground py-2 px-4 rounded-lg hover:bg-accent-foreground hover:cursor-pointer"
+            onClick={handleSubmit(onSubmit)}
+            disabled={loading}
+          >
+            Submit
+          </button>
         </div>
+      </div>
+      <div className="flex flex-row justify-between gap-4 my-2.5">
         <StyledTextField
           id="reference-link"
           label="Link"
@@ -200,64 +258,72 @@ const ReferenceInputWidget = ({ existingReference }) => {
           className="lg:w-1/2 xl:w-1/2 sm:w-full xs:w-full w-full my-2"
           {...register("title", { onChange: onTitleChange.current })}
         />
-        <div className="gap-4 w-full" style={{ maxHeight: "50vh", overflow: "scroll" }}>
-          {referenceTagInputs.map((input, index) => (
-            <div key={input} className="flex my-2 mr-2 w-full">
-              <StyledAutocomplete
-                id={`reference-tag-${input}`}
-                className="w-full"
-                freeSolo
-                autoSelect
-                options={suggestedReferenceTags}
-                disabled={loading}
-                renderOption={(props, option) => (
-                  <li {...props}>
-                    <IconButton
-                      className="mr-2"
-                      onClick={() => {
-                        updateLocalReferenceTags(existingReferenceTags =>
-                          existingReferenceTags.filter(item => item !== option)
-                        );
-                      }}
-                    >
-                      <DeleteOutline sx={{ color: "var(--background)"}} />
-                    </IconButton>
-                    {option}
-                  </li>
-                )}
-                defaultValue={get(existingReference, `tags.${index}`, undefined)}
-                renderInput={params => (
-                  <TextField
-                    id={`reference-tag-textfield-${input}`}
-                    label={`Tag ${index + 1}`}
-                    variant="outlined"
-                    placeholder="tag with dot notation"
-                    {...params}
-                    {...register(`tags.${input}`)}
-                  />
-                )}
-              />
-              <IconButton
-                className="text-red-600 mr-2"
-                onClick={() => {
-                  setReferenceTagInputs(existingValue => existingValue.filter(item => item !== input));
-                  syncReferenceTags();
-                }}
-              >
-                <DeleteOutline sx={{ color: "var(--input)"}} />
-              </IconButton>
-            </div>
-          ))}
-          <Button
-            className="my-2 w-64"
-            variant="outlined"
-            startIcon={<AddOutlined />}
-            onClick={() => setReferenceTagInputs(existingValue => [...existingValue, uuid()])}
-          >
-            Add Tags
-          </Button>
-        </div>
-      </form>
+      </div>
+      <div
+        className="gap-4 w-full"
+        style={{ maxHeight: "50vh", overflow: "scroll" }}
+      >
+        {referenceTagInputs.map((input, index) => (
+          <div key={input} className="flex my-2 mr-2 w-full">
+            <StyledAutocomplete
+              id={`reference-tag-${input}`}
+              className="w-full"
+              freeSolo
+              autoSelect
+              options={suggestedReferenceTags}
+              disabled={loading}
+              renderOption={(props, option) => (
+                <li {...props}>
+                  <IconButton
+                    className="mr-2"
+                    onClick={() => {
+                      updateLocalReferenceTags((existingReferenceTags) =>
+                        existingReferenceTags.filter((item) => item !== option)
+                      );
+                    }}
+                  >
+                    <DeleteOutline sx={{ color: "var(--background)" }} />
+                  </IconButton>
+                  {option}
+                </li>
+              )}
+              defaultValue={get(existingReference, `tags.${index}`, undefined)}
+              renderInput={(params) => (
+                <TextField
+                  id={`reference-tag-textfield-${input}`}
+                  label={`Tag ${index + 1}`}
+                  variant="outlined"
+                  placeholder="tag with dot notation"
+                  {...params}
+                  {...register(`tags.${input}`)}
+                />
+              )}
+            />
+            <IconButton
+              className="text-red-600 mr-2"
+              onClick={() => {
+                setReferenceTagInputs((existingValue) =>
+                  existingValue.filter((item) => item !== input)
+                );
+                syncReferenceTags();
+              }}
+            >
+              <DeleteOutline sx={{ color: "var(--input)" }} />
+            </IconButton>
+          </div>
+        ))}
+        <Button
+          className="my-2 w-64"
+          variant="outlined"
+          startIcon={<AddOutlined />}
+          onClick={() =>
+            setReferenceTagInputs((existingValue) => [...existingValue, uuid()])
+          }
+        >
+          Add Tags
+        </Button>
+      </div>
+    </form>
   );
 };
 

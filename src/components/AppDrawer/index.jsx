@@ -10,7 +10,7 @@ import { LogoTitle } from "../LogoTitle";
 import { VERSION } from "../../utils/constants";
 import { groupBy, isEmpty } from "lodash";
 import MaterialListItem from "../MaterialListItem";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 
 const classes = {
   switch: "FormSwitch",
@@ -39,7 +39,7 @@ const StyledSwitchDiv = styled("div")(({ theme }) => ({
 
 export const AppDrawer = ({ open, onClose, routeList }) => {
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { setIsDark, isDark, globalAnimation, setGlobalAnimation } =
     useContext(LayoutContext);
 
@@ -109,7 +109,7 @@ export const AppDrawer = ({ open, onClose, routeList }) => {
                     item={item}
                     key={item.name}
                     onClick={(listItem) => {
-                      history.push(listItem.path);
+                      navigate(listItem.path);
                       onClose();
                     }}
                     isSelected={(listItem) => location.pathname === listItem.path}

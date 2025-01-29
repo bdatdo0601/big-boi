@@ -7,7 +7,7 @@ import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 import "./visual_md.less";
 import { CheckBoxOutlined } from "@mui/icons-material";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { get, isEmpty, merge, trim } from "lodash";
 
 import "./index.less";
@@ -35,7 +35,7 @@ const DataUpdateOptions = {
 };
 
 export default function BlogCreation() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { postID } = useParams();
 
   const defaultDataInputs = useMemo(() => ({ id: postID }), [postID]);
@@ -68,8 +68,8 @@ export default function BlogCreation() {
     return variables.input;
   }, [data, mutatePost, postPost, rawDefaultData]);
   const onPostUpdateBlogData = useCallback(async () => {
-    history.replace("/blogmanager");
-  }, [history]);
+    navigate("/blogmanager", { replace: true });
+  }, [navigate]);
 
   const [onSubmit] = useDataUpdateWrapper(updateBlogPostData, onPostUpdateBlogData, DataUpdateOptions);
 

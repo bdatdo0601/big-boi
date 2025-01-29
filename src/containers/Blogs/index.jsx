@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, Fragment, useState, useMemo } from "react";
 import { get } from "lodash";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import "./index.less";
 import { Seo } from "../../components/SEO";
 
@@ -8,7 +8,7 @@ const blogURL = process.env.NODE_ENV === "development" ? "http://localhost:8000"
 
 export default function Blogs() {
   const iframeRef = useRef(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const [currentData, setCurrentData] = useState({ site: { name: "Dat Do's Blogs and Thoughts" }, path: "/" });
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function Blogs() {
             if (decoded.newSite) {
               window.open(decoded.path);
             } else {
-              history.push(`/blogs${decoded.path}`);
+              navigate(`/blogs${decoded.path}`);
             }
           }
         }
@@ -36,7 +36,7 @@ export default function Blogs() {
     return () => {
       window.removeEventListener("message", messageHandler);
     };
-  }, [history]);
+  }, [navigate]);
   const titleTemplate = useMemo(() => location.pathname.replace(/\//gm, ""), [location]);
 
   return (

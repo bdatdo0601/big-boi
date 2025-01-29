@@ -57,7 +57,7 @@ export default function Reference() {
   return (
     <ReferenceContextProvider>
       {currentUser && (
-        <div className="fixed right-0 z-50 top-auto w-full xl:top-0 2xl:top-0 lg:top-0 md:top-0 md:w-1/2 xl:w-1/2 2xl:w-1/2 lg:w-1/2 shadow-lg">
+        <div className="sticky left-0 z-50 top-auto w-full xl:top-0 2xl:top-0 lg:top-0 md:top-0 md:w-1/2 xl:w-1/2 2xl:w-1/2 lg:w-1/2 shadow-lg">
           <Accordion
             expanded={isReferenceCreationExpanded}
             onChange={(e, newValue) => {

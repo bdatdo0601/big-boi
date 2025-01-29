@@ -32,9 +32,9 @@
     "action": "/share-target/",
     "method": "GET",
     "params": {
-      "title": "title",
-      "tags": "tags",
-      "url": "url",
+      "title": "name",
+      "text": "description",
+      "url": "link",
       "isPrivate": "isPrivate"
     }
   }

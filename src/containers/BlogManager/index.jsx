@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from "react";
 import { Button, CircularProgress, Typography } from "@mui/material";
 import { get, orderBy } from "lodash";
 import { v4 as uuid } from "uuid";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { AddRounded } from "@mui/icons-material";
 
 import { useAWSAPI, useLazyAWSAPI } from "../../utils/awsAPI";
@@ -26,7 +26,7 @@ const DataUpdateOptions = {
 };
 
 export default function BlogManager() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const query = useMemo(() => ({ limit: 10000 }), []);
   const {
     data: rawData,
@@ -88,7 +88,7 @@ export default function BlogManager() {
           style={{ width: "60%", margin: 8, maxWidth: 400 }}
           onClick={() => {
             const newID = uuid();
-            history.push(`/blogmanager/update/${newID}`);
+            navigate(`/blogmanager/update/${newID}`);
           }}
         >
           Add New Blog
@@ -107,7 +107,7 @@ export default function BlogManager() {
                 deletingPost={deletingPost}
                 onPostClick={() => {
                   if (!get(post, "postType")) {
-                    history.push(`/blogmanager/update/${post.id}`);
+                    navigate(`/blogmanager/update/${post.id}`);
                     return;
                   }
                   if (
