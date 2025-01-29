@@ -79,7 +79,7 @@ const ShareTarget = () => {
 
   return (
     <div>
-      Share Target: {title} {url} {isPrivate}
+      Share Target: {searchParams.getAll().join(", ")}
     </div>
   );
 };
