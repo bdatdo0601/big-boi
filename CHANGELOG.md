@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.1](https://github.com/bdatdo0601/big-boi/compare/v1.22.0...v1.22.1) (2025-01-29)
+
+
+### Bug Fixes
+
+* rsbuild output dir ([bf2e649](https://github.com/bdatdo0601/big-boi/commit/bf2e649109af4ed82e93a24db5379cd24cf3e9dd))
+
 ## [1.22.0](https://github.com/bdatdo0601/big-boi/compare/v1.21.14...v1.22.0) (2025-01-29)
 
 
