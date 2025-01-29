@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useCallback } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { v4 as uuid } from "uuid";
 
 import {
@@ -10,31 +10,25 @@ import { useLazyAWSAPI } from "../../utils/awsAPI";
 import { useDataUpdateWrapper } from "../../utils/hooks";
 import EventType from "../../assets/event-type.json";
 
-const DataUpdateOptions = {
-  snackBar: {
-    successMessage: "Reference Mutated",
-    errorMessage: "Unable to Mutate Reference",
-  },
-  logging: {
-    eventType: EventType.Personal.Reference.Update,
-  },
-};
-
 const ShareTarget = () => {
   const navigate = useNavigate();
-  const params = useParams();
+  const [searchParams] = useSearchParams();
   const { execute: postReference } = useLazyAWSAPI(createReference);
   const { execute: postPrivateReference } = useLazyAWSAPI(
     createPrivateReference
   );
 
-  const title = useMemo(() => params.name, [params]);
-  const url = useMemo(() => params.link, [params]);
+  const title = useMemo(() => searchParams.get("name"), [searchParams]);
+  const url = useMemo(() => searchParams.get("link"), [searchParams]);
   const tags = useMemo(
-    () => (params.tags || "").split(",").map((item) => item.trim()),
-    [params]
+    () =>
+      (searchParams.get("tags") || "").split(",").map((item) => item.trim()),
+    [searchParams]
   );
-  const isPrivate = useMemo(() => params.get("isPrivate") || true, [params]);
+  const isPrivate = useMemo(
+    () => searchParams.get("isPrivate") || true,
+    [searchParams]
+  );
 
   const onReferenceMutate = useCallback(async () => {
     const variables = {
@@ -55,8 +49,21 @@ const ShareTarget = () => {
     return { ...variables.input, isPrivate };
   }, [isPrivate, postPrivateReference, postReference, title, url, tags]);
   const onPostSubmit = useCallback(async () => {
-    navigate("/", { replace: true });
+    navigate("/reference", { replace: true });
   }, [navigate]);
+
+  const DataUpdateOptions = useMemo(
+    () => ({
+      snackBar: {
+        successMessage: `Add new reference ${title} (${url})`,
+        errorMessage: `Unable to add ${title} (${url})`,
+      },
+      logging: {
+        eventType: EventType.Personal.Reference.Update,
+      },
+    }),
+    [title, url]
+  );
 
   const [onSubmit] = useDataUpdateWrapper(
     onReferenceMutate,

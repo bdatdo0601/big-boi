@@ -20,7 +20,7 @@ export const useAWSAPIGetAll = (operation, input, authMode = "AMAZON_COGNITO_USE
     async (variables = input, ...args) => {
         try {
           setLoading(true);
-          let nextToken = undefined;
+          let nextToken;
           const data = [];
           do {
             const formattedOperation = graphqlOperation(operation, {

@@ -109,6 +109,9 @@ importers:
       convertkit-react:
         specifier: ^1.5.5
         version: 1.5.5
+      dompurify:
+        specifier: ^3.2.3
+        version: 3.2.3
       dot-object:
         specifier: ^2.1.5
         version: 2.1.5
@@ -3888,6 +3891,9 @@ packages:
 
   dompurify@2.5.8:
     resolution: {integrity: sha512-o1vSNgrmYMQObbSSvF/1brBYEQPHhV1+gsmrusO7/GXtp1T9rCS8cXFqVxK/9crT1jA6Ccv+5MTSjBNqr7Sovw==}
+
+  dompurify@3.2.3:
+    resolution: {integrity: sha512-U1U5Hzc2MO0oW3DF+G9qYN0aT7atAou4AgI0XjWz061nyBPbdxkfdhfy5uMgGn6+oLFCfn44ZGbdDqCzVmlOWA==}
 
   domutils@1.5.1:
     resolution: {integrity: sha512-gSu5Oi/I+3wDENBsOWBiRK1eoGxcywYSqg3rR960/+EfY0CF4EX1VPkgHOZ3WiS/Jg2DtliF6BhWcHlfpYUcGw==}
@@ -12380,6 +12386,10 @@ snapshots:
 
   dompurify@2.5.8:
     optional: true
+
+  dompurify@3.2.3:
+    optionalDependencies:
+      '@types/trusted-types': 2.0.7
 
   domutils@1.5.1:
     dependencies:
