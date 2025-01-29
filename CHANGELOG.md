@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.25.0](https://github.com/bdatdo0601/big-boi/compare/v1.24.2...v1.25.0) (2025-01-29)
+
+
+### Features
+
+* refactor reference ([7ee95d7](https://github.com/bdatdo0601/big-boi/commit/7ee95d76926c65124636fc456089b9e278ac85a5))
+
 ### [1.24.2](https://github.com/bdatdo0601/big-boi/compare/v1.24.1...v1.24.2) (2025-01-29)
 
 
