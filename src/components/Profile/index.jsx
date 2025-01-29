@@ -6,7 +6,7 @@ import { Typography } from "@mui/material";
 import MAIN_PICTURE from "../../assets/main_picture.jpg";
 import LayoutContext from "../../context/layout";
 
-import "./index.less";
+import "./index.css";
 
 export default function Profile({ image, name, wrapperStyle, imageStyle, animation }) {
   const { isDark } = useContext(LayoutContext);

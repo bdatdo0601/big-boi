@@ -5,12 +5,12 @@ import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
-import "./visual_md.less";
+import "./visual_md.css";
 import { CheckBoxOutlined } from "@mui/icons-material";
 import { useNavigate, useParams } from "react-router";
 import { get, isEmpty, merge, trim } from "lodash";
 
-import "./index.less";
+import "./index.css";
 import { uploadPhoto, getPhotoURL } from "../../../utils/awsStorage";
 import { useAWSAPI, useLazyAWSAPI } from "../../../utils/awsAPI";
 import { getPost } from "../../../graphql/queries";

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, Fragment, useState, useMemo } from "react";
 import { get } from "lodash";
 import { useNavigate, useLocation } from "react-router";
-import "./index.less";
+import "./index.css";
 import { Seo } from "../../components/SEO";
 
 const blogURL = process.env.NODE_ENV === "development" ? "http://localhost:8000" : "https://blogs.datbdo.com";

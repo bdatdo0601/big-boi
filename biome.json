@@ -213,7 +213,7 @@
 				"noDuplicateJsxProps": "error",
 				"noDuplicateObjectKeys": "warn",
 				"noDuplicateParameters": "warn",
-				"noEmptyBlockStatements": "error",
+				"noEmptyBlockStatements": "off",
 				"noFallthroughSwitchClause": "warn",
 				"noFunctionAssign": "warn",
 				"noGlobalAssign": "error",

@@ -9,7 +9,7 @@
   .html-wrap {
     font-family: "Courier New";
     padding: 6rem auto 1rem;
-    // max-width: 48rem;
+    {{/* max-width: 48rem; */}}
     padding: 0.5rem;
 
     font-size: 12px;

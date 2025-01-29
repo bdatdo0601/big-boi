@@ -8,7 +8,7 @@ import ReferenceInputWidget from "./components/ReferenceInputWidget";
 import { ReferenceContextProvider } from "./context";
 import Searchable from "./subcontainer/Searchable";
 import ReferenceTabs from "./subcontainer/ReferenceTabs";
-import "./index.less";
+import "./index.css";
 
 const DndScrollingDiv = withScrolling("div");
 

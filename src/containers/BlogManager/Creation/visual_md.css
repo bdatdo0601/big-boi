@@ -222,7 +222,7 @@
   ul {
     margin-top: 0rem;
     margin-bottom: 3rem;
-    // special case so ul lines up with ol
+    {{/* // special case so ul lines up with ol */}}
     padding-left: 24px;
     list-style: square;
   }

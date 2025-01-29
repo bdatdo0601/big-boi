@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { animated, useSpring } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 
-import "./index.less";
+import "./index.css";
 
 export default function ImageGridDisplay({ url, name, animation, style }) {
   const [animateProps, setAnimateProps] = useSpring(() => ({

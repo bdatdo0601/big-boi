@@ -5,6 +5,8 @@ import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { LogoTitle } from "../../components/LogoTitle";
 
+const subdomain = window.location.host.split(".")[0];
+
 export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
   const navigate = useNavigate();
   const location = useLocation();

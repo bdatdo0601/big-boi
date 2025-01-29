@@ -3,7 +3,7 @@ import { Typography, Grid } from "@mui/material";
 import { fetchPhotos, uploadPhoto, deletePhoto } from "../../utils/awsStorage";
 import PhotoUpload from "./photoUpload";
 import ResumeSchemaEditor from "./resumeSchemaEditor";
-import "./index.less";
+import "./index.css";
 
 export default function AdminDashboard() {
   return (

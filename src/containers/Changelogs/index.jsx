@@ -1,7 +1,7 @@
 import React from "react";
 import { Paper } from "@mui/material";
 
-import "./index.less";
+import "./index.css";
 import useGetTextFileFromURL from "../../utils/hooks/useFetchTextFromURL";
 import MarkdownDisplayer from "../../components/MarkdownDisplayer";
 

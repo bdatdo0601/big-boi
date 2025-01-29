@@ -2,20 +2,13 @@ import React, { useContext, useMemo } from "react";
 import { flattenDeep, get, isString } from "lodash";
 import PropTypes from "prop-types";
 import moment from "moment";
-import {
-  Paper,
-  Typography,
-  Alert,
-  AlertTitle,
-  ListItem,
-  Link,
-} from "@mui/material";
+import { AlertTitle, ListItem, Link } from "@mui/material";
 import { animated, useSpring } from "@react-spring/web";
 import { FixedSizeList } from "react-window";
 
 import ReactStringReplacer from "../../../utils/reactStringReplacer";
 import EventMessageContext from "../../../context/eventmessage";
-import "./index.less";
+import "./index.css";
 import DataIcon from "../../../components/DataIcon";
 import ProfileCard from "../../../components/ProfileCard";
 import LayoutContext from "../../../context/layout";

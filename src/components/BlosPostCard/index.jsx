@@ -16,7 +16,6 @@ import { Tweet } from "react-twitter-widgets";
 import { InstagramEmbed } from "react-social-media-embed";
 
 import { POST_STATE } from "../../utils/constants";
-import "./index.less";
 import LayoutContext from "../../context/layout";
 
 const DefaultCardContent = ({ post, showState, onPostClick, isDark }) => (

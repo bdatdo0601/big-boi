@@ -9,7 +9,7 @@ import Ajv from "ajv";
 import { CloudUploadOutlined, RestoreOutlined } from "@mui/icons-material";
 import { isEqual } from "lodash";
 
-import "./index.less";
+import "./index.css";
 
 import DEFAULT_RESUME from "../../assets/default-resume.json";
 import { useGetFile, useUploadFile } from "../../utils/awsStorage";

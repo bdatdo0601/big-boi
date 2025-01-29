@@ -5,10 +5,9 @@ export const POST_STATE = {
   PUBLISHED: "PUBLISHED",
   ARCHIVED: "ARCHIVED",
 };
+export const VERSION = import.meta.env.SITE_VERSION || "0.0.0";
 
-export const VERSION = import.meta.env.VITE_VERSION || "0.0.0";
-
-export const WEBSITE_TITLE = import.meta.env.VITE_WEBSITE_TITLE || "Dat Do";
+export const WEBSITE_TITLE = import.meta.env.SITE_WEBSITE_TITLE || "Dat Do";
 
 export const RESUME = {
   PREFIX: "resume/",

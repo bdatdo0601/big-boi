@@ -3,7 +3,7 @@ import MailchimpSubscribe from "react-mailchimp-subscribe";
 import { useForm } from "react-hook-form";
 import { Button, Input, Paper, Typography } from "@mui/material";
 
-import "./index.less";
+import "./index.css";
 
 const CustomForm = ({ status, message, onValidated, onCloseModal }) => {
   const { register, reset, handleSubmit } = useForm();

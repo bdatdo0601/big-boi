@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useSprings, animated, to as interpolate } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
-import "./index.less";
+import "./index.css";
 import { useTheme } from "@mui/material";
 import { sample } from "lodash";
 

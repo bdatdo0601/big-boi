@@ -73,6 +73,7 @@
     "react-vitae": "^1.0.9",
     "react-window": "^1.8.11",
     "styled-components": "^6.1.14",
+    "url-join": "^5.0.0",
     "use-local-storage-state": "^16.0.0",
     "uuid": "^11.0.5",
     "validator": "^13.12.0",
@@ -91,9 +92,9 @@
     "workbox-streams": "^7.3.0"
   },
   "scripts": {
-    "start": "cross-env VITE_VERSION=$npm_package_version vite",
-    "build": "cross-env VITE_VERSION=$npm_package_version vite build",
-    "preview": "cross-env VITE_VERSION=$npm_package_version vite preview",
+    "start": "cross-env SITE_VERSION=$npm_package_version rsbuild dev",
+    "build": "cross-env SITE_VERSION=$npm_package_version rsbuild build",
+    "preview": "cross-env SITE_VERSION=$npm_package_version rsbuild preview",
     "test": "vitest",
     "release": "standard-version && git push --follow-tags origin develop"
   },
@@ -117,6 +118,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@rsbuild/core": "^1.2.3",
+    "@rsbuild/plugin-react": "^1.1.0",
     "@tailwindcss/postcss": "^4.0.0",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/dom": "^10.4.0",
@@ -130,6 +133,7 @@
     "cross-env": "^7.0.3",
     "customize-cra": "^1.0.0",
     "happy-dom": "^16.7.2",
+    "inject-manifest-plugin": "^0.6.5",
     "jsdom": "^26.0.0",
     "less": "^4.2.2",
     "less-loader": "^12.2.0",
@@ -141,7 +145,6 @@
     "tailwind-merge": "^2.5.4",
     "tailwindcss": "^4.0.0",
     "tailwindcss-animate": "^1.0.7",
-    "vite": "^6.0.11",
     "vite-plugin-env-compatible": "^2.0.1",
     "vite-plugin-pwa": "^0.21.1",
     "vite-plugin-svgr": "^4.3.0",

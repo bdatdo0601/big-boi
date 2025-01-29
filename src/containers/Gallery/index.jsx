@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import ProfileCard from "../../components/ProfileCard";
 import LayoutContext from "../../context/layout";
 import ImagesDisplay from "./imagesDisplay";
-import "./index.less";
+import "./index.css";
 
 const descriptions = [
   "I put in here some of my best memory with friends and families, along with my interest outside of programming.",

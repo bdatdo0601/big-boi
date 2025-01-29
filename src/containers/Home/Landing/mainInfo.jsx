@@ -24,11 +24,9 @@ const MainInfo = ({ keywords, containerStyle, className, animation }) => (
       <div style={{ flex: 1, width: "100%" }}>
         <DataStack
           dataList={keywords.map(keyword => (
-            <>
-              <Typography variant="h4" style={{ fontFamily: "Kalam", color: "black" }}>
+              <Typography key={keyword} variant="h4" style={{ fontFamily: "Kalam", color: "black" }}>
                 {keyword}
               </Typography>
-            </>
           ))}
           listStyle={{
             marginTop: 100,
