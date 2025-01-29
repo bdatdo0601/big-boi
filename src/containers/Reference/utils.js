@@ -34,7 +34,7 @@ export const convertToReferenceRenderedData = data =>
     },
     {
       children: {
-        Tagless: { name: "Tagless", references: [], path: "Tagless", children: {} },
+        Tagless: { name: "Tagless", references: [], path: "", children: {} },
       },
     }
   );

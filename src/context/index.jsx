@@ -9,15 +9,20 @@ import { LayoutContextProvider } from "./layout";
 import { EventMessageContextProvider } from "./eventmessage";
 import { isTouchDevice } from "../utils";
 import "@aws-amplify/ui-react/styles.css"; // default theme
+import { AuthProvider } from "./auth";
 
 export default function ContextProvider({ children }) {
   return (
     <DndProvider backend={isTouchDevice() ? TouchBackend : HTML5Backend}>
-      <LayoutContextProvider>
-        <SnackbarProvider>
-          <EventMessageContextProvider>{children}</EventMessageContextProvider>
-        </SnackbarProvider>
-      </LayoutContextProvider>
+      <AuthProvider>
+        <LayoutContextProvider>
+          <SnackbarProvider>
+            <EventMessageContextProvider>
+              {children}
+            </EventMessageContextProvider>
+          </SnackbarProvider>
+        </LayoutContextProvider>
+      </AuthProvider>
     </DndProvider>
   );
 }

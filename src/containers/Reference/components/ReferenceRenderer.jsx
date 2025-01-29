@@ -1,6 +1,14 @@
 import React, { useCallback, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import { Chip, IconButton, Link, Modal, Paper, Tooltip, Typography } from "@mui/material";
+import {
+  Chip,
+  IconButton,
+  Link,
+  Modal,
+  Paper,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { get } from "lodash";
 import { useSnackbar } from "notistack";
 import {
@@ -45,7 +53,7 @@ function fallbackCopyTextToClipboard(text) {
   document.body.removeChild(textArea);
 }
 
-const copyTextToClipboard = async text => {
+const copyTextToClipboard = async (text) => {
   if (!navigator.clipboard) {
     fallbackCopyTextToClipboard(text);
     return;
@@ -61,25 +69,38 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
   const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
     type: DragDropTypes.LINK,
     item: reference,
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   }));
   const { enqueueSnackbar } = useSnackbar();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { execute: changeReference, loading: updatingReference } = useLazyAWSAPI(updateReference);
-  const { execute: changePrivateReference, loading: updatingPrivateReference } = useLazyAWSAPI(updatePrivateReference);
-  const { execute: removeReference, loading: deletingReference } = useLazyAWSAPI(deleteReference);
-  const { execute: removePrivateReference, loading: deletingPrivateReference } = useLazyAWSAPI(deletePrivateReference);
+  const { execute: changeReference, loading: updatingReference } =
+    useLazyAWSAPI(updateReference);
+  const { execute: changePrivateReference, loading: updatingPrivateReference } =
+    useLazyAWSAPI(updatePrivateReference);
+  const { execute: removeReference, loading: deletingReference } =
+    useLazyAWSAPI(deleteReference);
+  const { execute: removePrivateReference, loading: deletingPrivateReference } =
+    useLazyAWSAPI(deletePrivateReference);
   const { requestRefetch, currentUser } = useContext(ReferenceContext);
 
   const toggleModal = useCallback(() => {
-    setIsModalOpen(existingState => !existingState);
+    setIsModalOpen((existingState) => !existingState);
   }, []);
 
   const loading = useMemo(
-    () => updatingReference || updatingPrivateReference || deletingReference || deletingPrivateReference,
-    [updatingReference, updatingPrivateReference, deletingReference, deletingPrivateReference]
+    () =>
+      updatingReference ||
+      updatingPrivateReference ||
+      deletingReference ||
+      deletingPrivateReference,
+    [
+      updatingReference,
+      updatingPrivateReference,
+      deletingReference,
+      deletingPrivateReference,
+    ]
   );
 
   const onLinkClick = useCallback(async () => {
@@ -90,7 +111,9 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
           clickCount: get(reference, "clickCount", 0) + 1,
         },
       };
-      get(reference, "isPrivate", true) ? await changePrivateReference(variables) : await changeReference(variables);
+      get(reference, "isPrivate", true)
+        ? await changePrivateReference(variables)
+        : await changeReference(variables);
     } catch (err) {
       // eslint-disable-next-line
       console.warn("Unable to count clicks: ", err);
@@ -106,12 +129,18 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
         id: get(reference, "id"),
       },
     };
-    get(reference, "isPrivate", true) ? await removePrivateReference(variables) : await removeReference(variables);
+    get(reference, "isPrivate", true)
+      ? await removePrivateReference(variables)
+      : await removeReference(variables);
     await requestRefetch();
   }, [reference, removeReference, removePrivateReference, requestRefetch]);
 
   return (
-    <div ref={dragPreview} style={{ opacity: isDragging ? 0.5 : 1 }} className="w-full flex border-double p-2 bg-accent rounded-2xl items-center">
+    <div
+      ref={dragPreview}
+      style={{ opacity: isDragging ? 0.5 : 1, backgroundColor: get(reference, "isPrivate") ? "var(--secondary)" : "var(--accent)" }}
+      className="flex border-double py-1 px-2 rounded-2xl items-center"
+    >
       <Modal
         open={isModalOpen}
         onClose={() => {
@@ -120,10 +149,10 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Paper className="p-12">
+        <div className="bg-popover scroll-y-auto max-h-[90vh] overflow-y-auto p-4 rounded-lg">
           <Typography variant="h5">Update Reference</Typography>
           <ReferenceInputWidget existingReference={reference} />
-        </Paper>
+        </div>
       </Modal>
       {currentUser && draggable && (
         <span ref={drag}>
@@ -134,38 +163,50 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
         </span>
       )}
       <span
-        className="flex justify-between align-middle w-full ml-1"
-        onDragStart={e => {
+        className="flex justify-between align-middle w-full ml-1 items-center"
+        onDragStart={(e) => {
           e.preventDefault();
           e.stopPropagation();
         }}
       >
-        <span className="mt-2 mx-2">
-          {get(reference, "isPrivate") && <VisibilityOffOutlined className="mr-2 text-gray-600" sx={{ color: "var(--input)" }}  />}
-          <button className="mr-2 text-input hover:cursor-pointer" href="#" onClick={onLinkClick}>
-            <span className="text-lg text-input underline">{get(reference, "title")}</span>
-          </button>
-          {showTags &&
-            get(reference, "tags", []).map(item => <span className="rounded-xl bg-card py-2 px-3 text-xs italic" key={item}>{item}</span>)}
-        </span>
+        <IconButton
+          disabled={loading}
+          onClick={async () => {
+            await copyTextToClipboard(get(reference, "url"));
+            enqueueSnackbar(`"${get(reference, "title")}" URL Copied`, {
+              variant: "info",
+              anchorOrigin: { vertical: "top", horizontal: "left" },
+            });
+          }}
+        >
+          <ContentCopyOutlined sx={{ color: "var(--input)" }} />
+        </IconButton>
+        <button
+          className="mr-2 text-input hover:cursor-pointer"
+          href="#"
+          onClick={onLinkClick}
+        >
+          <span className="text-lg text-input underline">
+            {get(reference, "title")}
+          </span>
+        </button>
+        {showTags &&
+          get(reference, "tags", []).map((item) => (
+            <span
+              className="rounded-xl bg-foreground py-1 px-2 mr-1 text-xs italic text-wrap"
+              key={item}
+            >
+              {item}
+            </span>
+          ))}
         <Tooltip
           placement="top-end"
           followCursor
-          title={currentUser ? `Visited ${get(reference, "clickCount")} time(s)` : ""}
+          title={
+            currentUser ? `Visited ${get(reference, "clickCount")} time(s)` : ""
+          }
         >
           <span>
-            <IconButton
-              disabled={loading}
-              onClick={async () => {
-                await copyTextToClipboard(get(reference, "url"));
-                enqueueSnackbar(`"${get(reference, "title")}" URL Copied`, {
-                  variant: "info",
-                  anchorOrigin: { vertical: "top", horizontal: "left" },
-                });
-              }}
-            >
-              <ContentCopyOutlined sx={{ color: "var(--input)" }} />
-            </IconButton>
             {navigator.canShare && navigator.canShare() && (
               <IconButton
                 disabled={loading}
@@ -173,11 +214,15 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
                   await navigator.share({
                     title: get(reference, "title"),
                     url: get(reference, "url"),
-                    text: `${get(reference, "title")} [${get(reference, "tags", []).join(", ")}]`,
+                    text: `${get(reference, "title")} [${get(
+                      reference,
+                      "tags",
+                      []
+                    ).join(", ")}]`,
                   });
                 }}
               >
-                <ShareOutlined sx={{ color: "var(--input)" }}  />
+                <ShareOutlined sx={{ color: "var(--input)" }} />
               </IconButton>
             )}
             {currentUser && (
@@ -186,7 +231,11 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
               </IconButton>
             )}
             {currentUser && (
-              <IconButton color="error" disabled={loading} onClick={onLinkDelete}>
+              <IconButton
+                color="error"
+                disabled={loading}
+                onClick={onLinkDelete}
+              >
                 <DeleteOutlined />
               </IconButton>
             )}

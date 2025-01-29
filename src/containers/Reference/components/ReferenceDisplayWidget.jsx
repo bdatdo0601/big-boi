@@ -125,33 +125,27 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
 
   return (
     <div
-      className={`${level > 0 ? "border-l-2 pl-2" : ""} ${
+      className={`${level > 0 ? "border-l-2 pl-6 mr-4" : ""} ${
         isOver ? "border-blue-600" : ""
       }`}
     >
       <div ref={drop}>
         {level !== 0 && (
-          <Typography className="mx-2 mb-1">{get(data, "name")}</Typography>
+          <span className="text-xl text-input bg-foreground px-2 py-1 rounded-lg">{get(data, "name")}</span>
         )}
         {get(data, "references", []).length !== 0 && (
-          <List>
-            <Grid container>
-              {get(data, "references", []).map((item) => (
-                <Grid
-                  item
-                  key={get(item, "id")}
-                  {...getListItemSpanFromLevel(level)}
-                >
-                  <ListItem className="mt-1 px-2 p-0">
-                    <ReferenceRenderer reference={item} draggable />
-                  </ListItem>
-                </Grid>
-              ))}
-            </Grid>
-          </List>
+          <div className="flex flex-wrap gap-2 my-4">
+            {get(data, "references", []).map((item) => (
+              <ReferenceRenderer
+                key={get(item, "id")}
+                reference={item}
+                draggable
+              />
+            ))}
+          </div>
         )}
       </div>
-      <Grid container>
+      <div className="flex flex-wrap gap-8 mt-2">
         {Object.values(get(data, "children", {}))
           .filter(
             (item) =>
@@ -159,20 +153,14 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
               !isEmpty(get(item, "children"))
           )
           .map((item) => (
-            <Grid
-              item
+            <TreeReferenceDisplayWidget
               key={get(item, "name")}
-              {...getSpanFromLevel(level)}
-              className={level === 0 ? "mb-8" : "mt-1"}
-            >
-              <TreeReferenceDisplayWidget
-                data={item}
-                loading={loading}
-                bordered
-              />
-            </Grid>
+              data={item}
+              loading={loading}
+              bordered
+            />
           ))}
-      </Grid>
+      </div>
     </div>
   );
 };
@@ -269,7 +257,7 @@ const ReferenceDisplayWidget = ({ data, listData, widgetKey, ...props }) => {
       {isDisplayTreeReference ? (
         <TreeReferenceDisplayWidget data={data} {...props} />
       ) : (
-        <div className="min-sm:columns-3 columns-1">
+        <div className="flex flex-wrap gap-3">
           {(listData || []).map((item) => (
             <div key={get(item, "id")} className="mb-2">
               <ReferenceRenderer showTags reference={item} />

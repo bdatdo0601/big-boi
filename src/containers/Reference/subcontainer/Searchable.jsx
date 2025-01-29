@@ -31,7 +31,7 @@ const Searchable = () => {
     listPrivateReferences,
     query
   );
-  const { updateLocalReferenceTags, syncReferenceTags, registerRefetch, deregisterRefetch } = useContext(
+  const { registerRefetch, deregisterRefetch } = useContext(
     ReferenceContext
   );
 
@@ -88,44 +88,17 @@ const Searchable = () => {
     }, 200)
   );
   return (
-    <div className="p-4 m-2 text-left bg-card rounded-lg text-input">
+    <div className="p-4 m-2 text-left bg-muted rounded-lg text-input">
       <div className="flex my-4 mr-2 w-full">
-        <StyledAutocomplete
-          id="reference-search"
-          className="w-full"
-          freeSolo
-          autoSelect
+        <input
+          className="w-full p-4 border-2 border-input rounded-xl text-input"
+          type="text"
+          placeholder="Search References"
           value={autoCompleteText}
-          onInputChange={(e, newValue) => {
-            setAutoCompleteText(newValue);
-            onSearch.current(newValue, combinedData);
+          onChange={e => {
+            setAutoCompleteText(e.target.value);
+            onSearch.current(e.target.value, combinedData);
           }}
-          options={[]}
-          renderOption={(props, option) => (
-            <li {...props}>
-              <IconButton
-                className="text-red-600 mr-2"
-                onClick={() => {
-                  updateLocalReferenceTags(existingReferenceTags =>
-                    existingReferenceTags.filter(item => item !== option)
-                  );
-                  syncReferenceTags();
-                }}
-              >
-                <DeleteOutline />
-              </IconButton>
-              {option}
-            </li>
-          )}
-          renderInput={params => (
-            <TextField
-              id="reference-search-text-field"
-              label="Search Reference Here"
-              variant="outlined"
-              placeholder="Search References"
-              {...params}
-            />
-          )}
         />
       </div>
 

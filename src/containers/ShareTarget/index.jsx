@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useCallback } from "react";
+import { useEffect, useMemo, useCallback, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { v4 as uuid } from "uuid";
 
@@ -9,78 +9,99 @@ import {
 import { useLazyAWSAPI } from "../../utils/awsAPI";
 import { useDataUpdateWrapper } from "../../utils/hooks";
 import EventType from "../../assets/event-type.json";
+import ReferenceInputWidget from "../Reference/components/ReferenceInputWidget";
+import { ReferenceContextProvider } from "../Reference/context";
+
+const urlRegex =
+  /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi;
 
 const ShareTarget = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { execute: postReference } = useLazyAWSAPI(createReference);
-  const { execute: postPrivateReference } = useLazyAWSAPI(
-    createPrivateReference
+
+  const title = useMemo(
+    () => decodeURI(searchParams.get("name")),
+    [searchParams]
+  );
+  const description = useMemo(
+    () => decodeURI(searchParams.get("description")),
+    [searchParams]
+  );
+  const url = useMemo(
+    () => decodeURI(searchParams.get("link")),
+    [searchParams]
   );
 
-  const title = useMemo(() => searchParams.get("name"), [searchParams]);
-  const url = useMemo(() => searchParams.get("link"), [searchParams]);
+  const validURLS = useMemo(() => {
+    const searchStrings = [title, description, url]
+      .filter((item) => item)
+      .join(" ");
+    return searchStrings.match(urlRegex) || [];
+  }, [url, title, description]);
+
+  const referenceTitle = useMemo(() => {
+    return [title]
+      .map((item) => item.replace(urlRegex, ""))
+      .filter((item) => item)
+      .join(" - ");
+  }, [title, description]);
+
   const tags = useMemo(
     () =>
-      (searchParams.get("tags") || "").split(",").map((item) => item.trim()),
+      decodeURI(searchParams.get("tags") || "")
+        .split(",")
+        .map((item) => item.trim()),
     [searchParams]
   );
   const isPrivate = useMemo(
-    () => searchParams.get("isPrivate") || true,
+    () => searchParams.get("isPrivate") || false,
     [searchParams]
   );
 
-  const onReferenceMutate = useCallback(async () => {
-    const variables = {
-      input: {
-        id: uuid(),
-        clickCount: 0,
-        title,
-        url,
-        type: "REFERENCES",
-        tags,
-      },
-    };
+  const [referenceData, setReferenceData] = useState({
+    title: referenceTitle,
+    url: validURLS[0],
+    tags,
+    isPrivate,
+  });
 
-    isPrivate
-      ? await postPrivateReference(variables)
-      : await postReference(variables);
-
-    return { ...variables.input, isPrivate };
-  }, [isPrivate, postPrivateReference, postReference, title, url, tags]);
   const onPostSubmit = useCallback(async () => {
     navigate("/reference", { replace: true });
   }, [navigate]);
 
-  const DataUpdateOptions = useMemo(
-    () => ({
-      snackBar: {
-        successMessage: `Add new reference ${title} (${url})`,
-        errorMessage: `Unable to add ${title} (${url})`,
-      },
-      logging: {
-        eventType: EventType.Personal.Reference.Update,
-      },
-    }),
-    [title, url]
-  );
-
-  const [onSubmit] = useDataUpdateWrapper(
-    onReferenceMutate,
-    onPostSubmit,
-    DataUpdateOptions
-  );
-
-  useEffect(() => {
-    if (title && url) {
-      onSubmit();
-    }
-  }, [onSubmit, title, url]);
-
   return (
-    <div>
-      Share Target: {searchParams.toString()}
-    </div>
+    <ReferenceContextProvider>
+      <div className="p-4 bg-card flex flex-col gap-4">
+        <span className="text-xl">Link Share Detected!!</span>
+        {validURLS.length > 1 && (
+          <div className="bg-card-foreground w-full p-2 rounded-lg">
+            <span className="text-lg">Multiple URLS Detected!!</span>
+            <select
+              className="w-full p-2 rounded-md bg-secondary px-2"
+              onChange={(e) =>
+                setReferenceData({ ...referenceData, url: e.target.value })
+              }
+            >
+              {validURLS.map((url, index) => (
+                <option key={index} value={url}>
+                  {url}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+        <ReferenceInputWidget
+          existingReference={referenceData}
+          createNew
+          onReferenceUpserted={() => {
+            onPostSubmit();
+          }}
+        />
+        <pre className="text-wrap break-all p-4 rounded-lg bg-muted">
+          Share Target: {searchParams.toString()}
+        </pre>
+      </div>
+    </ReferenceContextProvider>
   );
 };
 

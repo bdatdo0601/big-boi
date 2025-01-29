@@ -10,9 +10,7 @@ import awsconfig from "./aws-exports";
 import routes, { errorRoutes, getRoutePath, ROUTE_TYPE, subdomainRouteMap } from "./routes";
 import ContextProvider from "./context";
 import Layout from "./layout";
-import withCustomAWSAuthenticator, {
-  useAuthenticateEffect,
-} from "./components/withCustomAWSAuthenticator";
+import withCustomAWSAuthenticator from "./components/withCustomAWSAuthenticator";
 import "./App.css";
 
 Amplify.configure({
@@ -41,7 +39,6 @@ const groupedRoutes = has(subdomainRouteMap, subdomain)
   : groupBy(routes, "type.name");
 
 function App() {
-  useAuthenticateEffect();
   return (
     <Router>
       <Layout>

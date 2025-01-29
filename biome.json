@@ -184,7 +184,7 @@
 				},
 				"noVar": "error",
 				"noYodaExpression": "error",
-				"useBlockStatements": "warn",
+				"useBlockStatements": "off",
 				"useCollapsedElseIf": "error",
 				"useConsistentBuiltinInstantiation": "warn",
 				"useConst": "error",
