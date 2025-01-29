@@ -19,13 +19,16 @@ export default defineConfig({
   },
   source: {
     define: {
+      "import.meta.env.PUBLIC_URL": JSON.stringify(
+        process.env.PUBLIC_URL || "https://datbdo.com"
+      ),
       "import.meta.env.SITE_VERSION": JSON.stringify(process.env.SITE_VERSION),
       "import.meta.env.SITE_WEBSITE_TITLE": JSON.stringify(
-        process.env.SITE_WEBSITE_TITLE || "Dat Do's Website"
+        process.env.SITE_WEBSITE_TITLE || "Dat Do"
       ),
     },
     entry: {
-      index: "./src/index.jsx",
+      index: "./src/index.tsx",
     },
   },
 });

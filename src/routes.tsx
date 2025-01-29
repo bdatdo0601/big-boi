@@ -1,10 +1,8 @@
-import React, { lazy } from "react";
+import React, { lazy, FC, ComponentType } from "react";
 import { Auth } from "@aws-amplify/auth";
 import { Navigate, useNavigate } from "react-router";
-import PropTypes from "prop-types";
 import {
   ImageOutlined,
-  // AccountTree,
   Map as MuiMap,
   Create as CreateIcon,
   AssignmentIndSharp as AssignmentIndSharpIcon,
@@ -26,7 +24,6 @@ import usePageTracking from "./utils/hooks/usePageTracking";
 
 const Blogs = lazy(() => import("./containers/Blogs"));
 const Background = lazy(() => import("./containers/Background"));
-// const Projects = lazy(() => import("./containers/Projects"));
 const Gallery = lazy(() => import("./containers/Gallery"));
 const ChangeLogs = lazy(() => import("./containers/Changelogs"));
 const Documentations = lazy(() => import("./containers/Documentations"));
@@ -47,14 +44,37 @@ export const ROUTE_TYPE = {
   },
 };
 
-const withAnalytics = (Component) => {
-  return (props) => {
+interface RouteType {
+  name: string;
+  withAuth: boolean;
+}
+
+export interface RouteConfig {
+  name: string;
+  icon?: React.ReactNode;
+  component?: ComponentType<any>;
+  path: string;
+  exact: boolean;
+  type: RouteType;
+  hidden?: boolean | (() => Promise<boolean>);
+}
+
+
+export const getRoutePath = (route: RouteConfig) => {
+  if (route.exact) {
+    return route.path;
+  }
+  return `${route.path}/*`;
+};
+
+const withAnalytics = <P extends object>(Component: ComponentType<P>): FC<P> => {
+  return (props: P) => {
     usePageTracking();
     return <Component {...props} />;
   };
 };
 
-const isAuthExist = async () => {
+const isAuthExist = async (): Promise<boolean> => {
   try {
     const user = await Auth.currentAuthenticatedUser();
     return user !== null;
@@ -63,7 +83,7 @@ const isAuthExist = async () => {
   }
 };
 
-const ErrorPage = () => {
+const ErrorPage: FC = () => {
   const navigate = useNavigate();
   return (
     <>
@@ -84,11 +104,7 @@ const ErrorPage = () => {
   );
 };
 
-ErrorPage.propTypes = {
-  history: PropTypes.object.isRequired,
-};
-
-export const subdomainRouteMap = {
+export const subdomainRouteMap: Record<string, RouteConfig[]> = {
   reference: [
     {
       name: "Reference",
@@ -134,20 +150,21 @@ export const subdomainRouteMap = {
   ],
 };
 
-export const errorRoutes = [
+export const errorRoutes: RouteConfig[] = [
   {
     name: "Error",
     component: ErrorPage,
     path: "*",
     hidden: true,
-    type: "Error",
+    type: ROUTE_TYPE.PUBLIC,
+    exact: false,
   },
 ].map((item) => ({
   ...item,
   component: item.component ? withAnalytics(item.component) : undefined,
 }));
 
-export default [
+const routes: RouteConfig[] = [
   {
     name: "Home",
     icon: <HomeIcon />,
@@ -197,14 +214,6 @@ export default [
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
   },
-  // {
-  //   name: "Projects",
-  //   icon: <AccountTree />,
-  //   component: Projects,
-  //   path: "/projects",
-  //   exact: true,
-  //   type: ROUTE_TYPE.PUBLIC,
-  // },
   {
     name: "Documentations",
     icon: <MuiMap />,
@@ -278,3 +287,5 @@ export default [
   ...item,
   component: item.component ? withAnalytics(item.component) : undefined,
 }));
+
+export default routes;

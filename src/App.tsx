@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { get, groupBy, has } from "lodash";
 import { BrowserRouter as Router, Route, Routes } from "react-router";
 import { Amplify } from "@aws-amplify/core";
@@ -7,7 +7,7 @@ import { Analytics, AWSKinesisProvider } from "@aws-amplify/analytics";
 import { CircularProgress } from "@mui/material";
 
 import awsconfig from "./aws-exports";
-import routes, { errorRoutes, ROUTE_TYPE, subdomainRouteMap } from "./routes";
+import routes, { errorRoutes, getRoutePath, ROUTE_TYPE, subdomainRouteMap } from "./routes";
 import ContextProvider from "./context";
 import Layout from "./layout";
 import withCustomAWSAuthenticator, {
@@ -51,38 +51,34 @@ function App() {
               const routeTypeData = Object.values(ROUTE_TYPE).find(
                 (item) => item.name === routeType
               );
-              return routeTypeData.withAuth
+              return get(routeTypeData, "withAuth", false)
                 ? groupedRoutes[routeType].map((route) => (
-                    <Route
-                      key={route.name}
-                      Component={withCustomAWSAuthenticator(route.component)}
-                      path={route.path}
-                      exact={route.exact}
-                    />
-                  ))
+                  <Route
+                    key={route.name}
+                    Component={withCustomAWSAuthenticator(route.component)}
+                    path={getRoutePath(route)}
+                  />
+                ))
                 : groupedRoutes[routeType].map((route) => (
-                    <Route
-                      key={route.name}
-                      Component={route.component}
-                      path={route.path}
-                      exact={route.exact}
-                    />
-                  ));
+                  <Route
+                    key={route.name}
+                    Component={route.component}
+                    path={getRoutePath(route)}
+                  />
+                ));
             })}
             {routes.map((route) => (
               <Route
                 key={route.name}
                 Component={route.component}
-                path={route.path}
-                exact={route.exact}
+                path={getRoutePath(route)}
               />
             ))}
             {errorRoutes.map((route) => (
               <Route
                 key={route.name}
                 Component={route.component}
-                path={route.path}
-                exact={route.exact}
+                path={getRoutePath(route)}
               />
             ))}
           </Routes>
@@ -92,7 +88,7 @@ function App() {
   );
 }
 
-const AppWrapper = (props) => (
+const AppWrapper = (props: React.ComponentProps<any>) => (
   <ContextProvider>
     <App {...props} />
   </ContextProvider>
