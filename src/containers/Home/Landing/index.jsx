@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from "react";
-import { Grid2 as Grid, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { isArray } from "lodash";
 import PropTypes from "prop-types";
 import LayoutContext from "../../../context/layout";
@@ -28,7 +28,11 @@ export default function Landing({ keywords, contacts, bio }) {
     () => ({
       key: "main-info",
       Component: MainInfo,
-      props: { animation: globalAnimation, keywords, containerStyle: { marginBottom: "5rem" } },
+      props: {
+        animation: globalAnimation,
+        keywords,
+        containerStyle: { marginBottom: "5rem" },
+      },
       span: {
         xs: 12,
         md: 12,
@@ -63,57 +67,32 @@ export default function Landing({ keywords, contacts, bio }) {
     }),
     [bio]
   );
-  const items = useMemo(() => [mainInfo, welcomeInfo, contactInfo, actionLogsInfo], [
-    welcomeInfo,
-    mainInfo,
-    contactInfo,
-    isFullSize,
-    actionLogsInfo,
-  ]);
+  const items = useMemo(
+    () => [mainInfo, welcomeInfo, contactInfo, actionLogsInfo],
+    [welcomeInfo, mainInfo, contactInfo, isFullSize, actionLogsInfo]
+  );
   return (
-    <div style={{ width: "100%", maxWidth: 1600, margin: "0 auto" }}>
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        alignContent="center"
-        direction="column"
-        spacing={10}
-        style={{ minHeight: "80vh", marginBottom: "2rem", textAlign: "center" }}
-      >
-        {items.map(item => (
-          <Grid
-            item
-            {...item.span}
+    <div className="w-full max-w-[1600px] mx-auto">
+      <div className="min-h-[80vh] mb-8 text-center flex flex-col items-center justify-center gap-32">
+        {items.map((item) => (
+          <div
             key={isArray(item) ? item[0].key : item.key}
-            style={{ paddingLeft: "1rem", paddingRight: "1rem", width: "100%" }}
+            className="px-4 w-full"
           >
             {isArray(item) ? (
-              <Grid
-                container
-                justifyContent="space-between"
-                direction="column"
-                alignItems="center"
-                alignContent="center"
-                spacing={2}
-              >
+              <div className="flex flex-col items-center justify-between gap-8">
                 {item.map(({ Component, props, key }) => (
-                  <Grid
-                    item
-                    {...item.span}
-                    key={key}
-                    style={{ paddingLeft: "1rem", paddingRight: "1rem", width: "100%" }}
-                  >
+                  <div key={key} className="px-4 w-full">
                     <Component {...props} />
-                  </Grid>
+                  </div>
                 ))}
-              </Grid>
+              </div>
             ) : (
               <item.Component {...item.props} />
             )}
-          </Grid>
+          </div>
         ))}
-      </Grid>
+      </div>
     </div>
   );
 }

@@ -35,6 +35,7 @@
       "title": "name",
       "text": "description",
       "url": "link",
+      "tags": "tags",
       "isPrivate": "isPrivate"
     }
   }

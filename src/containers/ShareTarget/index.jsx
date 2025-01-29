@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useCallback } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { v4 as uuid } from "uuid";
 
 import {
@@ -20,28 +20,21 @@ const DataUpdateOptions = {
   },
 };
 
-const parsedUrl = new URL(String(window.location));
-
 const ShareTarget = () => {
   const navigate = useNavigate();
+  const params = useParams();
   const { execute: postReference } = useLazyAWSAPI(createReference);
   const { execute: postPrivateReference } = useLazyAWSAPI(
     createPrivateReference
   );
 
-  const title = useMemo(() => parsedUrl.searchParams.get("name"), []);
-  const url = useMemo(() => parsedUrl.searchParams.get("link"), []);
+  const title = useMemo(() => params.name, [params]);
+  const url = useMemo(() => params.link, [params]);
   const tags = useMemo(
-    () =>
-      (parsedUrl.searchParams.get("tags") || "")
-        .split(",")
-        .map((item) => item.trim()),
-    []
+    () => (params.tags || "").split(",").map((item) => item.trim()),
+    [params]
   );
-  const isPrivate = useMemo(
-    () => parsedUrl.searchParams.get("isPrivate") || true,
-    []
-  );
+  const isPrivate = useMemo(() => params.get("isPrivate") || true, [params]);
 
   const onReferenceMutate = useCallback(async () => {
     const variables = {
@@ -74,12 +67,14 @@ const ShareTarget = () => {
   useEffect(() => {
     if (title && url) {
       onSubmit();
-    } 
+    }
   }, [onSubmit, title, url]);
 
-  return <div>
-    Share Target: {title} {url} {isPrivate}
-  </div>;
+  return (
+    <div>
+      Share Target: {title} {url} {isPrivate}
+    </div>
+  );
 };
 
 export default ShareTarget;
