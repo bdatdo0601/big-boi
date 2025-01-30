@@ -27,11 +27,11 @@ export default function Landing({ keywords, contacts, bio }) {
         <div className="w-full">
           <ActionLogsInfo animation={globalAnimation} keywords={keywords} />
         </div>
-        <span className="text-2xl italic">👀 A little bit more info</span>
+        <span id="background" className="text-2xl italic">👀 A little bit more info</span>
         <div>
           <Background />
         </div>
-        <span className="text-2xl italic">🫶 Oh and here are some of my best memories</span>
+        <span id="gallery" className="text-2xl italic">🫶 Oh and here are some of my best memories</span>
         <div>
           <Gallery />
         </div>
