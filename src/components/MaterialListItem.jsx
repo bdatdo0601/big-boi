@@ -19,7 +19,7 @@ const MaterialListItem = ({ item, level, onClick, isSelected }) => {
           {item.icon}
           <span
             className="text-lg"
-            style={isSelected(item) ? { color: "var(--primary)" } : {}}
+            style={isSelected(item) ? { color: "var(--primary)" } : { }}
           >
             {item.name}
           </span>

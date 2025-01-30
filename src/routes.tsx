@@ -23,7 +23,6 @@ import ShareTarget from "./containers/ShareTarget";
 import usePageTracking from "./utils/hooks/usePageTracking";
 
 const Blogs = lazy(() => import("./containers/Blogs"));
-const Gallery = lazy(() => import("./containers/Gallery"));
 const ChangeLogs = lazy(() => import("./containers/Changelogs"));
 const Documentations = lazy(() => import("./containers/Documentations"));
 const Home = lazy(() => import("./containers/Home"));
@@ -195,14 +194,6 @@ const routes: RouteConfig[] = [
     component: Blogs,
     path: "/blogs",
     exact: false,
-    type: ROUTE_TYPE.PUBLIC,
-  },
-  {
-    name: "Gallery",
-    icon: <ImageOutlined />,
-    component: Gallery,
-    path: "/gallery",
-    exact: true,
     type: ROUTE_TYPE.PUBLIC,
   },
   {

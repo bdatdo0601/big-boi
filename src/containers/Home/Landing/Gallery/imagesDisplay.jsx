@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { CircularProgress, useMediaQuery } from "@mui/material";
 import Masonry from "react-masonry-css";
 
-import { fetchPhotos } from "../../utils/awsStorage";
-import useGetDataList from "../../utils/hooks/useGetDataList";
-import ImageGridDisplay from "../../components/ImageGridDisplay";
-import { formatGridList } from "../../utils";
+import { fetchPhotos } from "../../../../utils/awsStorage";
+import useGetDataList from "../../../../utils/hooks/useGetDataList";
+import ImageGridDisplay from "../../../../components/ImageGridDisplay";
+import { formatGridList } from "../../../../utils";
 
 export default function ImagesDisplay({ imageCols }) {
   const { data, loading } = useGetDataList(fetchPhotos);

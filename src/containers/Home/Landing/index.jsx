@@ -8,6 +8,7 @@ import ContactInfo from "./contactInfo";
 import WelcomeInfo from "./welcomeInfo";
 import ActionLogsInfo from "./actionLogsInfo";
 import Background from "@/containers/Home/Landing/Background";
+import Gallery from "./Gallery";
 
 export default function Landing({ keywords, contacts, bio }) {
   const { globalAnimation } = useContext(LayoutContext);
@@ -26,9 +27,13 @@ export default function Landing({ keywords, contacts, bio }) {
         <div className="w-full">
           <ActionLogsInfo animation={globalAnimation} keywords={keywords} />
         </div>
-        <span className="text-2xl italic">A little bit more info...</span>
+        <span className="text-2xl italic">👀 A little bit more info</span>
         <div>
           <Background />
+        </div>
+        <span className="text-2xl italic">🫶 Oh and here are some of my best memories</span>
+        <div>
+          <Gallery />
         </div>
       </div>
     </div>

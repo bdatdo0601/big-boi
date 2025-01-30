@@ -1,54 +1,9 @@
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  styled,
-} from "@mui/material";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 
-const AnimatedCard = animated(Card);
-
-const classes = {
-  card: "card",
-  cardHeader: "cardHeader",
-  headerContent: "headerContent",
-};
-
-const AnimatedCardStyled = styled(AnimatedCard)(() => ({
-  [`&.${classes.card}`]: {
-    position: "relative",
-    overflow: "visible",
-    borderRadius: "10px",
-    backgroundColor: "var(--card)",
-  },
-  [`& .${classes.cardHeader}`]: {
-    display: "inline-block",
-    width: "100%",
-    padding: "0px",
-    marginBottom: 12,
-    overflow: "visible",
-    color: "var(--input)",
-  },
-  [`& .${classes.headerContent}`]: {
-    boxShadow:
-      "0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
-    position: "absolute",
-    width: "84%",
-    marginLeft: "8%",
-    marginRight: "8%",
-    top: -15,
-    borderRadius: "10px",
-    minHeight: "55px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "var(--card-foreground)",
-  },
-}));
+const AnimatedDiv = animated("div");
 
 function ProfileCard({
   cardStyle,
@@ -70,7 +25,6 @@ function ProfileCard({
     },
   }));
 
-  // Set the drag hook and define component movement based on gesture data
   const bind = useDrag(({ down, movement: [mx, my] }) => {
     setAnimateProps({
       transform: down && animation ? [mx, my] : [0, 0],
@@ -79,8 +33,8 @@ function ProfileCard({
   });
 
   return (
-    <AnimatedCardStyled
-      className={classes.card}
+    <AnimatedDiv
+      className="relative overflow-visible rounded-lg bg-card"
       style={{
         ...animateProps,
         transform: animateProps.transform.to(
@@ -89,26 +43,26 @@ function ProfileCard({
       }}
       {...bind()}
     >
-      <CardHeader
-        className={classes.cardHeader}
-        subheader={
+      <div className="inline-block w-full p-0 mb-3 overflow-visible text-input">
+        <div
+          className="z-10 overflow-visible mb-6"
+          style={headerWrapperStyle}
+        >
           <div
-            style={{
-              zIndex: 2,
-              overflow: "visible",
-              marginBottom: "24px",
-              ...headerWrapperStyle,
-            }}
+            className="absolute w-[84%] ml-[8%] mr-[8%] -top-4 rounded-lg min-h-[55px] flex justify-center items-center bg-[var(--popover)] text-[var(--popover-foreground)] shadow-lg"
+            style={headerStyle}
           >
-            <div className={classes.headerContent} style={headerStyle}>
-              {header}
-            </div>
+            {header}
           </div>
-        }
-      />
-      <CardContent style={contentStyle}>{children}</CardContent>
-      <CardActions style={footerStyle}>{footer}</CardActions>
-    </AnimatedCardStyled>
+        </div>
+      </div>
+      <div className="p-4" style={contentStyle}>
+        {children}
+      </div>
+      <div className="p-4" style={footerStyle}>
+        {footer}
+      </div>
+    </AnimatedDiv>
   );
 }
 

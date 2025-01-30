@@ -55,13 +55,13 @@ export default function MainLayout({ children }) {
         routeList={routeList}
       />
       <div className="flex flex-col min-h-screen h-full z-10">
-        <div className="min-md:hidden bg-accent shadow-lg w-10 fixed m-4 rounded-full z-10">
+        <div className="min-md:hidden bg-muted shadow-lg w-10 fixed m-4 rounded-full z-10">
           <IconButton
             onClick={() => {
               setOpen(true);
             }}
           >
-            <Menu sx={{ color: "var(--input)" }} />
+            <Menu sx={{ color: "var(--muted-foreground)" }} />
           </IconButton>
         </div>
         <MainNavbar

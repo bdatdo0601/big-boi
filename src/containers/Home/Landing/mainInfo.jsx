@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import PropTypes from "prop-types";
 import { Typography, CircularProgress } from "@mui/material";
-import BLANK_INDEX_CARD from "../../../assets/blank-index-card.jpg";
 import LandingProfile from "../../../components/Profile";
 
 const DataStack = lazy(() => import("../../../components/DataStack"));
@@ -20,13 +19,21 @@ const MainInfo = ({ keywords, containerStyle, className, animation }) => (
         ...containerStyle,
       }}
     >
-      <LandingProfile containerStyle={{ zIndex: 1 }} imageStyle={{ zIndex: 1 }} animation={animation} />
+      <LandingProfile
+        containerStyle={{ zIndex: 1 }}
+        imageStyle={{ zIndex: 1 }}
+        animation={animation}
+      />
       <div style={{ flex: 1, width: "100%" }}>
         <DataStack
-          dataList={keywords.map(keyword => (
-              <Typography key={keyword} variant="h4" style={{ fontFamily: "Kalam", color: "black" }}>
-                {keyword}
-              </Typography>
+          dataList={keywords.map((keyword) => (
+            <h4
+              key={keyword}
+              className="text-input text-3xl"
+              style={{ fontFamily: "Kalam" }}
+            >
+              {keyword}
+            </h4>
           ))}
           listStyle={{
             marginTop: 50,
@@ -40,8 +47,15 @@ const MainInfo = ({ keywords, containerStyle, className, animation }) => (
             zIndex: 3,
           }}
           itemStyle={{
-            background: `url(${BLANK_INDEX_CARD})`,
-            backgroundSize: "cover",
+            backgroundImage: `
+              linear-gradient(to bottom, var(--popover-foreground) 0.5px, transparent 0.3px),
+              linear-gradient(var(--popover) 42px, var(--popover-foreground) 0.5px)
+            `,
+            backgroundSize: '28px 28px, 28px 28px, 20% 12px',
+            backgroundPosition: '0 0, 0 0, 0 1px',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+            border: '2.5px solid var(--accent-foreground)',
+            borderRadius: '24px',
           }}
         />
       </div>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
 import { get } from "lodash";
 import Landing from "./Landing";
-import About from "./About";
 import { useGetFile } from "../../utils/awsStorage";
 import { RESUME } from "../../utils/constants";
 import { fetchFileToJSON } from "../../utils";
@@ -33,7 +32,6 @@ export default function Home() {
         contacts={get(resume, "custom.contacts", [])}
         bio={get(resume, "custom.bio", [])}
       />
-      <About resume={resume} />
     </div>
   );
 }

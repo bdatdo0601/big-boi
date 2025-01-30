@@ -22,6 +22,7 @@ import EventType from "../../../assets/event-type.json";
 import { useLazyAWSAPI } from "../../../utils/awsAPI";
 import { DataForm } from "@/components/DataForm";
 import validator from "@rjsf/validator-ajv8";
+import { ChipButton } from "@/components/ChipButton";
 
 interface DefaultValuesType {
   title: string;
@@ -244,17 +245,18 @@ const ReferenceInputWidget: React.FC<ReferenceInputWidgetProps> = ({ existingRef
           return newData
         })
       }} customSubmit />
-      <div className="flex flex-wrap ga-2">
+      <div className="flex flex-wrap gap-1">
         {suggestedReferenceTags.filter((tag: string) => tag && !get(formData, "tags", "").includes(tag)).map((tag: string) => (
-          <button key={tag} onClick={() => {
-            setFormData(currentFormData => ({
-              ...DefaultValues,
-              ...currentFormData,
-              tags: [get(currentFormData, "tags", ""), tag].filter(item => item).join(", ")
-            }))
-          }} className="bg-foreground text-input rounded-lg px-2 py-1 mx-1 my-1 hover:cursor-pointer text-wrap">
-            {tag}
-          </button>
+          <ChipButton key={tag} label={tag}
+            onClick={() => {
+              setFormData(currentFormData => ({
+                ...DefaultValues,
+                ...currentFormData,
+                tags: [get(currentFormData, "tags", ""), tag].filter(item => item).join(", ")
+              }))
+            }}
+            bgColor="secondary"
+          />
         ))}
       </div>
     </div>

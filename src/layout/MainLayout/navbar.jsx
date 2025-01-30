@@ -31,12 +31,9 @@ export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
             setDrawerOpen(true);
           }}
         >
-          <Menu sx={{ color: "var(--input)" }} />
+          <Menu sx={{ color: "var(--muted-foreground)" }} />
         </IconButton>
-        <LogoTitle />
-        {isSubdomainRoute && (
-          <a href={window.location.href}>: {capitalize(subdomain)}</a>
-        )}
+        <LogoTitle isSubdomainRoute={isSubdomainRoute} subdomain={subdomain} />
       </div>
       <div className="max-lg:hidden flex gap-12 items-center">
         {tabItems.map((tabItem) => (
@@ -53,7 +50,7 @@ export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
                     borderBottom: "2px solid var(--primary)",
                   }
                 : {
-                    color: "var(--input)",
+                    color: "var(--muted-foreground)",
                   }
             }
             key={tabItem.name}

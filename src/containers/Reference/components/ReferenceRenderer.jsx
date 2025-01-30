@@ -30,6 +30,7 @@ import {
 import ReferenceContext from "../context";
 import ReferenceInputWidget from "./ReferenceInputWidget";
 import { DragDropTypes } from "../../../utils/constants";
+import { ChipButton } from "@/components/ChipButton";
 
 function fallbackCopyTextToClipboard(text) {
   const textArea = document.createElement("textarea");
@@ -205,16 +206,15 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
               </span>
             </button>
             <span className="flex flex-wrap gap-1">
-            {showTags &&
-              get(reference, "tags", []).map((item) => (
-                <span
-                  className="rounded-xl bg-foreground py-1 px-2 mr-1 text-xs italic text-wrap"
-                  key={item}
-                >
-                  {item}
-                </span>
-              ))}
-              </span>
+              {showTags &&
+                get(reference, "tags", []).filter(item => item).map((item) => (
+                  <ChipButton
+                    className="rounded-xl py-1 px-2 mr-1 text-xs bg-muted text-muted-foreground italic text-wrap"
+                    key={item}
+                    label={item}
+                  />
+                ))}
+            </span>
           </div>
           <span>
             {navigator.canShare && navigator.canShare() && (

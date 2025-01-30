@@ -16,7 +16,6 @@ export default function Profile({ image, name, wrapperStyle, imageStyle, animati
     opacity: 1,
     marginBottom: 32,
     borderRadius: "50%",
-    border: `${isDark ? "#fff" : "#000"} solid 5px`,
     ...imageStyle,
     config: {
       mass: 2,
@@ -42,7 +41,7 @@ export default function Profile({ image, name, wrapperStyle, imageStyle, animati
       }}
     >
       <animated.img
-        className="w-56 h-56 profile-image"
+        className="w-56 h-56 profile-image border-foreground shadow-2xl border-8"
         src={image || MAIN_PICTURE}
         alt="main_picture"
         style={{ ...imageProps, transform: imageProps.transform.to((x, y) => `translate(${x}px, ${y}px)`) }}
