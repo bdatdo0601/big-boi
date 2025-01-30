@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.0](https://github.com/bdatdo0601/big-boi/compare/v1.25.1...v1.26.0) (2025-01-30)
+
+
+### Features
+
+* merge bg with landing ([66f977f](https://github.com/bdatdo0601/big-boi/commit/66f977fed527cc874df66790ae9f9eb868309f3e))
+
 ### [1.25.1](https://github.com/bdatdo0601/big-boi/compare/v1.25.0...v1.25.1) (2025-01-29)
 
 
