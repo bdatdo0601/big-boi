@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.28.0](https://github.com/bdatdo0601/big-boi/compare/v1.27.1...v1.28.0) (2025-01-30)
+
+
+### Features
+
+* generate paper resume ([9607511](https://github.com/bdatdo0601/big-boi/commit/96075115498deab0cb61c48bf1a7e9b8eb045b49))
+
 ### [1.27.1](https://github.com/bdatdo0601/big-boi/compare/v1.27.0...v1.27.1) (2025-01-30)
 
 
