@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.1](https://github.com/bdatdo0601/big-boi/compare/v1.28.0...v1.28.1) (2025-01-30)
+
+
+### Bug Fixes
+
+* paper resume compatible with us letter ([6f89cfe](https://github.com/bdatdo0601/big-boi/commit/6f89cfe1046c2d55508ec3ed0995d574280f9780))
+
 ## [1.28.0](https://github.com/bdatdo0601/big-boi/compare/v1.27.1...v1.28.0) (2025-01-30)
 
 
