@@ -23,9 +23,9 @@ const ResumeContactItem: React.FC<{ IconComponent: MaterialIconComponent, name?:
 const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
   const resume = useResume();
   return (
-    <div ref={ref} className="w-[210mm] h-[297mm] p-[8mm] mx-auto bg-white text-black shadow-lg">
+    <div ref={ref} className="w-[8.5in] h-[11in] p-[5mm] mx-auto bg-white text-black shadow-lg">
       <div className="printable font-sans text-base leading-relaxed flex-col flex gap-[1mm]">
-        <header className="text-center flex-col flex gap-[0.1mm]">
+        <header className="text-center flex-col flex">
           <h1 className="text-2xl font-extrabold">{resume.basic.name.toLocaleUpperCase()}</h1>
           <p className='flex items-center justify-center text-center gap-[1mm]'>
             <ResumeContactItem IconComponent={Email} name={resume.basic.email} />
@@ -40,7 +40,7 @@ const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
           </p>
         </header>
         <section>
-          <h2 className="text-sm font-bold border-b-2 border-black pb-1 mb-2 text-center">{"Competencies".toLocaleUpperCase()}</h2>
+          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center">{"Competencies".toLocaleUpperCase()}</h2>
           <table className="flex flex-col">
             <tbody>
               {resume.skills.map(skillset => (
@@ -57,7 +57,7 @@ const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
           </table>
         </section>
         <section>
-          <h2 className="text-sm font-bold border-b-2 border-black pb-1 mb-2 text-center">{"Experience".toLocaleUpperCase()}</h2>
+          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center">{"Experience".toLocaleUpperCase()}</h2>
           <div className='flex flex-col gap-1'>
             {take(resume.work, 3).map(workItem => (
               <div key={workItem.company + workItem.position}>
@@ -81,7 +81,7 @@ const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
           </div>
         </section>
         <section>
-          <h2 className="text-sm font-bold border-b-2 border-black pb-1 mb-2 text-center">{"Research & Side Projects".toLocaleUpperCase()}</h2>
+          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center">{"Research & Side Projects".toLocaleUpperCase()}</h2>
           <div className='flex flex-col'>
             {take(resume.projects, 4).map(projectItem => (
               <div key={projectItem.name}>
@@ -109,7 +109,7 @@ const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
           </div>
         </section>
         <section>
-          <h2 className="text-sm font-bold border-b-2 border-black pb-1 mb-2 text-center">{"Education".toLocaleUpperCase()}</h2>
+          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center">{"Education".toLocaleUpperCase()}</h2>
           <div className='flex flex-col gap-1'>
             {resume.education.map(educationItem => (
               <div key={educationItem.institution}>
@@ -134,7 +134,7 @@ const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
           </div>
         </section>
         <section>
-          <h2 className="text-sm font-bold border-b-2 border-black pb-1 mb-2 text-center">{"Awards & Affilliations".toLocaleUpperCase()}</h2>
+          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center">{"Awards & Affilliations".toLocaleUpperCase()}</h2>
           <div className='flex flex-col gap-1'>
             {resume.awards.map(awardItem => (
               <div key={awardItem.title}>
