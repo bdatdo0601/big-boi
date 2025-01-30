@@ -1,4 +1,4 @@
-import { Facebook, GitHub, LinkedIn, Twitter } from "@mui/icons-material";
+import { EmailOutlined, Facebook, GitHub, LinkedIn, Twitter } from "@mui/icons-material";
 import { get } from "lodash";
 import { useBasic } from "@/components/Vitae";
 import ProfileCard from "@/components/ProfileCard";
@@ -14,26 +14,8 @@ const IconMapper: IconMapperType = {
   GitHub,
 };
 
-interface Profile {
-  network: string;
-  username: string;
-  url: string;
-}
-
-interface BasicInfo {
-  name: string;
-  label: string;
-  email: string;
-  location: {
-    city: string;
-    postalCode: string;
-  };
-  summary: string;
-  profiles: Profile[];
-}
-
 export const BasicInfo: React.FC = () => {
-  const basicInfo: BasicInfo = useBasic();
+  const basicInfo = useBasic();
   return (
     <ProfileCard
       header={
@@ -45,13 +27,6 @@ export const BasicInfo: React.FC = () => {
             <h2 className="text-xs font-normal text-input">
               {get(basicInfo, "label")}
             </h2>
-            <span className="text-input text-xs">{" | "}</span>
-            <a
-              className="text-input text-xs"
-              href={`mailto:${get(basicInfo, "email")}`}
-            >
-              {get(basicInfo, "email")}
-            </a>
             <span className="text-input text-xs">{" | "}</span>
             <span className="text-xs">
               {`${get(basicInfo, "location.city")} ${get(
@@ -68,12 +43,13 @@ export const BasicInfo: React.FC = () => {
           {get(basicInfo, "summary")}
         </p>
         <div className="flex flex-row gap-2 flex-wrap">
-          {get(basicInfo, "profiles", []).map((item: Profile) => {
+          {get(basicInfo, "profiles", []).map((item) => {
             const Icon = IconMapper[item.network];
             return (
               <ChipButton key={item.username} label={item.username} icon={<Icon sx={{ fontSize: 18 }} />} url={item.url} />
             );
           })}
+          <ChipButton label={get(basicInfo, "email")} icon={<EmailOutlined sx={{ fontSize: 18 }} />} url={`mailto:${get(basicInfo, "email")}`} />
         </div>
       </div>
     </ProfileCard>

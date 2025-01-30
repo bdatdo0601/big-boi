@@ -1,8 +1,3 @@
-import {
-  Card,
-  Chip,
-  Typography,
-} from "@mui/material";
 import { get } from "lodash";
 import {
   useSkills,
@@ -11,21 +6,9 @@ import {
 import ProfileCard from "@/components/ProfileCard";
 import { ChipButton } from "@/components/ChipButton";
 
-// Add these type definitions
-type Skill = {
-  name: string;
-  level: string;
-  keywords?: string[];
-};
-
-type Language = {
-  language: string;
-  fluency: string;
-};
-
 export const Competencies: React.FC = () => {
-  const skills: Skill[] = useSkills();
-  const languages: Language[] = useLanguages();
+  const skills = useSkills();
+  const languages = useLanguages();
 
   return (
     <ProfileCard
@@ -33,7 +16,7 @@ export const Competencies: React.FC = () => {
         <h2 className="text-xl text-input font-medium">Competencies</h2>
       }
     >
-      {skills.map((skillset: Skill) => (
+      {skills.map((skillset) => (
         <div
           key={skillset.name}
           className="flex flex-col gap-2 text-left pl-3 border-l-4 border-primary-foreground mt-2 mb-6"
@@ -58,7 +41,7 @@ export const Competencies: React.FC = () => {
           Languages
         </h3>
         <div className="flex flex-wrap gap-1 mb-1">
-          {languages.map((language: Language) => (
+          {languages.map((language) => (
             <ChipButton
               key={language.language}
               label={`${language.language} (${language.fluency})`}

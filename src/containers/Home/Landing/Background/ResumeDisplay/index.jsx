@@ -34,8 +34,8 @@ import Volunteer from "./Volunteers";
 import Interests from "./Interests";
 
 const ResumeDisplay = () => (
-  <div className="w-full flex flex-wrap">
-    <div className="w-full min-sm:w-1/3 p-2">
+  <div className="w-full flex flex-wrap max-md:gap-8">
+    <div className="w-full min-lg:w-1/3 p-2">
       <div className="flex flex-col gap-8">
         <div className="w-full">
           <BasicInfo />
@@ -55,7 +55,7 @@ const ResumeDisplay = () => (
       </div>
     </div>
 
-    <div className="w-full min-sm:w-2/3 p-2">
+    <div className="w-full min-lg:w-2/3 p-2">
       <div className="flex flex-col gap-8">
         <div className="w-full">
           <div className="page-break" />

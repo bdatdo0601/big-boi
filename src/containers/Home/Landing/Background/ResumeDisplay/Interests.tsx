@@ -5,11 +5,6 @@ import { useInterests } from "@/components/Vitae";
 import ProfileCard from "@/components/ProfileCard";
 import { ChipButton } from "@/components/ChipButton";
 
-interface Interest {
-  name: string;
-  keywords?: string[];
-}
-
 const Interests: React.FC = () => {
   const interests = useInterests();
 
@@ -18,7 +13,7 @@ const Interests: React.FC = () => {
       header={<h2 className="text-xl text-input">Interests</h2>
       }
     >
-      {interests.map((interest: Interest) => (
+      {interests.map((interest) => (
         <div
           key={interest.name}
           className="flex flex-col gap-2 text-left pl-3 border-l-4 border-primary-foreground mt-2 mb-6"

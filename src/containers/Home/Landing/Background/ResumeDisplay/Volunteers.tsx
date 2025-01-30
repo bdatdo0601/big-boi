@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Step,
   StepContent,
   StepIcon,
@@ -9,16 +8,7 @@ import {
 import React from "react";
 import { useVolunteer } from "@/components/Vitae";
 import ProfileCard from "@/components/ProfileCard";
-
-interface VolunteerWork {
-  organization: string;
-  position: string;
-  startDate: string;
-  endDate: string;
-  summary: string;
-  website: string;
-  highlights: string[];
-}
+import Avatar from "@/components/Avatar";
 
 const Volunteer: React.FC = () => {
   const volunteerWorks = useVolunteer();
@@ -30,14 +20,12 @@ const Volunteer: React.FC = () => {
       }
     >
       <Stepper orientation="vertical" className="text-left" nonLinear>
-        {volunteerWorks.map((item: VolunteerWork) => (
+        {volunteerWorks.map((item) => (
           <Step key={item.organization + item.position} active expanded>
             <StepIcon icon={null} />
             <StepLabel
               icon={
-                <Avatar sx={{ width: 50, height: 50 }}>
-                  {item.organization[0] || ""}
-                </Avatar>
+                <Avatar width={50} height={50} alt={item.organization} />
               }
             >
               <div className="text-input flex flex-col gap-1">

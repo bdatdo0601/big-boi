@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Step,
   StepContent,
   StepIcon,
@@ -11,19 +10,10 @@ import {
   useWork,
 } from "@/components/Vitae";
 import ProfileCard from "@/components/ProfileCard";
-
-interface WorkExperience {
-  company: string;
-  position: string;
-  startDate: string;
-  endDate: string;
-  summary: string;
-  website?: string;
-  highlights: string[];
-}
+import Avatar from "@/components/Avatar";
 
 const Experiences: React.FC = () => {
-  const experiences: WorkExperience[] = useWork();
+  const experiences = useWork();
   return (
     <ProfileCard
       header={
@@ -31,14 +21,12 @@ const Experiences: React.FC = () => {
       }
     >
       <Stepper orientation="vertical" className="text-left" nonLinear>
-        {experiences.map((item: WorkExperience) => (
+        {experiences.map((item) => (
           <Step key={item.company + item.position} active expanded>
             <StepIcon icon={null} />
             <StepLabel
               icon={
-                <Avatar sx={{ width: 50, height: 50 }}>
-                  {item.company[0] || ""}
-                </Avatar>
+                <Avatar width={50} height={50} alt={item.company} src={item.icon}/>
               }
             >
               <div className="text-input flex flex-col gap-1">

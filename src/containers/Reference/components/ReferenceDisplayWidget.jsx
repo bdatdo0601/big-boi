@@ -22,26 +22,6 @@ import {
 } from "../../../graphql/mutations";
 import ReferenceContext from "../context";
 
-const getSpanFromLevel = (level) => {
-  if (level <= 0) {
-    return { lg: 12, xl: 12, md: 12, xs: 12, sm: 12 };
-  }
-  if (level > 0 && level < 2) {
-    return { lg: 4, xl: 4, md: 12, xs: 12, sm: 12 };
-  }
-  return { lg: 12, xl: 12, md: 12, xs: 12, sm: 12 };
-};
-
-const getListItemSpanFromLevel = (level) => {
-  if (level <= 0) {
-    return { lg: 12, xl: 12, md: 12, xs: 12, sm: 12 };
-  }
-  if (level > 0 && level < 2) {
-    return { lg: 6, xl: 4, md: 12, xs: 12, sm: 12 };
-  }
-  return { lg: 12, xl: 12, md: 12, xs: 12, sm: 12 };
-};
-
 const TreeReferenceDisplayWidget = ({ data, loading }) => {
   const { execute: changeReference, loading: updatingReference } =
     useLazyAWSAPI(updateReference);

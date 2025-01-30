@@ -2,10 +2,8 @@ import React, { lazy, FC, ComponentType } from "react";
 import { Auth } from "@aws-amplify/auth";
 import { Navigate, useNavigate } from "react-router";
 import {
-  ImageOutlined,
   Map as MuiMap,
   Create as CreateIcon,
-  AssignmentIndSharp as AssignmentIndSharpIcon,
   ExitToApp as ExitToAppIcon,
   Dashboard as DashboardIcon,
   MeetingRoom as MeetingRoomIcon,
@@ -13,6 +11,7 @@ import {
   Home as HomeIcon,
   ListAltOutlined,
   LinkOutlined,
+  FilePresentOutlined,
 } from "@mui/icons-material";
 import { Typography, Button } from "@mui/material";
 import AdminDashboard from "./containers/AdminDashboard";
@@ -21,6 +20,7 @@ import BlogCreation from "./containers/BlogManager/Creation";
 import Reference from "./containers/Reference";
 import ShareTarget from "./containers/ShareTarget";
 import usePageTracking from "./utils/hooks/usePageTracking";
+import PaperResumeDisplay from "./containers/PaperResume";
 
 const Blogs = lazy(() => import("./containers/Blogs"));
 const ChangeLogs = lazy(() => import("./containers/Changelogs"));
@@ -194,6 +194,14 @@ const routes: RouteConfig[] = [
     component: Blogs,
     path: "/blogs",
     exact: false,
+    type: ROUTE_TYPE.PUBLIC,
+  },
+  {
+    name: "Resume",
+    icon: <FilePresentOutlined />,
+    component: PaperResumeDisplay,
+    path: "/resume",
+    exact: true,
     type: ROUTE_TYPE.PUBLIC,
   },
   {

@@ -10,8 +10,12 @@ export const LayoutContextProvider = ({ children }) => {
   const [isDark, setIsDark] = useLocalStorageState("darkMode", {
     defaultValue: window.matchMedia("(prefers-color-scheme: dark)").matches,
   });
-  const [animation, setAnimation] = useState(true);
-  const [globalAnimation, setGlobalAnimation] = useState(false);
+  const [animation, setAnimation] = useLocalStorageState("animation", {
+    defaultValue: true,
+  });
+  const [globalAnimation, setGlobalAnimation] = useLocalStorageState("globalAnimation", {
+    defaultValue: true,
+  });
 
   useEffect(() => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC

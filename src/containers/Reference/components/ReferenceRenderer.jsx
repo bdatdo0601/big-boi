@@ -116,8 +116,7 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
         ? await changePrivateReference(variables)
         : await changeReference(variables);
     } catch (err) {
-      // eslint-disable-next-line
-      console.warn("Unable to count clicks: ", err);
+      console.error("Unable to count clicks: ", err);
     } finally {
       window.open(get(reference, "url"), "_blank");
       await requestRefetch();

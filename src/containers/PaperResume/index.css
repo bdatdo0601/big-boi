@@ -1,0 +1,19 @@
+@media print {
+  @page {
+    margin: 5mm;
+  }
+  * {
+    visibility: hidden;
+  }
+
+  .printable {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .printable * {
+    visibility: visible;
+  }
+}

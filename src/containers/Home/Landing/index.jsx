@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useMemo, useRef } from "react";
 import { useMediaQuery } from "@mui/material";
 import { isArray } from "lodash";
 import PropTypes from "prop-types";
@@ -27,11 +27,11 @@ export default function Landing({ keywords, contacts, bio }) {
         <div className="w-full">
           <ActionLogsInfo animation={globalAnimation} keywords={keywords} />
         </div>
-        <span id="background" className="text-2xl italic">👀 A little bit more info</span>
+        <span id="background" className="text-2xl italic">A little bit more info 👀</span>
         <div>
           <Background />
         </div>
-        <span id="gallery" className="text-2xl italic">🫶 Oh and here are some of my best memories</span>
+        <span id="gallery" className="text-2xl italic">Oh and here are some of my best memories 🫶</span>
         <div>
           <Gallery />
         </div>

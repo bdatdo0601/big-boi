@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Avatar,
   Step,
   StepIcon,
   StepLabel,
@@ -8,18 +7,10 @@ import {
 } from "@mui/material";
 import { useEducation } from "@/components/Vitae";
 import ProfileCard from "@/components/ProfileCard";
-
-interface EducationItem {
-  institution: string;
-  studyType: string;
-  area: string;
-  gpa: string;
-  startDate: string;
-  endDate: string;
-}
+import Avatar from "@/components/Avatar";
 
 export const Education: React.FC = () => {
-  const educations = useEducation() as EducationItem[];
+  const educations = useEducation();
 
   return (
     <ProfileCard
@@ -35,9 +26,7 @@ export const Education: React.FC = () => {
             <StepIcon icon={null} />
             <StepLabel
               icon={
-                <Avatar sx={{ width: 50, height: 50 }}>
-                  {item.institution[0] || ""}
-                </Avatar>
+                <Avatar width={50} height={50} alt={item.institution} />
               }
             >
               <div className="text-input flex flex-col gap-1">

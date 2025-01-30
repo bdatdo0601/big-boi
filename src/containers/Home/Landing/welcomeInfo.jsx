@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import PropTypes from "prop-types";
-import { Typography } from "@mui/material";
 import ProfileCard from "../../../components/ProfileCard";
 import LayoutContext from "../../../context/layout";
 import { Download } from "@mui/icons-material";
+import PaperResumeRenderer from "@/containers/PaperResume/PaperResumeRenderer";
+import { useReactToPrint } from "react-to-print";
 
 export default function WelcomeInfo({ bio }) {
   const { globalAnimation } = useContext(LayoutContext);
+  const ref = useRef<HTMLDivElement>(null);
+  const reactToPrintFn = useReactToPrint({ contentRef: ref });
+
   return (
     <ProfileCard
       header={<span className="text-2xl text-input">Hello There!</span>}
@@ -26,13 +30,16 @@ export default function WelcomeInfo({ bio }) {
           ))}
         </div>
         <button
+          className="hover:cursor-pointer rounded-xl text-input shadow-lg bg-secondary px-3 py-2 mt-4"
           onClick={() => {
-            window.location.href = `${window.location.protocol}//${window.location.host}/custom/resume.pdf`;
+            reactToPrintFn();
           }}
-          className="hover:cursor-pointer rounded-xl w-[200px] text-input shadow-lg bg-secondary px-2 py-2 mt-4"
         >
-          <Download sx={{ color: "var(--input)" }} /> My Latest Resume
+          <Download sx={{}} /> My Latest Resume
         </button>
+      </div>
+      <div className="hidden">
+        <PaperResumeRenderer ref={ref} />
       </div>
     </ProfileCard>
   );
