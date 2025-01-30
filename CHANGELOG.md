@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.1](https://github.com/bdatdo0601/big-boi/compare/v1.27.0...v1.27.1) (2025-01-30)
+
+
+### Bug Fixes
+
+* add id to potentially scorllable content ([28bc52a](https://github.com/bdatdo0601/big-boi/commit/28bc52a79b66f9e4a61d4d1853d2ac9543c70442))
+* use local storage and system preference for dark mode decision ([bd18a79](https://github.com/bdatdo0601/big-boi/commit/bd18a79b38f6091a0d98fc9a0f65a5c69caa0b60))
+
 ## [1.27.0](https://github.com/bdatdo0601/big-boi/compare/v1.26.0...v1.27.0) (2025-01-30)
 
 
