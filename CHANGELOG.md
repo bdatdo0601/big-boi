@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.0](https://github.com/bdatdo0601/big-boi/compare/v1.26.0...v1.27.0) (2025-01-30)
+
+
+### Features
+
+* complete UI revamp ([a8b672f](https://github.com/bdatdo0601/big-boi/commit/a8b672f3cb9c31583bf66b421d30d4302417714b))
+
 ## [1.26.0](https://github.com/bdatdo0601/big-boi/compare/v1.25.1...v1.26.0) (2025-01-30)
 
 
