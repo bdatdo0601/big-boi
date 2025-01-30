@@ -79,7 +79,7 @@
     "react-window": "^1.8.11",
     "styled-components": "^6.1.14",
     "url-join": "^5.0.0",
-    "use-local-storage-state": "^16.0.0",
+    "use-local-storage-state": "^19.5.0",
     "uuid": "^11.0.5",
     "validator": "^13.12.0",
     "web-vitals": "^4.2.4",
