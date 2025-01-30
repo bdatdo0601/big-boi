@@ -12,8 +12,8 @@ function a11yProps(index) {
 }
 
 const TABS = [
-  { name: "Recently Updated", Component: MostRecent },
   { name: "Tag Based", Component: TagAlphabetical },
+  { name: "Recently Updated", Component: MostRecent },
   { name: "Frequently Visited", Component: MostFrequent },
 ];
 
@@ -31,7 +31,7 @@ const ReferenceTabs = () => {
             style={
               currentTabIndex === index
                 ? {
-                    borderBottom: "var(--primary) solid 1px",
+                    borderBottom: "var(--primary) solid 2px",
                   }
                 : {}
             }
@@ -41,7 +41,7 @@ const ReferenceTabs = () => {
               setCurrentTabIndex(index);
             }}
           >
-            <span className="text-xl">{item.name}</span>
+            <span className="text-md font-black">{item.name}</span>
           </button>
         ))}
       </div>

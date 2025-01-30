@@ -209,7 +209,7 @@ const ReferenceInputWidget: React.FC<ReferenceInputWidgetProps> = ({ existingRef
   }, [existingReference]);
 
   return (
-    <div className="bg-muted text-primary p-4">
+    <div className="bg-muted text-primary p-4 overflow-auto">
       <div className="flex justify-end">
         <div className="flex flex-row gap-4 my-2">
           {isURLMetadataFetching && <span>Fetching URL Information...</span>}
@@ -252,7 +252,7 @@ const ReferenceInputWidget: React.FC<ReferenceInputWidgetProps> = ({ existingRef
               ...currentFormData,
               tags: [get(currentFormData, "tags", ""), tag].filter(item => item).join(", ")
             }))
-          }} className="bg-foreground text-input rounded-lg px-2 py-1 mx-1 my-1 hover:cursor-pointer">
+          }} className="bg-foreground text-input rounded-lg px-2 py-1 mx-1 my-1 hover:cursor-pointer text-wrap">
             {tag}
           </button>
         ))}

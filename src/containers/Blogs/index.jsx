@@ -3,8 +3,8 @@ import { get } from "lodash";
 import { useNavigate, useLocation } from "react-router";
 import "./index.css";
 import { Seo } from "../../components/SEO";
-
-const blogURL = process.env.NODE_ENV === "development" ? "http://localhost:8000" : "https://blogs.datbdo.com";
+import IframeResizer from '@iframe-resizer/react';
+const blogURL =  "https://blogs.datbdo.com";
 
 export default function Blogs() {
   const iframeRef = useRef(null);
@@ -53,13 +53,16 @@ export default function Blogs() {
         keywords={get(currentData, "site.keywords", [""])}
         lang={get(currentData, "site.lang", "en")}
       />
-      <iframe
+      <IframeResizer
+       id="iframe"
         title="Blog Page"
         src={`${blogURL}${location.pathname.replace("/blogs", "")}`}
-        className="blog-container-div"
+        className="grow"
         ref={e => {
           iframeRef.current = e;
         }}
+        scrolling="omit"
+        waitForload
       />
     </>
   );

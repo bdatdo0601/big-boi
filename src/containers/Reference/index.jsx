@@ -8,7 +8,6 @@ import ReferenceInputWidget from "./components/ReferenceInputWidget";
 import { ReferenceContextProvider } from "./context";
 import Searchable from "./subcontainer/Searchable";
 import ReferenceTabs from "./subcontainer/ReferenceTabs";
-import "./index.css";
 import { useAuth } from "@/context/auth";
 
 const DndScrollingDiv = withScrolling("div");
@@ -29,43 +28,22 @@ const Items = [
   {
     key: "Searchable",
     Component: Searchable,
-    span: {
-      xl: 12,
-      lg: 12,
-      md: 12,
-      sm: 12,
-      xs: 12,
-    },
   },
   {
     key: "ReferenceTabs",
     Component: ReferenceTabs,
-    span: {
-      xl: 12,
-      lg: 12,
-      md: 12,
-      sm: 12,
-      xs: 12,
-    },
   },
   {
     key: "ReferenceCreation",
     Component: ReferenceCreation,
-    span: {
-      xl: 12,
-      lg: 12,
-      md: 12,
-      sm: 12,
-      xs: 12,
-    },
   },
 ];
 
 export default function Reference() {
   return (
     <ReferenceContextProvider>
-      <DndScrollingDiv className="reference-container-div md:my-2 lg:my-2 xl:my-2 2xl:my-2 pt-2 pb-16 px-1">
-        <div className="flex flex-col gap-4">
+      <DndScrollingDiv className="md:my-2 lg:my-2 xl:my-2 2xl:my-2 pt-2 pb-16 px-1">
+        <div className="flex flex-col gap-2 relative">
           {Items.map((item) => (
             <item.Component key={item.key} />
           ))}

@@ -29,12 +29,12 @@ const MainInfo = ({ keywords, containerStyle, className, animation }) => (
               </Typography>
           ))}
           listStyle={{
-            marginTop: 100,
+            marginTop: 50,
             paddingTop: 0,
           }}
           itemContainerStyle={{
-            height: 200,
-            width: 300,
+            height: 140,
+            width: 350,
             cursor: "pointer",
             textAlign: "center",
             zIndex: 3,

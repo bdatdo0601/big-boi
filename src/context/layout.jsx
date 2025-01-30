@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { StyledEngineProvider } from "@mui/material/styles";
+import useLocalStorageState from "use-local-storage-state";
 
 const LayoutContext = React.createContext();
 
 export const LayoutContextProvider = ({ children }) => {
   const [layout, setLayout] = useState();
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useLocalStorageState("darkMode", true);
   const [animation, setAnimation] = useState(true);
   const [globalAnimation, setGlobalAnimation] = useState(false);
 

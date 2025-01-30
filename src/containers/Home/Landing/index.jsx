@@ -7,91 +7,29 @@ import MainInfo from "./mainInfo";
 import ContactInfo from "./contactInfo";
 import WelcomeInfo from "./welcomeInfo";
 import ActionLogsInfo from "./actionLogsInfo";
+import Background from "@/containers/Home/Landing/Background";
 
 export default function Landing({ keywords, contacts, bio }) {
   const { globalAnimation } = useContext(LayoutContext);
-  const isFullSize = useMediaQuery("(min-width:1280px)");
-  const contactInfo = useMemo(
-    () => ({
-      key: "contact-info",
-      Component: ContactInfo,
-      props: { animation: globalAnimation, contacts },
-      span: {
-        xs: 12,
-        md: 12,
-        lg: 12,
-      },
-    }),
-    [globalAnimation, contacts]
-  );
-  const mainInfo = useMemo(
-    () => ({
-      key: "main-info",
-      Component: MainInfo,
-      props: {
-        animation: globalAnimation,
-        keywords,
-        containerStyle: { marginBottom: "5rem" },
-      },
-      span: {
-        xs: 12,
-        md: 12,
-        lg: 12,
-      },
-    }),
-    [globalAnimation, keywords]
-  );
-  const actionLogsInfo = useMemo(
-    () => ({
-      key: "action-log-info",
-      Component: ActionLogsInfo,
-      props: { animation: globalAnimation, keywords },
-      span: {
-        xs: 12,
-        md: 12,
-        lg: 12,
-      },
-    }),
-    [globalAnimation, keywords]
-  );
-  const welcomeInfo = useMemo(
-    () => ({
-      key: "welcome-info",
-      Component: WelcomeInfo,
-      props: { bio },
-      span: {
-        xs: 12,
-        md: 12,
-        lg: 12,
-      },
-    }),
-    [bio]
-  );
-  const items = useMemo(
-    () => [mainInfo, welcomeInfo, contactInfo, actionLogsInfo],
-    [welcomeInfo, mainInfo, contactInfo, isFullSize, actionLogsInfo]
-  );
   return (
-    <div className="w-full max-w-[1600px] mx-auto">
-      <div className="min-h-[80vh] mb-8 text-center flex flex-col items-center justify-center gap-32">
-        {items.map((item) => (
-          <div
-            key={isArray(item) ? item[0].key : item.key}
-            className="px-4 w-full"
-          >
-            {isArray(item) ? (
-              <div className="flex flex-col items-center justify-between gap-8">
-                {item.map(({ Component, props, key }) => (
-                  <div key={key} className="px-4 w-full">
-                    <Component {...props} />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <item.Component {...item.props} />
-            )}
-          </div>
-        ))}
+    <div className="w-full max-w-[1600px] mx-auto px-2">
+      <div className="h-full mb-8 text-center flex flex-col items-center justify-center gap-12">
+        <MainInfo
+          animation={globalAnimation}
+          keywords={keywords}
+          containerStyle={{ marginBottom: "5rem" }}
+        />
+        <div className="flex flex-row justify-between gap-12 items-start max-lg:flex-wrap">
+          <WelcomeInfo bio={bio} />
+          <ContactInfo animation={globalAnimation} contacts={contacts} />
+        </div>
+        <div className="w-full">
+          <ActionLogsInfo animation={globalAnimation} keywords={keywords} />
+        </div>
+        <span className="text-2xl italic">A little bit more info...</span>
+        <div>
+          <Background />
+        </div>
       </div>
     </div>
   );

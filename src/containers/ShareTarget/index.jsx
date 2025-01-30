@@ -20,15 +20,15 @@ const ShareTarget = () => {
   const [searchParams] = useSearchParams();
 
   const title = useMemo(
-    () => decodeURI(searchParams.get("name")),
+    () => decodeURI(searchParams.get("name") || ""),
     [searchParams]
   );
   const description = useMemo(
-    () => decodeURI(searchParams.get("description")),
+    () => decodeURI(searchParams.get("description") || ""),
     [searchParams]
   );
   const url = useMemo(
-    () => decodeURI(searchParams.get("link")),
+    () => decodeURI(searchParams.get("link") || ""),
     [searchParams]
   );
 
@@ -40,7 +40,8 @@ const ShareTarget = () => {
   }, [url, title, description]);
 
   const referenceTitle = useMemo(() => {
-    return [title]
+    if (title) return title;
+    return [description]
       .map((item) => item.replace(urlRegex, ""))
       .filter((item) => item)
       .join(" - ");

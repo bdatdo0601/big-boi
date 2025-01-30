@@ -88,7 +88,7 @@ const Searchable = () => {
     }, 200)
   );
   return (
-    <div className="p-4 m-2 text-left bg-muted rounded-lg text-input">
+    <div className="p-4 mx-2 text-left bg-muted rounded-lg text-input">
       <div className="flex my-4 mr-2 w-full">
         <input
           className="w-full p-4 border-2 border-input rounded-xl text-input"

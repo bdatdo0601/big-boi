@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import IframeResizer from '@iframe-resizer/react';
 
 const DOCUMENTATION_URL = "https://docs.datbdo.com/";
 
 // 64 pixels are height of nav bar
 export default function Documentations() {
   return (
-    <div style={{ height: "calc(100vh - 64px)", overflow: "hidden", width: "100vw" }}>
-      <iframe title="Documentation" src={DOCUMENTATION_URL} width="100%" height="100%" />
-    </div>
+      <IframeResizer
+        license="GPLv3"
+        className="grow"
+        title="Documentation"
+        src={DOCUMENTATION_URL}
+        style={{ width: "100%", height: "100%" }}
+        waitForLoad
+        scrolling="omit"
+      />
   );
 }

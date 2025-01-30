@@ -125,13 +125,15 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
 
   return (
     <div
-      className={`${level > 0 ? "border-l-2 pl-6 mr-4" : ""} ${
+      className={`${level > 0 ? "border-l-1 border-input pl-3" : ""} ${
         isOver ? "border-blue-600" : ""
       }`}
     >
       <div ref={drop}>
         {level !== 0 && (
-          <span className="text-xl text-input bg-foreground px-2 py-1 rounded-lg">{get(data, "name")}</span>
+          <span className="text-md font-bold text-input bg-foreground px-2 py-1 rounded-lg">
+            {get(data, "name")}
+          </span>
         )}
         {get(data, "references", []).length !== 0 && (
           <div className="flex flex-wrap gap-2 my-4">

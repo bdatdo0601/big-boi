@@ -23,7 +23,7 @@ import {
   useProjects,
   useVolunteer,
   useInterests,
-} from "../../../components/Vitae";
+} from "@/components/Vitae";
 
 const IconMapper = {
   Facebook: <Facebook />,
@@ -35,26 +35,14 @@ const IconMapper = {
 const BasicInfo = () => {
   const basicInfo = useBasic();
   return (
-    <Card
-      style={{
-        width: "100%",
-        padding: 12,
-        backgroundColor: "var(--card)",
-        color: "var(--input)",
-      }}
-      elevation={3}
-    >
-      <Typography className="text-input" variant="h5">
+    <div className="text-input bg-card w-full px-4 py-2 rounded-lg">
+      <h1 className="text-xl font-medium text-input">
         {get(basicInfo, "name")}
-      </Typography>
-      <Typography className="text-input" variant="subtitle1">
+      </h1>
+      <h2 className="text-base font-normal text-input">
         {get(basicInfo, "label")}
-      </Typography>
-      <Typography
-        className="text-input"
-        variant="subtitle2"
-        style={{ marginBottom: 8 }}
-      >
+      </h2>
+      {/* <p className="text-sm font-normal text-input mb-2">
         <a className="text-input" href={get(basicInfo, "website")}>
           {get(basicInfo, "website")}
         </a>
@@ -71,7 +59,7 @@ const BasicInfo = () => {
           basicInfo,
           "location.postalCode"
         )}`}
-      </Typography>
+      </p>
       {get(basicInfo, "profiles", []).map((item) => (
         <Chip
           key={item.network}
@@ -86,14 +74,11 @@ const BasicInfo = () => {
             window.location.href = item.url;
           }}
         />
-      ))}
-      <Typography
-        variant="body1"
-        style={{ textAlign: "justify", marginTop: 8 }}
-      >
+      ))} */}
+      <p className="text-base font-normal text-justify mt-2">
         {get(basicInfo, "summary")}
-      </Typography>
-    </Card>
+      </p>
+    </div>
   );
 };
 
@@ -122,7 +107,9 @@ const Education = () => {
                 </Avatar>
               }
             >
-              <Typography className="text-input"  variant="h6">{item.institution}</Typography>
+              <Typography className="text-input" variant="h6">
+                {item.institution}
+              </Typography>
               <Typography className="text-input" variant="subtitle1">
                 {item.studyType}: {item.area} (GPA: {item.gpa})
               </Typography>
@@ -223,8 +210,12 @@ const Experiences = () => {
                 </Avatar>
               }
             >
-              <Typography className="text-input" variant="h6">{item.company}</Typography>
-              <Typography className="text-input" variant="subtitle1">{item.position}</Typography>
+              <Typography className="text-input" variant="h6">
+                {item.company}
+              </Typography>
+              <Typography className="text-input" variant="subtitle1">
+                {item.position}
+              </Typography>
               <Typography className="text-input" variant="subtitle2">
                 {item.startDate} - {item.endDate}
               </Typography>
@@ -273,7 +264,9 @@ const Projects = () => {
           <Typography className="text-input" variant="body1">
             {project.name} ({project.startDate} - {project.endDate})
           </Typography>
-          <Typography className="text-input" variant="body2">{project.description}</Typography>
+          <Typography className="text-input" variant="body2">
+            {project.description}
+          </Typography>
           {project.highlights.map((highlight) => (
             <Typography variant="body2" key={highlight}>
               &#8226; {highlight}
@@ -310,8 +303,12 @@ const Volunteer = () => {
                 </Avatar>
               }
             >
-              <Typography className="text-input" variant="h6">{item.organization}</Typography>
-              <Typography className="text-input" variant="subtitle1">{item.position}</Typography>
+              <Typography className="text-input" variant="h6">
+                {item.organization}
+              </Typography>
+              <Typography className="text-input" variant="subtitle1">
+                {item.position}
+              </Typography>
               <Typography className="text-input" variant="subtitle2">
                 {item.startDate} - {item.endDate}
               </Typography>
@@ -363,7 +360,7 @@ const Interests = () => {
             <Chip
               key={keyword}
               label={keyword}
-              style={{ marginRight: 6, marginTop: 4, color: "var(--input)"  }}
+              style={{ marginRight: 6, marginTop: 4, color: "var(--input)" }}
               size="small"
             />
           ))}
@@ -374,40 +371,40 @@ const Interests = () => {
 };
 
 const ResumeDisplay = () => (
-  <Grid container style={{ width: "100%" }} justifyContent="flex-start">
-    <Grid item xl={4} lg={4} md={12} xs={12} style={{ padding: 4 }}>
-      <Grid container>
-        <Grid item xl={12} xs={12} md={12}>
+  <div className="w-full flex flex-wrap">
+    <div className="w-full xl:w-1/3 lg:w-1/3 md:w-full sm:w-full p-1">
+      <div className="flex flex-col">
+        <div className="w-full">
           <BasicInfo />
-        </Grid>
-        <Grid item xl={12} xs={12} md={12}>
+        </div>
+        <div className="w-full">
           <Education />
-        </Grid>
-        <Grid item xl={12} xs={12} md={12}>
+        </div>
+        <div className="w-full">
           <Competencies />
-        </Grid>
-        <Grid item xl={12} xs={12} md={12}>
+        </div>
+        <div className="w-full">
           <Projects />
-        </Grid>
-        <Grid item xl={12} xs={12} md={12}>
+        </div>
+        <div className="w-full">
           <Interests />
-        </Grid>
-      </Grid>
-    </Grid>
+        </div>
+      </div>
+    </div>
 
-    <Grid item xl={8} lg={8} md={12} xs={12} style={{ padding: 4 }}>
-      <Grid container>
-        <Grid item xl={12} xs={12} md={12}>
+    <div className="w-full xl:w-2/3 lg:w-2/3 md:w-full sm:w-full p-1">
+      <div className="flex flex-col">
+        <div className="w-full">
           <div className="page-break" />
           <Experiences />
-        </Grid>
-        <Grid item xl={12} xs={12} md={12}>
+        </div>
+        <div className="w-full">
           <div className="page-break" />
           <Volunteer />
-        </Grid>
-      </Grid>
-    </Grid>
-  </Grid>
+        </div>
+      </div>
+    </div>
+  </div>
 );
 
 export default ResumeDisplay;

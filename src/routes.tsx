@@ -23,7 +23,6 @@ import ShareTarget from "./containers/ShareTarget";
 import usePageTracking from "./utils/hooks/usePageTracking";
 
 const Blogs = lazy(() => import("./containers/Blogs"));
-const Background = lazy(() => import("./containers/Background"));
 const Gallery = lazy(() => import("./containers/Gallery"));
 const ChangeLogs = lazy(() => import("./containers/Changelogs"));
 const Documentations = lazy(() => import("./containers/Documentations"));
@@ -188,14 +187,6 @@ const routes: RouteConfig[] = [
     path: "/share-target",
     exact: true,
     hidden: true,
-    type: ROUTE_TYPE.PUBLIC,
-  },
-  {
-    name: "Background",
-    icon: <AssignmentIndSharpIcon />,
-    component: Background,
-    path: "/background",
-    exact: true,
     type: ROUTE_TYPE.PUBLIC,
   },
   {

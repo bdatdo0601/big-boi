@@ -24,7 +24,7 @@ export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
   );
 
   return (
-    <div className="min-sm:bg-muted max-sm:hidden bg-transparent w-full py-4 pr-12 pl-[2rem] min-sm:sticky min-sm:top-0 min-sm:z-50 min-sm:shadow-xl min-sm:flex flex-row justify-between">
+    <div className="min-md:bg-muted max-md:hidden bg-transparent w-full py-4 pr-12 pl-[2rem] min-md:sticky min-md:top-0 min-md:z-50 min-md:shadow-xl min-md:flex flex-row justify-between">
       <div className="flex flex-row gap-6 items-center">
         <IconButton
           onClick={() => {
@@ -38,7 +38,7 @@ export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
           <a href={window.location.href}>: {capitalize(subdomain)}</a>
         )}
       </div>
-      <div className="max-sm:hidden flex gap-12 items-center">
+      <div className="max-lg:hidden flex gap-12 items-center">
         {tabItems.map((tabItem) => (
           <button
             className="pb-2 pt-2 hover:cursor-pointer"

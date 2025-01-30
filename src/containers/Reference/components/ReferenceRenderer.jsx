@@ -138,8 +138,13 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
   return (
     <div
       ref={dragPreview}
-      style={{ opacity: isDragging ? 0.5 : 1, backgroundColor: get(reference, "isPrivate") ? "var(--secondary)" : "var(--accent)" }}
-      className="flex border-double py-1 px-2 rounded-2xl items-center"
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        backgroundColor: get(reference, "isPrivate")
+          ? "var(--secondary)"
+          : "var(--accent)",
+      }}
+      className="flex border-double py-2 px-2 rounded-2xl items-center text-left shadow-xl"
     >
       <Modal
         open={isModalOpen}
@@ -162,50 +167,55 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
           />
         </span>
       )}
-      <span
-        className="flex justify-between align-middle w-full ml-1 items-center"
-        onDragStart={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
+
+      <IconButton
+        disabled={loading}
+        onClick={async () => {
+          await copyTextToClipboard(get(reference, "url"));
+          enqueueSnackbar(`"${get(reference, "title")}" URL Copied`, {
+            variant: "info",
+            anchorOrigin: { vertical: "top", horizontal: "left" },
+          });
         }}
       >
-        <IconButton
-          disabled={loading}
-          onClick={async () => {
-            await copyTextToClipboard(get(reference, "url"));
-            enqueueSnackbar(`"${get(reference, "title")}" URL Copied`, {
-              variant: "info",
-              anchorOrigin: { vertical: "top", horizontal: "left" },
-            });
+        <ContentCopyOutlined sx={{ color: "var(--input)" }} />
+      </IconButton>
+      <Tooltip
+        placement="top-end"
+        followCursor
+        title={
+          currentUser ? `Visited ${get(reference, "clickCount")} time(s)` : ""
+        }
+      >
+        <span
+          className="flex justify-between align-middle w-full ml-1 items-center"
+          onDragStart={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
           }}
         >
-          <ContentCopyOutlined sx={{ color: "var(--input)" }} />
-        </IconButton>
-        <button
-          className="mr-2 text-input hover:cursor-pointer"
-          href="#"
-          onClick={onLinkClick}
-        >
-          <span className="text-lg text-input underline">
-            {get(reference, "title")}
-          </span>
-        </button>
-        {showTags &&
-          get(reference, "tags", []).map((item) => (
-            <span
-              className="rounded-xl bg-foreground py-1 px-2 mr-1 text-xs italic text-wrap"
-              key={item}
+          <div className="flex flex-col gap-2">
+            <button
+              className="mr-1 pt-1 text-input text-left hover:cursor-pointer"
+              href="#"
+              onClick={onLinkClick}
             >
-              {item}
-            </span>
-          ))}
-        <Tooltip
-          placement="top-end"
-          followCursor
-          title={
-            currentUser ? `Visited ${get(reference, "clickCount")} time(s)` : ""
-          }
-        >
+              <span className="text-md text-input underline">
+                {get(reference, "title")}
+              </span>
+            </button>
+            <span className="flex flex-wrap gap-1">
+            {showTags &&
+              get(reference, "tags", []).map((item) => (
+                <span
+                  className="rounded-xl bg-foreground py-1 px-2 mr-1 text-xs italic text-wrap"
+                  key={item}
+                >
+                  {item}
+                </span>
+              ))}
+              </span>
+          </div>
           <span>
             {navigator.canShare && navigator.canShare() && (
               <IconButton
@@ -240,8 +250,8 @@ const ReferenceRenderer = ({ reference, showTags, draggable }) => {
               </IconButton>
             )}
           </span>
-        </Tooltip>
-      </span>
+        </span>
+      </Tooltip>
     </div>
   );
 };

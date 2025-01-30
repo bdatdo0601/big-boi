@@ -10,13 +10,6 @@ import { Hub } from "aws-amplify";
 import { IconButton } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 
-const classes = {
-  drawerHeader: "LayoutdrawerHeader",
-  content: "LayoutContent",
-  contentShift: "LayoutContentShift",
-  subscriptionButton: "LayoutContentSubscriptionButton",
-};
-
 const subdomain = window.location.host.split(".")[0];
 const isSubdomainRoute = has(subdomainRouteMap, subdomain);
 
@@ -61,8 +54,8 @@ export default function MainLayout({ children }) {
         }}
         routeList={routeList}
       />
-      <div className="flex flex-col h-full z-10 pb-12">
-        <div className="min-sm:hidden bg-accent shadow-lg w-10 fixed m-4 rounded-full z-10">
+      <div className="flex flex-col min-h-screen h-full z-10">
+        <div className="min-md:hidden bg-accent shadow-lg w-10 fixed m-4 rounded-full z-10">
           <IconButton
             onClick={() => {
               setOpen(true);
@@ -76,7 +69,7 @@ export default function MainLayout({ children }) {
           isSubdomainRoute={isSubdomainRoute}
           routeList={routeList}
         />
-        <main>{children}</main>
+        <main className="grow flex flex-col w-full">{children}</main>
       </div>
     </div>
   );

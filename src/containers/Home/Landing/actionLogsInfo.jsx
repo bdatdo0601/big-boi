@@ -62,7 +62,7 @@ const ActionLogRow = (props) => {
   return (
     <AnimatedListItem key={index} style={{ ...animateProps, ...style }}>
       <div
-        className="hide-scrollbar rounded-lg bg-accent-foreground text-input pl-4 py-2 flex flex-row gap-3 align-center items-center"
+        className="hide-scrollbar rounded-lg bg-popover text-input pl-4 py-2 flex flex-row gap-3 align-center items-center"
         style={{ width: "100%", height: 70, overflow: "auto" }}
       >
         <div>
