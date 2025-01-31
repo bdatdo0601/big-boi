@@ -1,6 +1,5 @@
 import { createContext } from "react";
-import DEFAULT_RESUME from "@/assets/default-resume.json";
-
+import DEFAULT_RESUME from "../../assets/default-resume.json";
 
 export type ResumeSchemaBasic = {
   name: string;
