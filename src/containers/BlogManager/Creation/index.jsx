@@ -18,7 +18,7 @@ import { useNavigate, useParams } from "react-router";
 import { get, isEmpty, merge, trim } from "lodash";
 
 import "./index.css";
-import { uploadPhoto, getPhotoURL } from "../../../utils/awsStorage";
+import { uploadFile, getFile } from "../../../utils/awsStorage";
 import { useAWSAPI, useLazyAWSAPI } from "../../../utils/awsAPI";
 import { getPost } from "../../../graphql/queries";
 import { createPost, updatePost } from "../../../graphql/mutations";
@@ -174,8 +174,8 @@ export default function BlogCreation() {
             /\s+/g,
             "_"
           );
-          const { key: uploadedKey } = await uploadPhoto(file, key, prefix);
-          return getPhotoURL(uploadedKey, "");
+          const { key: uploadedKey } = await uploadFile(file, key, prefix);
+          return await getPhotoURL(uploadedKey);
         }}
         onChange={({ text }) => {
           setData((currentData) => ({ ...currentData, data: { text } }));

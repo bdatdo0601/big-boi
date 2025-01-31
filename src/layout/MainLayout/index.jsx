@@ -6,7 +6,7 @@ import routes, { subdomainRouteMap } from "../../routes";
 import { WEBSITE_TITLE } from "../../utils/constants";
 import { AppDrawer } from "../../components/AppDrawer";
 import { MainNavbar } from "./navbar";
-import { Hub } from "aws-amplify";
+import { Hub } from "aws-amplify/utils";
 import { IconButton } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 

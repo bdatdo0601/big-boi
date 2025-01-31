@@ -1,38 +1,32 @@
 import { Suspense } from "react";
 import { get, groupBy, has } from "lodash";
 import { BrowserRouter as Router, Route, Routes } from "react-router";
-import { Amplify } from "@aws-amplify/core";
-import { Auth } from "@aws-amplify/auth";
-import { Analytics, AWSKinesisProvider } from "@aws-amplify/analytics";
+import { Amplify } from "aws-amplify";
 import { CircularProgress } from "@mui/material";
+import amplifyconfig from './amplifyconfiguration.json';
 
-import awsconfig from "./aws-exports";
 import routes, { errorRoutes, getRoutePath, ROUTE_TYPE, subdomainRouteMap } from "./routes";
 import ContextProvider from "./context";
 import Layout from "./layout";
-import withCustomAWSAuthenticator from "./components/withCustomAWSAuthenticator";
+import { withCustomAWSAuthenticator } from "@/context/auth";
 import "./App.css";
 
 Amplify.configure({
-  ...awsconfig,
-});
-
-Auth.configure(awsconfig);
-
-Analytics.configure({
-  AWSKinesisProvider: {
-    region: awsconfig.aws_project_region,
-    bufferSize: 1,
+  ...amplifyconfig,
+  API: {
+    GraphQL: {
+      defaultAuthMode: 'apiKey',
+      endpoint: amplifyconfig.aws_appsync_graphqlEndpoint
+    }
   },
+  Auth: {
+    Cognito: {
+      identityPoolId: amplifyconfig.aws_cognito_identity_pool_id,
+      allowGuestAccess: true,
+    }
+  }
 });
-Analytics.addPluggable(
-  new AWSKinesisProvider({
-    region: awsconfig.aws_project_region,
-    bufferSize: 1,
-  })
-);
-// Analytics.addPluggable(new AWSKinesisFirehoseProvider());
-Analytics.enable();
+
 const subdomain = window.location.host.split(".")[0];
 const groupedRoutes = has(subdomainRouteMap, subdomain)
   ? groupBy(get(subdomainRouteMap, subdomain, []), "type.name")
@@ -52,7 +46,7 @@ function App() {
                 ? groupedRoutes[routeType].map((route) => (
                   <Route
                     key={route.name}
-                    Component={withCustomAWSAuthenticator(route.component)}
+                    Component={route.component && withCustomAWSAuthenticator(route.component)}
                     path={getRoutePath(route)}
                   />
                 ))

@@ -4,23 +4,32 @@ import { ResumeProvider } from "@/components/Vitae";
 
 import { useGetFile } from "@/utils/awsStorage";
 import { RESUME } from "@/utils/constants";
-import { fetchFileToJSON } from "@/utils";
 import { ResumeSchema } from "./provider";
 
-const withResumeProvider = <T extends object>(Component: React.FC<T>) => (props: T): React.ReactNode => {
-  const { file, loading } = useGetFile(RESUME.SCHEMA_FILE, RESUME.PREFIX);
-  const [resume, setResume] = useState<ResumeSchema | null>(null);
-  useEffect(() => {
-    if (file) {
-      fetchFileToJSON(file)
-        .then(((jsonFile: ResumeSchema) => setResume(jsonFile)))
-        .catch(() => setResume(null));
-    }
-  }, [file]);
+export const useStorageResume = () => {
+  const { file: rawFile, loading, fetchFile } = useGetFile(RESUME.SCHEMA_FILE, RESUME.PREFIX);
+  const [resume, setResume] = useState<ResumeSchema | null>();
+  const [fetchLoading, setFetchLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setResume(resume);
-  }, [resume]);
+    if (rawFile) {
+      rawFile.body.text().then(newResume => {
+        setResume(JSON.parse(newResume) as ResumeSchema);
+        setFetchLoading(false)
+      }).catch(err => {
+        console.error(err);
+        setResume(null)
+        setResume(null)
+      });
+    }
+  }, [rawFile]);
+
+
+  return { resume, loading: loading && fetchLoading, fetchFile }
+}
+
+const withResumeProvider = <T extends object>(Component: React.FC<T>) => (props: T): React.ReactNode => {
+  const { resume, loading } = useStorageResume();
 
   if (loading || !resume) {
     return <CircularProgress />;

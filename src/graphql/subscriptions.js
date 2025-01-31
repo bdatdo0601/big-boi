@@ -2,8 +2,11 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost {
-    onCreatePost {
+  subscription OnCreatePost(
+    $filter: ModelSubscriptionPostFilterInput
+    $owner: String
+  ) {
+    onCreatePost(filter: $filter, owner: $owner) {
       id
       title
       description
@@ -13,25 +16,22 @@ export const onCreatePost = /* GraphQL */ `
       postType
       updatedAt
       externalLink
+      comments {
+        nextToken
+        __typename
+      }
       owner
       createdAt
-      comments {
-        items {
-          id
-          postID
-          content
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      __typename
     }
   }
 `;
 export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost {
-    onUpdatePost {
+  subscription OnUpdatePost(
+    $filter: ModelSubscriptionPostFilterInput
+    $owner: String
+  ) {
+    onUpdatePost(filter: $filter, owner: $owner) {
       id
       title
       description
@@ -41,25 +41,22 @@ export const onUpdatePost = /* GraphQL */ `
       postType
       updatedAt
       externalLink
+      comments {
+        nextToken
+        __typename
+      }
       owner
       createdAt
-      comments {
-        items {
-          id
-          postID
-          content
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      __typename
     }
   }
 `;
 export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost {
-    onDeletePost {
+  subscription OnDeletePost(
+    $filter: ModelSubscriptionPostFilterInput
+    $owner: String
+  ) {
+    onDeletePost(filter: $filter, owner: $owner) {
       id
       title
       description
@@ -69,31 +66,24 @@ export const onDeletePost = /* GraphQL */ `
       postType
       updatedAt
       externalLink
+      comments {
+        nextToken
+        __typename
+      }
       owner
       createdAt
-      comments {
-        items {
-          id
-          postID
-          content
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      __typename
     }
   }
 `;
 export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment {
-    onCreateComment {
+  subscription OnCreateComment(
+    $filter: ModelSubscriptionCommentFilterInput
+    $owner: String
+  ) {
+    onCreateComment(filter: $filter, owner: $owner) {
       id
       postID
-      content
-      owner
-      createdAt
-      updatedAt
       post {
         id
         title
@@ -106,22 +96,24 @@ export const onCreateComment = /* GraphQL */ `
         externalLink
         owner
         createdAt
-        comments {
-          nextToken
-        }
+        __typename
       }
+      content
+      owner
+      createdAt
+      updatedAt
+      __typename
     }
   }
 `;
 export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment {
-    onUpdateComment {
+  subscription OnUpdateComment(
+    $filter: ModelSubscriptionCommentFilterInput
+    $owner: String
+  ) {
+    onUpdateComment(filter: $filter, owner: $owner) {
       id
       postID
-      content
-      owner
-      createdAt
-      updatedAt
       post {
         id
         title
@@ -134,22 +126,24 @@ export const onUpdateComment = /* GraphQL */ `
         externalLink
         owner
         createdAt
-        comments {
-          nextToken
-        }
+        __typename
       }
+      content
+      owner
+      createdAt
+      updatedAt
+      __typename
     }
   }
 `;
 export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment {
-    onDeleteComment {
+  subscription OnDeleteComment(
+    $filter: ModelSubscriptionCommentFilterInput
+    $owner: String
+  ) {
+    onDeleteComment(filter: $filter, owner: $owner) {
       id
       postID
-      content
-      owner
-      createdAt
-      updatedAt
       post {
         id
         title
@@ -162,16 +156,22 @@ export const onDeleteComment = /* GraphQL */ `
         externalLink
         owner
         createdAt
-        comments {
-          nextToken
-        }
+        __typename
       }
+      content
+      owner
+      createdAt
+      updatedAt
+      __typename
     }
   }
 `;
 export const onCreateEventMessage = /* GraphQL */ `
-  subscription OnCreateEventMessage($owner: String) {
-    onCreateEventMessage(owner: $owner) {
+  subscription OnCreateEventMessage(
+    $filter: ModelSubscriptionEventMessageFilterInput
+    $owner: String
+  ) {
+    onCreateEventMessage(filter: $filter, owner: $owner) {
       id
       type
       sourceID
@@ -184,12 +184,16 @@ export const onCreateEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
 export const onUpdateEventMessage = /* GraphQL */ `
-  subscription OnUpdateEventMessage($owner: String) {
-    onUpdateEventMessage(owner: $owner) {
+  subscription OnUpdateEventMessage(
+    $filter: ModelSubscriptionEventMessageFilterInput
+    $owner: String
+  ) {
+    onUpdateEventMessage(filter: $filter, owner: $owner) {
       id
       type
       sourceID
@@ -202,12 +206,16 @@ export const onUpdateEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
 export const onDeleteEventMessage = /* GraphQL */ `
-  subscription OnDeleteEventMessage($owner: String) {
-    onDeleteEventMessage(owner: $owner) {
+  subscription OnDeleteEventMessage(
+    $filter: ModelSubscriptionEventMessageFilterInput
+    $owner: String
+  ) {
+    onDeleteEventMessage(filter: $filter, owner: $owner) {
       id
       type
       sourceID
@@ -220,12 +228,16 @@ export const onDeleteEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
 export const onCreatePrivateEventMessage = /* GraphQL */ `
-  subscription OnCreatePrivateEventMessage($owner: String) {
-    onCreatePrivateEventMessage(owner: $owner) {
+  subscription OnCreatePrivateEventMessage(
+    $filter: ModelSubscriptionPrivateEventMessageFilterInput
+    $owner: String
+  ) {
+    onCreatePrivateEventMessage(filter: $filter, owner: $owner) {
       id
       type
       sourceID
@@ -238,12 +250,16 @@ export const onCreatePrivateEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
 export const onUpdatePrivateEventMessage = /* GraphQL */ `
-  subscription OnUpdatePrivateEventMessage($owner: String) {
-    onUpdatePrivateEventMessage(owner: $owner) {
+  subscription OnUpdatePrivateEventMessage(
+    $filter: ModelSubscriptionPrivateEventMessageFilterInput
+    $owner: String
+  ) {
+    onUpdatePrivateEventMessage(filter: $filter, owner: $owner) {
       id
       type
       sourceID
@@ -256,12 +272,16 @@ export const onUpdatePrivateEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
 export const onDeletePrivateEventMessage = /* GraphQL */ `
-  subscription OnDeletePrivateEventMessage($owner: String) {
-    onDeletePrivateEventMessage(owner: $owner) {
+  subscription OnDeletePrivateEventMessage(
+    $filter: ModelSubscriptionPrivateEventMessageFilterInput
+    $owner: String
+  ) {
+    onDeletePrivateEventMessage(filter: $filter, owner: $owner) {
       id
       type
       sourceID
@@ -274,12 +294,16 @@ export const onDeletePrivateEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
 export const onCreateReference = /* GraphQL */ `
-  subscription OnCreateReference($owner: String) {
-    onCreateReference(owner: $owner) {
+  subscription OnCreateReference(
+    $filter: ModelSubscriptionReferenceFilterInput
+    $owner: String
+  ) {
+    onCreateReference(filter: $filter, owner: $owner) {
       id
       title
       url
@@ -291,12 +315,16 @@ export const onCreateReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
 export const onUpdateReference = /* GraphQL */ `
-  subscription OnUpdateReference($owner: String) {
-    onUpdateReference(owner: $owner) {
+  subscription OnUpdateReference(
+    $filter: ModelSubscriptionReferenceFilterInput
+    $owner: String
+  ) {
+    onUpdateReference(filter: $filter, owner: $owner) {
       id
       title
       url
@@ -308,12 +336,16 @@ export const onUpdateReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
 export const onDeleteReference = /* GraphQL */ `
-  subscription OnDeleteReference($owner: String) {
-    onDeleteReference(owner: $owner) {
+  subscription OnDeleteReference(
+    $filter: ModelSubscriptionReferenceFilterInput
+    $owner: String
+  ) {
+    onDeleteReference(filter: $filter, owner: $owner) {
       id
       title
       url
@@ -325,12 +357,16 @@ export const onDeleteReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
 export const onCreatePrivateReference = /* GraphQL */ `
-  subscription OnCreatePrivateReference($owner: String) {
-    onCreatePrivateReference(owner: $owner) {
+  subscription OnCreatePrivateReference(
+    $filter: ModelSubscriptionPrivateReferenceFilterInput
+    $owner: String
+  ) {
+    onCreatePrivateReference(filter: $filter, owner: $owner) {
       id
       title
       url
@@ -342,12 +378,16 @@ export const onCreatePrivateReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
 export const onUpdatePrivateReference = /* GraphQL */ `
-  subscription OnUpdatePrivateReference($owner: String) {
-    onUpdatePrivateReference(owner: $owner) {
+  subscription OnUpdatePrivateReference(
+    $filter: ModelSubscriptionPrivateReferenceFilterInput
+    $owner: String
+  ) {
+    onUpdatePrivateReference(filter: $filter, owner: $owner) {
       id
       title
       url
@@ -359,12 +399,16 @@ export const onUpdatePrivateReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
 export const onDeletePrivateReference = /* GraphQL */ `
-  subscription OnDeletePrivateReference($owner: String) {
-    onDeletePrivateReference(owner: $owner) {
+  subscription OnDeletePrivateReference(
+    $filter: ModelSubscriptionPrivateReferenceFilterInput
+    $owner: String
+  ) {
+    onDeletePrivateReference(filter: $filter, owner: $owner) {
       id
       title
       url
@@ -376,6 +420,7 @@ export const onDeletePrivateReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;

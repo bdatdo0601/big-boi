@@ -16,9 +16,15 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "api": {
+    "AdminQueries": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    },
     "bigboiapi": {
       "GraphQLAPIEndpointOutput": "string",
-      "GraphQLAPIIdOutput": "string"
+      "GraphQLAPIIdOutput": "string",
+      "GraphQLAPIKeyOutput": "string"
     },
     "bigboiexternalapi": {
       "ApiId": "string",
@@ -30,14 +36,34 @@ export type AmplifyDependentResourcesAttributes = {
     "bigboi327b1f0d": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
-      "AppClientSecret": "string",
+      "CreatedSNSRole": "string",
+      "HostedUIDomain": "string",
       "IdentityPoolId": "string",
       "IdentityPoolName": "string",
+      "OAuthMetadata": "string",
+      "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
+    },
+    "userPoolGroups": {
+      "BigBoiSuperAdminGroupRole": "string"
     }
   },
   "function": {
+    "AdminQueries324157f8": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "bigboi327b1f0dPostConfirmation": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "bigboibigboilambdalayer": {
       "Arn": "string"
     },

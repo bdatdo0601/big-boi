@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo } from "react";
 import { get, reverse, sortBy } from "lodash";
-import { privateReferenceByUpdatedAt, referenceByUpdatedAt } from "../../../../graphql/queries";
+import { PrivateReferenceByUpdatedAt, ReferenceByUpdatedAt } from "../../../../graphql/queries";
 import { useAWSAPI } from "../../../../utils/awsAPI";
 import { convertToReferenceRenderedData } from "../../utils";
 import ReferenceDisplayWidget from "../../components/ReferenceDisplayWidget";
@@ -9,12 +9,11 @@ import ReferenceContext from "../../context";
 const MostRecent = () => {
   const query = useMemo(() => ({ type: "REFERENCES", sortDirection: "DESC", limit: 10000 }), []);
   const { data: rawPublicData, loading: publicDataLoading, execute: refetchReference } = useAWSAPI(
-    referenceByUpdatedAt,
+    ReferenceByUpdatedAt,
     query,
-    "API_KEY"
   );
   const { data: rawPrivateData, loading: privateDataLoading, execute: refetchPrivateReference } = useAWSAPI(
-    privateReferenceByUpdatedAt,
+    PrivateReferenceByUpdatedAt,
     query
   );
   const { registerRefetch, deregisterRefetch } = useContext(ReferenceContext);

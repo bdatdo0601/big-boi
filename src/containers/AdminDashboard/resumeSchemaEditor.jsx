@@ -1,21 +1,21 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Button, Card, CircularProgress } from "@mui/material";
-import PropTypes from "prop-types";
-import { CloudUploadOutlined, RestoreOutlined } from "@mui/icons-material";
-import { isEqual } from "lodash";
+import React, { useCallback, useEffect, useState } from 'react';
+import { Button, Card, CircularProgress } from '@mui/material';
+import PropTypes from 'prop-types';
+import { CloudUploadOutlined, RestoreOutlined } from '@mui/icons-material';
+import { isEqual } from 'lodash';
 
-import DEFAULT_RESUME from "../../assets/default-resume.json";
-import { useGetFile, useUploadFile } from "../../utils/awsStorage";
-import { RESUME } from "../../utils/constants";
-import { fetchFileToJSON } from "../../utils";
-import { useDataUpdateWrapper } from "../../utils/hooks";
-import EventType from "../../assets/event-type.json";
-import ResumeSchemaForm from "./resumeSchemaForm";
+import DEFAULT_RESUME from '../../assets/default-resume.json';
+import { useGetFile, useUploadFile } from '../../utils/awsStorage';
+import { RESUME } from '../../utils/constants';
+import { useDataUpdateWrapper } from '../../utils/hooks';
+import EventType from '../../assets/event-type.json';
+import ResumeSchemaForm from './resumeSchemaForm';
+import { useStorageResume } from '@/components/Vitae/withResumeProvider';
 
 const DataUpdateOptions = {
   snackBar: {
-    successMessage: "Resume Data Updated",
-    errorMessage: "Unable to Update Resume Data",
+    successMessage: 'Resume Data Updated',
+    errorMessage: 'Unable to Update Resume Data',
   },
   logging: {
     eventType: EventType.Personal.Resume.Update,
@@ -23,45 +23,32 @@ const DataUpdateOptions = {
 };
 
 export default function ResumeSchemaEditor() {
-  const { file, loading, fetchFile } = useGetFile(
-    RESUME.SCHEMA_FILE,
-    RESUME.PREFIX
-  );
-  const { uploadFile } = useUploadFile();
-  const [defaultFile, setDefaultFile] = useState(DEFAULT_RESUME);
-  const [resume, setResume] = useState(defaultFile);
-  useEffect(() => {
-    if (file) {
-      fetchFileToJSON(file)
-        .then((jsonFile) => setDefaultFile(jsonFile))
-        .catch(() => setDefaultFile(DEFAULT_RESUME));
-    }
-  }, [file]);
+  const { resume, loading, fetchFile } = useStorageResume();
+  const { upload } = useUploadFile();
+  const [newResume, setNewResume] = useState(resume);
 
   useEffect(() => {
-    setResume(defaultFile);
-  }, [defaultFile]);
+    if (resume) {
+      setNewResume(resume);
+    }
+  }, [resume]);
 
   const updateResume = useCallback(
-    async (newResume) => {
+    async newResume => {
       const blob = new Blob([JSON.stringify(newResume)], {
-        type: "application/json",
+        type: 'application/json',
       });
-      await uploadFile(blob, RESUME.SCHEMA_FILE, RESUME.PREFIX, "public");
+      await upload(blob, RESUME.SCHEMA_FILE, RESUME.PREFIX);
       return newResume;
     },
-    [uploadFile]
+    [upload]
   );
 
   const onPostUpdateResume = useCallback(async () => {
     await fetchFile();
   }, [fetchFile]);
 
-  const [onUploadResume] = useDataUpdateWrapper(
-    updateResume,
-    onPostUpdateResume,
-    DataUpdateOptions
-  );
+  const [onUploadResume] = useDataUpdateWrapper(updateResume, onPostUpdateResume, DataUpdateOptions);
 
   if (loading) {
     return <CircularProgress />;
@@ -75,8 +62,8 @@ export default function ResumeSchemaEditor() {
           variant="contained"
           color="primary"
           startIcon={<CloudUploadOutlined />}
-          disabled={isEqual(resume, defaultFile)}
-          onClick={async () => onUploadResume(resume)}
+          disabled={isEqual(resume, newResume)}
+          onClick={async () => onUploadResume(newResume)}
           style={{ margin: 12 }}
         >
           Update
@@ -92,9 +79,9 @@ export default function ResumeSchemaEditor() {
       </div>
       <div className="w-full overflow-x-auto">
         <ResumeSchemaForm
-          existingResume={resume}
-          onUpdateResume={(data) => {
-            setResume(data);
+          existingResume={newResume || resume}
+          onUpdateResume={data => {
+            setNewResume(data);
           }}
         />
       </div>

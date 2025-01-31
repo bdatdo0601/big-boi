@@ -5,7 +5,6 @@ import { ResumeProvider } from "../../../../components/Vitae";
 import ResumeDisplay from "./ResumeDisplay";
 import { useGetFile } from "../../../../utils/awsStorage";
 import { RESUME } from "../../../../utils/constants";
-import { fetchFileToJSON } from "../../../../utils";
 import ProfileCard from "../../../../components/ProfileCard";
 import withResumeProvider from "@/components/Vitae/withResumeProvider";
 

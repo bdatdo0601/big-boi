@@ -1,4 +1,4 @@
-import { isRegExp, escapeRegExp, isString, flatten } from "lodash";
+import { isRegExp, escapeRegExp, isString, flatten } from 'lodash';
 
 /**
  * Given a string, replace every substring that is matched by the `match` regex
@@ -23,21 +23,21 @@ import { isRegExp, escapeRegExp, isString, flatten } from "lodash";
  * @param {function} fn
  * @return {array}
  */
-const replaceString = (str, match, fn, onlyFirst = true) => {
+const replaceString = (str: string, match: RegExp | string, fn: Function, onlyFirst = true) => {
   let curCharStart = 0;
   let curCharLen = 0;
 
-  if (str === "") {
+  if (str === '') {
     return str;
   }
   if (!str || !isString(str)) {
-    throw new TypeError("First argument to react-string-replace#replaceString must be a string");
+    throw new TypeError('First argument to react-string-replace#replaceString must be a string');
   }
 
   let re = match;
 
   if (!isRegExp(re)) {
-    re = new RegExp(`(${escapeRegExp(re)})`, "gi");
+    re = new RegExp(`(${escapeRegExp(re)})`, 'gi');
   }
 
   let result = str.split(re);
@@ -49,7 +49,7 @@ const replaceString = (str, match, fn, onlyFirst = true) => {
     curCharStart += curCharLen;
 
     if (onlyFirst) {
-      result = [...result.slice(0, i + 1), result.slice(i + 1).join("")];
+      result = [...result.slice(0, i + 1), result.slice(i + 1).join('')];
       break;
     }
   }
@@ -57,9 +57,8 @@ const replaceString = (str, match, fn, onlyFirst = true) => {
   return result;
 };
 
-export default (source, match, fn) => {
-  // eslint-disable-next-line
-  if (!Array.isArray(source)) source = [source];
+export default (source: any | any[], match: RegExp | string, fn: Function) => {
+  const sourceArray = Array.isArray(source) ? source : [source];
 
-  return flatten(source.map(x => (isString(x) ? replaceString(x, match, fn) : x)));
+  return flatten(sourceArray.map(x => (isString(x) ? replaceString(x, match, fn) : x)));
 };

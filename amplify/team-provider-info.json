@@ -13,11 +13,13 @@
     },
     "categories": {
       "auth": {
-        "bigboi327b1f0d": {}
+        "bigboi327b1f0d": {},
+        "userPoolGroups": {}
       },
       "api": {
         "bigboiapi": {},
-        "bigboiexternalapi": {}
+        "bigboiexternalapi": {},
+        "AdminQueries": {}
       },
       "function": {
         "bigboikinesisconsumer": {
@@ -59,6 +61,15 @@
         "bigboiurlmetadataresolver": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
           "s3Key": "amplify-builds/bigboiurlmetadataresolver-7839646c4134432b764b-build.zip"
+        },
+        "bigboi327b1f0dPostConfirmation": {
+          "GROUP": "BigBoi",
+          "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+          "s3Key": "amplify-builds/bigboi327b1f0dPostConfirmation-5732742f6c5276307937-build.zip"
+        },
+        "AdminQueries324157f8": {
+          "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
+          "s3Key": "amplify-builds/AdminQueries324157f8-7447332b4176507a3366-build.zip"
         }
       },
       "hosting": {

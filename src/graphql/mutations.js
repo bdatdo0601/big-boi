@@ -16,19 +16,13 @@ export const createPost = /* GraphQL */ `
       postType
       updatedAt
       externalLink
+      comments {
+        nextToken
+        __typename
+      }
       owner
       createdAt
-      comments {
-        items {
-          id
-          postID
-          content
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      __typename
     }
   }
 `;
@@ -47,19 +41,13 @@ export const updatePost = /* GraphQL */ `
       postType
       updatedAt
       externalLink
+      comments {
+        nextToken
+        __typename
+      }
       owner
       createdAt
-      comments {
-        items {
-          id
-          postID
-          content
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      __typename
     }
   }
 `;
@@ -78,19 +66,13 @@ export const deletePost = /* GraphQL */ `
       postType
       updatedAt
       externalLink
+      comments {
+        nextToken
+        __typename
+      }
       owner
       createdAt
-      comments {
-        items {
-          id
-          postID
-          content
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      __typename
     }
   }
 `;
@@ -102,10 +84,6 @@ export const createComment = /* GraphQL */ `
     createComment(input: $input, condition: $condition) {
       id
       postID
-      content
-      owner
-      createdAt
-      updatedAt
       post {
         id
         title
@@ -118,10 +96,13 @@ export const createComment = /* GraphQL */ `
         externalLink
         owner
         createdAt
-        comments {
-          nextToken
-        }
+        __typename
       }
+      content
+      owner
+      createdAt
+      updatedAt
+      __typename
     }
   }
 `;
@@ -133,10 +114,6 @@ export const updateComment = /* GraphQL */ `
     updateComment(input: $input, condition: $condition) {
       id
       postID
-      content
-      owner
-      createdAt
-      updatedAt
       post {
         id
         title
@@ -149,10 +126,13 @@ export const updateComment = /* GraphQL */ `
         externalLink
         owner
         createdAt
-        comments {
-          nextToken
-        }
+        __typename
       }
+      content
+      owner
+      createdAt
+      updatedAt
+      __typename
     }
   }
 `;
@@ -164,10 +144,6 @@ export const deleteComment = /* GraphQL */ `
     deleteComment(input: $input, condition: $condition) {
       id
       postID
-      content
-      owner
-      createdAt
-      updatedAt
       post {
         id
         title
@@ -180,10 +156,13 @@ export const deleteComment = /* GraphQL */ `
         externalLink
         owner
         createdAt
-        comments {
-          nextToken
-        }
+        __typename
       }
+      content
+      owner
+      createdAt
+      updatedAt
+      __typename
     }
   }
 `;
@@ -205,6 +184,7 @@ export const createEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
@@ -226,6 +206,7 @@ export const updateEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
@@ -247,6 +228,7 @@ export const deleteEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
@@ -268,6 +250,7 @@ export const createPrivateEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
@@ -289,6 +272,7 @@ export const updatePrivateEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
@@ -310,6 +294,7 @@ export const deletePrivateEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
@@ -330,6 +315,7 @@ export const createReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
@@ -350,6 +336,7 @@ export const updateReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
@@ -370,6 +357,7 @@ export const deleteReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
@@ -390,6 +378,7 @@ export const createPrivateReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
@@ -410,6 +399,7 @@ export const updatePrivateReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
@@ -430,6 +420,7 @@ export const deletePrivateReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;

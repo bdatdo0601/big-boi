@@ -2,8 +2,6 @@ import { useCallback } from "react";
 import { useSnackbar } from "notistack";
 import { get, merge } from "lodash";
 
-import { recordEvent } from "../awsAnalytics";
-
 export const DataUpdateWrapperDefaultOptions = {
   snackBar: {
     successMessage: "Data Updated",
@@ -38,7 +36,7 @@ export const useDataUpdateWrapper = (
         if (!updatedData) {
           console.error("Unable to log updated data");
         }
-        recordEvent(get(options, "logging.eventType", "DATA_EVENT"), updatedData);
+        // recordEvent(get(options, "logging.eventType", "DATA_EVENT"), updatedData);
         enqueueSnackbar(
           get(options, "snackBar.successMessage", "Data Updated"),
           get(options, "snackBar.successMessageConfig", {})

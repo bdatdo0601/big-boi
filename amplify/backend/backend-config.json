@@ -14,26 +14,58 @@
     }
   },
   "api": {
+    "AdminQueries": {
+      "authorizationType": "AMAZON_COGNITO_USER_POOLS",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "bigboi327b1f0d"
+        },
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "AdminQueries324157f8"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "bigboiapi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "bigboi327b1f0d"
+        }
+      ],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-              "userPoolConfig": {
-                "userPoolId": "authbigboi327b1f0d"
-              }
+              "apiKeyConfig": {
+                "apiKeyExpirationDate": "2026-01-31T18:58:23.578Z",
+                "apiKeyExpirationDays": 365,
+                "description": "Default API Key"
+              },
+              "authenticationType": "API_KEY"
             },
             {
               "authenticationType": "AWS_IAM"
             }
           ],
           "defaultAuthentication": {
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 365,
-              "description": "public access"
-            },
-            "authenticationType": "API_KEY"
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authbigboi327b1f0d"
+            }
           }
         }
       },
@@ -82,12 +114,77 @@
   "auth": {
     "bigboi327b1f0d": {
       "customAuth": false,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "bigboi327b1f0dPostConfirmation",
+          "triggerProvider": "Cognito"
+        }
+      ],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OPTIONAL",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    },
+    "userPoolGroups": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "bigboi327b1f0d"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito-UserPool-Groups"
     }
   },
   "function": {
+    "AdminQueries324157f8": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "bigboi327b1f0d"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "bigboi327b1f0dPostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "bigboibigboilambdalayer": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -233,6 +330,46 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_AdminQueries324157f8_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AdminQueries324157f8"
+        }
+      ]
+    },
+    "AMPLIFY_function_AdminQueries324157f8_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AdminQueries324157f8"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboi327b1f0dPostConfirmation_GROUP": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboi327b1f0dPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboi327b1f0dPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboi327b1f0dPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboi327b1f0dPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboi327b1f0dPostConfirmation"
+        }
+      ]
+    },
     "AMPLIFY_function_bigboibigboilambdalayer_deploymentBucketName": {
       "usedBy": [
         {
@@ -444,6 +581,22 @@
   },
   "storage": {
     "bigboicontent": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "bigboi327b1f0d"
+        },
+        {
+          "attributes": [
+            "BigBoiSuperAdminGroupRole"
+          ],
+          "category": "auth",
+          "resourceName": "userPoolGroups"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "S3"
     }

@@ -1,4 +1,4 @@
-export const PHOTO_UPLOAD_PREFIX = "PHOTO_UPLOAD/";
+export const PHOTO_UPLOAD_PREFIX = "public/PHOTO_UPLOAD/";
 
 export const POST_STATE = {
   DRAFT: "DRAFT",
@@ -12,12 +12,12 @@ export const WEBSITE_TITLE = import.meta.env.SITE_WEBSITE_TITLE || "Dat Do";
 export const PUBLIC_URL = import.meta.env.PUBLIC_URL || "https://datbdo.com";
 
 export const RESUME = {
-  PREFIX: "resume/",
+  PREFIX: "public/resume/",
   SCHEMA_FILE: "schema.json",
 };
 
 export const REFERENCE_TAGS = {
-  PREFIX: "reference/",
+  PREFIX: "public/reference/",
   FILE_NAME: "reference_tags.json",
 };
 

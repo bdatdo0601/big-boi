@@ -11,7 +11,6 @@ const TagAlphabetical = () => {
   const { data: rawPublicData, loading: publicDataLoading, execute: refetchReference } = useAWSAPI(
     listReferences,
     query,
-    "API_KEY"
   );
   const { data: rawPrivateData, loading: privateDataLoading, execute: refetchPrivateReference } = useAWSAPI(
     listPrivateReferences,

@@ -25,7 +25,6 @@ const Searchable = () => {
   const { data: rawPublicData, loading: publicDataLoading, execute: refetchReference } = useAWSAPIGetAll(
     listReferences,
     query,
-    "API_KEY"
   );
   const { data: rawPrivateData, loading: privateDataLoading, execute: refetchPrivateReference } = useAWSAPIGetAll(
     listPrivateReferences,

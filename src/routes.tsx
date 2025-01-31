@@ -1,5 +1,4 @@
 import React, { lazy, FC, ComponentType } from "react";
-import { Auth } from "@aws-amplify/auth";
 import { Navigate, useNavigate } from "react-router";
 import {
   Map as MuiMap,
@@ -21,6 +20,8 @@ import Reference from "./containers/Reference";
 import ShareTarget from "./containers/ShareTarget";
 import usePageTracking from "./utils/hooks/usePageTracking";
 import PaperResumeDisplay from "./containers/PaperResume";
+import { useAuth } from "./context/auth";
+import { getCurrentUser } from "@aws-amplify/auth";
 
 const Blogs = lazy(() => import("./containers/Blogs"));
 const ChangeLogs = lazy(() => import("./containers/Changelogs"));
@@ -50,7 +51,7 @@ interface RouteType {
 export interface RouteConfig {
   name: string;
   icon?: React.ReactNode;
-  component?: ComponentType<any>;
+  component?: React.FC<object>;
   path: string;
   exact: boolean;
   type: RouteType;
@@ -74,9 +75,9 @@ const withAnalytics = <P extends object>(Component: ComponentType<P>): FC<P> => 
 
 const isAuthExist = async (): Promise<boolean> => {
   try {
-    const user = await Auth.currentAuthenticatedUser();
+    const user = await getCurrentUser();
     return user !== null;
-  } catch (err) {
+  } catch (_err: any) {
     return false;
   }
 };
@@ -126,7 +127,8 @@ export const subdomainRouteMap: Record<string, RouteConfig[]> = {
       icon: <MeetingRoomIcon />,
       component: () => {
         const navigate = useNavigate();
-        Auth.signOut().then(() => {
+        const { signOut } = useAuth();
+        signOut().then(() => {
           navigate("/", { replace: true });
         });
         return null;
@@ -263,7 +265,8 @@ const routes: RouteConfig[] = [
     icon: <MeetingRoomIcon />,
     component: () => {
       const navigate = useNavigate();
-      Auth.signOut().then(() => {
+      const { signOut } = useAuth();
+      signOut().then(() => {
         navigate("/", { replace: true });
       });
       return null;

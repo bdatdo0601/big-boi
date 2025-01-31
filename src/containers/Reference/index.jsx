@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Auth from "@aws-amplify/auth";
 import { ExpandMoreOutlined } from "@mui/icons-material";
 import { Accordion, AccordionSummary } from "@mui/material";
 import useLocalStorageState from "use-local-storage-state";

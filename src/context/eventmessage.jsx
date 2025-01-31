@@ -4,38 +4,9 @@ import { get, sortBy, reverse, isEmpty } from "lodash";
 import { useSnackbar } from "notistack";
 
 import { useAWSAPI, useSubscriptionAWSAPI } from "../utils/awsAPI";
+import { EventMessageByTimestamp } from "@/graphql/queries";
 
 const EventMessageContext = React.createContext();
-
-const listEventMessagesByTimeStamp = /* GraphQL */ `
-  query EventMessageByTimestamp(
-    $type: String
-    $timestamp: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelEventMessageFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    EventMessageByTimestamp(
-      type: $type
-      timestamp: $timestamp
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        eventType
-        publishInfo
-        timestamp
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 
 const onCreateEventMessage = /* GraphQL */ `
   subscription OnCreateEventMessage {
@@ -61,9 +32,8 @@ export const EventMessageContextProvider = ({ children }) => {
     []
   );
   const { data: rawMessages, loading, execute: refetch } = useAWSAPI(
-    listEventMessagesByTimeStamp,
+    EventMessageByTimestamp,
     variableInputs,
-    "API_KEY"
   );
 
   const onNewDataNotified = useCallback(
@@ -92,7 +62,7 @@ export const EventMessageContextProvider = ({ children }) => {
       ),
     [rawMessages]
   );
-  useSubscriptionAWSAPI(onCreateEventMessage, onNewDataNotified, console.error, "API_KEY");
+  useSubscriptionAWSAPI(onCreateEventMessage, onNewDataNotified, console.error);
   return <EventMessageContext.Provider value={{ messages, loading }}>{children}</EventMessageContext.Provider>;
 };
 

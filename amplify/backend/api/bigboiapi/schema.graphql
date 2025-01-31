@@ -4,50 +4,64 @@ enum PostStatus {
   ARCHIVED
 }
 
-type Post @model @key(name: "byUpdatedAt", fields: ["status", "updatedAt"], queryField: "PostByUpdatedAt")  @auth(
+type Post
+  @model
+  @auth(
     rules: [
-      { allow: private, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
-      { allow: private, provider: iam, operations: [read, create, update, delete] }, # iam lambda access
-      { allow: public, operations: [read] } # unauthenticated users can read
+      { allow: groups, provider: userPools, groups: ["BigBoiSuperAdmin"], operations: [read, create, update, delete] }
+      { allow: owner, provider: userPools, operations: [read, create, update, delete] }
+      { allow: private, provider: identityPool, operations: [read, create, update] }
+      { allow: public, operations: [read] }
+      { allow: public, provider: identityPool, operations: [read] }
     ]
-  ) {
+  )
+{
   id: ID!
   title: String!
   description: String
-  status: PostStatus!
+  status: PostStatus! @index(name: "byUpdatedAt", queryField: "PostByUpdatedAt", sortKeyFields: ["updatedAt"])
   tags: [String]
   data: AWSJSON!
   postType: String
   updatedAt: AWSDateTime!
   externalLink: String
-  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+  comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
   owner: String
 }
 
-type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(
+type Comment
+  @model
+  @auth(
     rules: [
-      { allow: private, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
-      { allow: private, provider: iam, operations: [read, create, update, delete] }, # iam lambda access
-      { allow: public, operations: [read] } # unauthenticated users can read
+      { allow: groups, provider: userPools, groups: ["BigBoiSuperAdmin"], operations: [read, create, update, delete] }
+      { allow: owner, provider: userPools, operations: [read, create, update, delete] }
+      { allow: private, provider: identityPool, operations: [read, create, update, delete] }
+      { allow: public, operations: [read] }
+      { allow: public, provider: identityPool, operations: [read, create] }
     ]
-  ) {
+  )
+{
   id: ID!
-  postID: ID!
-  post: Post @connection(fields: ["postID"])
+  postID: ID! @index(name: "byPost", sortKeyFields: ["content"])
+  post: Post @belongsTo(fields: ["postID"])
   content: String!
   owner: String
 }
 
-# TODO: improve message details
-type EventMessage @model @key(name: "byTimestamp", fields: ["type", "timestamp"], queryField: "EventMessageByTimestamp") @auth(
-  rules: [
-      { allow: owner, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
-      { allow: private, provider: iam, operations: [read, create, update, delete] }, # iam lambda access write
-      { allow: public, operations: [read] } # unauthenticated users can read
+type EventMessage
+  @model
+  @auth(
+    rules: [
+      { allow: groups, provider: userPools, groups: ["BigBoiSuperAdmin"], operations: [read, create, update, delete] }
+      { allow: owner, provider: userPools, operations: [read, create, update, delete] }
+      { allow: private, provider: identityPool, operations: [read, create, update] }
+      { allow: public, operations: [read] }
+      { allow: public, provider: identityPool, operations: [read] }
     ]
-) {
+  )
+{
   id: ID!
-  type: String!
+  type: String! @index(name: "byTimestamp", queryField: "EventMessageByTimestamp", sortKeyFields: ["timestamp"])
   sourceID: String!
   source: String!
   eventType: String!
@@ -57,14 +71,18 @@ type EventMessage @model @key(name: "byTimestamp", fields: ["type", "timestamp"]
   timestamp: AWSDateTime!
 }
 
-type PrivateEventMessage @model @key(name: "byTimestamp", fields: ["type", "timestamp"], queryField: "PrivateEventMessageByTimestamp") @auth(
-  rules: [
-      { allow: owner, provider: userPools, operations: [read, create, update, delete] }, # owner can update, delete, and read
-      { allow: private, provider: iam, operations: [read, create, update, delete] }, # iam lambda access write
+type PrivateEventMessage
+  @model
+  @auth(
+    rules: [
+      { allow: groups, provider: userPools, groups: ["BigBoiSuperAdmin"], operations: [read, create, update, delete] }
+      { allow: owner, provider: userPools, operations: [read, create, update, delete] }
+      { allow: private, provider: identityPool, operations: [read, create, update] }
     ]
-) {
+  )
+{
   id: ID!
-  type: String!
+  type: String! @index(name: "byTimestamp", queryField: "PrivateEventMessageByTimestamp", sortKeyFields: ["timestamp"])
   sourceID: String!
   source: String!
   eventType: String!
@@ -76,37 +94,24 @@ type PrivateEventMessage @model @key(name: "byTimestamp", fields: ["type", "time
 
 type Reference
   @model
-  @key(
-    name: "byUpdatedAt"
-    fields: ["type", "updatedAt"]
-    queryField: "ReferenceByUpdatedAt"
-  )
-  @key(
-    name: "byClickCount"
-    fields: ["type", "clickCount"]
-    queryField: "ReferenceByClickCount"
-  )
   @auth(
     rules: [
-      {
-        allow: owner
-        provider: userPools
-        operations: [read, create, update, delete]
-      } # owner can update, delete, and read
-      {
-        allow: private
-        provider: iam
-        operations: [read, create, update, delete]
-      } # iam lambda access write
-      { allow: public, operations: [read] } # unauthenticated users can read
+      { allow: groups, provider: userPools, groups: ["BigBoiSuperAdmin"], operations: [read, create, update, delete] }
+      { allow: owner, provider: userPools, operations: [read, create, update, delete] }
+      { allow: private, provider: identityPool, operations: [read, create, update] }
+      { allow: public, operations: [read] }
+      { allow: public, provider: identityPool, operations: [read] }
     ]
-  ) {
+  )
+{
   id: ID!
   title: String!
   url: String
   description: String
   extraData: AWSJSON
   type: String
+    @index(name: "byUpdatedAt", queryField: "ReferenceByUpdatedAt", sortKeyFields: ["updatedAt"])
+    @index(name: "byClickCount", queryField: "ReferenceByClickCount", sortKeyFields: ["clickCount"])
   clickCount: Int
   updatedAt: AWSDateTime!
   tags: [String]
@@ -114,36 +119,22 @@ type Reference
 
 type PrivateReference
   @model
-  @key(
-    name: "byUpdatedAt"
-    fields: ["type", "updatedAt"]
-    queryField: "PrivateReferenceByUpdatedAt"
-  )
-  @key(
-    name: "byClickCount"
-    fields: ["type", "clickCount"]
-    queryField: "PrivateReferenceByClickCount"
-  )
   @auth(
     rules: [
-      {
-        allow: owner
-        provider: userPools
-        operations: [read, create, update, delete]
-      } # owner can update, delete, and read
-      {
-        allow: private
-        provider: iam
-        operations: [read, create, update, delete]
-      } # iam lambda access write
+      { allow: groups, provider: userPools, groups: ["BigBoiSuperAdmin"], operations: [read, create, update, delete] }
+      { allow: owner, provider: userPools, operations: [read, create, update, delete] }
+      { allow: private, provider: identityPool, operations: [read, create, update] }
     ]
-  ) {
+  )
+{
   id: ID!
   title: String!
   url: String
   description: String
   extraData: AWSJSON
   type: String
+    @index(name: "byUpdatedAt", queryField: "PrivateReferenceByUpdatedAt", sortKeyFields: ["updatedAt"])
+    @index(name: "byClickCount", queryField: "PrivateReferenceByClickCount", sortKeyFields: ["clickCount"])
   clickCount: Int
   updatedAt: AWSDateTime!
   tags: [String]

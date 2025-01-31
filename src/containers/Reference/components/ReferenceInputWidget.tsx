@@ -6,7 +6,7 @@ import React, {
   useRef,
   useEffect,
 } from "react";
-import API from "@aws-amplify/api";
+import { put } from "@aws-amplify/api";
 import { RJSFSchema } from "@rjsf/utils";
 import { get, isEmpty, uniq, debounce, cloneDeep, set } from "lodash";
 import { v4 as uuid } from "uuid";
@@ -120,16 +120,21 @@ const ReferenceInputWidget: React.FC<ReferenceInputWidgetProps> = ({ existingRef
   const onURLChange = useRef(
     debounce(async (newURL: string) => {
       setIsURLMetadataFetching(true);
-      const response = await API.post("bigboiexternalapi", "/url-metadata", {
-        body: { url: newURL },
+      const rawResponse = await put({
+        apiName: "bigboiexternalapi",
+        path: "/url-metadata",
+        options: {
+          body: { url: newURL },
+        }
       });
+      const response = JSON.parse(await (await rawResponse.response).body.text())
       setFormData((currentValue: ReferenceSchemaType | undefined) => {
         setIsURLMetadataFetching(false);
         if (currentValue && !get(currentValue, "title")) {
           const newValue = cloneDeep(currentValue);
           const isPrivate = get(response, "isPrivate", true);
           set(newValue, "isPrivate", isPrivate);
-          set(newValue, "title", get(response, "title"))
+          set(newValue, "title", get(response, "title", get(response, "og:title")))
           return newValue;
         }
         return currentValue;

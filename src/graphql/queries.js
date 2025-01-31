@@ -13,19 +13,13 @@ export const getPost = /* GraphQL */ `
       postType
       updatedAt
       externalLink
+      comments {
+        nextToken
+        __typename
+      }
       owner
       createdAt
-      comments {
-        items {
-          id
-          postID
-          content
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      __typename
     }
   }
 `;
@@ -48,17 +42,16 @@ export const listPosts = /* GraphQL */ `
         externalLink
         owner
         createdAt
-        comments {
-          nextToken
-        }
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
-export const postByUpdatedAt = /* GraphQL */ `
+export const PostByUpdatedAt = /* GraphQL */ `
   query PostByUpdatedAt(
-    $status: PostStatus
+    $status: PostStatus!
     $updatedAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelPostFilterInput
@@ -85,11 +78,10 @@ export const postByUpdatedAt = /* GraphQL */ `
         externalLink
         owner
         createdAt
-        comments {
-          nextToken
-        }
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
@@ -98,10 +90,6 @@ export const getComment = /* GraphQL */ `
     getComment(id: $id) {
       id
       postID
-      content
-      owner
-      createdAt
-      updatedAt
       post {
         id
         title
@@ -114,10 +102,13 @@ export const getComment = /* GraphQL */ `
         externalLink
         owner
         createdAt
-        comments {
-          nextToken
-        }
+        __typename
       }
+      content
+      owner
+      createdAt
+      updatedAt
+      __typename
     }
   }
 `;
@@ -135,21 +126,10 @@ export const listComments = /* GraphQL */ `
         owner
         createdAt
         updatedAt
-        post {
-          id
-          title
-          description
-          status
-          tags
-          data
-          postType
-          updatedAt
-          externalLink
-          owner
-          createdAt
-        }
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
@@ -168,6 +148,7 @@ export const getEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
@@ -191,14 +172,16 @@ export const listEventMessages = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
-export const eventMessageByTimestamp = /* GraphQL */ `
+export const EventMessageByTimestamp = /* GraphQL */ `
   query EventMessageByTimestamp(
-    $type: String
+    $type: String!
     $timestamp: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelEventMessageFilterInput
@@ -226,8 +209,10 @@ export const eventMessageByTimestamp = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
@@ -246,6 +231,7 @@ export const getPrivateEventMessage = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      __typename
     }
   }
 `;
@@ -273,14 +259,16 @@ export const listPrivateEventMessages = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
-export const privateEventMessageByTimestamp = /* GraphQL */ `
+export const PrivateEventMessageByTimestamp = /* GraphQL */ `
   query PrivateEventMessageByTimestamp(
-    $type: String
+    $type: String!
     $timestamp: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelPrivateEventMessageFilterInput
@@ -308,8 +296,10 @@ export const privateEventMessageByTimestamp = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
@@ -327,6 +317,7 @@ export const getReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
@@ -349,14 +340,16 @@ export const listReferences = /* GraphQL */ `
         tags
         createdAt
         owner
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
-export const referenceByUpdatedAt = /* GraphQL */ `
+export const ReferenceByUpdatedAt = /* GraphQL */ `
   query ReferenceByUpdatedAt(
-    $type: String
+    $type: String!
     $updatedAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelReferenceFilterInput
@@ -383,14 +376,16 @@ export const referenceByUpdatedAt = /* GraphQL */ `
         tags
         createdAt
         owner
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
-export const referenceByClickCount = /* GraphQL */ `
+export const ReferenceByClickCount = /* GraphQL */ `
   query ReferenceByClickCount(
-    $type: String
+    $type: String!
     $clickCount: ModelIntKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelReferenceFilterInput
@@ -417,8 +412,10 @@ export const referenceByClickCount = /* GraphQL */ `
         tags
         createdAt
         owner
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
@@ -436,6 +433,7 @@ export const getPrivateReference = /* GraphQL */ `
       tags
       createdAt
       owner
+      __typename
     }
   }
 `;
@@ -462,14 +460,16 @@ export const listPrivateReferences = /* GraphQL */ `
         tags
         createdAt
         owner
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
-export const privateReferenceByUpdatedAt = /* GraphQL */ `
+export const PrivateReferenceByUpdatedAt = /* GraphQL */ `
   query PrivateReferenceByUpdatedAt(
-    $type: String
+    $type: String!
     $updatedAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelPrivateReferenceFilterInput
@@ -496,14 +496,16 @@ export const privateReferenceByUpdatedAt = /* GraphQL */ `
         tags
         createdAt
         owner
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
-export const privateReferenceByClickCount = /* GraphQL */ `
+export const PrivateReferenceByClickCount = /* GraphQL */ `
   query PrivateReferenceByClickCount(
-    $type: String
+    $type: String!
     $clickCount: ModelIntKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelPrivateReferenceFilterInput
@@ -530,8 +532,10 @@ export const privateReferenceByClickCount = /* GraphQL */ `
         tags
         createdAt
         owner
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;

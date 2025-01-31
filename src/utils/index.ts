@@ -1,6 +1,6 @@
-import { shuffle } from "lodash";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { shuffle } from 'lodash';
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
@@ -10,17 +10,17 @@ export function formatBytes(
   bytes: number,
   opts: {
     decimals?: number;
-    sizeType?: "accurate" | "normal";
+    sizeType?: 'accurate' | 'normal';
   } = {}
 ): string {
-  const { decimals = 0, sizeType = "normal" } = opts;
+  const { decimals = 0, sizeType = 'normal' } = opts;
 
-  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
-  const accurateSizes = ["Bytes", "KiB", "MiB", "GiB", "TiB"];
-  if (bytes === 0) return "0 Byte";
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  const accurateSizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB'];
+  if (bytes === 0) return '0 Byte';
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
   return `${(bytes / 1024 ** i).toFixed(decimals)} ${
-    sizeType === "accurate" ? accurateSizes[i] ?? "Bytes" : sizes[i] ?? "Bytes"
+    sizeType === 'accurate' ? (accurateSizes[i] ?? 'Bytes') : (sizes[i] ?? 'Bytes')
   }`;
 }
 
@@ -32,20 +32,13 @@ export function composeEventHandlers<E>(
   return function handleEvent(event: E) {
     originalEventHandler?.(event);
 
-    if (
-      checkForDefaultPrevented === false ||
-      !(event as unknown as Event).defaultPrevented
-    ) {
+    if (checkForDefaultPrevented === false || !(event as unknown as Event).defaultPrevented) {
       return ourEventHandler?.(event);
     }
   };
 }
 
-export const createFile = async (
-  path: string,
-  name: string,
-  type: string
-): Promise<File> => {
+export const createFile = async (path: string, name: string, type: string): Promise<File> => {
   const response = await fetch(path);
   const data = await response.blob();
   const metadata = {
@@ -55,7 +48,7 @@ export const createFile = async (
 };
 
 export const downloadUrl = (url: string, fileName: string): void => {
-  const a = document.createElement("a");
+  const a = document.createElement('a');
   a.href = url;
   a.download = fileName;
   document.body.appendChild(a);
@@ -65,8 +58,8 @@ export const downloadUrl = (url: string, fileName: string): void => {
 };
 
 export const stringToTextBlob = (text: string, filename: string): File => {
-  const blob = new Blob([text], { type: "text/plain" });
-  return new File([blob], filename, { type: "text/plain" });
+  const blob = new Blob([text], { type: 'text/plain' });
+  return new File([blob], filename, { type: 'text/plain' });
 };
 
 export const gcd = (a: number, b: number): number => {
@@ -79,16 +72,12 @@ export const gcd = (a: number, b: number): number => {
 export const isTouchDevice = (): boolean => {
   return (
     !!(
-      typeof window !== "undefined" &&
-      ("ontouchstart" in window ||
+      typeof window !== 'undefined' &&
+      ('ontouchstart' in window ||
         ((window as any).DocumentTouch &&
-          typeof document !== "undefined" &&
+          typeof document !== 'undefined' &&
           document instanceof (window as any).DocumentTouch))
-    ) ||
-    !!(
-      typeof navigator !== "undefined" &&
-      (navigator.maxTouchPoints || (navigator as any).msMaxTouchPoints)
-    )
+    ) || !!(typeof navigator !== 'undefined' && (navigator.maxTouchPoints || (navigator as any).msMaxTouchPoints))
   );
 };
 
@@ -102,14 +91,10 @@ interface Item {
   metaData: MetaData;
   [key: string]: any;
 }
-export const formatGridList = (
-  data: Item[],
-  colAmount: number,
-  isWeb: boolean
-): Item[] => {
+export const formatGridList = (data: Item[], colAmount: number, isWeb: boolean): Item[] => {
   let amount = 0;
   if (data.length <= 0) return [];
-  const result = shuffle(data).map((item) => {
+  const result = shuffle(data).map(item => {
     let cols = 0;
     if (item.metaData.aspectWidth === item.metaData.aspectHeight) {
       cols = isWeb ? 2 : 1;
@@ -138,7 +123,7 @@ export const getImageMeta = async (url: string): Promise<ImageMeta> =>
   new Promise((res, rej) => {
     const img = new Image();
     img.src = url;
-    img.onload = function(event) {
+    img.onload = function (event) {
       const target = event.target as HTMLImageElement;
       const divisor = gcd(target.width, target.height);
       res({
@@ -149,38 +134,27 @@ export const getImageMeta = async (url: string): Promise<ImageMeta> =>
       });
     };
     img.onerror = function onError() {
-      rej(new Error("Unable to get image meta data"));
+      rej(new Error('Unable to get image meta data'));
     };
   });
 
-export const fetchFileToJSON = async (url: string): Promise<any> => {
-  const response = await fetch(url, {
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-  });
-  const json = await response.json();
-  return json;
-};
-
-export const subdomain = window.location.host.split(".")[0];
+export const subdomain = window.location.host.split('.')[0];
 
 export const getDomainWithoutSubdomain = (): string => {
-  const urlParts = window.location.hostname.split(".");
+  const urlParts = window.location.hostname.split('.');
 
   const mainDomain = urlParts
     .slice(0)
     .slice(-(urlParts.length === 4 ? 3 : 2))
-    .join(".");
+    .join('.');
 
-  if (navigator.userAgent === "ReactSnap") {
-    return "/";
+  if (navigator.userAgent === 'ReactSnap') {
+    return '/';
   }
 
-  return mainDomain === "localhost"
-    ? `http://${mainDomain}:3000`
-    : `https://${mainDomain}`;
+  return mainDomain === 'localhost' ? `http://${mainDomain}:3000` : `https://${mainDomain}`;
 };
 
 export default {
   getImageMeta,
-  fetchFileToJSON,
 };
