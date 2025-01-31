@@ -1,6 +1,7 @@
 import JSONSchemaForm, { FormProps } from '@rjsf/core';
 
 import {
+  ArrayFieldTemplateProps,
   FieldErrorProps,
   FieldTemplateProps,
   IconButtonProps,
@@ -10,14 +11,44 @@ import {
 } from '@rjsf/utils';
 
 import { cn } from '@/utils';
-import { get, isEmpty, merge, pick } from 'lodash';
-import { Refresh } from '@mui/icons-material';
+import { get, merge, pick } from 'lodash';
+import { Add, ArrowDownward, ArrowUpward, Delete, Refresh } from '@mui/icons-material';
+import { useEffect, useState } from 'react';
 
 const Input = (props: React.ComponentProps<any>) => (
-  <input {...props} className="border border-gray-300 rounded-md p-2 w-full text-input" />
+  <input {...props} className="border border-gray-300 rounded-md py-1 px-2 w-full text-input" />
 )
 
+const base64ToFile = async (dataurl: string, filename: string): Promise<File> => {
+  const res: Response = await fetch(dataurl);
+  const blob: Blob = await res.blob();
+  return new File([blob], filename, { type: blob.type });
+};
+
+
+const convertToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
 const widgets: RegistryWidgetsType = {
+  URIWidget: (props: WidgetProps) => {
+    const { value, onChange, name, required, placeholder, label } = props;
+    return (
+      <Input
+        type="url"
+        placeholder={placeholder || label || name}
+        value={value || ''}
+        onChange={(e: any) => onChange(e.target.value)}
+        name={name}
+        required={required}
+      />
+    );
+  },
   TextWidget: (props: WidgetProps) => {
     const { value, onChange, name, required, placeholder, label } = props;
     return (
@@ -74,31 +105,52 @@ const widgets: RegistryWidgetsType = {
   },
 
   FileWidget: (props: WidgetProps) => {
-    const { onChange, multiple, value } = props;
-    const accept = get(props, 'options.accept');
+    const { onChange, multiple, value, options } = props;
+    const accept = options?.accept;
+    const [tempFile, setTempFile] = useState<File | null>(null);
+
+    useEffect(() => {
+      if (value) {
+        base64ToFile(value, 'tempFile').then((file) => {
+          setTempFile(file);
+        });
+      }
+    }, [value]);
+
+    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const files = event.target.files;
+      if (files) {
+        const fileList = Array.from(files);
+        if (multiple) {
+          onChange(fileList);
+        } else {
+          const file = fileList[0];
+          const base64Data = await convertToBase64(file);
+          onChange(base64Data);
+        }
+      }
+    };
+
     return (
-      <Input
-        type="file"
-        className={cn('max-w-full')}
-        {...(pick(props, ['onBlur', 'onFocus', 'disabled', 'multiple']) as any)}
-        value={value.filter((item: any) => !isEmpty(item))}
-        onValueChange={(files: File[]) => {
-          onChange(files.map((file) => file));
-        }}
-        multiple={multiple}
-        accept={accept}
-        maxSize={50 * 1024 * 1024}
-        maxFileCount={100}
-      />
+      <div>
+        <Input
+          type="file"
+          className={cn('max-w-full')}
+          {...(pick(props, ['onBlur', 'onFocus', 'disabled']) as any)}
+          onChange={handleFileChange}
+          multiple={multiple}
+          accept={accept}
+        />
+        {tempFile && <p>1 file registered ({tempFile.size} bytes)</p>}
+      </div>
     );
   },
 
   TextareaWidget: (props: WidgetProps) => {
     const { value, onChange, name, required, placeholder } = props;
-
     return (
       <textarea
-        className={cn('max-w-full')}
+        className={'border border-gray-300 rounded-md p-2 w-full min-w-[400px] text-input'}
         placeholder={placeholder}
         value={value}
         onChange={(e: any) => onChange(e.target.value)}
@@ -117,9 +169,9 @@ const templates = {
       uiSchema,
     } = props;
     return (
-      <div>
-        <div className="flex justify-between">
-          <h1 className="flex-grow text-3xl text-center"> {title}</h1>
+      <div className='bg-muted border-1 border-input pl-1 py-1 rounded-md min-w-[600px]'>
+        <div className="flex justify-start pl-1">
+          <h1 className="flex-grow text-lg text-center pl-2 font-bold">{title}</h1>
           {props.idSchema.$id === 'root' &&
             get(uiSchema, 'ui:submitButtonOptions.norender', false) && (
               <button disabled={isSubmitPending} type={get(uiSchema, 'ui:submitButtonOptions.type')} className="bg-success text-white px-4 py-2 rounded-md flex items-center">
@@ -130,19 +182,59 @@ const templates = {
               </button>
             )}
         </div>
-        {props.properties.map((element: any) => element.content)}
+        <div className='flex flex-row flex-wrap gap-2'>
+          {props.properties.map((element: any) => element.content)}
+        </div>
       </div>
     );
   },
   FieldTemplate: (props: FieldTemplateProps) => {
-    const { help, description, errors, children } = props;
-    if (['object'].includes(props.schema.type as string)) return children;
+    const { help, description, errors, children, label } = props;
+    if (['object', 'array'].includes(props.schema.type as string)) return children;
     return (
-      <div className="my-2 w-full">
+      <div className="my-2 flex flex-col gap-1">
+        <span className='text-xs'>{label}</span>
         <div className='flex-grow'>{children}</div>
         <span className="block">{description}</span>
         <span>{help}</span>
         {errors}
+      </div>
+    );
+  },
+
+  ArrayFieldTemplate: (props: ArrayFieldTemplateProps) => {
+    return (
+      <div className='border-1 border-input py-1 pr-1 rounded-lg flex flex-col gap-2'>
+        <span className='text-lg pl-2 font-bold'>{props.title}</span>
+        <div className='flex flex-wrap gap-2'>
+          {props.items.map((element) => (
+            <div key={element.key} className='flex flex-col gap-1'>
+              {element.children}
+              <span className='flex flex-row gap-2 justify-start'>
+                {element.hasMoveDown && (
+                  <button title='Move Down' className="p-1 rounded-full border-2 bg-secondary text-input hover:cursor-pointer" onClick={element.onReorderClick(element.index, element.index + 1)}>
+                    <ArrowDownward />
+                  </button>
+                )}
+                {element.hasMoveUp && (
+                  <button title='Move Up' className="p-1 rounded-full border-2 bg-secondary text-input hover:cursor-pointer" onClick={element.onReorderClick(element.index, element.index - 1)}>
+                    <ArrowUpward />
+                  </button>
+                )}
+                {element.hasRemove && (
+                  <button title='Remove' className="p-1 rounded-full border-2 bg-destructive text-input hover:cursor-pointer" onClick={element.onDropIndexClick(element.index)}>
+                    <Delete />
+                  </button>
+                )}
+              </span>
+            </div>
+          ))}
+        </div>
+        {props.canAdd && (
+          <button title='Add' className="m-2 py-2 px-4 rounded-full border-2 bg-primary text-input hover:cursor-pointer" onClick={props.onAddClick}>
+            <Add />
+          </button>
+        )}
       </div>
     );
   },
@@ -167,15 +259,15 @@ const templates = {
     AddButton: (props: IconButtonProps) => {
       return (
         <button {...props} className="m-2 py-2 px-4 rounded-lg border-2 bg-primary text-input hover:cursor-pointer">
-          Add Item
+          <Add />
         </button>
       );
     },
 
     RemoveButton: (props: IconButtonProps) => {
       return (
-        <button {...props} className="mr-2 py-1 px-4 rounded-lg border-2 bg-destructive text-input hover:cursor-pointer">
-          Remove
+        <button {...props} className="m-2 py-2 px-4 rounded-lg border-2 bg-destructive text-input hover:cursor-pointer">
+          <Delete />
         </button>
       );
     },
@@ -183,7 +275,7 @@ const templates = {
     MoveDownButton: (props: IconButtonProps) => {
       return (
         <button {...props} className="m-2 py-2 px-4 rounded-lg border-2 bg-secondary hover:cursor-pointer">
-          Move Down
+          <ArrowDownward />
         </button>
       );
     },
@@ -191,7 +283,7 @@ const templates = {
     MoveUpButton: (props: IconButtonProps) => {
       return (
         <button {...props} className="m-2 py-2 px-4 rounded-lg border-2 bg-secondary hover:cursor-pointer">
-          Move Up
+          <ArrowUpward />
         </button>
       );
     },

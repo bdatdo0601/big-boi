@@ -1,6 +1,13 @@
 import React, { useMemo, useState, useEffect, useCallback } from "react";
 import { v4 as uuid } from "uuid";
-import { Button, Chip, CircularProgress, Paper, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Chip,
+  CircularProgress,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 // import style manually
@@ -40,8 +47,12 @@ export default function BlogCreation() {
 
   const defaultDataInputs = useMemo(() => ({ id: postID }), [postID]);
   const { execute: postPost, loading: postingPost } = useLazyAWSAPI(createPost);
-  const { execute: mutatePost, loading: updatingPost } = useLazyAWSAPI(updatePost);
-  const { data: rawDefaultData, loading } = useAWSAPI(getPost, defaultDataInputs);
+  const { execute: mutatePost, loading: updatingPost } =
+    useLazyAWSAPI(updatePost);
+  const { data: rawDefaultData, loading } = useAWSAPI(
+    getPost,
+    defaultDataInputs
+  );
   const defaultData = useMemo(() => {
     const fetchedData = get(rawDefaultData, "data.getPost", {});
     const postData = JSON.parse(get(fetchedData, "data", "{}"));
@@ -64,104 +75,117 @@ export default function BlogCreation() {
         status: POST_STATE.DRAFT,
       },
     };
-    isEmpty(get(rawDefaultData, "data.getPost", {})) ? await postPost(variables) : await mutatePost(variables);
+    isEmpty(get(rawDefaultData, "data.getPost", {}))
+      ? await postPost(variables)
+      : await mutatePost(variables);
     return variables.input;
   }, [data, mutatePost, postPost, rawDefaultData]);
   const onPostUpdateBlogData = useCallback(async () => {
     navigate("/blogmanager", { replace: true });
   }, [navigate]);
 
-  const [onSubmit] = useDataUpdateWrapper(updateBlogPostData, onPostUpdateBlogData, DataUpdateOptions);
+  const [onSubmit] = useDataUpdateWrapper(
+    updateBlogPostData,
+    onPostUpdateBlogData,
+    DataUpdateOptions
+  );
 
   if (loading) {
     return <CircularProgress style={{ marginTop: 16 }} />;
   }
 
   return (
-    <div className="container-div" style={{ padding: 8 }}>
-      <Typography variant="h3">Blog Creation</Typography>
-      <Paper style={{ padding: 16, marginTop: 8, display: "flex", flexDirection: "column" }}>
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ marginTop: 8, marginBottom: 8 }}
-          startIcon={<CheckBoxOutlined />}
+    <div className="container-div container mx-auto p-2">
+      <h1 className="text-3xl font-bold mb-4">Blog Creation</h1>
+      <div className="bg-muted shadow-md rounded-lg p-4 mb-4 flex flex-col">
+        <button
+          className={`mb-4 bg-primary text-input py-2 px-4 rounded-md flex items-center justify-center ${
+            postingPost || updatingPost
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-accent"
+          }`}
           disabled={postingPost || updatingPost}
           onClick={onSubmit}
         >
+          <CheckBoxOutlined className="mr-2" />
           Submit
-        </Button>
-        <TextField
-          variant="outlined"
-          id="standard-basic"
-          label="Post Title"
-          fullWidth
+        </button>
+        <input
+          type="text"
+          placeholder="Post Title"
+          className="w-full p-2 mb-4 border border-gray-300 rounded-md"
           defaultValue={get(data, "title", "")}
-          onChange={e => {
+          onChange={(e) => {
             const newTitle = e.target.value;
-            setData(currentData => ({ ...currentData, title: newTitle }));
+            setData((currentData) => ({ ...currentData, title: newTitle }));
           }}
         />
-        <TextField
-          variant="outlined"
-          id="standard-description"
-          label="Post Description"
-          fullWidth
-          multiline
+        <textarea
+          placeholder="Post Description"
+          className="w-full p-2 mb-4 border border-gray-300 rounded-md"
           defaultValue={get(data, "description", "")}
-          style={{ marginTop: 8 }}
-          onChange={e => {
+          onChange={(e) => {
             const newDescription = e.target.value;
-            setData(currentData => ({ ...currentData, description: newDescription }));
-          }}
-        />
-        <TextField
-          variant="outlined"
-          id="standard-tags"
-          label="Post Tags (Separated by comma)"
-          fullWidth
-          multiline
-          defaultValue={get(data, "tags", []).join(", ")}
-          style={{ marginTop: 8 }}
-          onChange={e => {
-            const newTags = e.target.value;
-            setData(currentData => ({
+            setData((currentData) => ({
               ...currentData,
-              tags: newTags
-                .split(",")
-                .map(item => trim(item))
-                .filter(item => item),
+              description: newDescription,
             }));
           }}
         />
-        <div style={{ marginTop: 6, textAlign: "left" }}>
+        <input
+          type="text"
+          placeholder="Post Tags (Separated by comma)"
+          className="w-full p-2 mb-4 border border-gray-300 rounded-md"
+          defaultValue={get(data, "tags", []).join(", ")}
+          onChange={(e) => {
+            const newTags = e.target.value;
+            setData((currentData) => ({
+              ...currentData,
+              tags: newTags
+                .split(",")
+                .map((item) => trim(item))
+                .filter((item) => item),
+            }));
+          }}
+        />
+        <div className="flex flex-wrap mb-4">
           {get(data, "tags", []).map((item, index) => (
-            <span style={{ marginRight: 8 }} key={`${item} ${index}`}>
-              <Chip color="primary" label={item} />
+            <span
+              key={`${item} ${index}`}
+              className="bg-blue-500 text-white px-2 py-1 rounded-full mr-2 mb-2"
+            >
+              {item}
             </span>
           ))}
         </div>
-      </Paper>
+      </div>
       <MdEditor
-        style={{ height: "70vh", marginTop: "1rem" }}
+        style={{ height: "70vh" }}
         config={{
           markdownClass: "post-markdown-content",
           imageAccept: ".jpg, .png, .gif",
           allowPasteImage: true,
         }}
         value={get(data, "data.text", "")}
-        renderHTML={text => mdParser.render(text)}
-        onImageUpload={async file => {
+        renderHTML={(text) => mdParser.render(text)}
+        onImageUpload={async (file) => {
           const prefix = `${postID}-Images/`.replace(/\s+/g, "_");
-          const key = `${uuid()}-${get(file, "name", "Image")}`.replace(/\s+/g, "_");
+          const key = `${uuid()}-${get(file, "name", "Image")}`.replace(
+            /\s+/g,
+            "_"
+          );
           const { key: uploadedKey } = await uploadPhoto(file, key, prefix);
           return getPhotoURL(uploadedKey, "");
         }}
         onChange={({ text }) => {
-          setData(currentData => ({ ...currentData, data: { text } }));
+          setData((currentData) => ({ ...currentData, data: { text } }));
         }}
       />
-      {postingPost || updatingPost ? <CircularProgress /> : null}
+      {postingPost || updatingPost ? (
+        <div className="flex justify-center mt-4">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -93,7 +93,7 @@ export default function BlogManager() {
         >
           Add New Blog
         </Button>
-        <div className="h-full overflow-y-scroll">
+        <div className="flex flex-wrap gap-12 items-center mt-12 justify-center">
           {orderBy(posts, "createdAt", "desc")
             .filter((post) => !["Twitter", "Instagram"].includes(post.postType))
             .map((post) => (

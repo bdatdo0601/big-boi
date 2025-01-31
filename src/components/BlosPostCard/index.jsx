@@ -17,59 +17,39 @@ import { InstagramEmbed } from "react-social-media-embed";
 
 import { POST_STATE } from "../../utils/constants";
 import LayoutContext from "../../context/layout";
+import ProfileCard from "../ProfileCard";
 
 const DefaultCardContent = ({ post, showState, onPostClick, isDark }) => (
-  <Card
-    style={{
-      width: "100%",
-      textAlign: "left",
-      opacity: post.status === POST_STATE.ARCHIVED ? 0.5 : 1,
-      borderRadius: "10px",
-    }}
-    raised
-    elevation={3}
+  <div
+    className={`w-full text-left ${
+      post.status === POST_STATE.ARCHIVED ? "opacity-50" : "opacity-100"
+    }`}
   >
-    <CardActionArea onClick={onPostClick}>
-      <CardContent
-        style={{
-          backgroundColor: "var(--card)",
-          color: "var(--input)",
-          padding: 20,
-        }}
-      >
-        {showState && (
-          <Typography color="textSecondary" gutterBottom>
-            {`${
-              get(post, "postType")
-                ? `[${capitalize(get(post, "postType"))}] `
-                : ""
-            }${capitalize(post.status)}`}
-          </Typography>
-        )}
-        <Typography gutterBottom variant="h5" component="h2">
-          {post.title}
-        </Typography>
-        <Divider style={{ marginBottom: 10 }} />
-        <Typography variant="body2" color="textSecondary" component="p">
-          {post.description}
-        </Typography>
-        <div style={{ marginTop: 12, marginBottom: 12, textAlign: "left" }}>
+    <div className="cursor-pointer" onClick={onPostClick}>
+      <div className="text-input p-5">
+        <p className="text-input mb-3">{post.description}</p>
+        <div className="mb-3 text-left">
           {get(post, "tags", []).map((item, index) => (
-            <span
-              style={{ marginRight: 8, marginTop: 4 }}
-              key={`${item} ${index}`}
-            >
-              <Chip color="primary" label={item} style={{ marginTop: 8 }} />
+            <span className="mr-2 mt-1 inline-block" key={`${item} ${index}`}>
+              <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-sm mt-2">
+                {item}
+              </span>
             </span>
           ))}
         </div>
-        <Divider style={{ marginBottom: 10 }} />
-        <Typography variant="body2" color="textSecondary" component="p">
+        <p className="text-input text-sm">
           Updated At: {moment(post.updatedAt).format("hh:mma MMM DD YYYY")}
-        </Typography>
-      </CardContent>
-    </CardActionArea>
-  </Card>
+        </p>
+        <p className="text-input text-xs mb-2">
+          {`Status: ${
+            get(post, "postType")
+              ? `[${capitalize(get(post, "postType"))}] `
+              : ""
+          }${capitalize(post.status)}`}
+        </p>
+      </div>
+    </div>
+  </div>
 );
 
 DefaultCardContent.propTypes = {
@@ -173,7 +153,16 @@ export default function BlogPostCard({
 }) {
   const { isDark } = useContext(LayoutContext);
   return (
-    <div className="mx-auto my-4 flex flex-col gap-0" style={{ maxWidth: 1200 }}>
+    <ProfileCard
+      header={
+        <h3
+          className="text-2xl px-2 hover:cursor-pointer"
+          onClick={onPostClick}
+        >
+          {post.title}
+        </h3>
+      }
+    >
       <CardContentData
         post={post}
         showState={showState}
@@ -182,54 +171,52 @@ export default function BlogPostCard({
         isDark={isDark}
       />
       {showActions && (
-        <div className="mx-2 rounded-lg" style={{ backgroundColor: "var(--card-foreground)" }}>
-          <CardActions style={{ display: "flex", justifyContent: "center" }}>
-            <Button
-              size="small"
-              disabled={isString(get(updatingPost || post, "postType"))}
-              onClick={() => {
-                updatePostState(post, POST_STATE.DRAFT);
-              }}
-            >
-              Draft
-            </Button>
-            <Button
-              size="small"
-              color="primary"
-              disabled={isString(get(updatingPost || post, "postType"))}
-              onClick={() => {
-                updatePostState(post, POST_STATE.PUBLISHED);
-              }}
-            >
-              Publish
-            </Button>
-            <Button
-              size="small"
-              color="warning"
-              disabled={isString(get(updatingPost || post, "postType"))}
-              onClick={() => {
-                updatePostState(post, POST_STATE.ARCHIVED);
-              }}
-            >
-              Archived
-            </Button>
-            <Button
-              size="small"
-              color="error"
-              disabled={deletingPost}
-              onClick={() => {
-                // eslint-disable-next-line
-                if (window.confirm("Are you sure?")) {
-                  deletePost(post);
-                }
-              }}
-            >
-              Delete
-            </Button>
-          </CardActions>
-        </div>
+        <span className="flex flex-row justify-center gap-4 mt-2">
+          <Button
+            size="small"
+            disabled={isString(get(updatingPost || post, "postType"))}
+            onClick={() => {
+              updatePostState(post, POST_STATE.DRAFT);
+            }}
+          >
+            Draft
+          </Button>
+          <Button
+            size="small"
+            color="primary"
+            disabled={isString(get(updatingPost || post, "postType"))}
+            onClick={() => {
+              updatePostState(post, POST_STATE.PUBLISHED);
+            }}
+          >
+            Publish
+          </Button>
+          <Button
+            size="small"
+            color="warning"
+            disabled={isString(get(updatingPost || post, "postType"))}
+            onClick={() => {
+              updatePostState(post, POST_STATE.ARCHIVED);
+            }}
+          >
+            Archived
+          </Button>
+          <Button
+            size="small"
+            color="error"
+            disabled={deletingPost}
+            onClick={() => {
+              // eslint-disable-next-line
+              if (window.confirm("Are you sure?")) {
+                deletePost(post);
+              }
+            }}
+          >
+            Delete
+          </Button>
+        </span>
       )}
-    </div>
+    </ProfileCard>
   );
 }
 

@@ -3,8 +3,3 @@
     background-color: #fafafa;
   }
 }
-.features-wrapper {
-  overflow-y: scroll;
-  height: 80vh;
-  padding-bottom: 5rem;
-}

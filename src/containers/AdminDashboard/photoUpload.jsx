@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
-import { Card, Typography, CircularProgress, Grid, Button } from "@mui/material";
+import { CircularProgress, Button } from "@mui/material";
 import PropTypes from "prop-types";
 import { useSnackbar } from "notistack";
 import { UploadFile } from "@mui/icons-material";
@@ -9,6 +9,7 @@ import useGetDataList from "../../utils/hooks/useGetDataList";
 import ImageFilePreview from "../../components/ImageFilePreview";
 
 import { styled } from "@mui/material/styles";
+import ProfileCard from "@/components/ProfileCard";
 
 const classes = {
   imageDropzone: "imageDropzone",
@@ -29,10 +30,12 @@ export default function PhotoUpload({ fetchFiles, uploadFile, deleteFile }) {
 
   return (
     <StyledDropzone>
-      <Card className="my-8 mx-16 py-4 px-8">
-        <Typography variant="h5">Photo Upload</Typography>
+      <div className="p-4 overflow-auto bg-accent rounded-lg mx-2">
+        <div className="flex flex-col items-center my-2 gap-2">
+          <h5 className="text-2xl">Photo Upload</h5>
+        </div>
         {loading ? (
-          <CircularProgress style={{ marginTop: 16 }} />
+          <CircularProgress style={{ marginTop: 24 }} />
         ) : (
           <>
             <input
@@ -42,7 +45,7 @@ export default function PhotoUpload({ fetchFiles, uploadFile, deleteFile }) {
               id="raised-button-file"
               multiple
               type="file"
-              onChange={async e => {
+              onChange={async (e) => {
                 try {
                   const uploadingFiles = e.target.files;
                   for (let i = 0; i < uploadingFiles.length; i++) {
@@ -54,34 +57,40 @@ export default function PhotoUpload({ fetchFiles, uploadFile, deleteFile }) {
                     anchorOrigin: { horizontal: "right", vertical: "top" },
                   });
                 } catch (err) {
-                  enqueueSnackbar(err.message ? err.message : "Unable to upload files", {
-                    variant: "error",
-                    anchorOrigin: { horizontal: "left", vertical: "top" },
-                  });
+                  enqueueSnackbar(
+                    err.message ? err.message : "Unable to upload files",
+                    {
+                      variant: "error",
+                      anchorOrigin: { horizontal: "left", vertical: "top" },
+                    }
+                  );
                 }
               }}
             />
             <label htmlFor="raised-button-file">
-              <Button variant="outlined" component="span" style={{ margin: 12 }}>
+              <Button
+                variant="outlined"
+                component="span"
+                style={{ margin: 12 }}
+              >
                 <UploadFile style={{ marginRight: 4 }} /> Upload Images
               </Button>
             </label>
-            <Grid container>
-              {files.map(item => (
-                <Grid item key={item.key} xs={12} sm={4} md={3} lg={4}>
-                  <ImageFilePreview
-                    file={item}
-                    onDelete={async () => {
-                      await deleteFile(item);
-                      await refetch();
-                    }}
-                  />
-                </Grid>
+            <div className="flex flex-wrap gap-2 my-12">
+              {files.map((item) => (
+                <ImageFilePreview
+                  key={item.key}
+                  file={item}
+                  onDelete={async () => {
+                    await deleteFile(item);
+                    await refetch();
+                  }}
+                />
               ))}
-            </Grid>
+            </div>
           </>
         )}
-      </Card>
+      </div>
     </StyledDropzone>
   );
 }

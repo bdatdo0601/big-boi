@@ -1,18 +1,9 @@
 .custom-html-style {
   margin: -1rem;
   padding: 1rem;
-  --theme-ui-colors-text: #ffffff;
-  --theme-ui-colors-background: #282a36;
-  --theme-ui-colors-muted: #8394ca;
-  --theme-ui-colors-highlight: #5a6084;
-  --theme-ui-colors-surface: #323442;
-  --theme-ui-colors-primary: #ff79c6;
-  --theme-ui-colors-secondary: #8be9fd;
-  --theme-ui-colors-success: #50fa7b;
-  --theme-ui-colors-error: #ff5555;
-  --theme-ui-colors-black: #000000;
-  color: var(--theme-ui-colors-text);
-  background-color: var(--theme-ui-colors-background);
+  color: var(--input);
+  background-color: var(--background);
+  color: var(--input);
   @font-face {
     font-family: "Inconsolata";
     font-weight: 400;
@@ -222,7 +213,11 @@
   ul {
     margin-top: 0rem;
     margin-bottom: 3rem;
-    {{/* // special case so ul lines up with ol */}}
+     {
+       {
+        /* // special case so ul lines up with ol */
+      }
+    }
     padding-left: 24px;
     list-style: square;
   }
@@ -264,6 +259,6 @@
     p {
       padding: 3px;
       margin-bottom: 0rem;
-    };
-  };
+    }
+  }
 }
