@@ -5,7 +5,6 @@ import { JsonEditor as Editor } from "jsoneditor-react";
 import "brace";
 import "brace/mode/json";
 import "brace/theme/github";
-import Ajv from "ajv";
 import { CloudUploadOutlined, RestoreOutlined } from "@mui/icons-material";
 import { isEqual } from "lodash";
 
@@ -18,8 +17,6 @@ import { fetchFileToJSON } from "../../utils";
 import { useDataUpdateWrapper } from "../../utils/hooks";
 import EventType from "../../assets/event-type.json";
 import ResumeSchemaForm from "./resumeSchemaForm";
-
-const ajv = new Ajv({ allErrors: true, verbose: true });
 
 const DataUpdateOptions = {
   snackBar: {

@@ -19,7 +19,7 @@ import { POST_STATE } from "../../utils/constants";
 import LayoutContext from "../../context/layout";
 import ProfileCard from "../ProfileCard";
 
-const DefaultCardContent = ({ post, showState, onPostClick, isDark }) => (
+const DefaultCardContent = ({ post, onPostClick }) => (
   <div
     className={`w-full text-left ${
       post.status === POST_STATE.ARCHIVED ? "opacity-50" : "opacity-100"
