@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.30.0](https://github.com/bdatdo0601/big-boi/compare/v1.29.1...v1.30.0) (2025-01-31)
+
+
+### Features
+
+* upgrade amplify to v6 and clean up authentication ([adb061b](https://github.com/bdatdo0601/big-boi/commit/adb061be21371ed6d9f92753b3b29d84aadc11dd))
+
+
+### Bug Fixes
+
+* update based on feedback ([0fcb6a8](https://github.com/bdatdo0601/big-boi/commit/0fcb6a84f87ea5692d196bf2ba4a456da06dc784))
+* update form styling ([30ff64e](https://github.com/bdatdo0601/big-boi/commit/30ff64e3c5ed094bdf306a4fd9616dae39f90c02))
+
 ### [1.29.1](https://github.com/bdatdo0601/big-boi/compare/v1.29.0...v1.29.1) (2025-01-31)
 
 
