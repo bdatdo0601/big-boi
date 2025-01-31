@@ -32,8 +32,8 @@ function DataStack({ itemContainerStyle, listStyle, dataList, itemStyle }) {
   const theme = useTheme();
   // Create a gesture, we're interested in down-state, delta (current-pos - click-pos), direction and velocity
   const bind = useDrag(
-    ({ args: [index], down, movement: [mx], _, velocity }) => {
-      const dir = sample([1, -1]); // Direction should either point left or right
+    ({ args: [index], down, movement: [mx], direction: [xDir], velocity }) => {
+      const dir = xDir < 0 ? -1 : 1; // Direction should either point left or right
       if (!down) gone.add(index); // If button/finger's up and trigger velocity is reached, we flag the card ready to fly out
       api.start((i) => {
         if (index !== i) return; // We're only interested in changing spring-data for the current spring

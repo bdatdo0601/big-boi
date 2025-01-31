@@ -70,6 +70,34 @@ export const AppDrawer = ({ open, onClose, routeList }) => {
               <Menu sx={{ color: "var(--input)" }} />
             </IconButton>
           </div>
+          {!isEmpty(groupedContents) &&
+            Object.keys(groupedContents).map((groupedContentKey, index) => (
+              <div
+                key={JSON.stringify(groupedContentKey) + index}
+                className="border-b-1 pb-4 mt-2 flex-col flex gap-2"
+              >
+                {groupedContentKey && (
+                  <span className="text-popover-foreground font-black text-xl mb-2">
+                    {groupedContentKey}
+                  </span>
+                )}
+                {groupedContents[groupedContentKey].map((item) => (
+                  <MaterialListItem
+                    item={item}
+                    key={item.name}
+                    onClick={(listItem) => {
+                      navigate(listItem.path);
+                      onClose();
+                    }}
+                    isSelected={(listItem) =>
+                      location.pathname === listItem.path
+                    }
+                  />
+                ))}
+              </div>
+            ))}
+        </div>
+        <div>
           <StyledSwitchDiv className="pt-4 border-y-1">
             <FormControlLabel
               className={classes.switch}
@@ -97,30 +125,12 @@ export const AppDrawer = ({ open, onClose, routeList }) => {
               style={{ marginBottom: "5%", paddingLeft: 12 }}
             />
           </StyledSwitchDiv>
-          {!isEmpty(groupedContents) &&
-            Object.keys(groupedContents).map((groupedContentKey, index) => (
-              <div key={JSON.stringify(groupedContentKey) + index} className="border-b-1 pb-4 mt-2 flex-col flex gap-2">
-                {groupedContentKey && (
-                  <span className="text-popover-foreground font-black text-xl mb-2">{groupedContentKey}</span>
-                )}
-                {groupedContents[groupedContentKey].map((item) => (
-                  <MaterialListItem
-                    item={item}
-                    key={item.name}
-                    onClick={(listItem) => {
-                      navigate(listItem.path);
-                      onClose();
-                    }}
-                    isSelected={(listItem) => location.pathname === listItem.path}
-                  />
-                ))}
-              </div>
-            ))}
-        </div>
-        <div className="mt-4">
-          <a className="text-lg text-input ml-4" href="/change-logs">
-            <span className="font-bold italic">v{VERSION}</span> - The Big Boi Project
-          </a>
+          <div className="mt-4">
+            <a className="text-lg text-input ml-4" href="/change-logs">
+              <span className="font-bold italic">v{VERSION}</span> - The Big Boi
+              Project
+            </a>
+          </div>
         </div>
       </div>
     </Drawer>
