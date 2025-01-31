@@ -244,7 +244,7 @@ const ReferenceInputWidget: React.FC<ReferenceInputWidgetProps> = ({ existingRef
           return newData
         })
       }} customSubmit />
-      <div className="flex flex-wrap gap-1">
+      <div className="flex flex-wrap gap-1 mt-2">
         {suggestedReferenceTags.filter((tag: string) => tag && !get(formData, "tags", "").includes(tag)).map((tag: string) => (
           <ChipButton key={tag} label={tag}
             onClick={() => {

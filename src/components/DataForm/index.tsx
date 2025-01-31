@@ -150,7 +150,7 @@ const widgets: RegistryWidgetsType = {
     const { value, onChange, name, required, placeholder } = props;
     return (
       <textarea
-        className={'border border-gray-300 rounded-md p-2 w-full min-w-[400px] text-input'}
+        className={'border border-gray-300 rounded-md p-2 w-full min-w-[250px] text-input'}
         placeholder={placeholder}
         value={value}
         onChange={(e: any) => onChange(e.target.value)}
@@ -169,7 +169,7 @@ const templates = {
       uiSchema,
     } = props;
     return (
-      <div className='bg-muted border-1 border-input pl-1 py-1 rounded-md min-w-[600px]'>
+      <div className='border-l-2 border-primary pl-2 py-1'>
         <div className="flex justify-start pl-1">
           <h1 className="flex-grow text-lg text-center pl-2 font-bold">{title}</h1>
           {props.idSchema.$id === 'root' &&
@@ -204,36 +204,43 @@ const templates = {
 
   ArrayFieldTemplate: (props: ArrayFieldTemplateProps) => {
     return (
-      <div className='border-1 border-input py-1 pr-1 rounded-lg flex flex-col gap-2'>
+      <div className='py-1 pr-1 flex flex-col gap-2 border-y-2 border-foreground'>
         <span className='text-lg pl-2 font-bold'>{props.title}</span>
-        <div className='flex flex-wrap gap-2'>
+        <div className='flex flex-wrap gap-2 items-end'>
           {props.items.map((element) => (
-            <div key={element.key} className='flex flex-col gap-1'>
-              {element.children}
-              <span className='flex flex-row gap-2 justify-start'>
-                {element.hasMoveDown && (
-                  <button title='Move Down' className="p-1 rounded-full border-2 bg-secondary text-input hover:cursor-pointer" onClick={element.onReorderClick(element.index, element.index + 1)}>
-                    <ArrowDownward />
-                  </button>
-                )}
-                {element.hasMoveUp && (
-                  <button title='Move Up' className="p-1 rounded-full border-2 bg-secondary text-input hover:cursor-pointer" onClick={element.onReorderClick(element.index, element.index - 1)}>
-                    <ArrowUpward />
-                  </button>
-                )}
-                {element.hasRemove && (
-                  <button title='Remove' className="p-1 rounded-full border-2 bg-destructive text-input hover:cursor-pointer" onClick={element.onDropIndexClick(element.index)}>
-                    <Delete />
-                  </button>
-                )}
+            <div key={element.key} className='flex flex-col gap-1 py-2 border-b-2 border-primary border-dashed'>
+              <span className='flex flex-row gap-2 justify-start items-end px-2'>
+                <div className='border-r-2 border-dashed pr-2 border-primary'>
+                  {element.children}
+                </div>
+                <div className='flex flex-col gap-1 pl-2'>
+                  {element.hasMoveUp && (
+                    <button title='Move Up' className="p-1 rounded-full border-2 bg-secondary text-input hover:cursor-pointer" onClick={element.onReorderClick(element.index, element.index - 1)}>
+                      <ArrowUpward />
+                    </button>
+                  )}
+                  {element.hasMoveDown && (
+                    <button title='Move Down' className="p-1 rounded-full border-2 bg-secondary text-input hover:cursor-pointer" onClick={element.onReorderClick(element.index, element.index + 1)}>
+                      <ArrowDownward />
+                    </button>
+                  )}
+                  {element.hasRemove && (
+                    <button title='Remove' className="p-1 rounded-full border-2 bg-destructive text-input hover:cursor-pointer" onClick={element.onDropIndexClick(element.index)}>
+                      <Delete />
+                    </button>
+                  )}
+                </div>
               </span>
             </div>
           ))}
         </div>
         {props.canAdd && (
-          <button title='Add' className="m-2 py-2 px-4 rounded-full border-2 bg-primary text-input hover:cursor-pointer" onClick={props.onAddClick}>
-            <Add />
-          </button>
+          <div className='flex flex-row gap-2 justify-start items-center'>
+            <span className='text-xs'>{props.title} Action(s)</span>
+            <button title='Add' className="p-1 rounded-full border-2 bg-primary text-input hover:cursor-pointer" onClick={props.onAddClick}>
+              <Add />
+            </button>
+          </div>
         )}
       </div>
     );

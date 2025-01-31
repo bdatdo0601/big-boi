@@ -1,14 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Card, CircularProgress, Typography } from "@mui/material";
+import { Button, Card, CircularProgress } from "@mui/material";
 import PropTypes from "prop-types";
-import { JsonEditor as Editor } from "jsoneditor-react";
-import "brace";
-import "brace/mode/json";
-import "brace/theme/github";
 import { CloudUploadOutlined, RestoreOutlined } from "@mui/icons-material";
 import { isEqual } from "lodash";
-
-import "./index.css";
 
 import DEFAULT_RESUME from "../../assets/default-resume.json";
 import { useGetFile, useUploadFile } from "../../utils/awsStorage";
@@ -74,7 +68,7 @@ export default function ResumeSchemaEditor() {
   }
 
   return (
-    <div className="my-8 mx-16 py-4 px-8 resume-schema-editor w-full bg-card flex flex-col items-center">
+    <div className="my-8 mx-16 py-4 px-8 resume-schema-editor w-full bg-muted flex flex-col items-center">
       <h5 className="text-3xl mx-auto">Resume Schema Editor</h5>
       <div className="flex flex-row gap-2">
         <Button

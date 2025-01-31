@@ -38,6 +38,16 @@ const ResumeJsonUiSchema: UiSchema = {
       }
     }
   },
+  projects: {
+    items: {
+      description: {
+        "ui:widget": "textarea"
+      },
+      highlights: {
+        items: { "ui:widget": "textarea" }
+      }
+    }
+  },
   volunteer: {
     items: {
       summary: {
@@ -50,6 +60,13 @@ const ResumeJsonUiSchema: UiSchema = {
       },
       highlights: {
         items: { "ui:widget": "textarea" }
+      }
+    }
+  }, 
+  custom: {
+    bio: {
+      items: {
+        "ui:widget": "textarea"
       }
     }
   }
