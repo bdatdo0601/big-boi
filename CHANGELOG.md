@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.31.0](https://github.com/bdatdo0601/big-boi/compare/v1.30.2...v1.31.0) (2025-02-01)
+
+
+### Features
+
+* revamp amplify backend first round ([3a2269d](https://github.com/bdatdo0601/big-boi/commit/3a2269d6dab532b689639c03d2d353dce18856da))
+
 ### [1.30.2](https://github.com/bdatdo0601/big-boi/compare/v1.30.1...v1.30.2) (2025-02-01)
 
 
