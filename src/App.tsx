@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { get, groupBy, has } from "lodash";
+import { get, groupBy, has, merge } from "lodash";
 import { BrowserRouter as Router, Route, Routes } from "react-router";
 import { Amplify } from "aws-amplify";
 import { CircularProgress } from "@mui/material";
@@ -10,13 +10,25 @@ import ContextProvider from "./context";
 import Layout from "./layout";
 import { withCustomAWSAuthenticator } from "@/context/auth";
 import "./App.css";
+import { parseAWSExports } from "@aws-amplify/core/internals/utils";
 
-Amplify.configure({
-  ...amplifyconfig,
-  API: {
-    GraphQL: {
-      defaultAuthMode: 'apiKey',
-      endpoint: amplifyconfig.aws_appsync_graphqlEndpoint
+const formattedConfig = merge(parseAWSExports(amplifyconfig), {
+  Analytics: {
+    Pinpoint: {
+      appId: amplifyconfig.aws_mobile_analytics_app_id,
+      region: amplifyconfig.aws_mobile_analytics_app_region,
+    },
+    Kinesis: {
+      // REQUIRED -  Amazon Kinesis service region
+      region: 'us-east-1',
+      // OPTIONAL - The buffer size for events in number of items.
+      bufferSize: 1000,
+      // OPTIONAL - The number of events to be deleted from the buffer when flushed.
+      flushSize: 100,
+      // OPTIONAL - The interval in milliseconds to perform a buffer check and flush if necessary.
+      flushInterval: 5000, // 5s
+      // OPTIONAL - The limit for failed recording retries.
+      resendLimit: 5
     }
   },
   Auth: {
@@ -24,8 +36,10 @@ Amplify.configure({
       identityPoolId: amplifyconfig.aws_cognito_identity_pool_id,
       allowGuestAccess: true,
     }
-  }
+  },
 });
+
+Amplify.configure(formattedConfig);
 
 const subdomain = window.location.host.split(".")[0];
 const groupedRoutes = has(subdomainRouteMap, subdomain)
@@ -75,7 +89,7 @@ function App() {
           </Routes>
         </Suspense>
       </Layout>
-    </Router>
+    </Router >
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { get, sortBy, reverse, isEmpty } from "lodash";
 import { useSnackbar } from "notistack";
@@ -37,7 +37,7 @@ export const EventMessageContextProvider = ({ children }) => {
   );
 
   const onNewDataNotified = useCallback(
-    async ({ value }) => {
+    async ({ data: value }) => {
       const rawNewList = await refetch();
       const newList = get(rawNewList, "data.EventMessageByTimestamp.items", []);
       const newData = formatItem(newList.find(item => item.id === get(value, "data.onCreateEventMessage.id")));

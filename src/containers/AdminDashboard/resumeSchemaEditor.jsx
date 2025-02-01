@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Card, CircularProgress } from '@mui/material';
 import PropTypes from 'prop-types';
 import { CloudUploadOutlined, RestoreOutlined } from '@mui/icons-material';
-import { isEqual } from 'lodash';
+import { isEqual, pick } from 'lodash';
 
 import DEFAULT_RESUME from '../../assets/default-resume.json';
 import { useGetFile, useUploadFile } from '../../utils/awsStorage';
@@ -39,7 +39,7 @@ export default function ResumeSchemaEditor() {
         type: 'application/json',
       });
       await upload(blob, RESUME.SCHEMA_FILE, RESUME.PREFIX);
-      return newResume;
+      return pick(newResume.basic, ["name", "email"]);
     },
     [upload]
   );

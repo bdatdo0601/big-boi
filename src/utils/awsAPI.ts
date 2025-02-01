@@ -1,16 +1,10 @@
-import { useAuth } from '@/context/auth';
-import { generateClient, GraphQLResult, GraphQLSubscription } from '@aws-amplify/api';
+import { useApi } from '@/context/api';
+import { GraphQLResult, GraphQLSubscription } from '@aws-amplify/api';
 import { get, merge } from 'lodash';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-
-const useAWSClient = () => {
-  const { user } = useAuth();
-  const client = useMemo(() => generateClient({ authMode: user ? 'userPool' : 'identityPool' }), [user]);
-  return { client };
-};
+import { useCallback, useEffect, useState } from 'react';
 
 export const useAWSAPIGetAll = (operation: string, input: any) => {
-  const { client } = useAWSClient();
+  const { client } = useApi();
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any>(null);
@@ -59,10 +53,11 @@ export const useAWSAPIGetAll = (operation: string, input: any) => {
 };
 
 export const useAWSAPI = (operation: string, input: any) => {
-  const { client } = useAWSClient();
+  const { client } = useApi();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any>(null);
+
   const execute = useCallback(
     async (variables = input, ...args: any[]) => {
       try {
@@ -76,7 +71,7 @@ export const useAWSAPI = (operation: string, input: any) => {
         setLoading(false);
         return retrievedData;
       } catch (err) {
-        console.error(err);
+        console.error(err, input, operation, client);
         setError(err);
         setLoading(false);
         return {};
@@ -124,12 +119,13 @@ export const useAWSAPI = (operation: string, input: any) => {
 };
 
 export const useSubscriptionAWSAPI = (subscription: string, onNext: Function, onError: Function) => {
-  const { client } = useAWSClient();
+  const { client } = useApi();
   useEffect(() => {
-    const subsInstance: GraphQLSubscription<any> = client.graphql<any>({
-      query: subscription,
-    });
-    subsInstance.subscribe({
+    const subsInstance: any = (
+      client.graphql<any>({
+        query: subscription,
+      }) as GraphQLSubscription<any>
+    ).subscribe({
       next: onNext,
       error: onError,
     });
@@ -142,7 +138,7 @@ export const useSubscriptionAWSAPI = (subscription: string, onNext: Function, on
 };
 
 export const useLazyAWSAPI = (operation: string, input?: any) => {
-  const { client } = useAWSClient();
+  const { client } = useApi();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any>(null);

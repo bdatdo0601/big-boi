@@ -1,6 +1,37 @@
 [
   {
     "groupName": "BigBoiSuperAdmin",
-    "precedence": 1
+    "precedence": 1,
+    "customPolicies": [
+      {
+        "PolicyName": "admin-group-policy",
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Action": [
+                "mobiletargeting:*"
+              ],
+              "Resource": [
+                "arn:aws:mobiletargeting:us-east-1:*:apps/*"
+              ],
+              "Effect": "Allow",
+              "Sid": "mobiletargetingpinpoint"
+            },
+            {
+              "Action": [
+                "kinesis:PutRecords",
+                "kinesis:*"
+              ],
+              "Resource": [
+                "arn:aws:kinesis:us-east-1:*:stream/*"
+              ],
+              "Effect": "Allow",
+              "Sid": "kinesis"
+            }
+          ]
+        }
+      }
+    ]
   }
 ]

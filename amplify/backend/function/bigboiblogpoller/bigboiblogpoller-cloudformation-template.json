@@ -166,7 +166,7 @@
           ]
         },
         "Runtime": "nodejs22.x",
-        "Timeout": 25
+        "Timeout": 180
       }
     },
     "LambdaExecutionRole": {

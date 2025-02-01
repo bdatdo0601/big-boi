@@ -31,8 +31,12 @@ exports.handler = async handlerEvent => {
   const validEvents = events.filter(evt => get(evt, "metadata.isValid", false));
   const invalidEvents = events.filter(evt => !get(evt, "metadata.isValid", false));
   for (const evt of validEvents) {
-    // Propagate to SNS topic
-    await publishMessage(evt);
+    try {
+      // Propagate to SNS topic
+      await publishMessage(evt);
+    } catch (err) {
+      console.error("Error publishing message", err, validEvents);
+    }
   }
 
   const responseData = {

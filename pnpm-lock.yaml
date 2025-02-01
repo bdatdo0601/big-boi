@@ -38,7 +38,7 @@ importers:
   .:
     dependencies:
       '@aws-amplify/analytics':
-        specifier: ^7.0.67
+        specifier: ^7.0.63
         version: 7.0.67(@aws-amplify/core@6.9.2)
       '@aws-amplify/api':
         specifier: ^6.2.2
@@ -6754,7 +6754,7 @@ snapshots:
       '@aws-crypto/util': 5.2.0
       '@aws-sdk/types': 3.734.0
       '@aws-sdk/util-locate-window': 3.723.0
-      '@smithy/util-utf8': 2.0.0
+      '@smithy/util-utf8': 2.3.0
       tslib: 2.8.1
 
   '@aws-crypto/sha256-js@5.2.0':

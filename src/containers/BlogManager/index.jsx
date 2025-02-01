@@ -32,14 +32,14 @@ export default function BlogManager() {
     data: rawData,
     loading,
     execute: refetch,
-  } = useAWSAPI(listPosts, query, "AWS_IAM");
+  } = useAWSAPI(listPosts, query, "userPool");
   const { execute: mutatePost, loading: updatingPost } = useLazyAWSAPI(
     updatePost,
-    "AWS_IAM"
+    "userPool"
   );
   const { execute: deletePostRequest, loading: deletingPost } = useLazyAWSAPI(
     deletePostQuery,
-    "AWS_IAM"
+    "userPool"
   );
 
   const posts = useMemo(

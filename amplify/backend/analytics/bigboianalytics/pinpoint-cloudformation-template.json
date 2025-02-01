@@ -42,6 +42,14 @@
     "pinpointInAppMessagingPolicyName": {
       "Type": "String",
       "Default": "NONE"
+    },
+    "authbigboi327b1f0dUserPoolId": {
+      "Type": "String",
+      "Default": "authbigboi327b1f0dUserPoolId"
+    },
+    "authuserPoolGroupsBigBoiSuperAdminGroupRole": {
+      "Type": "String",
+      "Default": "authuserPoolGroupsBigBoiSuperAdminGroupRole"
     }
   },
   "Metadata": {

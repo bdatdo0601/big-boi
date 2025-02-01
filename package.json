@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@aws-amplify/analytics": "^7.0.67",
+    "@aws-amplify/analytics": "^7.0.63",
     "@aws-amplify/api": "^6.2.2",
     "@aws-amplify/auth": "^6.10.1",
     "@aws-amplify/core": "^6.9.2",

@@ -66,14 +66,6 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "bigboiwebhookproxy"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
           "resourceName": "bigboiurlmetadataresolver"
         },
         {
@@ -83,6 +75,14 @@
           ],
           "category": "function",
           "resourceName": "bigboiutilitydiscordinteraction"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "bigboiwebhookproxy"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -439,6 +439,14 @@
       ]
     },
     "AMPLIFY_function_bigboimessagestoring_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_vercelTeamId": {
       "usedBy": [
         {
           "category": "function",
