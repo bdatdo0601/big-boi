@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.2](https://github.com/bdatdo0601/big-boi/compare/v1.30.1...v1.30.2) (2025-02-01)
+
+
+### Bug Fixes
+
+* remove admin queries for now ([1a72d31](https://github.com/bdatdo0601/big-boi/commit/1a72d3109e29d0f32afd1a0f4a8f15f43f3da924))
+
 ### [1.30.1](https://github.com/bdatdo0601/big-boi/compare/v1.30.0...v1.30.1) (2025-02-01)
 
 
