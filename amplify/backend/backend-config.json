@@ -14,28 +14,6 @@
     }
   },
   "api": {
-    "AdminQueries": {
-      "authorizationType": "AMAZON_COGNITO_USER_POOLS",
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "bigboi327b1f0d"
-        },
-        {
-          "attributes": [
-            "Arn",
-            "Name"
-          ],
-          "category": "function",
-          "resourceName": "AdminQueries324157f8"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    },
     "bigboiapi": {
       "dependsOn": [
         {
@@ -166,20 +144,6 @@
     }
   },
   "function": {
-    "AdminQueries324157f8": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "bigboi327b1f0d"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "bigboi327b1f0dPostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -330,22 +294,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_AdminQueries324157f8_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AdminQueries324157f8"
-        }
-      ]
-    },
-    "AMPLIFY_function_AdminQueries324157f8_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AdminQueries324157f8"
-        }
-      ]
-    },
     "AMPLIFY_function_bigboi327b1f0dPostConfirmation_GROUP": {
       "usedBy": [
         {

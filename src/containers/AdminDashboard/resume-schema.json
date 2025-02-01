@@ -11,7 +11,7 @@
         "picture": { "type": "string", "title": "Picture" },
         "email": { "type": "string", "format": "email", "title": "Email" },
         "phone": { "type": "string", "title": "Phone" },
-        "website": { "type": "string", "title": "Website" },
+        "website": { "type": "string", "format": "uri", "title": "Website" },
         "summary": { "type": "string", "title": "Summary" },
         "location": {
           "type": "object",
@@ -33,7 +33,7 @@
             "properties": {
               "network": { "type": "string", "title": "Network" },
               "username": { "type": "string", "title": "Username" },
-              "url": { "type": "string", "title": "URL" }
+              "url": { "type": "string", "format": "uri", "title": "URL" }
             },
             "required": ["network", "username", "url"]
           }
@@ -60,7 +60,7 @@
           "company": { "type": "string", "title": "Company" },
           "icon": { "type": "string", "format": "data-url", "title": "Icon" },
           "position": { "type": "string", "title": "Position" },
-          "website": { "type": "string", "title": "Website" },
+          "website": { "type": "string", "format": "uri", "title": "Website" },
           "startDate": { "type": "string", "title": "Start Date" },
           "endDate": { "type": "string", "title": "End Date" },
           "summary": { "type": "string", "title": "Summary" },
@@ -73,7 +73,6 @@
         "required": [
           "company",
           "position",
-          "website",
           "startDate",
           "endDate",
           "summary",
@@ -89,7 +88,7 @@
         "properties": {
           "organization": { "type": "string", "title": "Organization" },
           "position": { "type": "string", "title": "Position" },
-          "website": { "type": "string", "title": "Website" },
+          "website": { "type": "string", "format": "uri", "title": "Website" },
           "startDate": { "type": "string", "title": "Start Date" },
           "endDate": { "type": "string", "title": "End Date" },
           "summary": { "type": "string", "title": "Summary" },
@@ -214,7 +213,7 @@
           },
           "startDate": { "type": "string", "title": "Start Date" },
           "endDate": { "type": "string", "title": "End Date" },
-          "url": { "type": "string", "title": "URL" },
+          "url": { "type": "string", "format": "uri", "title": "URL" },
           "roles": {
             "type": "array",
             "title": "Roles",

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import PaperResumeRenderer from "./PaperResumeRenderer";
-import { FileDownload } from "@mui/icons-material";
+import { Print } from "@mui/icons-material";
 
 export default function PaperResumeDisplay() {
   const ref = useRef<HTMLDivElement>(null);
@@ -13,7 +13,7 @@ export default function PaperResumeDisplay() {
         <button className="bg-primary py-2 px-4 rounded-lg hover:cursor-pointer" onClick={() => {
           reactToPrintFn()
         }}>
-          <FileDownload sx={{}}/> Print Resume
+          <Print sx={{}}/> Print Resume
         </button>
       </div>
       <PaperResumeRenderer ref={ref} />

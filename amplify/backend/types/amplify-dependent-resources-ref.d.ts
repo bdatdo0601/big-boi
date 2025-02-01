@@ -16,11 +16,6 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "api": {
-    "AdminQueries": {
-      "ApiId": "string",
-      "ApiName": "string",
-      "RootUrl": "string"
-    },
     "bigboiapi": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string",
@@ -50,13 +45,6 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "AdminQueries324157f8": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
     "bigboi327b1f0dPostConfirmation": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

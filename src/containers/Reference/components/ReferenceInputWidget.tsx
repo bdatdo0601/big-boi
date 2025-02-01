@@ -55,7 +55,7 @@ const ReferenceSchema: RJSFSchema = {
     url: {
       title: "Link",
       type: "string",
-      pattern: "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$",
+      format: "uri",
     },
     tags: {
       title: "Tags (separated by commas)",

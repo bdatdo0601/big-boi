@@ -14,6 +14,7 @@ import { cn } from '@/utils';
 import { get, merge, pick } from 'lodash';
 import { Add, ArrowDownward, ArrowUpward, Delete, Refresh } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
+import Switch from '../Switch';
 
 const Input = (props: React.ComponentProps<any>) => (
   <input {...props} className="border border-gray-300 rounded-md py-1 px-2 w-full text-input" />
@@ -95,6 +96,31 @@ const widgets: RegistryWidgetsType = {
     return (
       <Input
         type="password"
+        placeholder={placeholder}
+        value={value || ''}
+        onChange={(e: any) => onChange(e.target.value)}
+        name={name}
+        required={required}
+      />
+    );
+  },
+
+  CheckboxWidget: (props: WidgetProps) => {
+    const { value, onChange, required } = props;
+    return (
+      <Switch
+        isOn={value || false}
+        handleToggle={(e: any) => onChange(e.target.checked)}
+        label={<span className='text-sm text-foreground'>{required ? '*' : ''}</span>}
+      />
+    );
+  },
+
+  URLWidget: (props: WidgetProps) => {
+    const { value, onChange, name, required, placeholder } = props;
+    return (
+      <Input
+        type="url"
         placeholder={placeholder}
         value={value || ''}
         onChange={(e: any) => onChange(e.target.value)}
