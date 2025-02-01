@@ -32,7 +32,7 @@ const withResumeProvider = <T extends object>(Component: React.FC<T>) => (props:
   const { resume, loading } = useStorageResume();
 
   if (loading || !resume) {
-    return <CircularProgress />;
+    return <div className="w-full *:text-center mx-auto"><CircularProgress /></div>;
   }
 
   return (

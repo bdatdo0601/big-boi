@@ -6,7 +6,7 @@ import LandingProfile from "../../../components/Profile";
 const DataStack = lazy(() => import("../../../components/DataStack"));
 
 const MainInfo = ({ keywords, containerStyle, className, animation }) => (
-  <Suspense fallback={<CircularProgress />}>
+  <Suspense fallback={<div className="w-full *:text-center mx-auto"><CircularProgress /></div>}>
     <div
       className={`px-4 ${className}`}
       style={{

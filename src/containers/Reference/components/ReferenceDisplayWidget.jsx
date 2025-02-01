@@ -66,7 +66,7 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
   );
 
   if (loading) {
-    return <CircularProgress />;
+    return <div className="w-full *:text-center mx-auto"><CircularProgress /></div>;
   }
 
   if (get(data, 'references', []).length === 0 && isEmpty(get(data, 'children'))) {

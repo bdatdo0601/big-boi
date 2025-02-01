@@ -10,7 +10,7 @@ export default function Home() {
   const { resume, loading } = useStorageResume();
 
   if (loading) {
-    return <CircularProgress />;
+    return <div className="w-full *:text-center mx-auto"><CircularProgress /></div>;
   }
 
   return (

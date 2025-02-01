@@ -43,7 +43,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       .catch(() => { setUser(undefined); setInitialLoad(false) });
   }, [])
 
-  if (initialLoad) return <CircularProgress />
+  if (initialLoad) return <div className="w-full *:text-center mx-auto"><CircularProgress /></div>
 
   return <AuthContext.Provider value={{ user, signOut }}>{children}</AuthContext.Provider>;
 };

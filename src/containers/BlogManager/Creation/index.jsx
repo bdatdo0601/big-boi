@@ -91,7 +91,7 @@ export default function BlogCreation() {
   );
 
   if (loading) {
-    return <CircularProgress style={{ marginTop: 16 }} />;
+    return <div className="w-full *:text-center mx-auto"><CircularProgress /></div>;
   }
 
   return (

@@ -51,7 +51,7 @@ export default function ResumeSchemaEditor() {
   const [onUploadResume] = useDataUpdateWrapper(updateResume, onPostUpdateResume, DataUpdateOptions);
 
   if (loading) {
-    return <CircularProgress />;
+    return <div className="w-full *:text-center mx-auto"><CircularProgress /></div>;
   }
 
   return (

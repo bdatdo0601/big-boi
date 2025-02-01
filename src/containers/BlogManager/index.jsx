@@ -79,7 +79,7 @@ export default function BlogManager() {
   return (
     <div className="text-center px-4 py-8 h-full">
       <Typography variant="h3">Blog Manager</Typography>
-      {loading ? <CircularProgress /> : null}
+      {loading ? <div className="w-full *:text-center mx-auto my-2"><CircularProgress /></div> : null}
       <div style={{ marginTop: 12 }}>
         <Button
           variant="contained"

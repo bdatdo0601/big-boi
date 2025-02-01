@@ -50,7 +50,7 @@ function App() {
   return (
     <Router>
       <Layout>
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<div className="w-full *:text-center mx-auto"><CircularProgress /></div>}>
           <Routes>
             {Object.keys(groupedRoutes).map((routeType) => {
               const routeTypeData = Object.values(ROUTE_TYPE).find(

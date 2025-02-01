@@ -11,7 +11,7 @@ import { formatGridList } from "../../../../utils";
 export default function ImagesDisplay({ imageCols }) {
   const { data, loading } = useGetDataList(fetchFiles);
   const isWeb = useMediaQuery("(min-width:600px)");
-  if (loading) return <CircularProgress style={{ marginTop: 16 }} />;
+  if (loading) return <div className="w-full *:text-center mx-auto"><CircularProgress /></div>;
   return (
     <>
       <Masonry breakpointCols={isWeb ? 3 : 1} className="masonry-image" columnClassName="masonry-image-column">

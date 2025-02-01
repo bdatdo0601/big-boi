@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, CircularProgress, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { ResumeProvider } from "../../../../components/Vitae";
 
 import ResumeDisplay from "./ResumeDisplay";
