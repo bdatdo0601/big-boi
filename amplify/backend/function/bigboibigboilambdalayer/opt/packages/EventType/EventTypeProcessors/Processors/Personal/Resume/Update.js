@@ -7,7 +7,7 @@ module.exports = {
     populatePublishInfo: async evt => {
         const contentStatus = "Update";
         const target =  "Resume";
-        const targetLink = "https://www.dat.do/background";
+        const targetLink = "https://datbdo.com";
         const publishInfo = {
             icon: {
                 type: "Icon",
