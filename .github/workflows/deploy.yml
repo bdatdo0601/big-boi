@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the develop branch
   push:
-    tags: "v*.*.*"
+    tags: ["v*.*.*"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -68,7 +68,7 @@ jobs:
         with:
           amplify_command: publish
           amplify_env: dev
-          amplify_cli_version: 12.10.3
+          amplify_cli_version: 12.14.2
           amplify_arguments: '--force --yes -c'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
