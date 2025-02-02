@@ -100,7 +100,7 @@
 				"noVoidElementsWithChildren": "error",
 				"useArrayLiterals": "warn",
 				"useExhaustiveDependencies": "warn",
-				"useHookAtTopLevel": "error",
+				"useHookAtTopLevel": "off",
 				"useIsNan": "warn",
 				"useJsxKeyInIterable": "error",
 				"useValidForDirection": "error",

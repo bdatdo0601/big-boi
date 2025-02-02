@@ -1,6 +1,6 @@
 import { useApi } from '@/context/api';
 import { GraphQLResult, GraphQLSubscription } from '@aws-amplify/api';
-import { get, merge } from 'lodash';
+import { get, merge, mergeWith } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 
 export const useAWSAPIGetAll = (operation: string, input: any) => {
@@ -89,10 +89,16 @@ export const useAWSAPI = (operation: string, input: any) => {
           retrievedData = await client.graphql({
             query: operation,
             variables: {
+              ...input,
               nextToken: token,
             },
           });
-          setData(currentData => merge(currentData, retrievedData));
+          setData(currentData => mergeWith(currentData, retrievedData, (objValue, srcValue) => {
+            if (Array.isArray(objValue)) {
+              return objValue.concat(srcValue);
+            }
+            return undefined;
+          }));
         }
         setLoading(false);
         return retrievedData;
@@ -102,7 +108,7 @@ export const useAWSAPI = (operation: string, input: any) => {
         return {};
       }
     },
-    [operation, client]
+    [operation, client, input]
   );
 
   useEffect(() => {

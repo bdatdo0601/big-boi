@@ -24,7 +24,7 @@ export default function Landing({ keywords, contacts, bio }) {
           <WelcomeInfo bio={bio} />
           <ContactInfo animation={globalAnimation} contacts={contacts} />
         </div>
-        <div className="w-full">
+        <div className="w-full max-w-[800px]">
           <ActionLogsInfo animation={globalAnimation} keywords={keywords} />
         </div>
         <span id="background" className="text-2xl italic">A little bit more info 👀</span>
