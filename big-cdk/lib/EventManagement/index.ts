@@ -1,33 +1,93 @@
 import * as cdk from 'aws-cdk-lib';
 import * as events from 'aws-cdk-lib/aws-events';
-import * as schemas from 'aws-cdk-lib/aws-eventschemas';
+import * as pipes from 'aws-cdk-lib/aws-pipes';
+import * as kinesis from 'aws-cdk-lib/aws-kinesis';
 import { Construct } from 'constructs';
 
+type EventManagementStackProps = cdk.StackProps & {
+  ingestionKinesisStreamArn: string;
+};
+
 export class EventManagementStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(
+    scope: Construct,
+    id: string,
+    readonly props: EventManagementStackProps
+  ) {
     super(scope, id, props);
 
-    // Create an EventBus with schema discovery enabled
     const eventBus = new events.EventBus(this, 'MyEventBus', {
-      eventBusName: 'MyCustomEventBus'
+      eventBusName: 'MyCustomEventBus',
     });
 
-    // Enable schema discovery
-    const discoverer = new schemas.CfnDiscoverer(this, 'SchemaDiscoverer', {
-      sourceArn: eventBus.eventBusArn,
-      description: 'Schema discoverer for MyCustomEventBus'
-    });
+    const kinesisStream = kinesis.Stream.fromStreamArn(
+      this,
+      'ImportedKinesisStream',
+      this.props.ingestionKinesisStreamArn
+    );
 
-    // Output the EventBus ARN
+    const pipe = new pipes.CfnPipe(this, 'EventBridgeToPipe', {
+      source: kinesisStream.streamArn,
+      target: eventBus.eventBusArn,
+      roleArn: new cdk.aws_iam.Role(this, 'PipeRole', {
+        assumedBy: new cdk.aws_iam.ServicePrincipal('pipes.amazonaws.com'),
+        inlinePolicies: {
+          KinesisAccess: new cdk.aws_iam.PolicyDocument({
+            statements: [
+              new cdk.aws_iam.PolicyStatement({
+                actions: [
+                  'kinesis:DescribeStream',
+                  'kinesis:GetShardIterator',
+                  'kinesis:GetRecords',
+                  'kinesis:ListShards',
+                ],
+                resources: [kinesisStream.streamArn],
+              }),
+            ],
+          }),
+          EventBridgeAccess: new cdk.aws_iam.PolicyDocument({
+            statements: [
+              new cdk.aws_iam.PolicyStatement({
+                actions: ['events:PutEvents'],
+                resources: [eventBus.eventBusArn],
+              }),
+            ],
+          }),
+        },
+      }).roleArn,
+      sourceParameters: {
+        kinesisStreamParameters: {
+          startingPosition: 'LATEST',
+          batchSize: 10,
+          maximumBatchingWindowInSeconds: 5,
+        },
+      },
+      targetParameters: {
+        eventBridgeEventBusParameters: {
+          detailType: 'KinesisEvent',
+          source: 'KinesisStream',
+        },
+        inputTemplate: `
+          {
+            "id": <$.messageId>,
+            "detail-type": "KinesisEvent",
+            "source": "KinesisStream",
+            "time": <$.approximateArrivalTimestamp>,
+            "data": <$.data>,
+            "partitionKey": <$.partitionKey>
+            "eventSource": <$.eventSourceARN>,
+          }
+        `,
+      },
+    });
     new cdk.CfnOutput(this, 'EventBusArn', {
       value: eventBus.eventBusArn,
       description: 'The ARN of the EventBus',
     });
 
-    // Output the Schema Discoverer ID
-    new cdk.CfnOutput(this, 'SchemaDiscovererId', {
-      value: discoverer.attrDiscovererId,
-      description: 'The ID of the Schema Discoverer',
+    new cdk.CfnOutput(this, 'PipeArn', {
+      value: pipe.attrArn,
+      description: 'The ARN of the EventBridge Pipe',
     });
   }
 }
