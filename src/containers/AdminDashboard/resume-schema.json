@@ -300,6 +300,18 @@
         }
       },
       "required": ["affiliations", "bio", "keywordTags", "contacts"]
+    },
+    "faq": {
+      "type": "array",
+      "title": "FAQ",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": { "type": "string", "title": "string" },
+          "question": { "type": "string", "title": "string" },
+          "answer": { "type": "string", "title": "string" }
+        }
+      }
     }
   },
   "required": [

@@ -1,49 +1,24 @@
-import { useContext } from "react";
-import {
-  ResumeContext,
-  ResumeSchema,
-  ResumeSchemaBasic,
-  ResumeSchemaEducation,
-  ResumeSchemaInterest,
-  ResumeSchemaLanguage,
-  ResumeSchemaProject,
-  ResumeSchemaSkill,
-  ResumeSchemaVolunteer,
-  ResumeSchemaWork,
-} from "./provider";
+import { useContext } from 'react';
+import { ResumeContext, ResumeSchema } from './provider';
 
 const Sections = {
-  Basic: "basic",
-  Work: "work",
-  Volunteer: "volunteer",
-  Education: "education",
-  Awards: "awards",
-  Publications: "publications",
-  Skills: "skills",
-  Languages: "languages",
-  Interests: "interests",
-  References: "references",
-  Projects: "projects",
+  Basic: 'basic',
+  Work: 'work',
+  Volunteer: 'volunteer',
+  Education: 'education',
+  Awards: 'awards',
+  Publications: 'publications',
+  Skills: 'skills',
+  Languages: 'languages',
+  Interests: 'interests',
+  References: 'references',
+  Projects: 'projects',
 } as const;
-
-type SectionKey = (typeof Sections)[keyof typeof Sections];
-const getResumeElement = (
-  element: ResumeSchema,
-  section: SectionKey
-): any | undefined => {
-  if (!element[section]) {
-    return undefined;
-  }
-  const got = element[section];
-  return got;
-};
 
 export const useResume = (): ResumeSchema => {
   const context = useContext(ResumeContext);
   if (!context.resume) {
-    throw new Error(
-      "<ResumeProvider> missing at the root of the application, cannot use the resume context."
-    );
+    throw new Error('<ResumeProvider> missing at the root of the application, cannot use the resume context.');
   }
 
   return context.resume;
@@ -91,4 +66,8 @@ export const useLanguages = () => {
 
 export const useProjects = () => {
   return useResume().projects;
+};
+
+export const useFAQ = () => {
+  return useResume().faq;
 };

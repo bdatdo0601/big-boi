@@ -134,6 +134,12 @@ export type ResumeSchemaReference = {
 
 };
 
+export type ResumeSchemaFAQ = {
+  category: string,
+  question: string,
+  answer: string
+}
+
 export type ResumeSchema = {
   basic: ResumeSchemaBasic;
   work: ResumeSchemaWork[];
@@ -147,6 +153,7 @@ export type ResumeSchema = {
   interests: ResumeSchemaInterest[];
   references: ResumeSchemaReference[];
   custom: ResumeSchemaCustom;
+  faq: ResumeSchemaFAQ[];
 };
 
 type ResumeContextProps = {

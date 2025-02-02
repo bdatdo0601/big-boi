@@ -62,12 +62,18 @@ const ResumeJsonUiSchema: UiSchema = {
         items: { "ui:widget": "textarea" }
       }
     }
-  }, 
+  },
   custom: {
     bio: {
       items: {
         "ui:widget": "textarea"
       }
+    }
+  },
+  faq: {
+    items: {
+      question: { "ui:widget": "textarea" },
+      answer: { "ui:widget": "textarea" }
     }
   }
 }

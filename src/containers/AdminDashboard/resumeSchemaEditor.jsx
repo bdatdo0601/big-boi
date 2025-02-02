@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Card, CircularProgress } from '@mui/material';
 import PropTypes from 'prop-types';
-import { CloudUploadOutlined, RestoreOutlined } from '@mui/icons-material';
+import { CloudUploadOutlined, CopyAll, RestoreOutlined } from '@mui/icons-material';
 import { isEqual, pick } from 'lodash';
 
 import DEFAULT_RESUME from '../../assets/default-resume.json';
@@ -39,7 +39,7 @@ export default function ResumeSchemaEditor() {
         type: 'application/json',
       });
       await upload(blob, RESUME.SCHEMA_FILE, RESUME.PREFIX);
-      return pick(newResume.basic, ["name", "email"]);
+      return pick(newResume.basic, ['name', 'email']);
     },
     [upload]
   );
@@ -51,31 +51,39 @@ export default function ResumeSchemaEditor() {
   const [onUploadResume] = useDataUpdateWrapper(updateResume, onPostUpdateResume, DataUpdateOptions);
 
   if (loading) {
-    return <div className="w-full *:text-center mx-auto"><CircularProgress /></div>;
+    return (
+      <div className="w-full *:text-center mx-auto">
+        <CircularProgress />
+      </div>
+    );
   }
 
   return (
     <div className="my-8 mx-16 py-4 px-8 resume-schema-editor w-full bg-muted flex flex-col items-center">
       <h5 className="text-3xl mx-auto">Resume Schema Editor</h5>
-      <div className="flex flex-row gap-2">
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<CloudUploadOutlined />}
+      <div className="flex flex-row gap-2 my-2">
+        <button
+          className="bg-primary text-white py-1 px-2 rounded-md hover:cursor-pointer disabled:bg-accent"
           disabled={isEqual(resume, newResume)}
           onClick={async () => onUploadResume(newResume)}
-          style={{ margin: 12 }}
         >
-          Update
-        </Button>
-        <Button
-          variant="contained"
-          startIcon={<RestoreOutlined />}
+          <CloudUploadOutlined /> Update
+        </button>
+        <button
+          className="bg-secondary text-white py-1 px-2 rounded-md hover:cursor-pointer"
           onClick={async () => onUploadResume(DEFAULT_RESUME)}
-          style={{ margin: 12 }}
         >
-          Reset to Default
-        </Button>
+          <RestoreOutlined /> Reset to Default
+        </button>
+        <button
+          className="bg-secondary text-white py-1 px-2 rounded-md hover:cursor-pointer"
+          onClick={() => {
+            navigator.clipboard.writeText(JSON.stringify(resume, null, 2));
+            window.alert("Copied to clipboard")
+          }}
+        >
+          <CopyAll /> Get Current Resume Schema
+        </button>
       </div>
       <div className="w-full overflow-x-auto">
         <ResumeSchemaForm
