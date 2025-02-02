@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.31.3](https://github.com/bdatdo0601/big-boi/compare/v1.31.2...v1.31.3) (2025-02-02)
+
+
+### Bug Fixes
+
+* add cdk ([9a6fa22](https://github.com/bdatdo0601/big-boi/commit/9a6fa2211bec050c06841de7a7e917a470416452))
+* make paper resume extend beyond letter size ([b0fae2c](https://github.com/bdatdo0601/big-boi/commit/b0fae2c89cc5e3bed69e46c1448bedc1abc6319a))
+
 ### [1.31.2](https://github.com/bdatdo0601/big-boi/compare/v1.31.1...v1.31.2) (2025-02-02)
 
 
