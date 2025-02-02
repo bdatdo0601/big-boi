@@ -162,6 +162,7 @@ export default function BlogPostCard({
           {post.title}
         </h3>
       }
+      cardStyle={{ maxWidth: 600 }}
     >
       <CardContentData
         post={post}

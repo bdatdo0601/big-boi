@@ -7,7 +7,6 @@ import PaperResumeRenderer from "@/containers/PaperResume/PaperResumeRenderer";
 import { useReactToPrint } from "react-to-print";
 
 export default function WelcomeInfo({ bio }) {
-  const { globalAnimation } = useContext(LayoutContext);
   const ref = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef: ref });
 
@@ -18,8 +17,6 @@ export default function WelcomeInfo({ bio }) {
         paddingLeft: 16,
         paddingRight: 16,
       }}
-      cardStyle={{ maxWidth: 600, margin: "0 auto" }}
-      animation={globalAnimation}
     >
       <div className="flex flex-col items-center">
         <div className="mx-4 my-2 text-left">

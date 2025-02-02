@@ -4,7 +4,7 @@ import { FixedSizeList as List } from 'react-window';
 
 interface InfiniteListProps<T extends object> {
   parentHeight: string;
-  RowRenderer: (items: T[], alreadyVisitedIndexes: Set<T>, setAlreadyVisitedIndexes: Function) => React.FC<{ index: number; style: React.CSSProperties }>;
+  RowRenderer: React.FC<{ data: T[], index: number; style: React.CSSProperties }>;
   items: T[];
   fetchMore: () => Promise<void>;
   isFetchingItems: boolean;
@@ -24,6 +24,7 @@ const InfiniteList = <T extends object>({ parentHeight, RowRenderer, items, fetc
     if (target.isIntersecting && !isFetchingItems && internalItems.length > 0) {
       const lastVisibleIndex = Math.floor(scrollPosition / 80) + Math.floor(parseInt(parentHeight) / 80);
       if (previousLastVisibleIndex !== lastVisibleIndex && lastVisibleIndex >= internalItems.length - 1 && !dataCompleted) {
+        console.log("here");
         fetchMore().then();
         setPreviousLastVisibleIndex(lastVisibleIndex);
       }
@@ -67,13 +68,14 @@ const InfiniteList = <T extends object>({ parentHeight, RowRenderer, items, fetc
     <div className="w-full mx-auto p-4 scroll-smooth flex flex-col gap-2" style={{ height: parentHeight }}>
       <List
         ref={listRef}
-        height={parseInt(parentHeight) - 80}
+        height={parseInt(parentHeight)}
         itemCount={internalItems.length}
         itemSize={80}
         width="100%"
         onScroll={handleScroll}
+        overscanCount={5}
       >
-        {RowRenderer(internalItems, alreadyVisitedItems, setAlreadyVisitedItems)}
+        {RowRenderer}
       </List>
 
       {isFetchingItems && (

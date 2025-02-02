@@ -9,7 +9,6 @@ import LayoutContext from "../../context/layout";
 import "./index.css";
 
 export default function Profile({ image, name, wrapperStyle, imageStyle, animation }) {
-  const { isDark } = useContext(LayoutContext);
   const [imageProps, api] = useSpring(() => ({
     from: animation ? { opacity: 0, transform: [0, -100] } : {},
     transform: [0, 0],

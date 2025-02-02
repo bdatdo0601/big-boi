@@ -20,11 +20,11 @@ export default function Landing({ keywords, contacts, bio }) {
           keywords={keywords}
           containerStyle={{ marginBottom: "5rem" }}
         />
-        <div className="flex flex-row justify-between gap-12 items-start max-lg:flex-wrap">
+        <div className="flex flex-row justify-center gap-12 items-center max-lg:flex-wrap w-full">
           <WelcomeInfo bio={bio} />
           <ContactInfo animation={globalAnimation} contacts={contacts} />
         </div>
-        <div className="w-full max-w-[800px]">
+        <div className="w-full">
           <ActionLogsInfo animation={globalAnimation} keywords={keywords} />
         </div>
         <span id="background" className="text-2xl italic">A little bit more info 👀</span>
