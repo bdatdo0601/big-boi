@@ -23,7 +23,7 @@ const ResumeContactItem: React.FC<{ IconComponent: MaterialIconComponent, name?:
 const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
   const resume = useResume();
   return (
-    <div ref={ref} className="w-[8.5in] h-[11in] p-[5mm] mx-auto bg-white text-black shadow-lg">
+    <div ref={ref} className="w-[8.5in] p-[5mm] mx-auto bg-white text-black shadow-lg">
       <div className="printable font-sans text-base leading-relaxed flex-col flex gap-[1mm]">
         <header className="text-center flex-col flex">
           <h1 className="text-2xl font-extrabold">{resume.basic.name.toLocaleUpperCase()}</h1>
