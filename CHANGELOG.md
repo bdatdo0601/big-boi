@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.31.4](https://github.com/bdatdo0601/big-boi/compare/v1.31.3...v1.31.4) (2025-02-02)
+
+
+### Bug Fixes
+
+* add checkout action to cdk ([d961752](https://github.com/bdatdo0601/big-boi/commit/d96175269c4fd1f650df3463be4688b56b68a847))
+
 ### [1.31.3](https://github.com/bdatdo0601/big-boi/compare/v1.31.2...v1.31.3) (2025-02-02)
 
 
