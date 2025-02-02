@@ -23,20 +23,16 @@
     "LambdaLayerVersion630849e1": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
-        "CompatibleRuntimes": {
-          "Ref": "runtimes"
-        },
+        "CompatibleRuntimes": [
+          "nodejs22.x"
+        ],
         "Content": {
           "S3Bucket": {
             "Ref": "deploymentBucketName"
           },
-          "S3Key": {
-            "Ref": "s3Key"
-          }
+          "S3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion630849e1-build.zip"
         },
-        "Description": {
-          "Ref": "description"
-        },
+        "Description": "Updated layer version 2025-02-01T07:05:52.554Z",
         "LayerName": {
           "Fn::Sub": [
             "bigboibigboilambdalayer-${env}",
@@ -55,9 +51,7 @@
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": {
-          "Ref": "LambdaLayerVersion630849e1"
-        },
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:142037127835:layer:bigboibigboilambdalayer-dev:88",
         "Principal": {
           "Ref": "AWS::AccountId"
         }

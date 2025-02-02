@@ -7,12 +7,10 @@ const moment = require("moment");
 
 const API_ENDPOINT = process.env.API_ENDPOINT;
 
-const ACCEPTED_SOURCES = ["GithubWebhook"];
-
 exports.handler = async (event) => {
     const source = get(event, "queryStringParameters.source", "");
 
-    if (!source || !ACCEPTED_SOURCES.includes(source)) {
+    if (!source) {
         return {
             statusCode: 403,
             body: JSON.stringify({ message: "source query string parameter does not exist or is not accepted" })

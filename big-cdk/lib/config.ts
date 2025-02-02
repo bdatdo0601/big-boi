@@ -13,6 +13,7 @@ export const Environment: ENVIRONMENT = isValidEnvironment(process.env.ENVIRONME
 
 type CONFIG = {
   ingestionKinesisStreamArn: string;
+  ingestionLambdaArn: string;
   account: string,
   region: string,
   environment: string
@@ -24,6 +25,7 @@ const configs: { [key in ENVIRONMENT]: CONFIG } = {
     region: 'us-east-1',
     environment: 'dev',
     ingestionKinesisStreamArn: 'arn:aws:kinesis:us-east-1:142037127835:stream/bigboidefaultkinesis-dev',
+    ingestionLambdaArn: 'arn:aws:lambda:us-east-1:142037127835:function:bigboikinesisconsumer-dev',
   },
 };
 

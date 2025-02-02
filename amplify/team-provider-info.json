@@ -23,7 +23,7 @@
       "function": {
         "bigboikinesisconsumer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboikinesisconsumer-4e436e487a426145677a-build.zip"
+          "s3Key": "amplify-builds/bigboikinesisconsumer-566b687137496f71316f-build.zip"
         },
         "bigboibigboilambdalayer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
@@ -48,7 +48,7 @@
         },
         "bigboiwebhookproxy": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboiwebhookproxy-4972454e3546374b3675-build.zip",
+          "s3Key": "amplify-builds/bigboiwebhookproxy-374d7855616e594b7672-build.zip",
           "apiEndpoint": "https://api.datbdo.com",
           "apiKey": "jgmj2loTvO31fX4xWOq4saxCay4gNRVx5taSLKHr"
         },

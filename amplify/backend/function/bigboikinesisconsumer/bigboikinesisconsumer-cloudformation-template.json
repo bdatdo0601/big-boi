@@ -209,6 +209,13 @@
               "Resource": {
                 "Ref": "analyticsbigboinotificationsnsTopicArn"
               }
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "events:PutEvents"
+              ],
+              "Resource": "*"
             }
           ]
         }

@@ -10,6 +10,9 @@ const { identifySource } = require("/opt/packages/SourceIdentifier");
 const { formatEventByEventType } = require("/opt/packages/EventType");
 const { publishMessage } = require("/opt/packages/MessagePublisher");
 const { getEventSource, EventSourcesProcessors } = require("./eventSourceProcessors");
+const { EventBridge } = require("aws-sdk");
+
+const eventBridge = new EventBridge();
 
 exports.handler = async handlerEvent => {
   const eventSource = getEventSource(handlerEvent);
@@ -42,6 +45,22 @@ exports.handler = async handlerEvent => {
   const responseData = {
     validEvents,
     invalidEvents,
+  }
+
+  // Publish responseData to EventBridge
+  try {
+    await eventBridge.putEvents({
+      Entries: [
+        {
+          Source: 'custom.lambda.bigboikinesisconsumer',
+          DetailType: 'LegacyEventStream',
+          Detail: JSON.stringify(responseData),
+          EventBusName: 'BigBus'
+        }
+      ]
+    }).promise();
+  } catch (err) {
+    console.warn("Error publishing to EventBridge", err);
   }
 
   const response = await EventSourcesProcessors[eventSource].getResponses(responseData);
