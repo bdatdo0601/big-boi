@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.31.1](https://github.com/bdatdo0601/big-boi/compare/v1.31.0...v1.31.1) (2025-02-02)
+
+
+### Bug Fixes
+
+* update action bar ([d750db1](https://github.com/bdatdo0601/big-boi/commit/d750db183a2ab2dd91f2126f0d39488e59c89ac2))
+* update circular progress ([bfe7332](https://github.com/bdatdo0601/big-boi/commit/bfe7332d385a8ef891c713d541282fa233581e00))
+* update path for resume ([abee468](https://github.com/bdatdo0601/big-boi/commit/abee4684ea037e759d79cf34e00d0b0c7c9ab1a0))
+
 ## [1.31.0](https://github.com/bdatdo0601/big-boi/compare/v1.30.2...v1.31.0) (2025-02-01)
 
 
