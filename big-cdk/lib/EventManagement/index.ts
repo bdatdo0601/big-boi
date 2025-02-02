@@ -69,13 +69,13 @@ export class EventManagementStack extends cdk.Stack {
         },
         inputTemplate: `
           {
-            "id": <$.messageId>,
-            "detail-type": "KinesisEvent",
-            "source": "KinesisStream",
+            "detailType": "KinesisEvent",
+            "id": <$.eventID>,
+            "source": "<$.eventSource>",
             "time": <$.approximateArrivalTimestamp>,
             "data": <$.data>,
             "partitionKey": <$.partitionKey>
-            "eventSource": <$.eventSourceARN>,
+            "sourceArn": <$.eventSourceARN>,
           }
         `,
       },
