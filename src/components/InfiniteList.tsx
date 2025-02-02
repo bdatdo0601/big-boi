@@ -13,7 +13,6 @@ interface InfiniteListProps<T extends object> {
 }
 
 const InfiniteList = <T extends object>({ parentHeight, RowRenderer, items, fetchMore, isFetchingItems, newItems, dataCompleted }: InfiniteListProps<T>) => {
-  const [alreadyVisitedItems, setAlreadyVisitedItems] = useState(new Set<T>());
   const [internalItems, setInternalItems] = useState<T[]>(items);
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const listRef = useRef<List | null>(null);
@@ -24,7 +23,6 @@ const InfiniteList = <T extends object>({ parentHeight, RowRenderer, items, fetc
     if (target.isIntersecting && !isFetchingItems && internalItems.length > 0) {
       const lastVisibleIndex = Math.floor(scrollPosition / 80) + Math.floor(parseInt(parentHeight) / 80);
       if (previousLastVisibleIndex !== lastVisibleIndex && lastVisibleIndex >= internalItems.length - 1 && !dataCompleted) {
-        console.log("here");
         fetchMore().then();
         setPreviousLastVisibleIndex(lastVisibleIndex);
       }
@@ -77,10 +75,6 @@ const InfiniteList = <T extends object>({ parentHeight, RowRenderer, items, fetc
       >
         {RowRenderer}
       </List>
-
-      {isFetchingItems && (
-        <CircularProgress />
-      )}
 
       <div ref={loaderRef} className="h-4" />
     </div>
