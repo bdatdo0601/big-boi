@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.32.0](https://github.com/bdatdo0601/big-boi/compare/v1.31.4...v1.32.0) (2025-02-02)
+
+
+### Features
+
+* add eventbus and pipe from kinesis ([20756e2](https://github.com/bdatdo0601/big-boi/commit/20756e2cbbb509bfed9bcb9ee41767c7be529f56))
+* add faq page ([04d78ac](https://github.com/bdatdo0601/big-boi/commit/04d78ac090a166c7e40a519498a0357053baa056))
+
+
+### Bug Fixes
+
+* add faq ([5ad4172](https://github.com/bdatdo0601/big-boi/commit/5ad4172a976e1b53089283aad011e6de87a4d890))
+* attempt fix event bridge management ([b4279f8](https://github.com/bdatdo0601/big-boi/commit/b4279f8d5cb65bc54f16d783863e01aca6faffe9))
+* clean up infinite list ([7dbe176](https://github.com/bdatdo0601/big-boi/commit/7dbe1769e7e49a6d2266cc27d61b1dfa63f48fc3))
+* first step in consolidating event bus ([bbe99e2](https://github.com/bdatdo0601/big-boi/commit/bbe99e2d88668a56b52e085c7dd2d1fdeeb9cb66))
+
 ### [1.31.4](https://github.com/bdatdo0601/big-boi/compare/v1.31.3...v1.31.4) (2025-02-02)
 
 
