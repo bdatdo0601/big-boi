@@ -1,20 +1,6 @@
 import { useContext } from 'react';
 import { ResumeContext, ResumeSchema } from './provider';
 
-const Sections = {
-  Basic: 'basic',
-  Work: 'work',
-  Volunteer: 'volunteer',
-  Education: 'education',
-  Awards: 'awards',
-  Publications: 'publications',
-  Skills: 'skills',
-  Languages: 'languages',
-  Interests: 'interests',
-  References: 'references',
-  Projects: 'projects',
-} as const;
-
 export const useResume = (): ResumeSchema => {
   const context = useContext(ResumeContext);
   if (!context.resume) {

@@ -11,6 +11,7 @@ import {
   ListAltOutlined,
   LinkOutlined,
   FilePresentOutlined,
+  QuestionAnswer,
 } from "@mui/icons-material";
 import { Typography, Button } from "@mui/material";
 import AdminDashboard from "./containers/AdminDashboard";
@@ -22,6 +23,7 @@ import usePageTracking from "./utils/hooks/usePageTracking";
 import PaperResumeDisplay from "./containers/PaperResume";
 import { useAuth } from "./context/auth";
 import { getCurrentUser } from "@aws-amplify/auth";
+import FAQ from "./containers/FAQ";
 
 const Blogs = lazy(() => import("./containers/Blogs"));
 const ChangeLogs = lazy(() => import("./containers/Changelogs"));
@@ -203,6 +205,14 @@ const routes: RouteConfig[] = [
     icon: <FilePresentOutlined />,
     component: PaperResumeDisplay,
     path: "/resume",
+    exact: true,
+    type: ROUTE_TYPE.PUBLIC,
+  },
+  {
+    name: "FAQ",
+    icon: <QuestionAnswer />,
+    component: FAQ,
+    path: "/faq",
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
   },
