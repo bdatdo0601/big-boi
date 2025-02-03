@@ -1,7 +1,5 @@
 import React from "react";
-import { Paper } from "@mui/material";
 
-import "./index.css";
 import useGetTextFileFromURL from "../../utils/hooks/useFetchTextFromURL";
 import MarkdownDisplayer from "../../components/MarkdownDisplayer";
 
@@ -11,8 +9,8 @@ export default function ChangeLogs() {
   const { text } = useGetTextFileFromURL(CHANGELOG_URL);
 
   return (
-    <Paper className="section-container html-wrap">
+    <div className="section-container html-wrap">
       <MarkdownDisplayer value={text} style={{ padding: "4rem", overflowWrap: "break-word" }} />
-    </Paper>
+    </div>
   );
 }

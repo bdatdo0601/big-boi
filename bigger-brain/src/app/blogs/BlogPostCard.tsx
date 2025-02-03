@@ -2,7 +2,7 @@
 
 import { BlogPostWithSlug } from '@/api/blog'
 import Link from 'next/link'
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import slugify from "slugify";
 import { format } from "date-fns";
 import { get, capitalize, trim } from "lodash";
@@ -22,6 +22,7 @@ const BlogPost = ({ post }: { post: BlogPostWithSlug }) => {
     <Link
       href={!post.postType ? `/blogs/${slugify(post.title)}` : post.externalLink!}
       target={!post.postType ? "_self" : "_blank"}
+      suppressHydrationWarning
       onClick={e => {
         if (!post.postType && isIframe()) {
           window.parent.postMessage(
@@ -43,10 +44,8 @@ const BlogPost = ({ post }: { post: BlogPostWithSlug }) => {
           </h4>
           <time className='text-card-foreground'>{format(new Date(post.createdAt), "d-MMM-u")}</time>
         </div>
-        <p>{post.description}</p>
-        <div >
-          <h5>{!post.postType ? "View Post" : `Go to ${capitalize(post.postType)}`}</h5>
-        </div>
+        <blockquote>{post.description}</blockquote>
+        <h5>{!post.postType ? "View Post" : `Go to ${capitalize(post.postType)}`}</h5>
       </div>
     </Link>
   </div>
@@ -89,9 +88,9 @@ const InstagramBlogPost = ({ post }: { post: BlogPostWithSlug }) => {
           </div>
           <div>
             <time>{format(new Date(post.createdAt), "d-MMM-u")}</time>
-            <p>
+            <blockquote>
               {post.description}
-            </p>
+            </blockquote>
           </div>
           <div>
             <h5>{`Go to ${capitalize(post.postType)}`}</h5>
@@ -117,9 +116,15 @@ const GeneralBlogPostCard = ({ post, ...props }: { post: BlogPostWithSlug }) => 
 };
 
 const BlogPostCard: React.FC<{ index: number, data: BlogPostWithSlug, width: number }> = ({ index, data: post, width }) => {
+  const [isClient, setIsClient] = useState(false)
+ 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   return (
     <div className='w-full'>
-      <GeneralBlogPostCard post={post} />
+      {isClient && <GeneralBlogPostCard post={post} />}
     </div>
   )
 }

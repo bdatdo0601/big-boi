@@ -8,7 +8,7 @@
     --background: #c5cdde; /* Light background */
     --foreground: #395252; /* Dark teal text */
 
-    --muted: #7bc5b4; /* Light grayish-blue */
+    --muted: #7bc5c5; /* Light grayish-blue */
     --muted-foreground: #395252; /* Dark teal */
 
     --popover: #eeeeff; /* Light background */
@@ -17,7 +17,7 @@
     --border: #7394a4; /* Muted blue-gray */
     --input: #395252; /* Dark teal */
 
-    --card: #7bc5b4; /* Light background */
+    --card: #fafafa; /* Light background */
     --card-foreground: #395252; /* Dark teal */
 
     --primary: #e65239; /* Deep green */
@@ -210,6 +210,34 @@
     @apply bg-background text-input;
   }
 
+  h1::before {
+    content: '$~';
+    color: var(--success);
+    @apply mr-2;
+  }
+
+  h2::before {
+    content: '>';
+    color: var(--success);
+    @apply mr-2;
+  }
+
+  h3::before, h4::before {
+    content: '#';
+    margin-right: 4px;
+    color: var(--primary);
+  }
+  h3::after, h4::after {
+    content: '()';
+    margin-left: 2px;
+    color: var(--primary);
+  }
+
+  h1::after, h2::after {
+    content: '()';
+    color: var(--muted-foreground);
+  }
+
   input:-webkit-autofill:first-line {
     color: var(--primary) !important;
   }
@@ -222,62 +250,35 @@
 
   img {
     max-width: 100%;
-    @apply rounded-lg border-input border-2 my-2;
+    @apply rounded-lg border-input;
   }
 
   h1 {
-    @apply text-primary text-5xl font-bold my-4;
+    @apply text-primary text-5xl font-bold;
   }
 
   h2 {
-    @apply text-primary text-4xl font-normal my-2;
-  }
-
-  h1::before {
-    content: '>';
-    color: var(--success);
-    @apply mr-2;
-  }
-
-  h2::before {
-    content: '$~';
-    color: var(--success);
-    @apply mr-2;
-  }
-
-  h1::after, h2::after {
-    content: '()';
-    color: var(--muted-foreground);
+    @apply text-secondary text-4xl font-normal;
   }
 
   h3 {
-    @apply text-3xl text-primary mb-2;
+    @apply text-3xl text-muted-foreground;
   }
 
   h4 {
-    @apply text-2xl text-muted-foreground mb-2;
+    @apply text-2xl text-muted-foreground;
   }
 
   h5 {
-    @apply text-success;
+    @apply text-success text-lg;
   }
 
   h6 {
-    @apply text-destructive;
-  }
-  h3::before, h4::before {
-    content: '$~';
-    margin-right: 4px;
-    color: var(--primary);
-  }
-  h3::after, h4::after {
-    content: '()';
-    margin-left: 2px;
-    color: var(--primary);
+    @apply text-input text-base;
   }
 
   p {
-    @apply text-input text-xl;
+    @apply text-input text-base;
   }
 
   p code {
@@ -293,10 +294,10 @@
   }
 
   a {
-    @apply focus:outline-none focus:shadow-[0_2px_0_0_var(--primary)] text-input transition-shadow duration-200 ease-linear border-b-1 pb-0.5 border-primary hover:border-input;
+    @apply focus:outline-none focus:shadow-[0_2px_0_0_var(--primary)] text-base transition-shadow duration-200 ease-linear border-b-1 pb-[1px] border-primary hover:border-input;
   }
   time {
-    @apply text-input text-lg; 
+    @apply text-input text-base; 
   }
 
   code {
@@ -322,7 +323,7 @@
   }
 
   li {
-    @apply text-lg text-input;
+    @apply text-base text-input;
   }
 
   li code {
@@ -342,7 +343,7 @@
     margin-bottom: 48px !important;
   }
 
-  table {
+  /* table {
     border-collapse: collapse;
     margin-bottom: theme('spacing.3');
     border: none;
@@ -368,20 +369,19 @@
   tbody td {
     padding: theme('spacing.2') theme('spacing.3');
     border: 1px solid var(--foreground);
-  }
+  } */
 
   blockquote {
-    @apply italic;
+    @apply italic pl-4 text-base;
     border-radius: 0;
     border-left-color: var(--primary);
     border-left-style: solid;
-    border-left-width: 2px;
+    border-left-width: 4px;
     margin: 0 0 theme('spacing.3') theme('spacing.2');
   }
 
   blockquote p {
-    padding: theme('spacing.3');
-    margin-bottom: 0;
+    
   }
 
   .progress-primary {

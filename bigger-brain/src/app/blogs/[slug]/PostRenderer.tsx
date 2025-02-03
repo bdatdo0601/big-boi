@@ -25,6 +25,7 @@ import slugify from "slugify";
 import { get } from "lodash";
 import { isIframe } from "@/utils";
 import { BlogPostWithSlug } from "@/api/blog";
+import { usePathname } from "next/navigation";
 
 interface PostRendererProps {
   post: BlogPostWithSlug
@@ -33,20 +34,21 @@ interface PostRendererProps {
 const formatDate = (date: string) => format(new Date(date), "d-MMM-u");
 
 const PostRenderer: React.FC<PostRendererProps> = ({ post }) => {
+  const baseURL = typeof window !== 'undefined' ? window.location.origin : 'https://blogs.datbdo.com';
   const data = JSON.parse(post.data);
   useEffect(() => {
     if (isIframe()) {
       window.parent.postMessage(
         JSON.stringify({
           site: { name: post.title },
-          path: `/${slugify(post.title)}`,
+          path: `blogs/${slugify(post.title)}`,
         }),
         "*"
       );
     }
   }, [post.title]);
 
-  const blogLink = `/${slugify(post.title)}`;
+  const blogLink = `${baseURL}/${slugify(post.title)}`;
   const readingStats = useMemo(() => readingTime(get(data, "text", "")), [data]);
 
   if (data.postType) {
@@ -62,7 +64,7 @@ const PostRenderer: React.FC<PostRendererProps> = ({ post }) => {
             if (isIframe()) {
               window.parent.postMessage(
                 JSON.stringify({
-                  site: "/",
+                  site: { title: post.title },
                   path: "/",
                   navigateToPath: true,
                 }),

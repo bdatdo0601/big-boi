@@ -226,7 +226,7 @@
   }
 
   h1 {
-    @apply text-muted-foreground text-5xl font-bold;
+    @apply text-primary text-5xl font-bold;
   }
 
   h2 {
