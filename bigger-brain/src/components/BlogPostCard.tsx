@@ -18,8 +18,9 @@ const BlogPostSource = {
 
 
 const BlogPost = ({ post }: { post: BlogPostWithSlug }) => {
+  
   return <div key={post.id} className="shadow-2xl bg-popover p-4 rounded-xl border-input" >
-    <Link
+    <a
       href={!post.postType ? `/blogs/${slugify(post.title)}` : post.externalLink!}
       target={!post.postType ? "_self" : "_blank"}
       suppressHydrationWarning
@@ -47,7 +48,7 @@ const BlogPost = ({ post }: { post: BlogPostWithSlug }) => {
         <blockquote>{post.description}</blockquote>
         <h5>{!post.postType ? "View Post" : `Go to ${capitalize(post.postType)}`}</h5>
       </div>
-    </Link>
+    </a>
   </div>
 };
 
@@ -73,7 +74,7 @@ const InstagramBlogPost = ({ post }: { post: BlogPostWithSlug }) => {
   const link = useMemo(() => get(postData, "link", "").replace("instagr.am", "instagram.com"), [postData]);
   return (
     <div className="p-2 shadow-2xl bg-popover rounded-xl border-input">
-      <Link href={post.externalLink || ""} target="_blank" style={{ textDecoration: "inherit" }}>
+      <a href={post.externalLink || ""} target="_blank" style={{ textDecoration: "inherit" }} rel="noreferrer">
         <div>
           <div>
             <InstagramEmbed
@@ -96,7 +97,7 @@ const InstagramBlogPost = ({ post }: { post: BlogPostWithSlug }) => {
             <h5>{`Go to ${capitalize(post.postType)}`}</h5>
           </div>
         </div>
-      </Link>
+      </a>
     </div>
   );
 };
@@ -123,7 +124,7 @@ const BlogPostCard: React.FC<{ index: number, data: BlogPostWithSlug, width: num
   }, [])
 
   return (
-    <div className='w-full'>
+    <div className='w-full p-2'>
       {isClient && <GeneralBlogPostCard post={post} />}
     </div>
   )

@@ -2,8 +2,6 @@
 
 import React, { useEffect, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { format } from "date-fns";
 import { FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
@@ -20,12 +18,14 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from "react-share";
+// Using ES6 import syntax
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css';
 
 import slugify from "slugify";
 import { get } from "lodash";
 import { isIframe } from "@/utils";
 import { BlogPostWithSlug } from "@/api/blog";
-import { usePathname } from "next/navigation";
 
 interface PostRendererProps {
   post: BlogPostWithSlug
@@ -130,19 +130,11 @@ const PostRenderer: React.FC<PostRendererProps> = ({ post }) => {
           components={{
             code({ node, inline, className, children, ...props }: any) {
               const match = /language-(\w+)/.exec(className || "");
-              return !inline && match ? (
-                <SyntaxHighlighter
-                  style={nightOwl}
-                  language={match[1]}
-                  PreTag="div"
-                  {...props}
-                >
-                  {String(children).replace(/\n$/, "")}
-                </SyntaxHighlighter>
-              ) : (
-                <code className={className} {...props}>
-                  {children}
-                </code>
+              console.log(node, inline, className, children, props);
+              return (
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+                // biome-ignore lint/security/noDangerouslySetInnerHtmlWithChildren: <explanation>
+                <code className={className} {...props} dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(children).value }} />
               );
             },
             // biome-ignore lint/a11y/useAltText: <explanation>

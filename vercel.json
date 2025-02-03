@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "blogs.datbdo.com"
+        }
+      ],
+      "destination": "/blogs/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "docs.datbdo.com"
+        }
+      ],
+      "destination": "/docs/:path*"
+    }
+  ]
+}
