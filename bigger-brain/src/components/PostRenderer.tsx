@@ -129,8 +129,6 @@ const PostRenderer: React.FC<PostRendererProps> = ({ post }) => {
         <ReactMarkdown
           components={{
             code({ node, inline, className, children, ...props }: any) {
-              const match = /language-(\w+)/.exec(className || "");
-              console.log(node, inline, className, children, props);
               return (
                 // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
                 // biome-ignore lint/security/noDangerouslySetInnerHtmlWithChildren: <explanation>
