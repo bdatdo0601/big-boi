@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.33.0](https://github.com/bdatdo0601/big-boi/compare/v1.32.0...v1.33.0) (2025-02-03)
+
+
+### Features
+
+* adapt better style ([21b3b3a](https://github.com/bdatdo0601/big-boi/commit/21b3b3ad772d96d5aa5b2f5172ae014d5b1afd47))
+* nextjs bigger brain first try ([6673029](https://github.com/bdatdo0601/big-boi/commit/6673029e18023761fd503c62279e2b9076375e95))
+
 ## [1.32.0](https://github.com/bdatdo0601/big-boi/compare/v1.31.4...v1.32.0) (2025-02-02)
 
 
