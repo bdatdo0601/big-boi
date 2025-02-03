@@ -20,7 +20,7 @@ const RowRenderer = ({ index, style }: { data: EventMessage[], index: number, st
     const linkifyString = (textData: string[], textToLink: RegExp | string, link: string) =>
       textData.map((msg: string) =>
         ReactStringReplacer(msg, textToLink, (match: React.ReactNode, i: number) => (
-          <a key={`${match} ${i}`} className="font-bold border-b-1 border-primary pb-0.5 hover:cursor-pointer" href={link} target="_blank" rel="noopener noreferrer">
+          <a key={`${match} ${i}`} className="font-bold hover:cursor-pointer" href={link} target="_blank" rel="noopener noreferrer">
             {match}
           </a>
         ))
@@ -78,7 +78,7 @@ const RowRenderer = ({ index, style }: { data: EventMessage[], index: number, st
           />
         </div>
         <div className="flex flex-col gap-1 text-left grow px-1 scroll-auto w-fit" style={animationStyle}>
-          <span className="text-sm flex flex-nowrap justify-start gap-1">{messages.filter(item => item).map((msg, i) =>
+          <span className="text-base flex flex-nowrap justify-start gap-2 items-center">{messages.filter(item => item).map((msg, i) =>
             isString(msg) ? (
               <span key={`${msg} ${i}`} className="flex flex-nowrap text-nowrap text-input">
                 {msg}
@@ -87,7 +87,7 @@ const RowRenderer = ({ index, style }: { data: EventMessage[], index: number, st
               <span className="flex flex-nowrap text-nowrap" key={`${msg} ${i}`}>{msg}</span>
             )
           )}</span>
-          <span className="flex flex-nowrap text-xs text-input italic">{moment(item && item.createdAt).format("MM/DD/YY hh:mm a")}</span>
+          <span className="flex flex-nowrap text-sm text-input italic">{moment(item && item.createdAt).format("MM/DD/YY hh:mm a")}</span>
         </div>
       </div>
     </div>

@@ -20,26 +20,26 @@ export const BasicInfo: React.FC = () => {
     <ProfileCard
       header={
         <div className="text-input w-full px-4 py-2 rounded-lg text-center flex flex-col">
-          <h1 className="text-xl font-medium text-input">
+          <h3>
             {get(basicInfo, "name")}
-          </h1>
-          <span className="flex flex-row gap-1 mx-auto text-center mt-1 flex-wrap">
-            <h2 className="text-xs font-normal text-input">
+          </h3>
+          <span className="flex flex-row gap-1 mx-auto text-center mt-1 flex-wrap justify-center">
+            <h5 className="">
               {get(basicInfo, "label")}
-            </h2>
-            <span className="text-input text-xs">{" | "}</span>
-            <span className="text-xs">
+            </h5>
+            <h5>{" | "}</h5>
+            <h5 className="">
               {`${get(basicInfo, "location.city")} ${get(
                 basicInfo,
                 "location.postalCode"
               )}`}
-            </span>
+            </h5>
           </span>
         </div>
       }
     >
       <div className="flex flex-col gap-4">
-        <p className="text-base text-input text-justify mb-4 max-sm:mt-8 mt-4">
+        <p className="text-input text-justify mb-4 max-sm:mt-12 mt-8">
           {get(basicInfo, "summary")}
         </p>
         <div className="flex flex-row gap-2 flex-wrap">

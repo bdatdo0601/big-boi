@@ -13,7 +13,7 @@ const ResumeContactItem: React.FC<{ IconComponent: MaterialIconComponent, name?:
   const Icon = ResumeIcon(IconComponent);
   if (!name) return null;
   return (
-    <span className='flex flex-row gap-[1mm] items-center text-xs'>
+    <span className='flex flex-row gap-[1mm] items-center text-xs text-black'>
       <Icon />
       <span>{name}</span>
     </span>
@@ -26,21 +26,21 @@ const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
     <div ref={ref} className="w-[8.5in] p-[5mm] mx-auto bg-white text-black shadow-lg">
       <div className="printable font-sans text-base leading-relaxed flex-col flex gap-[1mm]">
         <header className="text-center flex-col flex">
-          <h1 className="text-2xl font-extrabold">{resume.basic.name.toLocaleUpperCase()}</h1>
+          <h1 className="text-2xl font-extrabold text-black">{resume.basic.name.toLocaleUpperCase()}</h1>
           <p className='flex items-center justify-center text-center gap-[1mm]'>
             <ResumeContactItem IconComponent={Email} name={resume.basic.email} />
-            <span className='text-xs'>{" | "}</span>
+            <span className='text-xs text-black'>{" | "}</span>
             <ResumeContactItem IconComponent={GitHub} name={resume.basic.profiles.find(item => item.network === "GitHub")?.username} />
-            <span className='text-xs'>{" | "}</span>
+            <span className='text-xs text-black'>{" | "}</span>
             <ResumeContactItem IconComponent={Language} name={resume.basic.website.replace(/^https?:\/\/|\/$/g, '')} />
-            <span className='text-xs'>{" | "}</span>
+            <span className='text-xs text-black'>{" | "}</span>
             <ResumeContactItem IconComponent={Phone} name={resume.basic.phone} />
-            <span className='text-xs'>{" | "}</span>
+            <span className='text-xs text-black'>{" | "}</span>
             <ResumeContactItem IconComponent={Place} name={`${resume.basic.location.city}, ${resume.basic.location.region}`} />
           </p>
         </header>
         <section>
-          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center">{"Competencies".toLocaleUpperCase()}</h2>
+          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center text-black">{"Competencies".toLocaleUpperCase()}</h2>
           <table className="flex flex-col">
             <tbody>
               {resume.skills.map(skillset => (
@@ -57,7 +57,7 @@ const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
           </table>
         </section>
         <section>
-          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center">{"Experience".toLocaleUpperCase()}</h2>
+          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center text-black">{"Experience".toLocaleUpperCase()}</h2>
           <div className='flex flex-col gap-1'>
             {take(resume.work, 3).map(workItem => (
               <div key={workItem.company + workItem.position}>
@@ -74,14 +74,14 @@ const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
                   </span>
                 </span>
                 <ul className='list-disc pl-4'>
-                  {workItem.highlights.map(item => <li className='text-xs' key={item}>{item}</li>)}
+                  {workItem.highlights.map(item => <li className='text-xs text-black' key={item}>{item}</li>)}
                 </ul>
               </div>
             ))}
           </div>
         </section>
         <section>
-          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center">{"Research & Side Projects".toLocaleUpperCase()}</h2>
+          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center text-black">{"Research & Side Projects".toLocaleUpperCase()}</h2>
           <div className='flex flex-col'>
             {take(resume.projects, 4).map(projectItem => (
               <div key={projectItem.name}>
@@ -102,14 +102,14 @@ const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
                   </span>
                 </span>
                 <ul className='list-none'>
-                  <li className='text-xs'>{projectItem.description}</li>
+                  <li className='text-xs text-black'>{projectItem.description}</li>
                 </ul>
               </div>
             ))}
           </div>
         </section>
         <section>
-          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center">{"Education".toLocaleUpperCase()}</h2>
+          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center text-black">{"Education".toLocaleUpperCase()}</h2>
           <div className='flex flex-col gap-1'>
             {resume.education.map(educationItem => (
               <div key={educationItem.institution}>
@@ -134,7 +134,7 @@ const PaperResumeRenderer: React.FC<{ ref: any }> = ({ ref }) => {
           </div>
         </section>
         <section>
-          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center">{"Awards & Affilliations".toLocaleUpperCase()}</h2>
+          <h2 className="text-sm font-bold border-b-2 border-black mb-1 text-center text-black">{"Awards & Affilliations".toLocaleUpperCase()}</h2>
           <div className='flex flex-col gap-1'>
             {resume.awards.map(awardItem => (
               <div key={awardItem.title}>

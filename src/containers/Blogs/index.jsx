@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router';
 import './index.css';
 import { Seo } from '../../components/SEO';
 import IframeResizer from '@iframe-resizer/react';
-const blogURL = 'http://localhost:3000/blogs';
+const blogURL = 'https://blogs.datbdo.com';
 
 export default function Blogs() {
   const iframeRef = useRef(null);

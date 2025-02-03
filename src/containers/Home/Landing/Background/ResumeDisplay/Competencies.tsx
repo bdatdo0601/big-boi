@@ -13,7 +13,7 @@ export const Competencies: React.FC = () => {
   return (
     <ProfileCard
       header={
-        <h2 className="text-xl text-input font-medium">Competencies</h2>
+        <h3>Competencies</h3>
       }
     >
       {skills.map((skillset) => (
@@ -21,9 +21,9 @@ export const Competencies: React.FC = () => {
           key={skillset.name}
           className="flex flex-col gap-2 text-left pl-3 border-l-4 border-primary-foreground mt-2 mb-6"
         >
-          <h3 className="text-md text-input mb-1">
+          <h5 className="mb-2">
             {skillset.name} ({skillset.level})
-          </h3>
+          </h5>
           <div className="flex flex-wrap gap-1">
             {get(skillset, "keywords", []).map((keyword: string) => (
               <ChipButton
@@ -37,9 +37,9 @@ export const Competencies: React.FC = () => {
       <div
         className="flex flex-col gap-2 text-left pl-3 border-l-4 border-primary-foreground my-2.5"
       >
-        <h3 className="text-md text-input">
+        <h5>
           Languages
-        </h3>
+        </h5>
         <div className="flex flex-wrap gap-1 mb-1">
           {languages.map((language) => (
             <ChipButton

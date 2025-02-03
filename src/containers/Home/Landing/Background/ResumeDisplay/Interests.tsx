@@ -1,4 +1,3 @@
-import { Card, Chip } from "@mui/material";
 import { get } from "lodash";
 import React from "react";
 import { useInterests } from "@/components/Vitae";
@@ -10,7 +9,7 @@ const Interests: React.FC = () => {
 
   return (
     <ProfileCard
-      header={<h2 className="text-xl text-input">Interests</h2>
+      header={<h4>Interests</h4>
       }
     >
       {interests.map((interest) => (
@@ -18,9 +17,9 @@ const Interests: React.FC = () => {
           key={interest.name}
           className="flex flex-col gap-2 text-left pl-3 border-l-4 border-primary-foreground mt-2 mb-6"
         >
-          <h3 className="text-md text-input mb-1">
+          <h5 className="mb-1">
             {interest.name}
-          </h3>
+          </h5>
           <div className="flex flex-wrap gap-1">
             {get(interest, "keywords", []).map((keyword: string) => (
               <ChipButton

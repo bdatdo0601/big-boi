@@ -15,9 +15,9 @@ export const Education: React.FC = () => {
   return (
     <ProfileCard
       header={
-        <span className="text-xl text-input">
+        <h3>
           Education
-        </span>
+        </h3>
       }
     >
       <Stepper orientation="vertical" className="text-left" nonLinear>
@@ -30,9 +30,9 @@ export const Education: React.FC = () => {
               }
             >
               <div className="text-input flex flex-col gap-1">
-                <h6 className="text-xl font-bold">{item.institution}</h6>
-                <p className="text-md font-normal">{item.studyType}: {item.area} (GPA: {item.gpa})</p>
-                <p className="text-sm italic">{item.startDate} - {item.endDate}</p>
+                <h4>{item.institution}</h4>
+                <h5>{item.studyType}: {item.area} (GPA: {item.gpa})</h5>
+                <time className="italic">{item.startDate} - {item.endDate}</time>
               </div>
             </StepLabel>
           </Step>

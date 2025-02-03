@@ -16,7 +16,7 @@ const Volunteer: React.FC = () => {
   return (
     <ProfileCard
       header={
-        <h2 className="text-xl text-input">Volunteers</h2>
+        <h3>Volunteers</h3>
       }
     >
       <Stepper orientation="vertical" className="text-left" nonLinear>
@@ -29,24 +29,24 @@ const Volunteer: React.FC = () => {
               }
             >
               <div className="text-input flex flex-col gap-1">
-                <h3 className="text-xl font-bold">{item.organization}</h3>
+                <h4>{item.organization}</h4>
                 <span className="flex flex-wrap gap-2">
-                  <p className="text-md font-normal">{item.position}</p>
-                  <span>{" | "}</span>
-                  <p className="text-md font-normal">
+                  <h5>{item.position}</h5>
+                  <h5>{" | "}</h5>
+                  <h5>
                     {item.website}
-                  </p>
+                  </h5>
                 </span>
-                <p className="text-md font-normal italic">
+                <h6 className="italic">
                   {item.summary}
-                </p>
-                <p className="text-sm italic">{item.startDate} - {item.endDate}</p>
+                </h6>
+                <time className="text-sm italic">{item.startDate} - {item.endDate}</time>
               </div>
             </StepLabel>
             <StepContent>
               <ul className="list-disc pl-2 flex flex-col gap-1.5">
                 {item.highlights.map((highlight: string) => (
-                  <li key={highlight} className="text-sm text-input">{highlight}</li>
+                  <li key={highlight}>{highlight}</li>
                 ))}
               </ul>
             </StepContent>

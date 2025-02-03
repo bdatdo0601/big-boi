@@ -11,7 +11,7 @@ const DataIcon = ({ type, value, href, alt }) => {
     case "Icon":
     case "icon":
       return href ? (
-        <a href={href} style={{}}>
+        <a className="border-none" href={href} style={{}}>
           {Icon && <Icon />}
         </a>
       ) : (
@@ -19,7 +19,7 @@ const DataIcon = ({ type, value, href, alt }) => {
       );
     case "image_data":
       return href ? (
-        <a href={href} style={style}>
+        <a className="border-none" href={href} style={style}>
           <img src={value} alt={alt} style={style} />
         </a>
       ) : (

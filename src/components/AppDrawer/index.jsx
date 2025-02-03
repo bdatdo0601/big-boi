@@ -78,7 +78,7 @@ export const AppDrawer = ({ open, onClose, routeList }) => {
             />
           </div>
           <div className="mt-4">
-            <a className="text-lg text-input ml-4" href="/change-logs">
+            <a className="text-base text-input ml-4" href="/change-logs">
               <span className="font-bold italic">v{VERSION}</span> - The Big Boi Project
             </a>
           </div>
