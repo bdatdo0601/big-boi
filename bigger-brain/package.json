@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aws-amplify/adapter-nextjs": "^1.4.2",
+    "@tailwindcss/postcss": "^4.0.3",
     "aws-amplify": "^6.12.2",
     "date-fns": "^4.1.0",
     "graphql": "^16.10.0",
