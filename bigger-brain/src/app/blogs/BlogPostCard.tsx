@@ -1,0 +1,127 @@
+"use client"
+
+import { BlogPostWithSlug } from '@/api/blog'
+import Link from 'next/link'
+import React, { useMemo, useState } from "react";
+import slugify from "slugify";
+import { format } from "date-fns";
+import { get, capitalize, trim } from "lodash";
+import { Tweet } from "react-twitter-widgets";
+import { InstagramEmbed } from "react-social-media-embed";
+import { isIframe } from "@/utils";
+
+const BlogPostSource = {
+  NOTION: "notion",
+  Twitter: "Twitter",
+  Instagram: "Instagram",
+};
+
+
+const BlogPost = ({ post }: { post: BlogPostWithSlug }) => {
+  return <div key={post.id} className="shadow-2xl bg-popover p-4 rounded-xl border-input" >
+    <Link
+      href={!post.postType ? `/blogs/${slugify(post.title)}` : post.externalLink!}
+      target={!post.postType ? "_self" : "_blank"}
+      onClick={e => {
+        if (!post.postType && isIframe()) {
+          window.parent.postMessage(
+            JSON.stringify({
+              site: { name: post.title },
+              path: `/${slugify(post.title)}`,
+              navigateToPath: true,
+            }),
+            "*"
+          );
+          e.preventDefault();
+        }
+      }}
+    >
+      <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-2'>
+          <h4>
+            {post.title}
+          </h4>
+          <time className='text-card-foreground'>{format(new Date(post.createdAt), "d-MMM-u")}</time>
+        </div>
+        <p>{post.description}</p>
+        <div >
+          <h5>{!post.postType ? "View Post" : `Go to ${capitalize(post.postType)}`}</h5>
+        </div>
+      </div>
+    </Link>
+  </div>
+};
+
+const TwitterBlogPost = ({ post }: { post: BlogPostWithSlug }) => {
+  const [loaded, setLoaded] = useState(false);
+  const postData = useMemo(() => JSON.parse(get(post, "data", "{}")), [post]);
+  return (
+    <div className="tweet-wrapper">
+      {!loaded && <BlogPost post={{ ...post, title: "Tweet" }} />}
+      <Tweet
+        tweetId={get(postData, "tweetID", "")}
+        options={{ theme: "dark", align: "center" }}
+        onLoad={() => {
+          setLoaded(true);
+        }}
+      />
+    </div>
+  );
+};
+
+const InstagramBlogPost = ({ post }: { post: BlogPostWithSlug }) => {
+  const postData = useMemo(() => JSON.parse(get(post, "data", "{}")), [post]);
+  const link = useMemo(() => get(postData, "link", "").replace("instagr.am", "instagram.com"), [postData]);
+  return (
+    <div className="p-2 shadow-2xl bg-popover rounded-xl border-input">
+      <Link href={post.externalLink || ""} target="_blank" style={{ textDecoration: "inherit" }}>
+        <div>
+          <div>
+            <InstagramEmbed
+              url={link}
+              width="100%"
+              embedPlaceholder={
+                <div className='mb-4'>
+                  <h4 className='text-muted-foreground'>Instagram...</h4>
+                </div>
+              }
+            />
+          </div>
+          <div>
+            <time>{format(new Date(post.createdAt), "d-MMM-u")}</time>
+            <p>
+              {post.description}
+            </p>
+          </div>
+          <div>
+            <h5>{`Go to ${capitalize(post.postType)}`}</h5>
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
+};
+
+const GeneralBlogPostCard = ({ post, ...props }: { post: BlogPostWithSlug }) => {
+  switch (get(post, "postType")) {
+    case BlogPostSource.NOTION:
+    case null:
+      return <BlogPost post={post} {...props} />;
+    case BlogPostSource.Twitter:
+      return <TwitterBlogPost post={post} {...props} />;
+    case BlogPostSource.Instagram:
+      return <InstagramBlogPost post={post} {...props} />;
+    default:
+      return get(post, "postType");
+  }
+};
+
+const BlogPostCard: React.FC<{ index: number, data: BlogPostWithSlug, width: number }> = ({ index, data: post, width }) => {
+  return (
+    <div className='w-full'>
+      <GeneralBlogPostCard post={post} />
+    </div>
+  )
+}
+
+export default BlogPostCard

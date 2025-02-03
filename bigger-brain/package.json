@@ -1,0 +1,42 @@
+{
+  "name": "bigger-brain",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@aws-amplify/adapter-nextjs": "^1.4.2",
+    "aws-amplify": "^6.12.2",
+    "date-fns": "^4.1.0",
+    "graphql": "^16.10.0",
+    "graphql-request": "^7.1.2",
+    "lodash": "^4.17.21",
+    "next": "15.1.6",
+    "prop-types": "^15.8.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.4.0",
+    "react-markdown": "^9.0.3",
+    "react-responsive-masonry": "^2.7.1",
+    "react-share": "^5.2.0",
+    "react-social-media-embed": "^2.5.17",
+    "react-syntax-highlighter": "^15.6.1",
+    "react-twitter-widgets": "^1.11.0",
+    "reading-time": "^1.5.0",
+    "slugify": "^1.6.6"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.15",
+    "@types/node": "^22.13.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/react-responsive-masonry": "^2.6.0",
+    "postcss": "^8",
+    "tailwindcss": "^4.0.3",
+    "typescript": "^5"
+  }
+}
