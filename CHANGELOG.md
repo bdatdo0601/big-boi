@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.34.1](https://github.com/bdatdo0601/big-boi/compare/v1.34.0...v1.34.1) (2025-02-03)
+
+
+### Bug Fixes
+
+* add tailwindcss ([0f5eef3](https://github.com/bdatdo0601/big-boi/commit/0f5eef3f53b88e8db7eea60e143a9f171d7949ac))
+* more styling for next js ([1d7537a](https://github.com/bdatdo0601/big-boi/commit/1d7537a7b9c82ae86e3401d4155ecf997572fb4e))
+* move vercel.json ([7cfb0a9](https://github.com/bdatdo0601/big-boi/commit/7cfb0a9a4bb5c2c34cd513f0d3921cc8c3ed8dd2))
+* move vercel.json ([e51ce83](https://github.com/bdatdo0601/big-boi/commit/e51ce835f572e3e5c4b56847a01e9ac8a8f816de))
+
 ## [1.34.0](https://github.com/bdatdo0601/big-boi/compare/v1.33.0...v1.34.0) (2025-02-03)
 
 
