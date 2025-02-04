@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import PostRenderer from '@/components/PostRenderer'
 import { Metadata } from 'next'
 import Head from 'next/head'
+import NextError from 'next/error';
 
 export const revalidate = 3600 // Revalidate every hour
 
@@ -21,47 +22,18 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const post = await getPostBySlug(slug)
-  if (!post) {
-    notFound()
-  } else {
-    return {
-      props: {
-        post,
-      },
-    }
-  }
-}
-
-interface PageProps {
-  params: Promise<{ slug: string }>
-}
-
-export async function generateMetadata(
-  { params }: PageProps
-): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug)
 
   return {
-    title: `Dat's Blog: ${post.title}`,
-    description: post.description,
-    openGraph: {
-      title: post.title,
-      description: post.description,
-    },
-    twitter: {
-      title: post.title,
-      description: post.description,
-    },
-    alternates: {
-      canonical: `/blogs/${slug}`,
+    props: {
+      post,
     },
   }
 }
 
 export default function BlogPost({
   post,
-}: { post: BlogPostWithSlug }) {
+}: { post?: BlogPostWithSlug }) {
+  if (!post) return <NextError statusCode={404} />
   return (
     <article className="max-w-4xl mx-auto py-8">
       <Head>

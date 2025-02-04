@@ -18,8 +18,8 @@ const BlogPostSource = {
 
 
 const BlogPost = ({ post }: { post: BlogPostWithSlug }) => {
-  
-  return <div key={post.id} className="shadow-2xl bg-popover p-4 rounded-xl border-input" >
+
+  return <div key={post.id} className="shadow-2xl bg-popover p-4 rounded-xl border-input h-full" >
     <a
       href={!post.postType ? `/blogs/${slugify(post.title)}` : post.externalLink!}
       target={!post.postType ? "_self" : "_blank"}
@@ -56,7 +56,7 @@ const TwitterBlogPost = ({ post }: { post: BlogPostWithSlug }) => {
   const [loaded, setLoaded] = useState(false);
   const postData = useMemo(() => JSON.parse(get(post, "data", "{}")), [post]);
   return (
-    <div className="tweet-wrapper">
+    <div className="tweet-wrapper min-h-[207px]">
       {!loaded && <BlogPost post={{ ...post, title: "Tweet" }} />}
       <Tweet
         tweetId={get(postData, "tweetID", "")}
@@ -76,17 +76,15 @@ const InstagramBlogPost = ({ post }: { post: BlogPostWithSlug }) => {
     <div className="p-2 shadow-2xl bg-popover rounded-xl border-input">
       <a href={post.externalLink || ""} target="_blank" style={{ textDecoration: "inherit" }} rel="noreferrer">
         <div>
-          <div>
-            <InstagramEmbed
-              url={link}
-              width="100%"
-              embedPlaceholder={
-                <div className='mb-4'>
-                  <h4 className='text-muted-foreground'>Instagram...</h4>
-                </div>
-              }
-            />
-          </div>
+          <InstagramEmbed
+            url={link}
+            width="100%"
+            embedPlaceholder={
+              <div className='mb-4 min-h-[574px] w-full text-center pt-4 flex flex-col bg-input'>
+                <h4 className='text-muted-foreground mx-auto my-auto'>Instagram Post...</h4>
+              </div>
+            }
+          />
           <div>
             <time>{format(new Date(post.createdAt), "d-MMM-u")}</time>
             <blockquote>
@@ -118,7 +116,7 @@ const GeneralBlogPostCard = ({ post, ...props }: { post: BlogPostWithSlug }) => 
 
 const BlogPostCard: React.FC<{ index: number, data: BlogPostWithSlug, width: number }> = ({ index, data: post, width }) => {
   const [isClient, setIsClient] = useState(false)
- 
+
   useEffect(() => {
     setIsClient(true)
   }, [])

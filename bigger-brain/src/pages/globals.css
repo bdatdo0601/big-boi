@@ -258,7 +258,7 @@
   }
 
   h2 {
-    @apply text-secondary text-4xl font-normal;
+    @apply text-primary text-4xl font-normal;
   }
 
   h3 {
@@ -278,7 +278,7 @@
   }
 
   p {
-    @apply text-input text-base;
+    @apply text-input text-lg;
   }
 
   p code {
