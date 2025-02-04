@@ -1,7 +1,5 @@
 import { BlogPostWithSlug, getAllPostSlugs, getPostBySlug } from '@/api/blog'
-import { notFound } from 'next/navigation'
 import PostRenderer from '@/components/PostRenderer'
-import { Metadata } from 'next'
 import Head from 'next/head'
 import NextError from 'next/error';
 
@@ -41,6 +39,7 @@ export default function BlogPost({
         <meta name="description" content={post.description} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <PostRenderer post={post} />
     </article>

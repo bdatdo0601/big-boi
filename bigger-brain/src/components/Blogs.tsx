@@ -18,7 +18,7 @@ const Blogs = ({ posts }: { posts: BlogPostWithSlug[] }) => {
   if (!isClient) return null;
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 py-8 flex flex-col gap-2">
+    <div className="mx-auto px-4 py-8 flex flex-col gap-2">
       <h1 className="">Dat Do Blogs & Thoughts</h1>
       <h4 className="mb-8 mt-4 text-success">Aggregation of my thoughts from various sources</h4>
       <div className="w-full">

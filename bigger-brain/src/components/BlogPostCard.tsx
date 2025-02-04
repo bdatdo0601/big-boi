@@ -43,9 +43,9 @@ const BlogPost = ({ post }: { post: BlogPostWithSlug }) => {
           <h4>
             {post.title}
           </h4>
-          <time className='text-card-foreground'>{format(new Date(post.createdAt), "d-MMM-u")}</time>
+          <time className='text-muted-foreground'>{format(new Date(post.createdAt), "d-MMM-u")}</time>
         </div>
-        <blockquote>{post.description}</blockquote>
+        <blockquote className='my-2'><h6>{post.description}</h6></blockquote>
         <h5>{!post.postType ? "View Post" : `Go to ${capitalize(post.postType)}`}</h5>
       </div>
     </a>
@@ -86,8 +86,8 @@ const InstagramBlogPost = ({ post }: { post: BlogPostWithSlug }) => {
             }
           />
           <div>
-            <time>{format(new Date(post.createdAt), "d-MMM-u")}</time>
-            <blockquote>
+            <time className='text-muted-foreground'>{format(new Date(post.createdAt), "d-MMM-u")}</time>
+            <blockquote className='my-4'>
               {post.description}
             </blockquote>
           </div>

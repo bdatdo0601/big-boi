@@ -77,18 +77,18 @@ const PostRenderer: React.FC<PostRendererProps> = ({ post }) => {
         >
           <FaArrowLeft /> Back for more posts
         </Link>
-        <div className="flex flex-row flex-wrap gap-1 my-2">
-          {post.tags.map((item, index) => (
-            <span
-              key={index}
-              className={`inline-block rounded-full px-3 text-lg bg-secondary text-secondary-foreground`}
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-        <div className="w-full">
-          <div className="text-input flex items-center flex-wrap gap-4">
+        <div className="flex flex-wrap justify-between items-center gap-2 w-full">
+          <div className="flex flex-row flex-wrap gap-2 my-2 py-2">
+            {post.tags.map((item, index) => (
+              <span
+                key={index}
+                className={`inline-block shadow-2xl shadow-accent-foreground font-bold rounded-md px-4 py-1 text-base bg-secondary text-secondary-foreground border-secondary-foreground border-1`}
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+          <div className="text-input flex items-center flex-wrap gap-4 bg-popover px-4 py-2 rounded-2xl border-popover-foreground border-1">
             <FacebookShareButton url={blogLink}>
               <FacebookIcon size={32} round />
             </FacebookShareButton>
