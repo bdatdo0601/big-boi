@@ -1,4 +1,5 @@
 import { gql, GraphQLClient } from 'graphql-request';
+import { isEmpty } from 'lodash';
 import slugify from 'slugify';
 
 const client = new GraphQLClient(process.env.BLOGPOST_APPSYNC_API_URL!, {
@@ -73,7 +74,10 @@ async function getSlugToIdMap(): Promise<Map<string, string>> {
   if (slugToIdMap) return slugToIdMap;
 
   const { listPosts } = await client.request<{ listPosts: { items: BlogPost[] } }>(GET_ALL_POSTS);
-  slugToIdMap = new Map(listPosts.items.map((post: any) => [slugify(post.title), post.id]));
+  // only list slugify post created directly
+  slugToIdMap = new Map(
+    listPosts.items.filter((post: BlogPost) => isEmpty(post.postType)).map((post: any) => [slugify(post.title), post.id])
+  );
 
   return slugToIdMap;
 }

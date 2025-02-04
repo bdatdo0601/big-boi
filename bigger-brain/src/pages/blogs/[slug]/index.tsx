@@ -25,6 +25,7 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
     props: {
       post,
     },
+    revalidate: 30
   }
 }
 
@@ -33,7 +34,7 @@ export default function BlogPost({
 }: { post?: BlogPostWithSlug }) {
   if (!post) return <NextError statusCode={404} />
   return (
-    <article className="max-w-4xl mx-auto py-8">
+    <article className="mx-auto py-8">
       <Head>
         <title>{post.title}</title>
         <meta name="description" content={post.description} />
