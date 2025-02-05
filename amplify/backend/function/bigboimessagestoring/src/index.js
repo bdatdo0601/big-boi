@@ -11,7 +11,6 @@ const gql = require('graphql-tag');
 const moment = require("moment");
 const { signedGraphQLMutationRequest } = require("/opt/packages/utils/signedGraphQLMutationRequest");
 const { getEventRetrieverSource, EventRetrieverProcessors } = require("/opt/packages/EventRetriever");
-const { redeployBlogSite } = require("/opt/packages/utils/redeployBlogSite");
 
 const createEventMessage = gql`
     mutation CreateEventMessage(
@@ -56,10 +55,7 @@ exports.handler = async (handlerEvent) => {
     }
 
     const messages = EventRetrieverProcessors[eventRetrieverSource].retrieveEvents(handlerEvent);
-    
-    if (messages.some(message => get(message, "metadata.blogChange"))) {
-       await redeployBlogSite();
-    }
+
 
     await Promise.all(messages.map(async message => {
         const variables = generateVariableInput(message);

@@ -31,7 +31,7 @@
         },
         "bigboimessagestoring": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboimessagestoring-6e494b33463879527372-build.zip",
+          "s3Key": "amplify-builds/bigboimessagestoring-704265476c3965465276-build.zip",
           "blogDeployWebhook": "https://api.vercel.com/v1/integrations/deploy/prj_lJsgGRkeFjleext52xjWDNzA2r0Z/c3wHQbC5Ya",
           "blogDeployToken": "sUvzBNLYCIbyTJfpFi96MkYa",
           "vercelTeamId": "team_H14dWJlEn6lyNRsWzILUUmZ0",
@@ -48,7 +48,7 @@
         },
         "bigboiwebhookproxy": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboiwebhookproxy-374d7855616e594b7672-build.zip",
+          "s3Key": "amplify-builds/bigboiwebhookproxy-4e5a393731536d6e586d-build.zip",
           "apiEndpoint": "https://api.datbdo.com",
           "apiKey": "jgmj2loTvO31fX4xWOq4saxCay4gNRVx5taSLKHr"
         },
