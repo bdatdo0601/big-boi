@@ -9,6 +9,8 @@ export default function Home() {
   useEffect(() => {
     if (window.location.hostname.includes('blogs')) {
       router.replace('/blogs');
+    } else if (window.location.hostname.includes('docs')) {
+      router.replace('/docs');
     }
   }, [router]);
 
@@ -21,6 +23,7 @@ export default function Home() {
       </Head>
       <div className="flex flex-col items-center justify-center gap-4">
         <Link href="/blogs">Blogs</Link>
+        <Link href="/docs">Docs</Link>
       </div>
     </div>
   );

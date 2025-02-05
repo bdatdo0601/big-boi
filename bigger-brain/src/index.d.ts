@@ -38,3 +38,22 @@ declare module 'reading-time/lib/reading-time' {
   };
 }
 
+declare module '*.mdx' {
+  import type { ComponentType } from 'react'
+  const component: ComponentType
+  export default component
+}
+
+interface FrontMatter {
+  title?: string
+  date?: string
+  tags?: string[]
+  [key: string]: any
+}
+
+interface MDXContent {
+  slug: string
+  metadata: FrontMatter
+  content: string
+  backlinks: string[]
+}

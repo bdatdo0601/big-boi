@@ -133,6 +133,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPostWithSlug> {
 export async function getAllPosts(): Promise<BlogPostWithSlug[]> {
   const { listPosts } = await client.request<{ listPosts: { items: BlogPost[] } }>(GET_ALL_POSTS);
   return listPosts.items
+    .filter((post) => post.status === 'PUBLISHED')
     .map((post: any) => ({
       ...post,
       slug: slugify(post.title),

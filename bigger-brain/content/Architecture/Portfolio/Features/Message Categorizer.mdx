@@ -1,0 +1,87 @@
+# Message Categorizer
+
+_This was a piece that I am pretty proud of_
+
+Initially, this was a single json file that map a dot-notation (i.e: `Personal.BlogPost.Resume`) to a json object that contain functional data transformation,
+allow consistent message schema get publish to downstream services.
+
+Clearly a single json file that hold logic is not scalable so we need to break it down for modularity. We also would want it make it as frictionless as possible
+to include new type of category
+
+## Introducing `EventTypeProcessors`
+
+This is a module within `lambda layer`, allowing to create each category as a `.js` file. all the `Processors` will then get rolled up into a single json reference file,
+allowing access to category transformer
+
+Here is the [module for the code](https://github.com/bdatdo0601/big-boi/tree/develop/amplify/backend/function/bigboibigboilambdalayer/opt/packages/EventType/EventTypeProcessors)
+
+Roll up logic
+
+```javascript
+const { capitalize } = require("lodash")
+const { readdirSync } = require("fs")
+const { resolve } = require("path")
+const dot = require("dot-object")
+
+const processorsDir = resolve(__dirname, "Processors")
+
+const getEventTypeProcessorsFromDir = (rootDir, objectPath = "") => {
+  const eventTypes = {}
+  const entities = readdirSync(rootDir, { withFileTypes: true })
+  for (const entity of entities) {
+    // will ignore any non-capitalize file name (for future code refactor)
+    if (entity.name[0] !== capitalize(entity.name)[0]) {
+      continue
+    }
+    const entityName = entity.name.split(".")[0]
+    const entityPath = objectPath
+      ? [objectPath, entityName].join(".")
+      : entityName
+    const entityDirPath = [rootDir, entityName].join("/")
+    if (entity.isDirectory()) {
+      const childEventTypes = getEventTypeProcessorsFromDir(
+        entityDirPath,
+        entityPath
+      )
+      Object.entries(childEventTypes).forEach(([key, value]) => {
+        eventTypes[key] = value
+      })
+    } else {
+      const data = require(entityDirPath)
+      Object.entries(data).forEach(([key, value]) => {
+        eventTypes[`${entityPath}.${key}`] = value
+      })
+      eventTypes[`${entityPath}.eventType`] = entityPath
+    }
+  }
+  return objectPath ? eventTypes : dot.object(eventTypes)
+}
+const EventTypeProcessors = getEventTypeProcessorsFromDir(processorsDir)
+console.log(JSON.stringify(EventTypeProcessors, null, 4))
+exports.EventTypeProcessors = EventTypeProcessors
+```
+
+## Constaints
+
+There are some constraint to each message category:
+
+- Category must be capitalize. This would allow non-capitalize file to be used as helper file
+- File and Folder must not share the same name in same level
+
+## Example
+
+```
+├── Processors
+│   ├── GithubWebhook.js
+│   ├── Personal
+│   │   ├── BlogPost
+│   │   │   ├── Notion.js
+│   │   │   ├── StatusUpdate.js
+│   │   │   └── Update.js
+│   │   └── Resume
+│   │       └── Update.js
+│   └── Unknown.js
+├── helpers
+│   └── constants.js
+└── index.js
+```
