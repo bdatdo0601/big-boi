@@ -7,7 +7,7 @@ interface BacklinksProps {
 }
 
 export default function Backlinks({ links }: BacklinksProps) {
-  if (links.length === 0) return null
+  if (!links || links.length === 0) return null
 
   return (
     <div className="mt-8 pt-4 border-t">

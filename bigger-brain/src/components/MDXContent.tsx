@@ -10,6 +10,7 @@ interface MDXContentProps {
 }
 
 export default function MDXContent({ source, components = {} }: MDXContentProps) {
+  if (!source) return null;
   return (
     <MDXProvider components={components}>
       <div className="prose max-w-4xl mx-auto flex flex-col gap-4">

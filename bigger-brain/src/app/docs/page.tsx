@@ -13,9 +13,7 @@ export default async function Home() {
           <ul className="space-y-2">
             {paths.map((path: string) => (
               <li key={path}>
-                <a
-                  href={`docs/doc/${path}`}
-                >
+                <a href={`docs/doc/${path}`}>
                   {path}
                 </a>
               </li>

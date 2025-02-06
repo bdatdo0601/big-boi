@@ -1,6 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { glob } from 'glob'
+import { findBacklinks, getMDXContent, getSource } from './mdx'
 
 export interface FileTree {
   type: 'file' | 'directory' | 'attachment'
@@ -8,6 +9,7 @@ export interface FileTree {
   path: string
   children?: FileTree[]
   attachmentData?: string;
+  slug: string[];
 }
 
 export interface FlattenFileTree {
@@ -15,6 +17,12 @@ export interface FlattenFileTree {
   name: string
   path: string
   attachmentData?: string;
+  slug: string[];
+}
+
+export interface FlattenFileTreeWithData extends FlattenFileTree {
+  content: string;
+  backlinks: string[];
 }
 
 const contentDirectory = path.join(process.cwd(), 'content')
@@ -34,14 +42,16 @@ export async function buildFileTree(dir: string = contentDirectory, basePath: st
           type: 'directory',
           name: entry.name,
           path: relativePath,
-          children
+          children,
+          slug: relativePath.split('/')
         })
       }
     } else if (entry.name.endsWith('.mdx')) {
       tree.push({
         type: 'file',
         name: entry.name.replace('.mdx', ''),
-        path: relativePath.replace('.mdx', '')
+        path: relativePath.replace('.mdx', ''),
+        slug: relativePath.replace('.mdx', '').split('/')
       })
     } else if (!ignoreAttachment) {
       const fileBuffer = await fs.readFile(fullPath)
@@ -49,7 +59,8 @@ export async function buildFileTree(dir: string = contentDirectory, basePath: st
         type: 'attachment',
         name: entry.name,
         attachmentData: fileBuffer.toString('base64'),
-        path: relativePath
+        path: fullPath,
+        slug: fullPath.split('/')
       })
     }
   }
@@ -87,7 +98,8 @@ export const getFlattenFileTree = async (): Promise<FlattenFileTree[]> => {
           name: item.name,
           path: path.replace(/^\//, ''),
           type: item.type,
-          attachmentData: item.attachmentData
+          attachmentData: item.attachmentData,
+          slug: path.split('/')
         })
       }
     })
@@ -95,6 +107,23 @@ export const getFlattenFileTree = async (): Promise<FlattenFileTree[]> => {
   flatten(fileTree, '')
   return flattenFileTree
 }
+
+export const getFlattenFileTreeWithContent = async (): Promise<FlattenFileTreeWithData[]> => {
+  const flattenFileTree = await getFlattenFileTree()
+  const flattenFileTreeWithData: FlattenFileTreeWithData[] = []
+  await Promise.all(flattenFileTree.map(async (item) => {
+    const content = await getSource(item.path);
+    const backlinkMatches = content.match(/\[\[(.*?)\]\]/g)
+    const backlinks = backlinkMatches ? backlinkMatches.map(match => match.replace(/\[\[|\]\]/g, '')) : []
+    flattenFileTreeWithData.push({
+      ...item,
+      content: await getSource(item.path),
+      backlinks
+    })
+  }))
+  return flattenFileTreeWithData
+}
+
 export async function getAllPaths(): Promise<string[]> {
   const files = await glob('**/*.mdx', { cwd: contentDirectory })
   return files.map(file => file.replace('.mdx', ''))

@@ -57,3 +57,7 @@ interface MDXContent {
   content: string
   backlinks: string[]
 }
+
+declare module 'react-digraph' {
+  export const GraphView: React.ComponentType<any>;
+}
