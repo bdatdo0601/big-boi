@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.34.5](https://github.com/bdatdo0601/big-boi/compare/v1.34.4...v1.34.5) (2025-02-06)
+
+
+### Bug Fixes
+
+* amplify data ([70a9006](https://github.com/bdatdo0601/big-boi/commit/70a9006ad441d0c2a8752ea63cb785dc37604170))
+* bigger brain deps ([3b835de](https://github.com/bdatdo0601/big-boi/commit/3b835ded3bf4b98a11c7e61f9e49de235dd542a0))
+* bigger brain deps ([569f42a](https://github.com/bdatdo0601/big-boi/commit/569f42a20e2d1170d4ab6877ae04b2a5f4e6a3e8))
+
 ### [1.34.4](https://github.com/bdatdo0601/big-boi/compare/v1.34.3...v1.34.4) (2025-02-05)
 
 
