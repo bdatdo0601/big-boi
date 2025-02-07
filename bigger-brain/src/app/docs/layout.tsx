@@ -25,9 +25,10 @@ export default async function RootLayout({
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossOrigin="anonymous" />
       </head>
-      <body className="flex min-h-screen flex-row">
-        <AppNav tree={tree} flattenTree={flattenTree} />
-        <main className="p-8 w-full flex flex-col gap-2">{children}</main>
+      <body className="min-h-screen">
+        <AppNav tree={tree} flattenTree={flattenTree} >
+          <main className="p-8 w-full flex flex-col gap-2">{children}</main>
+        </AppNav>
       </body>
     </html>
   )

@@ -6,34 +6,17 @@ import { Close, Map as MapIcon, Menu } from '@mui/icons-material'
 // import component 👇
 import Drawer from 'react-modern-drawer'
 import TreeView from './TreeView'
-import Modal from 'react-modal';
 import dynamic from 'next/dynamic'
+import Search from './Search'
+import { useRouter } from 'next/navigation'
 
 const GraphRenderer = dynamic(() => import('./GraphRenderer'), {
   ssr: false,
 });
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  },
-};
-
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement('body');
-
-export default function AppNav({ tree, flattenTree }: { tree: FileTree[], flattenTree: FlattenFileTreeWithData[] }) {
+export default function AppNav({ tree, flattenTree, children }: { tree: FileTree[], flattenTree: FlattenFileTreeWithData[], children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
-  const [modalOpen, setModalOpen] = useState(false);
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
-  };
-
+  const router = useRouter();
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState)
   }
@@ -47,34 +30,46 @@ export default function AppNav({ tree, flattenTree }: { tree: FileTree[], flatte
   }
 
   return (
-    <div id="AppNav" className='w-full'>
-      <div className='fixed p-2 top-4 right-4 flex flex-col gap-2'>
-        <button onClick={toggleDrawer} className='bg-primary rounded-full p-2 hover:cursor-pointer'><Menu /></button>
-        <button onClick={toggleModal} className='bg-primary rounded-full p-2 hover:cursor-pointer'><MapIcon /></button>
+    <div id="AppNav" className='w-full flex flex-col'>
+      <div className='top-0 w-full bg-accent'>
+        <div className='flex flex-row flex-wrap justify-between p-4 items-center gap-2'>
+          <h1 className='text-2xl font-bold'>Big Brain</h1>
+          <div className='flex flex-row gap-2 items-center'>
+            <Search items={flattenTree.map(item => ({ name: item.name, content: item.content, path: item.path }))} onResultSelect={(result) => {
+              router.push(`/docs/doc/${result.path}`);
+            }} />
+            <button onClick={toggleDrawer} className='bg-primary rounded-full p-1.5 hover:cursor-pointer'><MapIcon /></button>
+          </div>
+        </div>
       </div>
-      <Drawer
-        open={isOpen}
-        direction='right'
-        className='min-w-[300px]'
-        onClose={toggleDrawer}
-      >
-        <div className="w-full h-full overflow-y-auto border-r p-4 bg-popover">
+      <div className='fixed p-2 top-1 right-4 flex flex-row gap-2'>
+      </div>
+      <div className='flex flex-wrap gap-2 p-4 items-start'>
+        {children}
+        <div className="min-sm:fixed min-sm:right-1 max-sm:mx-auto overflow-y-auto border-2 rounded-md p-4 bg-popover min-w-[250px]">
           <h5>Dat's Documentation</h5>
           <TreeView tree={tree} />
         </div>
-      </Drawer>
-      <Modal
-        isOpen={modalOpen}
-        onAfterOpen={() => { }}
-        onRequestClose={toggleModal}
-        style={customStyles}
-        contentLabel="Graph Modal"
+      </div>
+
+      <Drawer
+        open={isOpen}
+        direction='top'
+        onClose={toggleDrawer}
+        className='h-full'
+        style={{
+          height: '80%',
+          maxHeight: '600px',
+        }}
       >
-        <div className="max-w-4xl max-h-[800px]">
-          <button className='fixed top-2 left-2 p-2 bg-secondary rounded-full z-50 hover:cursor-pointer' onClick={toggleModal}><Close /></button>
-          <GraphRenderer onNodeClick={toggleModal} items={flattenTree.map(item => ({ title: item.name, backlinks: item.backlinks, path: item.path }))} />
+        <div className="w-full h-full bg-popover flex flex-col items-center min-sm:p-4 p-2">
+          <button className='fixed top-2 left-2 p-2 bg-secondary rounded-full z-50 hover:cursor-pointer' onClick={toggleDrawer}><Close /></button>
+          <h2 className='pb-2'>Graph View</h2>
+          <div className='overflow-hidden h-full grow w-full border-primary border-1 rounded-md'>
+            <GraphRenderer onNodeClick={toggleDrawer} items={flattenTree.map(item => ({ title: item.name, backlinks: item.backlinks, path: item.path }))} />
+          </div>
         </div>
-      </Modal>
+      </Drawer>
     </div>
   )
 }

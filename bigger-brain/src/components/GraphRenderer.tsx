@@ -14,7 +14,7 @@ const GraphRenderer = ({ items, onNodeClick }: { items: Items[], onNodeClick: Fu
 
   const data = useMemo(() => {
     const nodes = items.map(item => ({ id: item.title, name: item.title, path: item.path, linkCount: 0 }));
-    const links = items.flatMap(item => 
+    const links = items.flatMap(item =>
       item.backlinks
         .filter(backlinkItem => items.find(node => node.title === backlinkItem))
         .map(backlinkItem => ({ source: item.title, target: backlinkItem }))
@@ -30,14 +30,29 @@ const GraphRenderer = ({ items, onNodeClick }: { items: Items[], onNodeClick: Fu
     return { nodes, links };
   }, [items]);
 
-  const [isMounted, setIsMounted] = useState(false);
-    useEffect(() => {
-      setIsMounted(true);
-    }, []);
-    if (!isMounted || typeof window === 'undefined') {
-      return null;
+  useEffect(() => {
+    if (graphRef.current && !graphRef.current.isProcessed) {
+      graphRef.current.d3Force('link').distance((link: any) => {
+        const sourceNode = data.nodes.find(node => node.id === link.source.id);
+        const targetNode = data.nodes.find(node => node.id === link.target.id);
+
+        if (sourceNode && targetNode) {
+          return 20 + (sourceNode.linkCount + targetNode.linkCount) * 30;
+        }
+        return 20;
+      });
+      graphRef.current.centerAt(0, 150);
+      graphRef.current.isProcessed = true;
     }
-  
+  });
+
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  if (!isMounted || typeof window === 'undefined') {
+    return null;
+  }
 
   const handleNodeClick = (node: any) => {
     router.push(`/docs/doc/${node.path}`);
@@ -45,41 +60,44 @@ const GraphRenderer = ({ items, onNodeClick }: { items: Items[], onNodeClick: Fu
   };
 
   return (
-    <ForceGraph2D
-      ref={graphRef}
-      graphData={data}
-      nodeLabel="name"
-      minZoom={3}
-      nodeAutoColorBy="id"
-      linkDirectionalArrowLength={7}
-      linkDirectionalArrowRelPos={3}
-      backgroundColor='#000000'
-      nodeRelSize={8}
-      linkColor="#ffffff"
-      linkDirectionalArrowColor="#ffffff"
-      linkAutoColorBy={"source"}
-      onNodeClick={handleNodeClick}
-      nodeCanvasObject={(node: any, ctx, globalScale) => {
-        const label = node.name;
-        const fontSize = 12/globalScale;
-        ctx.font = `${fontSize}px Sans-Serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillStyle = 'white';
+    <div className='h-full overflow-hidden'>
+      <ForceGraph2D
+        ref={graphRef}
+        graphData={data}
+        nodeLabel="name"
+        minZoom={2}
+        maxZoom={4}
+        nodeAutoColorBy="id"
+        linkDirectionalArrowLength={7}
+        linkDirectionalArrowRelPos={3}
+        backgroundColor='#2a2a2a'
+        nodeRelSize={8}
+        linkColor="#ffffff"
+        linkDirectionalArrowColor="#ffffff"
+        linkAutoColorBy={"source"}
+        onNodeClick={handleNodeClick}
+        nodeCanvasObject={(node: any, ctx, globalScale) => {
+          const label = node.name;
+          const fontSize = 12 / globalScale;
+          ctx.font = `${fontSize}px Sans-Serif`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillStyle = 'white';
 
-        const baseSize = 5;
-        const scaleFactor = 1.5;
-        const nodeSize = baseSize + (node.linkCount * scaleFactor);
+          const baseSize = 5;
+          const scaleFactor = 1.5;
+          const nodeSize = baseSize + (node.linkCount * scaleFactor);
 
-        ctx.beginPath();
-        ctx.arc(node.x!, node.y!, nodeSize, 0, 2 * Math.PI, false);
-        ctx.fillStyle = node.color;
-        ctx.fill();
+          ctx.beginPath();
+          ctx.arc(node.x!, node.y!, nodeSize, 0, 2 * Math.PI, false);
+          ctx.fillStyle = node.color;
+          ctx.fill();
 
-        ctx.fillStyle = 'white';
-        ctx.fillText(label, node.x!, node.y! + nodeSize + 5);
-      }}
-    />
+          ctx.fillStyle = 'white';
+          ctx.fillText(label, node.x!, node.y! + nodeSize + 5);
+        }}
+      />
+    </div>
   );
 };
 

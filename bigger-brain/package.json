@@ -16,6 +16,7 @@
     "@mui/icons-material": "^6.4.3",
     "@mui/material": "^6.4.3",
     "@next/mdx": "^15.1.6",
+    "@nozbe/microfuzz": "^1.0.0",
     "@tailwindcss/postcss": "^4.0.3",
     "aws-amplify": "^6.12.2",
     "date-fns": "^4.1.0",

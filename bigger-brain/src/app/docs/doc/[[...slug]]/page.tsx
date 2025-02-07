@@ -31,7 +31,7 @@ export default async function Page({ params }: PageProps) {
   const incomingBacklinks = await findBacklinks(slug);
 
   return (
-    <div className="p-8">
+    <div className="p-1 break-words hyphens-auto">
       <MDXContent source={content} />
       <Backlinks links={incomingBacklinks} />
     </div>
