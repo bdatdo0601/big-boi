@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.34.7](https://github.com/bdatdo0601/big-boi/compare/v1.34.6...v1.34.7) (2025-02-07)
+
+
+### Bug Fixes
+
+* bigger brain ([2b3869d](https://github.com/bdatdo0601/big-boi/commit/2b3869d46527fca0a240ef15e886d1ff0977f510))
+
 ### [1.34.6](https://github.com/bdatdo0601/big-boi/compare/v1.34.5...v1.34.6) (2025-02-07)
 
 
