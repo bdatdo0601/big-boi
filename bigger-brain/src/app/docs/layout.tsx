@@ -27,7 +27,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-screen">
         <AppNav tree={tree} flattenTree={flattenTree} >
-          <main className="p-8 w-full flex flex-col gap-2">{children}</main>
+          <main className="p-8 max-w-4xl mx-auto break-words hyphens-auto flex flex-col gap-2">{children}</main>
         </AppNav>
       </body>
     </html>

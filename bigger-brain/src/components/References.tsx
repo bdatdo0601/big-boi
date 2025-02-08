@@ -12,7 +12,7 @@ export default function Backlinks({ links }: BacklinksProps) {
 
   return (
     <div className="mt-8 pt-4 rounded-lg border-primary border-1 bg-popover p-4 ">
-      <h3 className="mb-4">Backlinks</h3>
+      <h3 className="mb-4">References</h3>
       <ul className="space-y-1 pl-2">
         {links.map((link, index) => (
           <li className='list-none' key={index}>
@@ -30,7 +30,7 @@ export default function Backlinks({ links }: BacklinksProps) {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  d="M11 17l-5-5m0 0l5-5m-5 5h12"
                 />
               </svg>
               {link.name}

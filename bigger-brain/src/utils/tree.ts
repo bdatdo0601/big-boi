@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { glob } from 'glob'
-import { findBacklinks, getMDXContent, getSource } from './mdx'
+import { getSource } from './mdx'
 
 export interface FileTree {
   type: 'file' | 'directory' | 'attachment'

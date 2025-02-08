@@ -1,10 +1,11 @@
-import { getMDXContent, findBacklinks } from '@/utils/mdx'
-import { getFlattenFileTree } from '@/utils/tree'
+import { getMDXContent } from '@/utils/mdx'
+import { getFlattenFileTree, getFlattenFileTreeWithContent } from '@/utils/tree'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import dynamic from 'next/dynamic'
 
 const MDXContent = dynamic(() => import('@/components/MDXContent'))
 const Backlinks = dynamic(() => import('@/components/Backlinks'))
+const References = dynamic(() => import('@/components/References'))
 
 interface PageProps {
   params: Promise<{
@@ -17,7 +18,7 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
-  const flattenFiles = await getFlattenFileTree();
+  const flattenFiles = await getFlattenFileTreeWithContent();
   const awaitedParams = await params
   const slug = awaitedParams?.slug ? awaitedParams.slug.join('/') : 'index'
   if (slug.split(".").length > 1) {
@@ -27,13 +28,12 @@ export default async function Page({ params }: PageProps) {
       </div>
     )
   }
-  const { content } = await getMDXContent(slug, flattenFiles);
-  const incomingBacklinks = await findBacklinks(slug);
-
+  const { content, backlinks } = await getMDXContent(slug, flattenFiles);
   return (
-    <div className="p-1 break-words hyphens-auto">
+    <div className="p-1 break-words hyphens-auto w-full mx-auto">
       <MDXContent source={content} />
-      <Backlinks links={incomingBacklinks} />
+      <Backlinks links={flattenFiles.filter(item => backlinks.includes(item.name))} />
+      <References links={flattenFiles.filter(item => item.backlinks.some(backlink => decodeURI(slug).includes(backlink)))} />
     </div>
   )
 }

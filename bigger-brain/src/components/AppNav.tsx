@@ -2,23 +2,25 @@
 
 import { FileTree, FlattenFileTreeWithData } from '@/utils/tree'
 import { useEffect, useState } from 'react'
-import { Close, Map as MapIcon, Menu } from '@mui/icons-material'
+import { ArrowDropDown, ArrowLeft, ArrowRight, Close, Map as MapIcon, Menu } from '@mui/icons-material'
 // import component 👇
 import Drawer from 'react-modern-drawer'
 import TreeView from './TreeView'
 import dynamic from 'next/dynamic'
 import Search from './Search'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const GraphRenderer = dynamic(() => import('./GraphRenderer'), {
   ssr: false,
 });
 
 export default function AppNav({ tree, flattenTree, children }: { tree: FileTree[], flattenTree: FlattenFileTreeWithData[], children: React.ReactNode }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isGraphDrawerOpen, setIsGraphDrawerOpen] = useState(false)
+  const [isTreeOpen, setIsTreeOpen] = useState(false);
   const router = useRouter();
-  const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState)
+  const toggleGraphDrawer = () => {
+    setIsGraphDrawerOpen((prevState) => !prevState)
   }
 
   const [isMounted, setIsMounted] = useState(false);
@@ -33,29 +35,30 @@ export default function AppNav({ tree, flattenTree, children }: { tree: FileTree
     <div id="AppNav" className='w-full flex flex-col'>
       <div className='top-0 w-full bg-accent'>
         <div className='flex flex-row flex-wrap justify-between p-4 items-center gap-2'>
-          <h1 className='text-2xl font-bold'>Big Brain</h1>
+          <Link href="/docs"><h1 className='text-2xl font-bold'>Big Brain</h1></Link>
           <div className='flex flex-row gap-2 items-center'>
             <Search items={flattenTree.map(item => ({ name: item.name, content: item.content, path: item.path }))} onResultSelect={(result) => {
               router.push(`/docs/doc/${result.path}`);
             }} />
-            <button onClick={toggleDrawer} className='bg-primary rounded-full p-1.5 hover:cursor-pointer'><MapIcon /></button>
+            <button onClick={toggleGraphDrawer} className='bg-primary rounded-full p-1.5 hover:cursor-pointer'><MapIcon /></button>
           </div>
         </div>
       </div>
-      <div className='fixed p-2 top-1 right-4 flex flex-row gap-2'>
-      </div>
-      <div className='flex flex-wrap gap-2 p-4 items-start'>
-        {children}
-        <div className="min-sm:fixed min-sm:right-1 max-sm:mx-auto overflow-y-auto border-2 rounded-md p-4 bg-popover min-w-[250px]">
-          <h5>Dat's Documentation</h5>
-          <TreeView tree={tree} />
+      <div className='w-full px-1'>
+        <div className='min-lg:fixed min-lg:right-2 min-lg:top-24 max-lg:mx-auto max-lg:mt-2 overflow-y-auto border-2 rounded-md p-4 bg-popover min-w-[250px]'>
+          <div className='flex flex-row justify-between items-center flex-wrap gap-10'>
+            <h5>Document Tree</h5>
+            <button onClick={() => { setIsTreeOpen(prevState => !prevState) }} className='bg-primary rounded-full p-1.5 hover:cursor-pointer float-right'>{isTreeOpen ? <ArrowDropDown /> : <ArrowLeft />}</button>
+          </div>
+          {isTreeOpen && <TreeView tree={tree} />}
         </div>
+        {children}
       </div>
 
       <Drawer
-        open={isOpen}
+        open={isGraphDrawerOpen}
         direction='top'
-        onClose={toggleDrawer}
+        onClose={toggleGraphDrawer}
         className='h-full'
         style={{
           height: '80%',
@@ -63,10 +66,10 @@ export default function AppNav({ tree, flattenTree, children }: { tree: FileTree
         }}
       >
         <div className="w-full h-full bg-popover flex flex-col items-center min-sm:p-4 p-2">
-          <button className='fixed top-2 left-2 p-2 bg-secondary rounded-full z-50 hover:cursor-pointer' onClick={toggleDrawer}><Close /></button>
+          <button className='fixed top-2 left-2 p-2 bg-secondary rounded-full z-50 hover:cursor-pointer' onClick={toggleGraphDrawer}><Close /></button>
           <h2 className='pb-2'>Graph View</h2>
           <div className='overflow-hidden h-full grow w-full border-primary border-1 rounded-md'>
-            <GraphRenderer onNodeClick={toggleDrawer} items={flattenTree.map(item => ({ title: item.name, backlinks: item.backlinks, path: item.path }))} />
+            <GraphRenderer onNodeClick={toggleGraphDrawer} items={flattenTree.map(item => ({ title: item.name, backlinks: item.backlinks, path: item.path }))} />
           </div>
         </div>
       </Drawer>

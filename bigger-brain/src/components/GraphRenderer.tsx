@@ -37,11 +37,12 @@ const GraphRenderer = ({ items, onNodeClick }: { items: Items[], onNodeClick: Fu
         const targetNode = data.nodes.find(node => node.id === link.target.id);
 
         if (sourceNode && targetNode) {
-          return 20 + (sourceNode.linkCount + targetNode.linkCount) * 30;
+          return 50 + (sourceNode.linkCount + targetNode.linkCount) * 30;
         }
         return 20;
       });
-      graphRef.current.centerAt(0, 150);
+      graphRef.current.centerAt(0, 200);
+      graphRef.current.zoom(2, 1000)
       graphRef.current.isProcessed = true;
     }
   });
@@ -65,7 +66,7 @@ const GraphRenderer = ({ items, onNodeClick }: { items: Items[], onNodeClick: Fu
         ref={graphRef}
         graphData={data}
         nodeLabel="name"
-        minZoom={2}
+        minZoom={0.01}
         maxZoom={4}
         nodeAutoColorBy="id"
         linkDirectionalArrowLength={7}

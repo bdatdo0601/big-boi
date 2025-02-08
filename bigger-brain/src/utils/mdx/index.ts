@@ -84,17 +84,3 @@ async function replaceAttachments(content: string, contentPath: string) {
 
   return updatedContent;
 }
-
-export async function findBacklinks(currentSlug: string) {
-  const files = await glob('**/*.mdx', { cwd: contentDirectory });
-  const backlinks = [];
-
-  for (const file of files) {
-    const content = await fs.readFile(path.join(contentDirectory, file), 'utf8');
-    if (content.includes(`[[${currentSlug}]]`)) {
-      backlinks.push(file.replace('.mdx', ''));
-    }
-  }
-
-  return backlinks;
-}
