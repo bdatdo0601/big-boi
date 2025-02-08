@@ -40,14 +40,6 @@
       "Type": "String",
       "Default": "apibigboiexternalapiApiId"
     },
-    "analyticsbigboianalyticsId": {
-      "Type": "String",
-      "Default": "analyticsbigboianalyticsId"
-    },
-    "analyticsbigboianalyticsRegion": {
-      "Type": "String",
-      "Default": "analyticsbigboianalyticsRegion"
-    },
     "analyticsbigboidefaultkinesiskinesisStreamArn": {
       "Type": "String",
       "Default": "analyticsbigboidefaultkinesiskinesisStreamArn"
@@ -135,12 +127,6 @@
             },
             "API_BIGBOIEXTERNALAPI_APIID": {
               "Ref": "apibigboiexternalapiApiId"
-            },
-            "ANALYTICS_BIGBOIANALYTICS_ID": {
-              "Ref": "analyticsbigboianalyticsId"
-            },
-            "ANALYTICS_BIGBOIANALYTICS_REGION": {
-              "Ref": "analyticsbigboianalyticsRegion"
             },
             "ANALYTICS_BIGBOIDEFAULTKINESIS_KINESISSTREAMARN": {
               "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
@@ -381,59 +367,6 @@
                       "::/restapis/",
                       {
                         "Ref": "apibigboiexternalapiApiName"
-                      },
-                      "/*"
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "mobiletargeting:Put*",
-                "mobiletargeting:Create*",
-                "mobiletargeting:Send*",
-                "mobiletargeting:Get*",
-                "mobiletargeting:List*",
-                "mobiletargeting:Update*",
-                "mobiletargeting:Delete*"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:mobiletargeting:",
-                      {
-                        "Ref": "analyticsbigboianalyticsRegion"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apps/",
-                      {
-                        "Ref": "analyticsbigboianalyticsId"
-                      }
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:mobiletargeting:",
-                      {
-                        "Ref": "analyticsbigboianalyticsRegion"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apps/",
-                      {
-                        "Ref": "analyticsbigboianalyticsId"
                       },
                       "/*"
                     ]

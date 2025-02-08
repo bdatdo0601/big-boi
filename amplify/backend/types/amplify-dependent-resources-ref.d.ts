@@ -1,10 +1,5 @@
 export type AmplifyDependentResourcesAttributes = {
   "analytics": {
-    "bigboianalytics": {
-      "Id": "string",
-      "Region": "string",
-      "appName": "string"
-    },
     "bigboidefaultkinesis": {
       "kinesisStreamArn": "string",
       "kinesisStreamId": "string",

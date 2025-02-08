@@ -23,12 +23,6 @@
       ]
     },
     "analytics": {
-      "bigboianalytics": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
       "bigboidefaultkinesis": [
         "create",
         "read",
