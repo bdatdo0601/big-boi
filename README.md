@@ -10,3 +10,7 @@ Personal Website
 - url-metadata-resolver: resolve url metadata
 - webhook-proxy: proxy webhook from publicly available api to kinesis consumer
 - utility-discord-interaction: discord interaction
+
+## Web analytics
+
+Using Umami for now https://umami.is/docs/

@@ -24,6 +24,7 @@ export default async function RootLayout({
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossOrigin="anonymous" />
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="af1dc329-1f96-45ff-bde8-d895794aed29"></script>
       </head>
       <body className="min-h-screen">
         <AppNav tree={tree} flattenTree={flattenTree} >

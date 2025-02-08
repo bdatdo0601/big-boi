@@ -44,7 +44,7 @@ export default function AppNav({ tree, flattenTree, children }: { tree: FileTree
           </div>
         </div>
       </div>
-      <div className='w-full px-1'>
+      <div className='w-full px-1 relative'>
         <div className='min-lg:fixed min-lg:right-2 min-lg:top-24 max-lg:mx-auto max-lg:mt-2 overflow-y-auto border-2 rounded-md p-4 bg-popover min-w-[250px]'>
           <div className='flex flex-row justify-between items-center flex-wrap gap-10'>
             <h5>Document Tree</h5>
