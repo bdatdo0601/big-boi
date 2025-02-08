@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.34.13](https://github.com/bdatdo0601/big-boi/compare/v1.34.12...v1.34.13) (2025-02-08)
+
+
+### Bug Fixes
+
+* remove pinpoint ([5e74474](https://github.com/bdatdo0601/big-boi/commit/5e74474231c8ebf8059afd0556e666fe193de2a2))
+* remove pinpoint analytics ([28903ab](https://github.com/bdatdo0601/big-boi/commit/28903abd0f154531a1e6ff9cb497c8d18ef438f2))
+
 ### [1.34.12](https://github.com/bdatdo0601/big-boi/compare/v1.34.11...v1.34.12) (2025-02-08)
 
 
