@@ -59,7 +59,7 @@ export default function Blogs() {
         license="GPLv3"
         id="iframe"
         title="Blog Page"
-        src={`${blogURL}${location.pathname.replace('/blogs', '')}`}
+        src={`${blogURL}${location.pathname}`}
         className="grow"
         ref={e => {
           iframeRef.current = e;

@@ -155,10 +155,10 @@
       "dependsOn": [
         {
           "attributes": [
-            "BucketName"
+            "kinesisStreamArn"
           ],
-          "category": "storage",
-          "resourceName": "bigboicontent"
+          "category": "analytics",
+          "resourceName": "bigboidefaultkinesis"
         },
         {
           "attributes": [
@@ -179,10 +179,10 @@
         },
         {
           "attributes": [
-            "kinesisStreamArn"
+            "BucketName"
           ],
-          "category": "analytics",
-          "resourceName": "bigboidefaultkinesis"
+          "category": "storage",
+          "resourceName": "bigboicontent"
         }
       ],
       "providerPlugin": "awscloudformation",

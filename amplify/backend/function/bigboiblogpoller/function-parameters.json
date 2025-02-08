@@ -1,7 +1,7 @@
 {
   "permissions": {
-    "storage": {
-      "bigboicontent": [
+    "analytics": {
+      "bigboidefaultkinesis": [
         "create",
         "read",
         "update",
@@ -22,8 +22,8 @@
         "delete"
       ]
     },
-    "analytics": {
-      "bigboidefaultkinesis": [
+    "storage": {
+      "bigboicontent": [
         "create",
         "read",
         "update",

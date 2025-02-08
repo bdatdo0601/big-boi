@@ -31,7 +31,7 @@
         },
         "bigboimessagestoring": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboimessagestoring-56583171674c67766771-build.zip",
+          "s3Key": "amplify-builds/bigboimessagestoring-704265476c3965465276-build.zip",
           "blogDeployWebhook": "https://api.vercel.com/v1/integrations/deploy/prj_lJsgGRkeFjleext52xjWDNzA2r0Z/c3wHQbC5Ya",
           "blogDeployToken": "sUvzBNLYCIbyTJfpFi96MkYa",
           "vercelTeamId": "team_H14dWJlEn6lyNRsWzILUUmZ0",

@@ -254,42 +254,38 @@
           "Statement": [
             {
               "Effect": "Allow",
-              "Action": "s3:ListBucket",
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:s3:::",
-                      {
-                        "Ref": "storagebigboicontentBucketName"
-                      }
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
               "Action": [
-                "s3:PutObject",
-                "s3:GetObject",
-                "s3:DeleteObject"
+                "kinesis:CreateStream",
+                "kinesis:RegisterStreamConsumer",
+                "kinesis:AddTagsToStream",
+                "kinesis:ListShards",
+                "kinesis:ListStreams",
+                "kinesis:ListStreamConsumers",
+                "kinesis:DescribeStream",
+                "kinesis:DescribeStreamSummary",
+                "kinesis:DescribeStreamConsumer",
+                "kinesis:GetRecords",
+                "kinesis:GetShardIterator",
+                "kinesis:SubscribeToShard",
+                "kinesis:DescribeLimits",
+                "kinesis:ListTagsForStream",
+                "kinesis:SubscribeToShard",
+                "kinesis:EnableEnhancedMonitoring",
+                "kinesis:DisableEnhancedMonitoring",
+                "kinesis:IncreaseStreamRetentionPeriod",
+                "kinesis:DecreaseStreamRetentionPeriod",
+                "kinesis:MergeShards",
+                "kinesis:PutRecord",
+                "kinesis:PutRecords",
+                "kinesis:SplitShard",
+                "kinesis:UpdateShardCount",
+                "kinesis:DeleteStream",
+                "kinesis:DeregisterStreamConsumer",
+                "kinesis:RemoveTagsFromStream"
               ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:s3:::",
-                      {
-                        "Ref": "storagebigboicontentBucketName"
-                      },
-                      "/*"
-                    ]
-                  ]
-                }
-              ]
+              "Resource": {
+                "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
+              }
             },
             {
               "Effect": "Allow",
@@ -376,38 +372,42 @@
             },
             {
               "Effect": "Allow",
+              "Action": "s3:ListBucket",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storagebigboicontentBucketName"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
               "Action": [
-                "kinesis:CreateStream",
-                "kinesis:RegisterStreamConsumer",
-                "kinesis:AddTagsToStream",
-                "kinesis:ListShards",
-                "kinesis:ListStreams",
-                "kinesis:ListStreamConsumers",
-                "kinesis:DescribeStream",
-                "kinesis:DescribeStreamSummary",
-                "kinesis:DescribeStreamConsumer",
-                "kinesis:GetRecords",
-                "kinesis:GetShardIterator",
-                "kinesis:SubscribeToShard",
-                "kinesis:DescribeLimits",
-                "kinesis:ListTagsForStream",
-                "kinesis:SubscribeToShard",
-                "kinesis:EnableEnhancedMonitoring",
-                "kinesis:DisableEnhancedMonitoring",
-                "kinesis:IncreaseStreamRetentionPeriod",
-                "kinesis:DecreaseStreamRetentionPeriod",
-                "kinesis:MergeShards",
-                "kinesis:PutRecord",
-                "kinesis:PutRecords",
-                "kinesis:SplitShard",
-                "kinesis:UpdateShardCount",
-                "kinesis:DeleteStream",
-                "kinesis:DeregisterStreamConsumer",
-                "kinesis:RemoveTagsFromStream"
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
               ],
-              "Resource": {
-                "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
-              }
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storagebigboicontentBucketName"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }

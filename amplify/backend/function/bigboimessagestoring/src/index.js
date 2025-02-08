@@ -11,6 +11,7 @@ const gql = require('graphql-tag');
 const moment = require("moment");
 const { signedGraphQLMutationRequest } = require("/opt/packages/utils/signedGraphQLMutationRequest");
 const { getEventRetrieverSource, EventRetrieverProcessors } = require("/opt/packages/EventRetriever");
+const { redeployBlogSite } = require("/opt/packages/utils/redeployBlogSite");
 
 const createEventMessage = gql`
     mutation CreateEventMessage(
