@@ -14,3 +14,4 @@ Personal Website
 ## Web analytics
 
 Using Umami for now https://umami.is/docs/
+

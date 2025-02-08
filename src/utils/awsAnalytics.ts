@@ -1,4 +1,4 @@
-import { record, RecordInput } from '@aws-amplify/analytics';
+import { RecordInput } from '@aws-amplify/analytics';
 import { record as recordKinesisEvent } from '@aws-amplify/analytics/kinesis';
 import { last, get } from 'lodash';
 import awsexport from '@/amplifyconfiguration.json';
@@ -11,7 +11,6 @@ export const recordEvent = (name: string, attributes: Record<string, string>) =>
     attributes: { ...attributes, eventType: name },
   };
   try {
-    record(event);
     recordKinesisEvent({
       partitionKey: name,
       data: { ...event.attributes },

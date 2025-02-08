@@ -19,7 +19,6 @@ import BlogManager from "./containers/BlogManager";
 import BlogCreation from "./containers/BlogManager/Creation";
 import Reference from "./containers/Reference";
 import ShareTarget from "./containers/ShareTarget";
-import usePageTracking from "./utils/hooks/usePageTracking";
 import PaperResumeDisplay from "./containers/PaperResume";
 import { useAuth } from "./context/auth";
 import { getCurrentUser } from "@aws-amplify/auth";
@@ -66,13 +65,6 @@ export const getRoutePath = (route: RouteConfig) => {
     return route.path;
   }
   return `${route.path}/*`;
-};
-
-const withAnalytics = <P extends object>(Component: ComponentType<P>): FC<P> => {
-  return (props: P) => {
-    usePageTracking();
-    return <Component {...props} />;
-  };
 };
 
 const isAuthExist = async (): Promise<boolean> => {
@@ -163,7 +155,7 @@ export const errorRoutes: RouteConfig[] = [
   },
 ].map((item) => ({
   ...item,
-  component: item.component ? withAnalytics(item.component) : undefined,
+  component: item.component,
 }));
 
 const routes: RouteConfig[] = [
@@ -288,7 +280,7 @@ const routes: RouteConfig[] = [
   },
 ].map((item) => ({
   ...item,
-  component: item.component ? withAnalytics(item.component) : undefined,
+  component: item.component,
 }));
 
 export default routes;
