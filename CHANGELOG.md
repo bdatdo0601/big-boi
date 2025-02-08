@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.34.10](https://github.com/bdatdo0601/big-boi/compare/v1.34.9...v1.34.10) (2025-02-08)
+
+
+### Bug Fixes
+
+* navigate to docs site in main app ([f95f51c](https://github.com/bdatdo0601/big-boi/commit/f95f51c7e9dd637c30c388cbcb2a338006af8f5b))
+
 ### [1.34.9](https://github.com/bdatdo0601/big-boi/compare/v1.34.8...v1.34.9) (2025-02-08)
 
 
