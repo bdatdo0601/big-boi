@@ -8,6 +8,7 @@ const { PersonalPublishInfo } = require("../../../helpers/constants");
 
 module.exports = {
     populateMetadata: async evt => {
+        console.log("StatusUpdate", evt);
         const getBlogPost = gql`
             query GetPost($id: ID!) {
                 getPost(id: $id) {

@@ -3,6 +3,11 @@ const moment = require("moment");
 const { has, get, every, isArray } = require("lodash");
 
 
+const ALLOW_CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "*"
+}
+
 // IFTTT Documentation https://maker.ifttt.com/use/q6bRYUkNBBJZP4VFhbYj6
 const constructInitialEventFromApiGateway = (record, bodyData, handlerEvent) => {
     // Construct initial events through api gateway
@@ -44,7 +49,11 @@ exports.apiGatewayEventSourceProcessor = {
         return {
             statusCode: 200,
             body: JSON.stringify(responseData),
-            isBase64Encoded: false
+            isBase64Encoded: false,
+            headers: {
+                ...ALLOW_CORS_HEADERS,
+                "Content-Type": "application/json"
+            }
         }
     }
 }

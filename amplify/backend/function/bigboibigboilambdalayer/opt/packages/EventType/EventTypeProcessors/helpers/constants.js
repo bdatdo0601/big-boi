@@ -1,5 +1,5 @@
 exports.PersonalPublishInfo = {
     subject: "Dat",
-    subjectLink: "https://www.dat.do/",
+    subjectLink: "https://datbdo.com/",
     githubHandle: "bdatdo0601",
 }

@@ -79,13 +79,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
-    "bigboiutilitydiscordinteraction": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
     "bigboiwebhookproxy": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

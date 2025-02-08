@@ -4,7 +4,7 @@
 	API_BIGBOIAPI_GRAPHQLAPIKEYOUTPUT
 	ENV
 	REGION
-Amplify Params - DO NOT EDIT */const { get } = require("lodash");
+Amplify Params - DO NOT EDIT */const { get, omit } = require("lodash");
 
 const { identifySource } = require("/opt/packages/SourceIdentifier");
 const { formatEventByEventType } = require("/opt/packages/EventType");
@@ -31,37 +31,33 @@ exports.handler = async handlerEvent => {
   }));
   // Only sent out valid event
   // TODO: properly handle invalid event
-  const validEvents = events.filter(evt => get(evt, "metadata.isValid", false));
-  const invalidEvents = events.filter(evt => !get(evt, "metadata.isValid", false));
+  const validEvents = events.filter(evt => get(evt, "metadata.isValid", false)).map(evt => omit(evt, ["metadata.sourceMessage.headers"]));
+  const invalidEvents = events.filter(evt => !get(evt, "metadata.isValid", false)).map(evt => omit(evt, ["metadata.sourceMessage.headers"]));
   for (const evt of validEvents) {
     try {
       // Propagate to SNS topic
       await publishMessage(evt);
+      // Propagate to event bridge
+      await eventBridge.putEvents({
+        Entries: [
+          {
+            Source: 'custom.lambda.bigboikinesisconsumer',
+            DetailType: 'LegacyEventStream',
+            Detail: JSON.stringify(evt),
+            EventBusName: 'BigBus'
+          }
+        ]
+      }).promise();
     } catch (err) {
       console.error("Error publishing message", err, validEvents);
     }
   }
 
-  const responseData = {
-    validEvents,
-    invalidEvents,
+  for (const evt of invalidEvents) {
+    console.warn("Invalid Event", evt);
   }
 
-  // Publish responseData to EventBridge
-  try {
-    await eventBridge.putEvents({
-      Entries: [
-        {
-          Source: 'custom.lambda.bigboikinesisconsumer',
-          DetailType: 'LegacyEventStream',
-          Detail: JSON.stringify(responseData),
-          EventBusName: 'BigBus'
-        }
-      ]
-    }).promise();
-  } catch (err) {
-    console.warn("Error publishing to EventBridge", err);
-  }
+  const responseData = {validEvents};
 
   const response = await EventSourcesProcessors[eventSource].getResponses(responseData);
   console.info(response);

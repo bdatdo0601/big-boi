@@ -14,13 +14,6 @@
         "setting": "open"
       }
     },
-    "/bot/interaction": {
-      "name": "/bot/interaction",
-      "lambdaFunction": "bigboiutilitydiscordinteraction",
-      "permissions": {
-        "setting": "open"
-      }
-    },
     "/publicevent": {
       "name": "/publicevent",
       "lambdaFunction": "bigboiwebhookproxy",

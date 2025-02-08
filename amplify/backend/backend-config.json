@@ -70,14 +70,6 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "bigboiutilitydiscordinteraction"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
           "resourceName": "bigboiwebhookproxy"
         }
       ],
@@ -250,22 +242,6 @@
     },
     "bigboiurlmetadataresolver": {
       "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "bigboiutilitydiscordinteraction": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ],
-          "category": "api",
-          "resourceName": "bigboiapi"
-        }
-      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
@@ -455,38 +431,6 @@
         {
           "category": "function",
           "resourceName": "bigboiurlmetadataresolver"
-        }
-      ]
-    },
-    "AMPLIFY_function_bigboiutilitydiscordinteraction_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "bigboiutilitydiscordinteraction"
-        }
-      ]
-    },
-    "AMPLIFY_function_bigboiutilitydiscordinteraction_discordApplicationPublicKey": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "bigboiutilitydiscordinteraction"
-        }
-      ]
-    },
-    "AMPLIFY_function_bigboiutilitydiscordinteraction_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "bigboiutilitydiscordinteraction"
-        }
-      ]
-    },
-    "AMPLIFY_function_bigboiutilitydiscordinteraction_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "bigboiutilitydiscordinteraction"
         }
       ]
     },

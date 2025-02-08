@@ -23,11 +23,11 @@
       "function": {
         "bigboikinesisconsumer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboikinesisconsumer-566b687137496f71316f-build.zip"
+          "s3Key": "amplify-builds/bigboikinesisconsumer-6d70736c664b4c367853-build.zip"
         },
         "bigboibigboilambdalayer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion630849e1-build.zip"
+          "s3Key": "amplify-builds/bigboibigboilambdalayer-LambdaLayerVersion4a3ca2eb-build.zip"
         },
         "bigboimessagestoring": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
@@ -52,12 +52,6 @@
           "apiEndpoint": "https://api.datbdo.com",
           "apiKey": "jgmj2loTvO31fX4xWOq4saxCay4gNRVx5taSLKHr"
         },
-        "bigboiutilitydiscordinteraction": {
-          "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboiutilitydiscordinteraction-2b354b79364839365845-build.zip",
-          "discordApplicationPublicKey": "35ebaa8659754d4b22416a0729bdf755c44113f1ff78a05b9723b3ec68928de0",
-          "secretsPathAmplifyAppId": "d2vxpb6a8hxx0o"
-        },
         "bigboiurlmetadataresolver": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
           "s3Key": "amplify-builds/bigboiurlmetadataresolver-7839646c4134432b764b-build.zip"
@@ -66,7 +60,8 @@
           "GROUP": "BigBoi",
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
           "s3Key": "amplify-builds/bigboi327b1f0dPostConfirmation-5732742f6c5276307937-build.zip"
-        }
+        },
+        "bigboiutilitydiscordinteraction": {}
       },
       "hosting": {
         "S3AndCloudFront": {}
@@ -75,7 +70,6 @@
         "bigboicontent": {}
       },
       "analytics": {
-        "bigboidefaultkinesis": {},
         "bigboinotification": {}
       }
     }

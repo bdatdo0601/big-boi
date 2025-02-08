@@ -1,7 +1,28 @@
 import { useApi } from '@/context/api';
-import { GraphQLResult, GraphQLSubscription } from '@aws-amplify/api';
+import { GraphQLResult, GraphQLSubscription, put } from '@aws-amplify/api';
 import { get, merge, mergeWith } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
+
+type EventData = {
+  eventName: string;
+  eventType: string;
+  id: string;
+  [key: string]: any;
+};
+
+export const publishEventData = async (event: EventData) => {
+  try {
+    await put({
+      apiName: 'bigboiexternalapi',
+      path: '/event',
+      options: {
+        body: { events: [{ eventData: event }], eventType: event.eventType, eventName: event.eventName },
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 export const useAWSAPIGetAll = (operation: string, input: any) => {
   const { client } = useApi();
@@ -93,12 +114,14 @@ export const useAWSAPI = (operation: string, input: any) => {
               nextToken: token,
             },
           });
-          setData(currentData => mergeWith(currentData, retrievedData, (objValue, srcValue) => {
-            if (Array.isArray(objValue)) {
-              return objValue.concat(srcValue);
-            }
-            return undefined;
-          }));
+          setData(currentData =>
+            mergeWith(currentData, retrievedData, (objValue, srcValue) => {
+              if (Array.isArray(objValue)) {
+                return objValue.concat(srcValue);
+              }
+              return undefined;
+            })
+          );
         }
         setLoading(false);
         return retrievedData;
