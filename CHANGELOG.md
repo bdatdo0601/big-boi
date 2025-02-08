@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.34.12](https://github.com/bdatdo0601/big-boi/compare/v1.34.11...v1.34.12) (2025-02-08)
+
+
+### Bug Fixes
+
+* remove other analytics than umami ([6c7d00d](https://github.com/bdatdo0601/big-boi/commit/6c7d00da15ac1bcd7c06a9cf7bc224a2fb02911e))
+
 ### [1.34.11](https://github.com/bdatdo0601/big-boi/compare/v1.34.10...v1.34.11) (2025-02-08)
 
 
