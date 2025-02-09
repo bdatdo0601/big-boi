@@ -247,33 +247,10 @@
                 "kinesis:ListStreams",
                 "kinesis:SubscribeToShard"
               ],
-              "Resource": {
-                "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
-              }
+              "Resource": "*"
             }
           ]
         }
-      }
-    },
-    "LambdaEventSourceMapping": {
-      "Type": "AWS::Lambda::EventSourceMapping",
-      "DependsOn": [
-        "LambdaTriggerPolicy",
-        "LambdaExecutionRole"
-      ],
-      "Properties": {
-        "BatchSize": 1,
-        "Enabled": true,
-        "EventSourceArn": {
-          "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
-        },
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "LambdaFunction",
-            "Arn"
-          ]
-        },
-        "StartingPosition": "LATEST"
       }
     },
     "AmplifyResourcesPolicy": {

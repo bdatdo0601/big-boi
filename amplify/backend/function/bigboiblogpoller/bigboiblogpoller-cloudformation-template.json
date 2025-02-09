@@ -40,10 +40,6 @@
       "Type": "String",
       "Default": "apibigboiexternalapiApiId"
     },
-    "analyticsbigboidefaultkinesiskinesisStreamArn": {
-      "Type": "String",
-      "Default": "analyticsbigboidefaultkinesiskinesisStreamArn"
-    },
     "notionIntegrationToken": {
       "Type": "String"
     },
@@ -55,6 +51,10 @@
     },
     "eventApiEndpoint": {
       "Type": "String"
+    },
+    "analyticsbigboidefaultkinesiskinesisStreamArn": {
+      "Type": "String",
+      "Default": "analyticsbigboidefaultkinesiskinesisStreamArn"
     }
   },
   "Conditions": {
@@ -127,9 +127,6 @@
             },
             "API_BIGBOIEXTERNALAPI_APIID": {
               "Ref": "apibigboiexternalapiApiId"
-            },
-            "ANALYTICS_BIGBOIDEFAULTKINESIS_KINESISSTREAMARN": {
-              "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
             },
             "NOTION_INTEGRATION_TOKEN": {
               "Ref": "notionIntegrationToken"
@@ -252,41 +249,6 @@
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "kinesis:CreateStream",
-                "kinesis:RegisterStreamConsumer",
-                "kinesis:AddTagsToStream",
-                "kinesis:ListShards",
-                "kinesis:ListStreams",
-                "kinesis:ListStreamConsumers",
-                "kinesis:DescribeStream",
-                "kinesis:DescribeStreamSummary",
-                "kinesis:DescribeStreamConsumer",
-                "kinesis:GetRecords",
-                "kinesis:GetShardIterator",
-                "kinesis:SubscribeToShard",
-                "kinesis:DescribeLimits",
-                "kinesis:ListTagsForStream",
-                "kinesis:SubscribeToShard",
-                "kinesis:EnableEnhancedMonitoring",
-                "kinesis:DisableEnhancedMonitoring",
-                "kinesis:IncreaseStreamRetentionPeriod",
-                "kinesis:DecreaseStreamRetentionPeriod",
-                "kinesis:MergeShards",
-                "kinesis:PutRecord",
-                "kinesis:PutRecords",
-                "kinesis:SplitShard",
-                "kinesis:UpdateShardCount",
-                "kinesis:DeleteStream",
-                "kinesis:DeregisterStreamConsumer",
-                "kinesis:RemoveTagsFromStream"
-              ],
-              "Resource": {
-                "Ref": "analyticsbigboidefaultkinesiskinesisStreamArn"
-              }
-            },
             {
               "Effect": "Allow",
               "Action": [

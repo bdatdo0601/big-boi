@@ -1,13 +1,5 @@
 {
   "permissions": {
-    "analytics": {
-      "bigboidefaultkinesis": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ]
-    },
     "api": {
       "bigboiapi": [
         "create",
