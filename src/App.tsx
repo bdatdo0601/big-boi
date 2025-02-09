@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router";
 import { Amplify } from "aws-amplify";
 import amplifyconfig from './amplifyconfiguration.json';
 
-import routes, { errorRoutes, getRoutePath, ROUTE_TYPE, subdomainRouteMap } from "./routes";
+import routes, { getRoutePath, ROUTE_TYPE, subdomainRouteMap } from "./routes";
 import ContextProvider from "./context";
 import Layout from "./layout";
 import { withCustomAWSAuthenticator } from "@/context/auth";
 import "./App.css";
 import { parseAWSExports } from "@aws-amplify/core/internals/utils";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 const formattedConfig = merge(parseAWSExports(amplifyconfig), {
   Analytics: {
@@ -55,6 +56,7 @@ function App() {
                   key={route.name}
                   Component={route.component && withCustomAWSAuthenticator(route.component)}
                   path={getRoutePath(route)}
+                  ErrorBoundary={ErrorBoundary}
                 />
               ))
               : groupedRoutes[routeType].map((route) => (
@@ -62,6 +64,7 @@ function App() {
                   key={route.name}
                   Component={route.component}
                   path={getRoutePath(route)}
+                  ErrorBoundary={ErrorBoundary}
                 />
               ));
           })}
@@ -70,15 +73,10 @@ function App() {
               key={route.name}
               Component={route.component}
               path={getRoutePath(route)}
+              ErrorBoundary={ErrorBoundary}
             />
           ))}
-          {errorRoutes.map((route) => (
-            <Route
-              key={route.name}
-              Component={route.component}
-              path={getRoutePath(route)}
-            />
-          ))}
+          <Route path="*" element={<ErrorBoundary error={new Error("404 - Page not found")} />} />
         </Routes>
       </Layout>
     </Router >

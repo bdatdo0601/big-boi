@@ -1,21 +1,17 @@
 .images-display-wrapper {
-  overflow: scroll;
+  overflow: hidden;
   .masonry-image {
     height: 100%;
     width: 100%;
-    margin-bottom: 2%;
-    padding: 8px;
     overflow: auto;
-    border-radius: 12;
     display: -webkit-box; /* Not needed if autoprefixing */
     display: -ms-flexbox; /* Not needed if autoprefixing */
     display: flex;
-    margin-left: -30px; /* gutter size offset */
-    width: auto;
   }
 
   .masonry-image-column {
-    padding-left: 10px; /* gutter size */
     background-clip: padding-box;
+    padding-left: 2px; /* gutter size */
+    padding-right: 2px; /* gutter size */
   }
 }

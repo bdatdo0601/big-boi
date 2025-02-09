@@ -1,4 +1,4 @@
-import React, { lazy, FC } from "react";
+import React, { lazy } from "react";
 import { Navigate, useNavigate } from "react-router";
 import MuiMap from "@mui/icons-material/Map";
 import CreateIcon from "@mui/icons-material/Create";
@@ -11,7 +11,6 @@ import ListAltOutlined from "@mui/icons-material/ListAltOutlined";
 import LinkOutlined from "@mui/icons-material/LinkOutlined";
 import FilePresentOutlined from "@mui/icons-material/FilePresentOutlined";
 import QuestionAnswer from "@mui/icons-material/QuestionAnswer";
-import { Typography, Button } from "@mui/material";
 import AdminDashboard from "./containers/AdminDashboard";
 import BlogManager from "./containers/BlogManager";
 import BlogCreation from "./containers/BlogManager/Creation";
@@ -74,27 +73,6 @@ const isAuthExist = async (): Promise<boolean> => {
   }
 };
 
-const ErrorPage: FC = () => {
-  const navigate = useNavigate();
-  return (
-    <>
-      <Typography variant="h1" style={{ color: "red" }}>
-        404 - Error not found
-      </Typography>
-
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          navigate("/", { replace: true });
-        }}
-      >
-        Go Home
-      </Button>
-    </>
-  );
-};
-
 export const subdomainRouteMap: Record<string, RouteConfig[]> = {
   reference: [
     {
@@ -141,20 +119,6 @@ export const subdomainRouteMap: Record<string, RouteConfig[]> = {
     },
   ],
 };
-
-export const errorRoutes: RouteConfig[] = [
-  {
-    name: "Error",
-    component: ErrorPage,
-    path: "*",
-    hidden: true,
-    type: ROUTE_TYPE.PUBLIC,
-    exact: false,
-  },
-].map((item) => ({
-  ...item,
-  component: item.component,
-}));
 
 const routes: RouteConfig[] = [
   {
