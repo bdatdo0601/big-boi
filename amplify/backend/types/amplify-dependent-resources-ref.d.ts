@@ -1,10 +1,5 @@
 export type AmplifyDependentResourcesAttributes = {
   "analytics": {
-    "bigboidefaultkinesis": {
-      "kinesisStreamArn": "string",
-      "kinesisStreamId": "string",
-      "kinesisStreamShardCount": "string"
-    },
     "bigboinotification": {
       "snsTopicArn": "string",
       "snsTopicName": "string"

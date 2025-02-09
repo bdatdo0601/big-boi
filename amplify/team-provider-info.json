@@ -23,7 +23,8 @@
       "function": {
         "bigboikinesisconsumer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
-          "s3Key": "amplify-builds/bigboikinesisconsumer-6d70736c664b4c367853-build.zip"
+          "s3Key": "amplify-builds/bigboikinesisconsumer-6d70736c664b4c367853-build.zip",
+          "analyticsBigboinotificationSnstopicarn": "arn:aws:sns:us-east-1:142037127835:bigboinotificationdev"
         },
         "bigboibigboilambdalayer": {
           "deploymentBucketName": "amplify-big-boi-dev-142545-deployment",
@@ -70,8 +71,7 @@
         "bigboicontent": {}
       },
       "analytics": {
-        "bigboinotification": {},
-        "bigboidefaultkinesis": {}
+        "bigboinotification": {}
       }
     }
   }
