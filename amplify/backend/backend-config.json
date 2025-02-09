@@ -239,6 +239,224 @@
       "service": "S3AndCloudFront"
     }
   },
+  "parameters": {
+    "AMPLIFY_function_bigboi327b1f0dPostConfirmation_GROUP": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboi327b1f0dPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboi327b1f0dPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboi327b1f0dPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboi327b1f0dPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboi327b1f0dPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboibigboilambdalayer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboibigboilambdalayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboibigboilambdalayer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboibigboilambdalayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiblogpoller_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiblogpoller_eventApiEndpoint": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiblogpoller_eventApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiblogpoller_notionBlogpostBlockid": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiblogpoller_notionIntegrationToken": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiblogpoller_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiblogpoller"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboikinesisconsumer_analyticsBigboinotificationSnstopicarn": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboikinesisconsumer"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboikinesisconsumer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboikinesisconsumer"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboikinesisconsumer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboikinesisconsumer"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_blogDeployBranch": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_blogDeployProjectId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_blogDeployToken": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_blogDeployWebhook": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboimessagestoring_vercelTeamId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboimessagestoring"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiurlmetadataresolver_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiurlmetadataresolver"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiurlmetadataresolver_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiurlmetadataresolver"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiwebhookproxy_apiEndpoint": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiwebhookproxy"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiwebhookproxy_apiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiwebhookproxy"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiwebhookproxy_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiwebhookproxy"
+        }
+      ]
+    },
+    "AMPLIFY_function_bigboiwebhookproxy_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bigboiwebhookproxy"
+        }
+      ]
+    }
+  },
   "storage": {
     "bigboicontent": {
       "dependsOn": [

@@ -32,7 +32,7 @@
       "Type": "String",
       "Default": "apibigboiapiGraphQLAPIKeyOutput"
     },
-    "analyticsbigboinotificationsnsTopicArn": {
+    "analyticsBigboinotificationSnstopicarn": {
       "Type": "String",
       "Default": "arn:aws:sns:us-east-1:142037127835:bigboinotificationdev"
     },
@@ -104,7 +104,7 @@
               "Ref": "apibigboiapiGraphQLAPIKeyOutput"
             },
             "ANALYTICS_BIGBOINOTIFICATION_SNSTOPICARN": {
-              "Ref": "analyticsbigboinotificationsnsTopicArn"
+              "Ref": "analyticsBigboinotificationSnstopicarn"
             }
           }
         },
@@ -207,7 +207,7 @@
                 "sns:Publish"
               ],
               "Resource": {
-                "Ref": "analyticsbigboinotificationsnsTopicArn"
+                "Ref": "analyticsBigboinotificationSnstopicarn"
               }
             },
             {
