@@ -36,11 +36,23 @@ function getMimeType(filePath: string) {
 }
 
 export const getSource = async (slug: string) => {
-  const fullPath = path.join(contentDirectory, `${slug}.mdx`);
-  const source = await fs.readFile(fullPath, 'utf8');
-  return source;
-};
+  const extensions = ['.mdx', '.markdown', '.md'];
+  let source;
 
+  for (const ext of extensions) {
+    const fullPath = path.join(contentDirectory, `${slug}${ext}`);
+    try {
+      source = await fs.readFile(fullPath, 'utf8');
+      return source;
+    } catch (error: any) {
+      if (error.code !== 'ENOENT') {
+        throw error;
+      }
+    }
+  }
+
+  throw new Error(`No file found for slug: ${slug}`);
+};
 export async function getMDXContent(slug: string, files: FileTree[]) {
   const decodedSlug = decodeURIComponent(slug);
   const source = await getSource(decodedSlug);

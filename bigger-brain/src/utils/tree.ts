@@ -46,12 +46,13 @@ export async function buildFileTree(dir: string = contentDirectory, basePath: st
           slug: relativePath.split('/')
         })
       }
-    } else if (entry.name.endsWith('.mdx')) {
+    } else if (entry.name.endsWith('.mdx') || entry.name.endsWith('.md') || entry.name.endsWith('.markdown')) {
+      const fileExtension = path.extname(entry.name);
       tree.push({
         type: 'file',
-        name: entry.name.replace('.mdx', ''),
-        path: relativePath.replace('.mdx', ''),
-        slug: relativePath.replace('.mdx', '').split('/')
+        name: entry.name.replace(fileExtension, ''),
+        path: relativePath.replace(fileExtension, ''),
+        slug: relativePath.replace(fileExtension, '').split('/')
       })
     } else if (!ignoreAttachment) {
       const fileBuffer = await fs.readFile(fullPath)
@@ -125,6 +126,10 @@ export const getFlattenFileTreeWithContent = async (): Promise<FlattenFileTreeWi
 }
 
 export async function getAllPaths(): Promise<string[]> {
-  const files = await glob('**/*.mdx', { cwd: contentDirectory })
-  return files.map(file => file.replace('.mdx', ''))
+  const mdxFiles = await glob('**/*.mdx', { cwd: contentDirectory })
+  const mdFiles = await glob('**/*.md', { cwd: contentDirectory })
+  const markdownFiles = await glob('**/*.markdown', { cwd: contentDirectory })
+  
+  const allFiles = [...mdxFiles, ...mdFiles, ...markdownFiles]
+  return allFiles.map(file => file.replace(/\.(mdx|md|markdown)$/, ''))
 }
