@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.34.16](https://github.com/bdatdo0601/big-boi/compare/v1.34.15...v1.34.16) (2025-02-09)
+
+
+### Bug Fixes
+
+* optimize loading ([6adcd86](https://github.com/bdatdo0601/big-boi/commit/6adcd86a6382b9fb018e7953f0fa560ca44efb23))
+* some styling issue ([bdd5771](https://github.com/bdatdo0601/big-boi/commit/bdd5771bf6a4978e3f5135b13be742965ba935a9))
+
 ### [1.34.15](https://github.com/bdatdo0601/big-boi/compare/v1.34.14...v1.34.15) (2025-02-09)
 
 
