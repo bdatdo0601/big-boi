@@ -34,11 +34,11 @@
     },
     "analyticsbigboinotificationsnsTopicArn": {
       "Type": "String",
-      "Default": "analyticsbigboinotificationsnsTopicArn"
+      "Default": "*"
     },
     "analyticsbigboidefaultkinesiskinesisStreamArn": {
       "Type": "String",
-      "Default": "analyticsbigboidefaultkinesiskinesisStreamArn"
+      "Default": "*"
     }
   },
   "Conditions": {

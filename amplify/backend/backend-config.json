@@ -147,13 +147,6 @@
       "dependsOn": [
         {
           "attributes": [
-            "kinesisStreamArn"
-          ],
-          "category": "analytics",
-          "resourceName": "bigboidefaultkinesis"
-        },
-        {
-          "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput",
             "GraphQLAPIKeyOutput"
@@ -205,13 +198,6 @@
           ],
           "category": "analytics",
           "resourceName": "bigboinotification"
-        },
-        {
-          "attributes": [
-            "kinesisStreamArn"
-          ],
-          "category": "analytics",
-          "resourceName": "bigboidefaultkinesis"
         }
       ],
       "providerPlugin": "awscloudformation",

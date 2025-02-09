@@ -40,6 +40,10 @@
       "Type": "String",
       "Default": "apibigboiexternalapiApiId"
     },
+    "analyticsbigboidefaultkinesiskinesisStreamArn": {
+      "Type": "String",
+      "Default": "analyticsbigboidefaultkinesiskinesisStreamArn"
+    },
     "notionIntegrationToken": {
       "Type": "String"
     },
@@ -51,10 +55,6 @@
     },
     "eventApiEndpoint": {
       "Type": "String"
-    },
-    "analyticsbigboidefaultkinesiskinesisStreamArn": {
-      "Type": "String",
-      "Default": "analyticsbigboidefaultkinesiskinesisStreamArn"
     }
   },
   "Conditions": {
