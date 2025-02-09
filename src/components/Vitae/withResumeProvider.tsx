@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { CircularProgress } from "@mui/material";
 import { ResumeProvider } from "@/components/Vitae";
 
 import { useGetFile } from "@/utils/awsStorage";
@@ -29,10 +28,10 @@ export const useStorageResume = () => {
 }
 
 const withResumeProvider = <T extends object>(Component: React.FC<T>) => (props: T): React.ReactNode => {
-  const { resume, loading } = useStorageResume();
+  const { resume } = useStorageResume();
 
-  if (loading || !resume) {
-    return <div className="w-full *:text-center mx-auto"><CircularProgress /></div>;
+  if (!resume) {
+    return null;
   }
 
   return (

@@ -1,6 +1,6 @@
 import { capitalize, get, groupBy, has } from "lodash";
 import { IconButton } from "@mui/material";
-import { Menu } from "@mui/icons-material";
+import Menu from "@mui/icons-material/Menu";
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { LogoTitle } from "../../components/LogoTitle";

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { flattenDeep, get, isString } from "lodash";
+import { flattenDeep, get, isString, uniqBy } from "lodash";
 import moment from "moment";
 
-import ReactStringReplacer from "../../../utils/reactStringReplacer";
-import EventMessageContext, { EventMessage } from "../../../context/eventmessage";
-import DataIcon from "../../../components/DataIcon";
-import ProfileCard from "../../../components/ProfileCard";
+import ReactStringReplacer from "@/utils/reactStringReplacer";
+import EventMessageContext, { EventMessage } from "@/context/eventmessage";
+import ProfileCard from "@/components/ProfileCard";
 import InfiniteList from "@/components/InfiniteList";
+import Icon from "@/components/Icons";
 
 const alreadyVisitedItems = new Set<EventMessage>();
 
@@ -71,7 +71,7 @@ const RowRenderer = ({ index, style }: { data: EventMessage[], index: number, st
         style={{ width: "100%", height: 70, overflow: "auto" }}
       >
         <div className="sticky left-0 flex flex-nowrap gap-2 align-center items-center bg-muted h-full pl-4 pr-1" style={animationStyle}>
-          <DataIcon
+          <Icon
             href={get(item, "publishInfo.icon.link")}
             value={get(item, "publishInfo.icon.value")}
             type={get(item, "publishInfo.icon.type")}

@@ -1,18 +1,16 @@
-import React, { lazy, FC, ComponentType } from "react";
+import React, { lazy, FC } from "react";
 import { Navigate, useNavigate } from "react-router";
-import {
-  Map as MuiMap,
-  Create as CreateIcon,
-  ExitToApp as ExitToAppIcon,
-  Dashboard as DashboardIcon,
-  MeetingRoom as MeetingRoomIcon,
-  Comment as CommentIcon,
-  Home as HomeIcon,
-  ListAltOutlined,
-  LinkOutlined,
-  FilePresentOutlined,
-  QuestionAnswer,
-} from "@mui/icons-material";
+import MuiMap from "@mui/icons-material/Map";
+import CreateIcon from "@mui/icons-material/Create";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
+import CommentIcon from "@mui/icons-material/Comment";
+import HomeIcon from "@mui/icons-material/Home";
+import ListAltOutlined from "@mui/icons-material/ListAltOutlined";
+import LinkOutlined from "@mui/icons-material/LinkOutlined";
+import FilePresentOutlined from "@mui/icons-material/FilePresentOutlined";
+import QuestionAnswer from "@mui/icons-material/QuestionAnswer";
 import { Typography, Button } from "@mui/material";
 import AdminDashboard from "./containers/AdminDashboard";
 import BlogManager from "./containers/BlogManager";

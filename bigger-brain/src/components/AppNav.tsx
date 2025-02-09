@@ -2,7 +2,10 @@
 
 import { FileTree, FlattenFileTreeWithData } from '@/utils/tree'
 import { useEffect, useState } from 'react'
-import { ArrowDropDown, ArrowLeft, ArrowRight, Close, Map as MapIcon, Menu } from '@mui/icons-material'
+import ArrowDropDown from '@mui/icons-material/ArrowDropDown'
+import ArrowLeft from '@mui/icons-material/ArrowLeft'
+import Close from '@mui/icons-material/Close'
+import MapIcon from '@mui/icons-material/Map'
 // import component 👇
 import Drawer from 'react-modern-drawer'
 import TreeView from './TreeView'

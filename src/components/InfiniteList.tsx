@@ -1,4 +1,3 @@
-import { CircularProgress } from '@mui/material';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { FixedSizeList as List } from 'react-window';
 

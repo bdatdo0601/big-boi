@@ -3,7 +3,7 @@ import { Button, CircularProgress, Typography } from "@mui/material";
 import { get, orderBy } from "lodash";
 import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router";
-import { AddRounded } from "@mui/icons-material";
+import AddRounded from "@mui/icons-material/AddRounded";
 
 import { useAWSAPI, useLazyAWSAPI } from "../../utils/awsAPI";
 import { listPosts } from "../../graphql/queries";

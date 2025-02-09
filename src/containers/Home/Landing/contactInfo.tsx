@@ -1,11 +1,7 @@
 import React from 'react';
-import ProfileCard from '../../../components/ProfileCard';
-import ContactButton from '../../../components/ContactButton';
+import ProfileCard from '@/components/ProfileCard';
+import ContactButton, { Contact } from '@/components/ContactButton';
 
-interface Contact {
-  key: string;
-  // Add other properties of contact as needed
-}
 
 interface ContactInfoProps {
   className?: string;
@@ -17,8 +13,11 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ contacts = [] }) => {
   return (
     <ProfileCard
       header={<span className="text-2xl text-input">Contact Me!</span>}
+      cardStyle={{
+        maxWidth: 700
+      }}
     >
-      <div className="text-left max-sm:flex min-sm:columns-2 max-sm:flex-wrap gap-2">
+      <div className="flex flex-wrap gap-4 w-full min-lg:justify-start justify-start mx-auto grow">
         {contacts.map(contact => (
           <div key={contact.key}>
             <ContactButton contact={contact} />

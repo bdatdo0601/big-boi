@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { get, isEmpty } from "lodash";
+import { get, isEmpty, uniqBy } from "lodash";
 import { useSnackbar } from "notistack";
 
 import { useAWSAPI, useSubscriptionAWSAPI } from "../utils/awsAPI";
@@ -40,7 +40,7 @@ export const EventMessageContextProvider: React.FC<{ children: React.ReactNode }
   const variableInputs = useMemo(
     () => ({
       type: "Event",
-      limit: 20,
+      limit: 50,
       sortDirection: "DESC",
     }),
     []
@@ -69,16 +69,14 @@ export const EventMessageContextProvider: React.FC<{ children: React.ReactNode }
   const nextToken: string | undefined = useMemo(() => get(rawMessages, "data.EventMessageByTimestamp.nextToken", "-1"), [rawMessages]);
   const fetchMoreMessages = useCallback(
     async () => {
-      if (nextToken) {
-        await fetchMore(nextToken);
-      }
+      await fetchMore("data.EventMessageByTimestamp.nextToken");
+      
     },
-    [fetchMore, nextToken]
+    [fetchMore]
   );
 
-  const messages: EventMessage[] = get(rawMessages, "data.EventMessageByTimestamp.items", []).map(item => formatItem(item)); -
-
-    useSubscriptionAWSAPI(onCreateEventMessage, onNewDataNotified, console.error);
+  const messages: EventMessage[] = uniqBy(get(rawMessages, "data.EventMessageByTimestamp.items", []).map(item => formatItem(item)), "id");
+  useSubscriptionAWSAPI(onCreateEventMessage, onNewDataNotified, console.error);
   return <EventMessageContext.Provider value={{ messages, loading, fetchMore: fetchMoreMessages, newMessages: newlyArrivedMessages, isDataComplete: isEmpty(nextToken) }}>{children}</EventMessageContext.Provider>;
 };
 

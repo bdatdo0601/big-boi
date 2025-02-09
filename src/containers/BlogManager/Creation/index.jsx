@@ -13,7 +13,7 @@ import MdEditor from "react-markdown-editor-lite";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
 import "./visual_md.css";
-import { CheckBoxOutlined } from "@mui/icons-material";
+import CheckBoxOutlined from "@mui/icons-material/CheckBoxOutlined";
 import { useNavigate, useParams } from "react-router";
 import { get, isEmpty, merge, trim } from "lodash";
 

@@ -11,8 +11,11 @@ import {
   Stepper,
   Typography,
 } from "@mui/material";
-import { Facebook, GitHub, LinkedIn, Twitter } from "@mui/icons-material";
-import { get } from "lodash";
+import Facebook from "@mui/icons-material/Facebook";
+import GitHub from "@mui/icons-material/GitHub";
+import LinkedIn from "@mui/icons-material/LinkedIn";
+import Twitter from "@mui/icons-material/Twitter";
+import get from "lodash/get";
 import React from "react";
 import {
   useBasic,

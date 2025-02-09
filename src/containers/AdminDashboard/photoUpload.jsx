@@ -3,7 +3,7 @@ import React from "react";
 import { CircularProgress, Button } from "@mui/material";
 import PropTypes from "prop-types";
 import { useSnackbar } from "notistack";
-import { UploadFile } from "@mui/icons-material";
+import UploadFile from "@mui/icons-material/UploadFile";
 
 import useGetDataList from "../../utils/hooks/useGetDataList";
 import ImageFilePreview from "../../components/ImageFilePreview";

@@ -5,7 +5,8 @@ import { usePathname } from 'next/navigation'
 import { FileTree } from '@/utils/tree'
 import { eq } from 'lodash'
 import { useState } from 'react'
-import { KeyboardArrowDown, KeyboardArrowRight } from '@mui/icons-material'
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown'
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 
 interface TreeItemProps {
   item: FileTree

@@ -8,7 +8,7 @@ import { AppDrawer } from "../../components/AppDrawer";
 import { MainNavbar } from "./navbar";
 import { Hub } from "aws-amplify/utils";
 import { IconButton } from "@mui/material";
-import { Menu } from "@mui/icons-material";
+import Menu from "@mui/icons-material/Menu";
 
 const subdomain = window.location.host.split(".")[0];
 const isSubdomainRoute = has(subdomainRouteMap, subdomain);

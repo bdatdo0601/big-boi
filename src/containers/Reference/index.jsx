@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ExpandMoreOutlined } from "@mui/icons-material";
+import ExpandMoreOutlined from "@mui/icons-material/ExpandMoreOutlined";
 import { Accordion, AccordionSummary } from "@mui/material";
 import useLocalStorageState from "use-local-storage-state";
 import withScrolling from "react-dnd-scrolling";

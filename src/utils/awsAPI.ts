@@ -1,6 +1,6 @@
 import { useApi } from '@/context/api';
 import { GraphQLResult, GraphQLSubscription, put } from '@aws-amplify/api';
-import { get, merge, mergeWith } from 'lodash';
+import { get, isString, merge, mergeWith } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 
 type EventData = {
@@ -102,27 +102,29 @@ export const useAWSAPI = (operation: string, input: any) => {
   );
 
   const fetchMore = useCallback(
-    async (token: string) => {
+    async (path: string = "") => {
       try {
+        const token = get(data, path);
+        if (!token) return;
         setLoading(true);
-        let retrievedData: any;
-        if (token) {
-          retrievedData = await client.graphql({
-            query: operation,
-            variables: {
-              ...input,
-              nextToken: token,
-            },
-          });
-          setData(currentData =>
-            mergeWith(currentData, retrievedData, (objValue, srcValue) => {
-              if (Array.isArray(objValue)) {
-                return objValue.concat(srcValue);
-              }
-              return undefined;
-            })
-          );
-        }
+        const retrievedData = await client.graphql({
+          query: operation,
+          variables: {
+            ...input,
+            nextToken: token,
+          },
+        });
+        setData(currentData =>
+          mergeWith(currentData, retrievedData, (objValue, srcValue) => {
+            if (Array.isArray(objValue)) {
+              return objValue.concat(srcValue);
+            }
+            if (isString(objValue)) {
+              return srcValue;
+            }
+            return undefined;
+          })
+        );
         setLoading(false);
         return retrievedData;
       } catch (err) {
@@ -131,7 +133,7 @@ export const useAWSAPI = (operation: string, input: any) => {
         return {};
       }
     },
-    [operation, client, input]
+    [operation, client, input, data]
   );
 
   useEffect(() => {

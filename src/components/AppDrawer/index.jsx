@@ -2,7 +2,7 @@ import Drawer from 'react-modern-drawer';
 //import styles 👇
 import 'react-modern-drawer/dist/index.css';
 import { FormControlLabel, IconButton } from '@mui/material';
-import { Menu } from '@mui/icons-material';
+import Menu from '@mui/icons-material/Menu';
 import { useContext, useMemo } from 'react';
 import LayoutContext from '../../context/layout';
 import { styled } from '@mui/material/styles';

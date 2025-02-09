@@ -11,14 +11,12 @@ import {
 } from "@mui/material";
 import { get } from "lodash";
 import { useSnackbar } from "notistack";
-import {
-  ContentCopyOutlined,
-  DeleteOutlined,
-  DragIndicatorOutlined,
-  EditOutlined,
-  ShareOutlined,
-  VisibilityOffOutlined,
-} from "@mui/icons-material";
+import ContentCopyOutlined from "@mui/icons-material/ContentCopyOutlined";
+import DeleteOutlined from "@mui/icons-material/DeleteOutlined";
+import DragIndicatorOutlined from "@mui/icons-material/DragIndicatorOutlined";
+import EditOutlined from "@mui/icons-material/EditOutlined";
+import ShareOutlined from "@mui/icons-material/ShareOutlined";
+import VisibilityOffOutlined from "@mui/icons-material/VisibilityOffOutlined";
 import { useDrag } from "react-dnd";
 import { useLazyAWSAPI } from "../../../utils/awsAPI";
 import {

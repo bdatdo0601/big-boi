@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import { Chip, Tooltip } from "@mui/material";
 import Avatar from "../Avatar";
-import { Delete } from "@mui/icons-material";
+import Delete from "@mui/icons-material/Delete";
 
 const PREFIX = "index";
 

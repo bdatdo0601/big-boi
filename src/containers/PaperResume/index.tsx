@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import PaperResumeRenderer from "./PaperResumeRenderer";
-import { Print } from "@mui/icons-material";
+import Print from "@mui/icons-material/Print";
 
 export default function PaperResumeDisplay() {
   const ref = useRef<HTMLDivElement>(null);
