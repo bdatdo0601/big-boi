@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.34.15](https://github.com/bdatdo0601/big-boi/compare/v1.34.14...v1.34.15) (2025-02-09)
+
+
+### Bug Fixes
+
+* amplify changes ([6b09a71](https://github.com/bdatdo0601/big-boi/commit/6b09a71a02569052439a7dc77d3ca6f785267f49))
+* amplify changes ([e7388b7](https://github.com/bdatdo0601/big-boi/commit/e7388b7acd53ef8be70a648c4f0952961a0185f9))
+* complete removal of kinesis ([63c024e](https://github.com/bdatdo0601/big-boi/commit/63c024e679a8833348dcd01e7f62eb2e1d60d03d))
+* kinesis old deps removal ([c458802](https://github.com/bdatdo0601/big-boi/commit/c458802568f2f581285e828aa4e81a27ec2bd180))
+* update notification sns arn ([e6b9733](https://github.com/bdatdo0601/big-boi/commit/e6b9733a1e1d12eb040992930d1defc504274a5e))
+
 ### [1.34.14](https://github.com/bdatdo0601/big-boi/compare/v1.34.13...v1.34.14) (2025-02-08)
 
 
