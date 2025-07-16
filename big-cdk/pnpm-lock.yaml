@@ -8,12 +8,21 @@ importers:
 
   .:
     dependencies:
+      '@aws-solutions-constructs/aws-alb-fargate':
+        specifier: ^2.86.0
+        version: 2.86.0(@aws-solutions-constructs/core@2.86.0(aws-cdk-lib@2.177.0(constructs@10.4.2))(constructs@10.4.2))(aws-cdk-lib@2.177.0(constructs@10.4.2))(constructs@10.4.2)
       aws-cdk-lib:
         specifier: 2.177.0
         version: 2.177.0(constructs@10.4.2)
+      cdk-nag:
+        specifier: ^2.36.38
+        version: 2.36.39(aws-cdk-lib@2.177.0(constructs@10.4.2))(constructs@10.4.2)
       constructs:
         specifier: ^10.0.0
         version: 10.4.2
+      fs-extra:
+        specifier: ^11.3.0
+        version: 11.3.0
     devDependencies:
       '@types/jest':
         specifier: ^29.5.14
@@ -57,6 +66,23 @@ packages:
     bundledDependencies:
       - jsonschema
       - semver
+
+  '@aws-solutions-constructs/aws-alb-fargate@2.86.0':
+    resolution: {integrity: sha512-pRCjK4Bu55M6w8xx9Gjg29r8iVmPh7MV67/Y4oj1T/3R08DNhQwfMHf/RL0pl05LWTzYXoJX1ACvKw97OP/t6A==}
+    peerDependencies:
+      '@aws-solutions-constructs/core': 2.86.0
+      aws-cdk-lib: ^2.193.0
+      constructs: ^10.0.0
+
+  '@aws-solutions-constructs/core@2.86.0':
+    resolution: {integrity: sha512-PYhCLOE7DaeqA7VyTC9+l4XnOX3vvFWC5un+/mhn4zsbHauhqNuo9OGuayldM/VWLA7gicsZi5zs3i39nQhsHw==}
+    peerDependencies:
+      aws-cdk-lib: ^2.193.0
+      constructs: ^10.0.0
+    bundledDependencies:
+      - deepmerge
+      - npmlog
+      - deep-diff
 
   '@babel/code-frame@7.26.2':
     resolution: {integrity: sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==}
@@ -507,6 +533,12 @@ packages:
   caniuse-lite@1.0.30001696:
     resolution: {integrity: sha512-pDCPkvzfa39ehJtJ+OwGT/2yvT2SbjfHhiIW2LWOAcMQ7BzwxT/XuyUp4OTOd0XFWA6BKw0JalnBHgSi5DGJBQ==}
 
+  cdk-nag@2.36.39:
+    resolution: {integrity: sha512-kOsJGmkJYw+wca3Hf1R9CQbtEjAw/W3icKP61KKT2wOmkiHZ9xtMOqxJq6nS+jYKOMyAmHWlV/lHcfUqPjK1lg==}
+    peerDependencies:
+      aws-cdk-lib: ^2.156.0
+      constructs: ^10.0.5
+
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
@@ -653,6 +685,10 @@ packages:
   find-up@4.1.0:
     resolution: {integrity: sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw==}
     engines: {node: '>=8'}
+
+  fs-extra@11.3.0:
+    resolution: {integrity: sha512-Z4XaCL6dUDHfP/jT25jJKMmtxvuwbkrD1vNSMFlo9lNLY2c5FHYSQgHPRZUjAB26TpDEoW9HCOgplrdbaPV/ew==}
+    engines: {node: '>=14.14'}
 
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
@@ -931,6 +967,9 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
+
+  jsonfile@6.1.0:
+    resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
 
   kleur@3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
@@ -1235,6 +1274,10 @@ packages:
   undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
 
+  universalify@2.0.1:
+    resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
+    engines: {node: '>= 10.0.0'}
+
   update-browserslist-db@1.1.2:
     resolution: {integrity: sha512-PPypAm5qvlD7XMZC3BujecnaOxwhrtoFR+Dqkk5Aa/6DssiH0ibKoketaj9w8LP7Bont1rYeoV5plxD7RTEPRg==}
     hasBin: true
@@ -1304,6 +1347,17 @@ snapshots:
   '@aws-cdk/asset-node-proxy-agent-v6@2.1.0': {}
 
   '@aws-cdk/cloud-assembly-schema@39.2.12': {}
+
+  '@aws-solutions-constructs/aws-alb-fargate@2.86.0(@aws-solutions-constructs/core@2.86.0(aws-cdk-lib@2.177.0(constructs@10.4.2))(constructs@10.4.2))(aws-cdk-lib@2.177.0(constructs@10.4.2))(constructs@10.4.2)':
+    dependencies:
+      '@aws-solutions-constructs/core': 2.86.0(aws-cdk-lib@2.177.0(constructs@10.4.2))(constructs@10.4.2)
+      aws-cdk-lib: 2.177.0(constructs@10.4.2)
+      constructs: 10.4.2
+
+  '@aws-solutions-constructs/core@2.86.0(aws-cdk-lib@2.177.0(constructs@10.4.2))(constructs@10.4.2)':
+    dependencies:
+      aws-cdk-lib: 2.177.0(constructs@10.4.2)
+      constructs: 10.4.2
 
   '@babel/code-frame@7.26.2':
     dependencies:
@@ -1898,6 +1952,11 @@ snapshots:
 
   caniuse-lite@1.0.30001696: {}
 
+  cdk-nag@2.36.39(aws-cdk-lib@2.177.0(constructs@10.4.2))(constructs@10.4.2):
+    dependencies:
+      aws-cdk-lib: 2.177.0(constructs@10.4.2)
+      constructs: 10.4.2
+
   chalk@4.1.2:
     dependencies:
       ansi-styles: 4.3.0
@@ -2028,6 +2087,12 @@ snapshots:
     dependencies:
       locate-path: 5.0.0
       path-exists: 4.0.0
+
+  fs-extra@11.3.0:
+    dependencies:
+      graceful-fs: 4.2.11
+      jsonfile: 6.1.0
+      universalify: 2.0.1
 
   fs.realpath@1.0.0: {}
 
@@ -2470,6 +2535,12 @@ snapshots:
 
   json5@2.2.3: {}
 
+  jsonfile@6.1.0:
+    dependencies:
+      universalify: 2.0.1
+    optionalDependencies:
+      graceful-fs: 4.2.11
+
   kleur@3.0.3: {}
 
   leven@3.1.0: {}
@@ -2721,6 +2792,8 @@ snapshots:
   typescript@5.6.3: {}
 
   undici-types@6.19.8: {}
+
+  universalify@2.0.1: {}
 
   update-browserslist-db@1.1.2(browserslist@4.24.4):
     dependencies:

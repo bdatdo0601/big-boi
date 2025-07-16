@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          cache: "pnpm"
 
       # Configure amplify
       - name: configure amplify
@@ -47,7 +47,7 @@ jobs:
         with:
           amplify_command: configure
           amplify_env: dev
-          amplify_arguments: '--restore'
+          amplify_arguments: "--restore"
           amplify_cli_version: 12.10.3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -69,7 +69,7 @@ jobs:
           amplify_command: publish
           amplify_env: dev
           amplify_cli_version: 12.14.2
-          amplify_arguments: '--force --yes -c'
+          amplify_arguments: "--force --yes -c"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -89,27 +89,38 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: use node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+      - name: install, build and test
+        run: |
+          cd big-cdk/
+          pnpm install
+          # build
+          pnpm build
       - name: cdk synth
         uses: youyo/aws-cdk-github-actions@v2
         with:
-          cdk_subcommand: 'synth'
-          cdk_version: '2.177.0'
-          working_dir: 'big-cdk'
+          cdk_subcommand: "synth"
+          cdk_version: "2.177.0"
+          working_dir: "big-cdk"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: 'us-east-1'
+          AWS_DEFAULT_REGION: "us-east-1"
 
       - name: cdk deploy
         uses: youyo/aws-cdk-github-actions@v2
         with:
-          cdk_subcommand: 'deploy'
-          cdk_version: '2.177.0'
-          cdk_stack: '--all'
-          cdk_args: '--require-approval never'
+          cdk_subcommand: "deploy"
+          cdk_version: "2.177.0"
+          cdk_stack: "--all"
+          cdk_args: "--require-approval never"
           actions_comment: false
-          working_dir: 'big-cdk'
+          working_dir: "big-cdk"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: 'us-east-1'
+          AWS_DEFAULT_REGION: "us-east-1"
