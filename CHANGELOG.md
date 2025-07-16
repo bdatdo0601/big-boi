@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.36.5](https://github.com/bdatdo0601/big-boi/compare/v1.36.4...v1.36.5) (2025-07-16)
+
+
+### Bug Fixes
+
+* remove health check for khoj ([44762b6](https://github.com/bdatdo0601/big-boi/commit/44762b63ea53490305317ca248cd8d947c5083c2))
+* update tsconfig to not emit js and d.ts ([1c71500](https://github.com/bdatdo0601/big-boi/commit/1c715001b5923946929db28e6a01c49fd5ed3c61))
+
 ### [1.36.4](https://github.com/bdatdo0601/big-boi/compare/v1.36.3...v1.36.4) (2025-07-16)
 
 
