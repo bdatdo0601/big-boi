@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.36.2](https://github.com/bdatdo0601/big-boi/compare/v1.36.1...v1.36.2) (2025-07-16)
+
+
+### Bug Fixes
+
+* remove explicit dependency ([2275a80](https://github.com/bdatdo0601/big-boi/commit/2275a80f08a9d70c4e7fafe75eb34e5b496c28c7))
+
 ### [1.36.1](https://github.com/bdatdo0601/big-boi/compare/v1.36.0...v1.36.1) (2025-07-16)
 
 
