@@ -88,11 +88,9 @@ export class KnowledgeGraphStack extends cdk.Stack {
     });
 
     // Add dependencies to ensure proper creation order
-    databaseStack.addDependency(secretsStack);
-    iamStack.addDependency(secretsStack);
-    containerStack.addDependency(iamStack);
-    containerStack.addDependency(databaseStack);
-    loadBalancerStack.addDependency(containerStack);
+    // Note: Since we're using Constructs instead of NestedStacks, 
+    // CDK will automatically handle dependencies based on resource references
+    // The explicit addDependency calls are no longer needed and were causing circular dependencies
 
     // Main stack outputs
     new cdk.CfnOutput(this, "KhojApplicationUrl", {

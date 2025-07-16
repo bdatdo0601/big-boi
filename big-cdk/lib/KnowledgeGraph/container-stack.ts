@@ -6,7 +6,7 @@ import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
 import * as rds from 'aws-cdk-lib/aws-rds';
 import { Construct } from 'constructs';
 
-export interface ContainerStackProps extends cdk.NestedStackProps {
+export interface ContainerStackProps {
   cluster: ecs.Cluster;
   taskRole: iam.Role;
   executionRole: iam.Role;
@@ -25,7 +25,7 @@ export interface ContainerStackProps extends cdk.NestedStackProps {
   };
 }
 
-export class ContainerStack extends cdk.NestedStack {
+export class ContainerStack extends Construct {
   public readonly serverService: ecs.FargateService;
   public readonly sandboxService: ecs.FargateService;
   public readonly searchService: ecs.FargateService;
@@ -33,7 +33,7 @@ export class ContainerStack extends cdk.NestedStack {
   public readonly serverContainer: ecs.ContainerDefinition;
 
   constructor(scope: Construct, id: string, props: ContainerStackProps) {
-    super(scope, id, props);
+    super(scope, id);
 
     // Use log groups passed from parent stack
     const serverLogGroup = props.logGroups.serverLogGroup;

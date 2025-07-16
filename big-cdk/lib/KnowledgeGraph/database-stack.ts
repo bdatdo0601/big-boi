@@ -5,16 +5,16 @@ import * as logs from 'aws-cdk-lib/aws-logs';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import { Construct } from 'constructs';
 
-export interface DatabaseStackProps extends cdk.NestedStackProps {
+export interface DatabaseStackProps {
   dbCredentials: secretsmanager.Secret;
   cluster: ecs.Cluster;
 }
 
-export class DatabaseStack extends cdk.NestedStack {
+export class DatabaseStack extends Construct {
   public readonly dbCluster: rds.DatabaseCluster;
 
   constructor(scope: Construct, id: string, props: DatabaseStackProps) {
-    super(scope, id, props);
+    super(scope, id);
 
     // Create Aurora Serverless v2 PostgreSQL cluster (using cluster VPC)
     this.dbCluster = new rds.DatabaseCluster(this, 'KhojDatabase', {

@@ -3,18 +3,18 @@ import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 
-export interface SecretsStackProps extends cdk.NestedStackProps {
+export interface SecretsStackProps {
   // No additional props needed for now
 }
 
-export class SecretsStack extends cdk.NestedStack {
+export class SecretsStack extends Construct {
   public readonly dbCredentials: secretsmanager.Secret;
   public readonly djangoSecret: secretsmanager.Secret;
   public readonly adminSecret: secretsmanager.Secret;
   public readonly anthropicApiKeySecret: secretsmanager.Secret;
 
   constructor(scope: Construct, id: string, props: SecretsStackProps) {
-    super(scope, id, props);
+    super(scope, id);
 
     // Create database credentials secret
     this.dbCredentials = new secretsmanager.Secret(this, 'KhojDbCredentials', {

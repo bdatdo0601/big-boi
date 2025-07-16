@@ -3,19 +3,19 @@ import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 import { Construct } from 'constructs';
 
-export interface LoadBalancerStackProps extends cdk.NestedStackProps {
+export interface LoadBalancerStackProps {
   cluster: ecs.Cluster;
   serverService: ecs.FargateService;
   serverContainer: ecs.ContainerDefinition;
 }
 
-export class LoadBalancerStack extends cdk.NestedStack {
+export class LoadBalancerStack extends Construct {
   public readonly alb: elbv2.ApplicationLoadBalancer;
   public readonly targetGroup: elbv2.ApplicationTargetGroup;
   public readonly listener: elbv2.ApplicationListener;
 
   constructor(scope: Construct, id: string, props: LoadBalancerStackProps) {
-    super(scope, id, props);
+    super(scope, id);
 
     // Create Application Load Balancer
     this.alb = new elbv2.ApplicationLoadBalancer(this, 'KhojLoadBalancer', {

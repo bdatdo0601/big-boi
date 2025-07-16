@@ -4,7 +4,7 @@ import * as logs from 'aws-cdk-lib/aws-logs';
 import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
 import { Construct } from 'constructs';
 
-export interface IamStackProps extends cdk.NestedStackProps {
+export interface IamStackProps {
   secrets: {
     dbCredentials: secretsmanager.Secret;
     djangoSecret: secretsmanager.Secret;
@@ -14,13 +14,13 @@ export interface IamStackProps extends cdk.NestedStackProps {
   logGroups: logs.LogGroup[];
 }
 
-export class IamStack extends cdk.NestedStack {
+export class IamStack extends Construct {
   public readonly taskRole: iam.Role;
   public readonly executionRole: iam.Role;
   public readonly serviceCommRole: iam.Role;
 
   constructor(scope: Construct, id: string, props: IamStackProps) {
-    super(scope, id, props);
+    super(scope, id);
 
     // Create execution role for ECS tasks
     this.executionRole = new iam.Role(this, 'KhojExecutionRole', {
