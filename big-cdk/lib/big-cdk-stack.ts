@@ -24,7 +24,8 @@ export class BigCdkStack extends cdk.Stack {
       deploymentProps,
     );
 
-    this.addDependency(eventMessageStack);
-    this.addDependency(knowledgeBaseStack);
+    // Remove these lines - they create circular dependencies!
+    // this.addDependency(eventMessageStack);
+    // this.addDependency(knowledgeBaseStack);
   }
 }

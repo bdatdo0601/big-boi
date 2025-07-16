@@ -17,6 +17,12 @@ export interface ContainerStackProps extends cdk.NestedStackProps {
     anthropicApiKeySecret: secretsmanager.Secret;
   };
   dbCluster: rds.DatabaseCluster;
+  logGroups: {
+    serverLogGroup: logs.LogGroup;
+    sandboxLogGroup: logs.LogGroup;
+    searchLogGroup: logs.LogGroup;
+    computerLogGroup: logs.LogGroup;
+  };
 }
 
 export class ContainerStack extends cdk.NestedStack {
@@ -29,26 +35,11 @@ export class ContainerStack extends cdk.NestedStack {
   constructor(scope: Construct, id: string, props: ContainerStackProps) {
     super(scope, id, props);
 
-    // Create log groups for services
-    const serverLogGroup = new logs.LogGroup(this, 'KhojServerLogGroup', {
-      logGroupName: '/aws/ecs/khoj-server',
-      retention: logs.RetentionDays.ONE_MONTH,
-    });
-
-    const sandboxLogGroup = new logs.LogGroup(this, 'KhojSandboxLogGroup', {
-      logGroupName: '/aws/ecs/khoj-sandbox',
-      retention: logs.RetentionDays.ONE_MONTH,
-    });
-
-    const searchLogGroup = new logs.LogGroup(this, 'KhojSearchLogGroup', {
-      logGroupName: '/aws/ecs/khoj-search',
-      retention: logs.RetentionDays.ONE_MONTH,
-    });
-
-    const computerLogGroup = new logs.LogGroup(this, 'KhojComputerLogGroup', {
-      logGroupName: '/aws/ecs/khoj-computer',
-      retention: logs.RetentionDays.ONE_MONTH,
-    });
+    // Use log groups passed from parent stack
+    const serverLogGroup = props.logGroups.serverLogGroup;
+    const sandboxLogGroup = props.logGroups.sandboxLogGroup;
+    const searchLogGroup = props.logGroups.searchLogGroup;
+    const computerLogGroup = props.logGroups.computerLogGroup;
 
     // Create task definition for sandbox service
     const sandboxTaskDefinition = new ecs.FargateTaskDefinition(this, 'SandboxTaskDef', {

@@ -30,24 +30,24 @@ export class KnowledgeGraphStack extends cdk.Stack {
     });
 
     // Create log groups for IAM stack
-    const logGroups = [
-      new logs.LogGroup(this, "ServerLogGroup", {
-        logGroupName: "/aws/ecs/khoj-server",
-        retention: logs.RetentionDays.ONE_MONTH,
-      }),
-      new logs.LogGroup(this, "SandboxLogGroup", {
-        logGroupName: "/aws/ecs/khoj-sandbox",
-        retention: logs.RetentionDays.ONE_MONTH,
-      }),
-      new logs.LogGroup(this, "SearchLogGroup", {
-        logGroupName: "/aws/ecs/khoj-search",
-        retention: logs.RetentionDays.ONE_MONTH,
-      }),
-      new logs.LogGroup(this, "ComputerLogGroup", {
-        logGroupName: "/aws/ecs/khoj-computer",
-        retention: logs.RetentionDays.ONE_MONTH,
-      }),
-    ];
+    const serverLogGroup = new logs.LogGroup(this, "ServerLogGroup", {
+      logGroupName: "/aws/ecs/khoj-server",
+      retention: logs.RetentionDays.ONE_MONTH,
+    });
+    const sandboxLogGroup = new logs.LogGroup(this, "SandboxLogGroup", {
+      logGroupName: "/aws/ecs/khoj-sandbox",
+      retention: logs.RetentionDays.ONE_MONTH,
+    });
+    const searchLogGroup = new logs.LogGroup(this, "SearchLogGroup", {
+      logGroupName: "/aws/ecs/khoj-search",
+      retention: logs.RetentionDays.ONE_MONTH,
+    });
+    const computerLogGroup = new logs.LogGroup(this, "ComputerLogGroup", {
+      logGroupName: "/aws/ecs/khoj-computer",
+      retention: logs.RetentionDays.ONE_MONTH,
+    });
+
+    const logGroups = [serverLogGroup, sandboxLogGroup, searchLogGroup, computerLogGroup];
 
     // 3. Create IAM Stack
     const iamStack = new IamStack(this, "IamStack", {
@@ -72,6 +72,12 @@ export class KnowledgeGraphStack extends cdk.Stack {
         anthropicApiKeySecret: secretsStack.anthropicApiKeySecret,
       },
       dbCluster: databaseStack.dbCluster,
+      logGroups: {
+        serverLogGroup: serverLogGroup,
+        sandboxLogGroup: sandboxLogGroup,
+        searchLogGroup: searchLogGroup,
+        computerLogGroup: computerLogGroup,
+      },
     });
 
     // 5. Create Load Balancer Stack
@@ -80,6 +86,13 @@ export class KnowledgeGraphStack extends cdk.Stack {
       serverService: containerStack.serverService,
       serverContainer: containerStack.serverContainer,
     });
+
+    // Add dependencies to ensure proper creation order
+    databaseStack.addDependency(secretsStack);
+    iamStack.addDependency(secretsStack);
+    containerStack.addDependency(iamStack);
+    containerStack.addDependency(databaseStack);
+    loadBalancerStack.addDependency(containerStack);
 
     // Main stack outputs
     new cdk.CfnOutput(this, "KhojApplicationUrl", {
