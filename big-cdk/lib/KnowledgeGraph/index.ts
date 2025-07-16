@@ -1,14 +1,14 @@
 import * as cdk from "aws-cdk-lib";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as logs from "aws-cdk-lib/aws-logs";
-import { Construct } from "constructs";
 import { NagSuppressions } from "cdk-nag";
+import { Construct } from "constructs";
 
-import { SecretsStack } from "./secrets-stack";
+import { ContainerStack } from "./container-stack";
 import { DatabaseStack } from "./database-stack";
 import { IamStack } from "./iam-stack";
-import { ContainerStack } from "./container-stack";
 import { LoadBalancerStack } from "./load-balancer-stack";
+import { SecretsStack } from "./secrets-stack";
 
 export class KnowledgeGraphStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -80,13 +80,6 @@ export class KnowledgeGraphStack extends cdk.Stack {
       serverService: containerStack.serverService,
       serverContainer: containerStack.serverContainer,
     });
-
-    // Add dependencies to ensure proper creation order
-    databaseStack.addDependency(secretsStack);
-    iamStack.addDependency(secretsStack);
-    containerStack.addDependency(iamStack);
-    containerStack.addDependency(databaseStack);
-    loadBalancerStack.addDependency(containerStack);
 
     // Main stack outputs
     new cdk.CfnOutput(this, "KhojApplicationUrl", {

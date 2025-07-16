@@ -25,5 +25,6 @@ export class BigCdkStack extends cdk.Stack {
     );
 
     this.addDependency(eventMessageStack);
+    this.addDependency(knowledgeBaseStack);
   }
 }
