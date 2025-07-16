@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.36.1](https://github.com/bdatdo0601/big-boi/compare/v1.36.0...v1.36.1) (2025-07-16)
+
+
+### Bug Fixes
+
+* add pnpm in cdk setup ([b78d962](https://github.com/bdatdo0601/big-boi/commit/b78d962ecea5ad4e1e6924d2cf03e6604927aa15))
+
 ## [1.36.0](https://github.com/bdatdo0601/big-boi/compare/v1.35.1...v1.36.0) (2025-07-16)
 
 
