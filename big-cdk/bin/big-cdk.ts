@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 import * as cdk from "aws-cdk-lib";
 import { BigCdkStack } from "../lib/big-cdk-stack";
-import { KhojStack } from "../lib/khoj-stack";
-import { AwsSolutionsChecks } from "cdk-nag";
 
 const app = new cdk.App();
 
@@ -23,7 +21,3 @@ new BigCdkStack(app, "BigCdkStack", {
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
-
-// new KhojStack(app, 'KhojStack', {
-//   env: { account: process.env.CDK_TARGET_ACCOUNT, region: process.env.CDK_TARGET_REGION },
-// });
