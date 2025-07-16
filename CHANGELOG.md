@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.36.0](https://github.com/bdatdo0601/big-boi/compare/v1.35.1...v1.36.0) (2025-07-16)
+
+
+### Features
+
+* update cdk build step ([6449e85](https://github.com/bdatdo0601/big-boi/commit/6449e85a80972384d563b52e5f58b8beeaeea8bc))
+
 ### [1.35.1](https://github.com/bdatdo0601/big-boi/compare/v1.35.0...v1.35.1) (2025-07-16)
 
 
