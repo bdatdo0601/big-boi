@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.35.1](https://github.com/bdatdo0601/big-boi/compare/v1.35.0...v1.35.1) (2025-07-16)
+
+
+### Bug Fixes
+
+* enable type emit ([ab87558](https://github.com/bdatdo0601/big-boi/commit/ab875588ae825e3990a6acca11f58b1201018e60))
+
 ## [1.35.0](https://github.com/bdatdo0601/big-boi/compare/v1.34.16...v1.35.0) (2025-07-16)
 
 
