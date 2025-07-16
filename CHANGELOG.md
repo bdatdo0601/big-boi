@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.35.0](https://github.com/bdatdo0601/big-boi/compare/v1.34.16...v1.35.0) (2025-07-16)
+
+
+### Features
+
+* experiment with khoj ([bc66cfd](https://github.com/bdatdo0601/big-boi/commit/bc66cfdb7843ebf955dbebd0d5cbb866c90d08c8))
+
+
+### Bug Fixes
+
+* accept other markdown extension ([6660f05](https://github.com/bdatdo0601/big-boi/commit/6660f05e83e4b35a833636cb6e03a97a779c25a9))
+* add knowledge mngr stack ([ef8dd40](https://github.com/bdatdo0601/big-boi/commit/ef8dd401fbab2d0cb59472f8175689154ebb6861))
+
 ### [1.34.16](https://github.com/bdatdo0601/big-boi/compare/v1.34.15...v1.34.16) (2025-02-09)
 
 
