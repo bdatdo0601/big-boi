@@ -1,7 +1,6 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import { EventManagementStack } from "./EventManagement";
-import { KnowledgeGraphStack } from "./KnowledgeGraph";
 import config from "./config";
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
@@ -15,12 +14,6 @@ export class BigCdkStack extends cdk.Stack {
     const eventMessageStack = new EventManagementStack(
       this,
       "EventManagementStack",
-      deploymentProps,
-    );
-
-    const knowledgeBaseStack = new KnowledgeGraphStack(
-      this,
-      "KnowledgeBaseStack",
       deploymentProps,
     );
 
