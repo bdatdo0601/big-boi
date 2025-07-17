@@ -1,0 +1,97 @@
+version: "3.8"
+
+services:
+  database:
+    # PostgreSQL database for Khoj to store data
+    image: docker.io/pgvector/pgvector:pg15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - khoj_db:/var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    # Railway-specific: restart policy
+    restart: unless-stopped
+
+  # Creates Computer for Khoj to use.
+  # Set KHOJ_OPERATOR_ENABLED=True in the server service environment variable to enable.
+  # computer:
+  #   # https://github.com/khoj-ai/khoj/tree/master/src/khoj/processor/operator
+  #   container_name: khoj-computer
+  #   image: ghcr.io/khoj-ai/khoj-computer:latest
+  #   ports:
+  #     - "5900:5900"
+  #   volumes:
+  #     - khoj_computer:/home/operator
+  #   restart: unless-stopped
+
+  server:
+    depends_on:
+      database:
+        condition: service_healthy
+    # Use the latest stable version
+    image: ghcr.io/khoj-ai/khoj:latest
+    ports:
+      - "42110:42110"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    working_dir: /app
+    volumes:
+      - khoj_config:/root/.khoj/
+      - khoj_models:/root/.cache/torch/sentence_transformers
+      - khoj_models:/root/.cache/huggingface
+    environment:
+      # Database configuration
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=database
+      - POSTGRES_PORT=5432
+
+      # Khoj configuration
+      - KHOJ_DJANGO_SECRET_KEY=${KHOJ_DJANGO_SECRET_KEY:-your-secret-key-change-this}
+      - KHOJ_DEBUG=${KHOJ_DEBUG:-False}
+      - KHOJ_ADMIN_EMAIL=${KHOJ_ADMIN_EMAIL:-admin@example.com}
+      - KHOJ_ADMIN_PASSWORD=${KHOJ_ADMIN_PASSWORD:-change-this-password}
+
+      # AI Model APIs (set these in Railway dashboard)
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+
+      # Optional: Local AI models
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - KHOJ_DEFAULT_CHAT_MODEL=${KHOJ_DEFAULT_CHAT_MODEL}
+
+      # Optional: Computer control
+      - KHOJ_OPERATOR_ENABLED=${KHOJ_OPERATOR_ENABLED:-False}
+
+      # Optional: Enhanced web search
+      - SERPER_DEV_API_KEY=${SERPER_DEV_API_KEY}
+      - OLOSTEP_API_KEY=${OLOSTEP_API_KEY}
+
+      # Terrarium
+      - E2B_API_KEY=${E2B_API_KEY}
+
+      - KHOJ_NO_HTTPS=${KHOJ_NO_HTTPS:-False}
+      - KHOJ_DOMAIN=${KHOJ_DOMAIN}
+      - KHOJ_ALLOWED_DOMAIN=${KHOJ_ALLOWED_DOMAIN}
+
+      # Optional: Disable telemetry
+      - KHOJ_TELEMETRY_DISABLE=${KHOJ_TELEMETRY_DISABLE:-False}
+
+      # Railway-specific: Port configuration
+      - PORT=42110
+
+    command: --host="0.0.0.0" --port=42110 -vv --non-interactive
+    restart: unless-stopped
+
+volumes:
+  khoj_config:
+  khoj_db:
+  khoj_models:
