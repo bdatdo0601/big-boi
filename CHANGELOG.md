@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.37.0](https://github.com/bdatdo0601/big-boi/compare/v1.36.5...v1.37.0) (2025-07-21)
+
+
+### Features
+
+* add Sliplane deployment configuration for big-agent ([1a39b45](https://github.com/bdatdo0601/big-boi/commit/1a39b454360689713ad74aa493f0ff48e7f6b6ca))
+
 ### [1.36.5](https://github.com/bdatdo0601/big-boi/compare/v1.36.4...v1.36.5) (2025-07-16)
 
 
