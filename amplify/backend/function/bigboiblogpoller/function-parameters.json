@@ -1,26 +1,11 @@
 {
   "permissions": {
     "api": {
-      "bigboiapi": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
-      "bigboiexternalapi": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ]
+      "bigboiapi": ["create", "read", "update", "delete"],
+      "bigboiexternalapi": ["create", "read", "update", "delete"]
     },
     "storage": {
-      "bigboicontent": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ]
+      "bigboicontent": ["create", "read", "update", "delete"]
     }
   },
   "lambdaLayers": [

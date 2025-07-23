@@ -1,9 +1,9 @@
-import { useRef } from 'react';
-import ProfileCard from '../../../components/ProfileCard';
 import { Download, QuestionAnswer } from '@mui/icons-material';
-import PaperResumeRenderer from '@/containers/PaperResume/PaperResumeRenderer';
-import { useReactToPrint } from 'react-to-print';
+import { useRef } from 'react';
 import { useNavigate } from 'react-router';
+import { useReactToPrint } from 'react-to-print';
+import PaperResumeRenderer from '@/containers/PaperResume/PaperResumeRenderer';
+import ProfileCard from '../../../components/ProfileCard';
 
 export default function WelcomeInfo({ bio }: { bio: string[] }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -26,7 +26,7 @@ export default function WelcomeInfo({ bio }: { bio: string[] }) {
             </p>
           ))}
         </div>
-        <div className='flex flex-wrap gap-2 items-center'>
+        <div className="flex flex-wrap gap-2 items-center">
           <button
             className="hover:cursor-pointer rounded-xl text-input shadow-lg bg-secondary px-3 py-2 mt-4"
             onClick={() => {
@@ -36,7 +36,12 @@ export default function WelcomeInfo({ bio }: { bio: string[] }) {
             <Download sx={{}} /> My Latest Resume
           </button>
 
-          <button className="hover:cursor-pointer rounded-xl text-input shadow-lg bg-secondary px-3 py-2 mt-4" onClick={() => { navigate('/faq') }}>
+          <button
+            className="hover:cursor-pointer rounded-xl text-input shadow-lg bg-secondary px-3 py-2 mt-4"
+            onClick={() => {
+              navigate('/faq');
+            }}
+          >
             <QuestionAnswer sx={{}} /> My FAQ
           </button>
         </div>

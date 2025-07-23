@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
 import { get } from 'lodash';
-import Landing from './Landing';
+import React, { useEffect, useState } from 'react';
+import { useStorageResume } from '@/components/Vitae/withResumeProvider';
 import { useGetFile, useGetFileURL } from '../../utils/awsStorage';
 import { RESUME } from '../../utils/constants';
-import { useStorageResume } from '@/components/Vitae/withResumeProvider';
+import Landing from './Landing';
 
 export default function Home() {
   const { resume } = useStorageResume();

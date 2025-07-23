@@ -1,10 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
-import { list, getUrl, uploadData, ListPaginateWithPathOutput, downloadData, remove } from '@aws-amplify/storage';
-
-import { PHOTO_UPLOAD_PREFIX } from './constants';
-import { getImageMeta } from '.';
+import { downloadData, getUrl, ListPaginateWithPathOutput, list, remove, uploadData } from '@aws-amplify/storage';
 import { ItemWithPath } from 'node_modules/@aws-amplify/storage/dist/esm/providers/s3/types/outputs';
 import { StorageDownloadDataOutput } from 'node_modules/@aws-amplify/storage/dist/esm/types';
+import { useCallback, useEffect, useState } from 'react';
+import { getImageMeta } from '.';
+import { PHOTO_UPLOAD_PREFIX } from './constants';
 
 export const getFileURL = async (key: string) => {
   const response = await getUrl({ path: key, options: { validateObjectExistence: true } });

@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import PropTypes from "prop-types";
-import { useSpring, animated } from "@react-spring/web";
-import { useDrag } from "@use-gesture/react";
-import { Typography } from "@mui/material";
-import MAIN_PICTURE from "../../assets/main_picture.jpg";
-import LayoutContext from "../../context/layout";
+import { Typography } from '@mui/material';
+import { animated, useSpring } from '@react-spring/web';
+import { useDrag } from '@use-gesture/react';
+import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import MAIN_PICTURE from '../../assets/main_picture.jpg';
+import LayoutContext from '../../context/layout';
 
-import "./index.css";
+import './index.css';
 
 export default function Profile({ image, name, wrapperStyle, imageStyle, animation }) {
   const [imageProps, api] = useSpring(() => ({
@@ -14,7 +14,7 @@ export default function Profile({ image, name, wrapperStyle, imageStyle, animati
     transform: [0, 0],
     opacity: 1,
     marginBottom: 32,
-    borderRadius: "50%",
+    borderRadius: '50%',
     ...imageStyle,
     config: {
       mass: 2,
@@ -29,11 +29,11 @@ export default function Profile({ image, name, wrapperStyle, imageStyle, animati
   return (
     <div
       style={{
-        textAlign: "center",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         marginTop: 72,
         marginBottom: 32,
         ...wrapperStyle,
@@ -62,8 +62,8 @@ Profile.propTypes = {
 
 Profile.defaultProps = {
   image: MAIN_PICTURE,
-  name: "Dat Do",
-  title: "Software Engineer @ STW",
+  name: 'Dat Do',
+  title: 'Software Engineer @ STW',
   wrapperStyle: {},
   imageStyle: {},
   animation: false,

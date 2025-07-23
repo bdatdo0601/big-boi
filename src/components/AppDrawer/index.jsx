@@ -1,16 +1,16 @@
 import Drawer from 'react-modern-drawer';
 //import styles 👇
 import 'react-modern-drawer/dist/index.css';
-import { FormControlLabel, IconButton } from '@mui/material';
 import Menu from '@mui/icons-material/Menu';
-import { useContext, useMemo } from 'react';
-import LayoutContext from '../../context/layout';
+import { FormControlLabel, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { LogoTitle } from '../LogoTitle';
-import { VERSION } from '../../utils/constants';
 import { groupBy, isEmpty } from 'lodash';
-import MaterialListItem from '../MaterialListItem';
+import { useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router';
+import LayoutContext from '../../context/layout';
+import { VERSION } from '../../utils/constants';
+import { LogoTitle } from '../LogoTitle';
+import MaterialListItem from '../MaterialListItem';
 import Switch from '../Switch';
 
 export const AppDrawer = ({ open, onClose, routeList }) => {

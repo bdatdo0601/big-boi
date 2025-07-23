@@ -1,7 +1,7 @@
-"use client"
+'use client';
 
-import React from 'react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import React from 'react';
 
 interface Attachment {
   name: string;

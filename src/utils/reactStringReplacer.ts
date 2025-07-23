@@ -1,4 +1,4 @@
-import { isRegExp, escapeRegExp, isString, flatten } from 'lodash';
+import { escapeRegExp, flatten, isRegExp, isString } from 'lodash';
 
 /**
  * Given a string, replace every substring that is matched by the `match` regex

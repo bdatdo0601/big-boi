@@ -1,4 +1,4 @@
-import { has, set, get, last, startCase } from "lodash";
+import { get, has, last, set, startCase } from 'lodash';
 
 export const convertToReferenceRenderedData = data =>
   data.reduce(
@@ -9,15 +9,15 @@ export const convertToReferenceRenderedData = data =>
         return acc;
       }
       tags.forEach(tag => {
-        const tagSplitted = tag.split(".");
+        const tagSplitted = tag.split('.');
         tagSplitted.reduce((tagSplittedAcc, currentSplit) => {
           tagSplittedAcc.push(startCase(currentSplit));
-          const rawPath = `children.${tagSplittedAcc.join(".children.")}`;
+          const rawPath = `children.${tagSplittedAcc.join('.children.')}`;
           if (!has(acc, rawPath)) {
             set(acc, rawPath, {
               name: last(tagSplittedAcc),
               references: [],
-              path: tagSplittedAcc.join("."),
+              path: tagSplittedAcc.join('.'),
               rawPath,
               children: {},
             });
@@ -25,16 +25,16 @@ export const convertToReferenceRenderedData = data =>
           return tagSplittedAcc;
         }, []);
         const tagPath = `children.${tag
-          .split(".")
+          .split('.')
           .map(item => startCase(item))
-          .join(".children.")}`;
+          .join('.children.')}`;
         get(acc, tagPath).references.push({ ...currentItem, rawPath: tagPath, path: tag });
       });
       return acc;
     },
     {
       children: {
-        Tagless: { name: "Tagless", references: [], path: "", children: {} },
+        Tagless: { name: 'Tagless', references: [], path: '', children: {} },
       },
     }
   );

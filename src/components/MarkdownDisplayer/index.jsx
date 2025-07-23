@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
-import PropTypes from "prop-types";
-import MarkdownIt from "markdown-it";
-import MarkdownItHighlightJSPlugins from "markdown-it-highlightjs";
-import htmlParser from "html-react-parser";
+import htmlParser from 'html-react-parser';
+import MarkdownIt from 'markdown-it';
+import MarkdownItHighlightJSPlugins from 'markdown-it-highlightjs';
+import PropTypes from 'prop-types';
+import React, { useMemo } from 'react';
 
 // Initialize a markdown parser
 const mdParser = new MarkdownIt(/* Markdown-it options */).use(MarkdownItHighlightJSPlugins);
@@ -20,7 +20,7 @@ MarkdownDisplayer.propTypes = {
 };
 
 MarkdownDisplayer.defaultProps = {
-  value: "",
+  value: '',
   style: {},
-  className: "retro",
+  className: 'retro',
 };

@@ -1,15 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { animated, useSpring } from "@react-spring/web";
-import { useDrag } from "@use-gesture/react";
+import { animated, useSpring } from '@react-spring/web';
+import { useDrag } from '@use-gesture/react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import "./index.css";
+import './index.css';
 
 export default function ImageGridDisplay({ url, name, animation, style }) {
   const [animateProps, setAnimateProps] = useSpring(() => ({
     transform: [0, 0],
-    objectFit: "contain",
-    width: "100%",
+    objectFit: 'contain',
+    width: '100%',
     ...style,
     from: { transform: animation ? [0, -200] : [0, 0] },
     config: {

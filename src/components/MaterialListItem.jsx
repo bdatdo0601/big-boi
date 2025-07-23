@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Collapse, List } from "@mui/material";
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import { Collapse, List } from '@mui/material';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
 const MaterialListItem = ({ item, level, onClick, isSelected }) => {
   const [open, setOpen] = useState(item.defaultOpen);
@@ -17,17 +17,14 @@ const MaterialListItem = ({ item, level, onClick, isSelected }) => {
           className="text-left flex flex-row gap-2 hover:bg-accent hover:cursor-pointer py-2 px-2 hover:rounded-lg"
         >
           {item.icon}
-          <span
-            className="text-lg"
-            style={isSelected(item) ? { color: "var(--primary)" } : { }}
-          >
+          <span className="text-lg" style={isSelected(item) ? { color: 'var(--primary)' } : {}}>
             {item.name}
           </span>
           {open ? <ExpandLess /> : <ExpandMore />}
         </button>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            {item.children.map((childItem) => (
+            {item.children.map(childItem => (
               <MaterialListItem
                 key={childItem.name}
                 item={childItem}
@@ -53,10 +50,7 @@ const MaterialListItem = ({ item, level, onClick, isSelected }) => {
       }}
     >
       {item.icon}
-      <span
-        className="text-lg"
-        style={isSelected(item) ? { color: "var(--primary)", fontWeight: "bolder" } : {}}
-      >
+      <span className="text-lg" style={isSelected(item) ? { color: 'var(--primary)', fontWeight: 'bolder' } : {}}>
         {item.name}
       </span>
     </button>

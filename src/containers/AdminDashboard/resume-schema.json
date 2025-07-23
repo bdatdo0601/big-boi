@@ -39,17 +39,7 @@
           }
         }
       },
-      "required": [
-        "name",
-        "label",
-        "picture",
-        "email",
-        "phone",
-        "website",
-        "summary",
-        "location",
-        "profiles"
-      ]
+      "required": ["name", "label", "picture", "email", "phone", "website", "summary", "location", "profiles"]
     },
     "work": {
       "type": "array",
@@ -70,14 +60,7 @@
             "items": { "type": "string" }
           }
         },
-        "required": [
-          "company",
-          "position",
-          "startDate",
-          "endDate",
-          "summary",
-          "highlights"
-        ]
+        "required": ["company", "position", "startDate", "endDate", "summary", "highlights"]
       }
     },
     "volunteer": {
@@ -98,14 +81,7 @@
             "items": { "type": "string" }
           }
         },
-        "required": [
-          "organization",
-          "position",
-          "startDate",
-          "endDate",
-          "summary",
-          "highlights"
-        ]
+        "required": ["organization", "position", "startDate", "endDate", "summary", "highlights"]
       }
     },
     "education": {
@@ -131,15 +107,7 @@
             "items": { "type": "string" }
           }
         },
-        "required": [
-          "institution",
-          "area",
-          "studyType",
-          "startDate",
-          "endDate",
-          "gpa",
-          "courses"
-        ]
+        "required": ["institution", "area", "studyType", "startDate", "endDate", "gpa", "courses"]
       }
     },
     "awards": {

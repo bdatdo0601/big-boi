@@ -143,12 +143,7 @@
             },
             "output": {
               "type": "object",
-              "required": [
-                "summary",
-                "text",
-                "annotations_count",
-                "annotations_url"
-              ],
+              "required": ["summary", "text", "annotations_count", "annotations_url"],
               "properties": {
                 "title": { "type": ["string", "null"] },
                 "summary": { "type": ["string", "null"] },
@@ -195,16 +190,7 @@
                 },
                 "conclusion": {
                   "type": ["string", "null"],
-                  "enum": [
-                    "success",
-                    "failure",
-                    "neutral",
-                    "cancelled",
-                    "timed_out",
-                    "action_required",
-                    "stale",
-                    null
-                  ]
+                  "enum": ["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale", null]
                 },
                 "url": { "type": "string", "format": "uri" },
                 "before": { "type": ["string", "null"] },
@@ -314,12 +300,7 @@
             },
             "output": {
               "type": "object",
-              "required": [
-                "summary",
-                "text",
-                "annotations_count",
-                "annotations_url"
-              ],
+              "required": ["summary", "text", "annotations_count", "annotations_url"],
               "properties": {
                 "title": { "type": ["string", "null"] },
                 "summary": { "type": ["string", "null"] },
@@ -366,16 +347,7 @@
                 },
                 "conclusion": {
                   "type": ["string", "null"],
-                  "enum": [
-                    "success",
-                    "failure",
-                    "neutral",
-                    "cancelled",
-                    "timed_out",
-                    "action_required",
-                    "stale",
-                    null
-                  ]
+                  "enum": ["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale", null]
                 },
                 "url": { "type": "string", "format": "uri" },
                 "before": { "type": ["string", "null"] },
@@ -422,13 +394,7 @@
     "check_run$requested_action": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "check_run",
-        "requested_action",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "check_run", "requested_action", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["requested_action"] },
         "check_run": {
@@ -491,12 +457,7 @@
             },
             "output": {
               "type": "object",
-              "required": [
-                "summary",
-                "text",
-                "annotations_count",
-                "annotations_url"
-              ],
+              "required": ["summary", "text", "annotations_count", "annotations_url"],
               "properties": {
                 "title": { "type": ["string", "null"] },
                 "summary": { "type": ["string", "null"] },
@@ -543,16 +504,7 @@
                 },
                 "conclusion": {
                   "type": ["string", "null"],
-                  "enum": [
-                    "success",
-                    "failure",
-                    "neutral",
-                    "cancelled",
-                    "timed_out",
-                    "action_required",
-                    "stale",
-                    null
-                  ]
+                  "enum": ["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale", null]
                 },
                 "url": { "type": "string", "format": "uri" },
                 "before": { "type": ["string", "null"] },
@@ -662,12 +614,7 @@
             },
             "output": {
               "type": "object",
-              "required": [
-                "summary",
-                "text",
-                "annotations_count",
-                "annotations_url"
-              ],
+              "required": ["summary", "text", "annotations_count", "annotations_url"],
               "properties": {
                 "title": { "type": ["string", "null"] },
                 "summary": { "type": ["string", "null"] },
@@ -711,15 +658,7 @@
                 "status": { "type": "string", "enum": ["completed"] },
                 "conclusion": {
                   "type": "string",
-                  "enum": [
-                    "success",
-                    "failure",
-                    "neutral",
-                    "cancelled",
-                    "timed_out",
-                    "action_required",
-                    "stale"
-                  ]
+                  "enum": ["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale"]
                 },
                 "url": { "type": "string", "format": "uri" },
                 "before": { "type": ["string", "null"] },
@@ -816,16 +755,7 @@
             },
             "conclusion": {
               "type": ["string", "null"],
-              "enum": [
-                "success",
-                "failure",
-                "neutral",
-                "cancelled",
-                "timed_out",
-                "action_required",
-                "stale",
-                null
-              ],
+              "enum": ["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale", null],
               "description": "The summary conclusion for all check runs that are part of the check suite. Can be one of `success`, `failure`, `neutral`, `cancelled`, `timed_out`, `action_required` or `stale`. This value will be `null` until the check run has `completed`."
             },
             "url": {
@@ -903,16 +833,7 @@
             "conclusion": {
               "description": "The summary conclusion for all check runs that are part of the check suite. Can be one of `success`, `failure`,` neutral`, `cancelled`, `timed_out`, `action_required` or `stale`. This value will be `null` until the check run has completed.",
               "type": ["string", "null"],
-              "enum": [
-                "success",
-                "failure",
-                "neutral",
-                "cancelled",
-                "timed_out",
-                "action_required",
-                "stale",
-                null
-              ]
+              "enum": ["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale", null]
             },
             "url": {
               "type": "string",
@@ -989,16 +910,7 @@
             "conclusion": {
               "type": ["string", "null"],
               "description": "The summary conclusion for all check runs that are part of the check suite. Can be one of `success`, `failure`,` neutral`, `cancelled`, `timed_out`, `action_required` or `stale`. This value will be `null` until the check run has completed.",
-              "enum": [
-                "success",
-                "failure",
-                "neutral",
-                "cancelled",
-                "timed_out",
-                "action_required",
-                "stale",
-                null
-              ]
+              "enum": ["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale", null]
             },
             "url": {
               "type": "string",
@@ -1039,14 +951,7 @@
     "code_scanning_alert$appeared_in_branch": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "alert",
-        "ref",
-        "commit_oid",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "alert", "ref", "commit_oid", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["appeared_in_branch"] },
         "alert": {
@@ -1161,14 +1066,7 @@
     "code_scanning_alert$closed_by_user": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "alert",
-        "ref",
-        "commit_oid",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "alert", "ref", "commit_oid", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["closed_by_user"] },
         "alert": {
@@ -1298,14 +1196,7 @@
     "code_scanning_alert$created": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "alert",
-        "ref",
-        "commit_oid",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "alert", "ref", "commit_oid", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["created"] },
         "alert": {
@@ -1436,14 +1327,7 @@
     "code_scanning_alert$fixed": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "alert",
-        "ref",
-        "commit_oid",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "alert", "ref", "commit_oid", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["fixed"] },
         "alert": {
@@ -1576,14 +1460,7 @@
     "code_scanning_alert$reopened": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "alert",
-        "ref",
-        "commit_oid",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "alert", "ref", "commit_oid", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["reopened"] },
         "alert": {
@@ -1711,14 +1588,7 @@
     "code_scanning_alert$reopened_by_user": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "alert",
-        "ref",
-        "commit_oid",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "alert", "ref", "commit_oid", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["reopened_by_user"] },
         "alert": {
@@ -1931,13 +1801,7 @@
     "content_reference$created": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "content_reference",
-        "repository",
-        "sender",
-        "installation"
-      ],
+      "required": ["action", "content_reference", "repository", "sender", "installation"],
       "properties": {
         "action": { "type": "string", "enum": ["created"] },
         "content_reference": {
@@ -1965,15 +1829,7 @@
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
       "description": "A Git branch or tag is created.",
-      "required": [
-        "ref",
-        "ref_type",
-        "master_branch",
-        "description",
-        "pusher_type",
-        "repository",
-        "sender"
-      ],
+      "required": ["ref", "ref_type", "master_branch", "description", "pusher_type", "repository", "sender"],
       "properties": {
         "ref": {
           "type": "string",
@@ -2040,15 +1896,7 @@
         "key": {
           "type": "object",
           "description": "The [`deploy key`](https://docs.github.com/en/rest/reference/repos#get-a-deploy-key) resource.",
-          "required": [
-            "id",
-            "key",
-            "url",
-            "title",
-            "verified",
-            "created_at",
-            "read_only"
-          ],
+          "required": ["id", "key", "url", "title", "verified", "created_at", "read_only"],
           "properties": {
             "id": { "type": "integer" },
             "key": { "type": "string" },
@@ -2077,15 +1925,7 @@
         "key": {
           "type": "object",
           "description": "The [`deploy key`](https://docs.github.com/en/rest/reference/repos#get-a-deploy-key) resource.",
-          "required": [
-            "id",
-            "key",
-            "url",
-            "title",
-            "verified",
-            "created_at",
-            "read_only"
-          ],
+          "required": ["id", "key", "url", "title", "verified", "created_at", "read_only"],
           "properties": {
             "id": { "type": "integer" },
             "key": { "type": "string" },
@@ -2106,22 +1946,12 @@
       "title": "deploy_key deleted event"
     },
     "deploy_key_event": {
-      "oneOf": [
-        { "$ref": "#/definitions/deploy_key$created" },
-        { "$ref": "#/definitions/deploy_key$deleted" }
-      ]
+      "oneOf": [{ "$ref": "#/definitions/deploy_key$created" }, { "$ref": "#/definitions/deploy_key$deleted" }]
     },
     "deployment$created": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "deployment",
-        "workflow",
-        "workflow_run",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "deployment", "workflow", "workflow_run", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["created"] },
         "deployment": {
@@ -2188,13 +2018,7 @@
     "deployment_status$created": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "deployment_status",
-        "deployment",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "deployment_status", "deployment", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["created"] },
         "deployment_status": {
@@ -2312,12 +2136,7 @@
             { "$ref": "#/definitions/discussion" },
             {
               "type": "object",
-              "required": [
-                "category",
-                "answer_html_url",
-                "answer_chosen_at",
-                "answer_chosen_by"
-              ],
+              "required": ["category", "answer_html_url", "answer_chosen_at", "answer_chosen_by"],
               "properties": {
                 "category": {
                   "type": "object",
@@ -2443,13 +2262,7 @@
             { "$ref": "#/definitions/discussion" },
             {
               "type": "object",
-              "required": [
-                "state",
-                "locked",
-                "answer_html_url",
-                "answer_chosen_at",
-                "answer_chosen_by"
-              ],
+              "required": ["state", "locked", "answer_html_url", "answer_chosen_at", "answer_chosen_by"],
               "properties": {
                 "state": { "type": "string", "enum": ["open", "converting"] },
                 "locked": { "type": "boolean", "enum": [false] },
@@ -2603,13 +2416,7 @@
     "discussion$unanswered": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "discussion",
-        "old_answer",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "discussion", "old_answer", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["unanswered"] },
         "discussion": {
@@ -2617,12 +2424,7 @@
             { "$ref": "#/definitions/discussion" },
             {
               "type": "object",
-              "required": [
-                "category",
-                "answer_html_url",
-                "answer_chosen_at",
-                "answer_chosen_by"
-              ],
+              "required": ["category", "answer_html_url", "answer_chosen_at", "answer_chosen_by"],
               "properties": {
                 "category": {
                   "type": "object",
@@ -2761,14 +2563,7 @@
     "discussion_comment$created": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "comment",
-        "discussion",
-        "repository",
-        "sender",
-        "installation"
-      ],
+      "required": ["action", "comment", "discussion", "repository", "sender", "installation"],
       "properties": {
         "action": { "type": "string", "enum": ["created"] },
         "comment": {
@@ -2819,14 +2614,7 @@
     "discussion_comment$deleted": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "comment",
-        "discussion",
-        "repository",
-        "sender",
-        "installation"
-      ],
+      "required": ["action", "comment", "discussion", "repository", "sender", "installation"],
       "properties": {
         "action": { "type": "string", "enum": ["deleted"] },
         "comment": {
@@ -2877,15 +2665,7 @@
     "discussion_comment$edited": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "changes",
-        "comment",
-        "discussion",
-        "repository",
-        "sender",
-        "installation"
-      ],
+      "required": ["action", "changes", "comment", "discussion", "repository", "sender", "installation"],
       "properties": {
         "changes": {
           "type": "object",
@@ -3003,14 +2783,7 @@
           "description": "The pages that were updated.",
           "items": {
             "type": "object",
-            "required": [
-              "page_name",
-              "title",
-              "summary",
-              "action",
-              "sha",
-              "html_url"
-            ],
+            "required": ["page_name", "title", "summary", "action", "sha", "html_url"],
             "properties": {
               "page_name": {
                 "type": "string",
@@ -3450,10 +3223,7 @@
               "required": ["labels", "state", "locked", "assignee"],
               "properties": {
                 "assignee": {
-                  "oneOf": [
-                    { "$ref": "#/definitions/user" },
-                    { "type": "null" }
-                  ]
+                  "oneOf": [{ "$ref": "#/definitions/user" }, { "type": "null" }]
                 },
                 "state": {
                   "type": "string",
@@ -3505,10 +3275,7 @@
               "required": ["labels", "state", "locked", "assignee"],
               "properties": {
                 "assignee": {
-                  "oneOf": [
-                    { "$ref": "#/definitions/user" },
-                    { "type": "null" }
-                  ]
+                  "oneOf": [{ "$ref": "#/definitions/user" }, { "type": "null" }]
                 },
                 "state": {
                   "type": "string",
@@ -3548,14 +3315,7 @@
     "issue_comment$edited": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "changes",
-        "issue",
-        "comment",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "changes", "issue", "comment", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["edited"] },
         "changes": {
@@ -3585,10 +3345,7 @@
               "required": ["labels", "state", "locked", "assignee"],
               "properties": {
                 "assignee": {
-                  "oneOf": [
-                    { "$ref": "#/definitions/user" },
-                    { "type": "null" }
-                  ]
+                  "oneOf": [{ "$ref": "#/definitions/user" }, { "type": "null" }]
                 },
                 "state": {
                   "type": "string",
@@ -4163,12 +3920,7 @@
     "marketplace_purchase$cancelled": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "effective_date",
-        "sender",
-        "marketplace_purchase"
-      ],
+      "required": ["action", "effective_date", "sender", "marketplace_purchase"],
       "properties": {
         "action": { "type": "string", "enum": ["cancelled"] },
         "effective_date": { "type": "string" },
@@ -4237,12 +3989,7 @@
     "marketplace_purchase$changed": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "effective_date",
-        "sender",
-        "marketplace_purchase"
-      ],
+      "required": ["action", "effective_date", "sender", "marketplace_purchase"],
       "properties": {
         "action": { "type": "string", "enum": ["changed"] },
         "effective_date": { "type": "string" },
@@ -4311,12 +4058,7 @@
     "marketplace_purchase$pending_change": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "effective_date",
-        "sender",
-        "marketplace_purchase"
-      ],
+      "required": ["action", "effective_date", "sender", "marketplace_purchase"],
       "properties": {
         "action": { "type": "string", "enum": ["pending_change"] },
         "effective_date": { "type": "string" },
@@ -4385,12 +4127,7 @@
     "marketplace_purchase$pending_change_cancelled": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "effective_date",
-        "sender",
-        "marketplace_purchase"
-      ],
+      "required": ["action", "effective_date", "sender", "marketplace_purchase"],
       "properties": {
         "action": { "type": "string", "enum": ["pending_change_cancelled"] },
         "effective_date": { "type": "string" },
@@ -4459,12 +4196,7 @@
     "marketplace_purchase$purchased": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "effective_date",
-        "sender",
-        "marketplace_purchase"
-      ],
+      "required": ["action", "effective_date", "sender", "marketplace_purchase"],
       "properties": {
         "action": { "type": "string", "enum": ["purchased"] },
         "effective_date": { "type": "string" },
@@ -4636,14 +4368,7 @@
     "membership$added": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "scope",
-        "member",
-        "sender",
-        "team",
-        "organization"
-      ],
+      "required": ["action", "scope", "member", "sender", "team", "organization"],
       "properties": {
         "action": { "type": "string", "enum": ["added"] },
         "scope": {
@@ -4669,14 +4394,7 @@
     "membership$removed": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "scope",
-        "member",
-        "sender",
-        "team",
-        "organization"
-      ],
+      "required": ["action", "scope", "member", "sender", "team", "organization"],
       "properties": {
         "action": { "type": "string", "enum": ["removed"] },
         "scope": {
@@ -4712,10 +4430,7 @@
       "title": "membership removed event"
     },
     "membership_event": {
-      "oneOf": [
-        { "$ref": "#/definitions/membership$added" },
-        { "$ref": "#/definitions/membership$removed" }
-      ]
+      "oneOf": [{ "$ref": "#/definitions/membership$added" }, { "$ref": "#/definitions/membership$removed" }]
     },
     "meta$deleted": {
       "$schema": "http://json-schema.org/draft-07/schema",
@@ -4730,16 +4445,7 @@
         "hook": {
           "type": "object",
           "description": "The modified webhook. This will contain different keys based on the type of webhook it is: repository, organization, business, app, or GitHub Marketplace.",
-          "required": [
-            "type",
-            "id",
-            "name",
-            "active",
-            "events",
-            "config",
-            "updated_at",
-            "created_at"
-          ],
+          "required": ["type", "id", "name", "active", "events", "config", "updated_at", "created_at"],
           "properties": {
             "type": { "type": "string" },
             "id": { "type": "integer" },
@@ -4967,10 +4673,7 @@
       "title": "org_block unblocked event"
     },
     "org_block_event": {
-      "oneOf": [
-        { "$ref": "#/definitions/org_block$blocked" },
-        { "$ref": "#/definitions/org_block$unblocked" }
-      ]
+      "oneOf": [{ "$ref": "#/definitions/org_block$blocked" }, { "$ref": "#/definitions/org_block$unblocked" }]
     },
     "organization$deleted": {
       "$schema": "http://json-schema.org/draft-07/schema",
@@ -5030,10 +4733,7 @@
             "role": { "type": "string" },
             "created_at": { "type": "string", "format": "date-time" },
             "failed_at": {
-              "oneOf": [
-                { "type": "string", "format": "date-time" },
-                { "type": "null" }
-              ]
+              "oneOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }]
             },
             "failed_reason": { "type": ["string", "null"] },
             "inviter": { "$ref": "#/definitions/user" },
@@ -5430,10 +5130,7 @@
       "title": "package updated event"
     },
     "package_event": {
-      "oneOf": [
-        { "$ref": "#/definitions/package$published" },
-        { "$ref": "#/definitions/package$updated" }
-      ]
+      "oneOf": [{ "$ref": "#/definitions/package$published" }, { "$ref": "#/definitions/package$updated" }]
     },
     "page_build$event": {
       "$schema": "http://json-schema.org/draft-07/schema",
@@ -5445,16 +5142,7 @@
         "build": {
           "type": "object",
           "description": "The [List GitHub Pages builds](https://docs.github.com/en/rest/reference/repos#list-github-pages-builds) itself.",
-          "required": [
-            "url",
-            "status",
-            "error",
-            "pusher",
-            "commit",
-            "duration",
-            "created_at",
-            "updated_at"
-          ],
+          "required": ["url", "status", "error", "pusher", "commit", "duration", "created_at", "updated_at"],
           "properties": {
             "url": { "type": "string", "format": "uri" },
             "status": { "type": "string" },
@@ -5908,14 +5596,7 @@
     "pull_request$assigned": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "number",
-        "pull_request",
-        "assignee",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "number", "pull_request", "assignee", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["assigned"] },
         "number": {
@@ -6016,13 +5697,7 @@
             { "$ref": "#/definitions/pull-request" },
             {
               "type": "object",
-              "required": [
-                "closed_at",
-                "merged_at",
-                "draft",
-                "merged",
-                "merged_by"
-              ],
+              "required": ["closed_at", "merged_at", "draft", "merged", "merged_by"],
               "properties": {
                 "closed_at": { "type": "null" },
                 "merged_at": { "type": "null" },
@@ -6049,14 +5724,7 @@
     "pull_request$edited": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "changes",
-        "number",
-        "pull_request",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "changes", "number", "pull_request", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["edited"] },
         "number": {
@@ -6104,14 +5772,7 @@
     "pull_request$labeled": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "number",
-        "pull_request",
-        "label",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "number", "pull_request", "label", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["labeled"] },
         "number": {
@@ -6162,14 +5823,7 @@
             { "$ref": "#/definitions/pull-request" },
             {
               "type": "object",
-              "required": [
-                "state",
-                "closed_at",
-                "merged_at",
-                "merge_commit_sha",
-                "active_lock_reason",
-                "merged_by"
-              ],
+              "required": ["state", "closed_at", "merged_at", "merge_commit_sha", "active_lock_reason", "merged_by"],
               "properties": {
                 "state": { "type": "string", "enum": ["open"] },
                 "closed_at": { "type": "null" },
@@ -6205,14 +5859,7 @@
             { "$ref": "#/definitions/pull-request" },
             {
               "type": "object",
-              "required": [
-                "state",
-                "closed_at",
-                "merged_at",
-                "draft",
-                "merged",
-                "merged_by"
-              ],
+              "required": ["state", "closed_at", "merged_at", "draft", "merged", "merged_by"],
               "properties": {
                 "state": { "type": "string", "enum": ["open"] },
                 "closed_at": { "type": "null" },
@@ -6252,14 +5899,7 @@
             { "$ref": "#/definitions/pull-request" },
             {
               "type": "object",
-              "required": [
-                "state",
-                "closed_at",
-                "merged_at",
-                "merge_commit_sha",
-                "merged",
-                "merged_by"
-              ],
+              "required": ["state", "closed_at", "merged_at", "merge_commit_sha", "merged", "merged_by"],
               "properties": {
                 "state": { "type": "string", "enum": ["open"] },
                 "closed_at": { "type": "null" },
@@ -6285,14 +5925,7 @@
       "oneOf": [
         {
           "type": "object",
-          "required": [
-            "action",
-            "number",
-            "pull_request",
-            "requested_reviewer",
-            "repository",
-            "sender"
-          ],
+          "required": ["action", "number", "pull_request", "requested_reviewer", "repository", "sender"],
           "properties": {
             "action": { "type": "string", "enum": ["review_request_removed"] },
             "number": {
@@ -6310,14 +5943,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "action",
-            "number",
-            "pull_request",
-            "requested_team",
-            "repository",
-            "sender"
-          ],
+          "required": ["action", "number", "pull_request", "requested_team", "repository", "sender"],
           "properties": {
             "action": { "type": "string", "enum": ["review_request_removed"] },
             "number": {
@@ -6341,14 +5967,7 @@
       "oneOf": [
         {
           "type": "object",
-          "required": [
-            "action",
-            "number",
-            "pull_request",
-            "requested_reviewer",
-            "repository",
-            "sender"
-          ],
+          "required": ["action", "number", "pull_request", "requested_reviewer", "repository", "sender"],
           "properties": {
             "action": { "type": "string", "enum": ["review_requested"] },
             "number": {
@@ -6366,14 +5985,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "action",
-            "number",
-            "pull_request",
-            "requested_team",
-            "repository",
-            "sender"
-          ],
+          "required": ["action", "number", "pull_request", "requested_team", "repository", "sender"],
           "properties": {
             "action": { "type": "string", "enum": ["review_requested"] },
             "number": {
@@ -6395,15 +6007,7 @@
     "pull_request$synchronize": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "number",
-        "before",
-        "after",
-        "pull_request",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "number", "before", "after", "pull_request", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["synchronize"] },
         "number": {
@@ -6424,14 +6028,7 @@
     "pull_request$unassigned": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "number",
-        "pull_request",
-        "assignee",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "number", "pull_request", "assignee", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["unassigned"] },
         "number": {
@@ -6451,14 +6048,7 @@
     "pull_request$unlabeled": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "number",
-        "pull_request",
-        "label",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "number", "pull_request", "label", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["unlabeled"] },
         "number": {
@@ -6583,14 +6173,7 @@
     "pull_request_review$edited": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "changes",
-        "review",
-        "pull_request",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "changes", "review", "pull_request", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["edited"] },
         "changes": {
@@ -6815,10 +6398,7 @@
             "requested_reviewers": {
               "type": "array",
               "items": {
-                "oneOf": [
-                  { "$ref": "#/definitions/user" },
-                  { "$ref": "#/definitions/team" }
-                ]
+                "oneOf": [{ "$ref": "#/definitions/user" }, { "$ref": "#/definitions/team" }]
               }
             },
             "requested_teams": {
@@ -6830,10 +6410,7 @@
               "items": { "$ref": "#/definitions/label" }
             },
             "milestone": {
-              "oneOf": [
-                { "$ref": "#/definitions/milestone" },
-                { "type": "null" }
-              ]
+              "oneOf": [{ "$ref": "#/definitions/milestone" }, { "type": "null" }]
             },
             "draft": { "type": "boolean" },
             "commits_url": { "type": "string", "format": "uri" },
@@ -6985,10 +6562,7 @@
             "requested_reviewers": {
               "type": "array",
               "items": {
-                "oneOf": [
-                  { "$ref": "#/definitions/user" },
-                  { "$ref": "#/definitions/team" }
-                ]
+                "oneOf": [{ "$ref": "#/definitions/user" }, { "$ref": "#/definitions/team" }]
               }
             },
             "requested_teams": {
@@ -7000,10 +6574,7 @@
               "items": { "$ref": "#/definitions/label" }
             },
             "milestone": {
-              "oneOf": [
-                { "$ref": "#/definitions/milestone" },
-                { "type": "null" }
-              ]
+              "oneOf": [{ "$ref": "#/definitions/milestone" }, { "type": "null" }]
             },
             "draft": { "type": "boolean" },
             "commits_url": { "type": "string", "format": "uri" },
@@ -7084,14 +6655,7 @@
     "pull_request_review_comment$edited": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "changes",
-        "comment",
-        "pull_request",
-        "repository",
-        "sender"
-      ],
+      "required": ["action", "changes", "comment", "pull_request", "repository", "sender"],
       "properties": {
         "action": { "type": "string", "enum": ["edited"] },
         "changes": {
@@ -7180,10 +6744,7 @@
             "requested_reviewers": {
               "type": "array",
               "items": {
-                "oneOf": [
-                  { "$ref": "#/definitions/user" },
-                  { "$ref": "#/definitions/team" }
-                ]
+                "oneOf": [{ "$ref": "#/definitions/user" }, { "$ref": "#/definitions/team" }]
               }
             },
             "requested_teams": {
@@ -7195,10 +6756,7 @@
               "items": { "$ref": "#/definitions/label" }
             },
             "milestone": {
-              "oneOf": [
-                { "$ref": "#/definitions/milestone" },
-                { "type": "null" }
-              ]
+              "oneOf": [{ "$ref": "#/definitions/milestone" }, { "type": "null" }]
             },
             "draft": { "type": "boolean" },
             "commits_url": { "type": "string", "format": "uri" },
@@ -7802,14 +7360,7 @@
     "repository_dispatch$event": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "branch",
-        "client_payload",
-        "repository",
-        "sender",
-        "installation"
-      ],
+      "required": ["action", "branch", "client_payload", "repository", "sender", "installation"],
       "properties": {
         "action": { "type": "string" },
         "branch": { "type": "string" },
@@ -7982,13 +7533,7 @@
         "alert": {
           "type": "object",
           "description": "The secret scanning alert involved in the event.",
-          "required": [
-            "number",
-            "secret_type",
-            "resolution",
-            "resolved_by",
-            "resolved_at"
-          ],
+          "required": ["number", "secret_type", "resolution", "resolved_by", "resolved_at"],
           "properties": {
             "number": { "type": "integer" },
             "secret_type": { "type": "string" },
@@ -8014,13 +7559,7 @@
         "alert": {
           "type": "object",
           "description": "The secret scanning alert involved in the event.",
-          "required": [
-            "number",
-            "secret_type",
-            "resolution",
-            "resolved_by",
-            "resolved_at"
-          ],
+          "required": ["number", "secret_type", "resolution", "resolved_by", "resolved_at"],
           "properties": {
             "number": { "type": "integer" },
             "secret_type": { "type": "string" },
@@ -8047,13 +7586,7 @@
         "alert": {
           "type": "object",
           "description": "The secret scanning alert involved in the event.",
-          "required": [
-            "number",
-            "secret_type",
-            "resolution",
-            "resolved_by",
-            "resolved_at"
-          ],
+          "required": ["number", "secret_type", "resolution", "resolved_by", "resolved_at"],
           "properties": {
             "number": { "type": "integer" },
             "secret_type": { "type": "string" },
@@ -8158,12 +7691,7 @@
               "type": "array",
               "items": {
                 "type": "object",
-                "required": [
-                  "package",
-                  "severity",
-                  "vulnerable_version_range",
-                  "first_patched_version"
-                ],
+                "required": ["package", "severity", "vulnerable_version_range", "first_patched_version"],
                 "properties": {
                   "package": {
                     "type": "object",
@@ -8270,12 +7798,7 @@
               "type": "array",
               "items": {
                 "type": "object",
-                "required": [
-                  "package",
-                  "severity",
-                  "vulnerable_version_range",
-                  "first_patched_version"
-                ],
+                "required": ["package", "severity", "vulnerable_version_range", "first_patched_version"],
                 "properties": {
                   "package": {
                     "type": "object",
@@ -8382,12 +7905,7 @@
               "type": "array",
               "items": {
                 "type": "object",
-                "required": [
-                  "package",
-                  "severity",
-                  "vulnerable_version_range",
-                  "first_patched_version"
-                ],
+                "required": ["package", "severity", "vulnerable_version_range", "first_patched_version"],
                 "properties": {
                   "package": {
                     "type": "object",
@@ -8494,12 +8012,7 @@
               "type": "array",
               "items": {
                 "type": "object",
-                "required": [
-                  "package",
-                  "severity",
-                  "vulnerable_version_range",
-                  "first_patched_version"
-                ],
+                "required": ["package", "severity", "vulnerable_version_range", "first_patched_version"],
                 "properties": {
                   "package": {
                     "type": "object",
@@ -8545,14 +8058,7 @@
         "action": { "type": "string", "enum": ["cancelled"] },
         "sponsorship": {
           "type": "object",
-          "required": [
-            "node_id",
-            "created_at",
-            "sponsorable",
-            "sponsor",
-            "privacy_level",
-            "tier"
-          ],
+          "required": ["node_id", "created_at", "sponsorable", "sponsor", "privacy_level", "tier"],
           "properties": {
             "node_id": { "type": "string" },
             "created_at": { "type": "string" },
@@ -8576,14 +8082,7 @@
         "action": { "type": "string", "enum": ["created"] },
         "sponsorship": {
           "type": "object",
-          "required": [
-            "node_id",
-            "created_at",
-            "sponsorable",
-            "sponsor",
-            "privacy_level",
-            "tier"
-          ],
+          "required": ["node_id", "created_at", "sponsorable", "sponsor", "privacy_level", "tier"],
           "properties": {
             "node_id": { "type": "string" },
             "created_at": { "type": "string" },
@@ -8607,14 +8106,7 @@
         "action": { "type": "string", "enum": ["edited"] },
         "sponsorship": {
           "type": "object",
-          "required": [
-            "node_id",
-            "created_at",
-            "sponsorable",
-            "sponsor",
-            "privacy_level",
-            "tier"
-          ],
+          "required": ["node_id", "created_at", "sponsorable", "sponsor", "privacy_level", "tier"],
           "properties": {
             "node_id": { "type": "string" },
             "created_at": { "type": "string" },
@@ -8655,14 +8147,7 @@
         "action": { "type": "string", "enum": ["pending_cancellation"] },
         "sponsorship": {
           "type": "object",
-          "required": [
-            "node_id",
-            "created_at",
-            "sponsorable",
-            "sponsor",
-            "privacy_level",
-            "tier"
-          ],
+          "required": ["node_id", "created_at", "sponsorable", "sponsor", "privacy_level", "tier"],
           "properties": {
             "node_id": { "type": "string" },
             "created_at": { "type": "string" },
@@ -8690,14 +8175,7 @@
         "action": { "type": "string", "enum": ["pending_tier_change"] },
         "sponsorship": {
           "type": "object",
-          "required": [
-            "node_id",
-            "created_at",
-            "sponsorable",
-            "sponsor",
-            "privacy_level",
-            "tier"
-          ],
+          "required": ["node_id", "created_at", "sponsorable", "sponsor", "privacy_level", "tier"],
           "properties": {
             "node_id": { "type": "string" },
             "created_at": { "type": "string" },
@@ -8740,14 +8218,7 @@
         "action": { "type": "string", "enum": ["tier_changed"] },
         "sponsorship": {
           "type": "object",
-          "required": [
-            "node_id",
-            "created_at",
-            "sponsorable",
-            "sponsor",
-            "privacy_level",
-            "tier"
-          ],
+          "required": ["node_id", "created_at", "sponsorable", "sponsor", "privacy_level", "tier"],
           "properties": {
             "node_id": { "type": "string" },
             "created_at": { "type": "string" },
@@ -8825,10 +8296,7 @@
       "title": "star deleted event"
     },
     "star_event": {
-      "oneOf": [
-        { "$ref": "#/definitions/star$created" },
-        { "$ref": "#/definitions/star$deleted" }
-      ]
+      "oneOf": [{ "$ref": "#/definitions/star$created" }, { "$ref": "#/definitions/star$deleted" }]
     },
     "status$event": {
       "$schema": "http://json-schema.org/draft-07/schema",
@@ -8872,31 +8340,13 @@
         },
         "commit": {
           "type": "object",
-          "required": [
-            "sha",
-            "node_id",
-            "commit",
-            "url",
-            "html_url",
-            "comments_url",
-            "author",
-            "committer",
-            "parents"
-          ],
+          "required": ["sha", "node_id", "commit", "url", "html_url", "comments_url", "author", "committer", "parents"],
           "properties": {
             "sha": { "type": "string" },
             "node_id": { "type": "string" },
             "commit": {
               "type": "object",
-              "required": [
-                "author",
-                "committer",
-                "message",
-                "tree",
-                "url",
-                "comment_count",
-                "verification"
-              ],
+              "required": ["author", "committer", "message", "tree", "url", "comment_count", "verification"],
               "properties": {
                 "author": {
                   "allOf": [
@@ -9405,13 +8855,7 @@
     "workflow_run$completed": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "repository",
-        "sender",
-        "workflow",
-        "workflow_run"
-      ],
+      "required": ["action", "repository", "sender", "workflow", "workflow_run"],
       "properties": {
         "action": { "type": "string", "enum": ["completed"] },
         "organization": { "$ref": "#/definitions/organization" },
@@ -9427,15 +8871,7 @@
               "properties": {
                 "conclusion": {
                   "type": "string",
-                  "enum": [
-                    "success",
-                    "failure",
-                    "neutral",
-                    "cancelled",
-                    "timed_out",
-                    "action_required",
-                    "stale"
-                  ]
+                  "enum": ["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale"]
                 }
               },
               "tsAdditionalProperties": false
@@ -9450,13 +8886,7 @@
     "workflow_run$requested": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "action",
-        "repository",
-        "sender",
-        "workflow",
-        "workflow_run"
-      ],
+      "required": ["action", "repository", "sender", "workflow", "workflow_run"],
       "properties": {
         "action": { "type": "string", "enum": ["requested"] },
         "organization": { "$ref": "#/definitions/organization" },
@@ -9470,10 +8900,7 @@
       "title": "workflow_run requested event"
     },
     "workflow_run_event": {
-      "oneOf": [
-        { "$ref": "#/definitions/workflow_run$completed" },
-        { "$ref": "#/definitions/workflow_run$requested" }
-      ]
+      "oneOf": [{ "$ref": "#/definitions/workflow_run$completed" }, { "$ref": "#/definitions/workflow_run$requested" }]
     },
     "alert-instance": {
       "$schema": "http://json-schema.org/draft-07/schema",
@@ -9868,14 +9295,7 @@
     "commit-simple": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "id",
-        "tree_id",
-        "message",
-        "timestamp",
-        "author",
-        "committer"
-      ],
+      "required": ["id", "tree_id", "message", "timestamp", "author", "committer"],
       "properties": {
         "id": { "type": "string" },
         "tree_id": { "type": "string" },
@@ -10333,16 +9753,10 @@
           }
         },
         "created_at": {
-          "oneOf": [
-            { "type": "string", "format": "date-time" },
-            { "type": "integer" }
-          ]
+          "oneOf": [{ "type": "string", "format": "date-time" }, { "type": "integer" }]
         },
         "updated_at": {
-          "oneOf": [
-            { "type": "string", "format": "date-time" },
-            { "type": "integer" }
-          ]
+          "oneOf": [{ "type": "string", "format": "date-time" }, { "type": "integer" }]
         },
         "single_file_name": { "type": ["string", "null"] },
         "has_multiple_single_files": { "type": "boolean" },
@@ -10500,15 +9914,7 @@
     "label": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "id",
-        "node_id",
-        "url",
-        "name",
-        "color",
-        "default",
-        "description"
-      ],
+      "required": ["id", "node_id", "url", "name", "color", "default", "description"],
       "properties": {
         "id": { "type": "integer" },
         "node_id": { "type": "string" },
@@ -10552,25 +9958,12 @@
     },
     "marketplace-purchase": {
       "$schema": "http://json-schema.org/draft-07/schema",
-      "required": [
-        "account",
-        "billing_cycle",
-        "unit_count",
-        "on_free_trial",
-        "free_trial_ends_on",
-        "plan"
-      ],
+      "required": ["account", "billing_cycle", "unit_count", "on_free_trial", "free_trial_ends_on", "plan"],
       "type": "object",
       "properties": {
         "account": {
           "type": "object",
-          "required": [
-            "type",
-            "id",
-            "node_id",
-            "login",
-            "organization_billing_email"
-          ],
+          "required": ["type", "id", "node_id", "login", "organization_billing_email"],
           "properties": {
             "type": { "type": "string" },
             "id": { "type": "integer" },
@@ -10757,16 +10150,7 @@
     },
     "project-column": {
       "$schema": "http://json-schema.org/draft-07/schema",
-      "required": [
-        "url",
-        "project_url",
-        "cards_url",
-        "id",
-        "node_id",
-        "name",
-        "created_at",
-        "updated_at"
-      ],
+      "required": ["url", "project_url", "cards_url", "id", "node_id", "name", "created_at", "updated_at"],
       "type": "object",
       "properties": {
         "url": { "type": "string", "format": "uri" },
@@ -11056,10 +10440,7 @@
         "requested_reviewers": {
           "type": "array",
           "items": {
-            "oneOf": [
-              { "$ref": "#/definitions/user" },
-              { "$ref": "#/definitions/team" }
-            ]
+            "oneOf": [{ "$ref": "#/definitions/user" }, { "$ref": "#/definitions/team" }]
           }
         },
         "requested_teams": {
@@ -11104,16 +10485,7 @@
         },
         "_links": {
           "type": "object",
-          "required": [
-            "self",
-            "html",
-            "issue",
-            "comments",
-            "review_comments",
-            "review_comment",
-            "commits",
-            "statuses"
-          ],
+          "required": ["self", "html", "issue", "comments", "review_comments", "review_comment", "commits", "statuses"],
           "properties": {
             "self": { "$ref": "#/definitions/link" },
             "html": { "$ref": "#/definitions/link" },
@@ -11160,18 +10532,7 @@
     "reactions": {
       "$schema": "http://json-schema.org/draft-07/schema",
       "type": "object",
-      "required": [
-        "url",
-        "total_count",
-        "+1",
-        "-1",
-        "laugh",
-        "confused",
-        "heart",
-        "hooray",
-        "eyes",
-        "rocket"
-      ],
+      "required": ["url", "total_count", "+1", "-1", "laugh", "confused", "heart", "hooray", "eyes", "rocket"],
       "properties": {
         "url": { "type": "string", "format": "uri" },
         "total_count": { "type": "integer" },
@@ -11552,18 +10913,11 @@
         "releases_url": { "type": "string", "format": "uri-template" },
         "deployments_url": { "type": "string", "format": "uri" },
         "created_at": {
-          "oneOf": [
-            { "type": "integer" },
-            { "type": "string", "format": "date-time" }
-          ]
+          "oneOf": [{ "type": "integer" }, { "type": "string", "format": "date-time" }]
         },
         "updated_at": { "type": "string", "format": "date-time" },
         "pushed_at": {
-          "oneOf": [
-            { "type": "integer" },
-            { "type": "string", "format": "date-time" },
-            { "type": "null" }
-          ]
+          "oneOf": [{ "type": "integer" }, { "type": "string", "format": "date-time" }, { "type": "null" }]
         },
         "git_url": { "type": "string", "format": "uri" },
         "ssh_url": { "type": "string" },
@@ -11742,10 +11096,7 @@
         "requested_reviewers": {
           "type": "array",
           "items": {
-            "oneOf": [
-              { "$ref": "#/definitions/user" },
-              { "$ref": "#/definitions/team" }
-            ]
+            "oneOf": [{ "$ref": "#/definitions/user" }, { "$ref": "#/definitions/team" }]
           }
         },
         "requested_teams": {
@@ -11791,16 +11142,7 @@
         },
         "_links": {
           "type": "object",
-          "required": [
-            "self",
-            "html",
-            "issue",
-            "comments",
-            "review_comments",
-            "review_comment",
-            "commits",
-            "statuses"
-          ],
+          "required": ["self", "html", "issue", "comments", "review_comments", "review_comment", "commits", "statuses"],
           "properties": {
             "self": { "$ref": "#/definitions/link" },
             "html": { "$ref": "#/definitions/link" },
@@ -12158,16 +11500,7 @@
         "check_suite_node_id": { "type": "string" },
         "conclusion": {
           "type": ["string", "null"],
-          "enum": [
-            "success",
-            "failure",
-            "neutral",
-            "cancelled",
-            "timed_out",
-            "action_required",
-            "stale",
-            null
-          ]
+          "enum": ["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale", null]
         },
         "created_at": { "type": "string", "format": "date-time" },
         "event": { "type": "string" },
@@ -12236,14 +11569,7 @@
     },
     "workflow-step-completed": {
       "$schema": "http://json-schema.org/draft-07/schema",
-      "required": [
-        "name",
-        "status",
-        "conclusion",
-        "number",
-        "started_at",
-        "completed_at"
-      ],
+      "required": ["name", "status", "conclusion", "number", "started_at", "completed_at"],
       "type": "object",
       "properties": {
         "name": { "type": "string" },
@@ -12261,14 +11587,7 @@
     },
     "workflow-step-in_progress": {
       "$schema": "http://json-schema.org/draft-07/schema",
-      "required": [
-        "name",
-        "status",
-        "conclusion",
-        "number",
-        "started_at",
-        "completed_at"
-      ],
+      "required": ["name", "status", "conclusion", "number", "started_at", "completed_at"],
       "type": "object",
       "properties": {
         "name": { "type": "string" },

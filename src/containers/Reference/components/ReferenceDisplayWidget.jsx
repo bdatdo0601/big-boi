@@ -1,16 +1,16 @@
-import React, { useCallback, useContext, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { CircularProgress, Typography, List, ListItem, Grid2 as Grid, FormControlLabel } from '@mui/material';
-import { get, isEmpty, uniq } from 'lodash';
 import { DeleteOutline } from '@mui/icons-material';
-import useLocalStorageState from 'use-local-storage-state';
+import { CircularProgress, FormControlLabel, Grid2 as Grid, List, ListItem, Typography } from '@mui/material';
+import { get, isEmpty, uniq } from 'lodash';
+import PropTypes from 'prop-types';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { useDrop } from 'react-dnd';
-import ReferenceRenderer from './ReferenceRenderer';
-import { DragDropTypes } from '../../../utils/constants';
-import { useLazyAWSAPI } from '../../../utils/awsAPI';
-import { updatePrivateReference, updateReference } from '../../../graphql/mutations';
-import ReferenceContext from '../context';
+import useLocalStorageState from 'use-local-storage-state';
 import Switch from '@/components/Switch';
+import { updatePrivateReference, updateReference } from '../../../graphql/mutations';
+import { useLazyAWSAPI } from '../../../utils/awsAPI';
+import { DragDropTypes } from '../../../utils/constants';
+import ReferenceContext from '../context';
+import ReferenceRenderer from './ReferenceRenderer';
 
 const TreeReferenceDisplayWidget = ({ data, loading }) => {
   const { execute: changeReference, loading: updatingReference } = useLazyAWSAPI(updateReference);
@@ -66,7 +66,11 @@ const TreeReferenceDisplayWidget = ({ data, loading }) => {
   );
 
   if (loading) {
-    return <div className="w-full *:text-center mx-auto"><CircularProgress /></div>;
+    return (
+      <div className="w-full *:text-center mx-auto">
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (get(data, 'references', []).length === 0 && isEmpty(get(data, 'children'))) {

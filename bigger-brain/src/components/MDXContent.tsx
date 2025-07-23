@@ -1,12 +1,11 @@
-'use client'
+'use client';
 
-import { MDXProvider } from '@mdx-js/react'
-import { MDXRemote } from 'next-mdx-remote'
-
+import { MDXProvider } from '@mdx-js/react';
+import { MDXRemote } from 'next-mdx-remote';
 
 interface MDXContentProps {
-  source: any,
-  components?: Record<string, React.ComponentType>
+  source: any;
+  components?: Record<string, React.ComponentType>;
 }
 
 export default function MDXContent({ source, components = {} }: MDXContentProps) {
@@ -17,5 +16,5 @@ export default function MDXContent({ source, components = {} }: MDXContentProps)
         <MDXRemote {...source} components={components} />
       </div>
     </MDXProvider>
-  )
+  );
 }

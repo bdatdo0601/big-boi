@@ -1,19 +1,19 @@
-"use client"
+'use client';
 
-import { BlogPostWithSlug } from '@/api/blog'
-import BlogPostCard from './BlogPostCard';
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import { orderBy } from 'lodash';
 import { useEffect, useState } from 'react';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import { BlogPostWithSlug } from '@/api/blog';
+import BlogPostCard from './BlogPostCard';
 
 const TypedResponsiveMasonry = ResponsiveMasonry as any;
 
 const Blogs = ({ posts }: { posts: BlogPostWithSlug[] }) => {
-  const [isClient, setIsClient] = useState(false)
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true)
-  }, [])
+    setIsClient(true);
+  }, []);
 
   if (!isClient) return null;
 
@@ -24,15 +24,18 @@ const Blogs = ({ posts }: { posts: BlogPostWithSlug[] }) => {
       <div className="w-full">
         <TypedResponsiveMasonry
           columnsCountBreakPoints={{ 350: 1, 900: 2, 1200: 3 }}
-          gutterBreakpoints={{ 350: "12px", 900: "16px", 1200: "24px" }}
+          gutterBreakpoints={{ 350: '12px', 900: '16px', 1200: '24px' }}
         >
           <Masonry>
-            {isClient && orderBy(posts, "updatedAt", "desc").map((post, index) => <BlogPostCard key={post.id} data={post} index={index} width={350} />)}
+            {isClient &&
+              orderBy(posts, 'updatedAt', 'desc').map((post, index) => (
+                <BlogPostCard key={post.id} data={post} index={index} width={350} />
+              ))}
           </Masonry>
         </TypedResponsiveMasonry>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Blogs;

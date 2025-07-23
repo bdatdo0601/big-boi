@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import ExpandMoreOutlined from "@mui/icons-material/ExpandMoreOutlined";
-import { Accordion, AccordionSummary } from "@mui/material";
-import useLocalStorageState from "use-local-storage-state";
-import withScrolling from "react-dnd-scrolling";
-import ReferenceInputWidget from "./components/ReferenceInputWidget";
-import { ReferenceContextProvider } from "./context";
-import Searchable from "./subcontainer/Searchable";
-import ReferenceTabs from "./subcontainer/ReferenceTabs";
-import { useAuth } from "@/context/auth";
+import ExpandMoreOutlined from '@mui/icons-material/ExpandMoreOutlined';
+import { Accordion, AccordionSummary } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import withScrolling from 'react-dnd-scrolling';
+import useLocalStorageState from 'use-local-storage-state';
+import { useAuth } from '@/context/auth';
+import ReferenceInputWidget from './components/ReferenceInputWidget';
+import { ReferenceContextProvider } from './context';
+import ReferenceTabs from './subcontainer/ReferenceTabs';
+import Searchable from './subcontainer/Searchable';
 
-const DndScrollingDiv = withScrolling("div");
+const DndScrollingDiv = withScrolling('div');
 
 const ReferenceCreation = () => {
   const { user } = useAuth();
@@ -25,15 +25,15 @@ const ReferenceCreation = () => {
 
 const Items = [
   {
-    key: "Searchable",
+    key: 'Searchable',
     Component: Searchable,
   },
   {
-    key: "ReferenceTabs",
+    key: 'ReferenceTabs',
     Component: ReferenceTabs,
   },
   {
-    key: "ReferenceCreation",
+    key: 'ReferenceCreation',
     Component: ReferenceCreation,
   },
 ];
@@ -43,7 +43,7 @@ export default function Reference() {
     <ReferenceContextProvider>
       <DndScrollingDiv className="md:my-2 lg:my-2 xl:my-2 2xl:my-2 pt-2 pb-16 px-1">
         <div className="flex flex-col gap-2 relative">
-          {Items.map((item) => (
+          {Items.map(item => (
             <item.Component key={item.key} />
           ))}
         </div>

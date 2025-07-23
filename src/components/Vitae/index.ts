@@ -1,5 +1,5 @@
 /* eslint-disable import/export */
-import { ResumeProvider, ResumeContext } from './provider';
+import { ResumeContext, ResumeProvider } from './provider';
 
 export * from './hooks';
 export { ResumeProvider, ResumeContext };

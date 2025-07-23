@@ -6,12 +6,12 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-const { get } = require("lodash");
+const { get } = require('lodash');
 const gql = require('graphql-tag');
-const moment = require("moment");
-const { signedGraphQLMutationRequest } = require("/opt/packages/utils/signedGraphQLMutationRequest");
-const { getEventRetrieverSource, EventRetrieverProcessors } = require("/opt/packages/EventRetriever");
-const { redeployBlogSite } = require("/opt/packages/utils/redeployBlogSite");
+const moment = require('moment');
+const { signedGraphQLMutationRequest } = require('/opt/packages/utils/signedGraphQLMutationRequest');
+const { getEventRetrieverSource, EventRetrieverProcessors } = require('/opt/packages/EventRetriever');
+const { redeployBlogSite } = require('/opt/packages/utils/redeployBlogSite');
 
 const createEventMessage = gql`
     mutation CreateEventMessage(
@@ -22,7 +22,7 @@ const createEventMessage = gql`
             id
         }
     }
-`
+`;
 
 const createPrivateEventMessage = gql`
     mutation CreatePrivateEventMessage(
@@ -33,48 +33,49 @@ const createPrivateEventMessage = gql`
             id
         }
     }
-`
+`;
 
 const generateVariableInput = message => ({
-    input: {
-        ...message,
-        type: "Event",
-        content: JSON.stringify(get(message, "content", {})),
-        metadata: JSON.stringify(get(message, "metadata", {})),
-        publishInfo: JSON.stringify(get(message, "publishInfo", {})),
-        timestamp: moment(get(message, "metadata.timestamp", moment().valueOf())).toISOString()
-    }
-})
+  input: {
+    ...message,
+    type: 'Event',
+    content: JSON.stringify(get(message, 'content', {})),
+    metadata: JSON.stringify(get(message, 'metadata', {})),
+    publishInfo: JSON.stringify(get(message, 'publishInfo', {})),
+    timestamp: moment(get(message, 'metadata.timestamp', moment().valueOf())).toISOString(),
+  },
+});
 
 // message storing handler
-exports.handler = async (handlerEvent) => {
-    const eventRetrieverSource = getEventRetrieverSource(handlerEvent);
+exports.handler = async handlerEvent => {
+  const eventRetrieverSource = getEventRetrieverSource(handlerEvent);
 
-    if (!eventRetrieverSource) {
-      console.error("Invalid Event Retriever Source", handlerEvent);
-      return { statusCode: 400, body: "{}", isBase64Encoded: false };
-    }
+  if (!eventRetrieverSource) {
+    console.error('Invalid Event Retriever Source', handlerEvent);
+    return { statusCode: 400, body: '{}', isBase64Encoded: false };
+  }
 
-    const messages = EventRetrieverProcessors[eventRetrieverSource].retrieveEvents(handlerEvent);
+  const messages = EventRetrieverProcessors[eventRetrieverSource].retrieveEvents(handlerEvent);
 
+  await Promise.all(
+    messages.map(async message => {
+      const variables = generateVariableInput(message);
+      const visibility = get(message, 'metadata.visibility', 'private');
+      let graphQLQuery = null;
+      switch (visibility) {
+        case 'public':
+          graphQLQuery = createEventMessage;
+          break;
+        case 'private':
+          graphQLQuery = createPrivateEventMessage;
+          break;
+        default:
+          graphQLQuery = createPrivateEventMessage;
+          break;
+      }
+      await signedGraphQLMutationRequest(graphQLQuery, variables);
+    })
+  );
 
-    await Promise.all(messages.map(async message => {
-        const variables = generateVariableInput(message);
-        const visibility = get(message, "metadata.visibility", "private");
-        let graphQLQuery = null;
-        switch (visibility) {
-            case "public":
-                graphQLQuery = createEventMessage;
-                break;
-            case "private":
-                graphQLQuery = createPrivateEventMessage;
-                break;
-            default:
-                graphQLQuery = createPrivateEventMessage;
-                break; 
-        }
-        await signedGraphQLMutationRequest(graphQLQuery, variables);
-    }));
-
-    return { messages, statusCode: 200 };
+  return { messages, statusCode: 200 };
 };

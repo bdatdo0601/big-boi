@@ -1,4 +1,4 @@
-import { gql, GraphQLClient } from 'graphql-request';
+import { GraphQLClient, gql } from 'graphql-request';
 import { isEmpty } from 'lodash';
 import slugify from 'slugify';
 
@@ -37,33 +37,33 @@ export type BlogPostWithSlug = BlogPost & { slug: string };
 // Query to get all posts for the index page
 const GET_ALL_POSTS = gql`
   query GetAllPosts {
-  listPosts {
-    nextToken
-    items {
-      comments {
-        items {
-          content
-          createdAt
-          id
-          owner
-          updatedAt
-          postID
+    listPosts {
+      nextToken
+      items {
+        comments {
+          items {
+            content
+            createdAt
+            id
+            owner
+            updatedAt
+            postID
+          }
         }
+        createdAt
+        data
+        description
+        externalLink
+        id
+        owner
+        postType
+        status
+        tags
+        title
+        updatedAt
       }
-      createdAt
-      data
-      description
-      externalLink
-      id
-      owner
-      postType
-      status
-      tags
-      title
-      updatedAt
     }
   }
-}
 `;
 
 // In-memory cache for slug to ID mapping
@@ -73,10 +73,14 @@ let slugToIdMap: Map<string, string> | null = null;
 async function getSlugToIdMap(): Promise<Map<string, string>> {
   if (slugToIdMap) return slugToIdMap;
 
-  const { listPosts } = await client.request<{ listPosts: { items: BlogPost[] } }>(GET_ALL_POSTS);
+  const { listPosts } = await client.request<{
+    listPosts: { items: BlogPost[] };
+  }>(GET_ALL_POSTS);
   // only list slugify post created directly
   slugToIdMap = new Map(
-    listPosts.items.filter((post: BlogPost) => isEmpty(post.postType)).map((post: any) => [slugify(post.title), post.id])
+    listPosts.items
+      .filter((post: BlogPost) => isEmpty(post.postType))
+      .map((post: any) => [slugify(post.title), post.id])
   );
 
   return slugToIdMap;
@@ -131,9 +135,11 @@ export async function getPostBySlug(slug: string): Promise<BlogPostWithSlug> {
 }
 
 export async function getAllPosts(): Promise<BlogPostWithSlug[]> {
-  const { listPosts } = await client.request<{ listPosts: { items: BlogPost[] } }>(GET_ALL_POSTS);
+  const { listPosts } = await client.request<{
+    listPosts: { items: BlogPost[] };
+  }>(GET_ALL_POSTS);
   return listPosts.items
-    .filter((post) => post.status === 'PUBLISHED')
+    .filter(post => post.status === 'PUBLISHED')
     .map((post: any) => ({
       ...post,
       slug: slugify(post.title),

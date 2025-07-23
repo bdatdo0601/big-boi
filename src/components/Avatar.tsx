@@ -16,17 +16,22 @@ const Avatar: React.FC<AvatarProps> = ({ src, alt, width = 50, height = 50 }) =>
       alt={alt}
       className={`rounded-full flex justify-center items-center border-input border-2`}
       style={{
-        width, height
+        width,
+        height,
       }}
     />
   ) : (
-    <span className={`rounded-full bg-secondary flex justify-center items-center font-normal border-input border-2`} style={{
-      width, height,
-      fontSize: `${Math.min(width, height) * 0.4}px`,
-    }}>
+    <span
+      className={`rounded-full bg-secondary flex justify-center items-center font-normal border-input border-2`}
+      style={{
+        width,
+        height,
+        fontSize: `${Math.min(width, height) * 0.4}px`,
+      }}
+    >
       {firstLetter}
     </span>
-  )
+  );
 };
 
 export default Avatar;

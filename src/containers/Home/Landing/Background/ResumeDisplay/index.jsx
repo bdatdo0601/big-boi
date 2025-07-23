@@ -1,3 +1,7 @@
+import Facebook from '@mui/icons-material/Facebook';
+import GitHub from '@mui/icons-material/GitHub';
+import LinkedIn from '@mui/icons-material/LinkedIn';
+import Twitter from '@mui/icons-material/Twitter';
 import {
   Avatar,
   Card,
@@ -10,31 +14,27 @@ import {
   StepLabel,
   Stepper,
   Typography,
-} from "@mui/material";
-import Facebook from "@mui/icons-material/Facebook";
-import GitHub from "@mui/icons-material/GitHub";
-import LinkedIn from "@mui/icons-material/LinkedIn";
-import Twitter from "@mui/icons-material/Twitter";
-import get from "lodash/get";
-import React from "react";
+} from '@mui/material';
+import get from 'lodash/get';
+import React from 'react';
+import ProfileCard from '@/components/ProfileCard';
 import {
   useBasic,
   useEducation,
-  useSkills,
-  useLanguages,
-  useWork,
-  useProjects,
-  useVolunteer,
   useInterests,
-} from "@/components/Vitae";
-import ProfileCard from "@/components/ProfileCard";
-import { BasicInfo } from "./BasicInfo";
-import { Education } from "./Education";
-import { Competencies } from "./Competencies";
-import Experiences from "./Experiences";
-import Projects from "./Projects";
-import Volunteer from "./Volunteers";
-import Interests from "./Interests";
+  useLanguages,
+  useProjects,
+  useSkills,
+  useVolunteer,
+  useWork,
+} from '@/components/Vitae';
+import { BasicInfo } from './BasicInfo';
+import { Competencies } from './Competencies';
+import { Education } from './Education';
+import Experiences from './Experiences';
+import Interests from './Interests';
+import Projects from './Projects';
+import Volunteer from './Volunteers';
 
 const ResumeDisplay = () => (
   <div className="w-full flex flex-wrap max-md:gap-8">

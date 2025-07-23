@@ -1,5 +1,5 @@
+import { Add, ArrowDownward, ArrowUpward, Delete, Refresh } from '@mui/icons-material';
 import JSONSchemaForm, { FormProps } from '@rjsf/core';
-
 import {
   ArrayFieldTemplateProps,
   FieldErrorProps,
@@ -9,16 +9,14 @@ import {
   RegistryWidgetsType,
   WidgetProps,
 } from '@rjsf/utils';
-
-import { cn } from '@/utils';
 import { get, merge, pick } from 'lodash';
-import { Add, ArrowDownward, ArrowUpward, Delete, Refresh } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
+import { cn } from '@/utils';
 import Switch from '../Switch';
 
 const Input = (props: React.ComponentProps<any>) => (
   <input {...props} className="border border-gray-300 rounded-md py-1 px-2 w-full text-input" />
-)
+);
 
 const base64ToFile = async (dataurl: string, filename: string): Promise<File> => {
   const res: Response = await fetch(dataurl);
@@ -26,13 +24,12 @@ const base64ToFile = async (dataurl: string, filename: string): Promise<File> =>
   return new File([blob], filename, { type: blob.type });
 };
 
-
 const convertToBase64 = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
+    reader.onerror = error => reject(error);
   });
 };
 
@@ -111,7 +108,7 @@ const widgets: RegistryWidgetsType = {
       <Switch
         isOn={value || false}
         handleToggle={(e: any) => onChange(e.target.checked)}
-        label={<span className='text-sm text-foreground'>{required ? '*' : ''}</span>}
+        label={<span className="text-sm text-foreground">{required ? '*' : ''}</span>}
       />
     );
   },
@@ -137,7 +134,7 @@ const widgets: RegistryWidgetsType = {
 
     useEffect(() => {
       if (value) {
-        base64ToFile(value, 'tempFile').then((file) => {
+        base64ToFile(value, 'tempFile').then(file => {
           setTempFile(file);
         });
       }
@@ -195,22 +192,21 @@ const templates = {
       uiSchema,
     } = props;
     return (
-      <div className='border-l-2 border-primary pl-2 py-1'>
+      <div className="border-l-2 border-primary pl-2 py-1">
         <div className="flex justify-start pl-1">
           <h1 className="flex-grow text-lg text-center pl-2 font-bold">{title}</h1>
-          {props.idSchema.$id === 'root' &&
-            get(uiSchema, 'ui:submitButtonOptions.norender', false) && (
-              <button disabled={isSubmitPending} type={get(uiSchema, 'ui:submitButtonOptions.type')} className="bg-success text-white px-4 py-2 rounded-md flex items-center">
-                {isSubmitPending && (
-                  <Refresh className="mr-2 h-4 w-4 animate-spin" />
-                )}
-                {get(uiSchema, 'ui:submitButtonOptions.submitText', 'Submit')}
-              </button>
-            )}
+          {props.idSchema.$id === 'root' && get(uiSchema, 'ui:submitButtonOptions.norender', false) && (
+            <button
+              disabled={isSubmitPending}
+              type={get(uiSchema, 'ui:submitButtonOptions.type')}
+              className="bg-success text-white px-4 py-2 rounded-md flex items-center"
+            >
+              {isSubmitPending && <Refresh className="mr-2 h-4 w-4 animate-spin" />}
+              {get(uiSchema, 'ui:submitButtonOptions.submitText', 'Submit')}
+            </button>
+          )}
         </div>
-        <div className='flex flex-row flex-wrap gap-2'>
-          {props.properties.map((element: any) => element.content)}
-        </div>
+        <div className="flex flex-row flex-wrap gap-2">{props.properties.map((element: any) => element.content)}</div>
       </div>
     );
   },
@@ -219,8 +215,8 @@ const templates = {
     if (['object', 'array'].includes(props.schema.type as string)) return children;
     return (
       <div className="my-2 flex flex-col gap-1">
-        <span className='text-xs'>{label}</span>
-        <div className='flex-grow'>{children}</div>
+        <span className="text-xs">{label}</span>
+        <div className="flex-grow">{children}</div>
         <span className="block">{description}</span>
         <span>{help}</span>
         {errors}
@@ -230,28 +226,38 @@ const templates = {
 
   ArrayFieldTemplate: (props: ArrayFieldTemplateProps) => {
     return (
-      <div className='py-1 pr-1 flex flex-col gap-2 border-y-2 border-foreground'>
-        <span className='text-lg pl-2 font-bold'>{props.title}</span>
-        <div className='flex flex-wrap gap-2 items-end'>
-          {props.items.map((element) => (
-            <div key={element.key} className='flex flex-col gap-1 py-2 border-b-2 border-primary border-dashed'>
-              <span className='flex flex-row gap-2 justify-start items-end px-2'>
-                <div className='border-r-2 border-dashed pr-2 border-primary'>
-                  {element.children}
-                </div>
-                <div className='flex flex-col gap-1 pl-2'>
+      <div className="py-1 pr-1 flex flex-col gap-2 border-y-2 border-foreground">
+        <span className="text-lg pl-2 font-bold">{props.title}</span>
+        <div className="flex flex-wrap gap-2 items-end">
+          {props.items.map(element => (
+            <div key={element.key} className="flex flex-col gap-1 py-2 border-b-2 border-primary border-dashed">
+              <span className="flex flex-row gap-2 justify-start items-end px-2">
+                <div className="border-r-2 border-dashed pr-2 border-primary">{element.children}</div>
+                <div className="flex flex-col gap-1 pl-2">
                   {element.hasMoveUp && (
-                    <button title='Move Up' className="p-1 rounded-full border-2 bg-secondary text-input hover:cursor-pointer" onClick={element.onReorderClick(element.index, element.index - 1)}>
+                    <button
+                      title="Move Up"
+                      className="p-1 rounded-full border-2 bg-secondary text-input hover:cursor-pointer"
+                      onClick={element.onReorderClick(element.index, element.index - 1)}
+                    >
                       <ArrowUpward />
                     </button>
                   )}
                   {element.hasMoveDown && (
-                    <button title='Move Down' className="p-1 rounded-full border-2 bg-secondary text-input hover:cursor-pointer" onClick={element.onReorderClick(element.index, element.index + 1)}>
+                    <button
+                      title="Move Down"
+                      className="p-1 rounded-full border-2 bg-secondary text-input hover:cursor-pointer"
+                      onClick={element.onReorderClick(element.index, element.index + 1)}
+                    >
                       <ArrowDownward />
                     </button>
                   )}
                   {element.hasRemove && (
-                    <button title='Remove' className="p-1 rounded-full border-2 bg-destructive text-input hover:cursor-pointer" onClick={element.onDropIndexClick(element.index)}>
+                    <button
+                      title="Remove"
+                      className="p-1 rounded-full border-2 bg-destructive text-input hover:cursor-pointer"
+                      onClick={element.onDropIndexClick(element.index)}
+                    >
                       <Delete />
                     </button>
                   )}
@@ -261,9 +267,13 @@ const templates = {
           ))}
         </div>
         {props.canAdd && (
-          <div className='flex flex-row gap-2 justify-start items-center'>
-            <span className='text-xs'>{props.title} Action(s)</span>
-            <button title='Add' className="p-1 rounded-full border-2 bg-primary text-input hover:cursor-pointer" onClick={props.onAddClick}>
+          <div className="flex flex-row gap-2 justify-start items-center">
+            <span className="text-xs">{props.title} Action(s)</span>
+            <button
+              title="Add"
+              className="p-1 rounded-full border-2 bg-primary text-input hover:cursor-pointer"
+              onClick={props.onAddClick}
+            >
               <Add />
             </button>
           </div>
@@ -275,9 +285,7 @@ const templates = {
   FieldErrorTemplate: (props: FieldErrorProps) => {
     const { errors } = props;
     if (!errors) return null;
-    return (
-      <span className="text-red-400 text-sm italic block">* {errors}</span>
-    );
+    return <span className="text-red-400 text-sm italic block">* {errors}</span>;
   },
 
   ErrorListTemplate: () => {
@@ -324,7 +332,12 @@ const templates = {
 };
 
 export const DataForm = (
-  props: FormProps & { submitText?: string; customSubmit?: boolean, templateOverride?: Partial<typeof templates>, loading?: boolean },
+  props: FormProps & {
+    submitText?: string;
+    customSubmit?: boolean;
+    templateOverride?: Partial<typeof templates>;
+    loading?: boolean;
+  }
 ) => {
   return (
     <JSONSchemaForm
@@ -338,7 +351,7 @@ export const DataForm = (
       uiSchema={{
         'ui:submitButtonOptions': {
           norender: !props.customSubmit,
-          submitText: props.submitText || 'Submit'
+          submitText: props.submitText || 'Submit',
         },
         ...props.uiSchema,
       }}

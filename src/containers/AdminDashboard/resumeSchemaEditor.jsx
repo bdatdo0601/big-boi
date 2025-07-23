@@ -1,16 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Card, CircularProgress } from '@mui/material';
-import PropTypes from 'prop-types';
 import { CloudUploadOutlined, CopyAll, RestoreOutlined } from '@mui/icons-material';
+import { Button, Card, CircularProgress } from '@mui/material';
 import { isEqual, pick } from 'lodash';
-
+import PropTypes from 'prop-types';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useStorageResume } from '@/components/Vitae/withResumeProvider';
 import DEFAULT_RESUME from '../../assets/default-resume.json';
+import EventType from '../../assets/event-type.json';
 import { useGetFile, useUploadFile } from '../../utils/awsStorage';
 import { RESUME } from '../../utils/constants';
 import { useDataUpdateWrapper } from '../../utils/hooks';
-import EventType from '../../assets/event-type.json';
 import ResumeSchemaForm from './resumeSchemaForm';
-import { useStorageResume } from '@/components/Vitae/withResumeProvider';
 
 const DataUpdateOptions = {
   snackBar: {
@@ -79,7 +78,7 @@ export default function ResumeSchemaEditor() {
           className="bg-secondary text-white py-1 px-2 rounded-md hover:cursor-pointer"
           onClick={() => {
             navigator.clipboard.writeText(JSON.stringify(resume, null, 2));
-            window.alert("Copied to clipboard")
+            window.alert('Copied to clipboard');
           }}
         >
           <CopyAll /> Get Current Resume Schema

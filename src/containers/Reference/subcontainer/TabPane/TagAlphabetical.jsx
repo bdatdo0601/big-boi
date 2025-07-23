@@ -1,26 +1,28 @@
-import React, { useContext, useEffect, useMemo } from "react";
-import { get, sortBy } from "lodash";
-import { listPrivateReferences, listReferences } from "../../../../graphql/queries";
-import { useAWSAPI } from "../../../../utils/awsAPI";
-import { convertToReferenceRenderedData } from "../../utils";
-import ReferenceDisplayWidget from "../../components/ReferenceDisplayWidget";
-import ReferenceContext from "../../context";
+import { get, sortBy } from 'lodash';
+import React, { useContext, useEffect, useMemo } from 'react';
+import { listPrivateReferences, listReferences } from '../../../../graphql/queries';
+import { useAWSAPI } from '../../../../utils/awsAPI';
+import ReferenceDisplayWidget from '../../components/ReferenceDisplayWidget';
+import ReferenceContext from '../../context';
+import { convertToReferenceRenderedData } from '../../utils';
 
 const TagAlphabetical = () => {
   const query = useMemo(() => ({ limit: 10000 }), []);
-  const { data: rawPublicData, loading: publicDataLoading, execute: refetchReference } = useAWSAPI(
-    listReferences,
-    query,
-  );
-  const { data: rawPrivateData, loading: privateDataLoading, execute: refetchPrivateReference } = useAWSAPI(
-    listPrivateReferences,
-    query
-  );
+  const {
+    data: rawPublicData,
+    loading: publicDataLoading,
+    execute: refetchReference,
+  } = useAWSAPI(listReferences, query);
+  const {
+    data: rawPrivateData,
+    loading: privateDataLoading,
+    execute: refetchPrivateReference,
+  } = useAWSAPI(listPrivateReferences, query);
   const { registerRefetch, deregisterRefetch } = useContext(ReferenceContext);
   const isLoading = useMemo(() => publicDataLoading || privateDataLoading, [publicDataLoading, privateDataLoading]);
 
   useEffect(() => {
-    registerRefetch("TagAlphabetical", async () =>
+    registerRefetch('TagAlphabetical', async () =>
       Promise.all(
         [refetchReference, refetchPrivateReference].map(async fn => {
           fn();
@@ -28,7 +30,7 @@ const TagAlphabetical = () => {
       )
     );
     return () => {
-      deregisterRefetch("TagAlphabetical");
+      deregisterRefetch('TagAlphabetical');
     };
   }, [registerRefetch, refetchReference, refetchPrivateReference, deregisterRefetch]);
 
@@ -36,18 +38,18 @@ const TagAlphabetical = () => {
     () =>
       sortBy(
         [
-          ...get(rawPublicData, "data.listReferences.items", []).map(item => ({
+          ...get(rawPublicData, 'data.listReferences.items', []).map(item => ({
             ...item,
-            tags: sortBy(get(item, "tags", []), tag => tag),
+            tags: sortBy(get(item, 'tags', []), tag => tag),
             isPrivate: false,
           })),
-          ...get(rawPrivateData, "data.listPrivateReferences.items", []).map(item => ({
+          ...get(rawPrivateData, 'data.listPrivateReferences.items', []).map(item => ({
             ...item,
-            tags: sortBy(get(item, "tags", []), tag => tag),
+            tags: sortBy(get(item, 'tags', []), tag => tag),
             isPrivate: true,
           })),
         ],
-        "tags"
+        'tags'
       ),
     [rawPrivateData, rawPublicData]
   );

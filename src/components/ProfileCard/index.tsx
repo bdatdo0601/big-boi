@@ -1,4 +1,5 @@
-import { useSpring, animated } from '@react-spring/web';
+import { animated, useSpring } from '@react-spring/web';
+
 interface ProfileCardProps {
   cardStyle?: React.CSSProperties;
   headerWrapperStyle?: React.CSSProperties;
@@ -58,10 +59,7 @@ function ProfileCard({
       className="relative overflow-visible rounded-lg bg-card w-full"
     >
       <div className="inline-block w-full p-0 mb-3 overflow-visible text-input">
-        <div
-          className="z-10 overflow-visible mb-6"
-          style={headerWrapperStyle}
-        >
+        <div className="z-10 overflow-visible mb-6" style={headerWrapperStyle}>
           <AnimatedDiv
             style={{
               ...headerAnimation,

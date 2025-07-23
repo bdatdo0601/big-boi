@@ -1,42 +1,42 @@
-import React, { lazy } from "react";
-import { Navigate, useNavigate } from "react-router";
-import MuiMap from "@mui/icons-material/Map";
-import CreateIcon from "@mui/icons-material/Create";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
-import CommentIcon from "@mui/icons-material/Comment";
-import HomeIcon from "@mui/icons-material/Home";
-import ListAltOutlined from "@mui/icons-material/ListAltOutlined";
-import LinkOutlined from "@mui/icons-material/LinkOutlined";
-import FilePresentOutlined from "@mui/icons-material/FilePresentOutlined";
-import QuestionAnswer from "@mui/icons-material/QuestionAnswer";
-import AdminDashboard from "./containers/AdminDashboard";
-import BlogManager from "./containers/BlogManager";
-import BlogCreation from "./containers/BlogManager/Creation";
-import Reference from "./containers/Reference";
-import ShareTarget from "./containers/ShareTarget";
-import PaperResumeDisplay from "./containers/PaperResume";
-import { useAuth } from "./context/auth";
-import { getCurrentUser } from "@aws-amplify/auth";
-import FAQ from "./containers/FAQ";
+import { getCurrentUser } from '@aws-amplify/auth';
+import CommentIcon from '@mui/icons-material/Comment';
+import CreateIcon from '@mui/icons-material/Create';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import FilePresentOutlined from '@mui/icons-material/FilePresentOutlined';
+import HomeIcon from '@mui/icons-material/Home';
+import LinkOutlined from '@mui/icons-material/LinkOutlined';
+import ListAltOutlined from '@mui/icons-material/ListAltOutlined';
+import MuiMap from '@mui/icons-material/Map';
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import QuestionAnswer from '@mui/icons-material/QuestionAnswer';
+import React, { lazy } from 'react';
+import { Navigate, useNavigate } from 'react-router';
+import AdminDashboard from './containers/AdminDashboard';
+import BlogManager from './containers/BlogManager';
+import BlogCreation from './containers/BlogManager/Creation';
+import FAQ from './containers/FAQ';
+import PaperResumeDisplay from './containers/PaperResume';
+import Reference from './containers/Reference';
+import ShareTarget from './containers/ShareTarget';
+import { useAuth } from './context/auth';
 
-const Blogs = lazy(() => import("./containers/Blogs"));
-const ChangeLogs = lazy(() => import("./containers/Changelogs"));
-const Documentations = lazy(() => import("./containers/Documentations"));
-const Home = lazy(() => import("./containers/Home"));
+const Blogs = lazy(() => import('./containers/Blogs'));
+const ChangeLogs = lazy(() => import('./containers/Changelogs'));
+const Documentations = lazy(() => import('./containers/Documentations'));
+const Home = lazy(() => import('./containers/Home'));
 
 export const ROUTE_TYPE = {
   PUBLIC: {
-    name: "",
+    name: '',
     withAuth: false,
   },
   PRIVATE: {
-    name: "Management",
+    name: 'Management',
     withAuth: true,
   },
   DEV: {
-    name: "For Nerds",
+    name: 'For Nerds',
     withAuth: false,
   },
 };
@@ -55,7 +55,6 @@ export interface RouteConfig {
   type: RouteType;
   hidden?: boolean | (() => Promise<boolean>);
 }
-
 
 export const getRoutePath = (route: RouteConfig) => {
   if (route.exact) {
@@ -76,43 +75,43 @@ const isAuthExist = async (): Promise<boolean> => {
 export const subdomainRouteMap: Record<string, RouteConfig[]> = {
   reference: [
     {
-      name: "Reference",
+      name: 'Reference',
       icon: <LinkOutlined />,
       component: Reference,
-      path: "/",
+      path: '/',
       exact: true,
       type: ROUTE_TYPE.PUBLIC,
     },
     {
-      name: "Share-Target",
+      name: 'Share-Target',
       icon: <LinkOutlined />,
       component: ShareTarget,
-      path: "/share-target",
+      path: '/share-target',
       exact: true,
       hidden: true,
       type: ROUTE_TYPE.PUBLIC,
     },
     {
-      name: "Logout",
+      name: 'Logout',
       icon: <MeetingRoomIcon />,
       component: () => {
         const navigate = useNavigate();
         const { signOut } = useAuth();
         signOut().then(() => {
-          navigate("/", { replace: true });
+          navigate('/', { replace: true });
         });
         return null;
       },
-      path: "/logout",
+      path: '/logout',
       exact: true,
       type: ROUTE_TYPE.PRIVATE,
       hidden: async () => !(await isAuthExist()),
     },
     {
-      name: "Login",
+      name: 'Login',
       icon: <ExitToAppIcon />,
       component: () => <Navigate replace to="/" />,
-      path: "/login",
+      path: '/login',
       exact: true,
       type: ROUTE_TYPE.PRIVATE,
       hidden: async () => isAuthExist(),
@@ -122,125 +121,125 @@ export const subdomainRouteMap: Record<string, RouteConfig[]> = {
 
 const routes: RouteConfig[] = [
   {
-    name: "Home",
+    name: 'Home',
     icon: <HomeIcon />,
     component: Home,
-    path: "/",
+    path: '/',
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
   },
   {
-    name: "Reference",
+    name: 'Reference',
     icon: <LinkOutlined />,
     component: Reference,
-    path: "/reference",
+    path: '/reference',
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
   },
   {
-    name: "Share-Target",
+    name: 'Share-Target',
     icon: <LinkOutlined />,
     component: ShareTarget,
-    path: "/share-target",
+    path: '/share-target',
     exact: true,
     hidden: true,
     type: ROUTE_TYPE.PUBLIC,
   },
   {
-    name: "Blogs & Thoughts",
+    name: 'Blogs & Thoughts',
     icon: <CommentIcon />,
     component: Blogs,
-    path: "/blogs",
+    path: '/blogs',
     exact: false,
     type: ROUTE_TYPE.PUBLIC,
   },
   {
-    name: "Resume",
+    name: 'Resume',
     icon: <FilePresentOutlined />,
     component: PaperResumeDisplay,
-    path: "/resume",
+    path: '/resume',
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
   },
   {
-    name: "FAQ",
+    name: 'FAQ',
     icon: <QuestionAnswer />,
     component: FAQ,
-    path: "/faq",
+    path: '/faq',
     exact: true,
     type: ROUTE_TYPE.PUBLIC,
   },
   {
-    name: "Documentations",
+    name: 'Documentations',
     icon: <MuiMap />,
     component: Documentations,
-    path: "/documentations",
+    path: '/documentations',
     exact: true,
     type: ROUTE_TYPE.DEV,
     hidden: async () => false,
   },
   {
-    name: "Change Logs",
+    name: 'Change Logs',
     icon: <ListAltOutlined />,
     component: ChangeLogs,
-    path: "/change-logs",
+    path: '/change-logs',
     exact: true,
     type: ROUTE_TYPE.DEV,
     hidden: async () => false,
   },
   {
-    name: "Login",
+    name: 'Login',
     icon: <ExitToAppIcon />,
     component: () => <Navigate to="/admin" />,
-    path: "/login",
+    path: '/login',
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
     hidden: async () => isAuthExist(),
   },
   {
-    name: "Admin Dashboard",
+    name: 'Admin Dashboard',
     icon: <DashboardIcon />,
     component: AdminDashboard,
-    path: "/admin",
+    path: '/admin',
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
     hidden: async () => !(await isAuthExist()),
   },
   {
-    name: "Blogs Manager",
+    name: 'Blogs Manager',
     icon: <CreateIcon />,
     component: BlogManager,
-    path: "/blogmanager",
+    path: '/blogmanager',
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
     hidden: async () => !(await isAuthExist()),
   },
   {
-    name: "Blogs Creation",
+    name: 'Blogs Creation',
     icon: <CreateIcon />,
     component: BlogCreation,
-    path: "/blogmanager/update/:postID",
+    path: '/blogmanager/update/:postID',
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
     hidden: async () => true,
   },
   {
-    name: "Logout",
+    name: 'Logout',
     icon: <MeetingRoomIcon />,
     component: () => {
       const navigate = useNavigate();
       const { signOut } = useAuth();
       signOut().then(() => {
-        navigate("/", { replace: true });
+        navigate('/', { replace: true });
       });
       return null;
     },
-    path: "/logout",
+    path: '/logout',
     exact: true,
     type: ROUTE_TYPE.PRIVATE,
     hidden: async () => !(await isAuthExist()),
   },
-].map((item) => ({
+].map(item => ({
   ...item,
   component: item.component,
 }));

@@ -13,7 +13,7 @@ const moduleNames = process.env.MODULES.split(',');
 /**
  * The array of imported modules.
  */
-const modules = moduleNames.map((name) => require(`./${name}`));
+const modules = moduleNames.map(name => require(`./${name}`));
 
 /**
  * This async handler iterates over the given modules and awaits them.
@@ -28,6 +28,6 @@ exports.handler = async (event, context) => {
    * `await Promise.all(...)`. This would otherwise just be determined by the
    * order of names in the `MODULES` var.
    */
-  await Promise.all(modules.map((module) => module.handler(event, context)));
+  await Promise.all(modules.map(module => module.handler(event, context)));
   return event;
 };

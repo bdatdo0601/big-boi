@@ -1,14 +1,14 @@
 {
-    "Personal": {
-        "BlogPost": {
-            "Update": "Personal.BlogPost.Update",
-            "StatusUpdate": "Personal.BlogPost.StatusUpdate"
-        },
-        "Resume": {
-            "Update": "Personal.Resume.Update"
-        },
-        "Reference": {
-            "Update": "Personal.Reference.Update"
-        }
+  "Personal": {
+    "BlogPost": {
+      "Update": "Personal.BlogPost.Update",
+      "StatusUpdate": "Personal.BlogPost.StatusUpdate"
+    },
+    "Resume": {
+      "Update": "Personal.Resume.Update"
+    },
+    "Reference": {
+      "Update": "Personal.Reference.Update"
     }
+  }
 }

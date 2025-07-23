@@ -9,23 +9,14 @@
           "Version": "2012-10-17",
           "Statement": [
             {
-              "Action": [
-                "mobiletargeting:*"
-              ],
-              "Resource": [
-                "arn:aws:mobiletargeting:us-east-1:*:apps/*"
-              ],
+              "Action": ["mobiletargeting:*"],
+              "Resource": ["arn:aws:mobiletargeting:us-east-1:*:apps/*"],
               "Effect": "Allow",
               "Sid": "mobiletargetingpinpoint"
             },
             {
-              "Action": [
-                "kinesis:PutRecords",
-                "kinesis:*"
-              ],
-              "Resource": [
-                "arn:aws:kinesis:us-east-1:*:stream/*"
-              ],
+              "Action": ["kinesis:PutRecords", "kinesis:*"],
+              "Resource": ["arn:aws:kinesis:us-east-1:*:stream/*"],
               "Effect": "Allow",
               "Sid": "kinesis"
             }

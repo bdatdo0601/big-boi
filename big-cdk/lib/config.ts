@@ -14,9 +14,9 @@ export const Environment: ENVIRONMENT = isValidEnvironment(process.env.ENVIRONME
 type CONFIG = {
   ingestionKinesisStreamArn: string;
   ingestionLambdaArn: string;
-  account: string,
-  region: string,
-  environment: string
+  account: string;
+  region: string;
+  environment: string;
 };
 
 const configs: { [key in ENVIRONMENT]: CONFIG } = {

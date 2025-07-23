@@ -1,6 +1,6 @@
-import React, { useMemo, useRef, useEffect, useState } from 'react';
-import { ForceGraph2D } from 'react-force-graph';
 import { useRouter } from 'next/navigation';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { ForceGraph2D } from 'react-force-graph';
 
 interface Items {
   title: string;
@@ -8,7 +8,7 @@ interface Items {
   backlinks: string[];
 }
 
-const GraphRenderer = ({ items, onNodeClick }: { items: Items[], onNodeClick: Function }) => {
+const GraphRenderer = ({ items, onNodeClick }: { items: Items[]; onNodeClick: Function }) => {
   const graphRef = useRef<any>(null);
   const router = useRouter();
 
@@ -42,7 +42,7 @@ const GraphRenderer = ({ items, onNodeClick }: { items: Items[], onNodeClick: Fu
         return 20;
       });
       graphRef.current.centerAt(0, 200);
-      graphRef.current.zoom(2, 1000)
+      graphRef.current.zoom(2, 1000);
       graphRef.current.isProcessed = true;
     }
   });
@@ -61,7 +61,7 @@ const GraphRenderer = ({ items, onNodeClick }: { items: Items[], onNodeClick: Fu
   };
 
   return (
-    <div className='h-full overflow-hidden'>
+    <div className="h-full overflow-hidden">
       <ForceGraph2D
         ref={graphRef}
         graphData={data}
@@ -71,11 +71,11 @@ const GraphRenderer = ({ items, onNodeClick }: { items: Items[], onNodeClick: Fu
         nodeAutoColorBy="id"
         linkDirectionalArrowLength={7}
         linkDirectionalArrowRelPos={3}
-        backgroundColor='#2a2a2a'
+        backgroundColor="#2a2a2a"
         nodeRelSize={8}
         linkColor="#ffffff"
         linkDirectionalArrowColor="#ffffff"
-        linkAutoColorBy={"source"}
+        linkAutoColorBy={'source'}
         onNodeClick={handleNodeClick}
         nodeCanvasObject={(node: any, ctx, globalScale) => {
           const label = node.name;
@@ -87,7 +87,7 @@ const GraphRenderer = ({ items, onNodeClick }: { items: Items[], onNodeClick: Fu
 
           const baseSize = 5;
           const scaleFactor = 1.5;
-          const nodeSize = baseSize + (node.linkCount * scaleFactor);
+          const nodeSize = baseSize + node.linkCount * scaleFactor;
 
           ctx.beginPath();
           ctx.arc(node.x!, node.y!, nodeSize, 0, 2 * Math.PI, false);

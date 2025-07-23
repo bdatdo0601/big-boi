@@ -1,11 +1,11 @@
-import { capitalize, get, groupBy, has } from "lodash";
-import { IconButton } from "@mui/material";
-import Menu from "@mui/icons-material/Menu";
-import { useMemo } from "react";
-import { useLocation, useNavigate } from "react-router";
-import { LogoTitle } from "../../components/LogoTitle";
+import Menu from '@mui/icons-material/Menu';
+import { IconButton } from '@mui/material';
+import { capitalize, get, groupBy, has } from 'lodash';
+import { useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import { LogoTitle } from '../../components/LogoTitle';
 
-const subdomain = window.location.host.split(".")[0];
+const subdomain = window.location.host.split('.')[0];
 
 export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
   const navigate = useNavigate();
@@ -14,10 +14,10 @@ export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
     () =>
       get(
         groupBy(
-          routeList.filter((item) => !item.hidden),
-          "type.name"
+          routeList.filter(item => !item.hidden),
+          'type.name'
         ),
-        "",
+        '',
         []
       ),
     [routeList]
@@ -31,12 +31,12 @@ export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
             setDrawerOpen(true);
           }}
         >
-          <Menu sx={{ color: "var(--muted-foreground)" }} />
+          <Menu sx={{ color: 'var(--muted-foreground)' }} />
         </IconButton>
         <LogoTitle isSubdomainRoute={isSubdomainRoute} subdomain={subdomain} />
       </div>
       <div className="max-lg:hidden flex gap-12 items-center">
-        {tabItems.map((tabItem) => (
+        {tabItems.map(tabItem => (
           <button
             className="pb-2 pt-2 hover:cursor-pointer"
             onClick={() => {
@@ -45,12 +45,12 @@ export const MainNavbar = ({ setDrawerOpen, isSubdomainRoute, routeList }) => {
             style={
               tabItem.path === location.pathname
                 ? {
-                    color: "var(--primary)",
-                    fontWeight: "bolder",
-                    borderBottom: "2px solid var(--primary)",
+                    color: 'var(--primary)',
+                    fontWeight: 'bolder',
+                    borderBottom: '2px solid var(--primary)',
                   }
                 : {
-                    color: "var(--muted-foreground)",
+                    color: 'var(--muted-foreground)',
                   }
             }
             key={tabItem.name}

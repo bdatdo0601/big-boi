@@ -1,37 +1,37 @@
-"use client"
+'use client';
 
-import React, { useEffect, useMemo } from "react";
-import ReactMarkdown from "react-markdown";
-import { format } from "date-fns";
-import { FaArrowLeft } from "react-icons/fa";
-import Link from "next/link";
-import readingTime from "reading-time/lib/reading-time";
-import {
-  EmailShareButton,
-  EmailIcon,
-  FacebookShareButton,
-  FacebookIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-  RedditShareButton,
-  RedditIcon,
-  TwitterShareButton,
-  TwitterIcon,
-} from "react-share";
+import { format } from 'date-fns';
 // Using ES6 import syntax
 import hljs from 'highlight.js';
+import Link from 'next/link';
+import React, { useEffect, useMemo } from 'react';
+import { FaArrowLeft } from 'react-icons/fa';
+import ReactMarkdown from 'react-markdown';
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  RedditIcon,
+  RedditShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+} from 'react-share';
+import readingTime from 'reading-time/lib/reading-time';
 import 'highlight.js/styles/atom-one-dark.css';
 
-import slugify from "slugify";
-import { get } from "lodash";
-import { isIframe } from "@/utils";
-import { BlogPostWithSlug } from "@/api/blog";
+import { get } from 'lodash';
+import slugify from 'slugify';
+import { BlogPostWithSlug } from '@/api/blog';
+import { isIframe } from '@/utils';
 
 interface PostRendererProps {
-  post: BlogPostWithSlug
+  post: BlogPostWithSlug;
 }
 
-const formatDate = (date: string) => format(new Date(date), "d-MMM-u");
+const formatDate = (date: string) => format(new Date(date), 'd-MMM-u');
 
 const PostRenderer: React.FC<PostRendererProps> = ({ post }) => {
   const baseURL = typeof window !== 'undefined' ? window.location.origin : 'https://blogs.datbdo.com';
@@ -43,13 +43,13 @@ const PostRenderer: React.FC<PostRendererProps> = ({ post }) => {
           site: { name: post.title },
           path: `blogs/${slugify(post.title)}`,
         }),
-        "*"
+        '*'
       );
     }
   }, [post.title]);
 
   const blogLink = `${baseURL}/${slugify(post.title)}`;
-  const readingStats = useMemo(() => readingTime(get(data, "text", "")), [data]);
+  const readingStats = useMemo(() => readingTime(get(data, 'text', '')), [data]);
 
   if (data.postType) {
     return <h1>{post.title}</h1>;
@@ -60,15 +60,15 @@ const PostRenderer: React.FC<PostRendererProps> = ({ post }) => {
       <div className="flex flex-col items-start gap-2">
         <Link
           href="/blogs"
-          onClick={(e) => {
+          onClick={e => {
             if (isIframe()) {
               window.parent.postMessage(
                 JSON.stringify({
                   site: { title: post.title },
-                  path: "/",
+                  path: '/',
                   navigateToPath: true,
                 }),
-                "*"
+                '*'
               );
               e.preventDefault();
             }
@@ -114,15 +114,11 @@ const PostRenderer: React.FC<PostRendererProps> = ({ post }) => {
           )}
         </div>
         <div className="w-full">
-          {post.createdAt && (
-            <div className="text-input">Date published: {formatDate(post.createdAt)}</div>
-          )}
+          {post.createdAt && <div className="text-input">Date published: {formatDate(post.createdAt)}</div>}
         </div>
         <div className="w-full">
           {post.updatedAt && (
-            <div className="text-input text-left mb-4">
-              Date modified: {formatDate(post.updatedAt)}
-            </div>
+            <div className="text-input text-left mb-4">Date modified: {formatDate(post.updatedAt)}</div>
           )}
         </div>
         <h1 className="font-bold mb-6">{post.title}</h1>
@@ -130,13 +126,17 @@ const PostRenderer: React.FC<PostRendererProps> = ({ post }) => {
           components={{
             code({ node, inline, className, children, ...props }: any) {
               return (
-                // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-                // biome-ignore lint/security/noDangerouslySetInnerHtmlWithChildren: <explanation>
-                <code className={className} {...props} dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(children).value }} />
+                <code
+                  className={className}
+                  {...props}
+                  // biome-ignore lint/security/noDangerouslySetInnerHtml: highlight styling
+                  dangerouslySetInnerHTML={{
+                    __html: hljs.highlightAuto(children).value,
+                  }}
+                />
               );
             },
-            // biome-ignore lint/a11y/useAltText: <explanation>
-            img: (props) => <img {...props} className="max-w-full h-auto" />,
+            img: props => <img alt="custom alt text" {...props} className="max-w-full h-auto" />,
           }}
         >
           {data.text}

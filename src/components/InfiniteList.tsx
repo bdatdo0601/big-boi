@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { FixedSizeList as List } from 'react-window';
 
 interface InfiniteListProps<T extends object> {
   parentHeight: string;
-  RowRenderer: React.FC<{ data: T[], index: number; style: React.CSSProperties }>;
+  RowRenderer: React.FC<{ data: T[]; index: number; style: React.CSSProperties }>;
   items: T[];
   fetchMore: () => Promise<void>;
   isFetchingItems: boolean;
@@ -11,28 +11,51 @@ interface InfiniteListProps<T extends object> {
   dataCompleted: boolean;
 }
 
-const InfiniteList = <T extends object>({ parentHeight, RowRenderer, items, fetchMore, isFetchingItems, newItems, dataCompleted }: InfiniteListProps<T>) => {
+const InfiniteList = <T extends object>({
+  parentHeight,
+  RowRenderer,
+  items,
+  fetchMore,
+  isFetchingItems,
+  newItems,
+  dataCompleted,
+}: InfiniteListProps<T>) => {
   const [internalItems, setInternalItems] = useState<T[]>(items);
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const listRef = useRef<List | null>(null);
   const [scrollPosition, setScrollPosition] = useState<number>(0);
   const [previousLastVisibleIndex, setPreviousLastVisibleIndex] = useState<number>(-1);
-  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
-    const target = entries[0];
-    if (target.isIntersecting && !isFetchingItems && internalItems.length > 0) {
-      const lastVisibleIndex = Math.floor(scrollPosition / 80) + Math.floor(parseInt(parentHeight) / 80);
-      if (previousLastVisibleIndex !== lastVisibleIndex && lastVisibleIndex >= internalItems.length - 1 && !dataCompleted) {
-        fetchMore().then();
-        setPreviousLastVisibleIndex(lastVisibleIndex);
+  const handleObserver = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const target = entries[0];
+      if (target.isIntersecting && !isFetchingItems && internalItems.length > 0) {
+        const lastVisibleIndex = Math.floor(scrollPosition / 80) + Math.floor(parseInt(parentHeight) / 80);
+        if (
+          previousLastVisibleIndex !== lastVisibleIndex &&
+          lastVisibleIndex >= internalItems.length - 1 &&
+          !dataCompleted
+        ) {
+          fetchMore().then();
+          setPreviousLastVisibleIndex(lastVisibleIndex);
+        }
       }
-    }
-  }, [isFetchingItems, internalItems.length, scrollPosition, parentHeight, fetchMore, dataCompleted, previousLastVisibleIndex]);
+    },
+    [
+      isFetchingItems,
+      internalItems.length,
+      scrollPosition,
+      parentHeight,
+      fetchMore,
+      dataCompleted,
+      previousLastVisibleIndex,
+    ]
+  );
 
   useEffect(() => {
     const option: IntersectionObserverInit = {
       root: null,
-      rootMargin: "20px",
-      threshold: 0
+      rootMargin: '20px',
+      threshold: 0,
     };
     const observer = new IntersectionObserver(handleObserver, option);
 

@@ -39,23 +39,23 @@ declare module 'reading-time/lib/reading-time' {
 }
 
 declare module '*.mdx' {
-  import type { ComponentType } from 'react'
-  const component: ComponentType
-  export default component
+  import type { ComponentType } from 'react';
+  const component: ComponentType;
+  export default component;
 }
 
 interface FrontMatter {
-  title?: string
-  date?: string
-  tags?: string[]
-  [key: string]: any
+  title?: string;
+  date?: string;
+  tags?: string[];
+  [key: string]: any;
 }
 
 interface MDXContent {
-  slug: string
-  metadata: FrontMatter
-  content: string
-  backlinks: string[]
+  slug: string;
+  metadata: FrontMatter;
+  content: string;
+  backlinks: string[];
 }
 
 declare module 'react-digraph' {

@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
 export const Seo = ({ type, title, titleTemplate, description, siteUrl, canonical, image, path, keywords, lang }) => {
-  const formatTitleTemplate = `${title} ${titleTemplate ? `| ${titleTemplate}` : ""}`;
+  const formatTitleTemplate = `${title} ${titleTemplate ? `| ${titleTemplate}` : ''}`;
 
   return (
     <Helmet>
@@ -14,12 +14,12 @@ export const Seo = ({ type, title, titleTemplate, description, siteUrl, canonica
       <meta name="image" content={image} />
       <meta name="image:alt" content={description} />
       <meta name="gatsby-theme" content="@pauliescanlon/gatsby-theme-terminal" />
-      <meta name="keywords" content={keywords ? keywords.join(", ") : null} />
+      <meta name="keywords" content={keywords ? keywords.join(', ') : null} />
 
       {/* Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:title" content={formatTitleTemplate} />
-      <meta property="og:url" content={`${siteUrl}${path ? path : ""}`} />
+      <meta property="og:url" content={`${siteUrl}${path ? path : ''}`} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       <meta property="og:image:alt" content={description}></meta>
@@ -27,7 +27,7 @@ export const Seo = ({ type, title, titleTemplate, description, siteUrl, canonica
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={formatTitleTemplate} />
-      <meta name="twitter:url" content={`${siteUrl}${path ? path : ""}`} />
+      <meta name="twitter:url" content={`${siteUrl}${path ? path : ''}`} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
       <meta name="twitter:image:alt" content={description}></meta>
@@ -53,7 +53,7 @@ export const Seo = ({ type, title, titleTemplate, description, siteUrl, canonica
 
 Seo.propTypes = {
   /** The type of meta - useful for Facebook */
-  type: PropTypes.oneOf(["website", "article"]),
+  type: PropTypes.oneOf(['website', 'article']),
   /** The site title */
   title: PropTypes.string.isRequired,
   /** The site individual route */
@@ -75,5 +75,5 @@ Seo.propTypes = {
 };
 
 Seo.defaultProps = {
-  lang: "en",
+  lang: 'en',
 };

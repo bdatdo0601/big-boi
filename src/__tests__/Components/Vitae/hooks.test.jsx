@@ -1,23 +1,21 @@
-import * as React from "react";
-import { render } from "@testing-library/react";
-
+import { render } from '@testing-library/react';
+import * as React from 'react';
+import { mockResume } from '../../../__mocks__/vitae';
 import {
   ResumeProvider,
-  useResume,
-  useBasic,
-  useWork,
-  useVolunteer,
-  useEducation,
   useAwards,
-  usePublications,
-  useSkills,
+  useBasic,
+  useEducation,
   useInterests,
-  useReferences,
   useLanguages,
   useProjects,
-} from "../../../components/Vitae";
-
-import { mockResume } from "../../../__mocks__/vitae";
+  usePublications,
+  useReferences,
+  useResume,
+  useSkills,
+  useVolunteer,
+  useWork,
+} from '../../../components/Vitae';
 
 const hooks = {
   useResume: {
@@ -113,16 +111,16 @@ Object.keys(hooks).forEach(hookName =>
       return { contextValue, error };
     };
 
-    it("Return the resume from the given context if it exists", () => {
+    it('Return the resume from the given context if it exists', () => {
       const resumeValue = runContext();
 
       expect(resumeValue).toEqual(information.expect);
     });
 
-    it("Throws an error when called with an invalid context", () => {
-      if (hookName === "useResume") {
+    it('Throws an error when called with an invalid context', () => {
+      if (hookName === 'useResume') {
         expect(runBadContext(true).error).toBeDefined();
-      } else if (hookName === "useBasic") {
+      } else if (hookName === 'useBasic') {
         expect(runBadContext().contextValue).toEqual(information.expect);
       } else {
         expect(runBadContext().contextValue).toBe(undefined);

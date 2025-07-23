@@ -3,18 +3,9 @@
   "bucketName": "bigboicontent-bucket",
   "policyUUID": "b4685797",
   "storageAccess": "authAndGuest",
-  "guestAccess": [
-    "READ"
-  ],
-  "authAccess": [
-    "CREATE_AND_UPDATE",
-    "READ"
-  ],
+  "guestAccess": ["READ"],
+  "authAccess": ["CREATE_AND_UPDATE", "READ"],
   "groupAccess": {
-    "BigBoiSuperAdmin": [
-      "CREATE_AND_UPDATE",
-      "READ",
-      "DELETE"
-    ]
+    "BigBoiSuperAdmin": ["CREATE_AND_UPDATE", "READ", "DELETE"]
   }
 }

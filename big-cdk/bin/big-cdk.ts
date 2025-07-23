@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-import * as cdk from "aws-cdk-lib";
-import { BigCdkStack } from "../lib/big-cdk-stack";
+import * as cdk from 'aws-cdk-lib';
+import { BigCdkStack } from '../lib/big-cdk-stack';
 
 const app = new cdk.App();
 
 // Apply CDK Nag for security best practices
 // AwsSolutionsChecks.check(app);
 
-new BigCdkStack(app, "BigCdkStack", {
+new BigCdkStack(app, 'BigCdkStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

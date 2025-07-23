@@ -9,9 +9,7 @@
     "bigboiapi": {
       "dependsOn": [
         {
-          "attributes": [
-            "UserPoolId"
-          ],
+          "attributes": ["UserPoolId"],
           "category": "auth",
           "resourceName": "bigboi327b1f0d"
         }
@@ -45,26 +43,17 @@
     "bigboiexternalapi": {
       "dependsOn": [
         {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
+          "attributes": ["Name", "Arn"],
           "category": "function",
           "resourceName": "bigboikinesisconsumer"
         },
         {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
+          "attributes": ["Name", "Arn"],
           "category": "function",
           "resourceName": "bigboiurlmetadataresolver"
         },
         {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
+          "attributes": ["Name", "Arn"],
           "category": "function",
           "resourceName": "bigboiwebhookproxy"
         }
@@ -78,10 +67,7 @@
       "customAuth": false,
       "dependsOn": [
         {
-          "attributes": [
-            "Arn",
-            "Name"
-          ],
+          "attributes": ["Arn", "Name"],
           "category": "function",
           "resourceName": "bigboi327b1f0dPostConfirmation",
           "triggerProvider": "Cognito"
@@ -89,23 +75,15 @@
       ],
       "frontendAuthConfig": {
         "mfaConfiguration": "OPTIONAL",
-        "mfaTypes": [
-          "SMS"
-        ],
+        "mfaTypes": ["SMS"],
         "passwordProtectionSettings": {
           "passwordPolicyCharacters": [],
           "passwordPolicyMinLength": 8
         },
-        "signupAttributes": [
-          "EMAIL"
-        ],
+        "signupAttributes": ["EMAIL"],
         "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
+        "usernameAttributes": ["EMAIL"],
+        "verificationMechanisms": ["EMAIL"]
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
@@ -113,12 +91,7 @@
     "userPoolGroups": {
       "dependsOn": [
         {
-          "attributes": [
-            "UserPoolId",
-            "AppClientIDWeb",
-            "AppClientID",
-            "IdentityPoolId"
-          ],
+          "attributes": ["UserPoolId", "AppClientIDWeb", "AppClientID", "IdentityPoolId"],
           "category": "auth",
           "resourceName": "bigboi327b1f0d"
         }
@@ -142,26 +115,17 @@
       "build": true,
       "dependsOn": [
         {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ],
+          "attributes": ["GraphQLAPIIdOutput", "GraphQLAPIEndpointOutput", "GraphQLAPIKeyOutput"],
           "category": "api",
           "resourceName": "bigboiapi"
         },
         {
-          "attributes": [
-            "ApiName",
-            "ApiId"
-          ],
+          "attributes": ["ApiName", "ApiId"],
           "category": "api",
           "resourceName": "bigboiexternalapi"
         },
         {
-          "attributes": [
-            "BucketName"
-          ],
+          "attributes": ["BucketName"],
           "category": "storage",
           "resourceName": "bigboicontent"
         }
@@ -173,25 +137,17 @@
       "build": true,
       "dependsOn": [
         {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ],
+          "attributes": ["GraphQLAPIIdOutput", "GraphQLAPIEndpointOutput", "GraphQLAPIKeyOutput"],
           "category": "api",
           "resourceName": "bigboiapi"
         },
         {
-          "attributes": [
-            "Arn"
-          ],
+          "attributes": ["Arn"],
           "category": "function",
           "resourceName": "bigboibigboilambdalayer"
         },
         {
-          "attributes": [
-            "snsTopicArn"
-          ],
+          "attributes": ["snsTopicArn"],
           "category": "analytics",
           "resourceName": "bigboinotification"
         }
@@ -203,18 +159,12 @@
       "build": true,
       "dependsOn": [
         {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ],
+          "attributes": ["GraphQLAPIIdOutput", "GraphQLAPIEndpointOutput", "GraphQLAPIKeyOutput"],
           "category": "api",
           "resourceName": "bigboiapi"
         },
         {
-          "attributes": [
-            "Arn"
-          ],
+          "attributes": ["Arn"],
           "category": "function",
           "resourceName": "bigboibigboilambdalayer"
         }
@@ -461,16 +411,12 @@
     "bigboicontent": {
       "dependsOn": [
         {
-          "attributes": [
-            "UserPoolId"
-          ],
+          "attributes": ["UserPoolId"],
           "category": "auth",
           "resourceName": "bigboi327b1f0d"
         },
         {
-          "attributes": [
-            "BigBoiSuperAdminGroupRole"
-          ],
+          "attributes": ["BigBoiSuperAdminGroupRole"],
           "category": "auth",
           "resourceName": "userPoolGroups"
         }

@@ -33,12 +33,7 @@ const Switch: React.FC<SwitchProps> = ({ isOn, handleToggle, width = 48, height 
   return (
     <div className="flex flex-row gap-2 items-center">
       <label className="relative inline-block" style={switchStyle}>
-        <input
-          type="checkbox"
-          checked={isOn}
-          onChange={handleToggle}
-          className="opacity-0 w-0 h-0 peer"
-        />
+        <input type="checkbox" checked={isOn} onChange={handleToggle} className="opacity-0 w-0 h-0 peer" />
         <span
           className="absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-background transition-all duration-400 peer-checked:bg-foreground peer-focus:shadow-[0_0_1px_#2196F3] before:content-[''] before:absolute before:bg-white before:transition-all before:duration-400 before:rounded-full peer-checked:before:translate-x-[26px]"
           style={sliderStyle}

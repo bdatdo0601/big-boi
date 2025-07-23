@@ -7,7 +7,7 @@
 	ENV
 	REGION
 	STORAGE_BIGBOICONTENT_BUCKETNAME
-Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
+Amplify Params - DO NOT EDIT */ /* Amplify Params - DO NOT EDIT
   API_BIGBOIAPI_GRAPHQLAPIENDPOINTOUTPUT
   API_BIGBOIAPI_GRAPHQLAPIIDOUTPUT
   API_BIGBOIAPI_GRAPHQLAPIKEYOUTPUT
@@ -16,23 +16,23 @@ Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
   STORAGE_BIGBOICONTENT_BUCKETNAME
 Amplify Params - DO NOT EDIT */
 
-const { Client } = require("@notionhq/client");
-const { get } = require("lodash");
+const { Client } = require('@notionhq/client');
+const { get } = require('lodash');
 const gql = require('graphql-tag');
-const moment = require("moment");
-const axios = require("axios");
+const moment = require('moment');
+const axios = require('axios');
 
-const { getNotionBlogPosts, retrievePageMetadata } = require("./Notion");
-const { queryGraphQLData, signedGraphQLMutationRequest } = require("./utils");
+const { getNotionBlogPosts, retrievePageMetadata } = require('./Notion');
+const { queryGraphQLData, signedGraphQLMutationRequest } = require('./utils');
 
 const RootBlockID = process.env.NOTION_BLOGPOST_BLOCKID;
 const auth = process.env.NOTION_INTEGRATION_TOKEN;
 
-const Owner = "5655c0b7-1480-4e60-bdb0-125b81faec5a";
+const Owner = '5655c0b7-1480-4e60-bdb0-125b81faec5a';
 
 const BlogPostSource = {
-  NOTION: "notion",
-  TWITTER: "twitter"
+  NOTION: 'notion',
+  TWITTER: 'twitter',
 };
 
 const listBlogPost = gql`
@@ -100,18 +100,18 @@ const deletePost = gql`
   }
 `;
 
-const synchronizeNotionBlogPosts = async (currentBlogPosts) => {
+const synchronizeNotionBlogPosts = async currentBlogPosts => {
   const client = new Client({
-    auth
-  })
+    auth,
+  });
   const notionRawBlogPosts = await getNotionBlogPosts(client, RootBlockID);
-  const notionBlogPosts = await Promise.all(notionRawBlogPosts.map(async blogPostOGData => {
-    const rawBlogPostData = await retrievePageMetadata(client, get(blogPostOGData, "id"));
-    return rawBlogPostData
-  }));
-  const newBlogPosts = [
-    ...notionBlogPosts.filter(item => !currentBlogPosts.find(post => post.id === item.id))
-  ];
+  const notionBlogPosts = await Promise.all(
+    notionRawBlogPosts.map(async blogPostOGData => {
+      const rawBlogPostData = await retrievePageMetadata(client, get(blogPostOGData, 'id'));
+      return rawBlogPostData;
+    })
+  );
+  const newBlogPosts = [...notionBlogPosts.filter(item => !currentBlogPosts.find(post => post.id === item.id))];
 
   const updatingBlogPosts = [
     ...notionBlogPosts.filter(item => {
@@ -119,97 +119,108 @@ const synchronizeNotionBlogPosts = async (currentBlogPosts) => {
       if (!existingBlogPost) {
         return false;
       }
-      return moment(item.attributes.updatedAt).valueOf() > moment(existingBlogPost.updatedAt).valueOf()
-    })
+      return moment(item.attributes.updatedAt).valueOf() > moment(existingBlogPost.updatedAt).valueOf();
+    }),
   ];
   const deletingBlogPosts = [
-    ...currentBlogPosts.filter(item => get(JSON.parse(item.data), "type") === BlogPostSource.NOTION && !notionBlogPosts.find(post => post.id === item.id)),
-  ]
+    ...currentBlogPosts.filter(
+      item =>
+        get(JSON.parse(item.data), 'type') === BlogPostSource.NOTION &&
+        !notionBlogPosts.find(post => post.id === item.id)
+    ),
+  ];
 
   const eventsToPush = [];
 
-  await Promise.all(newBlogPosts.map(async item => {
-    const data = {
-      rawData: item,
-      attributes: get(item, "attributes", {}),
-      url: get(item, "attributes.url"),
-      type: BlogPostSource.NOTION,
-      text: "",
-    }
-    const variables = {
-      input: {
-        id: get(item, "attributes.id"),
-        title: get(item, "attributes.title"),
-        data: JSON.stringify(data),
-        tags: [],
-        externalLink: get(item, "attributes.url"),
-        postType: BlogPostSource.NOTION,
-        owner: Owner,
-        description: "This blog is written in Notion",
-        status: get(item, "attributes.archived", true) ? "ARCHIVED" : "PUBLISHED",
-        updatedAt: get(item, "attributes.updatedAt"),
-      }
-    }
-    await signedGraphQLMutationRequest(createPost, variables);
-    eventsToPush.push({ eventData: { ...variables.input, data } });
-  }));
+  await Promise.all(
+    newBlogPosts.map(async item => {
+      const data = {
+        rawData: item,
+        attributes: get(item, 'attributes', {}),
+        url: get(item, 'attributes.url'),
+        type: BlogPostSource.NOTION,
+        text: '',
+      };
+      const variables = {
+        input: {
+          id: get(item, 'attributes.id'),
+          title: get(item, 'attributes.title'),
+          data: JSON.stringify(data),
+          tags: [],
+          externalLink: get(item, 'attributes.url'),
+          postType: BlogPostSource.NOTION,
+          owner: Owner,
+          description: 'This blog is written in Notion',
+          status: get(item, 'attributes.archived', true) ? 'ARCHIVED' : 'PUBLISHED',
+          updatedAt: get(item, 'attributes.updatedAt'),
+        },
+      };
+      await signedGraphQLMutationRequest(createPost, variables);
+      eventsToPush.push({ eventData: { ...variables.input, data } });
+    })
+  );
 
-  await Promise.all(updatingBlogPosts.map(async item => {
-    const data = {
-      rawData: item,
-      attributes: get(item, "attributes", {}),
-      url: get(item, "attributes.url"),
-      type: BlogPostSource.NOTION,
-      text: "",
-    }
-    const variables = {
-      input: {
-        id: get(item, "attributes.id"),
-        title: get(item, "attributes.title"),
-        tags: [],
-        externalLink: get(item, "attributes.url"),
-        postType: BlogPostSource.NOTION,
-        owner: Owner,
-        description: "This blog is written in Notion",
-        ...(get(item, "attributes.archived", true) ? { status: "ARCHIVED" } : {}),
-        updatedAt: get(item, "attributes.updatedAt"),
-      }
-    }
-    await signedGraphQLMutationRequest(updatePost, variables);
-    eventsToPush.push({ eventData: { ...variables.input, data } });
-  }));
+  await Promise.all(
+    updatingBlogPosts.map(async item => {
+      const data = {
+        rawData: item,
+        attributes: get(item, 'attributes', {}),
+        url: get(item, 'attributes.url'),
+        type: BlogPostSource.NOTION,
+        text: '',
+      };
+      const variables = {
+        input: {
+          id: get(item, 'attributes.id'),
+          title: get(item, 'attributes.title'),
+          tags: [],
+          externalLink: get(item, 'attributes.url'),
+          postType: BlogPostSource.NOTION,
+          owner: Owner,
+          description: 'This blog is written in Notion',
+          ...(get(item, 'attributes.archived', true) ? { status: 'ARCHIVED' } : {}),
+          updatedAt: get(item, 'attributes.updatedAt'),
+        },
+      };
+      await signedGraphQLMutationRequest(updatePost, variables);
+      eventsToPush.push({ eventData: { ...variables.input, data } });
+    })
+  );
 
-  await Promise.all(deletingBlogPosts.map(async item => {
-    const variables = {
-      input: {
-        id: get(item, "id")
-      }
-    }
+  await Promise.all(
+    deletingBlogPosts.map(async item => {
+      const variables = {
+        input: {
+          id: get(item, 'id'),
+        },
+      };
 
-    await signedGraphQLMutationRequest(deletePost, variables);
-  }));
+      await signedGraphQLMutationRequest(deletePost, variables);
+    })
+  );
 
   // push to events key
   if (eventsToPush.length > 0) {
-    await axios.post(`${process.env.EVENT_API_ENDPOINT}/event`, { 
-      eventType: "Personal.BlogPost.Notion",
-      timestamp: moment().valueOf(),
-      events: eventsToPush
-    }, { 
+    await axios.post(
+      `${process.env.EVENT_API_ENDPOINT}/event`,
+      {
+        eventType: 'Personal.BlogPost.Notion',
+        timestamp: moment().valueOf(),
+        events: eventsToPush,
+      },
+      {
         headers: {
-            "x-api-key": process.env.EVENT_API_KEY,
-        } 
-    });
+          'x-api-key': process.env.EVENT_API_KEY,
+        },
+      }
+    );
   }
-}
-
+};
 
 exports.handler = async () => {
-
-  const currentBlogPosts = await queryGraphQLData(listBlogPost, { limit: 10000 }, "data.data.listPosts.items")
+  const currentBlogPosts = await queryGraphQLData(listBlogPost, { limit: 10000 }, 'data.data.listPosts.items');
 
   await synchronizeNotionBlogPosts(currentBlogPosts);
 
   return { errors: [] };
 };
-

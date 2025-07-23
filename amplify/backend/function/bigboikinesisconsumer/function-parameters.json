@@ -10,12 +10,7 @@
   ],
   "permissions": {
     "api": {
-      "bigboiapi": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ]
+      "bigboiapi": ["create", "read", "update", "delete"]
     }
   },
   "environmentVariableList": []

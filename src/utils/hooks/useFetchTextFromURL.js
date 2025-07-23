@@ -1,19 +1,19 @@
-import { useState, useEffect, useCallback } from "react";
-import Axios from "axios";
-import { get } from "lodash";
+import Axios from 'axios';
+import { get } from 'lodash';
+import { useCallback, useEffect, useState } from 'react';
 
 const useGetTextFileFromURL = (url, shouldAutomaticFetch = true) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchData = useCallback(
     async (fetchURL = url) => {
-      let result = "";
+      let result = '';
       setLoading(true);
       try {
         const res = await Axios.get(fetchURL);
-        result = get(res, "data", "");
+        result = get(res, 'data', '');
       } catch (err) {
         setError(err);
       }

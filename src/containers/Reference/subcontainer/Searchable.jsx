@@ -1,45 +1,45 @@
-import React, { useContext, useMemo, useState, useRef, useEffect, useCallback } from "react";
-import { debounce, flatMap, get, lowerCase, sortBy } from "lodash";
-import { Autocomplete, IconButton, Paper, TextField } from "@mui/material";
-import DeleteOutline from "@mui/icons-material/DeleteOutline";
-import FlexSearch from "flexsearch/dist/flexsearch.bundle.min";
-import { listPrivateReferences, listReferences } from "../../../graphql/queries";
-import { useAWSAPIGetAll } from "../../../utils/awsAPI";
-import { convertToReferenceRenderedData } from "../utils";
-import ReferenceDisplayWidget from "../components/ReferenceDisplayWidget";
-import ReferenceContext from "../context";
-import { StyledAutocomplete } from "../../../components/StyledAutoComplete";
+import DeleteOutline from '@mui/icons-material/DeleteOutline';
+import { Autocomplete, IconButton, Paper, TextField } from '@mui/material';
+import FlexSearch from 'flexsearch/dist/flexsearch.bundle.min';
+import { debounce, flatMap, get, lowerCase, sortBy } from 'lodash';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { StyledAutocomplete } from '../../../components/StyledAutoComplete';
+import { listPrivateReferences, listReferences } from '../../../graphql/queries';
+import { useAWSAPIGetAll } from '../../../utils/awsAPI';
+import ReferenceDisplayWidget from '../components/ReferenceDisplayWidget';
+import ReferenceContext from '../context';
+import { convertToReferenceRenderedData } from '../utils';
 
 const documentSearchStore = new FlexSearch.Document({
   document: {
-    id: "id",
-    index: ["title", "url", "tags"],
+    id: 'id',
+    index: ['title', 'url', 'tags'],
   },
-  tokenize: "full"
+  tokenize: 'full',
 });
 
 const Searchable = () => {
   const [searchResult, setSearchResult] = useState({});
-  const [autoCompleteText, setAutoCompleteText] = useState("");
+  const [autoCompleteText, setAutoCompleteText] = useState('');
   const query = useMemo(() => ({ limit: 10000 }), []);
-  const { data: rawPublicData, loading: publicDataLoading, execute: refetchReference } = useAWSAPIGetAll(
-    listReferences,
-    query,
-  );
-  const { data: rawPrivateData, loading: privateDataLoading, execute: refetchPrivateReference } = useAWSAPIGetAll(
-    listPrivateReferences,
-    query
-  );
-  const { registerRefetch, deregisterRefetch } = useContext(
-    ReferenceContext
-  );
+  const {
+    data: rawPublicData,
+    loading: publicDataLoading,
+    execute: refetchReference,
+  } = useAWSAPIGetAll(listReferences, query);
+  const {
+    data: rawPrivateData,
+    loading: privateDataLoading,
+    execute: refetchPrivateReference,
+  } = useAWSAPIGetAll(listPrivateReferences, query);
+  const { registerRefetch, deregisterRefetch } = useContext(ReferenceContext);
 
   const resetAutoCompleteText = useCallback(() => {
-    setAutoCompleteText("");
+    setAutoCompleteText('');
   }, []);
 
   useEffect(() => {
-    registerRefetch("Searchable", async () =>
+    registerRefetch('Searchable', async () =>
       Promise.all(
         [refetchReference, refetchPrivateReference, resetAutoCompleteText].map(async fn => {
           fn();
@@ -47,7 +47,7 @@ const Searchable = () => {
       )
     );
     return () => {
-      deregisterRefetch("Searchable");
+      deregisterRefetch('Searchable');
     };
   }, [registerRefetch, refetchReference, refetchPrivateReference, deregisterRefetch, resetAutoCompleteText]);
 
@@ -57,16 +57,16 @@ const Searchable = () => {
       sortBy(
         [
           ...flatMap(rawPublicData, singleQuery =>
-            get(singleQuery, "data.listReferences.items", []).map(item => ({ ...item, isPrivate: false }))
+            get(singleQuery, 'data.listReferences.items', []).map(item => ({ ...item, isPrivate: false }))
           ),
           ...flatMap(rawPrivateData, singleQuery =>
-            get(singleQuery, "data.listPrivateReferences.items", []).map(item => ({
+            get(singleQuery, 'data.listPrivateReferences.items', []).map(item => ({
               ...item,
               isPrivate: true,
             }))
           ),
         ],
-        "clickCount"
+        'clickCount'
       ),
     [rawPrivateData, rawPublicData]
   );
@@ -81,7 +81,7 @@ const Searchable = () => {
     debounce((newText, combinedData) => {
       const data = documentSearchStore.search(newText);
 
-      const searchedData = combinedData.filter(item => flatMap(data, "result").includes(item.id));
+      const searchedData = combinedData.filter(item => flatMap(data, 'result').includes(item.id));
 
       setSearchResult({ treeData: convertToReferenceRenderedData(searchedData), listData: searchedData });
     }, 200)
@@ -104,8 +104,8 @@ const Searchable = () => {
       {autoCompleteText && (
         <ReferenceDisplayWidget
           widgetKey="searchable"
-          data={get(searchResult, "treeData", {})}
-          listData={get(searchResult,"listData", [])}
+          data={get(searchResult, 'treeData', {})}
+          listData={get(searchResult, 'listData', [])}
           loading={isLoading}
         />
       )}

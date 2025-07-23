@@ -1,20 +1,20 @@
-import { Paper, Tab, Tabs } from "@mui/material";
-import React, { useMemo, useState } from "react";
-import MostFrequent from "./TabPane/MostFrequent";
-import MostRecent from "./TabPane/MostRecent";
-import TagAlphabetical from "./TabPane/TagAlphabetical";
+import { Paper, Tab, Tabs } from '@mui/material';
+import React, { useMemo, useState } from 'react';
+import MostFrequent from './TabPane/MostFrequent';
+import MostRecent from './TabPane/MostRecent';
+import TagAlphabetical from './TabPane/TagAlphabetical';
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
 const TABS = [
-  { name: "Tag Based", Component: TagAlphabetical },
-  { name: "Recently Updated", Component: MostRecent },
-  { name: "Frequently Visited", Component: MostFrequent },
+  { name: 'Tag Based', Component: TagAlphabetical },
+  { name: 'Recently Updated', Component: MostRecent },
+  { name: 'Frequently Visited', Component: MostFrequent },
 ];
 
 const ReferenceTabs = () => {
@@ -31,7 +31,7 @@ const ReferenceTabs = () => {
             style={
               currentTabIndex === index
                 ? {
-                    borderBottom: "var(--primary) solid 2px",
+                    borderBottom: 'var(--primary) solid 2px',
                   }
                 : {}
             }

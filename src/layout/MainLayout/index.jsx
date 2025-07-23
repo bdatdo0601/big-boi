@@ -1,21 +1,19 @@
-import React, { useCallback, useEffect } from "react";
-import { isFunction, has, get } from "lodash";
-import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
-import routes, { subdomainRouteMap } from "../../routes";
-import { WEBSITE_TITLE } from "../../utils/constants";
-import { AppDrawer } from "../../components/AppDrawer";
-import { MainNavbar } from "./navbar";
-import { Hub } from "aws-amplify/utils";
-import { IconButton } from "@mui/material";
-import Menu from "@mui/icons-material/Menu";
+import Menu from '@mui/icons-material/Menu';
+import { IconButton } from '@mui/material';
+import { Hub } from 'aws-amplify/utils';
+import { get, has, isFunction } from 'lodash';
+import PropTypes from 'prop-types';
+import React, { useCallback, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import { AppDrawer } from '../../components/AppDrawer';
+import routes, { subdomainRouteMap } from '../../routes';
+import { WEBSITE_TITLE } from '../../utils/constants';
+import { MainNavbar } from './navbar';
 
-const subdomain = window.location.host.split(".")[0];
+const subdomain = window.location.host.split('.')[0];
 const isSubdomainRoute = has(subdomainRouteMap, subdomain);
 
-const domainRoutes = isSubdomainRoute
-  ? get(subdomainRouteMap, subdomain, [])
-  : routes;
+const domainRoutes = isSubdomainRoute ? get(subdomainRouteMap, subdomain, []) : routes;
 
 export default function MainLayout({ children }) {
   const [open, setOpen] = React.useState(false);
@@ -23,18 +21,18 @@ export default function MainLayout({ children }) {
 
   const updateRouteList = useCallback(() => {
     Promise.all(
-      domainRoutes.map(async (item) => ({
+      domainRoutes.map(async item => ({
         ...item,
         hidden: isFunction(item.hidden) ? await item.hidden() : item.hidden,
       }))
-    ).then((resolvedRoutes) => {
+    ).then(resolvedRoutes => {
       setRouteList(resolvedRoutes);
     });
   }, []);
 
   useEffect(() => {
     updateRouteList();
-    Hub.listen("auth", () => {
+    Hub.listen('auth', () => {
       updateRouteList();
     });
   }, [updateRouteList]);
@@ -61,14 +59,10 @@ export default function MainLayout({ children }) {
               setOpen(true);
             }}
           >
-            <Menu sx={{ color: "var(--muted-foreground)" }} />
+            <Menu sx={{ color: 'var(--muted-foreground)' }} />
           </IconButton>
         </div>
-        <MainNavbar
-          setDrawerOpen={setOpen}
-          isSubdomainRoute={isSubdomainRoute}
-          routeList={routeList}
-        />
+        <MainNavbar setDrawerOpen={setOpen} isSubdomainRoute={isSubdomainRoute} routeList={routeList} />
         <main className="grow flex flex-col w-full">{children}</main>
       </div>
     </div>
@@ -81,5 +75,5 @@ MainLayout.propTypes = {
 };
 
 MainLayout.defaultProps = {
-  name: "Dat Do",
+  name: 'Dat Do',
 };

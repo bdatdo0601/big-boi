@@ -9,9 +9,16 @@ interface ChipButtonProps {
   className?: string;
 }
 
-export const ChipButton: React.FC<ChipButtonProps> = ({ url, label, icon, bgColor = 'secondary', onClick, className }) => {
+export const ChipButton: React.FC<ChipButtonProps> = ({
+  url,
+  label,
+  icon,
+  bgColor = 'secondary',
+  onClick,
+  className,
+}) => {
   const defaultClassName = `text-xs flex items-center justify-start flex-row gap-1 text-secondary-foreground bg-${bgColor} shadow-lg rounded-lg px-2 py-0.5 hover:cursor-pointer`;
-  
+
   return (
     <button
       className={className || defaultClassName}

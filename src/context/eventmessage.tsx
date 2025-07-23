@@ -1,10 +1,9 @@
-import React, { useCallback, useMemo, useState } from "react";
-import { get, isEmpty, uniqBy } from "lodash";
-import { useSnackbar } from "notistack";
-
-import { useAWSAPI, useSubscriptionAWSAPI } from "../utils/awsAPI";
-import { EventMessageByTimestamp } from "@/graphql/queries";
-import { onCreateEventMessage } from "@/graphql/subscriptions";
+import { get, isEmpty, uniqBy } from 'lodash';
+import { useSnackbar } from 'notistack';
+import React, { useCallback, useMemo, useState } from 'react';
+import { EventMessageByTimestamp } from '@/graphql/queries';
+import { onCreateEventMessage } from '@/graphql/subscriptions';
+import { useAWSAPI, useSubscriptionAWSAPI } from '../utils/awsAPI';
 
 type RawMessage = {
   publishInfo: string;
@@ -25,39 +24,36 @@ const EventMessageContext = React.createContext<{
 }>({
   messages: [],
   loading: false,
-  fetchMore: () => new Promise((res) => res()),
+  fetchMore: () => new Promise(res => res()),
   newMessages: [],
   isDataComplete: false,
 });
 
 const formatItem = (rawItem: RawMessage): EventMessage => ({
   ...rawItem,
-  publishInfo: JSON.parse(get(rawItem, "publishInfo", "{}")),
+  publishInfo: JSON.parse(get(rawItem, 'publishInfo', '{}')),
 });
 
 export const EventMessageContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { enqueueSnackbar } = useSnackbar();
   const variableInputs = useMemo(
     () => ({
-      type: "Event",
+      type: 'Event',
       limit: 50,
-      sortDirection: "DESC",
+      sortDirection: 'DESC',
     }),
     []
   );
-  const { data: rawMessages, loading, fetchMore, execute } = useAWSAPI(
-    EventMessageByTimestamp,
-    variableInputs,
-  );
+  const { data: rawMessages, loading, fetchMore, execute } = useAWSAPI(EventMessageByTimestamp, variableInputs);
   const [newlyArrivedMessages] = useState<EventMessage[]>([]);
 
   const onNewDataNotified = useCallback(
     async ({ data }: { data: RawMessage }) => {
       const item = formatItem(data);
-      if (!isEmpty(get(item, "publishInfo.message"))) {
-        enqueueSnackbar(get(item, "publishInfo.message"), {
-          variant: "info",
-          anchorOrigin: { vertical: "top", horizontal: "right" },
+      if (!isEmpty(get(item, 'publishInfo.message'))) {
+        enqueueSnackbar(get(item, 'publishInfo.message'), {
+          variant: 'info',
+          anchorOrigin: { vertical: 'top', horizontal: 'right' },
           autoHideDuration: 2000,
         });
       }
@@ -66,18 +62,32 @@ export const EventMessageContextProvider: React.FC<{ children: React.ReactNode }
     [enqueueSnackbar, execute]
   );
 
-  const nextToken: string | undefined = useMemo(() => get(rawMessages, "data.EventMessageByTimestamp.nextToken", "-1"), [rawMessages]);
-  const fetchMoreMessages = useCallback(
-    async () => {
-      await fetchMore("data.EventMessageByTimestamp.nextToken");
-      
-    },
-    [fetchMore]
+  const nextToken: string | undefined = useMemo(
+    () => get(rawMessages, 'data.EventMessageByTimestamp.nextToken', '-1'),
+    [rawMessages]
   );
+  const fetchMoreMessages = useCallback(async () => {
+    await fetchMore('data.EventMessageByTimestamp.nextToken');
+  }, [fetchMore]);
 
-  const messages: EventMessage[] = uniqBy(get(rawMessages, "data.EventMessageByTimestamp.items", []).map(item => formatItem(item)), "id");
+  const messages: EventMessage[] = uniqBy(
+    get(rawMessages, 'data.EventMessageByTimestamp.items', []).map(item => formatItem(item)),
+    'id'
+  );
   useSubscriptionAWSAPI(onCreateEventMessage, onNewDataNotified, console.error);
-  return <EventMessageContext.Provider value={{ messages, loading, fetchMore: fetchMoreMessages, newMessages: newlyArrivedMessages, isDataComplete: isEmpty(nextToken) }}>{children}</EventMessageContext.Provider>;
+  return (
+    <EventMessageContext.Provider
+      value={{
+        messages,
+        loading,
+        fetchMore: fetchMoreMessages,
+        newMessages: newlyArrivedMessages,
+        isDataComplete: isEmpty(nextToken),
+      }}
+    >
+      {children}
+    </EventMessageContext.Provider>
+  );
 };
 
 export default EventMessageContext;

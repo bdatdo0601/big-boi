@@ -1,26 +1,28 @@
-import React, { useContext, useEffect, useMemo } from "react";
-import { get, reverse, sortBy } from "lodash";
-import { PrivateReferenceByClickCount, ReferenceByClickCount } from "../../../../graphql/queries";
-import { useAWSAPI } from "../../../../utils/awsAPI";
-import { convertToReferenceRenderedData } from "../../utils";
-import ReferenceDisplayWidget from "../../components/ReferenceDisplayWidget";
-import ReferenceContext from "../../context";
+import { get, reverse, sortBy } from 'lodash';
+import React, { useContext, useEffect, useMemo } from 'react';
+import { PrivateReferenceByClickCount, ReferenceByClickCount } from '../../../../graphql/queries';
+import { useAWSAPI } from '../../../../utils/awsAPI';
+import ReferenceDisplayWidget from '../../components/ReferenceDisplayWidget';
+import ReferenceContext from '../../context';
+import { convertToReferenceRenderedData } from '../../utils';
 
 const MostFrequent = () => {
-  const query = useMemo(() => ({ type: "REFERENCES", sortDirection: "DESC", limit: 10000 }), []);
-  const { data: rawPublicData, loading: publicDataLoading, execute: refetchReference } = useAWSAPI(
-    ReferenceByClickCount,
-    query,
-  );
-  const { data: rawPrivateData, loading: privateDataLoading, execute: refetchPrivateReference } = useAWSAPI(
-    PrivateReferenceByClickCount,
-    query
-  );
+  const query = useMemo(() => ({ type: 'REFERENCES', sortDirection: 'DESC', limit: 10000 }), []);
+  const {
+    data: rawPublicData,
+    loading: publicDataLoading,
+    execute: refetchReference,
+  } = useAWSAPI(ReferenceByClickCount, query);
+  const {
+    data: rawPrivateData,
+    loading: privateDataLoading,
+    execute: refetchPrivateReference,
+  } = useAWSAPI(PrivateReferenceByClickCount, query);
   const { registerRefetch, deregisterRefetch } = useContext(ReferenceContext);
   const isLoading = useMemo(() => publicDataLoading || privateDataLoading, [publicDataLoading, privateDataLoading]);
 
   useEffect(() => {
-    registerRefetch("MostFrequent", async () =>
+    registerRefetch('MostFrequent', async () =>
       Promise.all(
         [refetchReference, refetchPrivateReference].map(async fn => {
           fn();
@@ -28,7 +30,7 @@ const MostFrequent = () => {
       )
     );
     return () => {
-      deregisterRefetch("MostFrequent");
+      deregisterRefetch('MostFrequent');
     };
   }, [registerRefetch, refetchReference, refetchPrivateReference, deregisterRefetch]);
 
@@ -37,13 +39,13 @@ const MostFrequent = () => {
       reverse(
         sortBy(
           [
-            ...get(rawPublicData, "data.ReferenceByClickCount.items", []).map(item => ({ ...item, isPrivate: false })),
-            ...get(rawPrivateData, "data.PrivateReferenceByClickCount.items", []).map(item => ({
+            ...get(rawPublicData, 'data.ReferenceByClickCount.items', []).map(item => ({ ...item, isPrivate: false })),
+            ...get(rawPrivateData, 'data.PrivateReferenceByClickCount.items', []).map(item => ({
               ...item,
               isPrivate: true,
             })),
           ],
-          "clickCount"
+          'clickCount'
         )
       ),
     [rawPrivateData, rawPublicData]

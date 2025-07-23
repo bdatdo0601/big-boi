@@ -8,19 +8,19 @@ export default isDark => ({
       },
     },
     color: {
-      value: isDark ? "#ffffff" : "#736a73",
+      value: isDark ? '#ffffff' : '#736a73',
     },
     shape: {
-      type: "circle",
+      type: 'circle',
       stroke: {
         width: 10,
-        color: isDark ? "#ffffff" : "#736a73",
+        color: isDark ? '#ffffff' : '#736a73',
       },
       polygon: {
         nb_sides: 7,
       },
       image: {
-        src: "img/github.svg",
+        src: 'img/github.svg',
         width: 200,
         height: 1910,
       },
@@ -48,17 +48,17 @@ export default isDark => ({
     line_linked: {
       enable: true,
       distance: 200,
-      color: isDark ? "#ffffff" : "#736a73",
+      color: isDark ? '#ffffff' : '#736a73',
       opacity: 0.1736124811591,
       width: 1,
     },
     move: {
       enable: true,
       speed: 1.6,
-      direction: "none",
+      direction: 'none',
       random: true,
       straight: false,
-      out_mode: "bounce",
+      out_mode: 'bounce',
       bounce: true,
       attract: {
         enable: false,
@@ -68,15 +68,15 @@ export default isDark => ({
     },
   },
   interactivity: {
-    detect_on: "canvas",
+    detect_on: 'canvas',
     events: {
       onhover: {
         enable: true,
-        mode: "grab",
+        mode: 'grab',
       },
       onclick: {
         enable: true,
-        mode: "repulse",
+        mode: 'repulse',
       },
       resize: true,
     },

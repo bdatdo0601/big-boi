@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import DEFAULT_RESUME from "../../assets/default-resume.json";
+import { createContext } from 'react';
+import DEFAULT_RESUME from '../../assets/default-resume.json';
 
 export type ResumeSchemaBasic = {
   name: string;
@@ -21,7 +21,7 @@ export type ResumeSchemaBasic = {
     username: string;
     url: string;
   }>;
-}
+};
 
 export type ResumeSchemaWork = {
   company: string;
@@ -98,15 +98,15 @@ export type ResumeSchemaCustom = {
   bio: string[];
   keywordTags: string[];
   contacts: ResumeSchemaContact[];
-  affiliations: { title: string, entity: string, year: string }[]
+  affiliations: { title: string; entity: string; year: string }[];
 };
 
 export type ResumeSchemaAward = {
-  title: string,
-  entity: string,
-  year: string,
-  snippet: string
-}
+  title: string;
+  entity: string;
+  year: string;
+  snippet: string;
+};
 
 export type ResumeSchemaPublication = {
   name: string;
@@ -131,14 +131,13 @@ export type ResumeSchemaReference = {
   };
   position?: string;
   company?: string;
-
 };
 
 export type ResumeSchemaFAQ = {
-  category: string,
-  question: string,
-  answer: string
-}
+  category: string;
+  question: string;
+  answer: string;
+};
 
 export type ResumeSchema = {
   basic: ResumeSchemaBasic;
@@ -157,12 +156,13 @@ export type ResumeSchema = {
 };
 
 type ResumeContextProps = {
-  resume: ResumeSchema, children?: React.ReactNode
-}
+  resume: ResumeSchema;
+  children?: React.ReactNode;
+};
 
 export const ResumeContext = createContext<ResumeContextProps>({
   resume: DEFAULT_RESUME as ResumeSchema,
-  children: undefined
+  children: undefined,
 });
 
 export const ResumeProvider: React.FC<ResumeContextProps> = ({ resume, children }) => (

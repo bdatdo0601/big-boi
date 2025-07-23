@@ -1,10 +1,10 @@
-import * as React from "react";
-import { render } from "@testing-library/react";
+import { render } from '@testing-library/react';
+import * as React from 'react';
 
-import { mockResume } from "../../../__mocks__/vitae";
-import { ResumeProvider, ResumeContext } from "../../../components/Vitae";
+import { mockResume } from '../../../__mocks__/vitae';
+import { ResumeContext, ResumeProvider } from '../../../components/Vitae';
 
-describe("The <ResumeProvider> component", () => {
+describe('The <ResumeProvider> component', () => {
   const initialProps = {
     resume: mockResume,
   };
@@ -25,7 +25,7 @@ describe("The <ResumeProvider> component", () => {
     return contextValue;
   };
 
-  it("Will render its children with the resume context added", () => {
+  it('Will render its children with the resume context added', () => {
     expect(runContext()).toEqual(mockResume);
   });
 });

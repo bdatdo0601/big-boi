@@ -1,5 +1,5 @@
-import React, { createContext, useContext, ReactNode, useMemo } from 'react';
-import { generateClient, Client } from '@aws-amplify/api';
+import { Client, generateClient } from '@aws-amplify/api';
+import React, { createContext, ReactNode, useContext, useMemo } from 'react';
 import { useAuth } from './auth';
 
 interface ApiContextType {
@@ -12,11 +12,7 @@ export const ApiProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const { user } = useAuth();
   const client = useMemo(() => generateClient({ authMode: user ? 'userPool' : 'identityPool' }), [user]);
 
-  return (
-    <ApiContext.Provider value={{ client }}>
-      {children}
-    </ApiContext.Provider>
-  );
+  return <ApiContext.Provider value={{ client }}>{children}</ApiContext.Provider>;
 };
 
 export const useApi = (): ApiContextType => {

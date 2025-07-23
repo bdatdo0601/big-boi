@@ -1,10 +1,9 @@
 import * as cdk from 'aws-cdk-lib';
 import * as events from 'aws-cdk-lib/aws-events';
-import * as pipes from 'aws-cdk-lib/aws-pipes';
-import * as kinesis from 'aws-cdk-lib/aws-kinesis';
-import { Construct } from 'constructs';
-import { Function as LambdaFunction } from 'aws-cdk-lib/aws-lambda';
 import { Effect } from 'aws-cdk-lib/aws-iam';
+import * as kinesis from 'aws-cdk-lib/aws-kinesis';
+import * as pipes from 'aws-cdk-lib/aws-pipes';
+import { Construct } from 'constructs';
 
 type EventManagementStackProps = cdk.StackProps & {
   ingestionKinesisStreamArn: string;
@@ -30,7 +29,7 @@ export class EventManagementStack extends cdk.Stack {
       deadLetterQueue: dlq,
     });
 
-    const eventBusPolicy = new events.EventBusPolicy(this, 'EventBusPolicy', {
+    const _eventBusPolicy = new events.EventBusPolicy(this, 'EventBusPolicy', {
       eventBus: eventBus,
       statementId: 'AllowPublishingToEventBus',
       statement: new cdk.aws_iam.PolicyStatement({
@@ -43,11 +42,11 @@ export class EventManagementStack extends cdk.Stack {
     });
 
     // Add schema discovery
-    const schemaRegistry = new cdk.aws_eventschemas.CfnRegistry(this, 'SchemaRegistry', {
+    const _schemaRegistry = new cdk.aws_eventschemas.CfnRegistry(this, 'SchemaRegistry', {
       registryName: 'BigBusSchemaRegistry',
     });
 
-    const discoverer = new cdk.aws_eventschemas.CfnDiscoverer(this, 'SchemaDiscoverer', {
+    const _discoverer = new cdk.aws_eventschemas.CfnDiscoverer(this, 'SchemaDiscoverer', {
       sourceArn: eventBus.eventBusArn,
       description: 'Schema discoverer for BigBus',
     });
@@ -59,7 +58,7 @@ export class EventManagementStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
-    const rule = new events.Rule(this, 'LogAllEventsRule', {
+    const _rule = new events.Rule(this, 'LogAllEventsRule', {
       eventBus: eventBus,
       eventPattern: {
         account: [this.account],

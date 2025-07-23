@@ -1,7 +1,7 @@
-import { useApi } from '@/context/api';
 import { GraphQLResult, GraphQLSubscription, put } from '@aws-amplify/api';
 import { get, isString, merge, mergeWith } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
+import { useApi } from '@/context/api';
 
 type EventData = {
   eventName: string;
@@ -102,7 +102,7 @@ export const useAWSAPI = (operation: string, input: any) => {
   );
 
   const fetchMore = useCallback(
-    async (path: string = "") => {
+    async (path: string = '') => {
       try {
         const token = get(data, path);
         if (!token) return;

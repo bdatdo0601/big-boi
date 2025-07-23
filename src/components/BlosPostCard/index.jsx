@@ -1,50 +1,30 @@
-import React, { useContext, useMemo } from "react";
-import moment from "moment";
-import PropTypes from "prop-types";
-import {
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  Chip,
-  Typography,
-  Divider,
-} from "@mui/material";
-import { capitalize, get, isString } from "lodash";
-import { Tweet } from "react-twitter-widgets";
-import { InstagramEmbed } from "react-social-media-embed";
-
-import { POST_STATE } from "../../utils/constants";
-import LayoutContext from "../../context/layout";
-import ProfileCard from "../ProfileCard";
+import { Button, Card, CardActionArea, CardActions, CardContent, Chip, Divider, Typography } from '@mui/material';
+import { capitalize, get, isString } from 'lodash';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import React, { useContext, useMemo } from 'react';
+import { InstagramEmbed } from 'react-social-media-embed';
+import { Tweet } from 'react-twitter-widgets';
+import LayoutContext from '../../context/layout';
+import { POST_STATE } from '../../utils/constants';
+import ProfileCard from '../ProfileCard';
 
 const DefaultCardContent = ({ post, onPostClick }) => (
-  <div
-    className={`w-full text-left ${
-      post.status === POST_STATE.ARCHIVED ? "opacity-50" : "opacity-100"
-    }`}
-  >
+  <div className={`w-full text-left ${post.status === POST_STATE.ARCHIVED ? 'opacity-50' : 'opacity-100'}`}>
     <div className="cursor-pointer" onClick={onPostClick}>
       <div className="text-input p-5">
         <p className="text-input mb-3">{post.description}</p>
         <div className="mb-3 text-left">
-          {get(post, "tags", []).map((item, index) => (
+          {get(post, 'tags', []).map((item, index) => (
             <span className="mr-2 mt-1 inline-block" key={`${item} ${index}`}>
-              <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-sm mt-2">
-                {item}
-              </span>
+              <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-sm mt-2">{item}</span>
             </span>
           ))}
         </div>
-        <p className="text-input text-sm">
-          Updated At: {moment(post.updatedAt).format("hh:mma MMM DD YYYY")}
-        </p>
+        <p className="text-input text-sm">Updated At: {moment(post.updatedAt).format('hh:mma MMM DD YYYY')}</p>
         <p className="text-input text-xs mb-2">
           {`Status: ${
-            get(post, "postType")
-              ? `[${capitalize(get(post, "postType"))}] `
-              : ""
+            get(post, 'postType') ? `[${capitalize(get(post, 'postType'))}] ` : ''
           }${capitalize(post.status)}`}
         </p>
       </div>
@@ -69,13 +49,10 @@ DefaultCardContent.defaultProps = {
 };
 
 const TwitterCardContent = ({ post, isDark }) => {
-  const postData = useMemo(() => JSON.parse(get(post, "data", "{}")), [post]);
+  const postData = useMemo(() => JSON.parse(get(post, 'data', '{}')), [post]);
   return (
     <div className="tweet-wrapper" style={{ margin: 8, padding: 8 }}>
-      <Tweet
-        tweetId={get(postData, "tweetID")}
-        options={{ theme: isDark ? "dark" : "light", align: "center" }}
-      />
+      <Tweet tweetId={get(postData, 'tweetID')} options={{ theme: isDark ? 'dark' : 'light', align: 'center' }} />
     </div>
   );
 };
@@ -86,33 +63,28 @@ TwitterCardContent.propTypes = {
 };
 
 const InstgramCardContent = ({ post, width }) => {
-  const postData = useMemo(() => JSON.parse(get(post, "data", "{}")), [post]);
+  const postData = useMemo(() => JSON.parse(get(post, 'data', '{}')), [post]);
   return (
     <Card
       style={{
         width,
         maxWidth: 550,
-        margin: "12px auto",
-        textAlign: "left",
+        margin: '12px auto',
+        textAlign: 'left',
         opacity: post.status === POST_STATE.ARCHIVED ? 0.5 : 1,
-        borderRadius: "10px",
+        borderRadius: '10px',
         padding: 16,
       }}
       raised
       elevation={3}
     >
-      <InstagramEmbed url={get(postData, "link")} />
+      <InstagramEmbed url={get(postData, 'link')} />
       <Divider style={{ marginBottom: 10 }} />
-      <Typography
-        variant="body"
-        color="textSecondary"
-        component="p"
-        style={{ marginBottom: 10 }}
-      >
+      <Typography variant="body" color="textSecondary" component="p" style={{ marginBottom: 10 }}>
         {postData.text}
       </Typography>
       <Typography variant="body2" color="textSecondary" component="p">
-        Updated At: {moment(postData.updatedAt).format("hh:mma MMM DD YYYY")}
+        Updated At: {moment(postData.updatedAt).format('hh:mma MMM DD YYYY')}
       </Typography>
     </Card>
   );
@@ -124,10 +96,10 @@ InstgramCardContent.propTypes = {
 };
 
 const CardContentData = ({ post, ...props }) => {
-  switch (get(post, "postType")) {
-    case "Twitter":
+  switch (get(post, 'postType')) {
+    case 'Twitter':
       return <TwitterCardContent post={post} {...props} />;
-    case "Instagram":
+    case 'Instagram':
       return <InstgramCardContent post={post} {...props} />;
     default:
       return <DefaultCardContent post={post} {...props} />;
@@ -155,27 +127,18 @@ export default function BlogPostCard({
   return (
     <ProfileCard
       header={
-        <h3
-          className="text-2xl px-2 hover:cursor-pointer"
-          onClick={onPostClick}
-        >
+        <h3 className="text-2xl px-2 hover:cursor-pointer" onClick={onPostClick}>
           {post.title}
         </h3>
       }
       cardStyle={{ maxWidth: 600 }}
     >
-      <CardContentData
-        post={post}
-        showState={showState}
-        onPostClick={onPostClick}
-        width={width}
-        isDark={isDark}
-      />
+      <CardContentData post={post} showState={showState} onPostClick={onPostClick} width={width} isDark={isDark} />
       {showActions && (
         <span className="flex flex-row justify-center gap-4 mt-2">
           <Button
             size="small"
-            disabled={isString(get(updatingPost || post, "postType"))}
+            disabled={isString(get(updatingPost || post, 'postType'))}
             onClick={() => {
               updatePostState(post, POST_STATE.DRAFT);
             }}
@@ -185,7 +148,7 @@ export default function BlogPostCard({
           <Button
             size="small"
             color="primary"
-            disabled={isString(get(updatingPost || post, "postType"))}
+            disabled={isString(get(updatingPost || post, 'postType'))}
             onClick={() => {
               updatePostState(post, POST_STATE.PUBLISHED);
             }}
@@ -195,7 +158,7 @@ export default function BlogPostCard({
           <Button
             size="small"
             color="warning"
-            disabled={isString(get(updatingPost || post, "postType"))}
+            disabled={isString(get(updatingPost || post, 'postType'))}
             onClick={() => {
               updatePostState(post, POST_STATE.ARCHIVED);
             }}
@@ -208,7 +171,7 @@ export default function BlogPostCard({
             disabled={deletingPost}
             onClick={() => {
               // eslint-disable-next-line
-              if (window.confirm("Are you sure?")) {
+              if (window.confirm('Are you sure?')) {
                 deletePost(post);
               }
             }}

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { ResumeProvider } from "@/components/Vitae";
+import React, { useEffect, useState } from 'react';
+import { ResumeProvider } from '@/components/Vitae';
 
-import { useGetFile } from "@/utils/awsStorage";
-import { RESUME } from "@/utils/constants";
-import { ResumeSchema } from "./provider";
+import { useGetFile } from '@/utils/awsStorage';
+import { RESUME } from '@/utils/constants';
+import { ResumeSchema } from './provider';
 
 export const useStorageResume = () => {
   const { file: rawFile, loading, fetchFile } = useGetFile(RESUME.SCHEMA_FILE, RESUME.PREFIX);
@@ -12,33 +12,37 @@ export const useStorageResume = () => {
 
   useEffect(() => {
     if (rawFile) {
-      rawFile.body.text().then(newResume => {
-        setResume(JSON.parse(newResume) as ResumeSchema);
-        setFetchLoading(false)
-      }).catch(err => {
-        console.error(err);
-        setResume(null)
-        setResume(null)
-      });
+      rawFile.body
+        .text()
+        .then(newResume => {
+          setResume(JSON.parse(newResume) as ResumeSchema);
+          setFetchLoading(false);
+        })
+        .catch(err => {
+          console.error(err);
+          setResume(null);
+          setResume(null);
+        });
     }
   }, [rawFile]);
 
+  return { resume, loading: loading && fetchLoading, fetchFile };
+};
 
-  return { resume, loading: loading && fetchLoading, fetchFile }
-}
+const withResumeProvider =
+  <T extends object>(Component: React.FC<T>) =>
+  (props: T): React.ReactNode => {
+    const { resume } = useStorageResume();
 
-const withResumeProvider = <T extends object>(Component: React.FC<T>) => (props: T): React.ReactNode => {
-  const { resume } = useStorageResume();
+    if (!resume) {
+      return null;
+    }
 
-  if (!resume) {
-    return null;
-  }
+    return (
+      <ResumeProvider resume={resume}>
+        <Component {...props} />
+      </ResumeProvider>
+    );
+  };
 
-  return (
-    <ResumeProvider resume={resume}>
-      <Component {...props} />
-    </ResumeProvider>
-  );
-}
-
-export default withResumeProvider
+export default withResumeProvider;

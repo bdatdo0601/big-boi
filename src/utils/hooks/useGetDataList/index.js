@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const useGetDataList = fetchFn => {
   const isSubscribedRef = useRef(true);
@@ -11,7 +11,7 @@ const useGetDataList = fetchFn => {
       if (isSubscribedRef.current) {
         setData(dataListFromServer);
       }
-    } catch (err) {
+    } catch (_err) {
       if (isSubscribedRef.current) {
         setData([]);
       }
@@ -21,7 +21,9 @@ const useGetDataList = fetchFn => {
   }, [fetchFn]);
 
   useEffect(() => {
-    getData().then(() => { /* empty */ });
+    getData().then(() => {
+      /* empty */
+    });
     return () => {
       isSubscribedRef.current = false;
     };

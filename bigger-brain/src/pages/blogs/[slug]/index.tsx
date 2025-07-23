@@ -1,38 +1,36 @@
-import { BlogPostWithSlug, getAllPostSlugs, getPostBySlug } from '@/api/blog'
-import PostRenderer from '@/components/PostRenderer'
-import Head from 'next/head'
 import NextError from 'next/error';
+import Head from 'next/head';
+import { BlogPostWithSlug, getAllPostSlugs, getPostBySlug } from '@/api/blog';
+import PostRenderer from '@/components/PostRenderer';
 
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 3600; // Revalidate every hour
 
 export async function getStaticPaths() {
-  const posts = await getAllPostSlugs()
+  const posts = await getAllPostSlugs();
   return {
-    paths: posts.map((post) => ({
+    paths: posts.map(post => ({
       params: {
         slug: post.slug,
       },
     })),
     fallback: 'blocking',
-  }
+  };
 }
 
 export async function getStaticProps({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  const post = await getPostBySlug(slug)
+  const post = await getPostBySlug(slug);
 
   return {
     props: {
       post,
     },
-    revalidate: 30
-  }
+    revalidate: 30,
+  };
 }
 
-export default function BlogPost({
-  post,
-}: { post?: BlogPostWithSlug }) {
-  if (!post) return <NextError statusCode={404} />
+export default function BlogPost({ post }: { post?: BlogPostWithSlug }) {
+  if (!post) return <NextError statusCode={404} />;
   return (
     <article className="mx-auto py-8">
       <Head>
@@ -44,5 +42,5 @@ export default function BlogPost({
       </Head>
       <PostRenderer post={post} />
     </article>
-  )
+  );
 }

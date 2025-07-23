@@ -23,9 +23,7 @@
     "LambdaLayerVersion4a3ca2eb": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
-        "CompatibleRuntimes": [
-          "nodejs22.x"
-        ],
+        "CompatibleRuntimes": ["nodejs22.x"],
         "Content": {
           "S3Bucket": {
             "Ref": "deploymentBucketName"
@@ -60,9 +58,7 @@
     "LambdaLayerVersion3d052ea4": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
-        "CompatibleRuntimes": [
-          "nodejs22.x"
-        ],
+        "CompatibleRuntimes": ["nodejs22.x"],
         "Content": {
           "S3Bucket": {
             "Ref": "deploymentBucketName"
@@ -97,9 +93,7 @@
     "LambdaLayerVersion4d9d4df1": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
-        "CompatibleRuntimes": [
-          "nodejs22.x"
-        ],
+        "CompatibleRuntimes": ["nodejs22.x"],
         "Content": {
           "S3Bucket": {
             "Ref": "deploymentBucketName"

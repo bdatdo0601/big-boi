@@ -1,16 +1,17 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Hub } from 'aws-amplify/utils';
+import { AuthUser, getCurrentUser, SignOutInput, signOut } from '@aws-amplify/auth';
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import { useSnackbar } from 'notistack';
-import { get } from 'lodash';
-import { AuthUser, getCurrentUser, signOut, SignOutInput } from '@aws-amplify/auth';
 import { CircularProgress } from '@mui/material';
+import { Hub } from 'aws-amplify/utils';
+import { get } from 'lodash';
+import { useSnackbar } from 'notistack';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export const withCustomAWSAuthenticator = <T extends Object>(Component: React.FC<T>) => withAuthenticator(Component, { hideSignUp: true });
+export const withCustomAWSAuthenticator = <T extends Object>(Component: React.FC<T>) =>
+  withAuthenticator(Component, { hideSignUp: true });
 
-const AuthContext = createContext<{ user?: AuthUser, signOut: (input?: SignOutInput) => Promise<void> }>({
+const AuthContext = createContext<{ user?: AuthUser; signOut: (input?: SignOutInput) => Promise<void> }>({
   user: undefined,
-  signOut
+  signOut,
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -39,11 +40,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     getCurrentUser()
-      .then(user => { setUser(user); setInitialLoad(false) })
-      .catch(() => { setUser(undefined); setInitialLoad(false) });
-  }, [])
+      .then(user => {
+        setUser(user);
+        setInitialLoad(false);
+      })
+      .catch(() => {
+        setUser(undefined);
+        setInitialLoad(false);
+      });
+  }, []);
 
-  if (initialLoad) return <div className="w-full *:text-center mx-auto"><CircularProgress /></div>
+  if (initialLoad)
+    return (
+      <div className="w-full *:text-center mx-auto">
+        <CircularProgress />
+      </div>
+    );
 
   return <AuthContext.Provider value={{ user, signOut }}>{children}</AuthContext.Provider>;
 };

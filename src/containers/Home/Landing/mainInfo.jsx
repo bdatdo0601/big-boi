@@ -1,6 +1,6 @@
-import React, { lazy, Suspense } from 'react';
+import { CircularProgress, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { Typography, CircularProgress } from '@mui/material';
+import React, { lazy, Suspense } from 'react';
 import LandingProfile from '../../../components/Profile';
 
 const DataStack = lazy(() => import('../../../components/DataStack'));

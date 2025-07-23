@@ -1,7 +1,7 @@
 {
-    "Version": 5,
-    "ElasticsearchWarning": true,
-    "StackMapping": {
-        "QueryEventMessageByTimestampResolver": "EventMessage"
-    }
+  "Version": 5,
+  "ElasticsearchWarning": true,
+  "StackMapping": {
+    "QueryEventMessageByTimestampResolver": "EventMessage"
+  }
 }

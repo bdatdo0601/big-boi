@@ -1,31 +1,33 @@
-import { useCallback } from "react";
-import { useSnackbar } from "notistack";
-import { get, merge } from "lodash";
-import { publishEventData } from "../awsAPI";
+import { get, merge } from 'lodash';
+import { useSnackbar } from 'notistack';
+import { useCallback } from 'react';
+import { publishEventData } from '../awsAPI';
 
 export const DataUpdateWrapperDefaultOptions = {
   snackBar: {
-    successMessage: "Data Updated",
-    errorMessage: "Unable to update",
+    successMessage: 'Data Updated',
+    errorMessage: 'Unable to update',
     successMessageConfig: {
-      variant: "success",
-      anchorOrigin: { vertical: "top", horizontal: "center" },
+      variant: 'success',
+      anchorOrigin: { vertical: 'top', horizontal: 'center' },
       autoHideDuration: 2000,
     },
     errorMessageConfig: {
-      variant: "error",
-      anchorOrigin: { vertical: "top", horizontal: "center" },
+      variant: 'error',
+      anchorOrigin: { vertical: 'top', horizontal: 'center' },
       autoHideDuration: 2000,
     },
   },
   logging: {
-    eventType: "",
+    eventType: '',
   },
 };
 
 export const useDataUpdateWrapper = (
   dataUpdateFn = async () => ({}), // Must return updated data
-  postUpdateFn = async () => {/* empty */ },
+  postUpdateFn = async () => {
+    /* empty */
+  },
   providedOptions = DataUpdateWrapperDefaultOptions
 ) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -35,23 +37,23 @@ export const useDataUpdateWrapper = (
       try {
         const updatedData = await dataUpdateFn(...args);
         if (!updatedData) {
-          console.error("Unable to log updated data");
+          console.error('Unable to log updated data');
         }
         await publishEventData({
-          eventName: get(options, "logging.eventType", "DATA_EVENT"),
-          eventType: get(options, "logging.eventType", "DATA_EVENT"),
-          ...updatedData
-        })
+          eventName: get(options, 'logging.eventType', 'DATA_EVENT'),
+          eventType: get(options, 'logging.eventType', 'DATA_EVENT'),
+          ...updatedData,
+        });
         enqueueSnackbar(
-          get(options, "snackBar.successMessage", "Data Updated"),
-          get(options, "snackBar.successMessageConfig", {})
+          get(options, 'snackBar.successMessage', 'Data Updated'),
+          get(options, 'snackBar.successMessageConfig', {})
         );
         await postUpdateFn(updatedData, ...args);
       } catch (err) {
         console.error(err);
         enqueueSnackbar(
-          get(options, "snackBar.errorMessage", "Unable to update Data"),
-          get(options, "snackBar.errorMessageConfig", {})
+          get(options, 'snackBar.errorMessage', 'Unable to update Data'),
+          get(options, 'snackBar.errorMessageConfig', {})
         );
       }
     },

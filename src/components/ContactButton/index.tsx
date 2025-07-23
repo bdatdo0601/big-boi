@@ -1,4 +1,4 @@
-import Icon from "../Icons";
+import Icon from '../Icons';
 
 interface IconInput {
   type: 'Icon' | 'Image';
@@ -18,10 +18,13 @@ interface ContactButtonProps {
 }
 export default function ContactButton({ contact }: ContactButtonProps) {
   return (
-    <button className='bg-secondary px-4 py-2 hover:bg-primary hover:cursor-pointer shadow-lg rounded-lg flex flex-nowrap gap-2 items-center my-2' onClick={(e) => {
-      e.preventDefault();
-      window.open(contact.link, '_blank');
-    }}>
+    <button
+      className="bg-secondary px-4 py-2 hover:bg-primary hover:cursor-pointer shadow-lg rounded-lg flex flex-nowrap gap-2 items-center my-2"
+      onClick={e => {
+        e.preventDefault();
+        window.open(contact.link, '_blank');
+      }}
+    >
       {contact.icon.type === 'Icon' ? (
         <Icon value={contact.icon.value} type="Icon" href="#" />
       ) : (

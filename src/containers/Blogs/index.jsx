@@ -1,9 +1,10 @@
-import React, { useRef, useEffect, Fragment, useState, useMemo } from 'react';
 import { get } from 'lodash';
-import { useNavigate, useLocation } from 'react-router';
+import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import './index.css';
-import { Seo } from '../../components/SEO';
 import IframeResizer from '@iframe-resizer/react';
+import { Seo } from '../../components/SEO';
+
 const blogURL = 'https://blogs.datbdo.com';
 
 export default function Blogs() {
@@ -29,7 +30,7 @@ export default function Blogs() {
             }
           }
         }
-      } catch (err) {
+      } catch (_err) {
         /* empty */
       }
     };

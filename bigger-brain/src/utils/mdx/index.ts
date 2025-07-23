@@ -1,11 +1,11 @@
 import fs from 'fs/promises';
-import path from 'path';
 import { glob } from 'glob';
 import matter from 'gray-matter';
-import { remarkBacklinks } from './remarkBacklinks';
-import { serialize } from 'next-mdx-remote/serialize';
 import { initial } from 'lodash';
+import { serialize } from 'next-mdx-remote/serialize';
+import path from 'path';
 import { FileTree } from '../tree';
+import { remarkBacklinks } from './remarkBacklinks';
 
 const contentDirectory = path.join(process.cwd(), 'content');
 

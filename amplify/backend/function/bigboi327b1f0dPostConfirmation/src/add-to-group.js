@@ -10,7 +10,7 @@ const cognitoIdentityServiceProvider = new CognitoIdentityProviderClient({});
 /**
  * @type {import('@types/aws-lambda').PostConfirmationTriggerHandler}
  */
-exports.handler = async (event) => {
+exports.handler = async event => {
   const groupParams = {
     GroupName: process.env.GROUP,
     UserPoolId: event.userPoolId,
@@ -25,7 +25,7 @@ exports.handler = async (event) => {
    */
   try {
     await cognitoIdentityServiceProvider.send(new GetGroupCommand(groupParams));
-  } catch (e) {
+  } catch (_e) {
     await cognitoIdentityServiceProvider.send(new CreateGroupCommand(groupParams));
   }
   /**

@@ -1,7 +1,7 @@
-import { getAllPaths } from '@/utils/tree'
+import { getAllPaths } from '@/utils/tree';
 
 export default async function Home() {
-  const paths = await getAllPaths()
+  const paths = await getAllPaths();
 
   return (
     <div className="p-8 max-w-4xl mx-auto flex flex-col gap-2">
@@ -13,14 +13,12 @@ export default async function Home() {
           <ul className="space-y-2">
             {paths.map((path: string) => (
               <li key={path}>
-                <a href={`docs/doc/${path}`}>
-                  {path}
-                </a>
+                <a href={`docs/doc/${path}`}>{path}</a>
               </li>
             ))}
           </ul>
         </div>
       </div>
     </div>
-  )
+  );
 }

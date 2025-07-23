@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
-export default function Error({
+export default function DocumentError({
   error,
   reset,
 }: {
-  error: Error & { digest?: string }
-  reset: () => void
+  error: Error & { digest?: string };
+  reset: () => void;
 }) {
   useEffect(() => {
-    console.error(error)
-  }, [error])
+    console.error(error);
+  }, [error]);
 
   return (
     <div className="p-8">
@@ -20,7 +20,7 @@ export default function Error({
           Something went wrong!
         </h2>
         <p className="text-gray-600 mb-6">
-          {error.message || 'An unexpected error occurred'}
+          {error.message || "An unexpected error occurred"}
         </p>
         <button
           onClick={reset}
@@ -30,5 +30,5 @@ export default function Error({
         </button>
       </div>
     </div>
-  )
+  );
 }

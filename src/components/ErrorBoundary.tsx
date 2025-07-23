@@ -1,8 +1,6 @@
-import { isRouteErrorResponse } from "react-router";
+import { isRouteErrorResponse } from 'react-router';
 
-export function ErrorBoundary({
-  error,
-}: { error?: Error }) {
+export function ErrorBoundary({ error }: { error?: Error }) {
   if (isRouteErrorResponse(error)) {
     return (
       <>

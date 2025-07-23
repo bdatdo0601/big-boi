@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { StyledEngineProvider } from "@mui/material/styles";
-import useLocalStorageState from "use-local-storage-state";
+import { StyledEngineProvider } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import useLocalStorageState from 'use-local-storage-state';
 
 const LayoutContext = React.createContext();
 
 export const LayoutContextProvider = ({ children }) => {
   const [layout, setLayout] = useState();
-  const [isDark, setIsDark] = useLocalStorageState("darkMode", {
-    defaultValue: window.matchMedia("(prefers-color-scheme: dark)").matches,
+  const [isDark, setIsDark] = useLocalStorageState('darkMode', {
+    defaultValue: window.matchMedia('(prefers-color-scheme: dark)').matches,
   });
-  const [animation, setAnimation] = useLocalStorageState("animation", {
+  const [animation, setAnimation] = useLocalStorageState('animation', {
     defaultValue: true,
   });
-  const [globalAnimation, setGlobalAnimation] = useLocalStorageState("globalAnimation", {
+  const [globalAnimation, setGlobalAnimation] = useLocalStorageState('globalAnimation', {
     defaultValue: true,
   });
 
   useEffect(() => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
     if (isDark) {
-      document.documentElement.classList.add("dark");
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove('dark');
     }
   }, [isDark]);
 

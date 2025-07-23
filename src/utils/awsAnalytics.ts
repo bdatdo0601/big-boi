@@ -1,6 +1,6 @@
 import { RecordInput } from '@aws-amplify/analytics';
 import { record as recordKinesisEvent } from '@aws-amplify/analytics/kinesis';
-import { last, get } from 'lodash';
+import { get, last } from 'lodash';
 import awsexport from '@/amplifyconfiguration.json';
 
 const env = last(get(awsexport, 'aws_content_delivery_bucket', 'test-dev').split('-'));
