@@ -1,5 +1,5 @@
 enum ENVIRONMENT {
-  DEV = 'dev',
+  DEV = "dev",
 }
 
 // Option 2: Type guard (safer)
@@ -7,13 +7,13 @@ function isValidEnvironment(env?: string): env is ENVIRONMENT {
   return env !== undefined && Object.keys(ENVIRONMENT).includes(env); // Adjust based on your ENVIRONMENT type
 }
 
-export const Environment: ENVIRONMENT = isValidEnvironment(process.env.ENVIRONMENT)
+export const Environment: ENVIRONMENT = isValidEnvironment(
+  process.env.ENVIRONMENT,
+)
   ? process.env.ENVIRONMENT
   : ENVIRONMENT.DEV;
 
 type CONFIG = {
-  ingestionKinesisStreamArn: string;
-  ingestionLambdaArn: string;
   account: string;
   region: string;
   environment: string;
@@ -21,11 +21,9 @@ type CONFIG = {
 
 const configs: { [key in ENVIRONMENT]: CONFIG } = {
   [ENVIRONMENT.DEV]: {
-    account: '142037127835',
-    region: 'us-east-1',
-    environment: 'dev',
-    ingestionKinesisStreamArn: 'arn:aws:kinesis:us-east-1:142037127835:stream/bigboidefaultkinesis-dev',
-    ingestionLambdaArn: 'arn:aws:lambda:us-east-1:142037127835:function:bigboikinesisconsumer-dev',
+    account: "142037127835",
+    region: "us-east-1",
+    environment: "dev",
   },
 };
 
