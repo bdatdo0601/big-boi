@@ -1,0 +1,6 @@
+{
+  "lambda_name": "my-lambda",
+  "lambda_description": "A TypeScript Lambda function",
+  "author_name": "Big Boi Developer",
+  "license": "MIT"
+}

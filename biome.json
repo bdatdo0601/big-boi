@@ -3,7 +3,14 @@
   "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!amplify/**", "!big-cdk/cdk.out/**", "!**/*.css", "!**/*.js"]
+    "includes": [
+      "**",
+      "!amplify/**",
+      "!big-cdk/cdk.out/**",
+      "!**/*.css",
+      "!**/*.js",
+      "!template/**"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -15,7 +22,12 @@
     "lineWidth": 120,
     "attributePosition": "auto",
     "bracketSpacing": true,
-    "includes": ["**", "!**/schema.json", "!**/src/aws-exports.js", "!**/amplify"]
+    "includes": [
+      "**",
+      "!**/schema.json",
+      "!**/src/aws-exports.js",
+      "!**/amplify"
+    ]
   },
   "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {

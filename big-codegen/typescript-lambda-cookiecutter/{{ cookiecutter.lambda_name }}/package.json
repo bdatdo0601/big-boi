@@ -1,0 +1,32 @@
+{
+  "name": "{{ cookiecutter.lambda_name }}-lambda",
+  "version": "1.0.0",
+  "description": "{{ cookiecutter.lambda_description }}",
+  "main": "dist/index.js",
+  "scripts": {
+    "prebuild": "npm install",
+    "build": "rsbuild build",
+    "dev": "rsbuild dev",
+    "preview": "rsbuild preview"
+  },
+  "author": "{{ cookiecutter.author_name }}",
+  "license": "{{ cookiecutter.license }}",
+  "dependencies": {
+    "@aws-sdk/client-lambda": "^3.0.0",
+    "@aws-sdk/client-eventbridge": "^3.0.0",
+    "@aws-sdk/client-s3": "^3.0.0",
+    "@aws-sdk/client-dynamodb": "^3.0.0",
+    "@aws-sdk/client-sqs": "^3.0.0",
+    "@aws-sdk/client-sns": "^3.0.0",
+    "@big-boi-commons/typescript": "../../commons/typescript",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.0",
+    "@types/node": "^20.0.0",
+    "@types/lodash": "^4.17.20",
+    "@rsbuild/core": "^1.4.9",
+    "rsbuild-plugin-aws-lambda": "^0.0.3",
+    "typescript": "^5.8.3"
+  }
+}
