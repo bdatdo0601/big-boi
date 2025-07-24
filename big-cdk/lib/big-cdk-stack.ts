@@ -5,6 +5,7 @@ import config from "./config";
 import { EventManagementStack } from "./EventManagement";
 import { SecretsStack } from "./Secret";
 import { PrivateRealmStack } from "./Storage/private-realm-stack";
+import { PublicRealmStack } from "./Storage/public-realm-stack";
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class BigCdkStack extends cdk.Stack {
@@ -34,6 +35,12 @@ export class BigCdkStack extends cdk.Stack {
       "PrivateRealmStack",
       deploymentProps,
       { secret: secretStack },
+    );
+
+    const _publicRealmStack = new PublicRealmStack(
+      this,
+      "PublicRealmStack",
+      deploymentProps,
     );
   }
 }

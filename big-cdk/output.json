@@ -17,5 +17,11 @@
     "PrivateStorageBucketName": "private-realm-storage-dev",
     "EventsTableName": "private-realm-events-dev",
     "EmbeddingLambdaArn": "arn:aws:lambda:us-east-1:142037127835:function:private-realm-embedding-dev"
+  },
+  "BigCdkStackPublicRealmStack2CEFCABE": {
+    "PublicStorageBucketName": "public-realm-storage-dev",
+    "PublicContentTableName": "public-realm-content-dev",
+    "PublicFlexSearchTableName": "public-realm-flexsearch-dev",
+    "PublicEventsTableName": "public-realm-events-dev"
   }
 }
