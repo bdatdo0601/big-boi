@@ -1,3 +1,5 @@
+import { StackProps } from "aws-cdk-lib";
+
 enum ENVIRONMENT {
   DEV = "dev",
 }
@@ -13,17 +15,33 @@ export const Environment: ENVIRONMENT = isValidEnvironment(
   ? process.env.ENVIRONMENT
   : ENVIRONMENT.DEV;
 
-type CONFIG = {
+export type StackDeploymentProps = StackProps & {
   account: string;
   region: string;
   environment: string;
+  storage: {
+    privateRealm: {
+      // Currently S3 Vector does not support CDK automated deployment. Created via console and pass in the ARN instead
+      vectorBucketArn: string;
+      vectorBucketName: string;
+      textEmbeddingIndexName: string;
+    };
+  };
 };
 
-const configs: { [key in ENVIRONMENT]: CONFIG } = {
+const configs: { [key in ENVIRONMENT]: StackDeploymentProps } = {
   [ENVIRONMENT.DEV]: {
     account: "142037127835",
     region: "us-east-1",
     environment: "dev",
+    storage: {
+      privateRealm: {
+        vectorBucketArn:
+          "arn:aws:s3vectors:us-east-1:142037127835:bucket/big-s3-vector-bucket",
+        vectorBucketName: "big-s3-vector-bucket",
+        textEmbeddingIndexName: "text-embeddings",
+      },
+    },
   },
 };
 

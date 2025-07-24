@@ -1,0 +1,10 @@
+{
+  "name": "@big-boi-commons/typescript",
+  "version": "1.0.0",
+  "description": "Running embedding lambda on typescript",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.848.0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "embedding-lambda",
+  "version": "1.0.0",
+  "description": "Running embedding lambda on typescript",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "npm install",
+    "build": "rsbuild build"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@ai-sdk/mistral": "^1.2.8",
+    "@aws-sdk/client-s3vectors": "^3.848.0",
+    "@big-boi-commons/typescript": "../../commons/typescript",
+    "@mastra/rag": "^1.0.4",
+    "ai": "^4.3.19",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.4.9",
+    "@types/lodash": "^4.17.20",
+    "rsbuild-plugin-aws-lambda": "^0.0.3",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,10 +1,9 @@
-import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
+import { CfnOutput, Stack } from "aws-cdk-lib";
 import { Construct } from "constructs";
+import { StackDeploymentProps } from "../config";
 import { EventBusWithObservability } from "./constructs/eventbus";
 
-type EventManagementStackProps = StackProps & {
-  account: string;
-};
+type EventManagementStackProps = StackDeploymentProps;
 
 export class EventManagementStack extends Stack {
   constructor(
