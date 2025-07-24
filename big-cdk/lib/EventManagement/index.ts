@@ -1,6 +1,7 @@
 import { CfnOutput, Stack } from "aws-cdk-lib";
 import { Construct } from "constructs";
 import { StackDeploymentProps } from "../config";
+import { EventTransformer } from "./constructs/event-transformer";
 import { EventBusWithObservability } from "./constructs/eventbus";
 
 type EventManagementStackProps = StackDeploymentProps;
@@ -12,19 +13,66 @@ export class EventManagementStack extends Stack {
     readonly props: EventManagementStackProps,
   ) {
     super(scope, id, props);
+    const debug = this.node.tryGetContext("DEBUG") === "TRUE";
 
-    const eventBusConstruct = new EventBusWithObservability(
+    // Create the raw event bus
+    const rawEventBusConstruct = new EventBusWithObservability(
       this,
-      "EventBusWithObservability",
+      "RawEventBusWithObservability",
       {
-        eventBusName: "BigEventBus",
+        eventBusName: "BigRawBus",
         account: this.props.account,
+        schemaDiscovery: true,
+        debug,
       },
     );
 
-    new CfnOutput(this, "EventBusArn", {
-      value: eventBusConstruct.eventBus.eventBusArn,
-      description: "The ARN of the EventBus",
+    // Create the structured event bus
+    const structuredEventBusConstruct = new EventBusWithObservability(
+      this,
+      "StructuredEventBusWithObservability",
+      {
+        eventBusName: "BigStructuredBus",
+        account: this.props.account,
+        debug,
+      },
+    );
+
+    // Create the event transformer that processes events from raw to structured bus
+    const eventTransformer = new EventTransformer(this, "EventTransformer", {
+      rawEventBus: rawEventBusConstruct.eventBus,
+      structuredEventBus: structuredEventBusConstruct.eventBus,
+    });
+
+    // Outputs for easy reference
+    new CfnOutput(this, "RawEventBusArn", {
+      value: rawEventBusConstruct.eventBus.eventBusArn,
+      description: "The ARN of the Raw EventBus",
+      exportName: "BigRawBusArn",
+    });
+
+    new CfnOutput(this, "StructuredEventBusArn", {
+      value: structuredEventBusConstruct.eventBus.eventBusArn,
+      description: "The ARN of the Structured EventBus",
+      exportName: "BigStructuredBusArn",
+    });
+
+    new CfnOutput(this, "EventTransformerFunctionArn", {
+      value: eventTransformer.transformerFunction.lambdaFunction.functionArn,
+      description: "The ARN of the Event Transformer Lambda function",
+      exportName: "EventTransformerFunctionArn",
+    });
+
+    new CfnOutput(this, "EventTransformerDLQArn", {
+      value: eventTransformer.deadLetterQueue.queueArn,
+      description: "The ARN of the Event Transformer Dead Letter Queue",
+      exportName: "EventTransformerDLQArn",
+    });
+
+    new CfnOutput(this, "EventTransformerRuleArn", {
+      value: eventTransformer.eventRule.ruleArn,
+      description: "The ARN of the Event Rule that triggers transformation",
+      exportName: "EventTransformerRuleArn",
     });
   }
 }

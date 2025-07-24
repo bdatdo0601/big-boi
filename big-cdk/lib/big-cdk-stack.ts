@@ -1,6 +1,7 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import { AuthenticationStack } from "./Authentication";
+import { MonitoringAspect } from "./common/aspects/monitoring-aspect";
 import config from "./config";
 import { EventManagementStack } from "./EventManagement";
 import { SecretsStack } from "./Secret";
@@ -34,7 +35,9 @@ export class BigCdkStack extends cdk.Stack {
       this,
       "PrivateRealmStack",
       deploymentProps,
-      { secret: secretStack },
+      {
+        secret: secretStack,
+      },
     );
 
     const _publicRealmStack = new PublicRealmStack(
@@ -42,5 +45,7 @@ export class BigCdkStack extends cdk.Stack {
       "PublicRealmStack",
       deploymentProps,
     );
+
+    cdk.Aspects.of(this).add(new MonitoringAspect());
   }
 }

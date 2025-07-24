@@ -1,0 +1,21 @@
+{
+  "name": "event-transformer-lambda",
+  "version": "1.0.0",
+  "description": "Lambda function to transform raw events into structured format",
+  "main": "dist/index.js",
+  "scripts": {
+    "prebuild": "npm install",
+    "build": "rsbuild build"
+  },
+  "dependencies": {
+    "@aws-sdk/client-eventbridge": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.0",
+    "@types/node": "^20.0.0",
+    "@rsbuild/core": "^1.4.9",
+    "@types/lodash": "^4.17.20",
+    "rsbuild-plugin-aws-lambda": "^0.0.3",
+    "typescript": "^5.8.3"
+  }
+}
