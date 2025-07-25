@@ -21,6 +21,12 @@ global.console = {
   // error: vi.fn(),
 };
 
+// Setup global mocks for AWS SDK
+vi.mock("@aws-sdk/client-s3vectors", () => ({
+  S3VectorsClient: vi.fn(),
+  PutVectorsCommand: vi.fn(),
+}));
+
 // Mock environment variables
 process.env.NODE_ENV = "test";
 process.env.AWS_REGION = "us-east-1";

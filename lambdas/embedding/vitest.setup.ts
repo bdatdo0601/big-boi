@@ -1,5 +1,5 @@
 // Global test setup for Vitest
-import { vi } from 'vitest';
+import { vi } from "vitest";
 
 // Extend Vitest matchers if needed
 declare global {
@@ -22,14 +22,14 @@ global.console = {
 };
 
 // Setup global mocks for AWS SDK
-vi.mock('@aws-sdk/client-s3vectors', () => ({
+vi.mock("@aws-sdk/client-s3vectors", () => ({
   S3VectorsClient: vi.fn(),
   PutVectorsCommand: vi.fn(),
 }));
 
 // Mock environment variables
-process.env.NODE_ENV = 'test';
-process.env.AWS_REGION = 'us-east-1';
+process.env.NODE_ENV = "test";
+process.env.AWS_REGION = "us-east-1";
 
 // Global test timeout (set in vitest.config.ts, but can be overridden here)
 // vi.setConfig({ testTimeout: 10000 });

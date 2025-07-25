@@ -18,7 +18,7 @@ export default defineConfig({
         lines: 90,
       },
     },
-    setupFiles: ["test/setup/test-setup.ts"],
+    setupFiles: ["vitest.setup.ts"],
     testTimeout: 10000,
     mockReset: true,
     clearMocks: true,
