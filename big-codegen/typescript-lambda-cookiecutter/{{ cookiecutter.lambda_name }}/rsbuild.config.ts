@@ -5,4 +5,13 @@ export default {
   output: {
     minify: false,
   },
+  source: {
+    exclude: [
+      /test\//,
+      /\.test\./,
+      /\.spec\./,
+      /test-runner\.sh/,
+      /verify-tests\.js/,
+    ],
+  },
 };

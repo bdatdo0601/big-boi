@@ -3,12 +3,6 @@
   "version": "1.0.0",
   "description": "{{ cookiecutter.lambda_description }}",
   "main": "dist/index.js",
-  "scripts": {
-    "prebuild": "npm install",
-    "build": "rsbuild build",
-    "dev": "rsbuild dev",
-    "preview": "rsbuild preview"
-  },
   "author": "{{ cookiecutter.author_name }}",
   "license": "{{ cookiecutter.license }}",
   "dependencies": {
@@ -22,11 +16,41 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.0",
-    "@types/node": "^20.0.0",
-    "@types/lodash": "^4.17.20",
     "@rsbuild/core": "^1.4.9",
+    "@types/lodash": "^4.17.20",
+    "@vitest/coverage-v8": "^1.6.0",
     "rsbuild-plugin-aws-lambda": "^0.0.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^1.6.0"
+  },
+  "scripts": {
+    "prebuild": "npm install",
+    "build": "npm run clean && rsbuild build",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:unit": "vitest run test/unit",
+    "test:integration": "vitest run test/integration",
+    "test:setup": "vitest run test/setup",
+    "test:watch": "vitest",
+    "test:watch:unit": "vitest test/unit",
+    "test:watch:integration": "vitest test/integration",
+    "test:coverage": "vitest run --coverage",
+    "test:coverage:unit": "vitest run test/unit --coverage",
+    "test:coverage:integration": "vitest run test/integration --coverage"
+  },
+  "vitest": {
+    "environment": "node",
+    "include": [
+      "test/**/*.{test,spec}.ts"
+    ],
+    "coverage": {
+      "include": [
+        "src/**/*.ts"
+      ],
+      "exclude": [
+        "src/**/*.d.ts",
+        "test/**/*.ts"
+      ]
+    }
   }
 }

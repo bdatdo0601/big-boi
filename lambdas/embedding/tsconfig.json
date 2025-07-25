@@ -1,17 +1,32 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "commonjs",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "strict": true,
     "outDir": "./dist",
     "preserveConstEnums": true,
-    "sourceMap": false,
-    "moduleResolution": "node",
+    "sourceMap": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "declaration": true,
+    "declarationMap": true,
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "types": ["vitest/globals"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.d.ts", "src/__tests__/"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "test/**/*",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "test-runner.sh",
+    "verify-tests.js"
+  ]
 }
