@@ -24,27 +24,35 @@ export class BigCdkStack extends cdk.Stack {
     );
 
     // The code that defines your stack goes here
-    const _eventMessageStack = new EventManagementStack(
+    const eventManagementStack = new EventManagementStack(
       this,
       "EventManagementStack",
       deploymentProps,
     );
 
     // Private Realm Stack for content storage, embeddings, and search
-    const _privateRealmStack = new PrivateRealmStack(
+    const privateRealmStack = new PrivateRealmStack(
       this,
       "PrivateRealmStack",
       deploymentProps,
       {
         secret: secretStack,
+        eventManagement: eventManagementStack,
       },
     );
 
-    const _publicRealmStack = new PublicRealmStack(
+    const publicRealmStack = new PublicRealmStack(
       this,
       "PublicRealmStack",
       deploymentProps,
+      {
+        eventManagement: eventManagementStack,
+      },
     );
+
+    privateRealmStack.addDependency(secretStack);
+    privateRealmStack.addDependency(eventManagementStack);
+    publicRealmStack.addDependency(eventManagementStack);
 
     cdk.Aspects.of(this).add(new MonitoringAspect());
   }

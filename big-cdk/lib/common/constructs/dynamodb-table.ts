@@ -2,10 +2,10 @@ import * as cdk from "aws-cdk-lib";
 import {
   AttributeType,
   BillingMode,
-  PointInTimeRecoverySpecification,
   ProjectionType,
-  Table,
+  StreamViewType,
   TableEncryption,
+  TableV2,
 } from "aws-cdk-lib/aws-dynamodb";
 import { Construct } from "constructs";
 
@@ -39,27 +39,42 @@ export interface DynamoDBTableProps {
   pointInTimeRecovery?: boolean;
   globalSecondaryIndexes: DynamoDBTableGSI[];
   environment?: string;
+  /**
+   * Enable DynamoDB Streams to capture data modification events
+   * @default undefined - no streams
+   */
+  dynamoStream?: StreamViewType;
 }
 
 export class DynamoDBTable extends Construct {
-  public readonly table: Table;
+  public readonly table: TableV2;
 
   constructor(scope: Construct, id: string, props: DynamoDBTableProps) {
     super(scope, id);
 
-    this.table = new Table(this, "Table", {
+    // If streams are enabled, use TableV2 (required for EventBridge Pipes)
+    this.table = new TableV2(this, "TableV2", {
       tableName: props.tableName,
       partitionKey: props.partitionKey,
       sortKey: props.sortKey,
-      billingMode: props.billingMode || BillingMode.PAY_PER_REQUEST,
-      encryption: props.encryption || TableEncryption.AWS_MANAGED,
+      billing:
+        props.billingMode === BillingMode.PAY_PER_REQUEST
+          ? cdk.aws_dynamodb.Billing.onDemand()
+          : cdk.aws_dynamodb.Billing.provisioned({
+              readCapacity: cdk.aws_dynamodb.Capacity.fixed(5),
+              writeCapacity: cdk.aws_dynamodb.Capacity.autoscaled({
+                maxCapacity: 15,
+              }),
+            }),
+      encryption: cdk.aws_dynamodb.TableEncryptionV2.awsManagedKey(),
       removalPolicy: props.removalPolicy || cdk.RemovalPolicy.DESTROY,
       pointInTimeRecoverySpecification: {
-        pointInTimeRecoveryEnabled: false,
+        pointInTimeRecoveryEnabled: props.pointInTimeRecovery || false,
       },
+      dynamoStream: props.dynamoStream,
     });
 
-    // Add Global Secondary Indexes if provided
+    // Add Global Secondary Indexes to TableV2
     props.globalSecondaryIndexes.forEach((gsi) => {
       this.table.addGlobalSecondaryIndex({
         indexName: gsi.indexName,

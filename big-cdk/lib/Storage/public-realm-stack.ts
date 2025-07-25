@@ -1,28 +1,34 @@
 import * as cdk from "aws-cdk-lib";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
-import * as lambda from "aws-cdk-lib/aws-lambda";
-import * as s3 from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
+import { DynamoDBStreamToEventBridgePipes } from "../common/constructs/dynamodb-stream-to-eventbridge-pipes";
 import { DynamoDBTable } from "../common/constructs/dynamodb-table";
 import { S3BucketConstruct } from "../common/constructs/s3-bucket";
 import { StackDeploymentProps } from "../config";
+import { EventManagementStack } from "../EventManagement";
 
 export type PublicRealmStackProps = StackDeploymentProps & {
   environment: string;
 };
-
 export class PublicRealmStack extends cdk.Stack {
-  public readonly publicStorageBucket: s3.Bucket;
-  public readonly eventsTable: dynamodb.Table;
-  public readonly contentTable: dynamodb.Table;
-  public readonly flexSearchTable: dynamodb.Table;
-  public readonly embeddingLambda: lambda.Function;
+  public readonly publicStorageBucket: S3BucketConstruct;
+  public readonly eventsTable: DynamoDBTable;
+  public readonly contentTable: DynamoDBTable;
+  public readonly flexSearchTable: DynamoDBTable;
+  public readonly contentStreamPipe?: DynamoDBStreamToEventBridgePipes;
 
-  constructor(scope: Construct, id: string, props: PublicRealmStackProps) {
+  constructor(
+    scope: Construct,
+    id: string,
+    readonly props: PublicRealmStackProps,
+    readonly dependentStacks: {
+      eventManagement: EventManagementStack;
+    },
+  ) {
     super(scope, id, props);
 
     // Create private storage bucket using S3BucketConstruct
-    const publicStorage = new S3BucketConstruct(this, "PublicStorage", {
+    this.publicStorageBucket = new S3BucketConstruct(this, "PublicStorage", {
       environment: props.environment,
       bucketName: `public-realm-storage-${props.environment}`,
       lifecycleRules: [
@@ -33,10 +39,9 @@ export class PublicRealmStack extends cdk.Stack {
         },
       ],
     });
-    this.publicStorageBucket = publicStorage.bucket;
 
     // DynamoDB Table for Events
-    const eventsTableConstruct = new DynamoDBTable(this, "EventsTable", {
+    this.eventsTable = new DynamoDBTable(this, "EventsTable", {
       tableName: `public-realm-events-${props.environment}`,
       partitionKey: {
         name: "pk",
@@ -49,10 +54,9 @@ export class PublicRealmStack extends cdk.Stack {
       globalSecondaryIndexes: [],
       environment: props.environment,
     });
-    this.eventsTable = eventsTableConstruct.table;
 
-    // DynamoDB Table for Content
-    const contentTableConstruct = new DynamoDBTable(this, "ContentTable", {
+    // DynamoDB Table for Content with streams enabled for EventBridge Pipes
+    this.contentTable = new DynamoDBTable(this, "ContentTable", {
       tableName: `public-realm-content-${props.environment}`,
       partitionKey: {
         name: "pk",
@@ -65,56 +69,108 @@ export class PublicRealmStack extends cdk.Stack {
       pointInTimeRecovery: true,
       globalSecondaryIndexes: [],
       environment: props.environment,
+      // Enable streams to capture content changes
+      dynamoStream: dynamodb.StreamViewType.NEW_AND_OLD_IMAGES,
     });
-    this.contentTable = contentTableConstruct.table;
 
     // DynamoDB Table for FlexSearch
-    const flexSearchTableConstruct = new DynamoDBTable(
-      this,
-      "FlexSearchTable",
-      {
-        tableName: `public-realm-flexsearch-${props.environment}`,
-        partitionKey: {
-          name: "pk",
-          type: dynamodb.AttributeType.STRING,
-        },
-        sortKey: {
-          name: "sk",
-          type: dynamodb.AttributeType.STRING,
-        },
-        pointInTimeRecovery: true,
-        globalSecondaryIndexes: [],
-        environment: props.environment,
+    this.flexSearchTable = new DynamoDBTable(this, "FlexSearchTable", {
+      tableName: `public-realm-flexsearch-${props.environment}`,
+      partitionKey: {
+        name: "pk",
+        type: dynamodb.AttributeType.STRING,
       },
-    );
-    this.flexSearchTable = flexSearchTableConstruct.table;
+      sortKey: {
+        name: "sk",
+        type: dynamodb.AttributeType.STRING,
+      },
+      pointInTimeRecovery: true,
+      globalSecondaryIndexes: [],
+      environment: props.environment,
+    });
+
+    this.contentStreamPipe = this.enableContentStreaming();
 
     // Output important resource information
     new cdk.CfnOutput(this, "PublicStorageBucketName", {
-      value: this.publicStorageBucket.bucketName,
+      value: this.publicStorageBucket.bucket.bucketName,
       description: "Name of the private storage S3 bucket",
       exportName: `public-realm-storage-bucket-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "PublicEventsTableName", {
-      value: this.eventsTable.tableName,
+      value: this.eventsTable.table.tableName,
       description: "Name of the events DynamoDB table",
       exportName: `public-realm-events-table-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "PublicContentTableName", {
-      value: this.contentTable.tableName,
+      value: this.contentTable.table.tableName,
       description: "Name of the content DynamoDB table",
       exportName: `public-realm-content-table-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "PublicFlexSearchTableName", {
-      value: this.flexSearchTable.tableName,
+      value: this.flexSearchTable.table.tableName,
       description: "Name of the FlexSearch DynamoDB table",
       exportName: `public-realm-flexsearch-table-${props.environment}`,
     });
 
     // Add tags to all resources
     cdk.Tags.of(this).add("Project", "PublicRealm");
+  }
+
+  /**
+   * Enable content streaming to the BigRawBus using EventBridge Pipes
+   *
+   * @param bigRawBus - The EventBridge bus to send content events to
+   * @returns The created content stream pipe
+   */
+  public enableContentStreaming(): DynamoDBStreamToEventBridgePipes {
+    // Create EventBridge Pipe for content table stream
+    const contentStreamPipe = new DynamoDBStreamToEventBridgePipes(
+      this,
+      "ContentStreamPipe",
+      {
+        table: this.contentTable.table,
+        eventBus: this.dependentStacks.eventManagement.bigRawBus.eventBus,
+        pipeName: `public-content-stream-${this.props.environment}`,
+        description: "Stream public realm content table changes to BigRawBus",
+        environment: this.props.environment,
+
+        // Optimize for content table workloads
+        batchSize: 10,
+        maximumBatchingWindow: cdk.Duration.seconds(1),
+        parallelizationFactor: 2,
+
+        // Filter out DELETE events for now, focus on content creation/updates
+        filter: DynamoDBStreamToEventBridgePipes.createEventNameFilter([
+          "INSERT",
+          "MODIFY",
+          "REMOVE",
+        ]),
+
+        // Transform events with metadata about the public realm
+        inputTransformation:
+          DynamoDBStreamToEventBridgePipes.createStandardTransformation(
+            "content.public-realm",
+            "Public Content Changed",
+          ),
+      },
+    );
+
+    // Output pipe information
+    new cdk.CfnOutput(this, "PublicContentPipeArn", {
+      value: contentStreamPipe.pipe.pipeArn,
+      description: "ARN of the public content stream pipe",
+      exportName: `public-content-pipe-arn-${this.props.environment}`,
+    });
+
+    // Add tags for the pipe
+    cdk.Tags.of(contentStreamPipe).add("Purpose", "Content-Stream-Processing");
+    cdk.Tags.of(contentStreamPipe).add("ContentRealm", "Public");
+    cdk.Tags.of(contentStreamPipe).add("EventDestination", "BigRawBus");
+
+    return contentStreamPipe;
   }
 }

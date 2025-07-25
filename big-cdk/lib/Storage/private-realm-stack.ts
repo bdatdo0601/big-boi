@@ -1,14 +1,14 @@
 import * as cdk from "aws-cdk-lib";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import * as iam from "aws-cdk-lib/aws-iam";
-import * as lambda from "aws-cdk-lib/aws-lambda";
-import * as s3 from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
 import * as path from "path";
+import { DynamoDBStreamToEventBridgePipes } from "../common/constructs/dynamodb-stream-to-eventbridge-pipes";
 import { DynamoDBTable } from "../common/constructs/dynamodb-table";
 import { S3BucketConstruct } from "../common/constructs/s3-bucket";
 import { TypeScriptLambda } from "../common/constructs/ts-lambda";
 import { StackDeploymentProps } from "../config";
+import { EventManagementStack } from "../EventManagement";
 import { SecretsStack } from "../Secret";
 
 export type PrivateRealmStackProps = StackDeploymentProps & {
@@ -16,22 +16,28 @@ export type PrivateRealmStackProps = StackDeploymentProps & {
 };
 
 export class PrivateRealmStack extends cdk.Stack {
-  public readonly privateStorageBucket: s3.Bucket;
-  public readonly eventsTable: dynamodb.Table;
-  public readonly contentTable: dynamodb.Table;
-  public readonly flexSearchTable: dynamodb.Table;
-  public readonly embeddingLambda: lambda.Function;
+  public readonly privateStorageBucket: S3BucketConstruct;
+  public readonly eventsTable: DynamoDBTable;
+  public readonly flexSearchTable: DynamoDBTable;
+  public readonly embeddingLambda: TypeScriptLambda;
+  public readonly contentTable: DynamoDBTable;
+  public readonly contentStreamPipe?: DynamoDBStreamToEventBridgePipes;
 
   constructor(
     scope: Construct,
     id: string,
-    props: PrivateRealmStackProps,
-    readonly dependentStacks: { secret: SecretsStack },
+    readonly props: PrivateRealmStackProps,
+    readonly dependentStacks: {
+      secret: SecretsStack;
+      eventManagement: EventManagementStack;
+    },
   ) {
     super(scope, id, props);
 
+    this.props.environment = props.environment;
+
     // Create private storage bucket using S3BucketConstruct
-    const privateStorage = new S3BucketConstruct(this, "PrivateStorage", {
+    this.privateStorageBucket = new S3BucketConstruct(this, "PrivateStorage", {
       environment: props.environment,
       bucketName: `private-realm-storage-${props.environment}`,
       lifecycleRules: [
@@ -42,10 +48,9 @@ export class PrivateRealmStack extends cdk.Stack {
         },
       ],
     });
-    this.privateStorageBucket = privateStorage.bucket;
 
     // DynamoDB Table for Events
-    const eventsTableConstruct = new DynamoDBTable(this, "EventsTable", {
+    const eventsTable = new DynamoDBTable(this, "EventsTable", {
       tableName: `private-realm-events-${props.environment}`,
       partitionKey: {
         name: "pk",
@@ -58,10 +63,10 @@ export class PrivateRealmStack extends cdk.Stack {
       globalSecondaryIndexes: [],
       environment: props.environment,
     });
-    this.eventsTable = eventsTableConstruct.table;
+    this.eventsTable = eventsTable;
 
-    // DynamoDB Table for Content
-    const contentTableConstruct = new DynamoDBTable(this, "ContentTable", {
+    // DynamoDB Table for Content with streams enabled for EventBridge Pipes
+    const contentTable = new DynamoDBTable(this, "ContentTable", {
       tableName: `private-realm-content-${props.environment}`,
       partitionKey: {
         name: "pk",
@@ -74,32 +79,30 @@ export class PrivateRealmStack extends cdk.Stack {
       pointInTimeRecovery: true,
       globalSecondaryIndexes: [],
       environment: props.environment,
+      // Enable streams to capture content changes
+      dynamoStream: dynamodb.StreamViewType.NEW_AND_OLD_IMAGES,
     });
-    this.contentTable = contentTableConstruct.table;
+    this.contentTable = contentTable;
 
     // DynamoDB Table for FlexSearch
-    const flexSearchTableConstruct = new DynamoDBTable(
-      this,
-      "FlexSearchTable",
-      {
-        tableName: `private-realm-flexsearch-${props.environment}`,
-        partitionKey: {
-          name: "pk",
-          type: dynamodb.AttributeType.STRING,
-        },
-        sortKey: {
-          name: "sk",
-          type: dynamodb.AttributeType.STRING,
-        },
-        pointInTimeRecovery: true,
-        globalSecondaryIndexes: [],
-        environment: props.environment,
+    const flexSearchTable = new DynamoDBTable(this, "FlexSearchTable", {
+      tableName: `private-realm-flexsearch-${props.environment}`,
+      partitionKey: {
+        name: "pk",
+        type: dynamodb.AttributeType.STRING,
       },
-    );
-    this.flexSearchTable = flexSearchTableConstruct.table;
+      sortKey: {
+        name: "sk",
+        type: dynamodb.AttributeType.STRING,
+      },
+      pointInTimeRecovery: true,
+      globalSecondaryIndexes: [],
+      environment: props.environment,
+    });
+    this.flexSearchTable = flexSearchTable;
 
     // Create embedding lambda using TypeScriptLambda construct
-    const embeddingLambda = new TypeScriptLambda(this, "EmbeddingLambda", {
+    this.embeddingLambda = new TypeScriptLambda(this, "EmbeddingLambda", {
       functionName: `private-realm-embedding-${props.environment}`,
       codePath: path.join(__dirname, "../../../lambdas/embedding"),
       timeout: cdk.Duration.minutes(5),
@@ -114,15 +117,14 @@ export class PrivateRealmStack extends cdk.Stack {
       description:
         "TypeScript-based lambda function for generating embeddings in the private realm to a S3 Vector bucket",
     });
-    this.embeddingLambda = embeddingLambda.lambdaFunction;
-    this.embeddingLambda.addToRolePolicy(
+    this.embeddingLambda.lambdaFunction.addToRolePolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
         actions: ["s3vectors:*"],
         resources: [`${props.storage.privateRealm.vectorBucketArn}/index/*`],
       }),
     );
-    this.embeddingLambda.addToRolePolicy(
+    this.embeddingLambda.lambdaFunction.addToRolePolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
         actions: ["secretsmanager:GetSecretValue"],
@@ -130,38 +132,93 @@ export class PrivateRealmStack extends cdk.Stack {
       }),
     );
 
+    this.contentStreamPipe = this.enableContentStreaming();
+
     // Output important resource information
     new cdk.CfnOutput(this, "PrivateStorageBucketName", {
-      value: this.privateStorageBucket.bucketName,
+      value: this.privateStorageBucket.bucket.bucketName,
       description: "Name of the private storage S3 bucket",
       exportName: `private-realm-storage-bucket-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "EmbeddingLambdaArn", {
-      value: this.embeddingLambda.functionArn,
+      value: this.embeddingLambda.lambdaFunction.functionArn,
       description: "ARN of the embedding lambda function",
       exportName: `private-realm-embedding-lambda-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "EventsTableName", {
-      value: this.eventsTable.tableName,
+      value: this.eventsTable.table.tableName,
       description: "Name of the events DynamoDB table",
       exportName: `private-realm-events-table-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "ContentTableName", {
-      value: this.contentTable.tableName,
+      value: this.contentTable.table.tableName,
       description: "Name of the content DynamoDB table",
       exportName: `private-realm-content-table-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "FlexSearchTableName", {
-      value: this.flexSearchTable.tableName,
+      value: this.flexSearchTable.table.tableName,
       description: "Name of the FlexSearch DynamoDB table",
       exportName: `private-realm-flexsearch-table-${props.environment}`,
     });
 
     // Add tags to all resources
     cdk.Tags.of(this).add("Project", "PrivateRealm");
+  }
+
+  /**
+   * Enable content streaming to the BigRawBus using EventBridge Pipes
+   *
+   * @returns The created content stream pipe
+   */
+  private enableContentStreaming(): DynamoDBStreamToEventBridgePipes {
+    // Create EventBridge Pipe for content table stream
+    const contentStreamPipe = new DynamoDBStreamToEventBridgePipes(
+      this,
+      "ContentStreamPipe",
+      {
+        table: this.contentTable.table,
+        eventBus: this.dependentStacks.eventManagement.bigRawBus.eventBus,
+        pipeName: `private-content-stream-${this.props.environment}`,
+        description: "Stream private realm content table changes to BigRawBus",
+        environment: this.props.environment,
+
+        // Optimize for content table workloads
+        batchSize: 10,
+        maximumBatchingWindow: cdk.Duration.seconds(1),
+        parallelizationFactor: 2,
+
+        // Filter out DELETE events for now, focus on content creation/updates
+        filter: DynamoDBStreamToEventBridgePipes.createEventNameFilter([
+          "INSERT",
+          "MODIFY",
+          "REMOVE",
+        ]),
+
+        // Transform events with metadata about the private realm
+        inputTransformation:
+          DynamoDBStreamToEventBridgePipes.createStandardTransformation(
+            "content.private-realm",
+            "Private Content Changed",
+          ),
+      },
+    );
+
+    // Output pipe information
+    new cdk.CfnOutput(this, "PrivateContentPipeArn", {
+      value: contentStreamPipe.pipe.pipeArn,
+      description: "ARN of the private content stream pipe",
+      exportName: `private-content-pipe-arn-${this.props.environment}`,
+    });
+
+    // Add tags for the pipe
+    cdk.Tags.of(contentStreamPipe).add("Purpose", "Content-Stream-Processing");
+    cdk.Tags.of(contentStreamPipe).add("ContentRealm", "Private");
+    cdk.Tags.of(contentStreamPipe).add("EventDestination", "BigRawBus");
+
+    return contentStreamPipe;
   }
 }

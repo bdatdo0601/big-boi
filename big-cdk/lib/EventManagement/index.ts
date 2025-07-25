@@ -9,6 +9,9 @@ import { EventBusWithObservability } from "./constructs/eventbus";
 type EventManagementStackProps = StackDeploymentProps;
 
 export class EventManagementStack extends Stack {
+  readonly bigRawBus: EventBusWithObservability;
+  readonly bigStructuredBus: EventBusWithObservability;
+
   constructor(
     scope: Construct,
     id: string,
@@ -18,7 +21,7 @@ export class EventManagementStack extends Stack {
     const debug = this.node.tryGetContext("DEBUG") === "TRUE";
 
     // Create the raw event bus
-    const rawEventBusConstruct = new EventBusWithObservability(
+    this.bigRawBus = new EventBusWithObservability(
       this,
       "RawEventBusWithObservability",
       {
@@ -39,11 +42,11 @@ export class EventManagementStack extends Stack {
       eventPattern: {
         source: ["aws.s3"],
       },
-      targets: [new targets.EventBus(rawEventBusConstruct.eventBus)],
+      targets: [new targets.EventBus(this.bigRawBus.eventBus)],
     });
 
     // Create the structured event bus
-    const structuredEventBusConstruct = new EventBusWithObservability(
+    this.bigStructuredBus = new EventBusWithObservability(
       this,
       "StructuredEventBusWithObservability",
       {
@@ -55,19 +58,19 @@ export class EventManagementStack extends Stack {
 
     // Create the event transformer that processes events from raw to structured bus
     const eventTransformer = new EventTransformer(this, "EventTransformer", {
-      rawEventBus: rawEventBusConstruct.eventBus,
-      structuredEventBus: structuredEventBusConstruct.eventBus,
+      rawEventBus: this.bigRawBus.eventBus,
+      structuredEventBus: this.bigStructuredBus.eventBus,
     });
 
     // Outputs for easy reference
     new CfnOutput(this, "RawEventBusArn", {
-      value: rawEventBusConstruct.eventBus.eventBusArn,
+      value: this.bigRawBus.eventBus.eventBusArn,
       description: "The ARN of the Raw EventBus",
       exportName: "BigRawBusArn",
     });
 
     new CfnOutput(this, "StructuredEventBusArn", {
-      value: structuredEventBusConstruct.eventBus.eventBusArn,
+      value: this.bigStructuredBus.eventBus.eventBusArn,
       description: "The ARN of the Structured EventBus",
       exportName: "BigStructuredBusArn",
     });
