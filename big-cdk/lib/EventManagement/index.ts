@@ -1,4 +1,6 @@
 import { CfnOutput, Stack } from "aws-cdk-lib";
+import * as events from "aws-cdk-lib/aws-events";
+import * as targets from "aws-cdk-lib/aws-events-targets";
 import { Construct } from "constructs";
 import { StackDeploymentProps } from "../config";
 import { EventTransformer } from "./constructs/event-transformer";
@@ -26,6 +28,19 @@ export class EventManagementStack extends Stack {
         debug,
       },
     );
+
+    // Route S3 events from default event bus to raw event bus
+    new events.Rule(this, "S3EventRule", {
+      eventBus: events.EventBus.fromEventBusName(
+        this,
+        "DefaultEventBus",
+        "default",
+      ),
+      eventPattern: {
+        source: ["aws.s3"],
+      },
+      targets: [new targets.EventBus(rawEventBusConstruct.eventBus)],
+    });
 
     // Create the structured event bus
     const structuredEventBusConstruct = new EventBusWithObservability(

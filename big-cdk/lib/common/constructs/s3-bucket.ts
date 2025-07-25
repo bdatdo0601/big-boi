@@ -8,6 +8,7 @@ export interface S3BucketProps {
   encryption?: s3.BucketEncryption;
   blockPublicAccess?: s3.BlockPublicAccess;
   lifecycleRules?: s3.LifecycleRule[];
+  eventBridgeEnabled?: boolean;
 }
 
 export class S3BucketConstruct extends Construct {
@@ -30,6 +31,7 @@ export class S3BucketConstruct extends Construct {
           enabled: true,
         },
       ],
+      eventBridgeEnabled: props.eventBridgeEnabled ?? true,
     });
   }
 }
