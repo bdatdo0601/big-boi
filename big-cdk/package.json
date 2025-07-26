@@ -31,6 +31,7 @@
     "@aws-solutions-constructs/aws-alb-fargate": "^2.86.0",
     "cdk-nag": "^2.36.44",
     "constructs": "^10.4.2",
-    "fs-extra": "^11.3.0"
+    "fs-extra": "^11.3.0",
+    "@big-boi-commons/typescript": "../commons/typescript"
   }
 }

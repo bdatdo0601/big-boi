@@ -1,3 +1,9 @@
+import {
+  DYNAMODB_EVENT_TYPE,
+  DynamoDBTablePrefixes,
+  RawEventSource,
+  S3BucketPrefixes,
+} from "@big-boi-commons/typescript/lib";
 import * as cdk from "aws-cdk-lib";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import * as iam from "aws-cdk-lib/aws-iam";
@@ -39,7 +45,7 @@ export class PrivateRealmStack extends cdk.Stack {
     // Create private storage bucket using S3BucketConstruct
     this.privateStorageBucket = new S3BucketConstruct(this, "PrivateStorage", {
       environment: props.environment,
-      bucketName: `private-realm-storage-${props.environment}`,
+      bucketName: `${S3BucketPrefixes.PRIVATE_OBJECT}-${props.environment}`,
       lifecycleRules: [
         {
           id: "archive-old-versions",
@@ -51,7 +57,7 @@ export class PrivateRealmStack extends cdk.Stack {
 
     // DynamoDB Table for Events
     const eventsTable = new DynamoDBTable(this, "EventsTable", {
-      tableName: `private-realm-events-${props.environment}`,
+      tableName: `${DynamoDBTablePrefixes.PRIVATE_EVENT}-${props.environment}`,
       partitionKey: {
         name: "pk",
         type: dynamodb.AttributeType.STRING,
@@ -67,7 +73,7 @@ export class PrivateRealmStack extends cdk.Stack {
 
     // DynamoDB Table for Content with streams enabled for EventBridge Pipes
     const contentTable = new DynamoDBTable(this, "ContentTable", {
-      tableName: `private-realm-content-${props.environment}`,
+      tableName: `${DynamoDBTablePrefixes.PRIVATE_CONTENT}-${props.environment}`,
       partitionKey: {
         name: "pk",
         type: dynamodb.AttributeType.STRING,
@@ -86,7 +92,7 @@ export class PrivateRealmStack extends cdk.Stack {
 
     // DynamoDB Table for FlexSearch
     const flexSearchTable = new DynamoDBTable(this, "FlexSearchTable", {
-      tableName: `private-realm-flexsearch-${props.environment}`,
+      tableName: `${DynamoDBTablePrefixes.PRIVATE_FLEXSEARCH}-${props.environment}`,
       partitionKey: {
         name: "pk",
         type: dynamodb.AttributeType.STRING,
@@ -138,7 +144,7 @@ export class PrivateRealmStack extends cdk.Stack {
     new cdk.CfnOutput(this, "PrivateStorageBucketName", {
       value: this.privateStorageBucket.bucket.bucketName,
       description: "Name of the private storage S3 bucket",
-      exportName: `private-realm-storage-bucket-${props.environment}`,
+      exportName: `${S3BucketPrefixes.PRIVATE_OBJECT}-bucket-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "EmbeddingLambdaArn", {
@@ -150,19 +156,19 @@ export class PrivateRealmStack extends cdk.Stack {
     new cdk.CfnOutput(this, "EventsTableName", {
       value: this.eventsTable.table.tableName,
       description: "Name of the events DynamoDB table",
-      exportName: `private-realm-events-table-${props.environment}`,
+      exportName: `${DynamoDBTablePrefixes.PRIVATE_EVENT}-table-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "ContentTableName", {
       value: this.contentTable.table.tableName,
       description: "Name of the content DynamoDB table",
-      exportName: `private-realm-content-table-${props.environment}`,
+      exportName: `${DynamoDBTablePrefixes.PRIVATE_CONTENT}-table-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "FlexSearchTableName", {
       value: this.flexSearchTable.table.tableName,
       description: "Name of the FlexSearch DynamoDB table",
-      exportName: `private-realm-flexsearch-table-${props.environment}`,
+      exportName: `${DynamoDBTablePrefixes.PRIVATE_FLEXSEARCH}-table-${props.environment}`,
     });
 
     // Add tags to all resources
@@ -192,17 +198,15 @@ export class PrivateRealmStack extends cdk.Stack {
         parallelizationFactor: 2,
 
         // Filter out DELETE events for now, focus on content creation/updates
-        filter: DynamoDBStreamToEventBridgePipes.createEventNameFilter([
-          "INSERT",
-          "MODIFY",
-          "REMOVE",
-        ]),
+        filter: DynamoDBStreamToEventBridgePipes.createEventNameFilter(
+          Object.values(DYNAMODB_EVENT_TYPE),
+        ),
 
         // Transform events with metadata about the private realm
         inputTransformation:
           DynamoDBStreamToEventBridgePipes.createStandardTransformation(
-            "content.private-realm",
-            "Private Content Changed",
+            RawEventSource.DDB_STREAM,
+            DynamoDBTablePrefixes.PRIVATE_CONTENT,
           ),
       },
     );

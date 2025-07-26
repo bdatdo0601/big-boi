@@ -1,3 +1,9 @@
+import {
+  DYNAMODB_EVENT_TYPE,
+  DynamoDBTablePrefixes,
+  RawEventSource,
+  S3BucketPrefixes,
+} from "@big-boi-commons/typescript/lib";
 import * as cdk from "aws-cdk-lib";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import { Construct } from "constructs";
@@ -30,7 +36,7 @@ export class PublicRealmStack extends cdk.Stack {
     // Create private storage bucket using S3BucketConstruct
     this.publicStorageBucket = new S3BucketConstruct(this, "PublicStorage", {
       environment: props.environment,
-      bucketName: `public-realm-storage-${props.environment}`,
+      bucketName: `${S3BucketPrefixes.PUBLIC_OBJECT}-${props.environment}`,
       lifecycleRules: [
         {
           id: "archive-old-versions",
@@ -42,7 +48,7 @@ export class PublicRealmStack extends cdk.Stack {
 
     // DynamoDB Table for Events
     this.eventsTable = new DynamoDBTable(this, "EventsTable", {
-      tableName: `public-realm-events-${props.environment}`,
+      tableName: `${DynamoDBTablePrefixes.PUBLIC_EVENT}-${props.environment}`,
       partitionKey: {
         name: "pk",
         type: dynamodb.AttributeType.STRING,
@@ -57,7 +63,7 @@ export class PublicRealmStack extends cdk.Stack {
 
     // DynamoDB Table for Content with streams enabled for EventBridge Pipes
     this.contentTable = new DynamoDBTable(this, "ContentTable", {
-      tableName: `public-realm-content-${props.environment}`,
+      tableName: `${DynamoDBTablePrefixes.PUBLIC_CONTENT}-${props.environment}`,
       partitionKey: {
         name: "pk",
         type: dynamodb.AttributeType.STRING,
@@ -75,7 +81,7 @@ export class PublicRealmStack extends cdk.Stack {
 
     // DynamoDB Table for FlexSearch
     this.flexSearchTable = new DynamoDBTable(this, "FlexSearchTable", {
-      tableName: `public-realm-flexsearch-${props.environment}`,
+      tableName: `${DynamoDBTablePrefixes.PUBLIC_FLEXSEARCH}-${props.environment}`,
       partitionKey: {
         name: "pk",
         type: dynamodb.AttributeType.STRING,
@@ -95,25 +101,25 @@ export class PublicRealmStack extends cdk.Stack {
     new cdk.CfnOutput(this, "PublicStorageBucketName", {
       value: this.publicStorageBucket.bucket.bucketName,
       description: "Name of the private storage S3 bucket",
-      exportName: `public-realm-storage-bucket-${props.environment}`,
+      exportName: `${S3BucketPrefixes.PUBLIC_OBJECT}-bucket-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "PublicEventsTableName", {
       value: this.eventsTable.table.tableName,
       description: "Name of the events DynamoDB table",
-      exportName: `public-realm-events-table-${props.environment}`,
+      exportName: `${DynamoDBTablePrefixes.PUBLIC_EVENT}-table-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "PublicContentTableName", {
       value: this.contentTable.table.tableName,
       description: "Name of the content DynamoDB table",
-      exportName: `public-realm-content-table-${props.environment}`,
+      exportName: `${DynamoDBTablePrefixes.PUBLIC_CONTENT}-table-${props.environment}`,
     });
 
     new cdk.CfnOutput(this, "PublicFlexSearchTableName", {
       value: this.flexSearchTable.table.tableName,
       description: "Name of the FlexSearch DynamoDB table",
-      exportName: `public-realm-flexsearch-table-${props.environment}`,
+      exportName: `${DynamoDBTablePrefixes.PUBLIC_FLEXSEARCH}-table-${props.environment}`,
     });
 
     // Add tags to all resources
@@ -144,17 +150,15 @@ export class PublicRealmStack extends cdk.Stack {
         parallelizationFactor: 2,
 
         // Filter out DELETE events for now, focus on content creation/updates
-        filter: DynamoDBStreamToEventBridgePipes.createEventNameFilter([
-          "INSERT",
-          "MODIFY",
-          "REMOVE",
-        ]),
+        filter: DynamoDBStreamToEventBridgePipes.createEventNameFilter(
+          Object.values(DYNAMODB_EVENT_TYPE),
+        ),
 
         // Transform events with metadata about the public realm
         inputTransformation:
           DynamoDBStreamToEventBridgePipes.createStandardTransformation(
-            "content.public-realm",
-            "Public Content Changed",
+            RawEventSource.DDB_STREAM,
+            DynamoDBTablePrefixes.PUBLIC_CONTENT,
           ),
       },
     );

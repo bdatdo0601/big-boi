@@ -4,7 +4,29 @@
   "description": "Running embedding lambda on typescript",
   "author": "",
   "license": "MIT",
+  "scripts": {
+    "prebuild": "npm install",
+    "build": "npm run clean && rsbuild build",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:unit": "vitest run test/unit",
+    "test:integration": "vitest run test/integration",
+    "test:setup": "vitest run test/setup",
+    "test:watch": "vitest",
+    "test:watch:unit": "vitest test/unit",
+    "test:watch:integration": "vitest test/integration",
+    "test:coverage": "vitest run --coverage",
+    "test:coverage:unit": "vitest run test/unit --coverage",
+    "test:coverage:integration": "vitest run test/integration --coverage"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.20",
+    "@vitest/coverage-v8": "^1.6.0",
+    "typescript": "^5.8.3",
+    "vitest": "^1.6.0"
+  },
   "dependencies": {
-    "@aws-sdk/client-secrets-manager": "^3.848.0"
+    "@aws-sdk/client-secrets-manager": "^3.848.0",
+    "zod": "^4.0.10"
   }
 }

@@ -29,6 +29,9 @@ importers:
       '@aws-solutions-constructs/aws-alb-fargate':
         specifier: ^2.86.0
         version: 2.86.0(@aws-solutions-constructs/core@2.86.0(aws-cdk-lib@2.206.0(constructs@10.4.2))(constructs@10.4.2))(aws-cdk-lib@2.206.0(constructs@10.4.2))(constructs@10.4.2)
+      '@big-boi-commons/typescript':
+        specifier: ../commons/typescript
+        version: link:../commons/typescript
       cdk-nag:
         specifier: ^2.36.44
         version: 2.36.44(aws-cdk-lib@2.206.0(constructs@10.4.2))(constructs@10.4.2)

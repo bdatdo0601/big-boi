@@ -2,71 +2,175 @@ import {
   EventBridgeClient,
   PutEventsCommand,
 } from "@aws-sdk/client-eventbridge";
-import { Context, EventBridgeEvent } from "aws-lambda";
+import {
+  BigStructureEventInput,
+  DDBPrefixToStructuredEventSource,
+  DYNAMODB_EVENT_TYPE,
+  RawDynamoDBEventSchema,
+  RawEventSource,
+  RawEventSourceIdentifierMap,
+  RawS3EventSchema,
+  S3BucketPrefixes,
+  S3PrefixToStructuredEventSource,
+} from "@big-boi-commons/typescript/lib";
+import { EventBridgeEvent, Handler } from "aws-lambda";
+import { v7 as uuid } from "uuid";
 
 // Initialize EventBridge client
 const eventbridge = new EventBridgeClient({});
 
-interface RawEventDetail {
-  [key: string]: any;
+const initializeStructuredEvent = (event: EventBridgeEvent<string, any>) => {
+  return {
+    id: uuid(),
+    source: "EventTransformerLambda",
+    detail: {
+      eventMetadata: {
+        transformAt: new Date().toISOString(),
+        origin: event.source,
+        originId: event.id,
+        originDate: event.time,
+        originDetailType: event["detail-type"],
+      },
+    },
+  };
+};
+
+const transformFromDDBStreamEvent = async (
+  event: EventBridgeEvent<string, any>,
+): Promise<BigStructureEventInput> => {
+  const ddbEvent = RawDynamoDBEventSchema.parse(event.detail);
+  const streamARN = ddbEvent.eventSourceARN;
+  const tableName = streamARN.split("/")[1];
+  const metadata = {
+    tableName: tableName || "unknown",
+    keys: {
+      pk: ddbEvent.dynamodb.Keys?.pk?.S || ddbEvent.dynamodb.Keys?.pk || "",
+      sk: ddbEvent.dynamodb.Keys?.sk?.S || ddbEvent.dynamodb.Keys?.sk || "",
+    },
+    sequenceNumber: ddbEvent.dynamodb.SequenceNumber,
+    sizeBytes: ddbEvent.dynamodb.SizeBytes,
+    streamViewType: ddbEvent.dynamodb.StreamViewType,
+  };
+
+  const detailType = DDBPrefixToStructuredEventSource[event["detail-type"]];
+
+  let data: any;
+  switch (ddbEvent.eventName) {
+    case DYNAMODB_EVENT_TYPE.INSERT:
+      data = {
+        action: DYNAMODB_EVENT_TYPE.INSERT,
+        newImage: ddbEvent.dynamodb.NewImage,
+      };
+      break;
+    case DYNAMODB_EVENT_TYPE.MODIFY:
+      data = {
+        action: DYNAMODB_EVENT_TYPE.MODIFY,
+        oldImage: ddbEvent.dynamodb.OldImage,
+        newImage: ddbEvent.dynamodb.NewImage,
+      };
+      break;
+    case DYNAMODB_EVENT_TYPE.REMOVE:
+      data = {
+        action: DYNAMODB_EVENT_TYPE.REMOVE,
+        oldImage: ddbEvent.dynamodb.OldImage,
+      };
+      break;
+    default:
+      throw new Error(`Unsupported DynamoDB event type: ${ddbEvent.eventName}`);
+  }
+
+  const structuredEvent = initializeStructuredEvent(event);
+  return {
+    ...structuredEvent,
+    "detail-type": detailType,
+    detail: {
+      ...structuredEvent.detail,
+      metadata,
+      data,
+    },
+  };
+};
+
+const transformFromS3Event = async (
+  event: EventBridgeEvent<string, any>,
+): Promise<BigStructureEventInput> => {
+  const s3Event = RawS3EventSchema.parse(event.detail);
+
+  const metadata = {
+    bucketName: s3Event.bucket.name,
+    key: s3Event.object.key,
+    size: s3Event.object.size,
+    etag: s3Event.object.etag,
+    versionId: s3Event.object["version-id"],
+    sequencer: s3Event.object.sequencer,
+    requestID: s3Event["request-id"],
+    requester: s3Event.requester,
+    sourceIPAddress: s3Event["source-ip-address"],
+    reason: s3Event.reason,
+  };
+
+  const s3Prefix = Object.values(S3BucketPrefixes).find((item) =>
+    metadata.bucketName.startsWith(item),
+  ) as S3BucketPrefixes | undefined;
+
+  if (!s3Prefix) {
+    throw new Error(`Unsupported S3 bucket prefix ${metadata.bucketName}`);
+  }
+
+  const detailType = S3PrefixToStructuredEventSource[s3Prefix];
+
+  const structuredEvent = initializeStructuredEvent(event);
+  return {
+    ...structuredEvent,
+    "detail-type": detailType,
+    detail: {
+      ...structuredEvent.detail,
+      metadata,
+    },
+  };
+};
+
+async function transformEvent(
+  event: EventBridgeEvent<string, any>,
+): Promise<BigStructureEventInput> {
+  let rawEventSource: RawEventSource | null = null;
+  for (const [sourceKey, schema] of Object.entries(
+    RawEventSourceIdentifierMap,
+  )) {
+    const parseResult = schema.safeParse(event);
+    if (parseResult.success) {
+      rawEventSource = sourceKey as RawEventSource;
+      break;
+    }
+  }
+  switch (rawEventSource) {
+    case RawEventSource.DDB_STREAM:
+      return transformFromDDBStreamEvent(event);
+    case RawEventSource.S3_EVENT_NOTIFICATION:
+      return transformFromS3Event(event);
+    default:
+      throw new Error(`Unsupported event source: ${JSON.stringify(event)}`);
+  }
 }
 
-interface StructuredEventMetadata {
-  transformedAt: string;
-  originalSource: string;
-  originalDetailType: string;
-  version: string;
-  transformerId: string;
-}
-
-interface StructuredEventData {
-  id: string;
-  timestamp: string;
-  type: string;
-  userId?: string;
-  customerId?: string;
-  orderId?: string;
-  payload: any;
-}
-
-interface StructuredEvent {
-  metadata: StructuredEventMetadata;
-  data: StructuredEventData;
-}
-
-interface LambdaResponse {
-  statusCode: number;
-  body: string;
-}
-
-export const handler = async (
-  event: EventBridgeEvent<string, RawEventDetail>,
-  context: Context,
-): Promise<LambdaResponse> => {
+export const handler: Handler<
+  EventBridgeEvent<string, any>,
+  BigStructureEventInput
+> = async (event) => {
   const structuredBusName = process.env.STRUCTURED_BUS_NAME;
 
   if (!structuredBusName) {
     throw new Error("STRUCTURED_BUS_NAME environment variable is required");
   }
-
-  console.log(`Processing event: ${JSON.stringify(event)}`);
-
   try {
-    // Extract the actual event data from EventBridge wrapper
-    const rawEventData = event.detail;
-    const source = event.source || "unknown";
-    const detailType = event["detail-type"] || "Unknown Event";
-
-    // Transform the event into structured format
-    const structuredEvent = transformEvent(rawEventData, source, detailType);
-
+    const transformedEvent = await transformEvent(event);
     // Publish to structured event bus
     const command = new PutEventsCommand({
       Entries: [
         {
-          Source: "event.transformer",
-          DetailType: "Structured Event",
-          Detail: JSON.stringify(structuredEvent),
+          Source: transformedEvent.source,
+          DetailType: transformedEvent["detail-type"],
+          Detail: JSON.stringify(transformedEvent.detail),
           EventBusName: structuredBusName,
         },
       ],
@@ -74,118 +178,12 @@ export const handler = async (
 
     const response = await eventbridge.send(command);
 
-    console.log(
+    console.info(
       `Successfully published structured event: ${JSON.stringify(response)}`,
     );
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: "Event transformed and published successfully",
-        eventId: response.Entries?.[0]?.EventId,
-      }),
-    };
+    return transformedEvent;
   } catch (error) {
-    console.error(`Error processing event: ${error}`);
-    // Re-throw the exception to trigger DLQ
+    console.error("Failed to transform event:", error);
     throw error;
   }
 };
-
-function transformEvent(
-  rawData: RawEventDetail,
-  source: string,
-  detailType: string,
-): StructuredEvent {
-  const currentTime = new Date().toISOString();
-
-  // Basic structured event schema
-  const structuredEvent: StructuredEvent = {
-    metadata: {
-      transformedAt: currentTime,
-      originalSource: source,
-      originalDetailType: detailType,
-      version: "1.0",
-      transformerId: "event-transformer-lambda",
-    },
-    data: {
-      id: generateEventId(),
-      timestamp: currentTime,
-      type: "generic",
-      payload: rawData,
-    },
-  };
-
-  // Apply transformation rules based on event structure
-  if (rawData && typeof rawData === "object") {
-    // Extract and standardize the ID
-    structuredEvent.data.id =
-      extractValue(rawData, ["id", "event_id", "eventId"]) || generateEventId();
-
-    // Extract and standardize timestamp
-    const extractedTimestamp = extractValue(rawData, [
-      "timestamp",
-      "created_at",
-      "createdAt",
-      "time",
-    ]);
-    if (extractedTimestamp) {
-      structuredEvent.data.timestamp = extractedTimestamp;
-    }
-
-    // Extract and standardize type
-    const extractedType = extractValue(rawData, [
-      "type",
-      "event_type",
-      "eventType",
-      "category",
-    ]);
-    if (extractedType) {
-      structuredEvent.data.type = extractedType;
-    }
-
-    // Extract and standardize user ID
-    const userId = extractValue(rawData, [
-      "user_id",
-      "userId",
-      "customer_id",
-      "customerId",
-    ]);
-    if (userId) {
-      structuredEvent.data.userId = userId;
-    }
-
-    // Extract and standardize customer ID
-    const customerId = extractValue(rawData, ["customer_id", "customerId"]);
-    if (customerId) {
-      structuredEvent.data.customerId = customerId;
-    }
-
-    // Extract and standardize order ID
-    const orderId = extractValue(rawData, ["order_id", "orderId"]);
-    if (orderId) {
-      structuredEvent.data.orderId = orderId;
-    }
-  }
-
-  console.log(`Transformed event: ${JSON.stringify(structuredEvent)}`);
-  return structuredEvent;
-}
-
-function extractValue(obj: any, keys: string[]): string | undefined {
-  for (const key of keys) {
-    if (obj[key] !== undefined && obj[key] !== null) {
-      return String(obj[key]);
-    }
-  }
-  return undefined;
-}
-
-function generateEventId(): string {
-  // Generate a UUID-like string
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    const r = (Math.random() * 16) | 0;
-    const v = c === "x" ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-}

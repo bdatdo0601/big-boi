@@ -12,7 +12,7 @@ import {
   hashToSha256,
   LLMSecretKey,
   TextContentType,
-} from "@big-boi-commons/typescript";
+} from "@big-boi-commons/typescript/lib";
 import { MDocument } from "@mastra/rag";
 import { embedMany } from "ai";
 import { zip } from "lodash";

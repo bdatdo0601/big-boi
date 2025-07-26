@@ -4,7 +4,7 @@ import {
   EmbeddingRequest,
   LLMSecretKey,
   TextContentType,
-} from "@big-boi-commons/typescript";
+} from "@big-boi-commons/typescript/lib";
 import { embedMany } from "ai";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { handler } from "../../src/index";
@@ -21,8 +21,8 @@ vi.mock("@mastra/rag", () => ({
     fromJSON: vi.fn(),
   },
 }));
-vi.mock("@big-boi-commons/typescript", async () => {
-  const actual = await vi.importActual("@big-boi-commons/typescript");
+vi.mock("@big-boi-commons/typescript/lib", async () => {
+  const actual = await vi.importActual("@big-boi-commons/typescript/lib");
   return {
     ...actual,
     getSecret: vi.fn(),
@@ -37,7 +37,7 @@ const mockS3VectorsClient = vi.mocked(S3VectorsClient);
 const { MDocument: mockMDocument } = vi.mocked(await import("@mastra/rag"));
 
 // Import the mocked functions
-import { getSecret, hashToSha256 } from "@big-boi-commons/typescript";
+import { getSecret, hashToSha256 } from "@big-boi-commons/typescript/lib";
 
 const mockGetSecret = vi.mocked(getSecret);
 const mockHashToSha256 = vi.mocked(hashToSha256);
