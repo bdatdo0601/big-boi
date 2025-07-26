@@ -1,8 +1,4 @@
 import {
-  EventBridgeClient,
-  PutEventsCommand,
-} from "@aws-sdk/client-eventbridge";
-import {
   DynamoDBTablePrefixes,
   RawEventSource,
 } from "@big-boi-commons/typescript/lib";
@@ -57,35 +53,48 @@ describe("Event Transformer Lambda", () => {
   describe("DynamoDB Stream Events", () => {
     it("should transform DDB INSERT event correctly", async () => {
       const mockEvent: EventBridgeEvent<string, any> = {
-        id: "original-event-id",
-        source: RawEventSource.DDB_STREAM,
-        "detail-type": DynamoDBTablePrefixes.PRIVATE_CONTENT,
-        time: "2023-01-01T00:00:00Z",
-        region: "us-east-1",
-        account: "123456789012",
         version: "0",
+        id: "0c19aa24-7cb1-a83b-ac85-73783ea3ea19",
+        "detail-type": "Event from aws:dynamodb",
+        source: "Pipe public-content-stream-dev",
+        account: "142037127835",
+        time: "2025-07-26T03:53:12Z",
+        region: "us-east-1",
         resources: [],
         detail: {
-          eventID: "test-event-id",
-          eventName: "INSERT",
-          eventVersion: "1.1",
-          eventSource: "aws:dynamodb",
-          awsRegion: "us-east-1",
-          eventSourceARN:
-            "arn:aws:dynamodb:us-east-1:123456789012:table/TestTable/stream/123",
-          dynamodb: {
-            Keys: {
-              pk: { S: "test-pk" },
-              sk: { S: "test-sk" },
+          source: "ddbstream",
+          "detail-type": "public-realm-content",
+          detail: {
+            eventName: "INSERT",
+            eventID: "2a643906c250aa77afb9a154d7b0f64d",
+            eventVersion: "1.1",
+            eventSource: "aws:dynamodb",
+            awsRegion: "us-east-1",
+            eventSourceARN:
+              "arn:aws:dynamodb:us-east-1:142037127835:table/public-realm-content-dev/stream/2025-07-25T02:03:36.751",
+            dynamodb: {
+              ApproximateCreationDateTime: 1753501992,
+              Keys: {
+                sk: {
+                  S: "World",
+                },
+                pk: {
+                  S: "Hello",
+                },
+              },
+              NewImage: {
+                sk: {
+                  S: "World",
+                },
+                pk: {
+                  S: "Hello",
+                },
+              },
+              SequenceNumber: "5032300000745759069447434",
+              SizeBytes: 28,
+              StreamViewType: "NEW_AND_OLD_IMAGES",
             },
-            NewImage: {
-              pk: { S: "test-pk" },
-              sk: { S: "test-sk" },
-              data: { S: "test-data" },
-            },
-            SequenceNumber: "123456789",
-            SizeBytes: 100,
-            StreamViewType: "NEW_AND_OLD_IMAGES",
+            timestamp: "2025-07-26T03:53:12.222Z",
           },
         },
       };
@@ -113,46 +122,62 @@ describe("Event Transformer Lambda", () => {
       expect(result.source).toBe("EventTransformerLambda");
       const detail: any = result.detail;
       expect(detail.eventMetadata.origin).toBe(RawEventSource.DDB_STREAM);
-      expect(detail.metadata.tableName).toBe("TestTable");
+      expect(detail.metadata.tableName).toBe("public-realm-content-dev");
       expect(detail.data.action).toBe("INSERT");
     });
 
     it("should transform DDB MODIFY event correctly", async () => {
       const mockEvent: EventBridgeEvent<string, any> = {
-        id: "original-event-id",
-        source: RawEventSource.DDB_STREAM,
-        "detail-type": DynamoDBTablePrefixes.PUBLIC_CONTENT,
-        time: "2023-01-01T00:00:00Z",
-        region: "us-east-1",
-        account: "123456789012",
         version: "0",
+        id: "0c19aa24-7cb1-a83b-ac85-73783ea3ea19",
+        "detail-type": "Event from aws:dynamodb",
+        source: "Pipe public-content-stream-dev",
+        account: "142037127835",
+        time: "2025-07-26T03:53:12Z",
+        region: "us-east-1",
         resources: [],
         detail: {
-          eventID: "test-event-id",
-          eventName: "MODIFY",
-          eventVersion: "1.1",
-          eventSource: "aws:dynamodb",
-          awsRegion: "us-east-1",
-          eventSourceARN:
-            "arn:aws:dynamodb:us-east-1:123456789012:table/TestTable/stream/123",
-          dynamodb: {
-            Keys: {
-              pk: { S: "test-pk" },
-              sk: { S: "test-sk" },
+          source: "ddbstream",
+          "detail-type": "public-realm-content",
+          detail: {
+            eventName: "MODIFY",
+            eventID: "2a643906c250aa77afb9a154d7b0f64d",
+            eventVersion: "1.1",
+            eventSource: "aws:dynamodb",
+            awsRegion: "us-east-1",
+            eventSourceARN:
+              "arn:aws:dynamodb:us-east-1:142037127835:table/public-realm-content-dev/stream/2025-07-25T02:03:36.751",
+            dynamodb: {
+              ApproximateCreationDateTime: 1753501992,
+              Keys: {
+                sk: {
+                  S: "World",
+                },
+                pk: {
+                  S: "Hello",
+                },
+              },
+              OldImage: {
+                sk: {
+                  S: "World",
+                },
+                pk: {
+                  S: "Hello",
+                },
+              },
+              NewImage: {
+                sk: {
+                  S: "Hello",
+                },
+                pk: {
+                  S: "World",
+                },
+              },
+              SequenceNumber: "5032300000745759069447434",
+              SizeBytes: 28,
+              StreamViewType: "NEW_AND_OLD_IMAGES",
             },
-            OldImage: {
-              pk: { S: "test-pk" },
-              sk: { S: "test-sk" },
-              data: { S: "old-data" },
-            },
-            NewImage: {
-              pk: { S: "test-pk" },
-              sk: { S: "test-sk" },
-              data: { S: "new-data" },
-            },
-            SequenceNumber: "123456789",
-            SizeBytes: 100,
-            StreamViewType: "NEW_AND_OLD_IMAGES",
+            timestamp: "2025-07-26T03:53:12.222Z",
           },
         },
       };
@@ -167,37 +192,50 @@ describe("Event Transformer Lambda", () => {
       expect(detail.data.newImage).toBeDefined();
     });
 
-    it("should transform DDB REMOVE event correctly", async () => {
+    it("should throw on unknown DDB event correctly", async () => {
       const mockEvent: EventBridgeEvent<string, any> = {
-        id: "original-event-id",
-        source: RawEventSource.DDB_STREAM,
-        "detail-type": DynamoDBTablePrefixes.PRIVATE_CONTENT,
-        time: "2023-01-01T00:00:00Z",
-        region: "us-east-1",
-        account: "123456789012",
         version: "0",
+        id: "0c19aa24-7cb1-a83b-ac85-73783ea3ea19",
+        "detail-type": "Event from aws:dynamodb",
+        source: "Pipe public-content-stream-dev",
+        account: "142037127835",
+        time: "2025-07-26T03:53:12Z",
+        region: "us-east-1",
         resources: [],
         detail: {
-          eventID: "test-event-id",
-          eventName: "REMOVE",
-          eventVersion: "1.1",
-          eventSource: "aws:dynamodb",
-          awsRegion: "us-east-1",
-          eventSourceARN:
-            "arn:aws:dynamodb:us-east-1:123456789012:table/TestTable/stream/123",
-          dynamodb: {
-            Keys: {
-              pk: { S: "test-pk" },
-              sk: { S: "test-sk" },
+          source: "ddbstream",
+          "detail-type": "public-realm-content",
+          detail: {
+            eventName: "REMOVE",
+            eventID: "2a643906c250aa77afb9a154d7b0f64d",
+            eventVersion: "1.1",
+            eventSource: "aws:dynamodb",
+            awsRegion: "us-east-1",
+            eventSourceARN:
+              "arn:aws:dynamodb:us-east-1:142037127835:table/public-realm-content-dev/stream/2025-07-25T02:03:36.751",
+            dynamodb: {
+              ApproximateCreationDateTime: 1753501992,
+              Keys: {
+                sk: {
+                  S: "World",
+                },
+                pk: {
+                  S: "Hello",
+                },
+              },
+              OldImage: {
+                sk: {
+                  S: "World",
+                },
+                pk: {
+                  S: "Hello",
+                },
+              },
+              SequenceNumber: "5032300000745759069447434",
+              SizeBytes: 28,
+              StreamViewType: "NEW_AND_OLD_IMAGES",
             },
-            OldImage: {
-              pk: { S: "test-pk" },
-              sk: { S: "test-sk" },
-              data: { S: "old-data" },
-            },
-            SequenceNumber: "123456789",
-            SizeBytes: 100,
-            StreamViewType: "NEW_AND_OLD_IMAGES",
+            timestamp: "2025-07-26T03:53:12.222Z",
           },
         },
       };
@@ -302,28 +340,48 @@ describe("Event Transformer Lambda", () => {
       mockSend.mockRejectedValueOnce(new Error("EventBridge error"));
 
       const mockEvent: EventBridgeEvent<string, any> = {
-        id: "original-event-id",
-        source: RawEventSource.DDB_STREAM,
-        "detail-type": DynamoDBTablePrefixes.PRIVATE_CONTENT,
-        time: "2023-01-01T00:00:00Z",
-        region: "us-east-1",
-        account: "123456789012",
         version: "0",
+        id: "0c19aa24-7cb1-a83b-ac85-73783ea3ea19",
+        "detail-type": "Event from aws:dynamodb",
+        source: "Pipe public-content-stream-dev",
+        account: "142037127835",
+        time: "2025-07-26T03:53:12Z",
+        region: "us-east-1",
         resources: [],
         detail: {
-          eventID: "test-event-id",
-          eventName: "INSERT",
-          eventVersion: "1.1",
-          eventSource: "aws:dynamodb",
-          awsRegion: "us-east-1",
-          eventSourceARN:
-            "arn:aws:dynamodb:us-east-1:123456789012:table/TestTable/stream/123",
-          dynamodb: {
-            Keys: { pk: { S: "test-pk" }, sk: { S: "test-sk" } },
-            NewImage: { pk: { S: "test-pk" }, sk: { S: "test-sk" } },
-            SequenceNumber: "123456789",
-            SizeBytes: 100,
-            StreamViewType: "NEW_AND_OLD_IMAGES",
+          source: "ddbstream",
+          "detail-type": "public-realm-content",
+          detail: {
+            eventName: "INSERT",
+            eventID: "2a643906c250aa77afb9a154d7b0f64d",
+            eventVersion: "1.1",
+            eventSource: "aws:dynamodb",
+            awsRegion: "us-east-1",
+            eventSourceARN:
+              "arn:aws:dynamodb:us-east-1:142037127835:table/public-realm-content-dev/stream/2025-07-25T02:03:36.751",
+            dynamodb: {
+              ApproximateCreationDateTime: 1753501992,
+              Keys: {
+                sk: {
+                  S: "World",
+                },
+                pk: {
+                  S: "Hello",
+                },
+              },
+              NewImage: {
+                sk: {
+                  S: "World",
+                },
+                pk: {
+                  S: "Hello",
+                },
+              },
+              SequenceNumber: "5032300000745759069447434",
+              SizeBytes: 28,
+              StreamViewType: "NEW_AND_OLD_IMAGES",
+            },
+            timestamp: "2025-07-26T03:53:12.222Z",
           },
         },
       };

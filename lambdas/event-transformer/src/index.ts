@@ -2,6 +2,7 @@ import {
   EventBridgeClient,
   PutEventsCommand,
 } from "@aws-sdk/client-eventbridge";
+import { unmarshall } from "@aws-sdk/util-dynamodb";
 import {
   BigStructureEventInput,
   DDBPrefixToStructuredEventSource,
@@ -36,16 +37,17 @@ const initializeStructuredEvent = (event: EventBridgeEvent<string, any>) => {
 };
 
 const transformFromDDBStreamEvent = async (
-  event: EventBridgeEvent<string, any>,
+  rawEvent: EventBridgeEvent<string, any>,
 ): Promise<BigStructureEventInput> => {
+  const event = rawEvent.detail as EventBridgeEvent<string, any>; // passing event through pipe make detail nested
   const ddbEvent = RawDynamoDBEventSchema.parse(event.detail);
   const streamARN = ddbEvent.eventSourceARN;
   const tableName = streamARN.split("/")[1];
   const metadata = {
-    tableName: tableName || "unknown",
+    tableName: tableName,
     keys: {
-      pk: ddbEvent.dynamodb.Keys?.pk?.S || ddbEvent.dynamodb.Keys?.pk || "",
-      sk: ddbEvent.dynamodb.Keys?.sk?.S || ddbEvent.dynamodb.Keys?.sk || "",
+      pk: ddbEvent.dynamodb.Keys?.pk?.S,
+      sk: ddbEvent.dynamodb.Keys?.sk?.S,
     },
     sequenceNumber: ddbEvent.dynamodb.SequenceNumber,
     sizeBytes: ddbEvent.dynamodb.SizeBytes,
@@ -59,24 +61,23 @@ const transformFromDDBStreamEvent = async (
     case DYNAMODB_EVENT_TYPE.INSERT:
       data = {
         action: DYNAMODB_EVENT_TYPE.INSERT,
-        newImage: ddbEvent.dynamodb.NewImage,
-      };
-      break;
-    case DYNAMODB_EVENT_TYPE.MODIFY:
-      data = {
-        action: DYNAMODB_EVENT_TYPE.MODIFY,
-        oldImage: ddbEvent.dynamodb.OldImage,
-        newImage: ddbEvent.dynamodb.NewImage,
+        newImage: unmarshall(ddbEvent.dynamodb.NewImage),
       };
       break;
     case DYNAMODB_EVENT_TYPE.REMOVE:
       data = {
         action: DYNAMODB_EVENT_TYPE.REMOVE,
-        oldImage: ddbEvent.dynamodb.OldImage,
+        oldImage: unmarshall(ddbEvent.dynamodb.OldImage),
       };
       break;
+    case DYNAMODB_EVENT_TYPE.MODIFY:
     default:
-      throw new Error(`Unsupported DynamoDB event type: ${ddbEvent.eventName}`);
+      data = {
+        action: DYNAMODB_EVENT_TYPE.MODIFY,
+        oldImage: unmarshall(ddbEvent.dynamodb.OldImage),
+        newImage: unmarshall(ddbEvent.dynamodb.NewImage),
+      };
+      break;
   }
 
   const structuredEvent = initializeStructuredEvent(event);
@@ -111,11 +112,7 @@ const transformFromS3Event = async (
 
   const s3Prefix = Object.values(S3BucketPrefixes).find((item) =>
     metadata.bucketName.startsWith(item),
-  ) as S3BucketPrefixes | undefined;
-
-  if (!s3Prefix) {
-    throw new Error(`Unsupported S3 bucket prefix ${metadata.bucketName}`);
-  }
+  )! as S3BucketPrefixes;
 
   const detailType = S3PrefixToStructuredEventSource[s3Prefix];
 
@@ -149,7 +146,9 @@ async function transformEvent(
     case RawEventSource.S3_EVENT_NOTIFICATION:
       return transformFromS3Event(event);
     default:
-      throw new Error(`Unsupported event source: ${JSON.stringify(event)}`);
+      throw new Error(
+        `Unsupported event source: ${rawEventSource} ${JSON.stringify(event)}`,
+      );
   }
 }
 

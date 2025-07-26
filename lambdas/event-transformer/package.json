@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "dependencies": {
     "@aws-sdk/client-eventbridge": "^3.0.0",
+    "@aws-sdk/util-dynamodb": "^3.848.0",
     "@big-boi-commons/typescript": "../../commons/typescript",
     "uuid": "^11.1.0",
     "zod": "^4.0.10"

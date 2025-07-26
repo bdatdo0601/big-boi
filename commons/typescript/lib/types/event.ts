@@ -78,7 +78,7 @@ const S3DetailSchema = BaseDetailSchema.extend({
   metadata: z.object({
     bucketName: z.string(),
     key: z.string(),
-    size: z.number(),
+    size: z.number().optional(),
     etag: z.string(),
     versionId: z.string(),
     sequencer: z.string(),

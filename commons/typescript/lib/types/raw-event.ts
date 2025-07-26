@@ -35,7 +35,7 @@ export const RawS3EventSchema = z.object({
   }),
   object: z.object({
     key: z.string(),
-    size: z.number(),
+    size: z.number().optional(),
     etag: z.string(),
     "version-id": z.string(),
     sequencer: z.string(),
@@ -50,8 +50,7 @@ export const RawEventSourceIdentifierMap: {
   [key in RawEventSource]: z.ZodObject;
 } = {
   [RawEventSource.DDB_STREAM]: z.looseObject({
-    source: z.literal(RawEventSource.DDB_STREAM),
-    "detail-type": z.enum(DynamoDBTablePrefixes),
+    "detail-type": z.literal("Event from aws:dynamodb"),
   }),
   [RawEventSource.S3_EVENT_NOTIFICATION]: z.looseObject({
     source: z.literal(RawEventSource.S3_EVENT_NOTIFICATION),
